@@ -2,7 +2,7 @@
 title: "Obsidian でブログ運用するときのモバイル問題：Obsidian Sync の戦略的価値"
 published: 2026-06-10
 description: "Obsidian + Astro でブログ運用すると「モバイル編集が弱い」問題に直面する。Notion 移行を考える前に、月 10 ドルの Obsidian Sync が何を解決するのか、なぜパイプラインの入口を広げる設計が美しいのかを解説する。"
-image: "./cover.svg"
+image: "./cover.jpg"
 tags: ["Obsidian", "Obsidian Sync", "Astro", "モバイル運用", "ワークフロー"]
 category: "Tech"
 draft: false

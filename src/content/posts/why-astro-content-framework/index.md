@@ -2,7 +2,7 @@
 title: "Astro が選ばれる4つの理由：コンテンツ駆動サイト最強の本命"
 published: 2026-06-10
 description: "Next.jsやNuxtがある中でAstroが圧倒的支持を集める理由を、ゼロJS設計・マルチフレームワーク対応・Content Collections・低い学習コストの4軸で解説。実装視点でわかる選定の決め手。"
-image: "./cover.svg"
+image: "./cover.jpg"
 tags: ["Astro", "フロントエンド", "SSG", "JavaScript", "Web開発"]
 category: "Tech"
 draft: false

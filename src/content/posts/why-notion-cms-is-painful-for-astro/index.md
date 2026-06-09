@@ -2,7 +2,7 @@
 title: "なぜ Notion を CMS にすると面倒くさいのか：Astro Content Layer の仕組みから考える"
 published: 2026-06-10
 description: "Notion を Astro ブログの CMS にしたくなる気持ちはわかる。けれど Astro Content Layer の仕組みを理解すると、Notion 経由が技術負債を増やす理由が見えてくる。Markdown ネイティブ運用の本質的な強さを技術視点で解説する。"
-image: "./cover.svg"
+image: "./cover.jpg"
 tags: ["Astro", "Notion", "CMS", "Markdown", "Content Collections"]
 category: "Tech"
 draft: false

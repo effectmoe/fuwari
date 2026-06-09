@@ -2,7 +2,7 @@
 title: "Astro でチームブログを運用するための 4 つの選択肢：個人から段階的に拡張する設計"
 published: 2026-06-10
 description: "Astro + Obsidian の弱点は「チームでの共同編集」と言われる。しかし Astro/Markdown の根幹を変えずに、Web エディタ・ヘッドレス CMS・自前管理画面の 4 階層を段階導入することで、個人ブログからチーム運用まで途切れなくスケールできる。"
-image: "./cover.svg"
+image: "./cover.jpg"
 tags: ["Astro", "ヘッドレス CMS", "チーム運用", "Keystatic", "Cloudflare Access"]
 category: "Tech"
 draft: false
