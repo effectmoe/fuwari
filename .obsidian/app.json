@@ -1,0 +1,8 @@
+{
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "attachmentFolderPath": "./images",
+  "userIgnoreFilters": [
+    "node_modules/"
+  ]
+}
