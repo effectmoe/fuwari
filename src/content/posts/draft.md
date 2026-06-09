@@ -15,6 +15,7 @@ This article is currently in a draft state and is not published. Therefore, it w
 
 When the article is ready for publication, you can update the "draft" field to "false" in the Frontmatter:
 
+
 ```markdown
 ---
 title: Draft Example
@@ -23,3 +24,6 @@ tags: [Markdown, Blogging, Demo]
 category: Examples
 draft: false
 ---
+```
+
+![](images/claudecode-color%202.png)
