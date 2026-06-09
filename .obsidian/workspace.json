@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/expressive-code.md",
+                "file": "src/content/posts/draft.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "expressive-code"
+              "title": "draft"
             }
           }
         ]
@@ -40,7 +40,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
+                "sortOrder": "byCreatedTime",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/posts/expressive-code.md",
+                "file": "src/content/posts/draft.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "expressive-codeへのバックリンク"
+              "title": "draftへのバックリンク"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/posts/expressive-code.md",
+                "file": "src/content/posts/draft.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "expressive-codeからのアウトゴーイングリンク"
+              "title": "draftからのアウトゴーイングリンク"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/posts/expressive-code.md",
+                "file": "src/content/posts/draft.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "expressive-codeのアウトライン"
+              "title": "draftのアウトライン"
             }
           }
         ]
@@ -184,8 +184,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3a3a58ec60cdcc02",
+  "active": "5065935c3c5561a6",
   "lastOpenFiles": [
+    "src/content/posts/expressive-code.md",
     "src/content/posts/draft.md",
     "src/content/posts/markdown-extended.md",
     "src/content/posts/video.md"
