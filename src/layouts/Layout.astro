@@ -530,8 +530,9 @@ function createPhotoSwipe() {
 		imageClickAction: 'close',
 		tapAction: 'close',
 		doubleTapAction: 'zoom',
-		// 2026-06-10 astro-blog v1.7: 縦長 SVG でも縮小されないよう「fit と 100% の大きい方」採用
-		initialZoomLevel: (zoomLevelObject) => Math.max(zoomLevelObject.fit, 1),
+		// 2026-06-10 astro-blog v1.8: naturalWidth バグを domItemData で修正済みなので 'fit' 単体で正しく動く
+		// (Math.max(fit, 1) は大きい画像で 1 = 原寸 を返し viewport をオーバーフロー → 'fit' に戻す)
+		initialZoomLevel: "fit",   // ビューポートに必ずフィット
 		secondaryZoomLevel: 2,     // ダブルクリックで 2x
 		maxZoomLevel: 5,           // ホイールで最大 5x まで
 	})
