@@ -44,6 +44,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://github.com/effectmoe",
 			external: true,
 		},
+		{
+			name: "📧 メールマガ登録",
+			url: "https://substack.com/", // TODO: トニーの Substack publication URL に差替予定
+			external: true,
+		},
 	],
 };
 
