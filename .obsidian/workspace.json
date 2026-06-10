@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/draft.md",
+                "file": "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "draft"
+              "title": "index"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/posts/draft.md",
+                "file": "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "draftへのバックリンク"
+              "title": "indexへのバックリンク"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/posts/draft.md",
+                "file": "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "draftからのアウトゴーイングリンク"
+              "title": "indexからのアウトゴーイングリンク"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/posts/draft.md",
+                "file": "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "draftのアウトライン"
+              "title": "indexのアウトライン"
             }
           }
         ]
@@ -186,15 +186,36 @@
   },
   "active": "3a3a58ec60cdcc02",
   "lastOpenFiles": [
-    "src/content/posts/images/claudecode-color.png",
+    "src/content/posts/draft.md",
+    "src/content/posts/why-astro-content-framework/index.md",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress/cover.svg",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams/02-astro-vs-wordpress.svg",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams/01-end-to-end-flow.svg",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams",
+    "src/content/posts/astro-fuwari-workflow-vs-wordpress",
+    "src/content/posts/ai-era-senior-structuring-power/index.md",
+    "src/content/posts/ai-era-senior-structuring-power/cover.jpg",
+    "src/content/posts/ai-era-senior-structuring-power",
+    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams/02-tier1-flow.svg",
+    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams/01-four-tiers.svg",
+    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams",
+    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams/02-partial-sync.svg",
+    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams/01-writing-flow.svg",
+    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams",
+    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams/02-notion-vs-markdown.svg",
+    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams/01-astro-pipeline.svg",
+    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams",
+    "src/content/posts/why-astro-content-framework/diagrams",
+    "src/content/posts/astro-team-blog-collaboration-tiers/index.md",
+    "src/content/posts/obsidian-sync-mobile-astro-blog/index.md",
+    "src/content/posts/why-notion-cms-is-painful-for-astro/index.md",
+    "src/content/posts/astro-team-blog-collaboration-tiers",
+    "src/content/posts/obsidian-sync-mobile-astro-blog",
+    "src/content/posts/why-notion-cms-is-painful-for-astro",
+    "src/content/posts/video.md",
     "src/content/posts/expressive-code.md",
     "src/content/posts/guide/index.md",
-    "src/content/posts/guide/cover.jpeg",
-    "src/content/posts/draft.md",
-    "src/content/posts/images/claudecode-color 2.png",
-    "src/content/posts/images/claudecode-color 1.png",
-    "src/content/posts/images",
-    "src/content/posts/markdown-extended.md",
-    "src/content/posts/video.md"
+    "src/content/posts/markdown-extended.md"
   ]
 }
