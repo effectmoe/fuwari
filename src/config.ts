@@ -8,8 +8,8 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "シュ コウメイの構造化ブログ",
-	subtitle: "by Tony Chu / 株式会社EFFECT — AIで事業を構造化して加速する",
+	title: "構造化脳ブログ",
+	subtitle: "物事や事象を構造化",
 	lang: "ja", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 220, // Deep navy / steel blue — AI軍師ブランドを象徴する落ち着いた色
