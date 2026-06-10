@@ -60,7 +60,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "Amazon Kindle",
 			icon: "fa6-brands:amazon",
-			url: "https://www.amazon.co.jp/", // TODO: 正式 Kindle 著者ページ URL 要差替
+			url: "https://www.amazon.co.jp/dp/B0F7QQF392",
 		},
 		{
 			name: "LinkedIn",
