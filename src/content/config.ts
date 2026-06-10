@@ -12,6 +12,12 @@ const postsCollection = defineCollection({
 		category: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
 
+		/* astro-blog skill v1.10 - TL;DR マンガ */
+		manga_tldr: z.array(z.object({
+			src: z.string(),
+			caption: z.string(),
+		})).optional(),
+
 		/* For internal use */
 		prevTitle: z.string().default(""),
 		prevSlug: z.string().default(""),

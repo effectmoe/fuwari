@@ -3,6 +3,11 @@ title: Astro × Fuwari で作る一気通貫ブログ運用：WordPress との�
 published: 2026-06-10
 description: Astro Fuwari + Obsidian + Vercel + AI 自動化で構築した一気通貫ブログ運用パイプラインを設計記録として解説。WordPress と 14 観点で比較し、なぜ AI 時代のコンテンツ運用に Astro が選ばれているのかを実装視点で整理する。
 image: ./cover.jpg
+manga_tldr:
+  - { src: "./manga/panel-1.jpg", caption: "「ブログ運用って、こんなに複雑だっけ？」" }
+  - { src: "./manga/panel-2.jpg", caption: "「全部 Markdown で揃えたら、どうなる？」" }
+  - { src: "./manga/panel-3.jpg", caption: "「一つの源から、すべてが生まれる」" }
+  - { src: "./manga/panel-4.jpg", caption: "「AI 時代のブログは、ここから始まる」" }
 tags:
   - Astro
   - Fuwari

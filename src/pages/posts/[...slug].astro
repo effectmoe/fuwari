@@ -10,6 +10,7 @@ import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import { licenseConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
+import MangaSwiper from "../../components/MangaSwiper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
@@ -26,6 +27,28 @@ const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
+
+// TL;DR マンガパネルをビルド時に解決（astro-blog skill v1.10）
+let resolvedMangaPanels: { src: string; caption: string }[] = [];
+if (entry.data.manga_tldr && entry.data.manga_tldr.length > 0) {
+	const mangaFiles = import.meta.glob<ImageMetadata>("../../content/posts/**/*.{jpg,jpeg,png,webp}", {
+		import: "default",
+	});
+	const basePath = path.join("content/posts/", getDir(entry.id));
+	for (const p of entry.data.manga_tldr) {
+		const cleanSrc = p.src.startsWith("./") ? p.src.slice(2) : p.src;
+		const normalizedPath = path
+			.normalize(path.join("../../", basePath, cleanSrc))
+			.replace(/\\/g, "/");
+		const file = mangaFiles[normalizedPath];
+		if (file) {
+			const img = await file();
+			resolvedMangaPanels.push({ src: img.src, caption: p.caption });
+		} else {
+			console.error(`[manga_tldr] Image not found: ${normalizedPath}`);
+		}
+	}
+}
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -101,6 +124,9 @@ const jsonLd = {
                 <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
+            {resolvedMangaPanels.length > 0 &&
+                <MangaSwiper panels={resolvedMangaPanels} />
+            }
 
             <Markdown class="mb-6 markdown-content onload-animation">
                 <Content />
