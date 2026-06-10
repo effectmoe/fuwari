@@ -40,8 +40,8 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{
-			name: "GitHub",
-			url: "https://github.com/effectmoe",
+			name: "ストアカ",
+			url: "https://www.street-academy.com/steachers/271053",
 			external: true,
 		},
 	],
