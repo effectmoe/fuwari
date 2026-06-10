@@ -12,7 +12,7 @@ tags:
   - AI 自動化
   - ブログ運用
 category: Tech
-draft: false
+draft: true
 ---
 
 > **TL;DR**
