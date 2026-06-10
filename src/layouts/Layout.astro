@@ -530,6 +530,10 @@ function createPhotoSwipe() {
 		imageClickAction: 'close',
 		tapAction: 'close',
 		doubleTapAction: 'zoom',
+		// 2026-06-10 astro-blog v1.6: 図解 SVG をビューポートにフィット + ホイールでさらに拡大
+		initialZoomLevel: 'fit',   // 起動時に画面いっぱい
+		secondaryZoomLevel: 2,     // ダブルクリックで 2x
+		maxZoomLevel: 5,           // ホイールで最大 5x まで
 	})
 
 	lightbox.addFilter("domItemData", (itemData, element) => {
