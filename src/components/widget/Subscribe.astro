@@ -1,0 +1,57 @@
+---
+/**
+ * Subscribe.astro — Substack メールマガ登録フォーム埋込ウィジェット (v1.15)
+ *
+ * サイドバープロフィール下に常設するメール購読フォーム。
+ * Substack の公式 embed iframe を Fuwari の card-base スタイルでラップ。
+ *
+ * config.ts の substackEmbedUrl が空文字なら非表示。
+ */
+
+import { substackEmbedUrl } from "@/config";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+
+const { class: className, style } = Astro.props;
+const enabled = !!substackEmbedUrl;
+---
+
+{enabled && (
+	<div
+		class:list={["card-base p-5 w-full", className]}
+		style={style}
+	>
+		<div class="flex items-center mb-3 text-black/90 dark:text-white/90">
+			<div class="mr-2 text-[1.25rem]">📧</div>
+			<div class="font-bold text-md">メールマガ登録</div>
+		</div>
+		<p class="text-sm text-black/60 dark:text-white/60 mb-3 leading-relaxed">
+			Substack で新着記事をメール配信中。構造化の知見と実装記録を直接お届け。
+		</p>
+		<div class="subscribe-iframe-wrapper rounded-lg overflow-hidden">
+			<iframe
+				src={substackEmbedUrl}
+				width="100%"
+				height="150"
+				frameborder="0"
+				scrolling="no"
+				style="background: white; border: none;"
+				title="Substack メールマガ登録フォーム"
+				loading="lazy"
+			></iframe>
+		</div>
+	</div>
+)}
+
+<style>
+	.subscribe-iframe-wrapper {
+		min-height: 150px;
+	}
+	.subscribe-iframe-wrapper iframe {
+		display: block;
+		width: 100%;
+	}
+</style>

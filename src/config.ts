@@ -44,13 +44,14 @@ export const navBarConfig: NavBarConfig = {
 			url: "https://github.com/effectmoe",
 			external: true,
 		},
-		{
-			name: "📧 メールマガ登録",
-			url: "https://substack.com/", // TODO: トニーの Substack publication URL に差替予定
-			external: true,
-		},
 	],
 };
+
+/* Substack メールマガ購読フォーム埋込 URL（サイドバープロフィール下に常設）
+   - publication URL: https://<publication>.substack.com/embed の形
+   - 正式 URL 未確定の場合は空文字 ""（コンポーネントで空なら非表示）
+   v1.15: 2026-06-10 追加 */
+export const substackEmbedUrl = "https://kangmyung.substack.com/embed";
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/tony-avatar.jpg", // 桜の中のトニー（正方形クロップ）
