@@ -27,30 +27,7 @@ draft: false
 
 Astro v5 で導入された Content Layer は、ブログ運用の心臓部だ。
 
-```
-src/content/posts/<slug>/index.md
-   │
-   │ ① 読込
-   ▼
-Astro Content Collections（型検証）
-   ├─ frontmatter を z.object() で検証
-   ├─ 型エラーならビルド失敗（即発見）
-   └─ TypeScript 補完が効く
-   │
-   │ ② Markdown 本文 → AST 化
-   ▼
-remark プラグインチェーン
-   ├─ 数式・コード・リンク・カスタム要素の処理
-   │
-   │ ③ HTML AST に変換
-   ▼
-rehype プラグインチェーン
-   ├─ シンタックスハイライト・見出しID・anchor
-   │
-   │ ④ HTML 出力
-   ▼
-最終 HTML（Vercel に配信）
-```
+![Astro Content Layer の 4 段階パイプライン](./diagrams/01-astro-pipeline.svg)
 
 ポイントは **「ビルド時に確定的に変換される」** こと。
 
@@ -113,15 +90,7 @@ Astro が提供する型安全性のメリットを **自ら手放す**ことに
 
 対照的に、Astro + Obsidian の組合せはこうなる：
 
-```
-Obsidian で執筆（Markdown）
-   ↓ Git push
-GitHub（Markdown）
-   ↓ Vercel ビルド
-Astro Content Layer（Markdown → HTML）
-   ↓
-公開
-```
+![Notion 経由（変換ロスあり）vs Markdown 直接（ゼロ変換）の対比](./diagrams/02-notion-vs-markdown.svg)
 
 全工程 **Markdown で繋がっている**。変換ロスゼロ、API 依存ゼロ、型安全性フル活用。
 

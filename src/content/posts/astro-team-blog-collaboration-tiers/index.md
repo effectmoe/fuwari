@@ -40,6 +40,8 @@ Astro + Obsidian で個人ブログを運用していると、いつか必ず次
 
 ## 解決策の 4 階層
 
+![4 階層の段階導入：Tier 0 → 1 → 2 → 3](./diagrams/01-four-tiers.svg)
+
 ### Tier 0：GitHub ネイティブ運用
 
 技術者中心のチームなら、追加実装ゼロで成立する。
@@ -85,19 +87,7 @@ Keystatic は Astro の dev team が推奨しており、スキーマ定義で f
 
 動作フロー：
 
-```
-チームメンバー ──→ ブラウザで /admin/ にアクセス
-                          ↓
-                  Google OAuth / Cloudflare Access 認証
-                          ↓
-                  Web UI で記事編集（プレビュー付き）
-                          ↓
-                  「公開」ボタン
-                          ↓
-                  Markdown ファイルを git commit & push（自動）
-                          ↓
-                  Vercel 自動ビルド → 公開
-```
+![Tier 1 ヘッドレス CMS の動作フロー：ブラウザ → 認証 → 編集 → 公開](./diagrams/02-tier1-flow.svg)
 
 メリット：
 - **Astro/Markdown パイプライン完全維持**

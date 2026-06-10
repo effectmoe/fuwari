@@ -44,18 +44,7 @@ Notion 移行で解決しようとする前に、もっと安く・既存パイ�
 
 iPhone Obsidian アプリで Fuwari の Vault を完全同期できる。
 
-```
-平日朝の通勤電車：
-  iPhone Obsidian で記事の見出し構造を作る
-   ↓
-昼休みカフェ：
-  iPad Obsidian で本文を書き進める
-   ↓
-帰宅後の Mac：
-  Obsidian で frontmatter を整理し、画像を追加、commit-and-sync
-   ↓
-Vercel ビルド → 公開
-```
+![1 日の執筆リズム：通勤電車 → カフェ → 帰宅後 Mac → 公開まで](./diagrams/01-writing-flow.svg)
 
 これが **一つの Vault で繋がっている** という状態は、執筆のリズムを劇的に変える。
 
@@ -123,16 +112,7 @@ LLM Wiki 全体を同期したい場合、機密情報を含む Vault を iPhone
 
 そこで部分同期を活用する。
 
-```
-LLM Wiki Vault:
-  ├ Astro/              ← 同期 OK（公開系の運用ノート）
-  ├ EFFECT/             ← 同期しない（自社機密）
-  ├ <Client A>/         ← 同期しない（クライアント機密）
-  └ ...
-
-Fuwari Vault:
-  └ 全部同期 OK（最終的に公開される素材のため）
-```
+![部分同期の機密境界：Mac 単独ゾーンと Sync 対象ゾーンを分離](./diagrams/02-partial-sync.svg)
 
 機密が含まれる Vault は Mac 内ローカルのみに留め、公開ブログ用 Vault だけスマホと同期する。この **境界線の引き方** ができるのが Sync の柔軟性だ。
 
