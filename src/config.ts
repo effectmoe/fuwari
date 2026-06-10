@@ -16,9 +16,9 @@ export const siteConfig: SiteConfig = {
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
-		enable: true,
-		src: "assets/images/tony-banner.jpg", // 桜と愛犬を抱えるトニーのワイドバナー
-		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		enable: false, // 巨大化問題のため一時的に無効化（Fuwari banner は vh 単位で巨大表示される仕様）
+		src: "assets/images/tony-banner.jpg",
+		position: "center",
 		credit: {
 			enable: false,
 			text: "",
