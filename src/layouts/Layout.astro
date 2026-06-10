@@ -540,8 +540,16 @@ function createPhotoSwipe() {
 		if (element instanceof HTMLImageElement) {
 			itemData.src = element.src
 
-			itemData.w = Number(element.naturalWidth || window.innerWidth)
-			itemData.h = Number(element.naturalHeight || window.innerHeight)
+			// 2026-06-10 astro-blog v1.8: SVG の naturalWidth が小さく報告される問題対策
+			// Astro が <img width="1997" height="569"> 等で正しい寸法を付与しているのでそれを最優先
+			// なければ naturalWidth、最後に viewport をフォールバック
+			const attrW = Number(element.getAttribute("width")) || 0
+			const attrH = Number(element.getAttribute("height")) || 0
+			const natW = Number(element.naturalWidth) || 0
+			const natH = Number(element.naturalHeight) || 0
+			// 大きい値を採用（SVG で naturalWidth=300 のような小さい誤検出を回避）
+			itemData.w = Math.max(attrW, natW) || window.innerWidth
+			itemData.h = Math.max(attrH, natH) || window.innerHeight
 
 			itemData.msrc = element.src
 		}
