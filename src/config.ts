@@ -53,19 +53,24 @@ export const profileConfig: ProfileConfig = {
 	bio: "株式会社EFFECT 代表 / AI軍師。Claude Code・Cloudflare・自社プロダクト群で「AIで事業を構造化して加速する」実装ノートを発信。DFB（Decompose/Frame/Build = 分・枠・組）理論の提唱者。",
 	links: [
 		{
-			name: "GitHub",
-			icon: "fa6-brands:github",
-			url: "https://github.com/effectmoe",
+			name: "ストアカ講師ページ",
+			icon: "fa6-solid:chalkboard-user",
+			url: "https://www.street-academy.com/steachers/271053",
 		},
 		{
-			name: "ストアカ講師",
-			icon: "fa6-solid:graduation-cap",
-			url: "https://www.street-academy.com/",
+			name: "Amazon Kindle",
+			icon: "fa6-brands:amazon",
+			url: "https://www.amazon.co.jp/", // TODO: 正式 Kindle 著者ページ URL 要差替
 		},
 		{
-			name: "お問い合わせ",
-			icon: "fa6-solid:envelope",
-			url: "mailto:info@effect.moe",
+			name: "LinkedIn",
+			icon: "fa6-brands:linkedin",
+			url: "https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/",
+		},
+		{
+			name: "Substack",
+			icon: "simple-icons:substack",
+			url: "https://substack.com/", // TODO: 個人 publication URL 要差替
 		},
 	],
 };
