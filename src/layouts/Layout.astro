@@ -160,56 +160,10 @@ const bannerOffset =
 </html>
 
 <!-- ============================================================ -->
-<!-- medium-zoom: 記事内画像（特に図解 SVG）をクリック拡大表示する -->
-<!-- astro-blog skill 標準機能（2026-06-10 統合）                  -->
+<!-- 注: 画像クリック拡大は Fuwari 標準 PhotoSwipe が処理する     -->
+<!-- 過去に medium-zoom を被せて二重 lightbox 状態になったため撤去 -->
+<!-- 2026-06-10                                                   -->
 <!-- ============================================================ -->
-<script>
-import mediumZoom from "medium-zoom";
-
-let zoomInstance: ReturnType<typeof mediumZoom> | null = null;
-
-function initImageZoom() {
-	// 既存インスタンスを破棄してから再生成（swup ページ遷移対応）
-	if (zoomInstance) {
-		zoomInstance.detach();
-	}
-	zoomInstance = mediumZoom("main article img, main .prose img, main img:not(nav img):not(.no-zoom)", {
-		margin: 24,
-		background: "rgba(0, 0, 0, 0.85)",
-		scrollOffset: 60,
-	});
-}
-
-// 初回ロード
-initImageZoom();
-
-// swup ページ遷移後にも再初期化
-if (window.swup?.hooks) {
-	window.swup.hooks.on("page:view", () => {
-		initImageZoom();
-	});
-} else {
-	document.addEventListener("swup:enable", () => {
-		window.swup.hooks.on("page:view", () => {
-			initImageZoom();
-		});
-	});
-}
-</script>
-<style is:global>
-/* medium-zoom オーバーレイのスタイル微調整 */
-.medium-zoom-overlay {
-	z-index: 100;
-}
-.medium-zoom-image--opened {
-	z-index: 101;
-	cursor: zoom-out;
-}
-main article img,
-main .prose img {
-	cursor: zoom-in;
-}
-</style>
 
 <style is:global define:vars={{
 	bannerOffset,
