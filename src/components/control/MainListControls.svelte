@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onMount, tick } from "svelte";
+import { onMount } from "svelte";
 
 export let availableTags: string[] = [];
 export let availableCategories: string[] = [];
@@ -10,41 +10,8 @@ let sortOrder: "newest" | "oldest" = "newest";
 
 let tagOpen = false;
 let categoryOpen = false;
-let tagBtnEl: HTMLButtonElement | null = null;
-let categoryBtnEl: HTMLButtonElement | null = null;
-let tagDropdownPos = { top: 0, left: 0 };
-let categoryDropdownPos = { top: 0, left: 0 };
 
 let visibleCount = 0;
-
-function computePos(btn: HTMLElement) {
-	const rect = btn.getBoundingClientRect();
-	return { top: rect.bottom + 8, left: rect.left };
-}
-
-async function openTag(e: MouseEvent) {
-	e.stopPropagation();
-	categoryOpen = false;
-	if (tagOpen) {
-		tagOpen = false;
-		return;
-	}
-	if (tagBtnEl) tagDropdownPos = computePos(tagBtnEl);
-	tagOpen = true;
-	await tick();
-}
-
-async function openCategory(e: MouseEvent) {
-	e.stopPropagation();
-	tagOpen = false;
-	if (categoryOpen) {
-		categoryOpen = false;
-		return;
-	}
-	if (categoryBtnEl) categoryDropdownPos = computePos(categoryBtnEl);
-	categoryOpen = true;
-	await tick();
-}
 
 function toggleTag(tag: string) {
 	selectedTags = selectedTags.includes(tag)
@@ -122,142 +89,115 @@ function apply() {
 	visibleCount = shown;
 }
 
-function closeOnOutside(e: MouseEvent) {
-	const target = e.target as HTMLElement;
-	if (!target.closest("[data-mlc-portal]") && !target.closest("[data-mlc-trigger]")) {
-		tagOpen = false;
-		categoryOpen = false;
-	}
-}
-
-function onScrollOrResize() {
-	if (tagOpen && tagBtnEl) tagDropdownPos = computePos(tagBtnEl);
-	if (categoryOpen && categoryBtnEl) categoryDropdownPos = computePos(categoryBtnEl);
-}
-
 onMount(() => {
 	apply();
-	document.addEventListener("click", closeOnOutside);
-	window.addEventListener("scroll", onScrollOrResize, { passive: true });
-	window.addEventListener("resize", onScrollOrResize);
-	return () => {
-		document.removeEventListener("click", closeOnOutside);
-		window.removeEventListener("scroll", onScrollOrResize);
-		window.removeEventListener("resize", onScrollOrResize);
-	};
 });
 </script>
 
-<div class="card-base px-4 py-3 mb-4 flex flex-row flex-wrap items-center gap-2 text-sm">
-    <!-- タグ ボタン -->
-    <button
-        bind:this={tagBtnEl}
-        on:click={openTag}
-        data-mlc-trigger
-        class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
-        style={selectedTags.length > 0
-            ? "background: var(--primary); color: white;"
-            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
-    >
-        <span>タグ</span>
-        {#if selectedTags.length > 0}
-            <span class="text-xs opacity-90">({selectedTags.length})</span>
-        {/if}
-        <span class="text-xs">{tagOpen ? "▲" : "▼"}</span>
-    </button>
-
-    <!-- カテゴリ ボタン -->
-    <button
-        bind:this={categoryBtnEl}
-        on:click={openCategory}
-        data-mlc-trigger
-        class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
-        style={selectedCategories.length > 0
-            ? "background: var(--primary); color: white;"
-            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
-    >
-        <span>カテゴリ</span>
-        {#if selectedCategories.length > 0}
-            <span class="text-xs opacity-90">({selectedCategories.length})</span>
-        {/if}
-        <span class="text-xs">{categoryOpen ? "▲" : "▼"}</span>
-    </button>
-
-    <!-- ソート ボタン群 -->
-    <div class="flex items-center gap-1 ml-1">
+<div class="card-base px-4 py-3 mb-4 text-sm">
+    <!-- 1 行目: ボタン群 -->
+    <div class="flex flex-row flex-wrap items-center gap-2">
+        <!-- タグ ボタン -->
         <button
-            on:click={() => setSort("newest")}
-            class="px-3 py-1.5 rounded-full text-xs font-medium transition active:scale-95"
-            style={sortOrder === "newest"
+            on:click={() => { tagOpen = !tagOpen; }}
+            class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
+            style={selectedTags.length > 0
                 ? "background: var(--primary); color: white;"
                 : "background: var(--btn-plain-bg); color: var(--btn-content);"}
         >
-            ↓ 新着順
+            <span>タグ</span>
+            {#if selectedTags.length > 0}
+                <span class="text-xs opacity-90">({selectedTags.length})</span>
+            {/if}
+            <span class="text-xs">{tagOpen ? "▲" : "▼"}</span>
         </button>
+
+        <!-- カテゴリ ボタン -->
         <button
-            on:click={() => setSort("oldest")}
-            class="px-3 py-1.5 rounded-full text-xs font-medium transition active:scale-95"
-            style={sortOrder === "oldest"
+            on:click={() => { categoryOpen = !categoryOpen; }}
+            class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
+            style={selectedCategories.length > 0
                 ? "background: var(--primary); color: white;"
                 : "background: var(--btn-plain-bg); color: var(--btn-content);"}
         >
-            ↑ 古い順
+            <span>カテゴリ</span>
+            {#if selectedCategories.length > 0}
+                <span class="text-xs opacity-90">({selectedCategories.length})</span>
+            {/if}
+            <span class="text-xs">{categoryOpen ? "▲" : "▼"}</span>
         </button>
-    </div>
 
-    <!-- 右側：件数 + クリア -->
-    <div class="ml-auto flex items-center gap-2 text-xs text-50">
-        <span>{visibleCount} 件</span>
-        {#if selectedTags.length > 0 || selectedCategories.length > 0}
+        <!-- ソート ボタン群 -->
+        <div class="flex items-center gap-1 ml-1">
             <button
-                on:click={clearAll}
-                class="underline hover:text-75 active:scale-95"
+                on:click={() => setSort("newest")}
+                class="px-3 py-1.5 rounded-full text-xs font-medium transition active:scale-95"
+                style={sortOrder === "newest"
+                    ? "background: var(--primary); color: white;"
+                    : "background: var(--btn-plain-bg); color: var(--btn-content);"}
             >
-                クリア
+                ↓ 新着順
             </button>
-        {/if}
+            <button
+                on:click={() => setSort("oldest")}
+                class="px-3 py-1.5 rounded-full text-xs font-medium transition active:scale-95"
+                style={sortOrder === "oldest"
+                    ? "background: var(--primary); color: white;"
+                    : "background: var(--btn-plain-bg); color: var(--btn-content);"}
+            >
+                ↑ 古い順
+            </button>
+        </div>
+
+        <!-- 右側：件数 + クリア -->
+        <div class="ml-auto flex items-center gap-2 text-xs text-50">
+            <span>{visibleCount} 件</span>
+            {#if selectedTags.length > 0 || selectedCategories.length > 0}
+                <button
+                    on:click={clearAll}
+                    class="underline hover:text-75 active:scale-95"
+                >
+                    クリア
+                </button>
+            {/if}
+        </div>
     </div>
+
+    <!-- 2 行目: タグ展開（チップ） -->
+    {#if tagOpen}
+        <div class="mt-3 pt-3 border-t border-black/5 dark:border-white/5">
+            <div class="flex flex-wrap gap-1.5">
+                {#each availableTags as tag}
+                    <button
+                        on:click={() => toggleTag(tag)}
+                        class="px-3 py-1 rounded-full text-xs font-medium transition active:scale-95"
+                        style={selectedTags.includes(tag)
+                            ? "background: var(--primary); color: white;"
+                            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
+                    >
+                        {tag}
+                    </button>
+                {/each}
+            </div>
+        </div>
+    {/if}
+
+    <!-- 2 行目: カテゴリ展開（チップ） -->
+    {#if categoryOpen}
+        <div class="mt-3 pt-3 border-t border-black/5 dark:border-white/5">
+            <div class="flex flex-wrap gap-1.5">
+                {#each availableCategories as cat}
+                    <button
+                        on:click={() => toggleCategory(cat)}
+                        class="px-3 py-1 rounded-full text-xs font-medium transition active:scale-95"
+                        style={selectedCategories.includes(cat)
+                            ? "background: var(--primary); color: white;"
+                            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
+                    >
+                        {cat}
+                    </button>
+                {/each}
+            </div>
+        </div>
+    {/if}
 </div>
-
-<!-- ========== ドロップダウンは fixed で body 階層に出して stacking context バグ回避 ========== -->
-{#if tagOpen}
-    <div
-        data-mlc-portal
-        class="card-base p-2 shadow-2xl rounded-xl overflow-y-auto"
-        style="position: fixed; top: {tagDropdownPos.top}px; left: {tagDropdownPos.left}px; min-width: 14rem; max-height: 18rem; background: var(--card-bg); z-index: 99999;"
-        on:click|stopPropagation
-    >
-        {#each availableTags as tag}
-            <button
-                on:click={() => toggleTag(tag)}
-                class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
-            >
-                <span class="w-4 inline-block text-[var(--primary)]">
-                    {selectedTags.includes(tag) ? "✓" : ""}
-                </span>
-                <span>{tag}</span>
-            </button>
-        {/each}
-    </div>
-{/if}
-
-{#if categoryOpen}
-    <div
-        data-mlc-portal
-        class="card-base p-2 shadow-2xl rounded-xl"
-        style="position: fixed; top: {categoryDropdownPos.top}px; left: {categoryDropdownPos.left}px; min-width: 12rem; background: var(--card-bg); z-index: 99999;"
-        on:click|stopPropagation
-    >
-        {#each availableCategories as cat}
-            <button
-                on:click={() => toggleCategory(cat)}
-                class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
-            >
-                <span class="w-4 inline-block text-[var(--primary)]">
-                    {selectedCategories.includes(cat) ? "✓" : ""}
-                </span>
-                <span>{cat}</span>
-            </button>
-        {/each}
-    </div>
-{/if}
