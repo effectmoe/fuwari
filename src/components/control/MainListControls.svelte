@@ -177,7 +177,20 @@ onMount(() => {
             </button>
         </div>
 
-        <!-- 右側：シェア + 件数 + クリア -->
+        <!-- 件数 + クリア (ソートの直後) -->
+        <div class="flex items-center gap-2 text-xs text-50 ml-2">
+            <span>{visibleCount} 件</span>
+            {#if selectedTags.length > 0 || selectedCategories.length > 0}
+                <button
+                    on:click={clearAll}
+                    class="underline hover:text-75 active:scale-95"
+                >
+                    クリア
+                </button>
+            {/if}
+        </div>
+
+        <!-- 右側：シェア -->
         <div class="ml-auto flex items-center gap-2 text-xs text-50">
             {#if shareUrl}
                 <div class="flex items-center gap-1 mr-1 relative">
@@ -230,15 +243,6 @@ onMount(() => {
                         </span>
                     {/if}
                 </div>
-            {/if}
-            <span>{visibleCount} 件</span>
-            {#if selectedTags.length > 0 || selectedCategories.length > 0}
-                <button
-                    on:click={clearAll}
-                    class="underline hover:text-75 active:scale-95"
-                >
-                    クリア
-                </button>
             {/if}
         </div>
     </div>
