@@ -117,7 +117,7 @@ $: groups = (() => {
     <!-- タグ -->
     {#if availableTags.length > 0}
         <div class="mb-3">
-            <div class="text-sm font-bold text-75 mb-2">🏷️ タグで絞り込み</div>
+            <div class="text-sm font-bold text-75 mb-2">タグで絞り込み</div>
             <div class="flex flex-wrap gap-1.5">
                 {#each availableTags as tag}
                     <button
@@ -138,7 +138,7 @@ $: groups = (() => {
     <!-- カテゴリ -->
     {#if availableCategories.length > 0}
         <div class="mb-3">
-            <div class="text-sm font-bold text-75 mb-2">📂 カテゴリで絞り込み</div>
+            <div class="text-sm font-bold text-75 mb-2">カテゴリで絞り込み</div>
             <div class="flex flex-wrap gap-1.5">
                 {#each availableCategories as cat}
                     <button
@@ -158,7 +158,7 @@ $: groups = (() => {
     <!-- ソート + クリア -->
     <div class="flex flex-row items-center justify-between flex-wrap gap-2">
         <div class="flex items-center gap-2">
-            <span class="text-sm font-bold text-75">↕️ 並び順</span>
+            <span class="text-sm font-bold text-75">並び順</span>
             <button
                 on:click={() => (sortOrder = "newest")}
                 class="px-3 py-1 rounded-full text-xs font-medium transition active:scale-95"

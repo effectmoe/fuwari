@@ -108,9 +108,9 @@ onMount(() => {
 });
 </script>
 
-<div class="card-base px-4 py-3 mb-4 flex flex-row flex-wrap items-center gap-2 text-sm">
+<div class="card-base px-4 py-3 mb-4 flex flex-row flex-wrap items-center gap-2 text-sm relative" style="z-index: 100;">
     <!-- タグ ドロップダウン -->
-    <div class="relative" data-mlc-dropdown>
+    <div class="relative" style="z-index: 101;" data-mlc-dropdown>
         <button
             on:click|stopPropagation={() => { tagOpen = !tagOpen; categoryOpen = false; }}
             class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
@@ -118,7 +118,6 @@ onMount(() => {
                 ? "background: var(--primary); color: white;"
                 : "background: var(--btn-plain-bg); color: var(--btn-content);"}
         >
-            <span>🏷️</span>
             <span>タグ</span>
             {#if selectedTags.length > 0}
                 <span class="text-xs opacity-90">({selectedTags.length})</span>
@@ -127,8 +126,8 @@ onMount(() => {
         </button>
         {#if tagOpen}
             <div
-                class="absolute z-50 mt-2 left-0 min-w-[14rem] max-h-72 overflow-y-auto rounded-xl card-base p-2 shadow-lg"
-                style="background: var(--card-bg);"
+                class="absolute mt-2 left-0 min-w-[14rem] max-h-72 overflow-y-auto rounded-xl card-base p-2 shadow-lg"
+                style="background: var(--card-bg); z-index: 9999;"
                 on:click|stopPropagation
             >
                 {#each availableTags as tag}
@@ -147,7 +146,7 @@ onMount(() => {
     </div>
 
     <!-- カテゴリ ドロップダウン -->
-    <div class="relative" data-mlc-dropdown>
+    <div class="relative" style="z-index: 101;" data-mlc-dropdown>
         <button
             on:click|stopPropagation={() => { categoryOpen = !categoryOpen; tagOpen = false; }}
             class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
@@ -155,7 +154,6 @@ onMount(() => {
                 ? "background: var(--primary); color: white;"
                 : "background: var(--btn-plain-bg); color: var(--btn-content);"}
         >
-            <span>📂</span>
             <span>カテゴリ</span>
             {#if selectedCategories.length > 0}
                 <span class="text-xs opacity-90">({selectedCategories.length})</span>
@@ -164,8 +162,8 @@ onMount(() => {
         </button>
         {#if categoryOpen}
             <div
-                class="absolute z-50 mt-2 left-0 min-w-[12rem] rounded-xl card-base p-2 shadow-lg"
-                style="background: var(--card-bg);"
+                class="absolute mt-2 left-0 min-w-[12rem] rounded-xl card-base p-2 shadow-lg"
+                style="background: var(--card-bg); z-index: 9999;"
                 on:click|stopPropagation
             >
                 {#each availableCategories as cat}
