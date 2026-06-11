@@ -72,19 +72,6 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             <Icon name="fa6-brands:linkedin-in" class="text-[1rem]" />
         </a>
 
-        <!-- Instagram (navigator.share or fallback copy) -->
-        <button
-            type="button"
-            data-share-instagram={url}
-            data-share-title={title}
-            aria-label="Instagramで共有 (またはURLコピー)"
-            title="Instagram"
-            class="share-btn flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
-            style="background: var(--btn-plain-bg); color: var(--btn-content);"
-        >
-            <Icon name="fa6-brands:instagram" class="text-[1.1rem]" />
-        </button>
-
         <!-- トーストメッセージ -->
         <span data-share-toast class="text-xs text-[var(--primary)] font-medium ml-2 opacity-0 transition-opacity duration-300">
             ✓ コピーしました
@@ -135,31 +122,6 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             const url = copyBtn.getAttribute('data-share-copy');
             const ok = await copyUrl(url);
             if (ok) showToast(copyBtn);
-            return;
-        }
-
-        // Instagram: navigator.share か copy fallback
-        const igBtn = e.target.closest('[data-share-instagram]');
-        if (igBtn) {
-            e.preventDefault();
-            const url = igBtn.getAttribute('data-share-instagram');
-            const title = igBtn.getAttribute('data-share-title') || document.title;
-            if (navigator.share) {
-                try {
-                    await navigator.share({ url, title });
-                    return;
-                } catch (err) {
-                    // ユーザーキャンセル等
-                }
-            }
-            // 共有 API ない or 失敗 → URL コピー + ガイダンス
-            const ok = await copyUrl(url);
-            if (ok) {
-                showToast(igBtn);
-                setTimeout(() => {
-                    alert('URLをコピーしました。Instagramのアプリで貼り付けてください。');
-                }, 100);
-            }
         }
     });
 })();
