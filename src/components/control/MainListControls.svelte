@@ -1,8 +1,11 @@
 <script lang="ts">
+import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
 
 export let availableTags: string[] = [];
 export let availableCategories: string[] = [];
+export let shareUrl = "";
+export let shareTitle = "";
 
 let selectedTags: string[] = [];
 let selectedCategories: string[] = [];
@@ -10,6 +13,31 @@ let sortOrder: "newest" | "oldest" = "newest";
 
 let tagOpen = false;
 let categoryOpen = false;
+let copyToast = false;
+
+const encodedUrl = () => encodeURIComponent(shareUrl);
+const encodedTitle = () => encodeURIComponent(shareTitle);
+
+async function copyUrl() {
+	try {
+		await navigator.clipboard.writeText(shareUrl);
+	} catch {
+		try {
+			const ta = document.createElement("textarea");
+			ta.value = shareUrl;
+			ta.style.position = "fixed";
+			ta.style.top = "-1000px";
+			document.body.appendChild(ta);
+			ta.select();
+			document.execCommand("copy");
+			document.body.removeChild(ta);
+		} catch {
+			return;
+		}
+	}
+	copyToast = true;
+	setTimeout(() => (copyToast = false), 1800);
+}
 
 let visibleCount = 0;
 
@@ -149,8 +177,61 @@ onMount(() => {
             </button>
         </div>
 
-        <!-- 右側：件数 + クリア -->
+        <!-- 右側：シェア + 件数 + クリア -->
         <div class="ml-auto flex items-center gap-2 text-xs text-50">
+            {#if shareUrl}
+                <div class="flex items-center gap-1 mr-1 relative">
+                    <span class="mr-1 text-50 hidden sm:inline">シェア:</span>
+                    <button
+                        type="button"
+                        on:click={copyUrl}
+                        aria-label="URLをコピー"
+                        title="URLをコピー"
+                        class="share-mini flex items-center justify-center w-7 h-7 rounded-full transition active:scale-95 hover:scale-110"
+                        style="background: var(--btn-plain-bg); color: var(--btn-content);"
+                    >
+                        <Icon icon="material-symbols:content-copy-rounded" width="14" height="14" />
+                    </button>
+                    <a
+                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl()}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebookで共有"
+                        title="Facebookで共有"
+                        class="share-mini flex items-center justify-center w-7 h-7 rounded-full transition active:scale-95 hover:scale-110"
+                        style="background: var(--btn-plain-bg); color: var(--btn-content);"
+                    >
+                        <Icon icon="fa6-brands:facebook-f" width="12" height="12" />
+                    </a>
+                    <a
+                        href={`https://twitter.com/intent/tweet?url=${encodedUrl()}&text=${encodedTitle()}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Xで共有"
+                        title="Xで共有"
+                        class="share-mini flex items-center justify-center w-7 h-7 rounded-full transition active:scale-95 hover:scale-110"
+                        style="background: var(--btn-plain-bg); color: var(--btn-content);"
+                    >
+                        <Icon icon="fa6-brands:x-twitter" width="12" height="12" />
+                    </a>
+                    <a
+                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl()}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedInで共有"
+                        title="LinkedInで共有"
+                        class="share-mini flex items-center justify-center w-7 h-7 rounded-full transition active:scale-95 hover:scale-110"
+                        style="background: var(--btn-plain-bg); color: var(--btn-content);"
+                    >
+                        <Icon icon="fa6-brands:linkedin-in" width="12" height="12" />
+                    </a>
+                    {#if copyToast}
+                        <span class="absolute -bottom-6 right-0 text-xs text-[var(--primary)] font-medium whitespace-nowrap">
+                            ✓ コピーしました
+                        </span>
+                    {/if}
+                </div>
+            {/if}
             <span>{visibleCount} 件</span>
             {#if selectedTags.length > 0 || selectedCategories.length > 0}
                 <button
@@ -201,3 +282,10 @@ onMount(() => {
         </div>
     {/if}
 </div>
+
+<style>
+.share-mini:hover {
+    background: var(--btn-plain-bg-hover) !important;
+    color: var(--primary) !important;
+}
+</style>

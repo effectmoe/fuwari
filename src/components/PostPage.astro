@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlBySlug } from "@utils/url-utils";
+import { siteConfig } from "../config";
 import PostCard from "./PostCard.astro";
 import MainListControls from "./control/MainListControls.svelte";
 
@@ -25,12 +26,16 @@ const availableCategories = Array.from(
 			.filter((c: string | null | undefined): c is string => !!c),
 	),
 ).sort() as string[];
+
+const siteUrl = Astro.site ? Astro.site.toString() : "/";
 ---
 
 <MainListControls
 	client:load
 	availableTags={availableTags}
 	availableCategories={availableCategories}
+	shareUrl={siteUrl}
+	shareTitle={siteConfig.title}
 />
 
 <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
