@@ -2,12 +2,37 @@
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlBySlug } from "@utils/url-utils";
 import PostCard from "./PostCard.astro";
+import MainListControls from "./control/MainListControls.svelte";
 
 const { page } = Astro.props;
 
 let delay = 0;
 const interval = 50;
+
+// 現在ページの全記事から利用可能なタグ・カテゴリを集計
+const availableTags = Array.from(
+	new Set(
+		page.data.flatMap((entry: CollectionEntry<"posts">) =>
+			entry.data.tags ?? [],
+		),
+	),
+).sort() as string[];
+
+const availableCategories = Array.from(
+	new Set(
+		page.data
+			.map((entry: CollectionEntry<"posts">) => entry.data.category)
+			.filter((c: string | null | undefined): c is string => !!c),
+	),
+).sort() as string[];
 ---
+
+<MainListControls
+	client:load
+	availableTags={availableTags}
+	availableCategories={availableCategories}
+/>
+
 <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
     {page.data.map((entry: CollectionEntry<"posts">) => (
         <PostCard
