@@ -1,5 +1,5 @@
 <script lang="ts">
-import { onMount } from "svelte";
+import { onMount, tick } from "svelte";
 
 export let availableTags: string[] = [];
 export let availableCategories: string[] = [];
@@ -8,11 +8,43 @@ let selectedTags: string[] = [];
 let selectedCategories: string[] = [];
 let sortOrder: "newest" | "oldest" = "newest";
 
-// ドロップダウン開閉状態
 let tagOpen = false;
 let categoryOpen = false;
+let tagBtnEl: HTMLButtonElement | null = null;
+let categoryBtnEl: HTMLButtonElement | null = null;
+let tagDropdownPos = { top: 0, left: 0 };
+let categoryDropdownPos = { top: 0, left: 0 };
 
 let visibleCount = 0;
+
+function computePos(btn: HTMLElement) {
+	const rect = btn.getBoundingClientRect();
+	return { top: rect.bottom + 8, left: rect.left };
+}
+
+async function openTag(e: MouseEvent) {
+	e.stopPropagation();
+	categoryOpen = false;
+	if (tagOpen) {
+		tagOpen = false;
+		return;
+	}
+	if (tagBtnEl) tagDropdownPos = computePos(tagBtnEl);
+	tagOpen = true;
+	await tick();
+}
+
+async function openCategory(e: MouseEvent) {
+	e.stopPropagation();
+	tagOpen = false;
+	if (categoryOpen) {
+		categoryOpen = false;
+		return;
+	}
+	if (categoryBtnEl) categoryDropdownPos = computePos(categoryBtnEl);
+	categoryOpen = true;
+	await tick();
+}
 
 function toggleTag(tag: string) {
 	selectedTags = selectedTags.includes(tag)
@@ -46,7 +78,6 @@ function apply() {
 	);
 	let shown = 0;
 
-	// 各カードに対応する separator (mobile 下罫線) を事前取得
 	type Pair = { card: HTMLElement; sep: HTMLElement | null };
 	const pairs: Pair[] = cards.map((card) => {
 		const next = card.nextElementSibling as HTMLElement | null;
@@ -57,7 +88,6 @@ function apply() {
 		return { card, sep: isSep ? next : null };
 	});
 
-	// フィルタ適用
 	for (const { card, sep } of pairs) {
 		const tagStr = card.dataset.postTags ?? "";
 		const cat = card.dataset.postCategory ?? "";
@@ -75,7 +105,6 @@ function apply() {
 		if (show) shown++;
 	}
 
-	// ソート適用（DOM 並び替え・card と separator をペアで動かす）
 	const parent = cards[0]?.parentElement;
 	if (parent) {
 		const visiblePairs = pairs.filter((p) => p.card.style.display !== "none");
@@ -95,91 +124,64 @@ function apply() {
 
 function closeOnOutside(e: MouseEvent) {
 	const target = e.target as HTMLElement;
-	if (!target.closest("[data-mlc-dropdown]")) {
+	if (!target.closest("[data-mlc-portal]") && !target.closest("[data-mlc-trigger]")) {
 		tagOpen = false;
 		categoryOpen = false;
 	}
 }
 
+function onScrollOrResize() {
+	if (tagOpen && tagBtnEl) tagDropdownPos = computePos(tagBtnEl);
+	if (categoryOpen && categoryBtnEl) categoryDropdownPos = computePos(categoryBtnEl);
+}
+
 onMount(() => {
 	apply();
 	document.addEventListener("click", closeOnOutside);
-	return () => document.removeEventListener("click", closeOnOutside);
+	window.addEventListener("scroll", onScrollOrResize, { passive: true });
+	window.addEventListener("resize", onScrollOrResize);
+	return () => {
+		document.removeEventListener("click", closeOnOutside);
+		window.removeEventListener("scroll", onScrollOrResize);
+		window.removeEventListener("resize", onScrollOrResize);
+	};
 });
 </script>
 
-<div class="card-base px-4 py-3 mb-4 flex flex-row flex-wrap items-center gap-2 text-sm relative" style="z-index: 100;">
-    <!-- タグ ドロップダウン -->
-    <div class="relative" style="z-index: 101;" data-mlc-dropdown>
-        <button
-            on:click|stopPropagation={() => { tagOpen = !tagOpen; categoryOpen = false; }}
-            class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
-            style={selectedTags.length > 0
-                ? "background: var(--primary); color: white;"
-                : "background: var(--btn-plain-bg); color: var(--btn-content);"}
-        >
-            <span>タグ</span>
-            {#if selectedTags.length > 0}
-                <span class="text-xs opacity-90">({selectedTags.length})</span>
-            {/if}
-            <span class="text-xs">{tagOpen ? "▲" : "▼"}</span>
-        </button>
-        {#if tagOpen}
-            <div
-                class="absolute mt-2 left-0 min-w-[14rem] max-h-72 overflow-y-auto rounded-xl card-base p-2 shadow-lg"
-                style="background: var(--card-bg); z-index: 9999;"
-                on:click|stopPropagation
-            >
-                {#each availableTags as tag}
-                    <button
-                        on:click={() => toggleTag(tag)}
-                        class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
-                    >
-                        <span class="w-4 inline-block text-[var(--primary)]">
-                            {selectedTags.includes(tag) ? "✓" : ""}
-                        </span>
-                        <span>{tag}</span>
-                    </button>
-                {/each}
-            </div>
+<div class="card-base px-4 py-3 mb-4 flex flex-row flex-wrap items-center gap-2 text-sm">
+    <!-- タグ ボタン -->
+    <button
+        bind:this={tagBtnEl}
+        on:click={openTag}
+        data-mlc-trigger
+        class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
+        style={selectedTags.length > 0
+            ? "background: var(--primary); color: white;"
+            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
+    >
+        <span>タグ</span>
+        {#if selectedTags.length > 0}
+            <span class="text-xs opacity-90">({selectedTags.length})</span>
         {/if}
-    </div>
+        <span class="text-xs">{tagOpen ? "▲" : "▼"}</span>
+    </button>
 
-    <!-- カテゴリ ドロップダウン -->
-    <div class="relative" style="z-index: 101;" data-mlc-dropdown>
-        <button
-            on:click|stopPropagation={() => { categoryOpen = !categoryOpen; tagOpen = false; }}
-            class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
-            style={selectedCategories.length > 0
-                ? "background: var(--primary); color: white;"
-                : "background: var(--btn-plain-bg); color: var(--btn-content);"}
-        >
-            <span>カテゴリ</span>
-            {#if selectedCategories.length > 0}
-                <span class="text-xs opacity-90">({selectedCategories.length})</span>
-            {/if}
-            <span class="text-xs">{categoryOpen ? "▲" : "▼"}</span>
-        </button>
-        {#if categoryOpen}
-            <div
-                class="absolute mt-2 left-0 min-w-[12rem] rounded-xl card-base p-2 shadow-lg"
-                style="background: var(--card-bg); z-index: 9999;"
-                on:click|stopPropagation
-            >
-                {#each availableCategories as cat}
-                    <button
-                        on:click={() => toggleCategory(cat)}
-                        class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
-                    >
-                        <span class="w-4 inline-block text-[var(--primary)]">
-                            {selectedCategories.includes(cat) ? "✓" : ""}
-                        </span>
-                        <span>{cat}</span>
-                    </button>
-                {/each}
-            </div>
+    <!-- カテゴリ ボタン -->
+    <button
+        bind:this={categoryBtnEl}
+        on:click={openCategory}
+        data-mlc-trigger
+        class="flex items-center gap-1 px-3 py-1.5 rounded-full font-medium transition active:scale-95"
+        style={selectedCategories.length > 0
+            ? "background: var(--primary); color: white;"
+            : "background: var(--btn-plain-bg); color: var(--btn-content);"}
+    >
+        <span>カテゴリ</span>
+        {#if selectedCategories.length > 0}
+            <span class="text-xs opacity-90">({selectedCategories.length})</span>
         {/if}
-    </div>
+        <span class="text-xs">{categoryOpen ? "▲" : "▼"}</span>
+    </button>
 
     <!-- ソート ボタン群 -->
     <div class="flex items-center gap-1 ml-1">
@@ -216,3 +218,46 @@ onMount(() => {
         {/if}
     </div>
 </div>
+
+<!-- ========== ドロップダウンは fixed で body 階層に出して stacking context バグ回避 ========== -->
+{#if tagOpen}
+    <div
+        data-mlc-portal
+        class="card-base p-2 shadow-2xl rounded-xl overflow-y-auto"
+        style="position: fixed; top: {tagDropdownPos.top}px; left: {tagDropdownPos.left}px; min-width: 14rem; max-height: 18rem; background: var(--card-bg); z-index: 99999;"
+        on:click|stopPropagation
+    >
+        {#each availableTags as tag}
+            <button
+                on:click={() => toggleTag(tag)}
+                class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
+            >
+                <span class="w-4 inline-block text-[var(--primary)]">
+                    {selectedTags.includes(tag) ? "✓" : ""}
+                </span>
+                <span>{tag}</span>
+            </button>
+        {/each}
+    </div>
+{/if}
+
+{#if categoryOpen}
+    <div
+        data-mlc-portal
+        class="card-base p-2 shadow-2xl rounded-xl"
+        style="position: fixed; top: {categoryDropdownPos.top}px; left: {categoryDropdownPos.left}px; min-width: 12rem; background: var(--card-bg); z-index: 99999;"
+        on:click|stopPropagation
+    >
+        {#each availableCategories as cat}
+            <button
+                on:click={() => toggleCategory(cat)}
+                class="w-full text-left px-3 py-1.5 rounded-lg text-xs flex items-center gap-2 transition hover:bg-black/5 dark:hover:bg-white/5"
+            >
+                <span class="w-4 inline-block text-[var(--primary)]">
+                    {selectedCategories.includes(cat) ? "✓" : ""}
+                </span>
+                <span>{cat}</span>
+            </button>
+        {/each}
+    </div>
+{/if}
