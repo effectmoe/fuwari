@@ -1,0 +1,173 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	url: string;
+	title: string;
+	class?: string;
+	label?: string;
+}
+
+const { url, title, class: className, label = "この記事をシェア" } = Astro.props;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+
+const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+const xUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+---
+
+<div class:list={["share-bar card-base px-5 py-4", className]}>
+    <div class="flex flex-row items-center gap-2 flex-wrap">
+        <span class="text-sm font-bold text-75 mr-2">{label}</span>
+
+        <!-- URL コピー -->
+        <button
+            type="button"
+            data-share-copy={url}
+            aria-label="URLをコピー"
+            title="URLをコピー"
+            class="share-btn group flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
+            style="background: var(--btn-plain-bg); color: var(--btn-content);"
+        >
+            <Icon name="material-symbols:content-copy-rounded" class="text-[1.1rem]" />
+        </button>
+
+        <!-- Facebook -->
+        <a
+            href={facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebookで共有"
+            title="Facebookで共有"
+            class="share-btn flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
+            style="background: var(--btn-plain-bg); color: var(--btn-content);"
+        >
+            <Icon name="fa6-brands:facebook-f" class="text-[1rem]" />
+        </a>
+
+        <!-- X (旧Twitter) -->
+        <a
+            href={xUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Xで共有"
+            title="Xで共有"
+            class="share-btn flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
+            style="background: var(--btn-plain-bg); color: var(--btn-content);"
+        >
+            <Icon name="fa6-brands:x-twitter" class="text-[1rem]" />
+        </a>
+
+        <!-- LinkedIn -->
+        <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedInで共有"
+            title="LinkedInで共有"
+            class="share-btn flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
+            style="background: var(--btn-plain-bg); color: var(--btn-content);"
+        >
+            <Icon name="fa6-brands:linkedin-in" class="text-[1rem]" />
+        </a>
+
+        <!-- Instagram (navigator.share or fallback copy) -->
+        <button
+            type="button"
+            data-share-instagram={url}
+            data-share-title={title}
+            aria-label="Instagramで共有 (またはURLコピー)"
+            title="Instagram"
+            class="share-btn flex items-center justify-center w-9 h-9 rounded-full transition active:scale-95 hover:scale-110"
+            style="background: var(--btn-plain-bg); color: var(--btn-content);"
+        >
+            <Icon name="fa6-brands:instagram" class="text-[1.1rem]" />
+        </button>
+
+        <!-- トーストメッセージ -->
+        <span data-share-toast class="text-xs text-[var(--primary)] font-medium ml-2 opacity-0 transition-opacity duration-300">
+            ✓ コピーしました
+        </span>
+    </div>
+</div>
+
+<script is:inline>
+(() => {
+    if (window.__shareBarInit) return;
+    window.__shareBarInit = true;
+
+    function showToast(btn) {
+        const bar = btn.closest('.share-bar');
+        const toast = bar?.querySelector('[data-share-toast]');
+        if (!toast) return;
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+    }
+
+    async function copyUrl(url) {
+        try {
+            await navigator.clipboard.writeText(url);
+            return true;
+        } catch (e) {
+            // フォールバック: 仮 textarea
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = url;
+                ta.style.position = 'fixed';
+                ta.style.top = '-1000px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                return true;
+            } catch (err) {
+                return false;
+            }
+        }
+    }
+
+    // URL コピーボタン
+    document.addEventListener('click', async (e) => {
+        const copyBtn = e.target.closest('[data-share-copy]');
+        if (copyBtn) {
+            e.preventDefault();
+            const url = copyBtn.getAttribute('data-share-copy');
+            const ok = await copyUrl(url);
+            if (ok) showToast(copyBtn);
+            return;
+        }
+
+        // Instagram: navigator.share か copy fallback
+        const igBtn = e.target.closest('[data-share-instagram]');
+        if (igBtn) {
+            e.preventDefault();
+            const url = igBtn.getAttribute('data-share-instagram');
+            const title = igBtn.getAttribute('data-share-title') || document.title;
+            if (navigator.share) {
+                try {
+                    await navigator.share({ url, title });
+                    return;
+                } catch (err) {
+                    // ユーザーキャンセル等
+                }
+            }
+            // 共有 API ない or 失敗 → URL コピー + ガイダンス
+            const ok = await copyUrl(url);
+            if (ok) {
+                showToast(igBtn);
+                setTimeout(() => {
+                    alert('URLをコピーしました。Instagramのアプリで貼り付けてください。');
+                }, 100);
+            }
+        }
+    });
+})();
+</script>
+
+<style>
+.share-btn:hover {
+    background: var(--btn-plain-bg-hover) !important;
+    color: var(--primary) !important;
+}
+</style>
