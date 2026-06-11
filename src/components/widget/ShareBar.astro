@@ -33,13 +33,6 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
         "flex flex-row items-center flex-wrap",
         compact ? "gap-1.5" : "gap-2",
     ]}>
-        {!compact && (
-            <span class="text-sm font-bold text-75 mr-2">{label}</span>
-        )}
-        {compact && (
-            <span class="text-xs text-50 mr-1 hidden sm:inline">シェア:</span>
-        )}
-
         <!-- URL コピー -->
         <button
             type="button"

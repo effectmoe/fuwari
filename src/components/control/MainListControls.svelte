@@ -181,7 +181,6 @@ onMount(() => {
         <div class="ml-auto flex items-center gap-2 text-xs text-50">
             {#if shareUrl}
                 <div class="flex items-center gap-1 mr-1 relative">
-                    <span class="mr-1 text-50 hidden sm:inline">シェア:</span>
                     <button
                         type="button"
                         on:click={copyUrl}
