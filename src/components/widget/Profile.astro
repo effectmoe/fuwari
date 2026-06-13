@@ -1,10 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
-import { profileConfig } from "../../config";
+import { profileConfig, seoConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+const rv = seoConfig.reviews;
 ---
 <div class="card-base p-3">
     <a aria-label="Go to About Page" href={url('/about/')}
@@ -22,6 +23,25 @@ const config = profileConfig;
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
         <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
         <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
+
+        <!-- ストアカ実績バッジ（第三者評価＝E-E-A-T / 社会的証明） -->
+        <a href={rv.reviewUrl} target="_blank" rel="noopener noreferrer"
+           aria-label={`ストアカ評価 ${rv.ratingValue} / レビュー${rv.reviewCount}件`}
+           class="block rounded-xl bg-[var(--btn-plain-bg)] hover:bg-[var(--btn-plain-bg-hover)] transition active:scale-95 px-3 py-2.5 mb-3 mx-auto max-w-[12rem] lg:max-w-none">
+            <div class="flex items-center justify-center gap-1.5 mb-1">
+                <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
+                <span class="font-bold text-90 text-sm">{rv.ratingValue}</span>
+                <span class="text-50 text-xs">（{rv.reviewCount}件）</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 text-[0.7rem] text-50">
+                <span>受講 {rv.studentsTaught}人</span>
+                <span class="opacity-40">|</span>
+                <span>{rv.sessionsTaught}回</span>
+                <span class="opacity-40">|</span>
+                <span class="text-[var(--primary)] font-medium">プラチナ講師</span>
+            </div>
+        </a>
+
         <div class="flex flex-wrap gap-2 justify-center mb-1">
             {config.links.length > 1 && config.links.map(item =>
                     <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">

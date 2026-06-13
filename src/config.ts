@@ -167,6 +167,52 @@ export const seoConfig = {
 	// 著者の肩書（Person.jobTitle）
 	jobTitle: "株式会社EFFECT 代表 / AI軍師",
 	alternateName: ["シュ コウメイ", "朱 剛明", "AI軍師", "Tony Chu"],
+
+	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
+	// 出典: https://www.street-academy.com/steachers/271053#review（2026-06-14 時点）
+	reviews: {
+		ratingValue: 4.94,
+		reviewCount: 209,
+		bestRating: 5,
+		studentsTaught: 435,
+		sessionsTaught: 428,
+		repeatRate: "53.6%",
+		periodStart: "2019-01-01",
+		badge: "ストアカ プラチナランク（2026年7月よりProランク昇格）",
+		profileUrl: "https://www.street-academy.com/steachers/271053",
+		reviewUrl: "https://www.street-academy.com/steachers/271053#review",
+		// 代表的な受講生レビュー（ストアカ掲載のまま・表示名は公開準拠）
+		testimonials: [
+			{
+				course: "SEOはLLMOへ！AI検索に選ばれるWEBサイトを作る60分",
+				reviewer: "女性",
+				date: "2026-06",
+				rating: 5,
+				text: "これまでのSEOとLLMOがどう違うのか、というところから丁寧に教えてもらえて、頭の中が整理されました。JSON-LDやSchema.orgでの構造化データの作り方を、実際のサイトのソースコードやリッチリザルトの検証画面を見ながら解説してもらえたのが特によかったです。FAQや内部リンク、ピラー＆クラスターでサイトを回遊できる形にする考え方、医療系で重要なE-E-A-T（監修・出典・権威性）の話も具体的で、自社サイトのどこを直せばいいかが明確になりました。すぐ実践できる内容で、また次の講座も受けたいと思います。",
+			},
+			{
+				course: "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+				reviewer: "男性 40代",
+				date: "2026-06",
+				rating: 5,
+				text: "claude codeの基礎的なところから教えていただき、非常にためになりました。しっかり最後まで、伴走していただいたおかげで、最終的な成果物は満足ものになりました。非常にオススメです！！",
+			},
+			{
+				course: "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
+				reviewer: "男性",
+				date: "2026-06",
+				rating: 5,
+				text: "イラストも描きながら説明をしていただけるのでとてもわかりやすかったです。難しい言葉も使わないので余計に入ってきました。初心者の方にお勧めの講師ではないでしょうか。",
+			},
+			{
+				course: "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
+				reviewer: "女性 40代",
+				date: "2026-06",
+				rating: 5,
+				text: "いつもとても参考になっています！定期的に受講していきたいです！",
+			},
+		],
+	},
 };
 
 export const licenseConfig: LicenseConfig = {

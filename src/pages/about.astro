@@ -5,6 +5,7 @@ import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { profileConfig, seoConfig } from "../config";
 
 const aboutPost = await getEntry("spec", "about");
 
@@ -13,13 +14,110 @@ if (!aboutPost) {
 }
 
 const { Content } = await render(aboutPost);
+
+const rv = seoConfig.reviews;
+const siteUrl = Astro.site ? Astro.site.toString() : "/";
+
+// 受講生レビューの構造化データ（ページ上に表示＝Google 的にも正当・LLMO に強い）
+const reviewLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	"@id": `${siteUrl}#person`,
+	name: profileConfig.name,
+	aggregateRating: {
+		"@type": "AggregateRating",
+		ratingValue: rv.ratingValue,
+		reviewCount: rv.reviewCount,
+		bestRating: rv.bestRating,
+	},
+	review: rv.testimonials.map((t) => ({
+		"@type": "Review",
+		reviewRating: {
+			"@type": "Rating",
+			ratingValue: t.rating,
+			bestRating: 5,
+		},
+		author: { "@type": "Person", name: t.reviewer },
+		datePublished: t.date,
+		reviewBody: t.text,
+		name: t.course,
+	})),
+};
 ---
 <MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
-            <Markdown class="mt-2">
-                <Content />
-            </Markdown>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(reviewLd)}></script>
+    <div class="flex flex-col gap-4 w-full">
+        <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+            <div class="card-base z-10 px-9 py-6 relative w-full ">
+                <Markdown class="mt-2">
+                    <Content />
+                </Markdown>
+            </div>
+        </div>
+
+        <!-- ============ 受講生の声（ストアカ・第三者評価）============ -->
+        <div class="card-base px-6 md:px-9 py-7 relative w-full">
+            <div class="flex flex-row items-center gap-3 mb-1">
+                <h2 class="text-2xl font-bold text-90">受講生の声</h2>
+                <span class="text-xs text-50">ストアカ</span>
+            </div>
+            <p class="text-sm text-50 mb-5">
+                第三者プラットフォーム「ストアカ」での受講生による評価です。
+            </p>
+
+            <!-- 実績サマリ -->
+            <div class="flex flex-row flex-wrap gap-3 mb-6">
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-[var(--primary)] text-2xl font-bold">{rv.ratingValue}</span>
+                        <span class="text-50 text-xs">/ 5</span>
+                    </div>
+                    <div class="text-[var(--primary)] text-sm leading-none mt-0.5">★★★★★</div>
+                    <div class="text-50 text-[0.7rem] mt-1">{rv.reviewCount} 件のレビュー</div>
+                </div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
+                    <span class="text-90 text-2xl font-bold">{rv.studentsTaught}</span>
+                    <div class="text-50 text-[0.7rem] mt-1">累計受講者数</div>
+                </div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
+                    <span class="text-90 text-2xl font-bold">{rv.sessionsTaught}</span>
+                    <div class="text-50 text-[0.7rem] mt-1">開催回数</div>
+                </div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
+                    <span class="text-90 text-2xl font-bold">{rv.repeatRate}</span>
+                    <div class="text-50 text-[0.7rem] mt-1">リピート率</div>
+                </div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 flex-1 min-w-[10rem]">
+                    <span class="text-[var(--primary)] text-base font-bold">プラチナランク</span>
+                    <div class="text-50 text-[0.7rem] mt-1 text-center">2026年7月よりPro昇格</div>
+                </div>
+            </div>
+
+            <!-- 個別レビュー -->
+            <div class="flex flex-col gap-4">
+                {rv.testimonials.map((t) => (
+                    <div class="rounded-xl border border-black/5 dark:border-white/10 p-4 transition">
+                        <div class="flex flex-row items-center justify-between gap-2 mb-2 flex-wrap">
+                            <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
+                            <span class="text-50 text-xs">{t.reviewer}・{t.date.replace("-", "年")}月 受講</span>
+                        </div>
+                        <div class="text-xs text-50 mb-1.5 font-medium">講座「{t.course}」</div>
+                        <p class="text-sm text-75 leading-relaxed">{t.text}</p>
+                    </div>
+                ))}
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-6 flex flex-row flex-wrap gap-3">
+                <a href={rv.reviewUrl} target="_blank" rel="noopener noreferrer"
+                   class="btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center">
+                    すべてのレビューを見る（{rv.reviewCount}件）
+                </a>
+                <a href={rv.profileUrl} target="_blank" rel="noopener noreferrer"
+                   class="btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center">
+                    ストアカ講師ページ
+                </a>
+            </div>
         </div>
     </div>
 </MainGridLayout>

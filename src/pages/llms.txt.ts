@@ -45,6 +45,15 @@ ${seoConfig.sameAs.map((u) => `  - ${u}`).join("\n")}
 
 著者はストアカ人気講師（LLMO・Claude Code・AIエージェント・Notion・GA4・E-E-A-T 等の講座を多数開講）であり、LLMO 対策の書籍著者でもあります。本サイトの技術実装（構造化データ・LLMO 最適化）自体が、著者の専門性の実証事例です。
 
+## 実績・評価（第三者評価 / ストアカ）
+
+- 総合評価: ${seoConfig.reviews.ratingValue} / 5（レビュー ${seoConfig.reviews.reviewCount} 件）
+- 累計受講者数: ${seoConfig.reviews.studentsTaught} 人
+- 開催回数: ${seoConfig.reviews.sessionsTaught} 回
+- リピート率: ${seoConfig.reviews.repeatRate}
+- ランク: ${seoConfig.reviews.badge}
+- 出典: ${seoConfig.reviews.reviewUrl}
+
 ## 提供サービス（実益）
 
 - AIを中心に据えたシステム構築サービス（社内AIシステム構築）

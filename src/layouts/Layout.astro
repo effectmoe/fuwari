@@ -101,7 +101,15 @@ const personLd = {
 		url: seoConfig.organization.url,
 	},
 	knowsAbout: seoConfig.knowsAbout,
-	sameAs: seoConfig.sameAs,
+	sameAs: [...seoConfig.sameAs, seoConfig.reviews.reviewUrl],
+	// 第三者評価（ストアカ 4.94★/209件）= E-E-A-T Trustworthiness
+	aggregateRating: {
+		"@type": "AggregateRating",
+		ratingValue: seoConfig.reviews.ratingValue,
+		reviewCount: seoConfig.reviews.reviewCount,
+		bestRating: seoConfig.reviews.bestRating,
+		itemReviewed: { "@id": `${siteUrl}#person` },
+	},
 };
 const websiteLd = {
 	"@type": "WebSite",
