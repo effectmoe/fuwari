@@ -132,3 +132,60 @@
     background: linear-gradient(transparent 55%, rgba(250, 204, 21, 0.40) 55%);
     color: inherit;
 }
+
+/* ============================================================
+   Editorial 装飾（白×黒の単調さ解消・AIっぽさ回避）2026-06-14
+   方針: ブランドのネイビー1色アクセント + 淡色のみ。
+        グラデ・ネオン・glassmorphism・紫シアンは使わない。
+   ============================================================ */
+
+/* 見出し h2: 左にネイビーの太アクセントバー（雑誌の章扉感）*/
+.custom-md h2 {
+    padding-left: 0.75rem;
+    border-left: 4px solid var(--primary);
+    line-height: 1.5;
+}
+/* 見出し h3: 細い左バー + ネイビー寄りの色で階層を出す */
+.custom-md h3 {
+    padding-left: 0.6rem;
+    border-left: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+/* 引用/TL;DR: 淡いネイビー背景のカードに（左バーは既存を活かす）*/
+.custom-md blockquote {
+    background: color-mix(in srgb, var(--primary) 6%, transparent);
+    border-radius: 0.6rem;
+    padding: 0.9rem 1.1rem 0.9rem 1.25rem;
+    margin: 1.6rem 0;
+}
+
+/* 表: ヘッダーにネイビー淡色 + ゼブラ + 罫線で可読性と抑揚 */
+.custom-md table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.5rem 0;
+    font-size: 0.95em;
+}
+.custom-md thead th {
+    background: color-mix(in srgb, var(--primary) 14%, transparent);
+    color: var(--deep-text, inherit);
+    font-weight: 700;
+    text-align: left;
+}
+.custom-md th,
+.custom-md td {
+    border: 1px solid var(--line-divider);
+    padding: 0.55rem 0.8rem;
+}
+.custom-md tbody tr:nth-child(even) {
+    background: color-mix(in srgb, var(--primary) 4%, transparent);
+}
+
+/* 区切り線: ネイビーに向かう淡いグラデの極細ライン（控えめ）*/
+.custom-md hr {
+    border: none;
+    height: 1px;
+    background: color-mix(in srgb, var(--primary) 25%, transparent);
+    margin: 2.2rem 0;
+    opacity: 0.6;
+}
