@@ -15,9 +15,13 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+
+// ホームページ（記事一覧）の meta description（タイトル使い回しを避ける・SEO基本）
+const homeDescription =
+	"「構造化」でAI時代を勝ち抜く実装ノート。LLMO対策・AIエージェント・Claude Code・知識管理を、ストアカ人気講師（評価4.94）が実際に手を動かして解説します。";
 ---
 
-<MainGridLayout>
+<MainGridLayout description={homeDescription}>
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

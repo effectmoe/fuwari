@@ -30,6 +30,11 @@ const availableCategories = Array.from(
 const siteUrl = Astro.site ? Astro.site.toString() : "/";
 ---
 
+<!-- ページの大見出し（h1）。SEO基本：1ページ1つのh1で主題を明示 -->
+<h1 class="text-xl md:text-2xl font-bold text-90 mb-4 px-1 leading-snug">
+	{siteConfig.title}｜AIで事業と知識を「構造化」する実装ノート
+</h1>
+
 <MainListControls
 	client:load
 	availableTags={availableTags}
