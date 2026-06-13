@@ -177,7 +177,8 @@ export const seoConfig = {
 		studentsTaught: 435,
 		sessionsTaught: 428,
 		repeatRate: "53.6%",
-		periodStart: "2019-01-01",
+		periodStart: "2024-08", // 実際の講師登録月（管理画面の2019はプラットフォーム起点で誤り）
+		activeSince: "2024年8月", // 表示用：登録2年弱でこの実績＝スピード訴求
 		badge: "ストアカ プラチナランク（2026年7月よりProランク昇格）",
 		profileUrl: "https://www.street-academy.com/steachers/271053",
 		reviewUrl: "https://www.street-academy.com/steachers/271053#review",
