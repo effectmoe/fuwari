@@ -1,0 +1,152 @@
+---
+import { Icon } from "astro-icon/components";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import ImageWrapper from "../components/misc/ImageWrapper.astro";
+import { profileConfig, seoConfig, faqConfig } from "../config";
+import { url } from "../utils/url-utils";
+
+const siteUrl = Astro.site ? Astro.site.toString() : "/";
+const rv = seoConfig.reviews;
+
+// ProfilePage + Person（E-E-A-T の正典・著者エンティティページ）
+const profileLd = {
+	"@context": "https://schema.org",
+	"@type": "ProfilePage",
+	"@id": `${siteUrl}author/#profilepage`,
+	mainEntity: {
+		"@type": "Person",
+		"@id": `${siteUrl}#person`,
+		name: profileConfig.name,
+		alternateName: seoConfig.alternateName,
+		url: `${siteUrl}author/`,
+		image: `${siteUrl}og-image.jpg`,
+		jobTitle: seoConfig.jobTitle,
+		description: profileConfig.bio,
+		worksFor: {
+			"@type": "Organization",
+			name: seoConfig.organization.name,
+			url: seoConfig.organization.url,
+		},
+		knowsAbout: seoConfig.knowsAbout,
+		sameAs: seoConfig.sameAs,
+		aggregateRating: {
+			"@type": "AggregateRating",
+			ratingValue: rv.ratingValue,
+			reviewCount: rv.reviewCount,
+			bestRating: rv.bestRating,
+			itemReviewed: { "@id": `${siteUrl}#person` },
+		},
+	},
+};
+
+const pageDesc =
+	"構造化脳ブログ 著者 シュ コウメイ（Tony Chu）のプロフィール。株式会社EFFECT 代表 / AI軍師。ストアカ人気講師（評価4.94・受講435人・プラチナ講師）、LLMO対策書籍の著者。Claude Code・LLMO・AIエージェント・Notion・Obsidian などを専門に、AIで事業を構造化する実装を発信。";
+
+// 専門領域チップ
+const expertise = seoConfig.knowsAbout;
+
+// 主なリンク（sameAs を人間向けラベルで）
+const links = [
+	{ label: "ストアカ講師ページ", href: rv.profileUrl, icon: "fa6-solid:chalkboard-user" },
+	{ label: "オフィスク（法人研修講師）", href: "https://office.street-academy.com/teacher/shu-koumei", icon: "fa6-solid:building" },
+	{ label: "Amazon（LLMO対策 書籍）", href: "https://www.amazon.co.jp/dp/B0F7QQF392", icon: "fa6-brands:amazon" },
+	{ label: "LinkedIn", href: "https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/", icon: "fa6-brands:linkedin" },
+];
+---
+<MainGridLayout title="著者プロフィール｜シュ コウメイ" description={pageDesc}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(profileLd)}></script>
+
+    <div class="flex flex-col gap-4 w-full">
+        <!-- ヘッダー -->
+        <div class="card-base px-6 md:px-9 py-7">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <div class="w-28 h-28 shrink-0 rounded-2xl overflow-hidden">
+                    <ImageWrapper src={profileConfig.avatar} alt={profileConfig.name} class="w-full h-full" />
+                </div>
+                <div class="text-center sm:text-left">
+                    <div class="text-xs text-[var(--primary)] font-bold mb-1">著者プロフィール</div>
+                    <h1 class="text-3xl font-bold text-90 mb-1">{profileConfig.name}</h1>
+                    <div class="text-sm text-50 mb-3">{seoConfig.jobTitle}</div>
+                    <p class="text-sm text-75 leading-relaxed">{profileConfig.bio}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 実績サマリ（信頼の数字）-->
+        <div class="card-base px-6 md:px-9 py-7">
+            <div class="flex flex-row items-center gap-2 mb-4">
+                <Icon name="material-symbols:trophy-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+                <h2 class="text-2xl font-bold text-90">実績</h2>
+            </div>
+            <div class="flex flex-row flex-wrap gap-3">
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
+                    <div class="flex items-baseline gap-1"><span class="text-[var(--primary)] text-2xl font-bold">{rv.ratingValue}</span><span class="text-50 text-xs">/ 5</span></div>
+                    <div class="text-[var(--primary)] text-sm leading-none mt-0.5">★★★★★</div>
+                    <div class="text-50 text-[0.7rem] mt-1">{rv.reviewCount} 件のレビュー</div>
+                </div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.studentsTaught}</span><div class="text-50 text-[0.7rem] mt-1">累計受講者数</div></div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.sessionsTaught}</span><div class="text-50 text-[0.7rem] mt-1">開催回数</div></div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.repeatRate}</span><div class="text-50 text-[0.7rem] mt-1">リピート率</div></div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 flex-1 min-w-[10rem]"><span class="text-[var(--primary)] text-base font-bold">プラチナランク</span><div class="text-50 text-[0.7rem] mt-1 text-center">2026年7月よりPro昇格</div></div>
+            </div>
+            <p class="text-xs text-50 mt-3">※ スキルシェア「ストアカ」2024年8月の講師登録から約2年の実績（評価は第三者の受講生レビュー）。</p>
+        </div>
+
+        <!-- 著者について（Experience / Expertise）-->
+        <div class="card-base px-6 md:px-9 py-7">
+            <div class="flex flex-row items-center gap-2 mb-4">
+                <Icon name="material-symbols:person-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+                <h2 class="text-2xl font-bold text-90">著者について</h2>
+            </div>
+            <div class="text-sm text-75 leading-relaxed flex flex-col gap-3">
+                <p>株式会社EFFECT 代表。「AIで事業を構造化して加速する」をテーマに、AIの実装支援・講座・コンサルティングを行っています。肩書きは「AI軍師」。テクニックを教える前に「なぜそうなるのか」という<strong>仕組みの理解</strong>を大切にし、初心者にも専門用語をかみくだいて伝えることを信条にしています。</p>
+                <p>強みは、<strong>「教える人」であると同時に「自分で実装する人」</strong>である点です。たとえば、このブログ（構造化脳ブログ）自体が、私が講座で教えているLLMO対策・構造化データ・AI自動化の技術で実際に作られています。<a href={url('/faq/')} class="text-[var(--primary)] font-medium hover:underline">よくある質問・AI用語集</a>の回答もすべて私自身が書いています。「教えている内容を、自分のサイトで証明する」——これが私の発信のスタイルです。</p>
+                <p>提唱している<strong>DFB理論（Decompose / Frame / Build ＝ 分・枠・組）</strong>は、複雑な物事を「分けて・枠にはめて・組み立てる」ことで、AIに渡せる形に構造化する考え方です。これがLLMO・AIシステム構築・知識管理すべての土台になっています。</p>
+            </div>
+        </div>
+
+        <!-- 専門領域（knowsAbout）-->
+        <div class="card-base px-6 md:px-9 py-7">
+            <div class="flex flex-row items-center gap-2 mb-4">
+                <Icon name="material-symbols:workspace-premium-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+                <h2 class="text-2xl font-bold text-90">専門領域</h2>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+                {expertise.map((t) => (
+                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background: var(--btn-plain-bg); color: var(--btn-content);">{t}</span>
+                ))}
+            </div>
+            <p class="text-xs text-50 mt-4">これらはストアカで実際に開講している講座テーマでもあります。各用語のやさしい解説は <a href={url('/faq/')} class="text-[var(--primary)] font-medium hover:underline">AI用語集</a> をご覧ください。</p>
+        </div>
+
+        <!-- 主な活動・リンク（Authoritativeness）-->
+        <div class="card-base px-6 md:px-9 py-7">
+            <div class="flex flex-row items-center gap-2 mb-4">
+                <Icon name="material-symbols:link-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+                <h2 class="text-2xl font-bold text-90">活動・リンク</h2>
+            </div>
+            <div class="flex flex-col gap-2">
+                {links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noopener noreferrer"
+                       class="flex flex-row items-center gap-3 rounded-xl bg-[var(--btn-plain-bg)] hover:bg-[var(--btn-plain-bg-hover)] transition px-4 py-3 active:scale-95">
+                        <Icon name={l.icon} class="text-[1.2rem] text-[var(--primary)]" />
+                        <span class="text-sm font-medium text-75">{l.label}</span>
+                        <Icon name="material-symbols:arrow-outward-rounded" class="text-[1rem] text-50 ml-auto" />
+                    </a>
+                ))}
+            </div>
+        </div>
+
+        <!-- 相互リンク（FAQ / 受講生の声）-->
+        <div class="card-base px-6 md:px-9 py-6">
+            <div class="flex flex-row flex-wrap gap-3">
+                <a href={url('/faq/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
+                    <Icon name="material-symbols:help-outline-rounded" class="text-[1rem]" />よくある質問・AI用語集
+                </a>
+                <a href={url('/about/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
+                    <Icon name="material-symbols:reviews-outline-rounded" class="text-[1rem]" />受講生の声を見る
+                </a>
+            </div>
+        </div>
+    </div>
+</MainGridLayout>

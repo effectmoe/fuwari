@@ -1,7 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { faqConfig } from "../config";
+import { faqConfig, profileConfig, seoConfig } from "../config";
+import { url } from "../utils/url-utils";
 
 const siteUrl = Astro.site ? Astro.site.toString() : "/";
 
@@ -11,15 +12,21 @@ const faqLd = {
 	"@context": "https://schema.org",
 	"@type": "FAQPage",
 	"@id": `${siteUrl}faq/#faqpage`,
+	// 著者が回答していることを構造化データでも明示（E-E-A-T）
+	author: { "@id": `${siteUrl}#person` },
 	mainEntity: allFaq.map((f) => ({
 		"@type": "Question",
 		name: f.q,
-		acceptedAnswer: { "@type": "Answer", text: f.a },
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: f.a,
+			author: { "@type": "Person", name: profileConfig.name, url: `${siteUrl}author/` },
+		},
 	})),
 };
 
 const pageDesc =
-	"構造化脳ブログのよくある質問と、AI用語集（Claude / Claude Code / MCP / Obsidian / LLMO / AIエージェント などをやさしく解説）。初心者向けに専門用語をかみくだいて説明します。";
+	"構造化脳ブログのよくある質問と、AI用語集（Claude / Claude Code / MCP / Obsidian / LLMO / AIエージェント などをやさしく解説）。著者のシュ コウメイ（ストアカ評価4.94・LLMO書籍著者）が回答しています。";
 ---
 <MainGridLayout title="よくある質問・AI用語集" description={pageDesc}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
@@ -28,11 +35,19 @@ const pageDesc =
         <!-- ヘッダー -->
         <div class="card-base px-6 md:px-9 py-7">
             <h1 class="text-3xl font-bold text-90 mb-2">よくある質問・AI用語集</h1>
-            <p class="text-sm text-75 leading-relaxed">
+            <p class="text-sm text-75 leading-relaxed mb-4">
                 このブログや講座・サービスについてのよくある質問と、記事に出てくる
                 AI用語をやさしく解説した用語集です。専門用語は、できるだけ
                 かんたんな言葉でかみくだいています。
             </p>
+            <!-- 著者が回答している明示（E-E-A-T）-->
+            <a href={url('/author/')} class="inline-flex items-center gap-2 rounded-xl bg-[var(--btn-plain-bg)] hover:bg-[var(--btn-plain-bg-hover)] transition px-4 py-2.5 active:scale-95">
+                <Icon name="material-symbols:verified-outline-rounded" class="text-[1.2rem] text-[var(--primary)]" />
+                <span class="text-sm text-75">
+                    回答者：<span class="font-bold text-90">{profileConfig.name}</span>
+                    <span class="text-50">／ ストアカ評価 {seoConfig.reviews.ratingValue}・LLMO書籍著者 → プロフィール</span>
+                </span>
+            </a>
         </div>
 
         <!-- よくある質問 -->
@@ -48,7 +63,22 @@ const pageDesc =
                             <span>{f.q}</span>
                             <span class="faq-mark text-[var(--primary)] text-lg shrink-0">＋</span>
                         </summary>
-                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">{f.a}</div>
+                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">
+                            <p>{f.a}</p>
+                            {f.links && f.links.length > 0 && (
+                                <div class="mt-3 flex flex-col gap-1.5">
+                                    {f.links.map((l) => (
+                                        <a href={l.href.startsWith('http') ? l.href : url(l.href)}
+                                           target={l.href.startsWith('http') ? '_blank' : undefined}
+                                           rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                           class="inline-flex items-center gap-1 text-[var(--primary)] text-xs font-medium hover:underline">
+                                            <Icon name="material-symbols:arrow-forward-rounded" class="text-[0.9rem]" />{l.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                            <div class="mt-3 text-xs text-50">— {profileConfig.name}</div>
+                        </div>
                     </details>
                 ))}
             </div>
@@ -67,10 +97,34 @@ const pageDesc =
                             <span>{f.q}</span>
                             <span class="faq-mark text-[var(--primary)] text-lg shrink-0">＋</span>
                         </summary>
-                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">{f.a}</div>
+                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">
+                            <p>{f.a}</p>
+                            {f.links && f.links.length > 0 && (
+                                <div class="mt-3 flex flex-col gap-1.5">
+                                    {f.links.map((l) => (
+                                        <a href={l.href.startsWith('http') ? l.href : url(l.href)}
+                                           target={l.href.startsWith('http') ? '_blank' : undefined}
+                                           rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                           class="inline-flex items-center gap-1 text-[var(--primary)] text-xs font-medium hover:underline">
+                                            <Icon name="material-symbols:arrow-forward-rounded" class="text-[0.9rem]" />{l.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                            <div class="mt-3 text-xs text-50">— {profileConfig.name}</div>
+                        </div>
                     </details>
                 ))}
             </div>
+        </div>
+
+        <!-- 著者ページへの導線 -->
+        <div class="card-base px-6 md:px-9 py-6">
+            <p class="text-sm text-75 mb-3">これらの回答は、実際にAI講座を多数開講し、LLMO書籍を執筆している著者が書いています。</p>
+            <a href={url('/author/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
+                <Icon name="fa6-solid:user" class="text-[0.9rem]" />
+                著者プロフィール（経歴・専門・実績）を見る
+            </a>
         </div>
     </div>
 </MainGridLayout>
