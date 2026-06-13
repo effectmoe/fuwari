@@ -13,6 +13,11 @@ const postsCollection = defineCollection({
 		category: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
 
+		/* 関連講座CTA: courseConfig の id を指定すると記事末にその講座を誘導表示。
+		   未指定なら tags から自動マッチ（SEO/LLMO v2 2026-06-14）。
+		   "none" を指定すると非表示。 */
+		course: z.string().optional().default(""),
+
 		/* astro-blog skill v1.10 - TL;DR マンガ */
 		manga_tldr: z.array(z.object({
 			src: z.string(),

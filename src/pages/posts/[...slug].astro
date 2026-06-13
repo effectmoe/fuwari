@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+import CourseCTA from "@components/widget/CourseCTA.astro";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import ShareBar from "@components/widget/ShareBar.astro";
@@ -189,6 +190,13 @@ const breadcrumbLd = {
             <Markdown class="mb-6 markdown-content onload-animation">
                 <Content />
             </Markdown>
+
+            <CourseCTA
+                tags={entry.data.tags}
+                category={entry.data.category}
+                courseId={entry.data.course}
+                class="mb-6 onload-animation"
+            />
 
             <ShareBar
                 url={new URL(`/posts/${entry.slug}/`, Astro.site).toString()}

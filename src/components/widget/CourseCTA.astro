@@ -1,0 +1,73 @@
+---
+import { Icon } from "astro-icon/components";
+import { courseConfig, seoConfig } from "../../config";
+
+interface Props {
+	tags?: string[];
+	category?: string | null;
+	courseId?: string; // frontmatter で明示指定された場合（最優先）
+	class?: string;
+}
+
+const { tags = [], category, courseId = "", class: className } = Astro.props;
+
+// "none" 指定なら非表示
+const disabled = courseId === "none";
+
+// マッチング: ①frontmatter明示 > ②タグ重複最大 > ③fallback
+function pickCourse() {
+	if (disabled) return null;
+	if (courseId) {
+		const found = courseConfig.courses.find((c) => c.id === courseId);
+		if (found) return found;
+	}
+	const haystack = [...tags, category].filter(Boolean).map((t) => String(t).toLowerCase());
+	let best = null as (typeof courseConfig.courses)[number] | null;
+	let bestScore = 0;
+	for (const c of courseConfig.courses) {
+		if (c.id === courseConfig.fallbackId) continue; // fallbackは自動マッチ対象外
+		const score = c.topics.filter((t) => haystack.includes(t.toLowerCase())).length;
+		if (score > bestScore) {
+			bestScore = score;
+			best = c;
+		}
+	}
+	if (best && bestScore > 0) return best;
+	// 一致なし → fallback（AIコンサル）
+	return courseConfig.courses.find((c) => c.id === courseConfig.fallbackId) || null;
+}
+
+const course = pickCourse();
+const rv = seoConfig.reviews;
+---
+{course && (
+    <div class:list={["course-cta card-base px-6 md:px-8 py-6 relative overflow-hidden", className]}>
+        <div class="absolute top-0 left-0 w-1 h-full bg-[var(--primary)]"></div>
+        <div class="flex flex-row items-center gap-2 mb-2">
+            <Icon name="material-symbols:school-outline-rounded" class="text-[1.3rem] text-[var(--primary)]" />
+            <span class="text-sm font-bold text-[var(--primary)]">この記事に関連する講座</span>
+        </div>
+        <div class="text-lg md:text-xl font-bold text-90 mb-2 leading-snug">{course.title}</div>
+        <p class="text-sm text-75 leading-relaxed mb-3">{course.pitch}</p>
+
+        <!-- 社会的証明（実績バッジ連動）-->
+        <div class="flex flex-row items-center gap-2 mb-4 text-xs text-50 flex-wrap">
+            <span class="text-[var(--primary)]">★★★★★</span>
+            <span class="font-bold text-75">{rv.ratingValue}</span>
+            <span>（{rv.reviewCount}件）</span>
+            <span class="opacity-40">|</span>
+            <span>累計受講 {rv.studentsTaught}人</span>
+            <span class="opacity-40">|</span>
+            <span class="text-[var(--primary)] font-medium">プラチナ講師</span>
+        </div>
+
+        <a href={course.url} target="_blank" rel="noopener noreferrer"
+           aria-label={`講座を見る: ${course.title}`}
+           class="btn-regular inline-flex items-center gap-2 rounded-lg px-5 h-11 font-bold active:scale-95"
+           style="background: var(--primary); color: white;">
+            <Icon name="fa6-solid:chalkboard-user" class="text-[1rem]" />
+            ストアカで講座を見る
+            <Icon name="material-symbols:arrow-outward-rounded" class="text-[1.1rem]" />
+        </a>
+    </div>
+)}

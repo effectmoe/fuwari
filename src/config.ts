@@ -274,6 +274,129 @@ export const seoConfig = {
 	},
 };
 
+/* ============================================================
+   講座カタログ（記事末の関連講座CTA自動誘導）2026-06-14
+   ------------------------------------------------------------
+   記事の tags / category と各講座の topics を照合し、
+   最も一致する講座を記事末に CTA カードとして自動表示する。
+   - 記事 frontmatter に `course: "<id>"` があればそれを最優先（手動指定）
+   - なければ topics のタグ重複数が最大の講座を自動選択
+   - どれも一致しなければ fallback（AIコンサル）を表示
+   topics は記事の tags（構造化軸キーワード）と揃えると当たりやすい。
+   新講座が増えたらここに1件足すだけで全記事の自動誘導に乗る（SSOT）。
+   ============================================================ */
+export const courseConfig = {
+	// マッチしなかった記事に出す保険CTA（実益=コンサルへ）
+	fallbackId: "ai-consulting",
+	courses: [
+		{
+			id: "claude-obsidian",
+			title: "Claude × Obsidian｜AI×知識管理で劇的時短 活用術",
+			url: "https://www.street-academy.com/myclass/198519?sessiondetailid=22072787",
+			topics: ["Obsidian", "Obsidian Sync", "Claude", "メモ管理", "知識管理", "ワークフロー", "ナレッジ"],
+			pitch: "Obsidian の大量メモを Claude と連携し『最強のアイデア源』に変える方法を、実演で学べます。",
+		},
+		{
+			id: "notion-claude",
+			title: "NotionとClaude｜ご希望のツールを一緒に作る Notion実践講座",
+			url: "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584",
+			topics: ["Notion", "Claude", "CMS", "ツール作成", "業務効率化"],
+			pitch: "Notion × Claude で、あなたの業務に合わせたツールを一緒に作りながら学べます。",
+		},
+		{
+			id: "claude-code",
+			title: "Claude Code 講座｜AIコーディングを実務で使いこなす",
+			url: "https://www.street-academy.com/myclass/214883?sessiondetailid=22072529",
+			topics: ["Claude Code", "コーディング", "開発", "実装"],
+			pitch: "Claude Code を基礎から実務まで。初心者でも『作りたい』を形にできるようになります。",
+		},
+		{
+			id: "claude-code-agent",
+			title: "Claude Code AIエージェント講座｜自律エージェントを構築する",
+			url: "https://www.street-academy.com/myclass/214012?sessiondetailid=22073339",
+			topics: ["AIエージェント", "AI社員", "Claude Code", "自律実行", "業務AI自動化"],
+			pitch: "AIエージェント（AI社員）の作り方を実装ベースで。社内業務をAIに落とす第一歩。",
+		},
+		{
+			id: "claude-cowork",
+			title: "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
+			url: "https://www.street-academy.com/myclass/213188?sessiondetailid=22072409",
+			topics: ["Claude Cowork", "AI自律実行", "仕事術", "AI活用"],
+			pitch: "Claude Cowork で AI に仕事を任せる。即使い始められる自律実行の実演講座。",
+		},
+		{
+			id: "codex",
+			title: "ChatGPT Codex 速習講座｜独自機能とClaude連携",
+			url: "https://www.street-academy.com/myclass/215436?sessiondetailid=22074702",
+			topics: ["Codex", "ChatGPT", "Claude連携", "AIコーディング"],
+			pitch: "Codex と ChatGPT の違いから実践まで。実際に動かして理解できます。",
+		},
+		{
+			id: "claude-design",
+			title: "Claude Design 講座｜AIでデザインを形にする",
+			url: "https://www.street-academy.com/myclass/215435?sessiondetailid=22073713",
+			topics: ["Claude Design", "デザイン", "UI", "AI活用"],
+			pitch: "Claude でデザインを生成・実装。アイデアを形にするデザインAI活用講座。",
+		},
+		{
+			id: "seo-llmo",
+			title: "SEOはLLMOへ！AI検索に選ばれるWEBサイトを作る",
+			url: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948",
+			topics: ["LLMO", "LLMO対策", "SEO", "AI検索", "構造化データ", "JSON-LD", "構造化"],
+			pitch: "SEOとLLMOの違いから、JSON-LD・E-E-A-T・回遊設計まで。AI検索に選ばれるサイトの作り方。",
+		},
+		{
+			id: "llmo-writing",
+			title: "LLMOライティング講座｜AIに引用される文章術",
+			url: "https://www.street-academy.com/myclass/203152?sessiondetailid=22073831",
+			topics: ["LLMOライティング", "ライティング", "LLMO", "AI検索", "コンテンツ"],
+			pitch: "AIに引用されやすい構造化された文章の書き方を実例で習得できます。",
+		},
+		{
+			id: "eeat",
+			title: "E-E-A-T 講座｜権威性で検索とAIに信頼される",
+			url: "https://www.street-academy.com/myclass/216408?sessiondetailid=22239230",
+			topics: ["E-E-A-T", "権威性", "SEO", "信頼性", "監修"],
+			pitch: "経験・専門性・権威性・信頼性をサイトにどう実装するかを具体的に学べます。",
+		},
+		{
+			id: "ga4",
+			title: "GA4 講座｜AI時代のアクセス解析とAI流入計測",
+			url: "https://www.street-academy.com/myclass/197827?sessiondetailid=22074573",
+			topics: ["GA4", "アクセス解析", "AI流入", "計測", "データ分析"],
+			pitch: "GA4 でAI検索からの流入まで計測。データで打ち手を決められるようになります。",
+		},
+		{
+			id: "local-llm",
+			title: "ローカルLLM（ローカルAI）講座｜手元でAIを動かす",
+			url: "https://www.street-academy.com/myclass/209048?sessiondetailid=22074182",
+			topics: ["ローカルLLM", "ローカルAI", "MLX", "プライバシー", "AI活用"],
+			pitch: "手元のMacでAIを動かす。コストとプライバシーを両立するローカルLLM入門。",
+		},
+		{
+			id: "nanobanana-canva",
+			title: "Nano Banana Pro × Canva 講座｜AI画像をデザインに",
+			url: "https://www.street-academy.com/myclass/208379?sessiondetailid=22074299",
+			topics: ["Nano Banana Pro", "Canva", "画像生成", "デザイン", "AI画像"],
+			pitch: "AI画像生成（Nano Banana Pro）と Canva で、プロ級のビジュアルを作る方法。",
+		},
+		{
+			id: "ai-intro",
+			title: "AI講座｜AIの本質から学ぶ実践活用",
+			url: "https://www.street-academy.com/myclass/211441?sessiondetailid=22074444",
+			topics: ["AI", "AI活用", "生成AI", "入門", "構造化思考"],
+			pitch: "テクニックの前に『なぜそうなるか』から。AIの本質を理解して使いこなす講座。",
+		},
+		{
+			id: "ai-consulting",
+			title: "AI×LLM 経営伴走コンサルティング（月額）",
+			url: "https://www.street-academy.com/subscription/services/4690",
+			topics: ["AIコンサルティング", "AIシステム構築", "AIアプリ開発", "DX", "経営"],
+			pitch: "AIシステム構築・LLMO・業務自動化を、月額で継続伴走。事業をAIで構造化して加速します。",
+		},
+	],
+};
+
 export const licenseConfig: LicenseConfig = {
 	enable: true,
 	name: "CC BY-NC-SA 4.0",
