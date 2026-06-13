@@ -2,6 +2,7 @@
 import path from "node:path";
 import ArticleFAQ from "@components/widget/ArticleFAQ.astro";
 import CourseCTA from "@components/widget/CourseCTA.astro";
+import RelatedLinks from "@components/widget/RelatedLinks.astro";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import ShareBar from "@components/widget/ShareBar.astro";
@@ -192,14 +193,16 @@ const breadcrumbLd = {
                 <Content />
             </Markdown>
 
-            <ArticleFAQ faq={entry.data.faq} class="mb-6 onload-animation" />
-
             <CourseCTA
                 tags={entry.data.tags}
                 category={entry.data.category}
                 courseId={entry.data.course}
                 class="mb-6 onload-animation"
             />
+
+            <RelatedLinks links={entry.data.relatedLinks} class="mb-6 onload-animation" />
+
+            <ArticleFAQ faq={entry.data.faq} class="mb-6 onload-animation" />
 
             <ShareBar
                 url={new URL(`/posts/${entry.slug}/`, Astro.site).toString()}

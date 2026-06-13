@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon/components";
+import { url } from "../../utils/url-utils";
+
+interface Props {
+	links?: { label: string; href: string }[];
+	class?: string;
+}
+
+const { links = [], class: className } = Astro.props;
+const isExternal = (href: string) => href.startsWith("http");
+---
+{links.length > 0 && (
+    <div class:list={["related-links card-base px-6 md:px-8 py-6", className]}>
+        <div class="flex flex-row items-center gap-2 mb-3">
+            <Icon name="material-symbols:link-rounded" class="text-[1.3rem] text-[var(--primary)]" />
+            <h2 class="text-xl font-bold text-90">関連リンク</h2>
+        </div>
+        <div class="flex flex-col gap-2">
+            {links.map((l) => (
+                <a href={isExternal(l.href) ? l.href : url(l.href)}
+                   target={isExternal(l.href) ? "_blank" : undefined}
+                   rel={isExternal(l.href) ? "noopener noreferrer" : undefined}
+                   class="inline-flex items-center gap-2 text-[var(--primary)] text-sm font-medium hover:underline">
+                    <Icon name="material-symbols:arrow-forward-rounded" class="text-[1rem] shrink-0" />
+                    <span>{l.label}</span>
+                    {isExternal(l.href) && <Icon name="material-symbols:arrow-outward-rounded" class="text-[0.85rem] opacity-60" />}
+                </a>
+            ))}
+        </div>
+    </div>
+)}

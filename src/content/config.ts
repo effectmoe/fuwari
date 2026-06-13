@@ -25,6 +25,13 @@ const postsCollection = defineCollection({
 			a: z.string(),
 		})).optional().default([]),
 
+		/* 関連リンク（コンポーネント描画。CTA の下に配置）。
+		   講座リンクは CTA が自動表示するので、ここには他記事・出典のみ。2026-06-14 */
+		relatedLinks: z.array(z.object({
+			label: z.string(),
+			href: z.string(),
+		})).optional().default([]),
+
 		/* astro-blog skill v1.10 - TL;DR マンガ */
 		manga_tldr: z.array(z.object({
 			src: z.string(),

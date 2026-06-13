@@ -5,6 +5,11 @@ description: "ためたメモが活きていない——その原因は量では
 image: ./cover.jpg
 thumbnail: ./thumb.jpg
 tags: ["Obsidian", "Claude", "知識管理", "構造化", "MCP", "ワークフロー"]
+relatedLinks:
+  - label: "Obsidian でブログ運用するときのモバイル問題：Obsidian Sync の戦略的価値"
+    href: "/posts/obsidian-sync-mobile-astro-blog/"
+  - label: "AI時代に「シニア有利」の本質は構造化能力にある"
+    href: "/posts/ai-era-senior-structuring-power/"
 category: "Tech"
 course: "claude-obsidian"
 faq:
@@ -111,10 +116,5 @@ Obsidian × Claude のすごさは、「メモを整理してためる」とい�
 3. 本気でやるなら**本格連携**で全部おまかせにする
 
 そして、すべての土台は「**整理されたメモ**」です。AI時代に本当に問われるのは、AI を操るテクニックそのものより、**AI に渡せる形でメモ（知識）を整理しておく力**なのです。
-
-## 関連リンク
-
-- スマホでメモをためる話：[Obsidian でブログ運用するときのモバイル問題：Obsidian Sync の戦略的価値](/posts/obsidian-sync-mobile-astro-blog/)
-- [Claude × Obsidian を実演で学べる講座（ストアカ）](https://www.street-academy.com/myclass/198519?sessiondetailid=22072787)
 
 [^1]: 出典: Lifehacker Japan「ObsidianとClaudeを連携したら、大量のメモが『最強のアイデア源』に化けた」 https://www.lifehacker.jp/article/2606obsidian-claude-ai-note-taking/
