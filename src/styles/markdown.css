@@ -119,3 +119,16 @@
     }
     
 }
+
+/* インラインマーカー（抑揚用・マーカーペン風ハイライト）2026-06-14 */
+.custom-md mark {
+    background: linear-gradient(transparent 55%, rgba(250, 204, 21, 0.45) 55%);
+    color: inherit;
+    padding: 0 0.08em;
+    border-radius: 0.1em;
+    font-weight: 600;
+}
+.dark .custom-md mark {
+    background: linear-gradient(transparent 55%, rgba(250, 204, 21, 0.40) 55%);
+    color: inherit;
+}
