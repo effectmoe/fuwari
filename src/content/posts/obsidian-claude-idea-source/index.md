@@ -3,6 +3,7 @@ title: "Obsidian × Claude でメモを「アイデア源」に変える3つの�
 published: 2026-06-14
 description: "ためたメモが活きていない——その原因は量ではなく「散らかったまま」だから。Obsidian のメモを AI（Claude）につなぐと、メモ同士の隠れたつながりが見えてアイデアに変わります。やさしい・ふつう・本格の3つのつなぎ方を、初心者にもわかる言葉で解説します。"
 image: ./cover.jpg
+thumbnail: ./thumb.jpg
 tags: ["Obsidian", "Claude", "知識管理", "構造化", "MCP", "ワークフロー"]
 category: "Tech"
 course: "claude-obsidian"
@@ -17,7 +18,7 @@ faq:
     a: "Obsidian に後から足せる追加アプリです。これを入れると、Obsidian の画面の横でそのまま Claude と会話できるようになります。"
   - q: "プログラミングの知識がなくても使えますか？"
     a: "コピペの方法なら、知識ゼロでもすぐ始められます。本格連携（MCP）だけは少し設定が必要ですが、手順どおり進めれば大丈夫です。不安な方は講座で一緒に設定できます。"
-draft: true
+draft: false
 ---
 
 > **TL;DR（ひとことまとめ）**
