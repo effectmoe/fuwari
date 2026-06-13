@@ -93,9 +93,9 @@ const reviewLd = {
                 </div>
             </div>
 
-            <!-- 個別レビュー -->
+            <!-- 個別レビュー（最初5件を表示・残りは もっと見る で展開） -->
             <div class="flex flex-col gap-4">
-                {rv.testimonials.map((t) => (
+                {rv.testimonials.slice(0, 5).map((t) => (
                     <div class="rounded-xl border border-black/5 dark:border-white/10 p-4 transition">
                         <div class="flex flex-row items-center justify-between gap-2 mb-2 flex-wrap">
                             <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
@@ -105,6 +105,26 @@ const reviewLd = {
                         <p class="text-sm text-75 leading-relaxed">{t.text}</p>
                     </div>
                 ))}
+
+                {rv.testimonials.length > 5 && (
+                    <details class="mlc-reviews-more">
+                        <summary class="cursor-pointer select-none btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center justify-center list-none">
+                            もっと見る（残り {rv.testimonials.length - 5} 件）
+                        </summary>
+                        <div class="flex flex-col gap-4 mt-4">
+                            {rv.testimonials.slice(5).map((t) => (
+                                <div class="rounded-xl border border-black/5 dark:border-white/10 p-4 transition">
+                                    <div class="flex flex-row items-center justify-between gap-2 mb-2 flex-wrap">
+                                        <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
+                                        <span class="text-50 text-xs">{t.reviewer}・{t.date.replace("-", "年")}月 受講</span>
+                                    </div>
+                                    <div class="text-xs text-50 mb-1.5 font-medium">講座「{t.course}」</div>
+                                    <p class="text-sm text-75 leading-relaxed">{t.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </details>
+                )}
             </div>
 
             <!-- CTA -->
@@ -121,3 +141,9 @@ const reviewLd = {
         </div>
     </div>
 </MainGridLayout>
+
+<style>
+.mlc-reviews-more > summary::-webkit-details-marker { display: none; }
+.mlc-reviews-more > summary::marker { content: ""; }
+.mlc-reviews-more[open] > summary { display: none; }
+</style>
