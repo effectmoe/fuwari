@@ -18,6 +18,13 @@ const postsCollection = defineCollection({
 		   "none" を指定すると非表示。 */
 		course: z.string().optional().default(""),
 
+		/* 用語の補足・FAQ（クラスターFAQ / 難語の注記）。
+		   記事末に表示 + FAQPage 構造化データ化（トピッククラスター・2026-06-14）*/
+		faq: z.array(z.object({
+			q: z.string(),
+			a: z.string(),
+		})).optional().default([]),
+
 		/* astro-blog skill v1.10 - TL;DR マンガ */
 		manga_tldr: z.array(z.object({
 			src: z.string(),

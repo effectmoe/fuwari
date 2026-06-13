@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon/components";
+import { url } from "../../utils/url-utils";
+
+interface Props {
+	faq?: { q: string; a: string }[];
+	class?: string;
+}
+
+const { faq = [], class: className } = Astro.props;
+
+// FAQPage 構造化データ（LLMO/AI検索が Q&A をそのまま引用できる）
+const faqLd =
+	faq.length > 0
+		? {
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				mainEntity: faq.map((f) => ({
+					"@type": "Question",
+					name: f.q,
+					acceptedAnswer: { "@type": "Answer", text: f.a },
+				})),
+			}
+		: null;
+---
+{faq.length > 0 && (
+    <div class:list={["article-faq card-base px-6 md:px-8 py-6", className]}>
+        {faqLd && (
+            <script is:inline type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+        )}
+        <div class="flex flex-row items-center gap-2 mb-1">
+            <Icon name="material-symbols:help-outline-rounded" class="text-[1.3rem] text-[var(--primary)]" />
+            <h2 class="text-xl font-bold text-90">用語の補足・よくある質問</h2>
+        </div>
+        <p class="text-xs text-50 mb-4">記事に出てきた専門用語を、かんたんに補足します。</p>
+
+        <div class="flex flex-col gap-2">
+            {faq.map((f) => (
+                <details class="faq-item rounded-xl border border-black/5 dark:border-white/10 overflow-hidden">
+                    <summary class="cursor-pointer select-none px-4 py-3 font-bold text-75 text-sm flex flex-row items-center justify-between gap-2 transition hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
+                        <span>{f.q}</span>
+                        <span class="faq-mark text-[var(--primary)] text-lg shrink-0">＋</span>
+                    </summary>
+                    <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">
+                        {f.a}
+                    </div>
+                </details>
+            ))}
+        </div>
+
+        <a href={url('/faq/')} class="inline-flex items-center gap-1 mt-4 text-sm text-[var(--primary)] font-medium hover:underline">
+            もっと詳しい用語集・よくある質問を見る
+            <Icon name="material-symbols:arrow-forward-rounded" class="text-[1rem]" />
+        </a>
+    </div>
+)}
+
+<style>
+.article-faq details > summary::-webkit-details-marker { display: none; }
+.article-faq details > summary::marker { content: ""; }
+.article-faq details[open] .faq-mark { transform: rotate(45deg); }
+.article-faq .faq-mark { transition: transform 0.2s ease; display: inline-block; }
+</style>

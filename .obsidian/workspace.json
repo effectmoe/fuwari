@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e3fc82c700912106",
+        "id": "49fee8d57d4c6f14",
         "type": "tabs",
         "children": [
           {
-            "id": "3a3a58ec60cdcc02",
+            "id": "6b3bc7d2d4dab422",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/video.md",
+                "file": "src/content/posts/guide/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "video"
+              "title": "index"
             }
           }
         ]
@@ -184,39 +184,40 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3a3a58ec60cdcc02",
+  "active": "6b3bc7d2d4dab422",
   "lastOpenFiles": [
+    "dist/chunks/astro/server_BTBYN9yG.mjs",
+    "dist/pages/posts/_---slug_.astro.mjs",
+    "dist/pages/rss.xml.astro.mjs",
+    "dist/pages/robots.txt.astro.mjs",
+    "dist/pages/posts",
+    "dist/pages/llms.txt.astro.mjs",
+    "dist/pages/faq.astro.mjs",
+    "dist/pages/archive.astro.mjs",
+    "dist/pages/about.astro.mjs",
+    "dist/pages/_---page_.astro.mjs",
+    "dist/favicon/favicon-light-32.png",
+    "dist/favicon/favicon-light-192.png",
+    "dist/favicon/favicon-light-180.png",
+    "dist/favicon/favicon-light-128.png",
+    "dist/favicon/favicon-dark-32.png",
+    "dist/favicon/favicon-dark-192.png",
+    "dist/favicon/favicon-dark-180.png",
+    "dist/favicon/favicon-dark-128.png",
+    "dist/chunks/utils_DmF-9_lv.mjs",
+    "dist/_astro/tony-banner.CcgD_rxI.jpg",
+    "dist/_astro/tony-avatar.CX_kZnoq.jpg",
+    "src/content/posts/markdown-extended.md",
+    "src/content/posts/markdown.md",
+    "src/content/posts/expressive-code.md",
+    "src/content/posts/obsidian-sync-mobile-astro-blog/index.md",
+    "src/content/posts/video.md",
     "src/content/posts/draft.md",
     "src/content/posts/guide/index.md",
-    "src/content/posts/expressive-code.md",
-    "src/content/posts/markdown.md",
-    "src/content/posts/markdown-extended.md",
     "src/content/posts/astro-fuwari-workflow-vs-wordpress/index.md",
     "src/content/posts/why-astro-content-framework/index.md",
-    "src/content/posts/astro-fuwari-workflow-vs-wordpress/cover.svg",
-    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams/02-astro-vs-wordpress.svg",
-    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams/01-end-to-end-flow.svg",
-    "src/content/posts/astro-fuwari-workflow-vs-wordpress/diagrams",
-    "src/content/posts/astro-fuwari-workflow-vs-wordpress",
     "src/content/posts/ai-era-senior-structuring-power/index.md",
-    "src/content/posts/ai-era-senior-structuring-power/cover.jpg",
-    "src/content/posts/ai-era-senior-structuring-power",
-    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams/02-tier1-flow.svg",
-    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams/01-four-tiers.svg",
-    "src/content/posts/astro-team-blog-collaboration-tiers/diagrams",
-    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams/02-partial-sync.svg",
-    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams/01-writing-flow.svg",
-    "src/content/posts/obsidian-sync-mobile-astro-blog/diagrams",
-    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams/02-notion-vs-markdown.svg",
-    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams/01-astro-pipeline.svg",
-    "src/content/posts/why-notion-cms-is-painful-for-astro/diagrams",
-    "src/content/posts/why-astro-content-framework/diagrams",
     "src/content/posts/astro-team-blog-collaboration-tiers/index.md",
-    "src/content/posts/obsidian-sync-mobile-astro-blog/index.md",
-    "src/content/posts/why-notion-cms-is-painful-for-astro/index.md",
-    "src/content/posts/astro-team-blog-collaboration-tiers",
-    "src/content/posts/obsidian-sync-mobile-astro-blog",
-    "src/content/posts/why-notion-cms-is-painful-for-astro",
-    "src/content/posts/video.md"
+    "src/content/posts/why-notion-cms-is-painful-for-astro/index.md"
   ]
 }
