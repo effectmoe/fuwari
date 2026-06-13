@@ -32,6 +32,10 @@ const postsCollection = defineCollection({
 			href: z.string(),
 		})).optional().default([]),
 
+		/* 一覧サムネ隅のアイキャッチ文字バッジ（A案）。
+		   未指定なら tags[0] から自動。"none" で非表示。2026-06-14 */
+		badge: z.string().optional().default(""),
+
 		/* astro-blog skill v1.10 - TL;DR マンガ */
 		manga_tldr: z.array(z.object({
 			src: z.string(),

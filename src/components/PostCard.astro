@@ -40,6 +40,13 @@ const hasCover = image !== undefined && image !== null && image !== "";
 
 const coverWidth = "28%";
 
+// アイキャッチ文字バッジ（A案）: frontmatter badge > tags[0]。"none"で非表示
+const rawBadge = entry.data.badge ?? "";
+const badge =
+	rawBadge === "none"
+		? ""
+		: rawBadge || (Array.isArray(tags) && tags.length > 0 ? tags[0] : "");
+
 const { remarkPluginFrontmatter } = await entry.render();
 ---
 <div
@@ -93,6 +100,13 @@ const { remarkPluginFrontmatter } = await entry.render();
                         "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
                     ]} >
         <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
+        {badge && (
+            <div class="absolute top-2 right-2 z-20 pointer-events-none">
+                <span class="inline-block rounded-md bg-black/55 text-white text-[0.7rem] font-bold leading-none px-2 py-1 backdrop-blur-sm">
+                    {badge}
+                </span>
+            </div>
+        )}
         <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
             <Icon name="material-symbols:chevron-right-rounded"
                   class="transition opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 text-white text-5xl">
