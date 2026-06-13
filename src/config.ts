@@ -81,6 +81,94 @@ export const profileConfig: ProfileConfig = {
 	],
 };
 
+/* ============================================================
+   SEO / LLMO 設定（構造化マスターアーキテクチャ）
+   ------------------------------------------------------------
+   サイト軸 =「構造化」。ブランド（構造化脳/DFB/AI軍師）と
+   実益（AIシステム構築/AIアプリ開発/LLMO/コンサル）を一本化。
+
+   - keywords     : meta keywords + 軸キーワード
+   - knowsAbout   : Person JSON-LD の専門領域（ストアカ講座由来=E-E-A-T証明）
+   - sameAs       : 著者の権威プロフィール（書籍/講師ページ/LinkedIn）
+   - organization : 運営組織（株式会社EFFECT）
+
+   この設定は Layout / 記事ページ / astro-blog スキルが参照する
+   単一の真実源（SSOT）。キーワード戦略を変える時はここだけ直す。
+   2026-06-14 SEO/LLMO 全面対策で追加
+   ============================================================ */
+export const seoConfig = {
+	// 軸キーワード（トップ meta keywords・llms.txt に反映）
+	keywords: [
+		// 母艦語
+		"構造化",
+		"構造化思考",
+		"構造化脳",
+		"DFB理論",
+		// 構造化=LLMO
+		"LLMO",
+		"LLMO対策",
+		"LLMOライティング",
+		"AI検索最適化",
+		"GEO",
+		"AIO対策",
+		"E-E-A-T",
+		// 構造化=AIシステム
+		"AI社員",
+		"AIエージェント",
+		"社内AIシステム構築",
+		"業務AI自動化",
+		// 実益サービス
+		"AIシステム構築",
+		"AIアプリ開発",
+		"AIコンサルティング",
+		// 権威・指名
+		"AI軍師",
+		"Claude Code",
+	],
+	// Person JSON-LD knowsAbout（ストアカ講座群＝専門証明）
+	knowsAbout: [
+		"構造化思考",
+		"LLMO",
+		"LLMO対策",
+		"LLMOライティング",
+		"SEO",
+		"E-E-A-T",
+		"生成エンジン最適化(GEO)",
+		"AI検索最適化",
+		"Claude",
+		"Claude Code",
+		"Claude Cowork",
+		"Claude Design",
+		"AIエージェント",
+		"AI社員",
+		"Codex",
+		"Notion",
+		"Obsidian",
+		"ローカルLLM",
+		"GA4",
+		"Nano Banana Pro",
+		"AIアプリ開発",
+		"社内AIシステム構築",
+		"AIコンサルティング",
+		"DFB理論",
+	],
+	// 著者の権威プロフィール（E-E-A-T の sameAs）
+	sameAs: [
+		"https://www.street-academy.com/steachers/271053", // ストアカ人気講師
+		"https://office.street-academy.com/teacher/shu-koumei", // オフィスク法人研修講師
+		"https://www.amazon.co.jp/dp/B0F7QQF392", // LLMO 書籍（著者性）
+		"https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/", // LinkedIn
+	],
+	// 運営組織
+	organization: {
+		name: "株式会社EFFECT",
+		url: "https://effect.moe",
+	},
+	// 著者の肩書（Person.jobTitle）
+	jobTitle: "株式会社EFFECT 代表 / AI軍師",
+	alternateName: ["シュ コウメイ", "朱 剛明", "AI軍師", "Tony Chu"],
+};
+
 export const licenseConfig: LicenseConfig = {
 	enable: true,
 	name: "CC BY-NC-SA 4.0",

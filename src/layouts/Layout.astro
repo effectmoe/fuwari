@@ -4,7 +4,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import { profileConfig, siteConfig } from "@/config";
+import { profileConfig, seoConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -26,9 +26,11 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	ogImage?: string; // 絶対URL（記事=カバー画像 / その他=未指定でデフォルト）
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+let { title, banner, description, lang, setOGTypeArticle, ogImage } =
+	Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -70,6 +72,53 @@ const bannerOffsetByPosition = {
 };
 const bannerOffset =
 	bannerOffsetByPosition[siteConfig.banner.position || "center"];
+
+// ============================================================
+// SEO / LLMO 技術対策（全ページ自動適用）2026-06-14
+// ============================================================
+const siteUrl = Astro.site ? Astro.site.toString() : "/";
+// canonical: クエリ・ハッシュを除いた正規URL
+const canonicalURL = Astro.site
+	? new URL(Astro.url.pathname, Astro.site).toString()
+	: Astro.url.pathname;
+// OG画像: 記事はカバー画像（ogImage prop）、それ以外はサイトデフォルト
+const ogImageURL = ogImage || `${siteUrl}og-image.jpg`;
+const metaDescription = description || pageTitle;
+
+// --- 構造化データ JSON-LD: WebSite + Person（全ページ共通・LLMO の核） ---
+const personLd = {
+	"@type": "Person",
+	"@id": `${siteUrl}#person`,
+	name: profileConfig.name,
+	alternateName: seoConfig.alternateName,
+	url: siteUrl,
+	image: `${siteUrl}og-image.jpg`,
+	jobTitle: seoConfig.jobTitle,
+	description: profileConfig.bio,
+	worksFor: {
+		"@type": "Organization",
+		name: seoConfig.organization.name,
+		url: seoConfig.organization.url,
+	},
+	knowsAbout: seoConfig.knowsAbout,
+	sameAs: seoConfig.sameAs,
+};
+const websiteLd = {
+	"@type": "WebSite",
+	"@id": `${siteUrl}#website`,
+	name: siteConfig.title,
+	alternateName: siteConfig.subtitle,
+	url: siteUrl,
+	description: profileConfig.bio,
+	inLanguage: siteConfig.lang.replace("_", "-"),
+	keywords: seoConfig.keywords.join(", "),
+	publisher: { "@id": `${siteUrl}#person` },
+	author: { "@id": `${siteUrl}#person` },
+};
+const baseGraphLd = {
+	"@context": "https://schema.org",
+	"@graph": [websiteLd, personLd],
+};
 ---
 
 <!DOCTYPE html>
@@ -81,26 +130,45 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || pageTitle}>
+		<meta name="description" content={metaDescription}>
 		<meta name="author" content={profileConfig.name}>
+		<meta name="keywords" content={seoConfig.keywords.join(", ")}>
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
+		<!-- canonical -->
+		<link rel="canonical" href={canonicalURL}>
+
+		<!-- Open Graph -->
 		<meta property="og:site_name" content={siteConfig.title}>
-		<meta property="og:url" content={Astro.url}>
+		<meta property="og:url" content={canonicalURL}>
 		<meta property="og:title" content={pageTitle}>
-		<meta property="og:description" content={description || pageTitle}>
+		<meta property="og:description" content={metaDescription}>
+		<meta property="og:image" content={ogImageURL}>
+		<meta property="og:image:alt" content={pageTitle}>
+		<meta property="og:locale" content="ja_JP">
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
         <meta property="og:type" content="website" />
         )}
 
+		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content={Astro.url}>
+		<meta property="twitter:url" content={canonicalURL}>
 		<meta name="twitter:title" content={pageTitle}>
-		<meta name="twitter:description" content={description || pageTitle}>
+		<meta name="twitter:description" content={metaDescription}>
+		<meta name="twitter:image" content={ogImageURL}>
+
+		<meta name="theme-color" content={`oklch(0.70 0.14 ${siteConfig.themeColor.hue})`}>
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- 構造化データ: WebSite + Person（LLMO/E-E-A-T の核・全ページ共通） -->
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(baseGraphLd)} />
+
+		<!-- AI クローラ向け llms.txt の所在を明示 -->
+		<link rel="alternate" type="text/plain" href={`${siteUrl}llms.txt`} title="llms.txt">
 		{favicons.map(favicon => (
 			<link rel="icon"
 				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}

@@ -8,8 +8,9 @@ import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
+import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { licenseConfig } from "src/config";
+import { licenseConfig, seoConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
@@ -28,27 +29,103 @@ const { Content, headings } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
 
+const siteUrl = Astro.site ? Astro.site.toString() : "/";
+const postUrl = new URL(`/posts/${entry.slug}/`, Astro.site).toString();
+const inLang = entry.data.lang
+	? entry.data.lang.replace("_", "-")
+	: siteConfig.lang.replace("_", "-");
 
-const jsonLd = {
+// ============================================================
+// OG画像解決: 記事カバー画像 → 絶対URL（失敗時はサイトデフォルト）
+// ImageWrapper と同じ import.meta.glob 方式で content 画像を解決
+// 2026-06-14 SEO/LLMO 対策
+// ============================================================
+let ogImageUrl = `${siteUrl}og-image.jpg`;
+if (entry.data.image) {
+	try {
+		const files = import.meta.glob<ImageMetadata>("../../content/posts/**", {
+			import: "default",
+		});
+		const normalizedPath = path
+			.normalize(
+				path.join("../../content/posts/", getDir(entry.id), entry.data.image),
+			)
+			.replace(/\\/g, "/");
+		const file = files[normalizedPath];
+		if (file) {
+			const img = await file();
+			const optimized = await getImage({ src: img, width: 1200, format: "jpg" });
+			ogImageUrl = new URL(optimized.src, Astro.site).toString();
+		}
+	} catch (_e) {
+		// 解決失敗時はサイトデフォルトOG画像にフォールバック
+	}
+}
+
+// --- BlogPosting JSON-LD（完全版・LLMO/E-E-A-T 強化） ---
+const blogPostingLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
+	"@id": `${postUrl}#article`,
+	mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
 	headline: entry.data.title,
 	description: entry.data.description || entry.data.title,
-	keywords: entry.data.tags,
+	keywords: (entry.data.tags || []).join(", "),
+	image: ogImageUrl,
+	articleSection: entry.data.category || undefined,
+	wordCount: remarkPluginFrontmatter.words,
+	url: postUrl,
 	author: {
 		"@type": "Person",
+		"@id": `${siteUrl}#person`,
 		name: profileConfig.name,
-		url: Astro.site,
+		url: siteUrl,
+		jobTitle: seoConfig.jobTitle,
+		knowsAbout: seoConfig.knowsAbout,
+		sameAs: seoConfig.sameAs,
+	},
+	publisher: {
+		"@type": "Organization",
+		name: seoConfig.organization.name,
+		url: seoConfig.organization.url,
+		logo: {
+			"@type": "ImageObject",
+			url: `${siteUrl}og-image.jpg`,
+		},
 	},
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	inLanguage: entry.data.lang
-		? entry.data.lang.replace("_", "-")
-		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
+	dateModified: formatDateToYYYYMMDD(
+		entry.data.updated || entry.data.published,
+	),
+	inLanguage: inLang,
+};
+
+// --- BreadcrumbList JSON-LD（ナビゲーション構造を機械可読化） ---
+const breadcrumbLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "記事",
+			item: `${siteUrl}archive/`,
+		},
+		{ "@type": "ListItem", position: 3, name: entry.data.title, item: postUrl },
+	],
 };
 ---
-<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
-    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings} ogImage={ogImageUrl}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingLd)}></script>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)}></script>
+    <meta slot="head" property="article:published_time" content={formatDateToYYYYMMDD(entry.data.published)} />
+    <meta slot="head" property="article:modified_time" content={formatDateToYYYYMMDD(entry.data.updated || entry.data.published)} />
+    <meta slot="head" property="article:author" content={profileConfig.name} />
+    {entry.data.category && <meta slot="head" property="article:section" content={entry.data.category} />}
+    {(entry.data.tags || []).map((tag: string) => (
+        <meta slot="head" property="article:tag" content={tag} />
+    ))}
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
             {}
