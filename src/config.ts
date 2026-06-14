@@ -60,7 +60,7 @@ export const substackEmbedUrl = "https://kangmyung.substack.com/embed";
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/tony-avatar.jpg", // 桜の中のトニー（正方形クロップ）
 	name: "Tony Chu / シュ コウメイ",
-	bio: "株式会社EFFECT 代表 / AI軍師。Claude Code・Cloudflare・自社プロダクト群で「AIで事業を構造化して加速する」実装ノートを発信。DFB（Decompose/Frame/Build = 分・枠・組）理論の提唱者。",
+	bio: "AI時代の必須スキル【構造化】を日々研究し、そこで培ったスキルを「開発」「講座」「コンサル」に活用中。自ら考案したメソッド「DFB理論」によるエニタイム構造化を提唱する。",
 	links: [
 		{
 			name: "ストアカ講師ページ",
