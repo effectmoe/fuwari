@@ -44,20 +44,31 @@ const inLang = entry.data.lang
 // 2026-06-14 SEO/LLMO 対策
 // ============================================================
 let ogImageUrl = `${siteUrl}og-image.jpg`;
-if (entry.data.image) {
+// OG/SNSカード画像は thumbnail（クリーンなアイキャッチ）を最優先。無ければ image(カバー/漫画ページ)。
+// → 漫画ページ(小コマ密集)がリンクカードに出てしまう事故を防ぐ。
+// SNSカード規格 1200×630 (1.91:1) に cover クロップ（顔は縦中心50%ルールにより中央cropで残る）。
+const ogSource = entry.data.thumbnail || entry.data.image;
+if (ogSource) {
 	try {
 		const files = import.meta.glob<ImageMetadata>("../../content/posts/**", {
 			import: "default",
 		});
 		const normalizedPath = path
 			.normalize(
-				path.join("../../content/posts/", getDir(entry.id), entry.data.image),
+				path.join("../../content/posts/", getDir(entry.id), ogSource),
 			)
 			.replace(/\\/g, "/");
 		const file = files[normalizedPath];
 		if (file) {
 			const img = await file();
-			const optimized = await getImage({ src: img, width: 1200, format: "jpg" });
+			const optimized = await getImage({
+				src: img,
+				width: 1200,
+				height: 630,
+				fit: "cover",
+				position: "center",
+				format: "jpg",
+			});
 			ogImageUrl = new URL(optimized.src, Astro.site).toString();
 		}
 	} catch (_e) {
