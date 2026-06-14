@@ -78,9 +78,14 @@ export const profileConfig: ProfileConfig = {
 			url: "https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/",
 		},
 		{
+			name: "note",
+			icon: "simple-icons:note",
+			url: "https://note.com/effectmoe",
+		},
+		{
 			name: "Substack",
 			icon: "simple-icons:substack",
-			url: "https://substack.com/", // TODO: 個人 publication URL 要差替
+			url: "https://kangmyung.substack.com",
 		},
 	],
 };
@@ -162,6 +167,8 @@ export const seoConfig = {
 		"https://office.street-academy.com/teacher/shu-koumei", // オフィスク法人研修講師
 		"https://www.amazon.co.jp/dp/B0F7QQF392", // LLMO 書籍（著者性）
 		"https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/", // LinkedIn
+		"https://note.com/effectmoe", // note（国内発見チャネル）
+		"https://kangmyung.substack.com", // Substack ニュースレター
 	],
 	// 運営組織
 	organization: {
