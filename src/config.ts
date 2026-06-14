@@ -59,7 +59,7 @@ export const substackEmbedUrl = "https://kangmyung.substack.com/embed";
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/tony-avatar.jpg", // 桜の中のトニー（正方形クロップ）
-	name: "Tony Chu / シュ コウメイ",
+	name: "シュ コウメイ",
 	bio: "AI時代の必須スキル【構造化】を日々研究し、そこで培ったスキルを「開発」「講座」「コンサル」に活用中。自ら考案したメソッド「DFB理論」によるエニタイム構造化を提唱する。",
 	links: [
 		{
@@ -177,7 +177,7 @@ export const seoConfig = {
 	},
 	// 著者の肩書（Person.jobTitle）
 	jobTitle: "株式会社EFFECT 代表 / AI軍師",
-	alternateName: ["シュ コウメイ", "朱 剛明", "AI軍師", "Tony Chu"],
+	alternateName: ["AI軍師"],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
 	// 出典: https://www.street-academy.com/steachers/271053#review（2026-06-14 時点）
@@ -420,7 +420,7 @@ export const courseConfig = {
 export const faqConfig = {
 	// 回答した著者（「著者が実際に答えている」E-E-A-T 明示）
 	answeredBy: {
-		name: "シュ コウメイ（Tony Chu）",
+		name: "シュ コウメイ",
 		url: "/author/",
 	},
 	general: [
