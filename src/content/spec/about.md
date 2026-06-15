@@ -52,18 +52,6 @@ AI 時代に人間が身につけるべき思考メソッド。雑なプロン�
 
 ---
 
-## このサイトの構成
-
-- **テーマ**: Astro v5 + Fuwari（自社フォーク：[`effectmoe/fuwari`](https://github.com/effectmoe/fuwari)）
-- **CMS**: Obsidian（ローカル Vault → Git 同期）
-- **ホスト**: Vercel（Hobby プラン）
-- **自動化**: `astro-blog` Claude スキル v1.8（テーマ指示と「OK」だけで記事が公開される運用基盤）
-- **執筆フロー**: テーマ指定 → AI が情報収集・図解生成・カバー画像生成 → 下書き → トニーが「OK」 → 自動デプロイ
-
-詳細な構築記録は記事一覧（[Archive](/archive/)）から。
-
----
-
 ## お問い合わせ
 
 業務委託・コンサルティング・登壇・取材のご依頼は [info@effect.moe](mailto:info@effect.moe) までお願いいたします。
