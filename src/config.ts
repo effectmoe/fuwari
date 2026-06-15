@@ -180,14 +180,16 @@ export const seoConfig = {
 	alternateName: ["AI軍師"],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
-	// 出典: https://www.street-academy.com/steachers/271053#review（2026-06-14 時点）
+	// 出典: ストアカ管理画面ダッシュボード（毎日 06:00 LaunchAgent で自動更新）
+	// 数値の単一情報源: src/data/storaca-stats.json
+	// 数値更新時はこちらも合わせること（次回のリファクタで JSON 直接参照に切替予定）
 	reviews: {
 		ratingValue: 4.94,
-		reviewCount: 210,
+		reviewCount: 213,
 		bestRating: 5,
-		studentsTaught: 435,
-		sessionsTaught: 428,
-		repeatRate: "53.6%",
+		studentsTaught: 442,
+		sessionsTaught: 434,
+		repeatRate: "53.8%",
 		periodStart: "2024-08", // 実際の講師登録月（管理画面の2019はプラットフォーム起点で誤り）
 		activeSince: "2024年8月", // 表示用：登録2年弱でこの実績＝スピード訴求
 		badge: "ストアカ プラチナランク（2026年7月よりProランク昇格）",
