@@ -3,6 +3,7 @@ title: "Obsidian × Claude でメモを「アイデア源」に変える3つの�
 published: 2026-06-14
 description: "ためたメモが活きていない——その原因は量ではなく「散らかったまま」だから。Obsidian のメモを AI（Claude）につなぐと、メモ同士の隠れたつながりが見えてアイデアに変わります。やさしい・ふつう・本格の3つのつなぎ方を、初心者にもわかる言葉で解説します。"
 image: ./cover.jpg
+imageAlt: "アンドロイド・カガミが Obsidian のメモを Claude につなぐ過程を描いた4コマ漫画｜散らかったメモが星座のように線で結ばれ「最強のアイデア源」に変わる構造化×AI のメタファー"
 thumbnail: ./thumb.jpg
 tags: ["Obsidian", "Claude", "知識管理", "構造化", "MCP", "ワークフロー"]
 relatedLinks:

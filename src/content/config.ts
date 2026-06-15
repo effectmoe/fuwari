@@ -9,6 +9,11 @@ const postsCollection = defineCollection({
 		description: z.string().optional().default(""),
 		image: z.string().optional().default(""),
 		thumbnail: z.string().optional().default(""),
+		/* カバー画像の alt（LLMO/SEO/アクセシビリティ強化・任意）
+		   - 未指定時は「title｜description」が自動入る
+		   - 漫画記事など、画像の内容が title と乖離する時に明示推奨
+		   - 例: "アンドロイド・カガミがメモの星座を描く4コマ漫画。第2の脳構築を象徴する水彩イラスト" */
+		imageAlt: z.string().optional().default(""),
 		tags: z.array(z.string()).optional().default([]),
 		category: z.string().optional().nullable().default(""),
 		lang: z.string().optional().default(""),
