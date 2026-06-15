@@ -196,6 +196,14 @@ export const seoConfig = {
 		// 代表的な受講生レビュー（ストアカ掲載のまま・表示名は公開準拠）
 		// 上限12件・1トピック1件の網羅優先。先頭5件をAboutで表示、残りは「もっと見る」。
 		// 網羅: LLMO/構造化EEAT/ClaudeCode/Codex/Obsidian/AIエージェント/AI導入/コンサル月額/バイブ/Cowork/Notion
+		//
+		// 🔴 全項目必須（追加時は1件も欠かさない）:
+		//   course   : 講座タイトル（ストアカ掲載どおり）
+		//   reviewer : 受講者属性（性別・年代）
+		//   date     : YYYY-MM
+		//   rating   : 5 固定（5★レビューのみ掲載）
+		//   headline : ★必須★ レビュー短タイトル（about.astro でレビューカードに太字表示）
+		//   text     : ★必須★ レビュー本文（ストアカ掲載のまま）
 		testimonials: [
 			{
 				course: "SEOはLLMOへ！AI検索に選ばれるWEBサイトを作る60分",
