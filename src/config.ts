@@ -176,7 +176,7 @@ export const seoConfig = {
 		url: "https://effect.moe",
 	},
 	// 著者の肩書（Person.jobTitle）
-	jobTitle: "株式会社EFFECT 代表 / AI軍師",
+	jobTitle: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント",
 	alternateName: ["AI軍師"],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
@@ -202,6 +202,7 @@ export const seoConfig = {
 				reviewer: "女性",
 				date: "2026-06",
 				rating: 5,
+				headline: "LLMO対策の全体像が実例でつかめる講座",
 				text: "これまでのSEOとLLMOがどう違うのか、というところから丁寧に教えてもらえて、頭の中が整理されました。JSON-LDやSchema.orgでの構造化データの作り方を、実際のサイトのソースコードやリッチリザルトの検証画面を見ながら解説してもらえたのが特によかったです。FAQや内部リンク、ピラー＆クラスターでサイトを回遊できる形にする考え方、医療系で重要なE-E-A-T（監修・出典・権威性）の話も具体的で、自社サイトのどこを直せばいいかが明確になりました。すぐ実践できる内容で、また次の講座も受けたいと思います。",
 			},
 			{
