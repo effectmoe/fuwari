@@ -17,7 +17,7 @@ draft: false
 
 ## なぜこの記事？
 
-先日、ある方が Facebook に投稿した一文がタイムラインを通り過ぎた。
+先日、[ある方が Facebook に投稿した一文](https://www.facebook.com/story.php?story_fbid=26890238053960756&id=100002037751243)がタイムラインを通り過ぎた。
 
 > 「『AI vs 人間』ではなく、『AIを使って、人間としてどう価値を出すか』の時代」
 
@@ -97,5 +97,6 @@ AIは毎回違うものを返す確率的システムなので、**「出てき�
 
 ## 関連リンク
 
+- [元投稿 / Facebook (2026-05-25)](https://www.facebook.com/story.php?story_fbid=26890238053960756&id=100002037751243)
 - [株式会社EFFECT 公式サイト](https://effect.moe)
 - [Anthropic公式 / Structure prompts with XML tags](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-xml-tags)
