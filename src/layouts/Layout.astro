@@ -136,6 +136,16 @@ const baseGraphLd = {
 >
 	<head>
 
+		<!-- Google Tag Manager（最優先ロード・GTM-T9L3VSK2）GA4(G-571MN39B7X) を配信 -->
+		<script is:inline>
+		(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-T9L3VSK2');
+		</script>
+		<!-- End Google Tag Manager -->
+
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
@@ -228,6 +238,11 @@ const baseGraphLd = {
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
+		<!-- Google Tag Manager (noscript) JS無効環境用フォールバック -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9L3VSK2"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
 
