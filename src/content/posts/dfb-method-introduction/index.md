@@ -12,7 +12,7 @@ draft: false
 > **TL;DR**
 >
 > **DFB** ＝ **D**ecompose（分解） → **F**rame（枠の入れ替え） → **B**uild（組み立て）。  
-> シュ コウメイ（株式会社EFFECT代表）が提唱する、**人間の経験を AI に渡せる形に翻訳する**3ステップ。
+> シュ コウメイ が提唱する、**人間の経験を AI に渡せる形に翻訳する**3ステップ。
 
 ## なぜ DFB か
 
@@ -52,5 +52,3 @@ DFB が機能するためには、**割るに値する経験の塊** が要る�
 ## 関連リンク
 
 - [AI時代に『シニア有利』の本質は構造化能力にある](https://tony.effect.moe/posts/ai-era-senior-structuring-power/)
-- [株式会社EFFECT 公式サイト](https://effect.moe)
-- [AI×LLM 経営伴走コンサルティング（ストアカ）](https://www.street-academy.com/subscription/services/4690)
