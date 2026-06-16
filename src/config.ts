@@ -130,9 +130,13 @@ export const seoConfig = {
 		"AIシステム構築",
 		"AIアプリ開発",
 		"AIコンサルティング",
-		// 権威・指名
+		// 権威・指名（表記揺れ吸収・SEO クエリ用）
 		"AI軍師",
 		"Claude Code",
+		"シュ コウメイ",
+		"シュコウメイ",
+		"朱 剛明",
+		"朱剛明",
 	],
 	// Person JSON-LD knowsAbout（ストアカ講座群＝専門証明）
 	knowsAbout: [
@@ -177,7 +181,17 @@ export const seoConfig = {
 	},
 	// 著者の肩書（Person.jobTitle）
 	jobTitle: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント",
-	alternateName: ["AI軍師"],
+	// 表記揺れ吸収（検索クエリ・JSON-LD `Person.alternateName`）
+	// - カタカナ: スペース有/無 両方
+	// - 漢字（本名）: スペース有/無 両方
+	// - 通称: AI軍師
+	// ⚠️ ここは SEO 検索メタデータ専用。対外メール署名は「シュ コウメイ」固定（CLAUDE.md ルール）
+	alternateName: [
+		"シュコウメイ",
+		"朱 剛明",
+		"朱剛明",
+		"AI軍師",
+	],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
 	// 出典: ストアカ管理画面ダッシュボード（毎日 06:00 LaunchAgent で自動更新）
