@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "構造化脳ブログ",
-	subtitle: "物事や事象を構造化",
+	subtitle: "AI開発・LLMO・知識管理を構造化で攻略",
 	lang: "ja", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 220, // Deep navy / steel blue — AI軍師ブランドを象徴する落ち着いた色
