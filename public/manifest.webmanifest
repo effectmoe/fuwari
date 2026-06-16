@@ -1,0 +1,39 @@
+{
+  "name": "構造化脳ブログ",
+  "short_name": "構造化脳",
+  "description": "AI 時代の必須スキル『構造化』を、AI 開発・LLMO 対策・Notion 知識管理・コンサル現場の生実装で発信する個人ブログ。",
+  "lang": "ja",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#ffffff",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "categories": ["education", "productivity", "technology"],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-light-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-light-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon/favicon-light-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
