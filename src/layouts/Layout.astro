@@ -103,13 +103,14 @@ const personLd = {
 	},
 	knowsAbout: seoConfig.knowsAbout,
 	sameAs: [...seoConfig.sameAs, seoConfig.reviews.reviewUrl],
-	// 第三者評価（ストアカ 4.94★/210件）= E-E-A-T Trustworthiness
+	// 第三者評価（ストアカ 4.94★/213件）= E-E-A-T Trustworthiness
+	// ⚠️ AggregateRating には itemReviewed を入れない（Google Schema 違反）
+	// 親（Person）の aggregateRating として置くことで「Personに対する集約評価」と暗黙的に解釈される
 	aggregateRating: {
 		"@type": "AggregateRating",
 		ratingValue: seoConfig.reviews.ratingValue,
 		reviewCount: seoConfig.reviews.reviewCount,
 		bestRating: seoConfig.reviews.bestRating,
-		itemReviewed: { "@id": `${siteUrl}#person` },
 	},
 };
 const websiteLd = {
