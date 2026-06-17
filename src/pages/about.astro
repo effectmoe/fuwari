@@ -47,13 +47,22 @@ const reviewLd = {
 	review: rv.testimonials.map((t) => ({
 		"@type": "Review",
 		// 各 Review は実際の講座（Course）に対する評価
+		// Course は description が必須（Google リッチリザルト要件）
 		itemReviewed: {
 			"@type": "Course",
 			name: t.course,
+			description: t.headline
+				? `${t.headline}（ストアカで開催の「${t.course}」・${profileConfig.name}講師）`
+				: `ストアカで開催される「${t.course}」（${profileConfig.name}講師）`,
 			provider: {
 				"@type": "Person",
 				"@id": `${siteUrl}#person`,
 				name: profileConfig.name,
+			},
+			hasCourseInstance: {
+				"@type": "CourseInstance",
+				courseMode: "Online",
+				instructor: { "@id": `${siteUrl}#person` },
 			},
 		},
 		reviewRating: {
