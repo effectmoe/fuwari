@@ -9,6 +9,8 @@ const siteUrl = Astro.site ? Astro.site.toString() : "/";
 const rv = seoConfig.reviews;
 
 // ProfilePage + Person（E-E-A-T の正典・著者エンティティページ）
+// ⚠️ Person 自体に aggregateRating を付けると Google のレビュースニペット対象外で「無効」判定される。
+// そのため Person ノードは純粋なプロフィール表現のみ。レビュー表現は別ノード ProfessionalService に分離。
 const profileLd = {
 	"@context": "https://schema.org",
 	"@type": "ProfilePage",
@@ -29,13 +31,31 @@ const profileLd = {
 		},
 		knowsAbout: seoConfig.knowsAbout,
 		sameAs: seoConfig.sameAs,
-		// ⚠️ AggregateRating には itemReviewed を入れない（Google Schema 違反）
-		aggregateRating: {
-			"@type": "AggregateRating",
-			ratingValue: rv.ratingValue,
-			reviewCount: rv.reviewCount,
-			bestRating: rv.bestRating,
-		},
+	},
+};
+
+// レビュー専用ノード（ProfessionalService をルートに・各 Review の itemReviewed は Course）
+const serviceReviewLd = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	"@id": `${siteUrl}#service`,
+	name: `${profileConfig.name} - AI・LLMO・知識管理コンサルティング`,
+	description:
+		"AI実装・LLMO対策・Notion知識管理・システム開発を扱う個人事業のコンサルティングサービス。ストアカで4.94/5の評価。",
+	url: siteUrl,
+	image: `${siteUrl}og-image.jpg`,
+	provider: {
+		"@type": "Person",
+		"@id": `${siteUrl}#person`,
+		name: profileConfig.name,
+		url: `${siteUrl}author/`,
+	},
+	areaServed: { "@type": "Country", name: "Japan" },
+	aggregateRating: {
+		"@type": "AggregateRating",
+		ratingValue: rv.ratingValue,
+		reviewCount: rv.reviewCount,
+		bestRating: rv.bestRating,
 	},
 };
 
@@ -55,6 +75,7 @@ const links = [
 ---
 <MainGridLayout title="著者プロフィール｜シュ コウメイ" description={pageDesc}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(profileLd)}></script>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(serviceReviewLd)}></script>
 
     <div class="flex flex-col gap-4 w-full">
         <!-- ヘッダー -->

@@ -103,15 +103,8 @@ const personLd = {
 	},
 	knowsAbout: seoConfig.knowsAbout,
 	sameAs: [...seoConfig.sameAs, seoConfig.reviews.reviewUrl],
-	// 第三者評価（ストアカ 4.94★/213件）= E-E-A-T Trustworthiness
-	// ⚠️ AggregateRating には itemReviewed を入れない（Google Schema 違反）
-	// 親（Person）の aggregateRating として置くことで「Personに対する集約評価」と暗黙的に解釈される
-	aggregateRating: {
-		"@type": "AggregateRating",
-		ratingValue: seoConfig.reviews.ratingValue,
-		reviewCount: seoConfig.reviews.reviewCount,
-		bestRating: seoConfig.reviews.bestRating,
-	},
+	// ⚠️ Person に aggregateRating を付けると Google のレビュースニペット対象外で「無効」判定される。
+	// 集約評価は別ノード ProfessionalService に分離（下記 serviceLd）。
 };
 const websiteLd = {
 	"@type": "WebSite",
@@ -125,9 +118,28 @@ const websiteLd = {
 	publisher: { "@id": `${siteUrl}#person` },
 	author: { "@id": `${siteUrl}#person` },
 };
+// Google レビュースニペット対象タイプとして ProfessionalService に集約評価を載せる。
+// （Person は対象外・LocalBusiness/Service/Product/Course 等が対象）
+const serviceLd = {
+	"@type": "ProfessionalService",
+	"@id": `${siteUrl}#service`,
+	name: `${profileConfig.name} - AI・LLMO・知識管理コンサルティング`,
+	description:
+		"AI実装・LLMO対策・Notion知識管理・システム開発を扱う個人事業のコンサルティングサービス。ストアカで★評価4.94/5。",
+	url: siteUrl,
+	image: `${siteUrl}og-image.jpg`,
+	provider: { "@id": `${siteUrl}#person` },
+	areaServed: { "@type": "Country", name: "Japan" },
+	aggregateRating: {
+		"@type": "AggregateRating",
+		ratingValue: seoConfig.reviews.ratingValue,
+		reviewCount: seoConfig.reviews.reviewCount,
+		bestRating: seoConfig.reviews.bestRating,
+	},
+};
 const baseGraphLd = {
 	"@context": "https://schema.org",
-	"@graph": [websiteLd, personLd],
+	"@graph": [websiteLd, personLd, serviceLd],
 };
 ---
 

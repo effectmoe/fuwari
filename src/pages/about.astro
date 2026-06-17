@@ -18,25 +18,43 @@ const { Content } = await render(aboutPost);
 const rv = seoConfig.reviews;
 const siteUrl = Astro.site ? Astro.site.toString() : "/";
 
-// 受講生レビューの構造化データ（ページ上に表示＝Google 的にも正当・LLMO に強い）
+// 受講生レビューの構造化データ
+// Google リッチリザルト「レビュースニペット」の対象タイプは LocalBusiness/Product/Course/Service 等。
+// Person は対象外のため、ProfessionalService（個人コンサル業）をルートにし、provider に Person を保持。
+// 各 Review の itemReviewed は Course（ストアカ講座）に。
 const reviewLd = {
 	"@context": "https://schema.org",
-	"@type": "Person",
-	"@id": `${siteUrl}#person`,
-	name: profileConfig.name,
+	"@type": "ProfessionalService",
+	"@id": `${siteUrl}#service`,
+	name: `${profileConfig.name} - AI・LLMO・知識管理コンサルティング`,
+	description:
+		"AI実装・LLMO対策・Notion知識管理・システム開発を扱う個人事業のコンサルティングサービス。ストアカで4.94/5の評価。",
+	url: siteUrl,
+	image: `${siteUrl}og-image.jpg`,
+	provider: {
+		"@type": "Person",
+		"@id": `${siteUrl}#person`,
+		name: profileConfig.name,
+		url: `${siteUrl}author/`,
+	},
+	areaServed: { "@type": "Country", name: "Japan" },
 	aggregateRating: {
 		"@type": "AggregateRating",
 		ratingValue: rv.ratingValue,
 		reviewCount: rv.reviewCount,
 		bestRating: rv.bestRating,
 	},
-	// 各 Review に itemReviewed を明示（Google Schema 必須・親 Person を暗黙解釈しない）
 	review: rv.testimonials.map((t) => ({
 		"@type": "Review",
+		// 各 Review は実際の講座（Course）に対する評価
 		itemReviewed: {
-			"@type": "Person",
-			"@id": `${siteUrl}#person`,
-			name: profileConfig.name,
+			"@type": "Course",
+			name: t.course,
+			provider: {
+				"@type": "Person",
+				"@id": `${siteUrl}#person`,
+				name: profileConfig.name,
+			},
 		},
 		reviewRating: {
 			"@type": "Rating",
