@@ -38,12 +38,8 @@ const reviewLd = {
 		url: `${siteUrl}author/`,
 	},
 	areaServed: { "@type": "Country", name: "Japan" },
-	aggregateRating: {
-		"@type": "AggregateRating",
-		ratingValue: rv.ratingValue,
-		reviewCount: rv.reviewCount,
-		bestRating: rv.bestRating,
-	},
+	// ⚠️ aggregateRating は Layout.astro の serviceLd が全ページに提供している。
+	//    @id `#service` で Google がマージしたとき「複数の平均評価」エラーになるためここでは出さない。
 	review: rv.testimonials.map((t) => ({
 		"@type": "Review",
 		// 各 Review は実際の講座（Course）に対する評価
