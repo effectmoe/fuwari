@@ -30,8 +30,14 @@ const reviewLd = {
 		reviewCount: rv.reviewCount,
 		bestRating: rv.bestRating,
 	},
+	// 各 Review に itemReviewed を明示（Google Schema 必須・親 Person を暗黙解釈しない）
 	review: rv.testimonials.map((t) => ({
 		"@type": "Review",
+		itemReviewed: {
+			"@type": "Person",
+			"@id": `${siteUrl}#person`,
+			name: profileConfig.name,
+		},
 		reviewRating: {
 			"@type": "Rating",
 			ratingValue: t.rating,
