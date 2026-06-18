@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
 	lang: "ja", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 220, // Deep navy / steel blue — AI軍師ブランドを象徴する落ち着いた色
-		fixed: false, // Hide the theme color picker for visitors
+		fixed: true, // カラーピッカーを非表示（nav右端はみ出し防止）
 	},
 	banner: {
 		enable: false, // 巨大化問題のため一時的に無効化（Fuwari banner は vh 単位で巨大表示される仕様）
