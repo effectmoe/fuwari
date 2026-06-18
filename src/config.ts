@@ -6,6 +6,9 @@ import type {
 	SiteConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
+// ストアカ実績の単一情報源（毎日 06:00 LaunchAgent `com.streetacademy.fuwari-sync` が
+// ストアカ管理画面から自動取得して上書きする）
+import storacaStats from "./data/storaca-stats.json";
 
 export const siteConfig: SiteConfig = {
 	title: "構造化脳ブログ",
@@ -198,16 +201,16 @@ export const seoConfig = {
 	],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
-	// 出典: ストアカ管理画面ダッシュボード（毎日 06:00 LaunchAgent で自動更新）
-	// 数値の単一情報源: src/data/storaca-stats.json
-	// 数値更新時はこちらも合わせること（次回のリファクタで JSON 直接参照に切替予定）
+	// 数値は storaca-stats.json から直接 import（LaunchAgent が毎日 06:00 自動更新）
+	// 出典: ストアカ管理画面ダッシュボード https://www.street-academy.com/dashboard/steachers
 	reviews: {
-		ratingValue: 4.94,
-		reviewCount: 213,
+		ratingValue: storacaStats.ratingValue,
+		reviewCount: storacaStats.reviewCount,
 		bestRating: 5,
-		studentsTaught: 442,
-		sessionsTaught: 434,
-		repeatRate: "53.8%",
+		studentsTaught: storacaStats.studentsTaught,
+		sessionsTaught: storacaStats.sessionsTaught,
+		// JSON は数値 (54.2) で保存・サイト表示は "54.2%" 表記に整形
+		repeatRate: `${storacaStats.repeatRate}%`,
 		periodStart: "2024-08", // 実際の講師登録月（管理画面の2019はプラットフォーム起点で誤り）
 		activeSince: "2024年8月", // 表示用：登録2年弱でこの実績＝スピード訴求
 		badge: "ストアカ プラチナランク（2026年7月よりProランク昇格）",
