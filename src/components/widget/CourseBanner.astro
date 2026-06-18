@@ -1,0 +1,56 @@
+---
+interface Props {
+  class?: string;
+  style?: string;
+}
+
+const { class: className, style } = Astro.props;
+
+const COURSE_URL = "/ai-agent-course/";
+// 画像生成後: public/ai-agent-course/sidebar-banner.jpg に配置してコメントを外す
+const BANNER_IMG = ""; // "/ai-agent-course/sidebar-banner.jpg"
+---
+
+<div class:list={[className, "w-full"]} {style}>
+  <a
+    href={COURSE_URL}
+    class="block group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-700 hover:border-amber-300 dark:hover:border-amber-600 transition-colors duration-200 shadow-sm hover:shadow-md"
+  >
+    <!-- バナー画像エリア -->
+    <div class="relative overflow-hidden">
+      {BANNER_IMG ? (
+        <img
+          src={BANNER_IMG}
+          alt="AIエージェント講座 — Claude Code で自律エージェントを構築する"
+          class="w-full h-32 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      ) : (
+        <!-- 画像未設定時のグラデーションプレースホルダー -->
+        <div class="h-32 bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 dark:from-amber-950/40 dark:via-stone-900/60 dark:to-amber-900/30 flex flex-col items-center justify-center gap-1">
+          <div class="text-3xl">🤖</div>
+          <p class="text-[11px] font-medium text-stone-500 dark:text-stone-400 tracking-wide uppercase">AI Agent</p>
+        </div>
+      )}
+      <span class="absolute top-2 right-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">
+        NEW
+      </span>
+    </div>
+
+    <!-- テキストエリア -->
+    <div class="px-3 py-2.5 bg-stone-50 dark:bg-stone-900/20">
+      <p class="text-[11px] font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-0.5">
+        新着講座
+      </p>
+      <h3 class="text-sm font-bold text-neutral-800 dark:text-neutral-100 leading-snug group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-200">
+        AIエージェント講座
+      </h3>
+      <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
+        Claude Code で自律エージェントを実装する
+      </p>
+      <div class="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400 flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200">
+        詳しく見る <span aria-hidden="true">→</span>
+      </div>
+    </div>
+  </a>
+</div>
