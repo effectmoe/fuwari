@@ -126,7 +126,7 @@ const tagColors: Record<string, string> = {
             <Icon name="material-symbols:fiber-new-rounded" class="text-sm" />
             2026 年 新設プログラム
           </span>
-          <span class="inline-flex items-center gap-1 text-xs font-bold text-75 bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] rounded-full px-3 py-1">
+          <span class="inline-flex items-center gap-1 text-xs font-bold text-75 bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1">
             <Icon name="material-symbols:savings-outline-rounded" class="text-sm" />
             リスキリング助成金 対応
           </span>
@@ -202,7 +202,7 @@ const tagColors: Record<string, string> = {
             { icon: "material-symbols:hub-outline", text: "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる" },
             { icon: "material-symbols:auto-mode-rounded", text: "定型メール・議事録・報告書の作成工数がゼロになる" },
           ].map((item) => (
-            <div class="flex items-start gap-3 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-4 py-3.5 shadow-sm">
+            <div class="flex items-start gap-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-4 py-3.5 shadow-sm">
               <Icon name={item.icon} class="text-[var(--primary)] text-xl mt-0.5 shrink-0" />
               <span class="text-base text-75 leading-snug">{item.text}</span>
             </div>
@@ -278,7 +278,7 @@ const tagColors: Record<string, string> = {
           { icon: "material-symbols:computer-outline-rounded", label: "必要なもの", value: "PC（Win / Mac 可）\nインターネット接続" },
           { icon: "material-symbols:handshake-outline-rounded", label: "助成金サポート", value: "提携社労士事務所\nをご紹介" },
         ].map((item) => (
-          <div class="flex flex-col gap-2 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-4 py-4 shadow-sm">
+          <div class="flex flex-col gap-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-4 py-4 shadow-sm">
             <div class="flex items-center gap-2">
               <Icon name={item.icon} class="text-[var(--primary)] text-xl" />
               <span class="text-sm text-50 font-medium">{item.label}</span>
@@ -303,7 +303,7 @@ const tagColors: Record<string, string> = {
         </div>
         <div class="flex flex-col gap-4">
           {curriculum.map((item) => (
-            <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] overflow-hidden shadow-sm">
+            <div class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 overflow-hidden shadow-sm">
               <!-- カードヘッダー -->
               <div class="px-5 py-3 border-b border-[var(--line-divider)] flex flex-wrap items-center gap-2">
                 <span class="text-sm font-bold text-white bg-[var(--primary)] rounded-md px-2.5 py-1">
@@ -316,15 +316,15 @@ const tagColors: Record<string, string> = {
               </div>
               <!-- カードボディ -->
               <div class="px-5 py-4 grid sm:grid-cols-3 gap-3">
-                <div class="rounded-lg bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] px-4 py-3">
+                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
                   <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">学ぶ内容</p>
                   <p class="text-sm text-75 leading-relaxed">{item.learn}</p>
                 </div>
-                <div class="rounded-lg bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] px-4 py-3">
+                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
                   <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">身につくスキル</p>
                   <p class="text-sm text-75 leading-relaxed">{item.skill}</p>
                 </div>
-                <div class="rounded-lg bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] px-4 py-3">
+                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
                   <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">実践内容</p>
                   <p class="text-sm text-75 leading-relaxed">{item.practice}</p>
                 </div>
@@ -343,7 +343,7 @@ const tagColors: Record<string, string> = {
       </div>
       <div class="flex flex-col gap-4">
         {features.map((item) => (
-          <div class="flex gap-5 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-6 py-5 shadow-sm">
+          <div class="flex gap-5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-6 py-5 shadow-sm">
             <span class="text-4xl font-bold text-[var(--primary)] opacity-20 leading-none shrink-0 select-none">
               {item.no}
             </span>
@@ -362,7 +362,7 @@ const tagColors: Record<string, string> = {
         <Icon name="material-symbols:person-outline-rounded" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">講師：シュ コウメイ</h2>
       </div>
-      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5 shadow-sm">
+      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 p-5 shadow-sm">
         <div class="shrink-0">
           <img
             src="/ai-agent-course/tony-portrait.jpg"
@@ -405,7 +405,7 @@ const tagColors: Record<string, string> = {
         <h2 class="text-2xl font-bold text-90">こんな方に向いています</h2>
       </div>
       <div class="grid sm:grid-cols-2 gap-5">
-        <div class="rounded-xl border border-[var(--primary)]/20 bg-[var(--primary)]/5 p-5">
+        <div class="rounded-xl border border-amber-200/70 dark:border-amber-700/40 bg-amber-50/60 dark:bg-amber-900/20 p-5">
           <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
             <Icon name="material-symbols:thumb-up-outline-rounded" class="text-[var(--primary)] text-xl" />
             おすすめの方
@@ -425,7 +425,7 @@ const tagColors: Record<string, string> = {
             ))}
           </ul>
         </div>
-        <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5">
+        <div class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 p-5">
           <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
             <Icon name="material-symbols:thumb-down-outline-rounded" class="text-50 text-xl" />
             向いていない方
@@ -454,7 +454,7 @@ const tagColors: Record<string, string> = {
       </div>
       <div class="flex flex-col gap-3">
         {faqs.map((item) => (
-          <details class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-5 py-4 shadow-sm group cursor-pointer">
+          <details class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-5 py-4 shadow-sm group cursor-pointer">
             <summary class="font-bold text-90 text-base flex items-center justify-between gap-3 list-none">
               <span>{item.q}</span>
               <Icon
