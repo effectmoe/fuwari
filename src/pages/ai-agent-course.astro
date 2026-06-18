@@ -93,8 +93,13 @@ const faqs = [
   },
 ];
 
-const mailtoLink =
-  "mailto:info@effect.moe?subject=AIエージェント入門講座 お問い合わせ&body=【お問い合わせ内容】%0A受講希望人数：%0A希望時期：%0Aご質問・ご要望：";
+// mailto: の subject/body は RFC 6068 に従い UTF-8 を percent-encode する必要がある
+// （日本語を直書きするとブラウザ/メーラが起動しない不具合が出る）
+const mailtoSubject = encodeURIComponent("AIエージェント入門講座 お問い合わせ");
+const mailtoBody = encodeURIComponent(
+  "【お問い合わせ内容】\n受講希望人数：\n希望時期：\nご質問・ご要望：\n",
+);
+const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
 
 const tagColors: Record<string, string> = {
   SETUP:     "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
