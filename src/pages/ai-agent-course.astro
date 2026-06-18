@@ -315,18 +315,18 @@ const tagColors: Record<string, string> = {
                 <h3 class="font-bold text-90 text-base">{item.title}</h3>
               </div>
               <!-- カードボディ -->
-              <div class="px-5 py-4 grid sm:grid-cols-3 gap-4 text-sm text-75">
-                <div>
-                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">学ぶ内容</p>
-                  <p class="leading-relaxed">{item.learn}</p>
+              <div class="px-5 py-4 grid sm:grid-cols-3 gap-3">
+                <div class="rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/40 px-4 py-3">
+                  <p class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">学ぶ内容</p>
+                  <p class="text-sm text-75 leading-relaxed">{item.learn}</p>
                 </div>
-                <div>
-                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">身につくスキル</p>
-                  <p class="leading-relaxed">{item.skill}</p>
+                <div class="rounded-lg bg-violet-50 dark:bg-violet-900/20 border border-violet-100 dark:border-violet-800/40 px-4 py-3">
+                  <p class="text-xs font-bold text-violet-600 dark:text-violet-400 uppercase tracking-wider mb-2">身につくスキル</p>
+                  <p class="text-sm text-75 leading-relaxed">{item.skill}</p>
                 </div>
-                <div>
-                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">実践内容</p>
-                  <p class="leading-relaxed">{item.practice}</p>
+                <div class="rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/40 px-4 py-3">
+                  <p class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">実践内容</p>
+                  <p class="text-sm text-75 leading-relaxed">{item.practice}</p>
                 </div>
               </div>
             </div>
