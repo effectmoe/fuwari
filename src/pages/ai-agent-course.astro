@@ -95,122 +95,169 @@ const faqs = [
 
 const mailtoLink =
   "mailto:info@effect.moe?subject=AIエージェント入門講座 お問い合わせ&body=【お問い合わせ内容】%0A受講希望人数：%0A希望時期：%0Aご質問・ご要望：";
+
+const tagColors: Record<string, string> = {
+  SETUP:     "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+  BASICS:    "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
+  ANALYZE:   "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300",
+  DOCUMENT:  "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
+  INTEGRATE: "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
+  DEPLOY:    "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
+};
 ---
 
 <MainGridLayout
   title="AIエージェント入門講座 ／ Claude Code 徹底活用｜株式会社EFFECT"
-  description="GitHub・Webhook・MCP・API を活用したAIエージェント研修。全6回×各2時間のオンライン実践研修。人材開発支援助成金（リスキリング）対応。"
+  description="GitHub・Webhook・MCP・API を活用したAIエージェント研修。全6回×各2時間のオンライン実践研修。人材開発支援助成金（リスキリング）対応。講師：シュ コウメイ（株式会社EFFECT）"
 >
-  <div class="flex flex-col gap-4 w-full">
+  <div class="flex flex-col gap-5 w-full">
 
-    <!-- ===== Hero ===== -->
-    <div class="card-base px-6 md:px-9 py-8">
-      <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-widest mb-2">
-        2026 年 新設プログラム ／ リスキリング助成金 対応
-      </p>
-      <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
-        AIエージェント入門講座<br />
-        <span class="text-[var(--primary)]">Claude Code を、徹底攻略する。</span>
-      </h1>
-      <p class="text-base text-75 leading-relaxed mb-5">
-        「使う」から、「任せる」へ。<br />
-        GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する全 6 回の実践研修。
-      </p>
-      <div class="flex flex-wrap gap-3 mb-6">
-        <a
-          href={mailtoLink}
-          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-5 py-2.5 rounded-lg hover:opacity-90 transition"
-        >
-          <Icon name="material-symbols:mail-outline-rounded" class="text-lg" />
-          無料相談を申し込む
-        </a>
-        <a
-          href="#curriculum"
-          class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-5 py-2.5 hover:bg-[var(--btn-plain-bg-hover)] transition"
-        >
-          カリキュラムを見る
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-75">
-        <span class="flex items-center gap-1.5">
-          <Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)]" />
-          全 6 回 × 各 2 時間
-        </span>
-        <span class="flex items-center gap-1.5">
-          <Icon name="material-symbols:videocam-outline-rounded" class="text-[var(--primary)]" />
-          Zoom オンライン
-        </span>
-        <span class="flex items-center gap-1.5">
-          <Icon name="material-symbols:group-outline-rounded" class="text-[var(--primary)]" />
-          3 名から受講可
-        </span>
-        <span class="flex items-center gap-1.5">
-          <Icon name="material-symbols:savings-outline-rounded" class="text-[var(--primary)]" />
-          助成金活用で実質 約 1/4
-        </span>
+    <!-- ===== Hero Banner Image ===== -->
+    <div class="card-base overflow-hidden p-0">
+      <img
+        src="/ai-agent-course/hero.jpg"
+        alt="AIエージェント入門講座 — ネイビーブルーのAIワークスペース"
+        class="w-full h-52 md:h-72 object-cover"
+      />
+      <div class="px-6 md:px-9 py-7">
+        <!-- バッジ行 -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="inline-flex items-center gap-1 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1">
+            <Icon name="material-symbols:fiber-new-rounded" class="text-sm" />
+            2026 年 新設プログラム
+          </span>
+          <span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700 rounded-full px-3 py-1">
+            <Icon name="material-symbols:savings-outline-rounded" class="text-sm" />
+            リスキリング助成金 対応
+          </span>
+        </div>
+        <!-- タイトル -->
+        <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
+          AIエージェント<span class="text-[var(--primary)]">入門講座</span><br />
+          <span class="text-2xl md:text-3xl">Claude Code を、徹底攻略する。</span>
+        </h1>
+        <p class="text-base md:text-lg text-75 leading-relaxed mb-6">
+          「使う」から、「任せる」へ。<br />
+          GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する<br class="hidden md:block" />全 6 回の実践研修。
+        </p>
+        <!-- CTAボタン -->
+        <div class="flex flex-wrap gap-3 mb-6">
+          <a
+            href={mailtoLink}
+            class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
+          >
+            <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+            無料相談を申し込む
+          </a>
+          <a
+            href="#curriculum"
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
+          >
+            カリキュラムを見る
+          </a>
+        </div>
+        <!-- 概要バッジ -->
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)] text-lg" />
+            全 6 回 × 各 2 時間
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:videocam-outline-rounded" class="text-[var(--primary)] text-lg" />
+            Zoom オンライン
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:group-outline-rounded" class="text-[var(--primary)] text-lg" />
+            3 名から受講可
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:savings-outline-rounded" class="text-[var(--primary)] text-lg" />
+            助成金で実質 約 1/4
+          </span>
+        </div>
       </div>
     </div>
 
     <!-- ===== なぜエージェントか ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:lightbulb-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">「ChatGPT に聞く」と「AI に任せる」は、別物です。</h2>
-      </div>
-      <p class="text-sm text-75 mb-4 leading-relaxed">
-        Claude Code を使いこなせるようになると、こんなことが起こります。
-      </p>
-      <div class="grid sm:grid-cols-2 gap-2">
-        {[
-          "数百ファイルを一気に読ませて、必要な情報だけ抽出できる",
-          "Word・Excel・PowerPoint をテンプレから一気に量産できる",
-          "GitHub・Webhook・API を組み合わせて、業務システムが自分の手で作れる",
-          "HP・LP を企画から公開まで一人で完結できる",
-          "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる",
-          "定型メール・議事録・報告書の作成工数がゼロになる",
-        ].map((item) => (
-          <div class="flex items-start gap-2 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
-            <Icon
-              name="material-symbols:check-circle-outline-rounded"
-              class="text-[var(--primary)] mt-0.5 shrink-0"
-            />
-            <span class="text-sm text-75">{item}</span>
-          </div>
-        ))}
+    <div class="card-base overflow-hidden p-0">
+      <img
+        src="/ai-agent-course/img-why.jpg"
+        alt="AIが大量ファイルを処理するイメージ"
+        class="w-full h-40 md:h-56 object-cover"
+      />
+      <div class="px-6 md:px-9 py-7">
+        <div class="flex items-center gap-2 mb-3">
+          <Icon name="material-symbols:lightbulb-outline-rounded" class="text-2xl text-[var(--primary)]" />
+          <h2 class="text-2xl font-bold text-90">「ChatGPT に聞く」と「AI に任せる」は、別物です。</h2>
+        </div>
+        <p class="text-base text-75 mb-5 leading-relaxed">
+          Claude Code を使いこなせるようになると、こんなことが起こります。
+        </p>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {[
+            { icon: "material-symbols:folder-open-outline-rounded", text: "数百ファイルを一気に読ませて、必要な情報だけ抽出できる" },
+            { icon: "material-symbols:description-outline-rounded", text: "Word・Excel・PowerPoint をテンプレから一気に量産できる" },
+            { icon: "material-symbols:code-rounded", text: "GitHub・Webhook・API を組み合わせて、業務システムが自分の手で作れる" },
+            { icon: "material-symbols:open-in-browser-rounded", text: "HP・LP を企画から公開まで一人で完結できる" },
+            { icon: "material-symbols:hub-outline-rounded", text: "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる" },
+            { icon: "material-symbols:auto-mode-rounded", text: "定型メール・議事録・報告書の作成工数がゼロになる" },
+          ].map((item) => (
+            <div class="flex items-start gap-3 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3.5">
+              <Icon name={item.icon} class="text-[var(--primary)] text-xl mt-0.5 shrink-0" />
+              <span class="text-base text-75 leading-snug">{item.text}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
 
-    <!-- ===== 助成金 ===== -->
+    <!-- ===== 助成金・価格 ===== -->
     <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:savings-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">助成金活用で、実質 約 1/4 の負担</h2>
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:savings-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">助成金活用で、実質 約 1/4 の負担</h2>
       </div>
-      <p class="text-sm text-75 mb-4 leading-relaxed">
+      <p class="text-base text-75 mb-5 leading-relaxed">
         人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。
         当社では申請代行は行わず、提携の社労士事務所をご紹介いたします。
       </p>
-      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5">
-        <div class="flex flex-col divide-y divide-[var(--line-divider)]">
-          <div class="flex justify-between items-center py-2.5">
-            <span class="text-sm text-75">通常価格（1 名 / 全 6 回 / 計 12 時間）</span>
-            <span class="font-bold text-90">¥385,000</span>
+      <div class="rounded-2xl border border-[var(--line-divider)] overflow-hidden">
+        <div class="bg-[var(--btn-plain-bg)] px-6 py-4 flex justify-between items-center border-b border-[var(--line-divider)]">
+          <div>
+            <p class="text-sm text-50 mb-0.5">通常価格（1 名 / 全 6 回 / 計 12 時間）</p>
+            <p class="text-2xl font-bold text-90">¥385,000</p>
           </div>
-          <div class="flex justify-between items-center py-2.5">
-            <span class="text-sm text-[var(--primary)]">経費助成（研修費の 75% を補助）</span>
-            <span class="font-bold text-[var(--primary)]">−¥288,750</span>
+          <Icon name="material-symbols:payments-outline-rounded" class="text-3xl text-50" />
+        </div>
+        <div class="px-6 py-4 flex flex-col gap-3 border-b border-[var(--line-divider)]">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-base text-75">経費助成（研修費の 75% を補助）</span>
+            </div>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base">−¥288,750</span>
           </div>
-          <div class="flex justify-between items-center py-2.5">
-            <span class="text-sm text-[var(--primary)]">賃金助成（¥1,000 × 12 時間）</span>
-            <span class="font-bold text-[var(--primary)]">−¥12,000</span>
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-base text-75">賃金助成（¥1,000 × 12 時間）</span>
+            </div>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base">−¥12,000</span>
           </div>
-          <div class="flex justify-between items-center pt-4">
-            <span class="font-bold text-90">実質負担額（1 名あたり）</span>
-            <span class="text-2xl font-bold text-[var(--primary)]">¥84,250</span>
+        </div>
+        <div class="px-6 py-5 flex justify-between items-center bg-[var(--primary)]/5">
+          <div>
+            <p class="text-sm text-75 mb-1">実質負担額（1 名あたり）</p>
+            <p class="text-4xl font-bold text-[var(--primary)]">¥84,250</p>
+          </div>
+          <div class="text-right">
+            <span class="inline-block bg-[var(--primary)] text-white text-sm font-bold px-3 py-1.5 rounded-lg">
+              約 1/4 の自己負担
+            </span>
           </div>
         </div>
       </div>
-      <p class="text-xs text-50 mt-3 leading-relaxed">
+      <p class="text-sm text-50 mt-3 leading-relaxed">
         ※人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。申請は任意、支給には条件があります。<br />
         ※当社では助成金申請の代行は行っておりません。ご希望の場合は提携の社労士事務所をご紹介いたします。
       </p>
@@ -219,103 +266,90 @@ const mailtoLink =
     <!-- ===== 研修フォーマット ===== -->
     <div class="card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:format-list-bulleted-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">研修フォーマット</h2>
+        <Icon name="material-symbols:format-list-bulleted-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">研修フォーマット</h2>
       </div>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
         {[
-          {
-            icon: "material-symbols:schedule-outline-rounded",
-            label: "時間",
-            value: "全 6 回 × 各 2 時間\n合計 12 時間",
-          },
-          {
-            icon: "material-symbols:videocam-outline-rounded",
-            label: "実施方法",
-            value: "Zoom でオンライン\n録画あり・欠席回はアーカイブ視聴可",
-          },
-          {
-            icon: "material-symbols:calendar-month-outline-rounded",
-            label: "実施曜日",
-            value: "平日実施\n業務に合わせて柔軟に調整",
-          },
-          {
-            icon: "material-symbols:group-outline-rounded",
-            label: "人数",
-            value: "3 名から受講可\n社内貸切も対応",
-          },
-          {
-            icon: "material-symbols:computer-outline-rounded",
-            label: "必要なもの",
-            value: "PC（Win / Mac 可）\nインターネット接続",
-          },
-          {
-            icon: "material-symbols:handshake-outline-rounded",
-            label: "助成金サポート",
-            value: "提携社労士事務所\nをご紹介",
-          },
+          { icon: "material-symbols:schedule-outline-rounded", label: "時間", value: "全 6 回 × 各 2 時間\n合計 12 時間" },
+          { icon: "material-symbols:videocam-outline-rounded", label: "実施方法", value: "Zoom でオンライン\n録画あり・欠席回はアーカイブ視聴可" },
+          { icon: "material-symbols:calendar-month-outline-rounded", label: "実施曜日", value: "平日実施\n業務に合わせて柔軟に調整" },
+          { icon: "material-symbols:group-outline-rounded", label: "人数", value: "3 名から受講可\n社内貸切も対応" },
+          { icon: "material-symbols:computer-outline-rounded", label: "必要なもの", value: "PC（Win / Mac 可）\nインターネット接続" },
+          { icon: "material-symbols:handshake-outline-rounded", label: "助成金サポート", value: "提携社労士事務所\nをご紹介" },
         ].map((item) => (
-          <div class="flex flex-col gap-1 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+          <div class="flex flex-col gap-2 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-4">
             <div class="flex items-center gap-2">
-              <Icon name={item.icon} class="text-[var(--primary)]" />
-              <span class="text-xs text-50">{item.label}</span>
+              <Icon name={item.icon} class="text-[var(--primary)] text-xl" />
+              <span class="text-sm text-50 font-medium">{item.label}</span>
             </div>
-            <p class="text-sm font-medium text-90 whitespace-pre-line">{item.value}</p>
+            <p class="text-base font-medium text-90 whitespace-pre-line leading-snug">{item.value}</p>
           </div>
         ))}
       </div>
     </div>
 
     <!-- ===== カリキュラム ===== -->
-    <div id="curriculum" class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:menu-book-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">全 6 回 × 各 2 時間 ／ 導入から公開まで完全攻略</h2>
-      </div>
-      <div class="flex flex-col gap-3">
-        {curriculum.map((item) => (
-          <div class="rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4">
-            <div class="flex flex-wrap items-center gap-2 mb-2">
-              <span class="text-xs font-bold text-white bg-[var(--primary)] rounded px-2 py-0.5">
-                {item.no}
-              </span>
-              <span class="text-xs text-50 font-mono">{item.tag}</span>
-              <h3 class="font-bold text-90 text-sm">{item.title}</h3>
+    <div id="curriculum" class="card-base overflow-hidden p-0">
+      <img
+        src="/ai-agent-course/img-curriculum.jpg"
+        alt="ターミナルと開発環境のフラットレイ写真"
+        class="w-full h-40 md:h-52 object-cover"
+      />
+      <div class="px-6 md:px-9 py-7">
+        <div class="flex items-center gap-2 mb-5">
+          <Icon name="material-symbols:menu-book-outline-rounded" class="text-2xl text-[var(--primary)]" />
+          <h2 class="text-2xl font-bold text-90">全 6 回 × 各 2 時間 ／ 導入から公開まで完全攻略</h2>
+        </div>
+        <div class="flex flex-col gap-4">
+          {curriculum.map((item) => (
+            <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] overflow-hidden">
+              <!-- カードヘッダー -->
+              <div class="px-5 py-3 border-b border-[var(--line-divider)] flex flex-wrap items-center gap-2">
+                <span class="text-sm font-bold text-white bg-[var(--primary)] rounded-md px-2.5 py-1">
+                  {item.no}
+                </span>
+                <span class={`text-xs font-bold rounded-md px-2.5 py-1 ${tagColors[item.tag]}`}>
+                  {item.tag}
+                </span>
+                <h3 class="font-bold text-90 text-base">{item.title}</h3>
+              </div>
+              <!-- カードボディ -->
+              <div class="px-5 py-4 grid sm:grid-cols-3 gap-4 text-sm text-75">
+                <div>
+                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">学ぶ内容</p>
+                  <p class="leading-relaxed">{item.learn}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">身につくスキル</p>
+                  <p class="leading-relaxed">{item.skill}</p>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-50 uppercase tracking-wider mb-1.5">実践内容</p>
+                  <p class="leading-relaxed">{item.practice}</p>
+                </div>
+              </div>
             </div>
-            <div class="grid sm:grid-cols-3 gap-2 text-xs text-75">
-              <div>
-                <span class="text-50 block mb-0.5">学ぶ内容</span>
-                {item.learn}
-              </div>
-              <div>
-                <span class="text-50 block mb-0.5">身につくスキル</span>
-                {item.skill}
-              </div>
-              <div>
-                <span class="text-50 block mb-0.5">実践内容</span>
-                {item.practice}
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
 
     <!-- ===== 選ばれる理由 ===== -->
     <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:star-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">なぜ、この研修が選ばれるのか</h2>
+      <div class="flex items-center gap-2 mb-5">
+        <Icon name="material-symbols:star-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">なぜ、この研修が選ばれるのか</h2>
       </div>
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-4">
         {features.map((item) => (
-          <div class="flex gap-4 rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4">
-            <span class="text-3xl font-bold text-[var(--primary)] opacity-25 leading-none shrink-0">
+          <div class="flex gap-5 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-6 py-5">
+            <span class="text-4xl font-bold text-[var(--primary)] opacity-20 leading-none shrink-0 select-none">
               {item.no}
             </span>
             <div>
-              <h3 class="font-bold text-90 mb-1">{item.title}</h3>
-              <p class="text-sm text-75 leading-relaxed">{item.body}</p>
+              <h3 class="font-bold text-90 text-lg mb-2">{item.title}</h3>
+              <p class="text-base text-75 leading-relaxed">{item.body}</p>
             </div>
           </div>
         ))}
@@ -324,30 +358,30 @@ const mailtoLink =
 
     <!-- ===== 講師 ===== -->
     <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:person-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">講師：シュ コウメイ</h2>
+      <div class="flex items-center gap-2 mb-5">
+        <Icon name="material-symbols:person-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">講師：シュ コウメイ</h2>
       </div>
-      <div class="flex flex-col sm:flex-row gap-5">
+      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5">
         <div class="shrink-0">
           <img
             src="/assets/images/tony-avatar.jpg"
             alt="シュ コウメイ"
-            class="w-24 h-24 rounded-full object-cover"
+            class="w-28 h-28 rounded-full object-cover border-2 border-[var(--primary)]"
           />
         </div>
         <div>
-          <p class="font-bold text-90">株式会社EFFECT 代表</p>
-          <p class="text-sm text-50 mb-3">AI活用コンサルタント ／ Claude Code 実務運用</p>
-          <p class="text-sm text-75 leading-relaxed mb-3">
+          <p class="font-bold text-90 text-xl mb-0.5">シュ コウメイ</p>
+          <p class="text-base text-75 mb-3">株式会社EFFECT 代表 ／ AI活用コンサルタント</p>
+          <p class="text-base text-75 leading-relaxed mb-4">
             自社業務・クライアント向け開発の双方で Claude Code を日常運用。業務自動化システム・LP
-            ページ・AI カルテシステム等をすべて Claude Code で内製。ストアカ講師評価
+            ページ・AI カルテシステム等をすべて Claude Code で内製化。ストアカ講師評価
             4.94（5段階）、AI 活用・Claude Code 関連の講座を多数開講。LLMO 書籍著者。
           </p>
-          <div class="flex flex-wrap gap-2 text-xs">
+          <div class="flex flex-wrap gap-2">
             {["ストアカ評価 4.94", "LLMO 書籍著者", "Claude Code 日常運用", "業務自動化システム内製"].map(
               (tag) => (
-                <span class="rounded-full bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] px-3 py-1">
+                <span class="rounded-full bg-[var(--card-bg)] border border-[var(--line-divider)] px-3 py-1 text-sm font-medium text-75">
                   {tag}
                 </span>
               ),
@@ -359,17 +393,17 @@ const mailtoLink =
 
     <!-- ===== こんな方に ===== -->
     <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:person-check-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">こんな方に向いています</h2>
+      <div class="flex items-center gap-2 mb-5">
+        <Icon name="material-symbols:person-check-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">こんな方に向いています</h2>
       </div>
       <div class="grid sm:grid-cols-2 gap-5">
-        <div>
-          <h3 class="font-bold text-90 mb-3 flex items-center gap-2">
-            <Icon name="material-symbols:thumb-up-outline-rounded" class="text-[var(--primary)]" />
+        <div class="rounded-xl border border-emerald-200 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 p-5">
+          <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:thumb-up-outline-rounded" class="text-emerald-600 dark:text-emerald-400 text-xl" />
             おすすめの方
           </h3>
-          <ul class="flex flex-col gap-2">
+          <ul class="flex flex-col gap-2.5">
             {[
               "ChatGPT・Claude を日常的に使っていて、もう一段深く活用したい",
               "業務システムを社内で内製したい、もしくは外注費を減らしたい",
@@ -377,29 +411,26 @@ const mailtoLink =
               "HP・LP を社内で素早く作れる体制にしたい",
               "GitHub・API・Webhook・MCP を実業務に組み込みたい",
             ].map((item) => (
-              <li class="flex items-start gap-2 text-sm text-75">
-                <Icon
-                  name="material-symbols:check-rounded"
-                  class="text-[var(--primary)] mt-0.5 shrink-0"
-                />
+              <li class="flex items-start gap-2 text-base text-75">
+                <Icon name="material-symbols:check-rounded" class="text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0 text-lg" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
-        <div>
-          <h3 class="font-bold text-90 mb-3 flex items-center gap-2">
-            <Icon name="material-symbols:thumb-down-outline-rounded" class="text-50" />
+        <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5">
+          <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:thumb-down-outline-rounded" class="text-50 text-xl" />
             向いていない方
           </h3>
-          <ul class="flex flex-col gap-2">
+          <ul class="flex flex-col gap-2.5">
             {[
               "AI ツールに触れたことがほぼ無い方（先に入門研修をお勧めします）",
               "受講中に PC を使えない環境の方",
               "1 回完結の「概要だけ」を求める方",
             ].map((item) => (
-              <li class="flex items-start gap-2 text-sm text-75">
-                <Icon name="material-symbols:close-rounded" class="text-50 mt-0.5 shrink-0" />
+              <li class="flex items-start gap-2 text-base text-75">
+                <Icon name="material-symbols:close-rounded" class="text-50 mt-0.5 shrink-0 text-lg" />
                 {item}
               </li>
             ))}
@@ -410,43 +441,42 @@ const mailtoLink =
 
     <!-- ===== FAQ ===== -->
     <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:help-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-        <h2 class="text-xl font-bold text-90">よくあるご質問</h2>
+      <div class="flex items-center gap-2 mb-5">
+        <Icon name="material-symbols:help-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">よくあるご質問</h2>
       </div>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-3">
         {faqs.map((item) => (
-          <details class="rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4 group cursor-pointer">
-            <summary class="font-bold text-90 flex items-center justify-between gap-2 list-none">
+          <details class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-5 py-4 group cursor-pointer">
+            <summary class="font-bold text-90 text-base flex items-center justify-between gap-3 list-none">
               <span>{item.q}</span>
               <Icon
                 name="material-symbols:expand-more-rounded"
-                class="text-[var(--primary)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+                class="text-[var(--primary)] text-xl shrink-0 transition-transform duration-200 group-open:rotate-180"
               />
             </summary>
-            <p class="text-sm text-75 mt-3 leading-relaxed">{item.a}</p>
+            <p class="text-base text-75 mt-3 leading-relaxed">{item.a}</p>
           </details>
         ))}
       </div>
     </div>
 
     <!-- ===== CTA ===== -->
-    <div class="card-base px-6 md:px-9 py-8 text-center">
-      <h2 class="text-2xl font-bold text-90 mb-3">まずは無料相談から</h2>
-      <p class="text-sm text-75 mb-5 leading-relaxed">
+    <div class="card-base px-6 md:px-9 py-10 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは無料相談から</h2>
+      <p class="text-base text-75 mb-6 leading-relaxed">
         受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
         ご質問への回答は通常 1〜2 営業日以内に行います。
       </p>
       <a
         href={mailtoLink}
-        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-3 rounded-lg hover:opacity-90 transition text-base"
+        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
       >
-        <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+        <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
         info@effect.moe にメールする
       </a>
-      <p class="text-xs text-50 mt-5 leading-relaxed">
-        株式会社EFFECT ／ 担当：シュ コウメイ<br />
-        info@effect.moe
+      <p class="text-sm text-50 mt-6 leading-relaxed">
+        株式会社EFFECT ／ 担当：シュ コウメイ ／ info@effect.moe
       </p>
     </div>
 
