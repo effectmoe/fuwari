@@ -7,8 +7,7 @@ interface Props {
 const { class: className, style } = Astro.props;
 
 const COURSE_URL = "/ai-agent-course/";
-// 画像生成後: public/ai-agent-course/sidebar-banner.jpg に配置してコメントを外す
-const BANNER_IMG = ""; // "/ai-agent-course/sidebar-banner.jpg"
+const BANNER_IMG = "/ai-agent-course/sidebar-banner.jpg";
 ---
 
 <div class:list={[className, "w-full"]} {style}>
