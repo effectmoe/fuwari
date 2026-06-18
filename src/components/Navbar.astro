@@ -29,9 +29,9 @@ let links: NavBarLink[] = navBarConfig.links.map(
             <div class="flex flex-row text-[var(--primary)] items-center text-md leading-none">
                 <Icon name="material-symbols:home-outline-rounded" class="text-[1.75rem] mr-2 -translate-y-px" />
                 <div class="flex items-baseline gap-2">
-                    <span class="leading-none">{siteConfig.title}</span>
+                    <span class="leading-none whitespace-nowrap">{siteConfig.title}</span>
                     {siteConfig.subtitle && (
-                        <span class="text-[0.7rem] text-black/50 dark:text-white/50 font-normal tracking-wide hidden md:inline leading-none">
+                        <span class="text-[0.7rem] text-black/50 dark:text-white/50 font-normal tracking-wide hidden md:inline leading-none whitespace-nowrap">
                             {siteConfig.subtitle}
                         </span>
                     )}
