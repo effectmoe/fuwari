@@ -1,0 +1,454 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+
+const curriculum = [
+  {
+    no: "01", tag: "SETUP",
+    title: "Claude Code を導入する／仕組みを知る",
+    learn: "インストール、認証、IDE 連携、基本設定、AIエージェントの動作原理",
+    skill: "環境構築、権限モード、CLAUDE.md による振る舞い制御",
+    practice: "自分の PC に Claude Code を導入し、最初の自動化タスクを動かす",
+  },
+  {
+    no: "02", tag: "BASICS",
+    title: '基本操作と"任せ方"の作法',
+    learn: "指示の出し方、TODO・サブエージェント、Git 連携、ファイル編集",
+    skill: "長い作業を分割する力、AI に投げる粒度、レビューと差し戻し",
+    practice: "自分の業務ファイルを編集させ、Git で安全に取り消す体験",
+  },
+  {
+    no: "03", tag: "ANALYZE",
+    title: '大量ファイルを"一気に"分析する',
+    learn: "Grep・Glob による高速検索、PDF／Excel／Word の読込、横断要約",
+    skill: "数百ファイルから必要情報を抽出する設計力",
+    practice: "自社の規程／契約書フォルダを読ませ、比較表を自動生成する",
+  },
+  {
+    no: "04", tag: "DOCUMENT",
+    title: "書類作成を完全自動化する",
+    learn: "python-docx／openpyxl／python-pptx でのテンプレ運用と量産",
+    skill: "Word・Excel・PowerPoint の自動生成、テーブル罫線・フォント制御",
+    practice: "自分の業務テンプレを1個渡し、複数ケースで一括生成する",
+  },
+  {
+    no: "05", tag: "INTEGRATE",
+    title: "GitHub・Webhook・API・MCP で外と繋ぐ",
+    learn: "GitHub Actions、Webhook、外部 API、MCP（Notion／freee／Slack 等）連携",
+    skill: "業務システム間を繋ぐ設計、Webhook によるイベント駆動自動化、MCP で複数 SaaS を横断操作",
+    practice: "Webhook → Slack 通知 or 外部 API → Notion 連携を自作する",
+  },
+  {
+    no: "06", tag: "DEPLOY",
+    title: "HP・LP を企画から公開まで",
+    learn: "HTML／CSS／Tailwind でのページ制作、Netlify・Xserver への公開",
+    skill: "デザインの指示、レスポンシブ対応、独自ドメイン運用",
+    practice: "自社サービス紹介 LP を一本作り、本番ドメインに公開する",
+  },
+];
+
+const features = [
+  {
+    no: "01",
+    title: 'Claude Code に "1 ツール集中" の濃度',
+    body: "複数ツールを浅く触る研修ではなく、Claude Code 一本を 12 時間かけて深掘り。表面の使い方ではなく、業務に組み込める「実戦運用力」まで到達します。",
+  },
+  {
+    no: "02",
+    title: "講師が自社業務で毎日使っている",
+    body: "講師は自社の AI 活用コンサル・システム構築業務で Claude Code を日常運用。業務自動化システム・LP ページ・AI カルテシステム等をすべて内製。「教科書ではなく実戦」のノウハウを直接お渡しします。",
+  },
+  {
+    no: "03",
+    title: "受講者の業務テーマで実装する",
+    body: "演習は架空の題材ではなく、受講者ご自身の業務ファイルで実施。研修終了時には、業務で実際に動く自動化が手元に残ります。",
+  },
+  {
+    no: "04",
+    title: '"作って終わり" ではなく、公開まで',
+    body: "ローカルで動かすだけで終わらせず、最終回では Netlify／Xserver への本番公開まで実施。AI で作ったものを、世の中に出すところまで体験できます。",
+  },
+];
+
+const faqs = [
+  {
+    q: "プログラミング経験がなくても受講できますか？",
+    a: "はい、可能です。Claude Code は自然言語で指示を出すツールのため、コードを書ける必要はありません。ただし AI ツール（ChatGPT・Claude 等）を日常的に使っている状態が前提となります。完全な AI 初学者の方は、まず入門編の検討をお勧めします。",
+  },
+  {
+    q: "準備するものはありますか？",
+    a: "PC（Windows／Mac いずれも可）、インターネット接続、Anthropic Claude のアカウントをご用意ください。Claude Code は Claude Pro／Max プラン（月額 20〜200 ドル）の利用を推奨します。詳細は申込後にご案内します。",
+  },
+  {
+    q: "助成金の申請代行はお願いできますか？",
+    a: "当社では助成金申請の代行は行っておりません。ご希望の場合は、申請に慣れた提携先の社労士事務所をご紹介いたします。",
+  },
+  {
+    q: "受講人数はどのくらいから対応できますか？",
+    a: "3名から社内貸切での実施が可能です。人数・スケジュールはお気軽にご相談ください。",
+  },
+  {
+    q: "欠席した回はどうなりますか？",
+    a: "全回録画し、アーカイブ視聴が可能です。進捗に合わせて補講の調整も承ります。",
+  },
+];
+
+const mailtoLink =
+  "mailto:info@effect.moe?subject=AIエージェント入門講座 お問い合わせ&body=【お問い合わせ内容】%0A受講希望人数：%0A希望時期：%0Aご質問・ご要望：";
+---
+
+<MainGridLayout
+  title="AIエージェント入門講座 ／ Claude Code 徹底活用｜株式会社EFFECT"
+  description="GitHub・Webhook・MCP・API を活用したAIエージェント研修。全6回×各2時間のオンライン実践研修。人材開発支援助成金（リスキリング）対応。"
+>
+  <div class="flex flex-col gap-4 w-full">
+
+    <!-- ===== Hero ===== -->
+    <div class="card-base px-6 md:px-9 py-8">
+      <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-widest mb-2">
+        2026 年 新設プログラム ／ リスキリング助成金 対応
+      </p>
+      <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
+        AIエージェント入門講座<br />
+        <span class="text-[var(--primary)]">Claude Code を、徹底攻略する。</span>
+      </h1>
+      <p class="text-base text-75 leading-relaxed mb-5">
+        「使う」から、「任せる」へ。<br />
+        GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する全 6 回の実践研修。
+      </p>
+      <div class="flex flex-wrap gap-3 mb-6">
+        <a
+          href={mailtoLink}
+          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-5 py-2.5 rounded-lg hover:opacity-90 transition"
+        >
+          <Icon name="material-symbols:mail-outline-rounded" class="text-lg" />
+          無料相談を申し込む
+        </a>
+        <a
+          href="#curriculum"
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-5 py-2.5 hover:bg-[var(--btn-plain-bg-hover)] transition"
+        >
+          カリキュラムを見る
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-75">
+        <span class="flex items-center gap-1.5">
+          <Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)]" />
+          全 6 回 × 各 2 時間
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Icon name="material-symbols:videocam-outline-rounded" class="text-[var(--primary)]" />
+          Zoom オンライン
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Icon name="material-symbols:group-outline-rounded" class="text-[var(--primary)]" />
+          3 名から受講可
+        </span>
+        <span class="flex items-center gap-1.5">
+          <Icon name="material-symbols:savings-outline-rounded" class="text-[var(--primary)]" />
+          助成金活用で実質 約 1/4
+        </span>
+      </div>
+    </div>
+
+    <!-- ===== なぜエージェントか ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:lightbulb-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">「ChatGPT に聞く」と「AI に任せる」は、別物です。</h2>
+      </div>
+      <p class="text-sm text-75 mb-4 leading-relaxed">
+        Claude Code を使いこなせるようになると、こんなことが起こります。
+      </p>
+      <div class="grid sm:grid-cols-2 gap-2">
+        {[
+          "数百ファイルを一気に読ませて、必要な情報だけ抽出できる",
+          "Word・Excel・PowerPoint をテンプレから一気に量産できる",
+          "GitHub・Webhook・API を組み合わせて、業務システムが自分の手で作れる",
+          "HP・LP を企画から公開まで一人で完結できる",
+          "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる",
+          "定型メール・議事録・報告書の作成工数がゼロになる",
+        ].map((item) => (
+          <div class="flex items-start gap-2 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+            <Icon
+              name="material-symbols:check-circle-outline-rounded"
+              class="text-[var(--primary)] mt-0.5 shrink-0"
+            />
+            <span class="text-sm text-75">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 助成金 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:savings-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">助成金活用で、実質 約 1/4 の負担</h2>
+      </div>
+      <p class="text-sm text-75 mb-4 leading-relaxed">
+        人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。
+        当社では申請代行は行わず、提携の社労士事務所をご紹介いたします。
+      </p>
+      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5">
+        <div class="flex flex-col divide-y divide-[var(--line-divider)]">
+          <div class="flex justify-between items-center py-2.5">
+            <span class="text-sm text-75">通常価格（1 名 / 全 6 回 / 計 12 時間）</span>
+            <span class="font-bold text-90">¥385,000</span>
+          </div>
+          <div class="flex justify-between items-center py-2.5">
+            <span class="text-sm text-[var(--primary)]">経費助成（研修費の 75% を補助）</span>
+            <span class="font-bold text-[var(--primary)]">−¥288,750</span>
+          </div>
+          <div class="flex justify-between items-center py-2.5">
+            <span class="text-sm text-[var(--primary)]">賃金助成（¥1,000 × 12 時間）</span>
+            <span class="font-bold text-[var(--primary)]">−¥12,000</span>
+          </div>
+          <div class="flex justify-between items-center pt-4">
+            <span class="font-bold text-90">実質負担額（1 名あたり）</span>
+            <span class="text-2xl font-bold text-[var(--primary)]">¥84,250</span>
+          </div>
+        </div>
+      </div>
+      <p class="text-xs text-50 mt-3 leading-relaxed">
+        ※人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。申請は任意、支給には条件があります。<br />
+        ※当社では助成金申請の代行は行っておりません。ご希望の場合は提携の社労士事務所をご紹介いたします。
+      </p>
+    </div>
+
+    <!-- ===== 研修フォーマット ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:format-list-bulleted-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">研修フォーマット</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        {[
+          {
+            icon: "material-symbols:schedule-outline-rounded",
+            label: "時間",
+            value: "全 6 回 × 各 2 時間\n合計 12 時間",
+          },
+          {
+            icon: "material-symbols:videocam-outline-rounded",
+            label: "実施方法",
+            value: "Zoom でオンライン\n録画あり・欠席回はアーカイブ視聴可",
+          },
+          {
+            icon: "material-symbols:calendar-month-outline-rounded",
+            label: "実施曜日",
+            value: "平日実施\n業務に合わせて柔軟に調整",
+          },
+          {
+            icon: "material-symbols:group-outline-rounded",
+            label: "人数",
+            value: "3 名から受講可\n社内貸切も対応",
+          },
+          {
+            icon: "material-symbols:computer-outline-rounded",
+            label: "必要なもの",
+            value: "PC（Win / Mac 可）\nインターネット接続",
+          },
+          {
+            icon: "material-symbols:handshake-outline-rounded",
+            label: "助成金サポート",
+            value: "提携社労士事務所\nをご紹介",
+          },
+        ].map((item) => (
+          <div class="flex flex-col gap-1 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+            <div class="flex items-center gap-2">
+              <Icon name={item.icon} class="text-[var(--primary)]" />
+              <span class="text-xs text-50">{item.label}</span>
+            </div>
+            <p class="text-sm font-medium text-90 whitespace-pre-line">{item.value}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== カリキュラム ===== -->
+    <div id="curriculum" class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:menu-book-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">全 6 回 × 各 2 時間 ／ 導入から公開まで完全攻略</h2>
+      </div>
+      <div class="flex flex-col gap-3">
+        {curriculum.map((item) => (
+          <div class="rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="text-xs font-bold text-white bg-[var(--primary)] rounded px-2 py-0.5">
+                {item.no}
+              </span>
+              <span class="text-xs text-50 font-mono">{item.tag}</span>
+              <h3 class="font-bold text-90 text-sm">{item.title}</h3>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-2 text-xs text-75">
+              <div>
+                <span class="text-50 block mb-0.5">学ぶ内容</span>
+                {item.learn}
+              </div>
+              <div>
+                <span class="text-50 block mb-0.5">身につくスキル</span>
+                {item.skill}
+              </div>
+              <div>
+                <span class="text-50 block mb-0.5">実践内容</span>
+                {item.practice}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 選ばれる理由 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:star-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">なぜ、この研修が選ばれるのか</h2>
+      </div>
+      <div class="flex flex-col gap-3">
+        {features.map((item) => (
+          <div class="flex gap-4 rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4">
+            <span class="text-3xl font-bold text-[var(--primary)] opacity-25 leading-none shrink-0">
+              {item.no}
+            </span>
+            <div>
+              <h3 class="font-bold text-90 mb-1">{item.title}</h3>
+              <p class="text-sm text-75 leading-relaxed">{item.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 講師 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:person-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">講師：シュ コウメイ</h2>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-5">
+        <div class="shrink-0">
+          <img
+            src="/assets/images/tony-avatar.jpg"
+            alt="シュ コウメイ"
+            class="w-24 h-24 rounded-full object-cover"
+          />
+        </div>
+        <div>
+          <p class="font-bold text-90">株式会社EFFECT 代表</p>
+          <p class="text-sm text-50 mb-3">AI活用コンサルタント ／ Claude Code 実務運用</p>
+          <p class="text-sm text-75 leading-relaxed mb-3">
+            自社業務・クライアント向け開発の双方で Claude Code を日常運用。業務自動化システム・LP
+            ページ・AI カルテシステム等をすべて Claude Code で内製。ストアカ講師評価
+            4.94（5段階）、AI 活用・Claude Code 関連の講座を多数開講。LLMO 書籍著者。
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs">
+            {["ストアカ評価 4.94", "LLMO 書籍著者", "Claude Code 日常運用", "業務自動化システム内製"].map(
+              (tag) => (
+                <span class="rounded-full bg-[var(--btn-plain-bg)] border border-[var(--line-divider)] px-3 py-1">
+                  {tag}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== こんな方に ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:person-check-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">こんな方に向いています</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <h3 class="font-bold text-90 mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:thumb-up-outline-rounded" class="text-[var(--primary)]" />
+            おすすめの方
+          </h3>
+          <ul class="flex flex-col gap-2">
+            {[
+              "ChatGPT・Claude を日常的に使っていて、もう一段深く活用したい",
+              "業務システムを社内で内製したい、もしくは外注費を減らしたい",
+              "大量の社内文書・データを AI に整理・分析させたい",
+              "HP・LP を社内で素早く作れる体制にしたい",
+              "GitHub・API・Webhook・MCP を実業務に組み込みたい",
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-75">
+                <Icon
+                  name="material-symbols:check-rounded"
+                  class="text-[var(--primary)] mt-0.5 shrink-0"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-90 mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:thumb-down-outline-rounded" class="text-50" />
+            向いていない方
+          </h3>
+          <ul class="flex flex-col gap-2">
+            {[
+              "AI ツールに触れたことがほぼ無い方（先に入門研修をお勧めします）",
+              "受講中に PC を使えない環境の方",
+              "1 回完結の「概要だけ」を求める方",
+            ].map((item) => (
+              <li class="flex items-start gap-2 text-sm text-75">
+                <Icon name="material-symbols:close-rounded" class="text-50 mt-0.5 shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FAQ ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-4">
+        <Icon name="material-symbols:help-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
+        <h2 class="text-xl font-bold text-90">よくあるご質問</h2>
+      </div>
+      <div class="flex flex-col gap-2">
+        {faqs.map((item) => (
+          <details class="rounded-xl bg-[var(--btn-plain-bg)] px-5 py-4 group cursor-pointer">
+            <summary class="font-bold text-90 flex items-center justify-between gap-2 list-none">
+              <span>{item.q}</span>
+              <Icon
+                name="material-symbols:expand-more-rounded"
+                class="text-[var(--primary)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+              />
+            </summary>
+            <p class="text-sm text-75 mt-3 leading-relaxed">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== CTA ===== -->
+    <div class="card-base px-6 md:px-9 py-8 text-center">
+      <h2 class="text-2xl font-bold text-90 mb-3">まずは無料相談から</h2>
+      <p class="text-sm text-75 mb-5 leading-relaxed">
+        受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
+        ご質問への回答は通常 1〜2 営業日以内に行います。
+      </p>
+      <a
+        href={mailtoLink}
+        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-3 rounded-lg hover:opacity-90 transition text-base"
+      >
+        <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+        info@effect.moe にメールする
+      </a>
+      <p class="text-xs text-50 mt-5 leading-relaxed">
+        株式会社EFFECT ／ 担当：シュ コウメイ<br />
+        info@effect.moe
+      </p>
+    </div>
+
+  </div>
+</MainGridLayout>
