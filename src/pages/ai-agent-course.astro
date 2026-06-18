@@ -202,7 +202,7 @@ const tagColors: Record<string, string> = {
             { icon: "material-symbols:hub-outline", text: "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる" },
             { icon: "material-symbols:auto-mode-rounded", text: "定型メール・議事録・報告書の作成工数がゼロになる" },
           ].map((item) => (
-            <div class="flex items-start gap-3 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3.5">
+            <div class="flex items-start gap-3 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-4 py-3.5 shadow-sm">
               <Icon name={item.icon} class="text-[var(--primary)] text-xl mt-0.5 shrink-0" />
               <span class="text-base text-75 leading-snug">{item.text}</span>
             </div>
@@ -278,7 +278,7 @@ const tagColors: Record<string, string> = {
           { icon: "material-symbols:computer-outline-rounded", label: "必要なもの", value: "PC（Win / Mac 可）\nインターネット接続" },
           { icon: "material-symbols:handshake-outline-rounded", label: "助成金サポート", value: "提携社労士事務所\nをご紹介" },
         ].map((item) => (
-          <div class="flex flex-col gap-2 rounded-xl bg-[var(--btn-plain-bg)] px-4 py-4">
+          <div class="flex flex-col gap-2 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-4 py-4 shadow-sm">
             <div class="flex items-center gap-2">
               <Icon name={item.icon} class="text-[var(--primary)] text-xl" />
               <span class="text-sm text-50 font-medium">{item.label}</span>
@@ -303,7 +303,7 @@ const tagColors: Record<string, string> = {
         </div>
         <div class="flex flex-col gap-4">
           {curriculum.map((item) => (
-            <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] overflow-hidden">
+            <div class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] overflow-hidden shadow-sm">
               <!-- カードヘッダー -->
               <div class="px-5 py-3 border-b border-[var(--line-divider)] flex flex-wrap items-center gap-2">
                 <span class="text-sm font-bold text-white bg-[var(--primary)] rounded-md px-2.5 py-1">
@@ -343,7 +343,7 @@ const tagColors: Record<string, string> = {
       </div>
       <div class="flex flex-col gap-4">
         {features.map((item) => (
-          <div class="flex gap-5 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-6 py-5">
+          <div class="flex gap-5 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-6 py-5 shadow-sm">
             <span class="text-4xl font-bold text-[var(--primary)] opacity-20 leading-none shrink-0 select-none">
               {item.no}
             </span>
@@ -362,15 +362,15 @@ const tagColors: Record<string, string> = {
         <Icon name="material-symbols:person-outline-rounded" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">講師：シュ コウメイ</h2>
       </div>
-      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5">
+      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] p-5 shadow-sm">
         <div class="shrink-0">
           <img
-            src="/assets/images/tony-avatar.jpg"
+            src="/ai-agent-course/tony-portrait.jpg"
             alt="シュ コウメイ"
-            class="w-28 h-28 rounded-full object-cover border-2 border-[var(--primary)]"
+            class="w-36 h-36 rounded-2xl object-cover object-top border-2 border-[var(--primary)] shadow-sm"
           />
         </div>
-        <div>
+        <div class="flex-1">
           <p class="font-bold text-90 text-xl mb-0.5">シュ コウメイ</p>
           <p class="text-base text-75 mb-3">株式会社EFFECT 代表 ／ AI活用コンサルタント</p>
           <p class="text-base text-75 leading-relaxed mb-4">
@@ -378,7 +378,7 @@ const tagColors: Record<string, string> = {
             ページ・AI カルテシステム等をすべて Claude Code で内製化。ストアカ講師評価
             4.94（5段階）、AI 活用・Claude Code 関連の講座を多数開講。LLMO 書籍著者。
           </p>
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2 mb-4">
             {["ストアカ評価 4.94", "LLMO 書籍著者", "Claude Code 日常運用", "業務自動化システム内製"].map(
               (tag) => (
                 <span class="rounded-full bg-[var(--card-bg)] border border-[var(--line-divider)] px-3 py-1 text-sm font-medium text-75">
@@ -387,6 +387,13 @@ const tagColors: Record<string, string> = {
               ),
             )}
           </div>
+          <a
+            href="/about/"
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-medium px-4 py-2 text-sm hover:bg-[var(--btn-plain-bg-hover)] transition"
+          >
+            <Icon name="material-symbols:person-outline-rounded" class="text-base" />
+            詳しいプロフィールを見る
+          </a>
         </div>
       </div>
     </div>
@@ -447,7 +454,7 @@ const tagColors: Record<string, string> = {
       </div>
       <div class="flex flex-col gap-3">
         {faqs.map((item) => (
-          <details class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-5 py-4 group cursor-pointer">
+          <details class="rounded-xl border border-[var(--line-divider)] bg-[var(--btn-plain-bg)] px-5 py-4 shadow-sm group cursor-pointer">
             <summary class="font-bold text-90 text-base flex items-center justify-between gap-3 list-none">
               <span>{item.q}</span>
               <Icon
