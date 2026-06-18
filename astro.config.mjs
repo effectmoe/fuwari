@@ -47,6 +47,10 @@ export default defineConfig({
 			updateHead: true,
 			updateBodyClass: false,
 			globalInstance: true,
+			// mailto: / tel: / 別タブ / data-no-swup 付きは Swup でハイジャックしない。
+			// （デフォルトの "a[href]" だと mailto/tel も SPA 遷移として捕まえてしまい、
+			//   ブラウザがメーラ/電話アプリを起動できない不具合になる）
+			linkSelector: 'a[href]:not([href^="mailto:"]):not([href^="tel:"]):not([href^="javascript:"]):not([target="_blank"]):not([data-no-swup])',
 		}),
 		icon({
 			include: {
