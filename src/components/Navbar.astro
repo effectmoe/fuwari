@@ -38,14 +38,21 @@ let links: NavBarLink[] = navBarConfig.links.map(
                 </div>
             </div>
         </a>
-        <div class="hidden md:flex">
+        <div class="hidden md:flex items-center gap-0.5">
             {links.map((l) => {
+                const isCTA = l.url === '/ai-agent-course/';
                 return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
-                          class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"
+                          class:list={[
+                            "scale-animation rounded-lg h-9 font-bold px-3 active:scale-95 whitespace-nowrap flex items-center text-sm transition-all duration-200",
+                            isCTA
+                              ? "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-600 hover:bg-amber-200 dark:hover:bg-amber-800/50 hover:border-amber-400"
+                              : "btn-plain"
+                          ]}
                 >
-                    <div class="flex items-center">
+                    <div class="flex items-center gap-1">
+                        {isCTA && <span class="text-[10px] font-black tracking-tight text-amber-500 dark:text-amber-400">✦</span>}
                         {l.name}
-                        {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
+                        {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.75rem] transition -translate-y-[1px] ml-0.5 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
                     </div>
                 </a>;
             })}

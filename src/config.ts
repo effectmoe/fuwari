@@ -47,7 +47,7 @@ export const navBarConfig: NavBarConfig = {
 			url: "/faq/",
 		},
 		{
-			name: "AIエージェント講座",
+			name: "AI講座",
 			url: "/ai-agent-course/",
 		},
 		{
