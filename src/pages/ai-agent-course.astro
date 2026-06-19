@@ -146,9 +146,10 @@ const tagColors: Record<string, string> = {
           GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する<br class="hidden md:block" />全 6 回の実践研修。
         </p>
 <!-- CTAボタン -->
-        <div class="flex flex-wrap gap-3 mb-6">
+        <div class="flex flex-wrap gap-3 mb-3">
           <a
-            href="#contact"
+            href={mailtoLink}
+            data-no-swup
             class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
           >
             <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
@@ -161,6 +162,13 @@ const tagColors: Record<string, string> = {
             カリキュラムを見る
           </a>
         </div>
+        <!-- ボタンが動かない場合の素の mailto テキストリンク（保険） -->
+        <p class="text-sm text-50 mb-6">
+          または直接：
+          <a href={mailtoLink} data-no-swup class="text-[var(--primary)] hover:underline font-medium">
+            info@effect.moe
+          </a>
+        </p>
         <!-- 概要バッジ -->
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
           <span class="flex items-center gap-1.5">
@@ -473,110 +481,28 @@ const tagColors: Record<string, string> = {
       </div>
     </div>
 
-    <!-- ===== CTA / お問い合わせフォーム ===== -->
-    <div id="contact" class="card-base px-6 md:px-9 py-10">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは無料相談から</h2>
-        <p class="text-base text-75 leading-relaxed">
-          受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
-          ご質問への回答は通常 1〜2 営業日以内に行います。
-        </p>
-      </div>
-
-      <form
-        action="https://formsubmit.co/info@effect.moe"
-        method="POST"
-        class="max-w-2xl mx-auto flex flex-col gap-4"
+    <!-- ===== CTA ===== -->
+    <div class="card-base px-6 md:px-9 py-10 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは無料相談から</h2>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
+        ご質問への回答は通常 1〜2 営業日以内に行います。
+      </p>
+      <a
+        href={mailtoLink}
+        data-no-swup
+        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
       >
-        <!-- Formsubmit 設定: 件名・CAPTCHA OFF・テンプレ整形・送信後リダイレクト -->
-        <input type="hidden" name="_subject" value="【tony.effect.moe】AIエージェント入門講座 お問い合わせ" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_next" value="https://tony.effect.moe/ai-agent-course/?contact=sent" />
-        <!-- honeypot (スパムボット対策) -->
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label class="flex flex-col gap-1">
-            <span class="text-sm font-bold text-90">お名前 <span class="text-red-500">*</span></span>
-            <input
-              type="text"
-              name="お名前"
-              required
-              class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition"
-            />
-          </label>
-          <label class="flex flex-col gap-1">
-            <span class="text-sm font-bold text-90">会社名・所属</span>
-            <input
-              type="text"
-              name="会社名"
-              class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition"
-            />
-          </label>
-        </div>
-
-        <label class="flex flex-col gap-1">
-          <span class="text-sm font-bold text-90">メールアドレス <span class="text-red-500">*</span></span>
-          <input
-            type="email"
-            name="email"
-            required
-            class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition"
-          />
-        </label>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label class="flex flex-col gap-1">
-            <span class="text-sm font-bold text-90">受講希望人数</span>
-            <input
-              type="text"
-              name="受講希望人数"
-              placeholder="例: 3〜5名"
-              class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition"
-            />
-          </label>
-          <label class="flex flex-col gap-1">
-            <span class="text-sm font-bold text-90">希望時期</span>
-            <input
-              type="text"
-              name="希望時期"
-              placeholder="例: 2026年7月〜"
-              class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition"
-            />
-          </label>
-        </div>
-
-        <label class="flex flex-col gap-1">
-          <span class="text-sm font-bold text-90">ご質問・ご要望 <span class="text-red-500">*</span></span>
-          <textarea
-            name="ご質問・ご要望"
-            required
-            rows="5"
-            placeholder="ご相談内容・現状の課題・知りたいことなど、お気軽にどうぞ。"
-            class="px-3 py-2 rounded-lg border border-[var(--btn-plain-bg-hover)] bg-[var(--page-bg)] text-90 focus:border-[var(--primary)] focus:outline-none transition resize-y"
-          ></textarea>
-        </label>
-
-        <button
-          type="submit"
-          class="self-center inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-10 py-4 rounded-xl hover:opacity-90 transition text-lg mt-2"
-        >
-          <Icon name="material-symbols:send-outline-rounded" class="text-2xl" />
-          相談を申し込む
-        </button>
-      </form>
-
-      <p class="text-center text-sm text-50 mt-8 leading-relaxed">
-        フォームが使えない場合は <code class="px-2 py-0.5 rounded bg-[var(--btn-plain-bg)] text-75 font-mono select-all">{contactEmail}</code>
-        <button
-          type="button"
-          class="copy-email-btn inline-flex items-center gap-1 text-xs px-2 py-1 ml-1 rounded border border-current text-50 hover:bg-[var(--btn-plain-bg-hover)] transition"
-          data-email={contactEmail}
-        >
-          コピー
-        </button>
-        まで直接ご連絡ください。<br />
+        <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
+        無料相談を申し込む
+      </a>
+      <p class="text-sm text-50 mt-5 leading-relaxed">
+        または直接：
+        <a href={mailtoLink} data-no-swup class="text-[var(--primary)] hover:underline font-medium">
+          info@effect.moe
+        </a>
+      </p>
+      <p class="text-sm text-50 mt-6 leading-relaxed">
         株式会社EFFECT ／ 担当：シュ コウメイ
       </p>
     </div>
