@@ -94,12 +94,14 @@ const faqs = [
 ];
 
 // mailto: の subject/body は RFC 6068 に従い UTF-8 を percent-encode する必要がある
-// （日本語を直書きするとブラウザ/メーラが起動しない不具合が出る）
 const mailtoSubject = encodeURIComponent("AIエージェント入門講座 お問い合わせ");
 const mailtoBody = encodeURIComponent(
   "【お問い合わせ内容】\n受講希望人数：\n希望時期：\nご質問・ご要望：\n",
 );
 const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
+// Gmail Web の compose 直リンク（mailto: handler 未設定でも確実に Gmail 新規メール画面が開く）
+const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@effect.moe&su=${mailtoSubject}&body=${mailtoBody}`;
+const contactEmail = "info@effect.moe";
 
 const tagColors: Record<string, string> = {
   SETUP:     "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
@@ -146,14 +148,24 @@ const tagColors: Record<string, string> = {
           GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する<br class="hidden md:block" />全 6 回の実践研修。
         </p>
         <!-- CTAボタン -->
-        <div class="flex flex-wrap gap-3 mb-6">
+        <div class="flex flex-wrap gap-3 mb-3">
           <a
-            href={mailtoLink}
+            href={gmailLink}
+            target="_blank"
+            rel="noopener noreferrer"
             data-no-swup
             class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
           >
             <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
-            無料相談を申し込む
+            Gmail で送る
+          </a>
+          <a
+            href={mailtoLink}
+            data-no-swup
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
+          >
+            <Icon name="material-symbols:alternate-email-rounded" class="text-lg" />
+            メールアプリで送る
           </a>
           <a
             href="#curriculum"
@@ -161,6 +173,18 @@ const tagColors: Record<string, string> = {
           >
             カリキュラムを見る
           </a>
+        </div>
+        <!-- 直接アドレス（フォールバック・コピー可） -->
+        <div class="flex items-center gap-2 mb-6 text-sm text-50">
+          <span>うまく開かない場合は直接送付:</span>
+          <code class="px-2 py-0.5 rounded bg-[var(--btn-plain-bg)] text-75 font-mono select-all">{contactEmail}</code>
+          <button
+            type="button"
+            class="copy-email-btn inline-flex items-center gap-1 text-xs px-2 py-1 rounded border border-current text-50 hover:bg-[var(--btn-plain-bg-hover)] transition"
+            data-email={contactEmail}
+          >
+            コピー
+          </button>
         </div>
         <!-- 概要バッジ -->
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
@@ -481,18 +505,70 @@ const tagColors: Record<string, string> = {
         受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
         ご質問への回答は通常 1〜2 営業日以内に行います。
       </p>
-      <a
-        href={mailtoLink}
-        data-no-swup
-        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
-      >
-        <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
-        info@effect.moe にメールする
-      </a>
+      <div class="flex flex-wrap gap-3 justify-center mb-4">
+        <a
+          href={gmailLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-no-swup
+          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
+        >
+          <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
+          Gmail で送る
+        </a>
+        <a
+          href={mailtoLink}
+          data-no-swup
+          class="inline-flex items-center gap-2 rounded-xl border border-[var(--primary)] text-[var(--primary)] font-bold px-8 py-4 hover:bg-[var(--btn-plain-bg-hover)] transition text-lg"
+        >
+          <Icon name="material-symbols:alternate-email-rounded" class="text-2xl" />
+          メールアプリで送る
+        </a>
+      </div>
+      <div class="flex items-center justify-center gap-2 text-sm text-50">
+        <span>または直接送付:</span>
+        <code class="px-2 py-0.5 rounded bg-[var(--btn-plain-bg)] text-75 font-mono select-all">{contactEmail}</code>
+        <button
+          type="button"
+          class="copy-email-btn inline-flex items-center gap-1 text-xs px-2 py-1 rounded border border-current text-50 hover:bg-[var(--btn-plain-bg-hover)] transition"
+          data-email={contactEmail}
+        >
+          コピー
+        </button>
+      </div>
       <p class="text-sm text-50 mt-6 leading-relaxed">
-        株式会社EFFECT ／ 担当：シュ コウメイ ／ info@effect.moe
+        株式会社EFFECT ／ 担当：シュ コウメイ
       </p>
     </div>
 
   </div>
 </MainGridLayout>
+
+<script is:inline>
+  // 「コピー」ボタン: data-email 属性のアドレスをクリップボードへ
+  // Swup 遷移後にも再バインドするため、page:view と DOMContentLoaded の両方に登録
+  function initEmailCopyButtons() {
+    document.querySelectorAll('.copy-email-btn').forEach((btn) => {
+      if (btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', async () => {
+        const email = btn.getAttribute('data-email') || '';
+        const original = btn.textContent;
+        try {
+          await navigator.clipboard.writeText(email);
+          btn.textContent = '✓ コピー済み';
+          setTimeout(() => { btn.textContent = original; }, 1800);
+        } catch (e) {
+          // フォールバック: 古いブラウザ向け
+          const tmp = document.createElement('textarea');
+          tmp.value = email; document.body.appendChild(tmp);
+          tmp.select(); document.execCommand('copy'); tmp.remove();
+          btn.textContent = '✓ コピー済み';
+          setTimeout(() => { btn.textContent = original; }, 1800);
+        }
+      });
+    });
+  }
+  initEmailCopyButtons();
+  document.addEventListener('astro:page-load', initEmailCopyButtons);
+</script>
