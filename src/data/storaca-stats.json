@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.94,
   "reviewCount": 217,
-  "studentsTaught": 448,
-  "repeatStudents": 243,
+  "studentsTaught": 452,
+  "repeatStudents": 245,
   "repeatRate": 54.2,
-  "sessionsTaught": 440,
-  "salesTotal": 1818050,
+  "sessionsTaught": 444,
+  "salesTotal": 1838650,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年6月19日",
-  "updatedAt": "2026-06-18T21:00:29.077Z",
+  "periodEnd": "2026年6月20日",
+  "updatedAt": "2026-06-19T21:00:22.176Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -118,5 +118,5 @@
       "text": "ここ最近、こうめい先生にAIについて学ばせていただいています。まず一番最初にお伝えしたいのは、「AIの構造を理解した上で使うこと」の大切さを教えてくださる先生だということです。世の中にはAIのテクニックや便利な使い方を教える講座はたくさんありますが、こうめい先生はその前に「なぜそうなるのか」という本質的な部分から丁寧に教えてくださいます。しかも、こちらの理解が追いつくまで根気強く伴走してくださるので、知識がなくても安心して学ぶことができます。また、上辺だけのテクニックを教えたり、すぐに高額講座へ誘導したりすることもありません。何より素晴らしいのは、自身の可能性をどう活かしていくかという視点で向き合ってくださることです。LLM WikiやEEATの考え方を学び、自分が積み上げてきたものを「資産」として残していく道筋が見え始めています。AIを学びたい方はもちろん、自分の経験や知識を整理したい方、自分の強みを形にしていきたい方にもおすすめしたい先生です。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-06-18T23:36:58.836Z"
+  "testimonialsUpdatedAt": "2026-06-19T21:01:00.742Z"
 }
