@@ -99,8 +99,6 @@ const mailtoBody = encodeURIComponent(
   "【お問い合わせ内容】\n受講希望人数：\n希望時期：\nご質問・ご要望：\n",
 );
 const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
-// Gmail Web の compose 直リンク（mailto: handler 未設定でも確実に Gmail 新規メール画面が開く）
-const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=info@effect.moe&su=${mailtoSubject}&body=${mailtoBody}`;
 const contactEmail = "info@effect.moe";
 
 const tagColors: Record<string, string> = {
@@ -147,25 +145,15 @@ const tagColors: Record<string, string> = {
           「使う」から、「任せる」へ。<br />
           GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する<br class="hidden md:block" />全 6 回の実践研修。
         </p>
-        <!-- CTAボタン -->
+<!-- CTAボタン -->
         <div class="flex flex-wrap gap-3 mb-3">
           <a
-            href={gmailLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={mailtoLink}
             data-no-swup
             class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
           >
             <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
-            Gmail で送る
-          </a>
-          <a
-            href={mailtoLink}
-            data-no-swup
-            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
-          >
-            <Icon name="material-symbols:alternate-email-rounded" class="text-lg" />
-            メールアプリで送る
+            無料相談を申し込む
           </a>
           <a
             href="#curriculum"
@@ -174,9 +162,9 @@ const tagColors: Record<string, string> = {
             カリキュラムを見る
           </a>
         </div>
-        <!-- 直接アドレス（フォールバック・コピー可） -->
-        <div class="flex items-center gap-2 mb-6 text-sm text-50">
-          <span>うまく開かない場合は直接送付:</span>
+        <!-- メールアプリが起動しない方向け・直接アドレス + コピー -->
+        <div class="flex flex-wrap items-center gap-2 mb-6 text-sm text-50">
+          <span>※ボタンが反応しない場合は</span>
           <code class="px-2 py-0.5 rounded bg-[var(--btn-plain-bg)] text-75 font-mono select-all">{contactEmail}</code>
           <button
             type="button"
@@ -185,6 +173,7 @@ const tagColors: Record<string, string> = {
           >
             コピー
           </button>
+          <span>へ直接ご連絡ください</span>
         </div>
         <!-- 概要バッジ -->
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
@@ -505,28 +494,16 @@ const tagColors: Record<string, string> = {
         受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
         ご質問への回答は通常 1〜2 営業日以内に行います。
       </p>
-      <div class="flex flex-wrap gap-3 justify-center mb-4">
-        <a
-          href={gmailLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-no-swup
-          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
-        >
-          <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
-          Gmail で送る
-        </a>
-        <a
-          href={mailtoLink}
-          data-no-swup
-          class="inline-flex items-center gap-2 rounded-xl border border-[var(--primary)] text-[var(--primary)] font-bold px-8 py-4 hover:bg-[var(--btn-plain-bg-hover)] transition text-lg"
-        >
-          <Icon name="material-symbols:alternate-email-rounded" class="text-2xl" />
-          メールアプリで送る
-        </a>
-      </div>
-      <div class="flex items-center justify-center gap-2 text-sm text-50">
-        <span>または直接送付:</span>
+      <a
+        href={mailtoLink}
+        data-no-swup
+        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
+      >
+        <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
+        無料相談を申し込む
+      </a>
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-sm text-50">
+        <span>※ボタンが反応しない場合は</span>
         <code class="px-2 py-0.5 rounded bg-[var(--btn-plain-bg)] text-75 font-mono select-all">{contactEmail}</code>
         <button
           type="button"
@@ -535,6 +512,7 @@ const tagColors: Record<string, string> = {
         >
           コピー
         </button>
+        <span>へ直接ご連絡ください</span>
       </div>
       <p class="text-sm text-50 mt-6 leading-relaxed">
         株式会社EFFECT ／ 担当：シュ コウメイ
