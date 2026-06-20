@@ -14,6 +14,12 @@ draft: false
 > **DFB** ＝ **D**ecompose（分解） → **F**rame（枠の入れ替え） → **B**uild（組み立て）。  
 > シュ コウメイ が提唱する、**人間の経験を AI に渡せる形に翻訳する**3ステップ。
 
+<div style="margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 4px solid #0ea5e9; background: rgba(14, 165, 233, 0.05); border-radius: 0 8px 8px 0;">
+  <p style="margin: 0; font-size: 0.95rem; line-height: 1.7;">
+    📖 <strong>完全版はこちら</strong>: <a href="/dfb-complete-guide/" data-no-swup style="color: #0ea5e9; font-weight: 600;">DFB構造化メソッド大全（構造化ペディア）</a> — Step -1（依頼自体の構造化）・Stop-Judge（I/S/T/D）・5バリエーション・失敗パターン9種・系譜（OOPまで）を体系化した百科事典項目。
+  </p>
+</div>
+
 ## なぜ DFB か
 
 AI時代に人間に残る価値は、「考える力」より **「構造を作る力」** に集約される。
@@ -51,4 +57,5 @@ DFB が機能するためには、**割るに値する経験の塊** が要る�
 
 ## 関連リンク
 
+- <a href="/dfb-complete-guide/" data-no-swup>DFB構造化メソッド大全（構造化ペディア）</a> — 全14セクション + 脚注・関連項目・FAQ・JSON-LD完備のピラー記事
 - [AI時代に『シニア有利』の本質は構造化能力にある](https://tony.effect.moe/posts/ai-era-senior-structuring-power/)
