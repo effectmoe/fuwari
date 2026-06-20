@@ -40,7 +40,9 @@ let links: NavBarLink[] = navBarConfig.links.map(
         </a>
         <div class="hidden md:flex min-w-0 overflow-hidden">
             {links.map((l) => {
+                const isFullWidthRoute = !l.external && typeof l.url === "string" && l.url.startsWith("/dfb-complete-guide");
                 return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
+                          data-no-swup={isFullWidthRoute ? true : undefined}
                           class="btn-plain scale-animation rounded-lg h-11 font-bold px-3 active:scale-95 whitespace-nowrap"
                 >
                     <div class="flex items-center">

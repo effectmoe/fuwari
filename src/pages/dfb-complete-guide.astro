@@ -317,7 +317,7 @@ const externalLinks = [
       <p>DFB の本体は3ステップの循環構造である<Footnote n={1} />:</p>
       <figure class="my-4">
         <img src="/dfb/figures/dfb-cycle.png" alt="DFB サイクル（Decompose → Frame → Build → 違和感察知 → 戻る）" class="rounded-lg border border-stone-200 dark:border-stone-700 max-w-md w-full mx-auto" loading="lazy" />
-        <figcaption class="text-xs text-neutral-600 dark:text-neutral-400 text-center mt-2">図1: DFB サイクルの全体像（Napkin.ai 生成）</figcaption>
+        <figcaption class="text-xs text-neutral-600 dark:text-neutral-400 text-center mt-2">図1: DFB サイクルの全体像</figcaption>
       </figure>
       <ul class="list-disc pl-6 space-y-1.5">
         <li><strong>Decompose（分）</strong> — カオスを要素に分ける（因数分解）</li>
@@ -490,4 +490,30 @@ const externalLinks = [
   // Swup ライブラリのページ遷移後イベント
   document.addEventListener("swup:contentReplaced", window.dfbInitToc);
   document.addEventListener("swup:content:replace", window.dfbInitToc);
+
+  // ─────────────────────────────────────────────────────────
+  // Swup 1カラム残留バグ対策 — このページからの離脱はフルリロード強制
+  // 理由: MainGridLayout の fullWidth=true で書き換えた #main-grid の class と
+  //       <SideBar> の有無は Swup ページ遷移で更新されないため、
+  //       他ページに行った時にレイアウトが「1カラム + SideBar 無し」のまま残る。
+  //       SPA 遷移を抑制してフルリロードに切り替えることで、各ページの SSR レイアウトに復帰する。
+  // ─────────────────────────────────────────────────────────
+  document.addEventListener("click", function (e) {
+    const target = e.target;
+    if (!target || typeof target.closest !== "function") return;
+    const link = target.closest("a[href]");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (!href || href.startsWith("#") || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) return;
+    if (link.target === "_blank" || link.hasAttribute("download")) return;
+    try {
+      const url = new URL(href, location.href);
+      // 同一オリジン内の別パスへの遷移のみフルリロード化
+      if (url.origin === location.origin && url.pathname !== location.pathname) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href = url.href;
+      }
+    } catch (_) { /* invalid URL — let default behavior handle */ }
+  }, true);
 </script>
