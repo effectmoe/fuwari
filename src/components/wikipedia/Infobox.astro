@@ -1,0 +1,79 @@
+---
+/*
+ * Infobox.astro — Wikipedia 風 右上インフォボックス
+ * 固定ページ右上に表示する概要画像 + メタデータ表
+ */
+interface InfoboxField {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  image?: string;
+  imageCaption?: string;
+  fields: InfoboxField[];
+  class?: string;
+}
+
+const { title, subtitle, image, imageCaption, fields, class: className } = Astro.props;
+---
+
+<aside
+  class:list={[
+    className,
+    "wp-infobox float-right clear-right ml-4 mb-4 w-full md:w-72 lg:w-80",
+    "border border-stone-300 dark:border-stone-700 rounded-lg overflow-hidden",
+    "bg-stone-50 dark:bg-stone-900/40 shadow-sm text-xs",
+  ]}
+>
+  <!-- ヘッダー -->
+  <div class="bg-stone-200 dark:bg-stone-800 px-3 py-2 border-b border-stone-300 dark:border-stone-700">
+    <h2 class="text-sm font-bold text-neutral-900 dark:text-neutral-100 leading-tight m-0">
+      {title}
+    </h2>
+    {subtitle && (
+      <p class="text-[11px] text-neutral-600 dark:text-neutral-400 mt-0.5 leading-tight">
+        {subtitle}
+      </p>
+    )}
+  </div>
+
+  <!-- 画像 -->
+  {image && (
+    <figure class="m-0 border-b border-stone-300 dark:border-stone-700">
+      <img
+        src={image}
+        alt={imageCaption || title}
+        class="w-full h-auto object-cover"
+        loading="lazy"
+      />
+      {imageCaption && (
+        <figcaption class="text-[10px] text-neutral-600 dark:text-neutral-400 px-2 py-1.5 leading-relaxed bg-stone-100 dark:bg-stone-800/50">
+          {imageCaption}
+        </figcaption>
+      )}
+    </figure>
+  )}
+
+  <!-- メタデータ表 -->
+  <table class="w-full text-[11px] m-0">
+    <tbody>
+      {fields.map((f) => (
+        <tr class="border-b border-stone-200 dark:border-stone-700/50 last:border-b-0">
+          <th
+            scope="row"
+            class="text-left align-top font-bold px-2 py-1.5 bg-stone-100/60 dark:bg-stone-800/30 text-neutral-700 dark:text-neutral-300 w-1/3"
+          >
+            {f.label}
+          </th>
+          <td
+            class="align-top px-2 py-1.5 text-neutral-800 dark:text-neutral-200 leading-relaxed"
+            set:html={f.value}
+          />
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</aside>

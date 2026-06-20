@@ -1,0 +1,63 @@
+---
+/*
+ * TableOfContents.astro — Wikipedia 風 目次
+ * 右上の「折りたたみ」をクリックすると左カラム自体を閉じ、1カラムレイアウトに切り替わる。
+ * （ハンバーガーボタンと同じ window.dfbToggleToc を呼ぶ）
+ */
+interface TocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+interface Props {
+  items: TocItem[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+
+// H2 を主階層、その下に H3 を入れ子で表示
+let h2Counter = 0;
+let h3Counter = 0;
+const numbered = items.map((item) => {
+  if (item.level === 2) {
+    h2Counter++;
+    h3Counter = 0;
+    return { ...item, number: `${h2Counter}` };
+  }
+  h3Counter++;
+  return { ...item, number: `${h2Counter}.${h3Counter}` };
+});
+---
+
+<nav
+  class:list={[
+    className,
+    "wp-toc border border-stone-300 dark:border-stone-700 rounded-lg p-3 bg-stone-50 dark:bg-stone-900/40 text-sm",
+  ]}
+  aria-label="目次"
+>
+  <div class="flex items-center justify-between mb-2">
+    <span class="text-base font-bold text-neutral-900 dark:text-neutral-100">目次</span>
+    <button
+      type="button"
+      onclick="window.dfbToggleToc && window.dfbToggleToc()"
+      class="text-[11px] text-sky-600 dark:text-sky-400 hover:underline font-normal bg-transparent border-0 cursor-pointer"
+      aria-label="目次カラムを折りたたんで1カラムにする"
+    >[折りたたむ]</button>
+  </div>
+  <ol class="m-0 p-0 list-none space-y-1">
+    {numbered.map((item) => (
+      <li class={item.level === 3 ? "pl-4" : ""}>
+        <a
+          href={`#${item.id}`}
+          class="block py-0.5 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 hover:underline transition-colors leading-snug"
+        >
+          <span class="text-[11px] text-neutral-500 dark:text-neutral-400 mr-1.5 tabular-nums">{item.number}</span>
+          <span>{item.text}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

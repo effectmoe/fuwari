@@ -1,0 +1,49 @@
+---
+/*
+ * StubNotice.astro — Wikipedia 風 「この記事は書きかけ」スタブ表示
+ * Wikipedia の {{Stub}} テンプレートに相当する案内ボックス。
+ * 加筆協力を求めるメッセージ + 関連リンク。
+ */
+interface Props {
+  title?: string;
+  message?: string;
+  class?: string;
+}
+
+const {
+  title = "DFB構造化メソッド",
+  message,
+  class: className,
+} = Astro.props;
+
+const defaultMessage = `この項目「${title}」は、書きかけです。提唱者が随時加筆・更新していきます。`;
+const finalMessage = message ?? defaultMessage;
+---
+
+<aside
+  class:list={[
+    className,
+    "wp-stub mt-10 border-l-4 border-amber-400 dark:border-amber-500",
+    "bg-amber-50/70 dark:bg-amber-900/15 rounded-r-lg",
+    "p-4 md:p-5 flex gap-3 md:gap-4 items-start",
+  ]}
+  role="note"
+  aria-label="この記事は書きかけです"
+>
+  <!-- 鉛筆アイコン -->
+  <div class="shrink-0 text-amber-600 dark:text-amber-400 mt-0.5">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20h9"></path>
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+    </svg>
+  </div>
+
+  <div class="flex-1 min-w-0">
+    <p class="text-sm md:text-base font-bold text-amber-900 dark:text-amber-200 mb-1.5 leading-tight">
+      この項目は書きかけです
+    </p>
+    <p class="text-sm text-neutral-800 dark:text-neutral-200 leading-relaxed m-0">
+      {finalMessage}
+    </p>
+  </div>
+</aside>

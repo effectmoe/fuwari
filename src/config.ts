@@ -47,6 +47,10 @@ export const navBarConfig: NavBarConfig = {
 			url: "/faq/",
 		},
 		{
+			name: "構造化",
+			url: "/dfb-complete-guide/",
+		},
+		{
 			name: "AI講座",
 			url: "/ai-agent-course/",
 		},

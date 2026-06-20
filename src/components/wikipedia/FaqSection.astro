@@ -1,0 +1,51 @@
+---
+/*
+ * FaqSection.astro — Wikipedia 風 FAQ セクション (+ JSON-LD FAQPage schema 自動付与)
+ * AI Overview / Google リッチリザルト対策。
+ */
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  title?: string;
+  id?: string;
+  class?: string;
+}
+
+const { items, title = "よくある質問", id = "faq", class: className } = Astro.props;
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((it) => ({
+    "@type": "Question",
+    name: it.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: it.answer,
+    },
+  })),
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+
+<section id={id} class:list={[className, "mt-10 scroll-mt-20"]}>
+  <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 border-b-2 border-stone-300 dark:border-stone-700 pb-1.5 mt-0 mb-3">
+    {title}
+  </h2>
+  <dl class="space-y-4 m-0">
+    {items.map((it, i) => (
+      <div class="border border-stone-200 dark:border-stone-700 rounded-lg p-4 bg-stone-50/50 dark:bg-stone-900/30">
+        <dt class="font-bold text-neutral-900 dark:text-neutral-100 mb-2 leading-snug">
+          <span class="text-sky-600 dark:text-sky-400 mr-2 tabular-nums">Q{i + 1}.</span>
+          {it.question}
+        </dt>
+        <dd class="text-sm text-neutral-800 dark:text-neutral-200 leading-relaxed m-0 pl-7" set:html={it.answer} />
+      </div>
+    ))}
+  </dl>
+</section>

@@ -1,0 +1,41 @@
+---
+/*
+ * References.astro — Wikipedia 風 末尾の脚注一覧
+ * Footnote.astro のリンク先となる出典リスト。
+ */
+interface Reference {
+  n: number | string;
+  text: string;
+  url?: string;
+}
+
+interface Props {
+  items: Reference[];
+  class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<section id="references" class:list={[className, "wp-references mt-10 scroll-mt-20"]}>
+  <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 border-b-2 border-stone-300 dark:border-stone-700 pb-1.5 mt-0 mb-3">
+    脚注・参考文献
+  </h2>
+  <ol class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1.5 list-none pl-0 m-0">
+    {items.map((ref) => (
+      <li id={`fn-${ref.n}`} class="leading-relaxed flex gap-2">
+        <span class="text-sky-600 dark:text-sky-400 font-mono shrink-0">[{ref.n}]</span>
+        <span class="flex-1">
+          {ref.url ? (
+            <a href={ref.url} class="text-sky-600 dark:text-sky-400 hover:underline" target="_blank" rel="noopener">
+              {ref.text}
+            </a>
+          ) : (
+            <span>{ref.text}</span>
+          )}
+          <a href={`#fnref-${ref.n}`} class="ml-1.5 text-[10px] text-neutral-500 dark:text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400" aria-label="本文に戻る">↑</a>
+        </span>
+      </li>
+    ))}
+  </ol>
+</section>

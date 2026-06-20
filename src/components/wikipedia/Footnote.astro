@@ -1,0 +1,20 @@
+---
+/*
+ * Footnote.astro — インライン脚注番号 [N]
+ * 本文内に <Footnote n={1} /> として埋め込む。
+ * ページ末尾の References.astro と対応する。
+ */
+interface Props {
+  n: number | string;
+}
+const { n } = Astro.props;
+---
+
+<sup class="wp-footnote inline-block">
+  <a
+    href={`#fn-${n}`}
+    id={`fnref-${n}`}
+    class="text-sky-600 dark:text-sky-400 no-underline hover:underline px-0.5"
+    aria-label={`脚注 ${n}`}
+  >[{n}]</a>
+</sup>

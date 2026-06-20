@@ -1,0 +1,29 @@
+---
+/*
+ * RelatedItems.astro — Wikipedia 風 関連項目セクション
+ */
+interface RelatedItem {
+  href: string;
+  text: string;
+  description?: string;
+}
+interface Props {
+  items: RelatedItem[];
+  class?: string;
+}
+const { items, class: className } = Astro.props;
+---
+
+<section id="related-items" class:list={[className, "mt-10 scroll-mt-20"]}>
+  <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 border-b-2 border-stone-300 dark:border-stone-700 pb-1.5 mt-0 mb-3">
+    関連項目
+  </h2>
+  <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1.5 list-disc pl-5 m-0">
+    {items.map((it) => (
+      <li class="leading-relaxed">
+        <a href={it.href} class="text-sky-600 dark:text-sky-400 hover:underline">{it.text}</a>
+        {it.description && <span class="text-neutral-600 dark:text-neutral-400 ml-1.5">— {it.description}</span>}
+      </li>
+    ))}
+  </ul>
+</section>

@@ -1,0 +1,18 @@
+---
+/*
+ * InternalLink.astro — Wikipedia 風 内部リンク（青下線）
+ * 同サイト内の関連ページ・章へのリンク。
+ */
+interface Props {
+  href: string;
+  title?: string;
+}
+const { href, title } = Astro.props;
+---
+<a
+  href={href}
+  title={title}
+  class="text-sky-600 dark:text-sky-400 hover:underline decoration-sky-600 dark:decoration-sky-400 decoration-1 underline-offset-2"
+>
+  <slot />
+</a>

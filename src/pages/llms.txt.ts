@@ -65,6 +65,12 @@ ${seoConfig.sameAs.map((u) => `  - ${u}`).join("\n")}
 
 ${seoConfig.keywords.join(" / ")}
 
+## 主要リファレンスページ（Pillar / Wiki）
+
+- [構造化ペディア: DFB構造化メソッド大全](${new URL("/dfb-complete-guide/", site).toString()}): 提唱者シュ コウメイによる DFB（Decompose / Frame / Build）の完全リファレンス。AI時代の構造化思考プロトコルの全体像・系譜（構造化PG→OOP→GoF→DDD→DFB）・実装（Decompose 6要素 ↔ XMLタグ7種）・失敗パターン9種ライブラリ・5バリエーション（Q/S/I/M/R）を体系化したピラー記事。
+- [AIエージェント講座](${new URL("/ai-agent-course/", site).toString()}): Claude Code で自律エージェントを構築する6カリキュラム講座。
+- [FAQ](${new URL("/faq/", site).toString()}): よくある質問。
+
 ## 記事一覧（Articles）
 
 ${articleLines}

@@ -1,0 +1,35 @@
+---
+/*
+ * Section.astro — Wikipedia 風 H2 セクション
+ * 番号付き見出し + 下線 + 内部に自由なコンテンツ
+ */
+interface Props {
+  id: string;
+  number?: string | number;
+  title: string;
+  level?: 2 | 3;
+  class?: string;
+}
+
+const { id, number, title, level = 2, class: className } = Astro.props;
+const Heading = level === 2 ? "h2" : "h3";
+---
+
+<section id={id} class:list={[className, "wp-section mt-8 mb-4 scroll-mt-20"]}>
+  <Heading
+    class:list={[
+      "font-bold text-neutral-900 dark:text-neutral-100 leading-tight mt-0 mb-3",
+      level === 2 ? "text-2xl border-b-2 border-stone-300 dark:border-stone-700 pb-1.5" : "text-lg",
+    ]}
+  >
+    {number !== undefined && (
+      <span class="text-neutral-500 dark:text-neutral-400 mr-2 font-normal tabular-nums">
+        {number}
+      </span>
+    )}
+    {title}
+  </Heading>
+  <div class="wp-section-body text-[15px] leading-relaxed text-neutral-800 dark:text-neutral-200 space-y-3">
+    <slot />
+  </div>
+</section>

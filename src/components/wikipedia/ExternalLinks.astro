@@ -1,0 +1,31 @@
+---
+/*
+ * ExternalLinks.astro — Wikipedia 風 外部リンクセクション
+ */
+interface ExternalLink {
+  href: string;
+  text: string;
+  description?: string;
+}
+interface Props {
+  items: ExternalLink[];
+  class?: string;
+}
+const { items, class: className } = Astro.props;
+---
+
+<section id="external-links" class:list={[className, "mt-10 scroll-mt-20"]}>
+  <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 border-b-2 border-stone-300 dark:border-stone-700 pb-1.5 mt-0 mb-3">
+    外部リンク
+  </h2>
+  <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1.5 list-disc pl-5 m-0">
+    {items.map((it) => (
+      <li class="leading-relaxed">
+        <a href={it.href} target="_blank" rel="noopener" class="text-sky-600 dark:text-sky-400 hover:underline">
+          {it.text} <span aria-hidden="true" class="text-[10px] opacity-70">↗</span>
+        </a>
+        {it.description && <span class="text-neutral-600 dark:text-neutral-400 ml-1.5">— {it.description}</span>}
+      </li>
+    ))}
+  </ul>
+</section>
