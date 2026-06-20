@@ -1,11 +1,15 @@
 ---
-title: "AI時代に『シニア有利』の本質は構造化能力にある"
+title: AI時代に『シニア有利』の本質は構造化能力にある。
 published: 2026-06-10
-description: "ある方のFacebook投稿『AI時代は50代60代が有利』を起点に、『経験』の正体を『構造化能力』として読み解く。シニアの経験が資産化するか飲み込まれるかの分水嶺を提示する。"
-image: "./cover.jpg"
-thumbnail: "./thumb.jpg"
-tags: ["AI活用", "シニア", "構造化思考", "DFB"]
-category: "AI"
+description: ある方のFacebook投稿『AI時代は50代60代が有利』を起点に、『経験』の正体を『構造化能力』として読み解く。シニアの経験が資産化するか飲み込まれるかの分水嶺を提示する。
+image: ./cover.jpg
+thumbnail: ./thumb.jpg
+tags:
+  - AI活用
+  - シニア
+  - 構造化思考
+  - DFB
+category: AI
 draft: false
 ---
 
