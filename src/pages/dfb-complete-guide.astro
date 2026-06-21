@@ -219,11 +219,8 @@ const externalLinks = [
     </header>
 
     <!-- ★ 2カラム: ① 左 = 目次（追従・開閉可能）/ ② 右 = 本文 + Infobox -->
-    <div
-      id="dfb-2col"
-      class="grid gap-6 lg:gap-10"
-      style="grid-template-columns: 1fr;"
-    >
+    <!-- grid-template-columns は CSS @media で切替（JS matchMedia は viewport meta 設定や端末の挙動差で誤判定するため使用しない） -->
+    <div id="dfb-2col" class="dfb-2col-grid gap-6 lg:gap-10">
 
       <!-- ① 左カラム: 目次（トグル可能） -->
       <aside
@@ -445,6 +442,28 @@ const externalLinks = [
   </article>
 </MainGridLayout>
 
+<!-- 2カラム grid: CSS @media 主体（JS matchMedia 依存を排除） -->
+<style is:global>
+  .dfb-2col-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    transition: grid-template-columns 250ms ease-in-out;
+  }
+  @media (min-width: 1024px) {
+    .dfb-2col-grid {
+      grid-template-columns: 16rem minmax(0, 1fr);
+    }
+    /* collapsed クラス付与時は左カラムを 0 にして 1カラムに */
+    .dfb-2col-grid.dfb-collapsed {
+      grid-template-columns: 0 minmax(0, 1fr);
+      gap: 0;
+    }
+    .dfb-2col-grid.dfb-collapsed #dfb-toc-sidebar {
+      display: none;
+    }
+  }
+</style>
+
 <!-- 目次トグル制御（Swup 対応版・Claude Desktop 風 開閉ボタン） -->
 <script is:inline>
   // グローバル登録（Swup ページ遷移後も onclick 経由で呼べる）
@@ -457,20 +476,15 @@ const externalLinks = [
 
   window.dfbApplyTocState = function (collapsed) {
     const grid = document.getElementById("dfb-2col");
-    const sidebar = document.getElementById("dfb-toc-sidebar");
     const toggleBtn = document.getElementById("dfb-toc-toggle");
-    if (!grid || !sidebar || !toggleBtn) return;
-    // 1024px 以上を 2カラム、それ未満は 1カラムにする（インライン style で確実適用）
-    const isLg = window.matchMedia("(min-width: 1024px)").matches;
-    if (isLg && !collapsed) {
-      grid.style.gridTemplateColumns = "16rem minmax(0, 1fr)";
-      sidebar.style.display = "";
-    } else if (isLg && collapsed) {
-      grid.style.gridTemplateColumns = "1fr";
-      sidebar.style.display = "none";
+    if (!grid || !toggleBtn) return;
+    // JS は collapsed クラスの付け外しのみ。
+    // grid-template-columns / display の切替は CSS @media (min-width: 1024px) が担当。
+    // → viewport meta の設定や端末ごとの matchMedia 挙動差に依存しない堅牢な実装。
+    if (collapsed) {
+      grid.classList.add("dfb-collapsed");
     } else {
-      grid.style.gridTemplateColumns = "1fr";
-      sidebar.style.display = collapsed ? "none" : "";
+      grid.classList.remove("dfb-collapsed");
     }
     toggleBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
   };
