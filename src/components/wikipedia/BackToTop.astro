@@ -1,0 +1,104 @@
+---
+/*
+ * BackToTop.astro — Wikipedia 風ピラーページ用「上に戻る」ボタン
+ *
+ * 既存 Fuwari の src/components/control/BackToTop.astro は親 wrapper が
+ * page-width の右端基準だが、fullWidth=true ピラーページではブラウザ全幅となり
+ * 画面外に飛び出すため、ピラーページ専用に position: fixed を直接効かせる
+ * シンプルな実装を提供する。
+ *
+ * 機能:
+ *   - 200px 以上スクロールしたら右下に登場
+ *   - クリックで window.scroll({ top: 0, behavior: "smooth" })
+ *   - モバイル / PC 両対応
+ *   - キーボード操作対応（Tab + Enter）
+ *   - aria-label でアクセシビリティ確保
+ *   - Swup 対応（ページ遷移後に再 wire）
+ */
+---
+
+<button
+  id="wp-back-to-top"
+  type="button"
+  aria-label="ページの一番上に戻る"
+  class="wp-back-to-top fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9990] w-12 h-12 md:w-14 md:h-14 rounded-full bg-sky-500 hover:bg-sky-600 text-white shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-2"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<style is:global>
+  .wp-back-to-top.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+  .wp-back-to-top:active {
+    transform: scale(0.95) !important;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    // 重複初期化対策
+    if (window.__wpBackToTopInit) {
+      // 既存初期化済 → 再 wire のみ
+      if (typeof window.__wpBackToTopRewire === "function") window.__wpBackToTopRewire();
+      return;
+    }
+    window.__wpBackToTopInit = true;
+
+    const SCROLL_THRESHOLD = 200; // この px 以上スクロールしたら表示
+
+    function getBtn() {
+      return document.getElementById("wp-back-to-top");
+    }
+
+    function onScroll() {
+      const btn = getBtn();
+      if (!btn) return;
+      const y = window.scrollY || document.documentElement.scrollTop || 0;
+      if (y > SCROLL_THRESHOLD) {
+        btn.classList.add("is-visible");
+      } else {
+        btn.classList.remove("is-visible");
+      }
+    }
+
+    function onClick() {
+      window.scroll({ top: 0, behavior: "smooth" });
+    }
+
+    function wire() {
+      const btn = getBtn();
+      if (!btn || btn.__wpWired) return;
+      btn.__wpWired = true;
+      btn.addEventListener("click", onClick);
+      onScroll(); // 初期判定
+    }
+
+    // グローバル再 wire 関数（Swup 遷移後に呼ぶ）
+    window.__wpBackToTopRewire = wire;
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", wire);
+    } else {
+      wire();
+    }
+    document.addEventListener("swup:contentReplaced", wire);
+    document.addEventListener("swup:content:replace", wire);
+  })();
+</script>

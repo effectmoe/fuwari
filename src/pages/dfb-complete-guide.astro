@@ -16,6 +16,7 @@ import StubNotice from "../components/wikipedia/StubNotice.astro";
 import FaqSection from "../components/wikipedia/FaqSection.astro";
 import FigureLightbox from "../components/wikipedia/FigureLightbox.astro";
 import LightboxScript from "../components/wikipedia/LightboxScript.astro";
+import BackToTop from "../components/wikipedia/BackToTop.astro";
 import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
@@ -449,6 +450,9 @@ const externalLinks = [
 
 <!-- Lightbox（FigureLightbox の制御スクリプト・ページに1つだけ） -->
 <LightboxScript />
+
+<!-- 「上に戻る」ボタン（右下に固定・スクロールで表示） -->
+<BackToTop />
 
 <!-- 2カラム grid: CSS @media 主体（JS matchMedia 依存を排除） -->
 <style is:global>
