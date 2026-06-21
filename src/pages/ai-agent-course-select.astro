@@ -1,0 +1,221 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<MainGridLayout
+  title="AIエージェント講座 ─ コース選択｜株式会社EFFECT"
+  description="AIエージェント講座には初級編と上級編があります。あなたの経験・目標に合ったコースをお選びください。人材開発支援助成金（リスキリング）対応。"
+>
+  <div class="flex flex-col gap-5 w-full">
+
+    <!-- ===== ヘッダー ===== -->
+    <div class="card-base px-6 md:px-9 py-10 text-center">
+      <div class="inline-flex items-center gap-2 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1 mb-5">
+        <Icon name="material-symbols:savings-outline-rounded" class="text-sm" />
+        リスキリング助成金 対応 ／ 全コース共通
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-90 mb-4 leading-tight">
+        AIエージェント講座<br />
+        <span class="text-2xl md:text-3xl text-75 font-semibold">あなたのステップに合ったコースを選んでください</span>
+      </h1>
+      <p class="text-base text-75 leading-relaxed max-w-xl mx-auto">
+        Claude Code 未経験〜基礎から学ぶ方は <strong>初級編</strong>、<br />
+        Claude Code を既に使っていて設計・構築力を高めたい方は <strong>上級編</strong>。
+      </p>
+    </div>
+
+    <!-- ===== 2カード ===== -->
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <!-- 初級編 -->
+      <div class="card-base flex flex-col overflow-hidden">
+        <div class="h-2 bg-gradient-to-r from-[var(--primary)] to-sky-400"></div>
+        <div class="px-6 py-7 flex flex-col flex-1">
+          <!-- バッジ -->
+          <div class="flex items-center gap-2 mb-4">
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1">
+              <Icon name="material-symbols:school-rounded" class="text-sm" />
+              初級編
+            </span>
+            <span class="text-xs text-50">Claude Code を初めて導入する方</span>
+          </div>
+
+          <!-- タイトル -->
+          <h2 class="text-2xl font-bold text-90 mb-2 leading-tight">
+            AIエージェント<span class="text-[var(--primary)]">入門</span>講座
+          </h2>
+          <p class="text-base text-75 mb-5 leading-relaxed">
+            「使う」から「任せる」へ。<br />
+            Claude Code の導入から GitHub・Webhook・MCP・API 連携まで、<br />
+            業務自動化を実装ベースで習得する全 6 回の研修。
+          </p>
+
+          <!-- 対象 -->
+          <div class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-5 py-4 mb-5">
+            <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-3">こんな方に</p>
+            <ul class="flex flex-col gap-2">
+              {[
+                "ChatGPT・Claude を日常的に使っているが、もう一段深く活用したい",
+                "業務システムを社内で内製したい・外注費を減らしたい",
+                "大量の社内文書を AI に整理・分析させたい",
+                "HP・LP を社内で素早く作れる体制にしたい",
+              ].map((item) => (
+                <li class="flex items-start gap-2 text-sm text-75">
+                  <Icon name="material-symbols:check-rounded" class="text-[var(--primary)] mt-0.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- 概要 -->
+          <div class="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-75 mb-6">
+            <span class="flex items-center gap-1.5">
+              <Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)]" />
+              全 6 回 × 各 2 時間
+            </span>
+            <span class="flex items-center gap-1.5">
+              <Icon name="material-symbols:savings-outline-rounded" class="text-[var(--primary)]" />
+              助成金で実質 ¥84,250〜
+            </span>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-auto">
+            <a
+              href="/ai-agent-course/"
+              class="flex items-center justify-center gap-2 w-full bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
+            >
+              初級編の詳細を見る
+              <Icon name="material-symbols:arrow-forward-rounded" class="text-xl" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 上級編 -->
+      <div class="card-base flex flex-col overflow-hidden">
+        <div class="h-2 bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-500"></div>
+        <div class="px-6 py-7 flex flex-col flex-1">
+          <!-- バッジ -->
+          <div class="flex items-center gap-2 mb-4">
+            <span class="inline-flex items-center gap-1 text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-full px-3 py-1">
+              <Icon name="material-symbols:workspace-premium-rounded" class="text-sm" />
+              上級編
+            </span>
+            <span class="text-xs text-50">Claude Code を既に使っている方</span>
+          </div>
+
+          <!-- タイトル -->
+          <h2 class="text-2xl font-bold text-90 mb-2 leading-tight">
+            AIエージェント<span class="text-indigo-600 dark:text-indigo-400">実装</span>講座
+          </h2>
+          <p class="text-base text-75 mb-5 leading-relaxed">
+            「動かす」から「設計する」へ。<br />
+            CLAUDE.md エンジニアリング・マルチエージェント・カスタム MCP・CI/CD まで、<br />
+            本番稼働する AI インフラを自分で構築する全 6 回の研修。
+          </p>
+
+          <!-- 対象 -->
+          <div class="rounded-xl border border-indigo-100 dark:border-indigo-900/40 bg-indigo-50/30 dark:bg-indigo-900/10 px-5 py-4 mb-5">
+            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-3">こんな方に</p>
+            <ul class="flex flex-col gap-2">
+              {[
+                "Claude Code を業務に導入済みで、設計・構築力を高めたい",
+                "カスタム MCP で社内 API を Claude Code と繋ぎたい",
+                "AI システムを外注せず自社で内製したい",
+                "チーム全体の AI 活用を設計・定着させたいマネージャー",
+              ].map((item) => (
+                <li class="flex items-start gap-2 text-sm text-75">
+                  <Icon name="material-symbols:check-rounded" class="text-indigo-500 mt-0.5 shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- 概要 -->
+          <div class="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-75 mb-6">
+            <span class="flex items-center gap-1.5">
+              <Icon name="material-symbols:schedule-outline-rounded" class="text-indigo-500" />
+              全 6 回 × 各 2 時間
+            </span>
+            <span class="flex items-center gap-1.5">
+              <Icon name="material-symbols:savings-outline-rounded" class="text-indigo-500" />
+              助成金で実質 ¥84,250〜
+            </span>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-auto">
+            <a
+              href="/ai-agent-course-advanced/"
+              class="flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg transition text-base"
+            >
+              上級編の詳細を見る
+              <Icon name="material-symbols:arrow-forward-rounded" class="text-xl" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== 比較表 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-5">
+        <Icon name="material-symbols:compare-arrows-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">初級編 vs 上級編 ─ 何が違うか</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead>
+            <tr class="border-b border-[var(--line-divider)]">
+              <th class="py-3 pr-4 text-50 font-medium w-1/3">比較項目</th>
+              <th class="py-3 pr-4 text-[var(--primary)] font-bold">初級編</th>
+              <th class="py-3 text-indigo-600 dark:text-indigo-400 font-bold">上級編</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--line-divider)]">
+            {[
+              ["前提経験", "ChatGPT・Claude 利用経験あり", "Claude Code の基本操作経験あり"],
+              ["到達目標", "Claude Code で業務自動化を動かせる", "AI システムを設計・構築・本番運用できる"],
+              ["カリキュラム焦点", "導入・基本操作・ファイル操作・API 連携", "CLAUDE.md 設計・マルチエージェント・MCP・CI/CD"],
+              ["演習スタイル", "業務ファイルで実際に動かす体験型", "業務システムを本番稼働まで実装"],
+              ["成果物", "業務で実際に動く自動化スクリプト", "本番稼働する AI インフラ・MCP サーバー"],
+              ["助成金対応", "対応（実質 ¥84,250〜）", "対応（実質 ¥84,250〜）"],
+            ].map(([label, basic, advanced]) => (
+              <tr>
+                <td class="py-3 pr-4 text-50 font-medium">{label}</td>
+                <td class="py-3 pr-4 text-75">{basic}</td>
+                <td class="py-3 text-75">{advanced}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 迷ったら ===== -->
+    <div class="card-base px-6 md:px-9 py-7 text-center">
+      <h2 class="text-xl font-bold text-90 mb-3">どちらか迷う場合は、まずご相談ください</h2>
+      <p class="text-base text-75 mb-5 leading-relaxed">
+        現在の Claude Code の利用状況をお知らせいただければ、最適なコースをご提案します。<br />
+        ご質問への回答は通常 1〜2 営業日以内に行います。
+      </p>
+      <a
+        href="mailto:info@effect.moe?subject=AIエージェント講座%20コース相談&body=%E3%80%90%E5%88%A9%E7%94%A8%E7%8A%B6%E6%B3%81%E3%80%91%0AClaude%20Code%20%E3%81%AE%E7%8F%BE%E5%9C%A8%E3%81%AE%E5%88%A9%E7%94%A8%E7%8A%B6%E6%B3%81%EF%BC%9A%0A%E5%8F%97%E8%AC%9B%E5%B8%8C%E6%9C%9B%E4%BA%BA%E6%95%B0%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E6%99%82%E6%9C%9F%EF%BC%9A%0A"
+        data-no-swup
+        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
+      >
+        <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+        コース相談をする（無料）
+      </a>
+      <p class="text-sm text-50 mt-4">
+        株式会社EFFECT ／ 担当：シュ コウメイ ／ info@effect.moe
+      </p>
+    </div>
+
+  </div>
+</MainGridLayout>
