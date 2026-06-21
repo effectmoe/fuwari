@@ -457,17 +457,21 @@ const externalLinks = [
     grid-template-columns: 1fr;
     transition: grid-template-columns 250ms ease-in-out;
   }
+  /* grid アイテムの min-width 暴走防止（特に本文 div が prose 内の長文で潰れるのを防ぐ） */
+  .dfb-2col-grid > * {
+    min-width: 0 !important;
+  }
   @media (min-width: 1024px) {
     .dfb-2col-grid {
       grid-template-columns: 16rem minmax(0, 1fr);
     }
     /* collapsed クラス付与時は左カラムを 0 にして 1カラムに */
     .dfb-2col-grid.dfb-collapsed {
-      grid-template-columns: 0 minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 0;
     }
     .dfb-2col-grid.dfb-collapsed #dfb-toc-sidebar {
-      display: none;
+      display: none !important;
     }
   }
 </style>
