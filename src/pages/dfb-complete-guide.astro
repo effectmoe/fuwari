@@ -389,7 +389,16 @@ const externalLinks = [
         DFB の最初の一歩は<strong>「サイクルを回す前に、依頼そのものを構造化する」</strong>こと<Footnote n={1} />。
         ユーザーの依頼文から <strong>主体・動詞・対象・暗黙制約・成果物数</strong> を抽出し、<strong>動詞の数 = 成果物の数</strong>を厳守する。
       </p>
-      <p>これを飛ばすと <strong>失敗パターン G（Over-Delivery / 親切心過剰）</strong>が発動し、依頼にない成果物を勝手に足してしまう。提唱者本人が「自分が DFB を使えていなかった」自己言及的失敗から発見されたルールである<Footnote n={1} />。</p>
+      <p>抽出する 5 要素は次のとおり:</p>
+      <ul class="list-disc pl-6 space-y-1.5">
+        <li><strong>主体</strong> — 誰が誰に頼んでいるか</li>
+        <li><strong>動詞</strong>（複数）— 何を要求しているか。動詞のみを抜き出す</li>
+        <li><strong>対象</strong> — 動詞の目的語は何か</li>
+        <li><strong>暗黙制約</strong> — 言われていないが守るべきもの。修辞疑問は答えない、背景情報は処理対象外、など</li>
+        <li><strong>成果物数</strong> — 動詞の数だけ</li>
+      </ul>
+      <p>たとえば「この要件を構造化して、別 AI に渡すプロンプトを作成して」という依頼なら、動詞は「構造化する」と「プロンプトを作成する」の 2 つ。成果物も 2 つで止める。フィージビリティ判定や工数見積もりが依頼に含まれていなければ、それは<strong>絶対に作らない</strong>。</p>
+      <p>これを飛ばすと <strong>失敗パターン G（Over-Delivery / 親切心過剰）</strong>が発動し、依頼にない成果物を勝手に足してしまう。提唱者本人が「自分が DFB を使えていなかった」自己言及的失敗から発見されたルールである<Footnote n={1} />。発見の経緯はこうだ。DFB を実装した直後の検証セッションで、提唱者は「構造化して、プロンプトを作って」という 2 動詞の依頼に対し、フィージビリティ判定・スキル資産マッピング・8 週間工数・リスク Top3・優位性 4 点まで自動的に添えた。「DFB を使う側」が DFB の最初の一歩を踏んでいなかったわけで、このメタ的な自己言及こそが Step -1 を発見させた。</p>
     </Section>
 
     <Section id="stop-judge" number="7" title="Step 0: Stop-Judge（I/S/T/D）">
@@ -401,8 +410,32 @@ const externalLinks = [
         <li><strong>D</strong>（Deliverable）— 何を作って終わりとするか</li>
       </ul>
       <p>
-        <strong>I を最初に判定しないまま DFB を始めるな</strong>が最重要ルール。これを誤ると S/T/D が全て見当外れになる。能力評価系のキーワード（「デモして」「見せて」「試して」）を含めば <strong>I = メタ</strong>。
+        <strong>I を最初に判定しないまま DFB を始めるな</strong>が最重要ルール。これを誤ると S/T/D が全て見当外れになる。能力評価系のキーワード（「デモして」「見せて」「試して」「サンプル」「評価したい」）を含めば <strong>I = メタ</strong>。
         それ以外は <strong>I = オブジェクト</strong>。
+      </p>
+      <p>
+        I を取り違える典型例を 5 つ並べる:
+      </p>
+      <div class="overflow-x-auto my-3">
+        <table class="text-sm border-collapse border border-stone-300 dark:border-stone-700">
+          <thead class="bg-stone-100 dark:bg-stone-800/50">
+            <tr>
+              <th class="border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-left">ユーザー発言</th>
+              <th class="border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-left">I 判定</th>
+              <th class="border border-stone-300 dark:border-stone-700 px-3 py-1.5 text-left">正しい応答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">「DFB で何ができるか見せて」</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">メタ</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">簡易デモ 1〜2 本</td></tr>
+            <tr><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">「このプロンプトを DFB で最適化して」</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">オブジェクト</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">構造化されたプロンプト</td></tr>
+            <tr><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">「DFB の能力評価をしたい、サンプル投げます」</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">メタ</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">デモ実演、深掘りしない</td></tr>
+            <tr><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">「案件 X を DFB で構造化して、プロンプト作って」</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">オブジェクト</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">要件構造化 + プロンプト作成</td></tr>
+            <tr><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">「システム構築できますか？要件これ」</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">オブジェクト</td><td class="border border-stone-300 dark:border-stone-700 px-3 py-1.5">フィージビリティ判定</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        メタを「オブジェクト」と取り違えると、デモ依頼に対してフィージビリティ判定・工数・リスクまで添える <strong>パターン F（メタ/オブジェクト取り違え）</strong>が発動する。逆にオブジェクトを「メタ」と取り違えると、実装すべきものを「概念解説」で済ませてしまう。S/T/D の判定は I が確定したあとに自然に決まるので、<strong>I を最初に声に出して宣言する</strong>習慣が最強の予防策になる。
       </p>
       <FigureLightbox
         src="/dfb/figures/dfb-intent-tree.png"
@@ -415,38 +448,76 @@ const externalLinks = [
 
     <Section id="dfb-build" number="8" title="Step 1〜3: D/F/B 実装">
       <p>具体的な実装は次のフレームに対応する<Footnote n={3} /><Footnote n={4} />:</p>
-      <ol class="list-decimal pl-6 space-y-1.5">
-        <li><strong>Decompose</strong> — 6要素分解（Role / Task / Input / Constraints / Output / Examples）</li>
-        <li><strong>Frame</strong> — 5つの枠から選ぶ（XMLタグ / Markdown表 / IF-THEN / JSON-LD / 手順番号）</li>
-        <li><strong>Build</strong> — XMLタグ7種で組み立てる（role / task / input / constraints / output_format / example / phase）</li>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li>
+          <strong>Decompose</strong> — 6 要素分解（<strong>Role</strong> 誰として動くか / <strong>Task</strong> 何をするか・1文で / <strong>Input</strong> 渡す素材 / <strong>Constraints</strong> 守るルール / <strong>Output</strong> 出力形式 / <strong>Examples</strong> 見本があれば）。
+          ここで意識すべきは「全部埋めようとしない」こと。素材がなければ Input は空欄でいい。例がなければ Examples は無し。<strong>埋めることが目的化すると失敗パターン B（6要素埋め病）</strong>に陥る。
+        </li>
+        <li>
+          <strong>Frame</strong> — 5 つの枠から選ぶ。複雑な役割 × 複数指示 × 制約あり なら <strong>XML タグ</strong>。表で表せるデータ変換なら <strong>Markdown 表</strong>。条件分岐があれば <strong>IF-THEN</strong>。構造化データ出力なら <strong>JSON-LD</strong>。段階的処理なら <strong>番号付き手順</strong>。
+          単発質問にまで XML タグを巻くのは <strong>失敗パターン D（構造化疲労）</strong>になる。フレーム選択は「効果に対するコスト」で判断する。
+        </li>
+        <li>
+          <strong>Build</strong> — XML タグ 7 種で組み立てる。<code>&lt;role&gt;</code> / <code>&lt;task&gt;</code> / <code>&lt;input&gt;</code> / <code>&lt;constraints&gt;</code> / <code>&lt;output_format&gt;</code> / <code>&lt;example&gt;</code> がコアの 6 個、<code>&lt;phase&gt;</code> が段階制御用の拡張タグ。
+          Decompose の 6 要素と XML タグ 6 個が <strong>1対1で対応</strong>するように設計されているので、Decompose が完了すれば Build は機械的に埋まる<Footnote n={4} />。
+        </li>
       </ol>
-      <p><strong>Decompose の6要素と XMLタグは1対1で対応するよう設計されている</strong>のが特徴で、構造化が綺麗に揃う<Footnote n={4} />。</p>
+      <p><strong>Decompose の6要素と XMLタグは1対1で対応するよう設計されている</strong>のが特徴で、構造化が綺麗に揃う<Footnote n={4} />。これは偶然ではなく、Decompose を「そのまま Build に渡せる単位」で行うことで、サイクル中に翻訳コストを発生させないための設計判断である。実務上、Decompose の段階で何を分けるかが Build の品質の 8 割を決める。</p>
     </Section>
 
     <Section id="variations" number="9" title="DFB 5バリエーション（Q / S / I / M / R）">
-      <p>基本DFBの上に、シーン別の5派生が乗る<Footnote n={1} />:</p>
-      <ul class="list-disc pl-6 space-y-1.5">
-        <li><strong>DFB-Q</strong>（Question型）— 入力が曖昧な時、質問先行</li>
-        <li><strong>DFB-S</strong>（Stop型）— 境界明示の基本形</li>
-        <li><strong>DFB-I</strong>（Iterate型）— 段階的に解きほぐす</li>
-        <li><strong>DFB-M</strong>（Meta型）— DFB そのものを DFB で構造化（自己言及）</li>
-        <li><strong>DFB-R</strong>（Reverse型）— 既存構造を解体し再構造化</li>
+      <p>基本DFBの上に、シーン別の5派生が乗る<Footnote n={1} />。それぞれ「いつ呼び出すか」「典型シーン」がはっきり決まっている:</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>
+          <strong>DFB-Q</strong>（Question 型・質問先行）— 入力に不明点が多すぎて、即構造化すると間違える時。
+          先に AI（または自分）に質問を生成させ、回答を得てから Decompose に入る。<em>例</em>: 先方から「サイト作って」とだけ来た要件依頼。
+        </li>
+        <li>
+          <strong>DFB-S</strong>（Stop 型・強制停止）— 境界を明示的に守りたい時の基本形。
+          Stop-Judge の I/S/T/D を最初に宣言し、それを越えそうになったら強制停止。<em>例</em>: 受講者が「ちょっと聞いただけ」のときに講師が深掘りしすぎないように。
+        </li>
+        <li>
+          <strong>DFB-I</strong>（Iterate 型・反復明示）— 1 サイクルでは精度が出ないとき、明示的に複数サイクル回す。
+          Decompose A（粗）→ Frame → Build → 違和感察知 → Decompose B（細）→ Frame → Build。<em>例</em>: 複雑な業務カオスを段階的に解きほぐす。
+        </li>
+        <li>
+          <strong>DFB-M</strong>（Meta 型・自己言及）— DFB そのものを DFB で構造化する。教える側のスキル。
+          Decompose（DFB の構成要素）→ Frame（教えやすい枠）→ Build（カリキュラム）。<em>例</em>: 講座設計・スキル伝承・DFB 自体の改善。
+        </li>
+        <li>
+          <strong>DFB-R</strong>（Reverse 型・逆構造化）— 既に構造化されたものを解体し、別の抽象度で再構造化する。
+          De-build → De-frame → De-decompose → Decompose（別軸）→ Frame → Build。<em>例</em>: 既存の SWOT を「時間軸を入れた 4D-SWOT」に拡張する。
+        </li>
       </ul>
+      <p>
+        5 つは排他ではなく、現場では複数を入れ子で使うことが多い。たとえば DFB-Q で要件を引き出してから DFB-S で境界を引き、DFB-I で反復する、といった重ね方になる。バリエーションを「使い分ける」こと自体が L3 の目利きの一部だ。
+      </p>
     </Section>
 
     <Section id="failure-patterns" number="10" title="失敗パターン9種ライブラリ">
-      <p>「やってはいけない」を明示することで、目利きが育つ<Footnote n={1} /><Footnote n={5} />。9パターン:</p>
+      <p>「やってはいけない」を明示することで、目利きが育つ<Footnote n={1} /><Footnote n={5} />。9 つのパターンは、依頼受領フェーズ・実行フェーズ・出力フェーズの 3 段階に分布する:</p>
+
+      <p><strong>【依頼受領フェーズ】</strong>(4 種)</p>
       <ul class="list-disc pl-6 space-y-1.5">
-        <li><strong>G: 依頼の未構造化（Over-Delivery）</strong> ★最重要 — 動詞にない成果物を親切心で足す</li>
-        <li><strong>F: メタ/オブジェクト取り違え</strong>／<strong>F-chain</strong>（連続発動）</li>
-        <li><strong>H: タイムライン盲目</strong> — 時間軸を取り込み忘れる</li>
-        <li><strong>I: アカデミック疲労</strong> — 末尾の平易説明が欠落し読み手が疲れる</li>
-        <li><strong>B: 6要素埋め病</strong> — 不要な要素を無理に埋める</li>
-        <li><strong>C: フレーム原理主義</strong> — フレームに入らない情報を切り捨てる</li>
-        <li><strong>D: 構造化疲労</strong> — 単発質問にXMLタグを巻く愚行</li>
-        <li><strong>E: メタ盲目</strong> — 「これを構造化すべきか」を問わない</li>
+        <li><strong>G: 依頼の未構造化（Over-Delivery）</strong> ★最重要 — 動詞にない成果物を親切心で足す。発見の経緯はメタ的に痛烈で、「DFB の提唱者が DFB を使えていなかった」ことから生まれた。動詞数 = 成果物数 を声に出す習慣で防ぐ。</li>
+        <li><strong>F: メタ/オブジェクト取り違え</strong>／<strong>F-chain</strong>（連続発動）— ユーザーがメタ評価で話しているのに、オブジェクト実行で応答する。1 回踏むと次のターンで再発しやすい（F-chain）。Step 0 で I を最初に判定するだけで予防できる。</li>
+        <li><strong>H: タイムライン盲目</strong> — 直前ターンの失敗や、これまでの議論の流れを取り込み忘れる。「いま自分は何回目のやり取りで、直前で何を踏んだか」を Step -2 として宣言することで予防する。</li>
+        <li><strong>E: メタ盲目</strong> — 「これは構造化すべきか？」を問わずに、反射的に DFB を始める。雑談ですら構造化して空気を壊す愚行はここに分類される。</li>
       </ul>
-      <p>※ かつての「A: 抽象度の暴走」は誤診断と判明し削除された。これ自体が「失敗を講座素材化する」発想の源泉である<Footnote n={5} />。</p>
+
+      <p><strong>【実行フェーズ】</strong>(3 種)</p>
+      <ul class="list-disc pl-6 space-y-1.5">
+        <li><strong>B: 6要素埋め病</strong> — Decompose の 6 要素を全部埋めようとして本質が薄まる。「今何時？」のプロンプトに役割・制約・出力形式まで足す典型例がこれ。</li>
+        <li><strong>C: フレーム原理主義</strong> — 既存フレームに合わない情報を切り捨てる。SWOT に収まらない時系列要因を「対象外」にしてしまう動き。DFB-R（逆構造化）で防ぐ。</li>
+        <li><strong>D: 構造化疲労</strong> — 一過性のタスクまで構造化して ROI 割れする。「明日の天気は？」を XML タグで構造化する愚行。入力直後に 5 秒「これを構造化する価値があるか」を問うだけで防げる。</li>
+      </ul>
+
+      <p><strong>【出力フェーズ】</strong>(1 種)</p>
+      <ul class="list-disc pl-6 space-y-1.5">
+        <li><strong>I: アカデミック疲労</strong> — 構造化された内部ロジックをそのまま出力してしまい、末尾の平易な翻訳（ユーザー説明レイヤー）が欠落する。読み手が疲れる。Step 7 で「ユーザー向けの平易なまとめ」を必ず添える。</li>
+      </ul>
+
+      <p>※ かつての「A: 抽象度の暴走」は誤診断と判明し削除された。「L1 指示なのに L4 まで降りた」と当初は理論化したが、再診断の結果、本質は<strong>抽象度の問題ではなくメタ/オブジェクトの取り違え</strong>だったと判明し、F に再定義された。この「自己訂正の経緯」自体が「失敗を講座素材化する」発想の源泉になっている<Footnote n={5} />。失敗パターン集は他人を裁くためのものではなく、自分の応答を客観視するための道具として設計されている。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-failure-patterns.png"
         alt="DFB失敗パターンの発生フェーズ別俯瞰図。左側に「依頼受領フェーズ」（構造化されていない依頼とメタ盲目を中心に、作業開始前の根本的不整合・オブジェクト誤解釈・タイムライン盲目を引き起こす段階）、右側に「実行フェーズ」（内部方法論への厳格な固執・特定フレームワークへの過度依存・機械的または過度に学術的な出力を生む段階）の2軸で比較構造を視覚化している。"
