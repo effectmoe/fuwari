@@ -264,6 +264,15 @@ const externalLinks = [
     <!-- 書きかけ案内（Wikipedia stub テンプレート相当） -->
     <StubNotice title="DFB構造化メソッド" class="mb-6" />
 
+    <!-- 数字の地図（3/4/4/5/6/7/9 階層の俯瞰） -->
+    <FigureLightbox
+      src="/dfb/figures/dfb-numbers-map.png"
+      alt="DFB構造化メソッドの数字階層マインドマップ。中央に「DFB構造化メソッド」を据え、放射状に3ステップ・4階層・4要素・5バリエーション・6要素分解・7XMLタグ・9失敗パターンの7つの主要キーノードを配置し、各ノードから個別の構成要素が枝分かれする全体像を可視化している。"
+      caption="DFB の数字階層マップ — 3 / 4 / 4 / 5 / 6 / 7 / 9 がそれぞれ何を指すかの俯瞰図"
+      figureNumber={0}
+      maxWidth="max-w-2xl"
+    />
+
     <!-- 各セクション -->
     <Section id="summary" number="1" title="概要">
       <p>
@@ -299,16 +308,13 @@ const externalLinks = [
 
     <Section id="lineage" number="4" title="系譜">
       <p>DFB は突然変異ではなく、知的歴史60年の延長線上にある<Footnote n={5} />:</p>
-      <pre class="text-sm bg-stone-100 dark:bg-stone-800/50 p-3 rounded border border-stone-200 dark:border-stone-700 my-3 leading-relaxed">
-1960s  構造化プログラミング（Dijkstra）
-   ↓
-1980s  オブジェクト指向（Alan Kay）
-   ↓
-1990s  デザインパターン（GoF）
-   ↓
-2000s  ドメイン駆動設計（Eric Evans）
-   ↓
-2025〜  DFB 構造化メソッド（シュ コウメイ）</pre>
+      <FigureLightbox
+        src="/dfb/figures/dfb-lineage-timeline.png"
+        alt="構造化思想の系譜タイムライン。1960年代 Edsger W. Dijkstra による構造化プログラミング、1980年代 Alan Kay によるオブジェクト指向プログラミング、1990年代 GoF（Gang of Four）によるデザインパターン、2000年代 Eric Evans によるドメイン駆動設計、2025年〜 シュ コウメイによる DFB構造化メソッド の 60 年の知的系譜を5段階の横長タイムラインで視覚化している。"
+        caption="構造化思想の系譜 — 構造化プログラミングから DFB までの 60 年史"
+        figureNumber={2}
+        maxWidth="max-w-3xl"
+      />
       <p>貫く思想は<strong>「現実世界を、適切な抽象度でモデル化する」</strong>こと。DFB はこの思想をコードの世界から<strong>現実世界全体</strong>に拡張したものとして位置づけられる。</p>
       <p>OOP 既知者には <strong>「現実世界の OOP 化」</strong>として、コンサル系には <strong>「SWOT を含む上位概念」</strong>として腑に落ちる。</p>
     </Section>
@@ -353,6 +359,13 @@ const externalLinks = [
         <strong>I を最初に判定しないまま DFB を始めるな</strong>が最重要ルール。これを誤ると S/T/D が全て見当外れになる。能力評価系のキーワード（「デモして」「見せて」「試して」）を含めば <strong>I = メタ</strong>。
         それ以外は <strong>I = オブジェクト</strong>。
       </p>
+      <FigureLightbox
+        src="/dfb/figures/dfb-intent-tree.png"
+        alt="DFB の Intent（意図）判定フローチャート。最上部の「能力評価系のキーワードを含むか？」という質問から左右に分岐し、YESルートでは「I = メタレベル（道具評価）」+ Scope L1〜L2 / Deliverable デモ1〜2本 / フィージビリティ判定禁止、NOルートでは「I = オブジェクトレベル（道具で実行）」+ Scope は依頼の語彙から推定 / Deliverable は依頼通りの成果物、と判定する決定木構造を視覚化している。"
+        caption="Intent 判定の決定木 — Stop-Judge の最初に必ず通すフロー"
+        figureNumber={3}
+        maxWidth="max-w-3xl"
+      />
     </Section>
 
     <Section id="dfb-build" number="8" title="Step 1〜3: D/F/B 実装">
@@ -389,6 +402,13 @@ const externalLinks = [
         <li><strong>E: メタ盲目</strong> — 「これを構造化すべきか」を問わない</li>
       </ul>
       <p>※ かつての「A: 抽象度の暴走」は誤診断と判明し削除された。これ自体が「失敗を講座素材化する」発想の源泉である<Footnote n={5} />。</p>
+      <FigureLightbox
+        src="/dfb/figures/dfb-failure-patterns.png"
+        alt="DFB失敗パターンの発生フェーズ別俯瞰図。左側に「依頼受領フェーズ」（構造化されていない依頼とメタ盲目を中心に、作業開始前の根本的不整合・オブジェクト誤解釈・タイムライン盲目を引き起こす段階）、右側に「実行フェーズ」（内部方法論への厳格な固執・特定フレームワークへの過度依存・機械的または過度に学術的な出力を生む段階）の2軸で比較構造を視覚化している。"
+        caption="失敗パターンの発生フェーズ別俯瞰 — 依頼受領 vs 実行 の2つの注意領域"
+        figureNumber={4}
+        maxWidth="max-w-3xl"
+      />
     </Section>
 
     <Section id="demo" number="11" title="実演（Before/After）">
