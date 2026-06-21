@@ -528,31 +528,55 @@ const externalLinks = [
     </Section>
 
     <Section id="demo" number="11" title="実演（Before/After）">
-      <p>DFB の効果は、最も身近な題材「プロンプト最適化」で検証されている<Footnote n={3} />:</p>
-      <ul class="list-disc pl-6 space-y-1.5">
-        <li><strong>議事録作成</strong>: 15字 → 約500字（XMLタグ）</li>
-        <li><strong>新規事業アイデア出し</strong>: 14字 → 約450字（XMLタグ + Markdown表）</li>
-        <li><strong>メール返信案</strong>: 15字 → 約500字（XMLタグ + 3トーン案）</li>
+      <p>DFB の効果は、最も身近な題材「プロンプト最適化」で検証されている<Footnote n={3} />。日常的に AI に投げているラフな依頼を、DFB の 3 ステップで再構築すると、出力品質が桁違いに変わる:</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>議事録作成</strong>: 「次の会議の議事録を作って」（15 字）→ <code>&lt;role&gt;</code>（議事録作成のプロライター）/ <code>&lt;task&gt;</code>（A4 1 枚以内に変換）/ <code>&lt;input&gt;</code>（文字起こし）/ <code>&lt;constraints&gt;</code>（敬語・固有名詞そのまま）/ <code>&lt;output_format&gt;</code>（会議概要・議題と議論・決定事項・ToDo の 5 セクション仕様）まで構造化（約 500 字）。<em>変化のポイント</em>: AI が「議事録っぽい何か」を返すのではなく、仕様に従った決まった形式で返すようになる。</li>
+        <li><strong>新規事業アイデア出し</strong>: 「新規事業のアイデア出して」（14 字）→ Role（新規事業立ち上げ 20 件以上のコンサル）+ 前提条件（自社の強み・初期予算・市場領域・既存事業）+ 制約（既存シナジー・1 年以内に MVP・レッドオーシャン除外）+ 出力（5 案 × 7 軸テーブル + おすすめ TOP1 の理由）（約 450 字）。<em>変化のポイント</em>: 比較可能な評価軸を最初に明示することで、案を並べる時点で判断材料が揃う。</li>
+        <li><strong>メール返信案</strong>: 「このメールに返信考えて」（15 字）→ Role（ビジネスメール作成補助）+ context（相手・関係性・自分の立場・盛り込み事項）+ output（堅め / 中間 / 柔らかめの 3 トーン案 + 適切案の判断理由）+ constraints（書き出し統一・署名・字数）（約 500 字）。<em>変化のポイント</em>: 1 案ではなく 3 トーン案を出させることで、選ぶ自由と判断材料がついてくる。</li>
       </ul>
+      <p>
+        共通する設計判断は 3 つ:<strong>(1) Role を具体化</strong>（経験年数や顧客層まで書く）/<strong>(2) Constraints は禁止形で書く</strong>（「〜してください」より「〜しないでください」の方が効きやすい）/<strong>(3) Output_format をスキーマレベルで指定</strong>（後段でパースできる形式に揃える）。
+        この 3 つは Before/After のすべてのサンプルで共通して効いていて、トピックが何であってもプロンプト品質を底上げする最小公倍数のような働きをする。
+      </p>
     </Section>
 
     <Section id="anti-patterns" number="12" title="アンチパターン7種（XMLタグ実装時）">
-      <p>理論を知っていても実装で崩れる7つの典型<Footnote n={4} />:</p>
-      <ol class="list-decimal pl-6 space-y-1">
-        <li>単純質問への過剰構造化（→ パターン D）</li>
-        <li><code>&lt;task&gt;</code> に複数動詞（→ パターン B）</li>
-        <li><code>&lt;role&gt;</code> を「AIです」とだけ書く</li>
-        <li><code>&lt;constraints&gt;</code> に「良い感じに」と書く</li>
-        <li><code>&lt;example&gt;</code> をフレーム外に書く</li>
-        <li>タグの閉じ忘れ</li>
-        <li>入れ子記述（並列フラット推奨）</li>
+      <p>理論を知っていても実装で崩れる 7 つの典型<Footnote n={4} />。失敗パターン 9 種が「思考の歪み」を扱うのに対し、こちらは「実装の手癖」を扱う。実装時に踏みやすい順に並べた:</p>
+      <ol class="list-decimal pl-6 space-y-2">
+        <li><strong>単純質問への過剰構造化</strong>（→ 失敗パターン D）— 「明日の天気は？」のような単発質問にまで XML タグを巻く。フレーム選択のコストが効果を上回っている時点でアンチパターン。</li>
+        <li><strong><code>&lt;task&gt;</code> に複数動詞を詰める</strong>（→ 失敗パターン B）— 「読んで・要約して・宿題も教えて」のように動詞を散らかすと、AI が優先順位を誤って一部を抜かす。<code>&lt;task&gt;</code> は <strong>1 文・1 動詞</strong>に圧縮するのが鉄則。</li>
+        <li><strong><code>&lt;role&gt;</code> を「AI です」とだけ書く</strong> — 役割定義になっていない。経験年数・顧客層・専門領域まで書いて、AI に語彙と視点を固定する。</li>
+        <li><strong><code>&lt;constraints&gt;</code> に「良い感じに」と書く</strong> — 主観的な形容詞は制約ではない。文字数・敬語レベル・禁止事項のように<strong>検証可能な形</strong>で書く。</li>
+        <li><strong><code>&lt;example&gt;</code> をフレーム外に書く</strong> — 例示を地の文に置くと AI が「見本」と認識しない。必ず <code>&lt;example&gt;</code> タグで囲って渡す。</li>
+        <li><strong>タグの閉じ忘れ</strong> — 構文として壊れ、AI が出力をどこまでが入力かを誤解する。コピペ運用では特に起きやすい。</li>
+        <li><strong>入れ子記述</strong> — <code>&lt;role&gt;&lt;task&gt;…&lt;/task&gt;&lt;/role&gt;</code> のように役割の中にタスクを入れない。DFB は<strong>並列フラット</strong>を推奨する。役割・タスク・入力・制約・出力・例 は同じレイヤーに並ぶ独立要素として扱う。</li>
       </ol>
+      <p>
+        この 7 つに共通するのは、「フレームを使うこと自体が目的化している」状態。フレームは出力品質を上げる手段であって、整った見た目を作る目的ではない。実装時に「これは効果あるか？」を自問する 30 秒の習慣だけで、ほとんどのアンチパターンは予防できる。
+      </p>
     </Section>
 
     <Section id="kata" number="13" title="武道の「型」としての構造化">
       <p>
-        DFB は1回学んで終わりではなく、毎日の思考の<strong>型</strong>として体得するもの<Footnote n={2} />。
-        <strong>守破離の3段階</strong>、<strong>2原則</strong>（常に構造化目線で考える / 構造化された言葉でアウトプットする）、<strong>30秒トレーニング</strong>、<strong>30日習慣化ロードマップ</strong>に沿って訓練する。
+        DFB は1回学んで終わりではなく、毎日の思考の<strong>型</strong>として体得するもの<Footnote n={2} />。記事を読み終えて「分かった」気になるレベルと、実務で反射的に使えるレベルの間には、武道で言う「型稽古」に相当する距離がある。
+      </p>
+      <p>
+        体得の道筋は <strong>守破離の 3 段階</strong>で進む:
+      </p>
+      <ul class="list-disc pl-6 space-y-1.5">
+        <li><strong>守</strong> — 6 要素分解 / Stop-Judge / XML タグ 7 種 を、教科書通りに毎回踏む段階。違和感があっても省略しない。</li>
+        <li><strong>破</strong> — 状況に応じて要素を間引いたり、フレームを改造したりする段階。L3 の入口がここ。</li>
+        <li><strong>離</strong> — DFB そのものを使わずに、構造化の本質だけで動ける段階。L4 の領域。</li>
+      </ul>
+      <p>
+        日々の鍛錬は <strong>2 原則</strong>に集約される:
+      </p>
+      <ol class="list-decimal pl-6 space-y-1.5">
+        <li><strong>常に構造化目線で考える</strong> — どんな会話・どんな業務でも、「いまの塊は、何の要素で構成されているか？」を問い続ける。</li>
+        <li><strong>構造化された言葉でアウトプットする</strong> — 思考が構造化されていても、出力が散文に戻ったら相手に伝わらない。表・箇条書き・段落構造を出力時に意識する。</li>
+      </ol>
+      <p>
+        実用的なトレーニング法として <strong>30 秒トレーニング</strong>（目の前のテキスト 1 つを 30 秒だけ Decompose してみる）と、<strong>30 日習慣化ロードマップ</strong>（Day 1〜30 で段階的に DFB を生活に組み込む工程表）がある。型として体に染み込むまで、毎日少しずつ動かすのが最短経路にあたる。
       </p>
     </Section>
 
@@ -562,7 +586,14 @@ const externalLinks = [
         日々10社以上のクライアント業務で AI を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発した。
       </p>
       <p>
-        自社で運用する <strong>LLM Wiki</strong>（AI駆動型ナレッジ管理システム）は、DFB の実証実験そのもの。プロンプトレベルから組織知レベルまで、あらゆる階層で「AIフレンドリーな構造化」を毎日実践している<Footnote n={2} />。
+        DFB は机上の理論ではなく、現場の実装試行から逆算して組まれている。プロンプト 1 通の最適化から、社内 AI システム設計、クライアント業務の自動化、ピラー記事構成、講座カリキュラム設計まで、扱う粒度はバラバラだが、底に流れる「構造化の手順」は同じだという観察から、DFB という汎用プロトコルが結晶化した。
+      </p>
+      <p>
+        自社で運用する <strong>LLM Wiki</strong>（AI駆動型ナレッジ管理システム）は、DFB の実証実験そのもの。プロンプトレベルから組織知レベルまで、あらゆる階層で「AIフレンドリーな構造化」を毎日実践している<Footnote n={2} />。本記事自身も、DFB を使って書かれた DFB の解説、というメタ的な構造を持っている。
+      </p>
+      <p>
+        提唱者本人の関連発信は次のとおり:<a href="https://kangmyung.substack.com/" class="text-sky-600 dark:text-sky-400 hover:underline" target="_blank" rel="noopener">Substack「構造化脳」</a>（構造化の最新論考をメール配信）/<a href="https://www.street-academy.com/steachers/271053" class="text-sky-600 dark:text-sky-400 hover:underline" target="_blank" rel="noopener">ストアカ講座</a>（DFB を学べる対面講座）。
+        DFB は閉じた理論ではなく、現場で使われながら改訂され続けるオープンな実装プロトコルとして運用されている。本記事末尾の「よくある質問」や「関連項目」もその一部にあたる。
       </p>
     </Section>
 
