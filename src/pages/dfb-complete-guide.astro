@@ -14,6 +14,8 @@ import RelatedItems from "../components/wikipedia/RelatedItems.astro";
 import ExternalLinks from "../components/wikipedia/ExternalLinks.astro";
 import StubNotice from "../components/wikipedia/StubNotice.astro";
 import FaqSection from "../components/wikipedia/FaqSection.astro";
+import FigureLightbox from "../components/wikipedia/FigureLightbox.astro";
+import LightboxScript from "../components/wikipedia/LightboxScript.astro";
 import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
@@ -238,7 +240,7 @@ const externalLinks = [
       title="DFB構造化メソッド"
       subtitle="AI時代の思考プロトコル"
       image="/dfb/cover.jpg"
-      imageCaption="DFB の4コマ — プロンプト疲れから「推論はAIに、構造化は人間に」への気づきまで"
+      imageCaption="DFB構造化メソッドを4コマで象徴する縦長カバー漫画 — AIへのプロンプト疲れから始まり「自分で考える時代の終焉」「分けて／枠を入れ替えて／組み立てる」3ステップの気づきを経て「推論はAIに、構造化は人間に」という核心命題への到達を描く。"
       fields={infoboxFields}
     />
 
@@ -312,10 +314,13 @@ const externalLinks = [
 
     <Section id="dfb-cycle" number="5" title="DFBサイクル">
       <p>DFB の本体は3ステップの循環構造である<Footnote n={1} />:</p>
-      <figure class="my-4">
-        <img src="/dfb/figures/dfb-cycle.png" alt="DFB サイクル（Decompose → Frame → Build → 違和感察知 → 戻る）" class="rounded-lg border border-stone-200 dark:border-stone-700 max-w-md w-full mx-auto" loading="lazy" />
-        <figcaption class="text-xs text-neutral-600 dark:text-neutral-400 text-center mt-2">図1: DFB サイクルの全体像</figcaption>
-      </figure>
+      <FigureLightbox
+        src="/dfb/figures/dfb-cycle.png"
+        alt="DFB構造化メソッドの3ステップ循環図。Decompose（分解）→ Frame（枠の入れ替え）→ Build（組み立て）の3工程が円環状に配置され、Build後に違和感を察知したらDecomposeへ戻る適応的サイクル構造を視覚化している。"
+        caption="DFB サイクルの全体像 — 3ステップを違和感察知で循環させる適応的プロセス"
+        figureNumber={1}
+        maxWidth="max-w-md"
+      />
       <ul class="list-disc pl-6 space-y-1.5">
         <li><strong>Decompose（分）</strong> — カオスを要素に分ける（因数分解）</li>
         <li><strong>Frame（枠）</strong> — どの枠で見るかを選ぶ（フレーミング）</li>
@@ -441,6 +446,9 @@ const externalLinks = [
 
   </article>
 </MainGridLayout>
+
+<!-- Lightbox（FigureLightbox の制御スクリプト・ページに1つだけ） -->
+<LightboxScript />
 
 <!-- 2カラム grid: CSS @media 主体（JS matchMedia 依存を排除） -->
 <style is:global>

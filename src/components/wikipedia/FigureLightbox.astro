@@ -1,0 +1,79 @@
+---
+/*
+ * FigureLightbox.astro — クリックで拡大表示する図解コンポーネント
+ *
+ * 用途: Napkin / Mermaid / 自前 SVG / Higgsfield などで作った図解を、
+ *       本文中ではサムネ表示、クリックで全画面 Lightbox に拡大できるようにする。
+ *
+ * LLMO 観点:
+ *   - alt は「画像の意味」「主題」「キーワード」を含む自然な日本語で記述する
+ *   - 長すぎず（〜125 文字）短すぎず（〜50 文字）
+ *   - figcaption は alt と重複しない補足説明にする
+ *
+ * 例:
+ *   <FigureLightbox
+ *     src="/dfb/figures/dfb-cycle.png"
+ *     alt="DFB構造化メソッドの3ステップ循環図：Decompose（分解）→ Frame（枠の入れ替え）→ Build（組み立て）。違和感を感じたらDecomposeに戻る適応的プロセス。"
+ *     caption="図1: DFB サイクルの全体像"
+ *   />
+ *
+ * アクセシビリティ:
+ *   - キーボード操作: Tab でフォーカス、Enter/Space で開く
+ *   - ESC キーで閉じる、背景クリックで閉じる
+ *   - role="dialog" / aria-modal で支援技術対応
+ *
+ * Swup 対応:
+ *   - グローバル window 関数で初期化、ページ遷移後も `swup:contentReplaced` で再 wire
+ */
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** 図番号（任意・あれば "図N:" を caption の前に付ける） */
+  figureNumber?: number | string;
+  /** 最大幅（本文中の表示時）デフォルト max-w-2xl */
+  maxWidth?: string;
+  /** 追加 class */
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  figureNumber,
+  maxWidth = "max-w-2xl",
+  class: className,
+} = Astro.props;
+
+const captionText = figureNumber !== undefined
+  ? `図${figureNumber}: ${caption ?? ""}`.trim()
+  : caption;
+---
+
+<figure
+  class:list={[className, "wp-figure-lightbox my-5 mx-auto", maxWidth]}
+  data-lightbox-figure
+>
+  <button
+    type="button"
+    class="wp-figure-trigger block w-full bg-transparent border-0 p-0 m-0 cursor-zoom-in rounded-lg overflow-hidden border border-stone-200 dark:border-stone-700 hover:border-sky-300 dark:hover:border-sky-600 hover:shadow-lg transition-all duration-200"
+    data-lightbox-src={src}
+    data-lightbox-alt={alt}
+    data-lightbox-caption={captionText ?? ""}
+    aria-label={`${alt}（クリックで拡大）`}
+  >
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class="w-full h-auto block"
+    />
+  </button>
+  {captionText && (
+    <figcaption class="text-xs text-neutral-600 dark:text-neutral-400 text-center mt-2 leading-relaxed">
+      {captionText}
+    </figcaption>
+  )}
+</figure>

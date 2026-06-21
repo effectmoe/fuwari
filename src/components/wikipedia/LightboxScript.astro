@@ -1,0 +1,144 @@
+---
+/*
+ * LightboxScript.astro — FigureLightbox の制御モジュール
+ *
+ * ピラーページ内で <FigureLightbox> を使うときに、ページの末尾に1つだけ配置する。
+ * 役割:
+ *   - 全 .wp-figure-trigger のクリックを拾って Lightbox 全画面表示
+ *   - ESC キー / 背景クリック / × ボタンで閉じる
+ *   - スクロール抑止（body のスクロールロック）
+ *   - Swup ページ遷移後も再 wire（swup:contentReplaced）
+ *   - グローバル登録（重複読込でも一度だけ初期化）
+ */
+---
+
+<!-- Lightbox オーバーレイ DOM（1ページに1つだけ・最初は非表示） -->
+<div
+  id="dfb-lightbox-overlay"
+  class="dfb-lightbox-overlay fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="dfb-lightbox-caption"
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    id="dfb-lightbox-close"
+    class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl flex items-center justify-center transition-colors z-10"
+    aria-label="拡大表示を閉じる"
+  >
+    ✕
+  </button>
+  <figure class="max-w-[95vw] max-h-[95vh] flex flex-col items-center gap-3">
+    <img
+      id="dfb-lightbox-image"
+      src=""
+      alt=""
+      class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+    />
+    <figcaption
+      id="dfb-lightbox-caption"
+      class="text-white/90 text-sm md:text-base text-center px-4 leading-relaxed max-w-2xl"
+    ></figcaption>
+  </figure>
+</div>
+
+<style is:global>
+  .dfb-lightbox-overlay.is-open {
+    display: flex !important;
+  }
+  body.dfb-lightbox-locked {
+    overflow: hidden;
+  }
+  /* Lightbox オープン時のフェードイン */
+  .dfb-lightbox-overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+  .dfb-lightbox-overlay.is-open {
+    opacity: 1;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    // 既に初期化済みなら何もしない（重複読み込み対策）
+    if (window.__dfbLightboxInit) return;
+    window.__dfbLightboxInit = true;
+
+    function getEls() {
+      return {
+        overlay: document.getElementById("dfb-lightbox-overlay"),
+        image: document.getElementById("dfb-lightbox-image"),
+        caption: document.getElementById("dfb-lightbox-caption"),
+        closeBtn: document.getElementById("dfb-lightbox-close"),
+      };
+    }
+
+    function openLightbox(src, alt, caption) {
+      const { overlay, image, caption: capEl } = getEls();
+      if (!overlay || !image || !capEl) return;
+      image.src = src;
+      image.alt = alt || "";
+      capEl.textContent = caption || "";
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("dfb-lightbox-locked");
+    }
+
+    function closeLightbox() {
+      const { overlay, image } = getEls();
+      if (!overlay || !image) return;
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      // 画像 src を空にして次回開いた時の前画像チラつきを防ぐ
+      image.src = "";
+      document.body.classList.remove("dfb-lightbox-locked");
+    }
+
+    // トリガーボタンを全部 wire（初期化 + ページ遷移後）
+    function wireTriggers() {
+      const triggers = document.querySelectorAll(".wp-figure-trigger");
+      triggers.forEach((btn) => {
+        if (btn.__dfbLightboxWired) return;
+        btn.__dfbLightboxWired = true;
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const src = btn.getAttribute("data-lightbox-src");
+          const alt = btn.getAttribute("data-lightbox-alt");
+          const caption = btn.getAttribute("data-lightbox-caption");
+          if (src) openLightbox(src, alt, caption);
+        });
+      });
+    }
+
+    // クローズ系イベント
+    function wireCloseHandlers() {
+      const { overlay, closeBtn } = getEls();
+      if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+      if (overlay) {
+        overlay.addEventListener("click", function (e) {
+          // 画像本体や caption をクリックしたときは閉じない
+          if (e.target === overlay) closeLightbox();
+        });
+      }
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLightbox();
+      });
+    }
+
+    function init() {
+      wireTriggers();
+      wireCloseHandlers();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+    // Swup ページ遷移後も再 wire
+    document.addEventListener("swup:contentReplaced", wireTriggers);
+    document.addEventListener("swup:content:replace", wireTriggers);
+  })();
+</script>
