@@ -2,16 +2,12 @@
 title: "SEO が消えて LLMO が左上に来た日 — 2026 マーケトレンドマップを読み解く"
 published: 2026-06-22
 description: "日経クロストレンドの 2026 マーケトレンドマップを読み解く。「SEO」が消えて「LLMO/GEO/AEO/AIO」が左上に浮上した事実から、2026 下半期にマーケターが取るべき 4 つの行動を導き出す。"
-image: "./thumb.jpg"
+image: "./cover.jpg"
+thumbnail: "./thumb.jpg"
 tags: ["DFB", "構造化分析", "日経クロストレンド", "トレンドマップ", "2026予測", "LLMO", "GEO", "AEO", "AIO", "クラスター連載"]
 category: "DFB分析"
 draft: false
 ---
-
-<figure style="margin: 1.5rem auto; max-width: 480px;">
-  <img src="/dfb-trend-map-2026-marketing/cover.jpg" alt="4コマ漫画。1コマ目: マーケターのカガミがPCで『SEOで上位を取る、それが今までの正解だった』。2コマ目: トレンドマップを見上げて『ない…? SEOが消えてる』。3コマ目: マップ左上に浮上する『LLMO・GEO・AEO・AIO』を指差して『LLMOが新しい島として浮上している』。4コマ目: 桟橋に立ち、夜明けの空に『推論はAIに、構造化は人間に』と独白。" style="width:100%;display:block;border-radius:8px;" />
-  <figcaption style="text-align:center;font-size:0.85em;color:#78716c;margin-top:0.5rem;">図0: 本記事の起承転結を 4 コマで先取り。SEO 消失 → LLMO 浮上 → 「推論は AI に、構造化は人間に」の連載第 1 回。</figcaption>
-</figure>
 
 > **この記事の要点**
 >
