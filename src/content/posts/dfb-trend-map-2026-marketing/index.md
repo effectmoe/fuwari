@@ -42,7 +42,7 @@ draft: false
 
 <figure style="margin: 1.5rem 0;">
 <div style="position:relative;max-width:700px;margin:0 auto;">
-  <img src="./figures/trend-matrix-base.png" alt="2026マーケティングトレンドマップの座標再現図。横軸は経済インパクト(1〜5)、縦軸は将来性(1〜5)で、LLMO・GEO・AEO・AIO や AIエージェント、CDP/DMP、EC、CX、CRM 等 35 キーワードが散布図上に座標通りに配置され、緑枠で将来性高領域、橙枠で収益性高領域が示されている。" style="width:100%;display:block;border:1px solid #d6d3d1;border-radius:8px;" />
+  <img src="/dfb-trend-map-2026-marketing/figures/trend-matrix-base.png" alt="2026マーケティングトレンドマップの座標再現図。横軸は経済インパクト(1〜5)、縦軸は将来性(1〜5)で、LLMO・GEO・AEO・AIO や AIエージェント、CDP/DMP、EC、CX、CRM 等 35 キーワードが散布図上に座標通りに配置され、緑枠で将来性高領域、橙枠で収益性高領域が示されている。" style="width:100%;display:block;border:1px solid #d6d3d1;border-radius:8px;" />
   <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
     <defs>
       <marker id="dfb-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
