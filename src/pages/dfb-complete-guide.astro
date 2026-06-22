@@ -17,6 +17,7 @@ import FaqSection from "../components/wikipedia/FaqSection.astro";
 import FigureLightbox from "../components/wikipedia/FigureLightbox.astro";
 import LightboxScript from "../components/wikipedia/LightboxScript.astro";
 import BackToTop from "../components/wikipedia/BackToTop.astro";
+import InternalLink from "../components/wikipedia/InternalLink.astro";
 import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
@@ -277,45 +278,62 @@ const externalLinks = [
     <!-- 各セクション -->
     <Section id="summary" number="1" title="概要">
       <p>
-        DFB が解決する問題はひとつ。<strong>「人間に求められる能力が静かに、しかし決定的にスライドした」のに、まだ古い能力の延長で生きている</strong>状態を構造的に補強することだ<Footnote n={2} />。
+        DFB が解決したい問題は、たった一つです。<strong>「AI 時代に必要な力」が静かに入れ替わったのに、私たちが古い力のまま生きてしまっている</strong>——この状態を、思考の道具として整えること<Footnote n={2} />。
       </p>
       <p>
-        2024年までは「コミュニケーション力 / PC操作 / 自分で考える推論力」が知的労働者に求められた。2025年以降は3つめが「AIに考えさせる『枠』を作る力 = 構造化能力」に入れ替わった。これが <strong>能力のスライド</strong>である。プロンプトのテクニックを覚えるたびに「これって何のスキルなんだろう？」と虚しくなる現象や、SWOT・3C・ロジックツリーといった既存のフレームワークを AI に投げると3秒で同じものが返ってくる現象は、すべてこの「能力のスライド」が水面下で進んだ結果として説明できる。
+        2024 年まで、知的に働く人に求められた力は 3 つでした。「コミュニケーション力」「PC を使う力」「自分で考える推論力」。
+        2025 年からは、3 つ目の「自分で考える」が <strong>AI に考えさせる『枠』を作る力（= 構造化能力）</strong> に置き換わりました。これが <InternalLink href="#skill-shift">能力のスライド</InternalLink> です。
       </p>
       <p>
-        この能力をパッケージ化したのが DFB。<strong>SWOT・3C・4P・5Force・MECE・IF-THEN・JSON-LD</strong> 等の既存フレームワークを内包する上位概念であり、フレームを「覚える」のではなく「選ぶ・改造する・作る」ための思考プロトコルにあたる<Footnote n={2} />。フレーム集の知識量はもう競争優位にならない。代わりに、未知のカオスを目の前にしたとき「いまこのカオスには、どのフレームを当てれば AI が一番うまく処理できるか」を即座に判断し、必要なら自分で新しい枠を組む。この一段上の判断力こそが DFB が目指す到達点である。
+        ふと「プロンプトのテクニックを覚えても、これって何のスキルなんだろう？」と虚しくなる。SWOT・3C・ロジックツリーなどのフレームワークを ChatGPT などの LLM（大規模言語モデル）に投げると、3 秒で同じものが返ってくる。
+        こうした「あれ？」という感覚は、すべて能力のスライドが水面下で進んだ結果です。
+      </p>
+      <p>
+        マーケティングの世界でも同じ揺れが起きています。これまでの SEO（Google の検索アルゴリズムに合わせて文章を最適化する仕事）は影をひそめ、代わりに <strong>LLMO（Large Language Model Optimization・AI に拾わせる最適化）</strong> や <strong>GEO（Generative Engine Optimization・生成 AI 検索向け）</strong>、<strong>AEO（Answer Engine Optimization・回答エンジン向け）</strong>、<strong>AIO（AI Optimization）</strong> という新しい単語が浮上しました。
+        日経クロストレンドの 2026 トレンドマップでこの事実を実証した連載第 1 回が <InternalLink href="/posts/dfb-trend-map-2026-marketing/">2026 マーケトレンドマップ DFB 読み解き</InternalLink> です。
+      </p>
+      <p>
+        この「枠を作る力」をパッケージ化したのが DFB です。SWOT・3C・4P・5Force・MECE・IF-THEN・<strong>JSON-LD / Schema.org</strong> 等の既存フレームを「覚える」のではなく、<strong>選ぶ・改造する・作る</strong> ための思考プロトコルにあたります<Footnote n={2} />。
+        フレーム集の知識量はもう競争優位になりません。代わりに、未知の課題を前にしたとき「このカオスにはどの枠を当てれば AI が一番うまく処理できるか」を瞬時に判断し、必要なら自分で新しい枠を組む。この一段上の判断力こそが DFB の到達点です。
       </p>
     </Section>
 
     <Section id="skill-shift" number="2" title="能力のスライド">
       <p>
-        旧時代に必要だった「自分で考える推論力」は AI に代替された。理由は3つに圧縮できる:<strong>速い</strong>（人間が30分かける推論を AI は3秒で出す）/<strong>安い</strong>（人件費比で桁違いに安い）/<strong>疲れない</strong>（24時間動ける・休日も祝日もない）。この3条件が揃った相手と「考える速度・量・コスト」で勝負しても勝てない。コンサルやプランナーが30分かけて出すアウトプットの大半は、適切な前提を与えれば AI が秒で返す時代に入っている。
+        昔は必要だった「自分で考える推論力」は、AI に取って代わられました。理由はシンプルに 3 つです。<strong>速い</strong>（人間が 30 分かける推論を AI は 3 秒で出す）/ <strong>安い</strong>（人件費比で桁違いに安い）/ <strong>疲れない</strong>（24 時間動ける・休日も祝日もない）。
+        この 3 条件がそろった相手と「考える速度・量・コスト」で勝負しても勝てません。コンサルやプランナーが 30 分かけて出すアウトプットの大半は、適切な前提を与えれば AI が数秒で返す時代に入っています。
       </p>
       <p>
-        これに勝てる人間の領域として残ったのが、AI に<strong>「正しく考えさせる枠」を作る</strong>仕事。これが本ページの核心命題「<strong>推論はAIに、構造化は人間に</strong>」である<Footnote n={2} />。AI に何かを頼むときに「もっと具体的に指示してください」と返される経験は誰もが持っている。あの「具体性の壁」の正体が、人間が引き受けるべき構造化の領分にあたる。
+        勝てる領域として人間に残ったのが、AI に <strong>「正しく考えさせる枠」を作る</strong> 仕事。これが本記事の核心命題「<strong>推論は AI に、構造化は人間に</strong>」です<Footnote n={2} />。
+        AI に何かを頼むとき「もっと具体的に指示してください」と返された経験は誰でも持っているはずです。あの「具体性の壁」こそが、人間が引き受けるべき構造化の領分にあたります。
       </p>
       <p>
-        重要なのは、これが「プロンプトを上手く書く技術」のレベルの話ではないことだ。短期的なテクニックではなく、<strong>人間の知的労働の定義そのものが書き換わった</strong>という認識を持たない限り、いくらプロンプト集を覚えても虚しさは消えない。能力のスライドは、職業の置換ではなく職業の中身の置換として静かに進行している。
+        ここで大事なのは、この話が「<strong>プロンプト</strong>を上手く書くコツ」のレベルではないこと。短期テクニックではなく、<strong>人間の知的労働の中身そのものが書き換わった</strong> という大きな変化です。
+        能力のスライドは、職業の置き換えではなく <strong>職業の中身の置き換え</strong> として静かに進行しています。
+      </p>
+      <p>
+        わかりやすい実例が <strong>SEO の消失と LLMO 群の浮上</strong> です。長年マーケターが使ってきた「SEO」という単語が、2026 年のトレンドマップから消えました。代わりに左上に <strong>LLMO・GEO・AEO・AIO</strong> という新しい島が浮上しています。
+        やっていること自体は変わっていません。「人間が」「コンテンツを」「最適化する」。変わったのは <strong>最適化の対象が Google から LLM に置き換わったこと</strong> だけです。SEO が衰退したのではなく、LLMO 群というより大きな概念に格上げされた——これが能力のスライドの典型例です（詳細は <InternalLink href="/posts/dfb-trend-map-2026-marketing/">クラスター連載第 1 回</InternalLink> で実証しています）。
       </p>
     </Section>
 
-    <Section id="four-levels" number="3" title="構造化スキルの4階層">
-      <p>「構造化スキル」と一口に言ってもレベルがある。シュ コウメイは4階層に分けている<Footnote n={5} />:</p>
+    <Section id="four-levels" number="3" title="構造化スキルの 4 階層">
+      <p>「構造化スキル」とひとことで言っても、実はレベルがあります。シュ コウメイは 4 階層に分けて整理しています<Footnote n={5} />:</p>
       <ul class="list-disc pl-6 space-y-2">
-        <li><strong>L1 知る</strong> — 既存フレーム（SWOT, 3C, 4P）を暗記している段階。MBA の教科書を一冊読み終えた人のレベル。</li>
-        <li><strong>L2 使い分ける</strong> — 「これは SWOT より 5Force だ」と状況に応じて道具を選べる段階。コンサル新人レベル。</li>
-        <li><strong>L3 改造する</strong> — カオスに応じてフレームを改造する。たとえば SWOT の SW に「3年後の」「現在の」という時間軸を足して 4D-SWOT に組み替えるような動き。コンサル中堅以上が日常的にやっていること。</li>
-        <li><strong>L4 新フレームを作る</strong> — 既存のどの枠にも当てはまらない問題に対して、新しいフレーム自体を設計する。DFB そのものを設計するような動きがここに該当する。理論家・経営者のレベル。</li>
+        <li><strong>L1 知る</strong> — 既存フレーム（SWOT・3C・4P など）を暗記している段階。MBA の教科書を一冊読み終えた人のレベル。</li>
+        <li><strong>L2 使い分ける</strong> — 「これは SWOT より 5Force だな」と、状況に応じて道具を選べる段階。コンサル新人レベル。</li>
+        <li><strong>L3 改造する</strong> — カオスに合わせてフレーム自体を改造する。たとえば SWOT の SW に「3 年後の」「現在の」と時間軸を足して 4D-SWOT に組み替えるような動き。コンサル中堅以上が日常的にやっていることです。</li>
+        <li><strong>L4 新フレームを作る</strong> — 既存のどの枠にも当てはまらない問題に対して、新しいフレーム自体を設計する。DFB そのものを設計するような動きがここ。理論家・経営者のレベルです。</li>
       </ul>
-      <p>AI に代替されるのは <strong>L1・L2 まで</strong>。L3・L4 を支える「<strong>目利き</strong>」（抽象度感覚・違和感察知・フレーム改造力）が、AI 時代に売れる人間スキルである<Footnote n={5} />。</p>
+      <p>AI が代わりにやってくれるのは <strong>L1・L2 まで</strong>。L3・L4 を支える「<strong>目利き</strong>」（抽象度感覚・違和感察知・フレーム改造力）こそが、AI 時代に売れる人間スキルです<Footnote n={5} />。</p>
       <p>
-        目利き 3 要素を分解するとこうなる:<strong>抽象度感覚</strong>（今この問題を「個人 / 組織 / 業界」のどの粒度で扱うべきかを瞬時に判断する）/<strong>違和感察知</strong>（自分が作った構造に対して「なんか変だ」と気づく能力）/<strong>フレーム改造力</strong>（既存フレームに対して「ここに時間軸を足す」「この軸を入れ替える」と改造できる手の動き）。
-        この 3 つは知識量ではなく経験の蓄積で育つ。だからこそ AI に代替されない。本記事のゴールは、読者を L3 の入口まで連れていくことにある。L4 は天才の領域で、無理に目指すものではない。
+        目利きの 3 要素を分解するとこうなります。<strong>抽象度感覚</strong>（いまの問題を「個人 / 組織 / 業界」のどの粒度で扱うべきかを瞬時に判断する）/ <strong>違和感察知</strong>（自分が作った構造に「なんか変だ」と気づける）/ <strong>フレーム改造力</strong>（既存フレームに「ここに時間軸を足す」「この軸を入れ替える」と手を入れられる）。
+        この 3 つは、知識の暗記量ではなく <strong>経験の蓄積</strong> で育ちます。だからこそ AI には置き換えられない。本記事のゴールは、読者を <strong>L3 の入口</strong> まで連れていくことです。L4 は天才の領域で、無理に目指すものではありません。
       </p>
     </Section>
 
     <Section id="lineage" number="4" title="系譜">
-      <p>DFB は突然変異ではなく、知的歴史60年の延長線上にある<Footnote n={5} />:</p>
+      <p>DFB は突然出てきた発想ではなく、知的歴史 60 年の延長線上にあります<Footnote n={5} />。プログラミングの世界で連綿と積み上げられてきた「構造化」の思想が、AI 時代になって <strong>現実世界そのもの</strong> に拡張されたのが DFB です。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-lineage-timeline.png"
         alt="構造化思想の系譜タイムライン。1960年代 Edsger W. Dijkstra による構造化プログラミング、1980年代 Alan Kay によるオブジェクト指向プログラミング、1990年代 GoF（Gang of Four）によるデザインパターン、2000年代 Eric Evans によるドメイン駆動設計、2025年〜 シュ コウメイによる DFB構造化メソッド の 60 年の知的系譜を5段階の横長タイムラインで視覚化している。"
@@ -323,8 +341,9 @@ const externalLinks = [
         figureNumber={2}
         maxWidth="max-w-3xl"
       />
-      <p>貫く思想は<strong>「現実世界を、適切な抽象度でモデル化する」</strong>こと。DFB はこの思想をコードの世界から<strong>現実世界全体</strong>に拡張したものとして位置づけられる。1960年代の構造化プログラミングが「処理の流れ」を構造化し、1980年代の OOP が「データと振る舞い」を一体化して構造化し、1990年代のデザインパターンが「再利用できる設計」を構造化し、2000年代の DDD が「業務ドメイン知識」をコードに反映する形で構造化してきた。これらの上に、DFB は「現実世界の塊そのもの」を AI が扱える形に構造化する技法として乗っている。</p>
-      <p>OOP 既知者には <strong>「現実世界の OOP 化」</strong>として、コンサル系には <strong>「SWOT を含む上位概念」</strong>として腑に落ちる。具体的な対応はこうなる:</p>
+      <p>この 60 年を貫く思想はシンプルです——<strong>「現実世界を、ちょうどよい抽象度でモデル化する」</strong>。DFB は、この思想を <strong>コードの世界から現実世界全体</strong> へ拡張したものです。</p>
+      <p>順番に並べるとこうなります。1960 年代の構造化プログラミングが「処理の流れ」を整理し、1980 年代の OOP（オブジェクト指向プログラミング）が「データと振る舞い」を一体化し、1990 年代のデザインパターンが「再利用できる設計」を体系化し、2000 年代の DDD（ドメイン駆動設計）が「業務知識」をコードに反映する形で構造化してきました。これらの上に、DFB は「<strong>現実世界の塊そのものを、AI が扱える形に構造化する技法</strong>」として乗っています。</p>
+      <p>プログラマーには「<strong>現実世界の OOP 化</strong>」として、コンサルタント職には「<strong>SWOT を含む上位概念</strong>」として腑に落ちる位置取りです。具体的な対応は次の通り:</p>
       <div class="overflow-x-auto my-3">
         <table class="text-sm border-collapse border border-stone-300 dark:border-stone-700">
           <thead class="bg-stone-100 dark:bg-stone-800/50">
@@ -347,7 +366,7 @@ const externalLinks = [
     </Section>
 
     <Section id="dfb-cycle" number="5" title="DFBサイクル">
-      <p>DFB の本体は3ステップの循環構造である<Footnote n={1} />:</p>
+      <p>DFB の本体は、3 ステップの循環構造です<Footnote n={1} />。難しい理論ではなく「分けて・枠で見て・組み立てる」の繰り返しです。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-cycle.png"
         alt="DFB構造化メソッドの3ステップ循環図。Decompose（分解）→ Frame（枠の入れ替え）→ Build（組み立て）の3工程が円環状に配置され、Build後に違和感を察知したらDecomposeへ戻る適応的サイクル構造を視覚化している。"
@@ -356,13 +375,13 @@ const externalLinks = [
         maxWidth="max-w-md"
       />
       <ul class="list-disc pl-6 space-y-2">
-        <li><strong>Decompose（分）</strong> — カオスを要素に分ける（因数分解）。頭の中で渦巻く塊やモヤモヤを、言語化できる単位まで落とす作業。「うちの会社の課題」のような大きすぎる塊は、ここで「事実 / 感情 / 影響範囲 / 制約条件」のような小さな粒に分解される。</li>
-        <li><strong>Frame（枠）</strong> — どの枠で見るかを選ぶ（フレーミング）。同じ要素群を、SWOT で見るのか、3C で見るのか、IF-THEN リストで整理するのか、まったく新しい軸を作るのかを判断する。L3 の「目利き」が一番効くのがこのフェーズ。</li>
-        <li><strong>Build（組）</strong> — 実際に組み立てる（ビルド）。選んだ枠に従って要素を再配置し、AI が消化できる入力として組み上げる。その後 AI の出力を人間の経験で検閲し、違和感があれば次のサイクルへ。</li>
+        <li><strong>Decompose（分解）</strong> — カオスを要素に分ける作業。頭の中でモヤモヤしている塊を、言葉にできる小さな粒まで落とします。「うちの会社の課題」のような大きすぎる塊は、ここで「事実 / 感情 / 影響範囲 / 制約条件」のような扱いやすい粒に分けられます。</li>
+        <li><strong>Frame（枠で見る）</strong> — どの枠で見るかを選ぶ作業（フレーミング）。同じ要素を、SWOT で見るのか、3C で見るのか、IF-THEN リストで整理するのか、まったく新しい軸を作るのかを判断します。<InternalLink href="#four-levels">L3 の目利き</InternalLink> が一番効くのがこのフェーズです。</li>
+        <li><strong>Build（組み立てる）</strong> — 実際に組み立てる作業。選んだ枠に従って要素を再配置し、<strong>AI（LLM）が消化できる入力</strong> として組み上げます。AI の出力を人間の経験で検閲し、違和感があれば次のサイクルへ戻ります。</li>
       </ul>
       <p>
-        PDCA（業務改善）・OODA（意思決定）と並ぶ思考サイクルとして位置づけられるが、DFB の目的は「<strong>AI に渡す</strong>」ことに特化されている点が違う<Footnote n={1} />。
-        1回で完璧に作らず、組み立てた後の<strong>違和感</strong>を契機に Decompose に戻る、適応的プロセスとして設計されている。違和感の正体は、たいてい「分解の粒度が荒すぎた」「選んだフレームが現実に合っていない」「重要な要素を見落としていた」のどれかで、これは1サイクル目には見えない。だからこそ DFB は単発の翻訳作業ではなく、回し続ける前提のサイクルとして組まれている。
+        PDCA（業務改善）・OODA（意思決定）と並ぶ思考サイクルですが、DFB は <strong>「AI に渡す」ことに特化</strong> している点が違います<Footnote n={1} />。
+        1 回で完璧に作るのではなく、組み立てた後の <strong>違和感</strong> をきっかけに Decompose に戻る、<strong>適応的なプロセス</strong> として設計されています。違和感の正体は、たいてい「分解の粒度が荒すぎた」「選んだフレームが現実に合っていない」「重要な要素を見落とした」のどれか。これは 1 サイクル目には見えません。だから DFB は単発の翻訳作業ではなく、<strong>回し続ける前提</strong> のサイクルとして組まれています。
       </p>
       <p>
         3 つのサイクル思考の住み分けを整理するとこうなる:
@@ -387,10 +406,10 @@ const externalLinks = [
 
     <Section id="step-minus-one" number="6" title="Step -1: 依頼自体の構造化">
       <p>
-        DFB の最初の一歩は<strong>「サイクルを回す前に、依頼そのものを構造化する」</strong>こと<Footnote n={1} />。
-        ユーザーの依頼文から <strong>主体・動詞・対象・暗黙制約・成果物数</strong> を抽出し、<strong>動詞の数 = 成果物の数</strong>を厳守する。
+        DFB の最初の一歩は、<strong>サイクルを回す前に「依頼そのもの」を構造化する</strong> ことです<Footnote n={1} />。これは書き手の暴走を止めるための「儀式」のような工程。
+        やることはシンプルで、ユーザーの依頼文から <strong>主体・動詞・対象・暗黙制約・成果物数</strong> を抜き出し、<strong>動詞の数 = 成果物の数</strong> を厳守します。
       </p>
-      <p>抽出する 5 要素は次のとおり:</p>
+      <p>抜き出す 5 要素は次の通り:</p>
       <ul class="list-disc pl-6 space-y-1.5">
         <li><strong>主体</strong> — 誰が誰に頼んでいるか</li>
         <li><strong>動詞</strong>（複数）— 何を要求しているか。動詞のみを抜き出す</li>
@@ -398,12 +417,13 @@ const externalLinks = [
         <li><strong>暗黙制約</strong> — 言われていないが守るべきもの。修辞疑問は答えない、背景情報は処理対象外、など</li>
         <li><strong>成果物数</strong> — 動詞の数だけ</li>
       </ul>
-      <p>たとえば「この要件を構造化して、別 AI に渡すプロンプトを作成して」という依頼なら、動詞は「構造化する」と「プロンプトを作成する」の 2 つ。成果物も 2 つで止める。フィージビリティ判定や工数見積もりが依頼に含まれていなければ、それは<strong>絶対に作らない</strong>。</p>
-      <p>これを飛ばすと <strong>失敗パターン G（Over-Delivery / 親切心過剰）</strong>が発動し、依頼にない成果物を勝手に足してしまう。提唱者本人が「自分が DFB を使えていなかった」自己言及的失敗から発見されたルールである<Footnote n={1} />。発見の経緯はこうだ。DFB を実装した直後の検証セッションで、提唱者は「構造化して、プロンプトを作って」という 2 動詞の依頼に対し、フィージビリティ判定・スキル資産マッピング・8 週間工数・リスク Top3・優位性 4 点まで自動的に添えた。「DFB を使う側」が DFB の最初の一歩を踏んでいなかったわけで、このメタ的な自己言及こそが Step -1 を発見させた。</p>
+      <p>たとえば「この要件を構造化して、別 AI に渡す<strong>プロンプト</strong>を作成して」という依頼なら、動詞は「構造化する」と「プロンプトを作成する」の 2 つ。成果物も 2 つで止めます。フィージビリティ判定や工数見積もりが依頼に含まれていなければ、それは <strong>絶対に作らない</strong>。</p>
+      <p>これを飛ばすと <InternalLink href="#failure-patterns">失敗パターン G（Over-Delivery / 親切心過剰）</InternalLink> が発動し、依頼にない成果物を勝手に足してしまいます。実はこのルール、提唱者本人が「自分が DFB を使えていなかった」自己言及的な失敗から発見されたものです<Footnote n={1} />。</p>
+      <p>発見の経緯はこうです。DFB を実装した直後の検証セッションで、提唱者は「構造化して、プロンプトを作って」という 2 動詞の依頼に対し、フィージビリティ判定・スキル資産マッピング・8 週間工数・リスク Top3・優位性 4 点まで自動的に添えてしまいました。「DFB を使う側」が DFB の最初の一歩を踏んでいなかったのです。このメタ的な自己発見こそが Step -1 を生み出しました。</p>
     </Section>
 
     <Section id="stop-judge" number="7" title="Step 0: Stop-Judge（I/S/T/D）">
-      <p>サイクル開始前に必ず宣言する4要素<Footnote n={1} />:</p>
+      <p>サイクルを始める前に、必ず「立ち止まって判断する（Stop-Judge）」工程があります。自分に向けて 4 つを声に出して宣言します<Footnote n={1} />:</p>
       <ul class="list-disc pl-6 space-y-1.5">
         <li><strong>I</strong>（Intent layer）— ユーザーは <strong>メタ</strong>（道具評価）か <strong>オブジェクト</strong>（道具で実行）か ★最重要</li>
         <li><strong>S</strong>（Scope）— L1〜L4 のどこで止めるか</li>
@@ -411,11 +431,11 @@ const externalLinks = [
         <li><strong>D</strong>（Deliverable）— 何を作って終わりとするか</li>
       </ul>
       <p>
-        <strong>I を最初に判定しないまま DFB を始めるな</strong>が最重要ルール。これを誤ると S/T/D が全て見当外れになる。能力評価系のキーワード（「デモして」「見せて」「試して」「サンプル」「評価したい」）を含めば <strong>I = メタ</strong>。
-        それ以外は <strong>I = オブジェクト</strong>。
+        最重要ルールは <strong>「I を最初に判定しないまま DFB を始めるな」</strong>。これを誤ると S/T/D が全部見当外れになります。能力評価系のキーワード（「デモして」「見せて」「試して」「サンプル」「評価したい」）が含まれていれば <strong>I = メタ</strong>。
+        それ以外は <strong>I = オブジェクト</strong> です。
       </p>
       <p>
-        I を取り違える典型例を 5 つ並べる:
+        I を取り違える典型例を 5 つ並べます:
       </p>
       <div class="overflow-x-auto my-3">
         <table class="text-sm border-collapse border border-stone-300 dark:border-stone-700">
@@ -436,7 +456,8 @@ const externalLinks = [
         </table>
       </div>
       <p>
-        メタを「オブジェクト」と取り違えると、デモ依頼に対してフィージビリティ判定・工数・リスクまで添える <strong>パターン F（メタ/オブジェクト取り違え）</strong>が発動する。逆にオブジェクトを「メタ」と取り違えると、実装すべきものを「概念解説」で済ませてしまう。S/T/D の判定は I が確定したあとに自然に決まるので、<strong>I を最初に声に出して宣言する</strong>習慣が最強の予防策になる。
+        メタを「オブジェクト」と取り違えると、デモ依頼に対してフィージビリティ判定・工数・リスクまで添える <InternalLink href="#failure-patterns">パターン F（メタ/オブジェクト取り違え）</InternalLink> が発動。逆にオブジェクトを「メタ」と取り違えると、実装すべきものを「概念解説」で済ませてしまいます。
+        S/T/D の判定は I が確定したあとに自然に決まるので、<strong>I を最初に声に出して宣言する</strong> 習慣が最強の予防策です。
       </p>
       <FigureLightbox
         src="/dfb/figures/dfb-intent-tree.png"
@@ -448,26 +469,27 @@ const externalLinks = [
     </Section>
 
     <Section id="dfb-build" number="8" title="Step 1〜3: D/F/B 実装">
-      <p>具体的な実装は次のフレームに対応する<Footnote n={3} /><Footnote n={4} />:</p>
+      <p>実装は次のフレームに対応します<Footnote n={3} /><Footnote n={4} />:</p>
       <ol class="list-decimal pl-6 space-y-2">
         <li>
-          <strong>Decompose</strong> — 6 要素分解（<strong>Role</strong> 誰として動くか / <strong>Task</strong> 何をするか・1文で / <strong>Input</strong> 渡す素材 / <strong>Constraints</strong> 守るルール / <strong>Output</strong> 出力形式 / <strong>Examples</strong> 見本があれば）。
-          ここで意識すべきは「全部埋めようとしない」こと。素材がなければ Input は空欄でいい。例がなければ Examples は無し。<strong>埋めることが目的化すると失敗パターン B（6要素埋め病）</strong>に陥る。
+          <strong>Decompose</strong> — 6 要素分解（<strong>Role</strong> 誰として動くか / <strong>Task</strong> 何をするか・1 文で / <strong>Input</strong> 渡す素材 / <strong>Constraints</strong> 守るルール / <strong>Output</strong> 出力形式 / <strong>Examples</strong> 見本）。
+          ここで意識すべきは「全部埋めようとしない」こと。素材がなければ Input は空欄で OK。例がなければ Examples なしで OK。埋めること自体が目的化すると <InternalLink href="#failure-patterns">失敗パターン B（6 要素埋め病）</InternalLink> に陥ります。
         </li>
         <li>
-          <strong>Frame</strong> — 5 つの枠から選ぶ。複雑な役割 × 複数指示 × 制約あり なら <strong>XML タグ</strong>。表で表せるデータ変換なら <strong>Markdown 表</strong>。条件分岐があれば <strong>IF-THEN</strong>。構造化データ出力なら <strong>JSON-LD</strong>。段階的処理なら <strong>番号付き手順</strong>。
-          単発質問にまで XML タグを巻くのは <strong>失敗パターン D（構造化疲労）</strong>になる。フレーム選択は「効果に対するコスト」で判断する。
+          <strong>Frame</strong> — 5 つの枠から選ぶ。複雑な役割 × 複数指示 × 制約あり なら <strong>XML タグ</strong>。表で表せるデータ変換なら <strong>Markdown 表</strong>。条件分岐があれば <strong>IF-THEN</strong>。構造化データ出力（AI 検索や <strong>Schema.org</strong> 連携）なら <strong>JSON-LD</strong>。段階的処理なら <strong>番号付き手順</strong>。
+          単発質問にまで XML タグを巻くのは <InternalLink href="#failure-patterns">失敗パターン D（構造化疲労）</InternalLink>。フレーム選択は「効果に対するコスト」で判断します。
         </li>
         <li>
           <strong>Build</strong> — XML タグ 7 種で組み立てる。<code>&lt;role&gt;</code> / <code>&lt;task&gt;</code> / <code>&lt;input&gt;</code> / <code>&lt;constraints&gt;</code> / <code>&lt;output_format&gt;</code> / <code>&lt;example&gt;</code> がコアの 6 個、<code>&lt;phase&gt;</code> が段階制御用の拡張タグ。
-          Decompose の 6 要素と XML タグ 6 個が <strong>1対1で対応</strong>するように設計されているので、Decompose が完了すれば Build は機械的に埋まる<Footnote n={4} />。
+          Decompose の 6 要素と XML タグ 6 個が <strong>1 対 1 で対応</strong> するように設計されているので、Decompose が終われば Build は機械的に埋まります<Footnote n={4} />。
         </li>
       </ol>
-      <p><strong>Decompose の6要素と XMLタグは1対1で対応するよう設計されている</strong>のが特徴で、構造化が綺麗に揃う<Footnote n={4} />。これは偶然ではなく、Decompose を「そのまま Build に渡せる単位」で行うことで、サイクル中に翻訳コストを発生させないための設計判断である。実務上、Decompose の段階で何を分けるかが Build の品質の 8 割を決める。</p>
+      <p><strong>Decompose の 6 要素と XML タグは 1 対 1 で対応するように設計されている</strong> のがこのメソッドの特徴で、構造化が綺麗に揃います<Footnote n={4} />。これは偶然ではなく、Decompose を「そのまま Build に渡せる単位」で行うことで、サイクル中の翻訳コストをゼロにするための設計判断です。実務的には、<strong>Decompose の段階で何を分けるかが、Build の品質の 8 割を決めます</strong>。</p>
+      <p>なお、Schema.org の <strong>JSON-LD</strong> は LLMO / GEO / AEO / AIO の対策とも親和性が高く、本記事自体も <code>Article</code> + <code>HowTo</code> + <code>FAQPage</code> の JSON-LD を埋め込んでいます（AI 検索エンジンに「何の記事か」を構造化して伝えるため）。</p>
     </Section>
 
     <Section id="variations" number="9" title="DFB 5バリエーション（Q / S / I / M / R）">
-      <p>基本DFBの上に、シーン別の5派生が乗る<Footnote n={1} />。それぞれ「いつ呼び出すか」「典型シーン」がはっきり決まっている:</p>
+      <p>基本 DFB の上に、シーン別の 5 派生が乗っています<Footnote n={1} />。それぞれ「いつ呼び出すか」「典型シーン」がはっきり決まっています:</p>
       <ul class="list-disc pl-6 space-y-2">
         <li>
           <strong>DFB-Q</strong>（Question 型・質問先行）— 入力に不明点が多すぎて、即構造化すると間違える時。
@@ -491,12 +513,12 @@ const externalLinks = [
         </li>
       </ul>
       <p>
-        5 つは排他ではなく、現場では複数を入れ子で使うことが多い。たとえば DFB-Q で要件を引き出してから DFB-S で境界を引き、DFB-I で反復する、といった重ね方になる。バリエーションを「使い分ける」こと自体が L3 の目利きの一部だ。
+        5 つは排他ではなく、現場では複数を入れ子で使うことが多いです。たとえば DFB-Q で要件を引き出し → DFB-S で境界を引き → DFB-I で反復する、といった重ね方になります。バリエーションを「使い分ける」こと自体が <InternalLink href="#four-levels">L3 の目利き</InternalLink> の一部です。
       </p>
     </Section>
 
     <Section id="failure-patterns" number="10" title="失敗パターン9種ライブラリ">
-      <p>「やってはいけない」を明示することで、目利きが育つ<Footnote n={1} /><Footnote n={5} />。9 つのパターンは、依頼受領フェーズ・実行フェーズ・出力フェーズの 3 段階に分布する:</p>
+      <p>「やってはいけない」を明示することで、<InternalLink href="#four-levels">目利き</InternalLink> が育ちます<Footnote n={1} /><Footnote n={5} />。9 つのパターンは、依頼受領フェーズ・実行フェーズ・出力フェーズの 3 段階に分布します:</p>
 
       <p><strong>【依頼受領フェーズ】</strong>(4 種)</p>
       <ul class="list-disc pl-6 space-y-1.5">
@@ -518,7 +540,7 @@ const externalLinks = [
         <li><strong>I: アカデミック疲労</strong> — 構造化された内部ロジックをそのまま出力してしまい、末尾の平易な翻訳（ユーザー説明レイヤー）が欠落する。読み手が疲れる。Step 7 で「ユーザー向けの平易なまとめ」を必ず添える。</li>
       </ul>
 
-      <p>※ かつての「A: 抽象度の暴走」は誤診断と判明し削除された。「L1 指示なのに L4 まで降りた」と当初は理論化したが、再診断の結果、本質は<strong>抽象度の問題ではなくメタ/オブジェクトの取り違え</strong>だったと判明し、F に再定義された。この「自己訂正の経緯」自体が「失敗を講座素材化する」発想の源泉になっている<Footnote n={5} />。失敗パターン集は他人を裁くためのものではなく、自分の応答を客観視するための道具として設計されている。</p>
+      <p>※ かつての「A: 抽象度の暴走」は、再診断の結果 <strong>誤診断と判明</strong> して削除されました。「L1 指示なのに L4 まで降りた」と当初は理論化していましたが、本質は <strong>抽象度の問題ではなくメタ/オブジェクトの取り違え</strong> だったので、パターン F に再定義しました。この「自己訂正の経緯」自体が「失敗を講座素材化する」という発想の源泉になっています<Footnote n={5} />。失敗パターン集は他人を裁くためのものではなく、<strong>自分の応答を客観視するための道具</strong> として設計されています。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-failure-patterns.png"
         alt="DFB失敗パターンの発生フェーズ別俯瞰図。左側に「依頼受領フェーズ」（構造化されていない依頼とメタ盲目を中心に、作業開始前の根本的不整合・オブジェクト誤解釈・タイムライン盲目を引き起こす段階）、右側に「実行フェーズ」（内部方法論への厳格な固執・特定フレームワークへの過度依存・機械的または過度に学術的な出力を生む段階）の2軸で比較構造を視覚化している。"
@@ -529,20 +551,23 @@ const externalLinks = [
     </Section>
 
     <Section id="demo" number="11" title="実演（Before/After）">
-      <p>DFB の効果は、最も身近な題材「プロンプト最適化」で検証されている<Footnote n={3} />。日常的に AI に投げているラフな依頼を、DFB の 3 ステップで再構築すると、出力品質が桁違いに変わる:</p>
+      <p>DFB の効果は、誰でも身近な題材「<strong>プロンプト最適化</strong>」で検証できます<Footnote n={3} />。日常的に AI に投げているラフな依頼を、DFB の 3 ステップで再構築すると、<strong>出力品質が桁違いに変わります</strong>:</p>
       <ul class="list-disc pl-6 space-y-2">
         <li><strong>議事録作成</strong>: 「次の会議の議事録を作って」（15 字）→ <code>&lt;role&gt;</code>（議事録作成のプロライター）/ <code>&lt;task&gt;</code>（A4 1 枚以内に変換）/ <code>&lt;input&gt;</code>（文字起こし）/ <code>&lt;constraints&gt;</code>（敬語・固有名詞そのまま）/ <code>&lt;output_format&gt;</code>（会議概要・議題と議論・決定事項・ToDo の 5 セクション仕様）まで構造化（約 500 字）。<em>変化のポイント</em>: AI が「議事録っぽい何か」を返すのではなく、仕様に従った決まった形式で返すようになる。</li>
         <li><strong>新規事業アイデア出し</strong>: 「新規事業のアイデア出して」（14 字）→ Role（新規事業立ち上げ 20 件以上のコンサル）+ 前提条件（自社の強み・初期予算・市場領域・既存事業）+ 制約（既存シナジー・1 年以内に MVP・レッドオーシャン除外）+ 出力（5 案 × 7 軸テーブル + おすすめ TOP1 の理由）（約 450 字）。<em>変化のポイント</em>: 比較可能な評価軸を最初に明示することで、案を並べる時点で判断材料が揃う。</li>
         <li><strong>メール返信案</strong>: 「このメールに返信考えて」（15 字）→ Role（ビジネスメール作成補助）+ context（相手・関係性・自分の立場・盛り込み事項）+ output（堅め / 中間 / 柔らかめの 3 トーン案 + 適切案の判断理由）+ constraints（書き出し統一・署名・字数）（約 500 字）。<em>変化のポイント</em>: 1 案ではなく 3 トーン案を出させることで、選ぶ自由と判断材料がついてくる。</li>
       </ul>
       <p>
-        共通する設計判断は 3 つ:<strong>(1) Role を具体化</strong>（経験年数や顧客層まで書く）/<strong>(2) Constraints は禁止形で書く</strong>（「〜してください」より「〜しないでください」の方が効きやすい）/<strong>(3) Output_format をスキーマレベルで指定</strong>（後段でパースできる形式に揃える）。
-        この 3 つは Before/After のすべてのサンプルで共通して効いていて、トピックが何であってもプロンプト品質を底上げする最小公倍数のような働きをする。
+        共通する設計判断は 3 つです。<strong>(1) Role を具体化</strong>（経験年数や顧客層まで書く）/ <strong>(2) Constraints は禁止形で書く</strong>（「〜してください」より「〜しないでください」のほうが効きやすい）/ <strong>(3) Output_format をスキーマレベルで指定</strong>（あとでプログラム的に処理できる形式に揃える、たとえば <strong>JSON-LD</strong> や <strong>Schema.org</strong> 準拠で出力させる）。
+        この 3 つは Before/After のすべてのサンプルで共通して効いていて、トピックが何であってもプロンプト品質を底上げする最小公倍数のような働きをします。
+      </p>
+      <p>
+        さらに大きなスケールでの実演として、日経クロストレンドの 2026 マーケトレンドマップ（35 キーワードの散布図）を DFB で読み解いた <InternalLink href="/posts/dfb-trend-map-2026-marketing/">クラスター連載第 1 回</InternalLink> もあります。SEO 消失と LLMO 群（LLMO / GEO / AEO / AIO）の浮上を「能力のスライド」の実例として実証した記事です。
       </p>
     </Section>
 
     <Section id="anti-patterns" number="12" title="アンチパターン7種（XMLタグ実装時）">
-      <p>理論を知っていても実装で崩れる 7 つの典型<Footnote n={4} />。失敗パターン 9 種が「思考の歪み」を扱うのに対し、こちらは「実装の手癖」を扱う。実装時に踏みやすい順に並べた:</p>
+      <p>理論を知っていても、実装で崩れる典型を 7 つ集めました<Footnote n={4} />。<InternalLink href="#failure-patterns">失敗パターン 9 種</InternalLink> が「思考の歪み」を扱うのに対し、こちらは「実装の手癖」を扱います。実装時に踏みやすい順に並べました:</p>
       <ol class="list-decimal pl-6 space-y-2">
         <li><strong>単純質問への過剰構造化</strong>（→ 失敗パターン D）— 「明日の天気は？」のような単発質問にまで XML タグを巻く。フレーム選択のコストが効果を上回っている時点でアンチパターン。</li>
         <li><strong><code>&lt;task&gt;</code> に複数動詞を詰める</strong>（→ 失敗パターン B）— 「読んで・要約して・宿題も教えて」のように動詞を散らかすと、AI が優先順位を誤って一部を抜かす。<code>&lt;task&gt;</code> は <strong>1 文・1 動詞</strong>に圧縮するのが鉄則。</li>
@@ -553,44 +578,47 @@ const externalLinks = [
         <li><strong>入れ子記述</strong> — <code>&lt;role&gt;&lt;task&gt;…&lt;/task&gt;&lt;/role&gt;</code> のように役割の中にタスクを入れない。DFB は<strong>並列フラット</strong>を推奨する。役割・タスク・入力・制約・出力・例 は同じレイヤーに並ぶ独立要素として扱う。</li>
       </ol>
       <p>
-        この 7 つに共通するのは、「フレームを使うこと自体が目的化している」状態。フレームは出力品質を上げる手段であって、整った見た目を作る目的ではない。実装時に「これは効果あるか？」を自問する 30 秒の習慣だけで、ほとんどのアンチパターンは予防できる。
+        この 7 つに共通するのは、「フレームを使うこと自体が目的化している」状態です。フレームは出力品質を上げる <strong>手段</strong> であって、整った見た目を作る <strong>目的</strong> ではありません。実装時に「これは効果ある？」と自問する <strong>30 秒の習慣</strong> だけで、ほとんどのアンチパターンは予防できます。
       </p>
     </Section>
 
     <Section id="kata" number="13" title="武道の「型」としての構造化">
       <p>
-        DFB は1回学んで終わりではなく、毎日の思考の<strong>型</strong>として体得するもの<Footnote n={2} />。記事を読み終えて「分かった」気になるレベルと、実務で反射的に使えるレベルの間には、武道で言う「型稽古」に相当する距離がある。
+        DFB は 1 回学んで終わりではなく、毎日の思考の <strong>型</strong> として体得するものです<Footnote n={2} />。記事を読み終えて「分かった」気になるレベルと、実務で反射的に使えるレベルの間には、武道でいう「型稽古」に相当する距離があります。
       </p>
       <p>
-        体得の道筋は <strong>守破離の 3 段階</strong>で進む:
+        体得の道筋は、<strong>守破離の 3 段階</strong> で進みます:
       </p>
       <ul class="list-disc pl-6 space-y-1.5">
-        <li><strong>守</strong> — 6 要素分解 / Stop-Judge / XML タグ 7 種 を、教科書通りに毎回踏む段階。違和感があっても省略しない。</li>
-        <li><strong>破</strong> — 状況に応じて要素を間引いたり、フレームを改造したりする段階。L3 の入口がここ。</li>
+        <li><strong>守</strong> — 6 要素分解 / Stop-Judge / XML タグ 7 種を、教科書通りに毎回踏む段階。違和感があっても省略しない。</li>
+        <li><strong>破</strong> — 状況に応じて要素を間引いたり、フレームを改造したりする段階。<InternalLink href="#four-levels">L3 の入口</InternalLink> がここ。</li>
         <li><strong>離</strong> — DFB そのものを使わずに、構造化の本質だけで動ける段階。L4 の領域。</li>
       </ul>
       <p>
-        日々の鍛錬は <strong>2 原則</strong>に集約される:
+        日々の鍛錬は <strong>2 原則</strong> に集約されます:
       </p>
       <ol class="list-decimal pl-6 space-y-1.5">
-        <li><strong>常に構造化目線で考える</strong> — どんな会話・どんな業務でも、「いまの塊は、何の要素で構成されているか？」を問い続ける。</li>
-        <li><strong>構造化された言葉でアウトプットする</strong> — 思考が構造化されていても、出力が散文に戻ったら相手に伝わらない。表・箇条書き・段落構造を出力時に意識する。</li>
+        <li><strong>常に構造化目線で考える</strong> — どんな会話・業務でも、「いまの塊は、どの要素で構成されているか？」を問い続ける。</li>
+        <li><strong>構造化された言葉でアウトプットする</strong> — 思考が構造化されていても、出力が散文に戻ると相手に伝わりません。表・箇条書き・段落構造を出力時に意識します。</li>
       </ol>
       <p>
-        実用的なトレーニング法として <strong>30 秒トレーニング</strong>（目の前のテキスト 1 つを 30 秒だけ Decompose してみる）と、<strong>30 日習慣化ロードマップ</strong>（Day 1〜30 で段階的に DFB を生活に組み込む工程表）がある。型として体に染み込むまで、毎日少しずつ動かすのが最短経路にあたる。
+        実用的なトレーニング法として <strong>30 秒トレーニング</strong>（目の前のテキスト 1 つを 30 秒だけ Decompose してみる）と、<strong>30 日習慣化ロードマップ</strong>（Day 1〜30 で段階的に DFB を生活に組み込む工程表）があります。型として体に染み込むまで、毎日少しずつ動かすのが最短経路です。
       </p>
     </Section>
 
     <Section id="proponent" number="14" title="提唱者">
       <p>
-        <strong>シュ コウメイ</strong>（Tony Chu / 朱 剛明）は、AI 時代の構造化メソッド「DFB」を 2025 年に提唱した実務家。
-        日々10社以上のクライアント業務で AI を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発した。
+        <strong>シュ コウメイ</strong>（Tony Chu / 朱 剛明）は、AI 時代の構造化メソッド「DFB」を 2025 年に提唱した実務家です。
+        日々 10 社以上のクライアント業務で AI（ChatGPT・Claude などの LLM）を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発しました。
       </p>
       <p>
-        DFB は机上の理論ではなく、現場の実装試行から逆算して組まれている。プロンプト 1 通の最適化から、社内 AI システム設計、クライアント業務の自動化、ピラー記事構成、講座カリキュラム設計まで、扱う粒度はバラバラだが、底に流れる「構造化の手順」は同じだという観察から、DFB という汎用プロトコルが結晶化した。
+        DFB は机上の理論ではなく、<strong>現場の実装試行から逆算</strong> して組まれています。プロンプト 1 通の最適化から、社内 AI システム設計、クライアント業務の自動化、ピラー記事構成、講座カリキュラム設計まで、扱う粒度はバラバラ。でも「底に流れる構造化の手順は同じだ」という観察から、DFB という汎用プロトコルが結晶化しました。
       </p>
       <p>
-        自社で運用する <strong>LLM Wiki</strong>（AI駆動型ナレッジ管理システム）は、DFB の実証実験そのもの。プロンプトレベルから組織知レベルまで、あらゆる階層で「AIフレンドリーな構造化」を毎日実践している<Footnote n={2} />。本記事自身も、DFB を使って書かれた DFB の解説、というメタ的な構造を持っている。
+        自社で運用する <strong>LLM Wiki</strong>（AI 駆動型ナレッジ管理システム）は、DFB の実証実験そのもの。プロンプトレベルから組織知レベルまで、あらゆる階層で「<strong>AI フレンドリーな構造化</strong>」（JSON-LD / Schema.org / LLMO / GEO / AEO / AIO を含む）を毎日実践しています<Footnote n={2} />。本記事自身も、DFB を使って書かれた DFB の解説、というメタ的な構造を持っています。
+      </p>
+      <p>
+        DFB を実演した連載第 1 回が <InternalLink href="/posts/dfb-trend-map-2026-marketing/">2026 マーケトレンドマップ DFB 読み解き</InternalLink>、入門編が <InternalLink href="/posts/dfb-method-introduction/">DFB とは — シュ コウメイが提唱する AI 時代の構造化メソッド</InternalLink>、関連論考が <InternalLink href="/posts/ai-era-senior-structuring-power/">AI 時代に『シニア有利』の本質は構造化能力にある</InternalLink> です。
       </p>
       <p>
         提唱者本人の関連発信は次のとおり:<a href="https://kangmyung.substack.com/" class="text-sky-600 dark:text-sky-400 hover:underline" target="_blank" rel="noopener">Substack「構造化脳」</a>（構造化の最新論考をメール配信）/<a href="https://www.street-academy.com/steachers/271053" class="text-sky-600 dark:text-sky-400 hover:underline" target="_blank" rel="noopener">ストアカ講座</a>（DFB を学べる対面講座）。
