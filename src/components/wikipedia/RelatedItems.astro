@@ -21,7 +21,7 @@ const { items, class: className } = Astro.props;
   <ul class="text-sm text-neutral-700 dark:text-neutral-300 space-y-1.5 list-disc pl-5 m-0">
     {items.map((it) => (
       <li class="leading-relaxed">
-        <a href={it.href} class="text-sky-600 dark:text-sky-400 hover:underline">{it.text}</a>
+        <a href={it.href} data-no-swup class="text-sky-600 dark:text-sky-400 hover:underline">{it.text}</a>
         {it.description && <span class="text-neutral-600 dark:text-neutral-400 ml-1.5">— {it.description}</span>}
       </li>
     ))}

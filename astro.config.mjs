@@ -55,6 +55,10 @@ export default defineConfig({
 				'a[href^="mailto:"]',
 				'a[href^="tel:"]',
 				'a[href^="javascript:"]',
+				// fullWidth レイアウト（Wikipedia 風固定ページ）への遷移は SPA 化しない。
+				// Swup は <main> だけを差し替えるため、fullWidth ↔ 通常レイアウトを
+				// 跨ぐと grid-template-columns が引き継がれず壊れる。
+				'a[href^="/dfb-complete-guide"]',
 			],
 		}),
 		icon({
