@@ -1,18 +1,27 @@
 ---
 /*
  * InternalLink.astro — Wikipedia 風 内部リンク（青下線）
- * 同サイト内の関連ページ・章へのリンク。
+ *
+ * リンク先による挙動:
+ *   - href が "#" で始まる(同ページ内アンカー) → 同タブで遷移(スクロール)
+ *   - href が "/" で始まる(別ページ)         → 新タブで開く(寄り道用)
+ *   - その他(相対パス等)                       → 同タブ
  */
 interface Props {
   href: string;
   title?: string;
 }
 const { href, title } = Astro.props;
+const isOtherPage = href.startsWith("/");
+const linkProps = isOtherPage
+  ? { target: "_blank", rel: "noopener" }
+  : {};
 ---
 <a
   href={href}
   title={title}
   data-no-swup
+  {...linkProps}
   class="wp-internal-link text-sky-700 dark:text-sky-300 font-medium underline decoration-sky-700 dark:decoration-sky-300 decoration-2 underline-offset-2 hover:text-sky-800 dark:hover:text-sky-200"
 >
   <slot />
