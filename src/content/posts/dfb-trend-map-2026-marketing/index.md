@@ -50,11 +50,11 @@ draft: false
       </marker>
     </defs>
     <!-- LLMO 群を赤丸で強調 -->
-    <ellipse cx="22" cy="22" rx="11" ry="3.5" fill="none" stroke="#dc2626" stroke-width="0.5" stroke-dasharray="0.8 0.4" />
-    <text x="34" y="22.5" fill="#dc2626" font-size="2.5" font-weight="bold">★中心命題</text>
+    <ellipse cx="14" cy="23" rx="10" ry="3" fill="none" stroke="#dc2626" stroke-width="0.5" stroke-dasharray="0.8 0.4" />
+    <text x="14" y="18" fill="#dc2626" font-size="2.5" font-weight="bold" text-anchor="middle">★中心命題</text>
     <!-- 能力のスライド軸（右下→左上の大きな矢印） -->
-    <path d="M 62 70 Q 45 50 28 24" stroke="rgba(220,38,38,0.55)" stroke-width="0.7" fill="none" marker-end="url(#dfb-arrow)" stroke-dasharray="1.5 0.8" />
-    <text x="48" y="46" fill="rgba(220,38,38,0.95)" font-size="3" font-weight="bold" transform="rotate(-32 48 46)">能力のスライド</text>
+    <path d="M 65 68 Q 42 48 21 26" stroke="rgba(220,38,38,0.55)" stroke-width="0.7" fill="none" marker-end="url(#dfb-arrow)" stroke-dasharray="1.5 0.8" />
+    <text x="45" y="48" fill="rgba(220,38,38,0.95)" font-size="3" font-weight="bold" transform="rotate(-32 45 48)">能力のスライド</text>
   </svg>
 </div>
 <figcaption style="text-align:center;font-size:0.85em;color:#78716c;margin-top:0.5rem;">図1: 2026 マーケティングトレンドマップ（公式マップを参照した自作分析図）。赤い破線丸で LLMO/GEO/AEO/AIO 群（記事の中心命題）を強調し、右下→左上の赤矢印で「能力のスライド」軸を視覚化している。</figcaption>
