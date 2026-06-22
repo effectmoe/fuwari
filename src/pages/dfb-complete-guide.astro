@@ -679,6 +679,33 @@ const externalLinks = [
   article table td {
     padding: 0.5rem 1rem !important;
   }
+  /* Wikipedia 風内部リンク（InternalLink.astro）の青下線を強制 */
+  article a.wp-internal-link,
+  a.wp-internal-link {
+    color: #0369a1 !important; /* sky-700 */
+    text-decoration: underline !important;
+    text-decoration-color: #0369a1 !important;
+    text-decoration-thickness: 2px !important;
+    text-underline-offset: 2px !important;
+    font-weight: 500 !important;
+  }
+  article a.wp-internal-link:hover,
+  a.wp-internal-link:hover {
+    color: #075985 !important; /* sky-800 */
+    text-decoration-color: #075985 !important;
+  }
+  @media (prefers-color-scheme: dark) {
+    article a.wp-internal-link,
+    a.wp-internal-link {
+      color: #7dd3fc !important; /* sky-300 */
+      text-decoration-color: #7dd3fc !important;
+    }
+    article a.wp-internal-link:hover,
+    a.wp-internal-link:hover {
+      color: #bae6fd !important; /* sky-200 */
+      text-decoration-color: #bae6fd !important;
+    }
+  }
 </style>
 
 <!-- 目次トグル制御（Swup 対応版・Claude Desktop 風 開閉ボタン） -->
