@@ -41,21 +41,8 @@ draft: false
 下の図は、ぼくが公式マップを参照しながら**自作した概念再現図**だ。公式マトリクスの正確なビジュアルは出典先（[日経クロストレンド公式X投稿](https://x.com/NIKKEIxTREND/status/2065562330470162607) / [元記事](https://xtrend.nikkei.com/atcl/contents/18/00448/00020/)）を直接ご覧いただきたい。
 
 <figure style="margin: 1.5rem 0;">
-<div style="position:relative;max-width:700px;margin:0 auto;">
-  <img src="/dfb-trend-map-2026-marketing/figures/trend-matrix-base.png" alt="2026マーケティングトレンドマップの座標再現図。横軸は経済インパクト(1〜5)、縦軸は将来性(1〜5)で、LLMO・GEO・AEO・AIO や AIエージェント、CDP/DMP、EC、CX、CRM 等 35 キーワードが散布図上に座標通りに配置され、緑枠で将来性高領域、橙枠で収益性高領域が示されている。" style="width:100%;display:block;border:1px solid #d6d3d1;border-radius:8px;" />
-  <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
-    <defs>
-      <marker id="dfb-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
-        <polygon points="0 0, 6 3, 0 6" fill="rgba(220,38,38,0.85)" />
-      </marker>
-    </defs>
-    <!-- LLMO 群を赤丸で強調 -->
-    <ellipse cx="23.5" cy="21" rx="11" ry="3" fill="none" stroke="#dc2626" stroke-width="0.6" stroke-dasharray="0.8 0.4" />
-    <text x="23.5" y="15.5" fill="#dc2626" font-size="2.5" font-weight="bold" text-anchor="middle">★中心命題</text>
-    <!-- 能力のスライド軸（右下→左上の大きな矢印） -->
-    <path d="M 65 68 Q 47 48 35 23" stroke="rgba(220,38,38,0.55)" stroke-width="0.7" fill="none" marker-end="url(#dfb-arrow)" stroke-dasharray="1.5 0.8" />
-    <text x="48" y="48" fill="rgba(220,38,38,0.95)" font-size="3" font-weight="bold" transform="rotate(-32 48 48)">能力のスライド</text>
-  </svg>
+<div style="max-width:700px;margin:0 auto;">
+  <img src="/dfb-trend-map-2026-marketing/figures/trend-matrix-base.png" alt="2026マーケティングトレンドマップの座標再現図（DFB分析オーバーレイ入り）。横軸は経済インパクト(1〜5)、縦軸は将来性(1〜5)。LLMO・GEO・AEO・AIO ラベル群が左上に赤い破線楕円で囲まれ「★中心命題」と明示され、散布図右下から LLMO 群に向かって赤い破線矢印で「能力のスライド」軸が引かれている。35キーワード（AIエージェント、CDP/DMP、EC、CX、CRM 他）も座標通りに配置され、緑枠で将来性高領域、橙枠で収益性高領域が示されている。" style="width:100%;display:block;border:1px solid #d6d3d1;border-radius:8px;" />
 </div>
 <figcaption style="text-align:center;font-size:0.85em;color:#78716c;margin-top:0.5rem;">図1: 2026 マーケティングトレンドマップ（公式マップを参照した自作分析図）。赤い破線丸で LLMO/GEO/AEO/AIO 群（記事の中心命題）を強調し、右下→左上の赤矢印で「能力のスライド」軸を視覚化している。</figcaption>
 </figure>
