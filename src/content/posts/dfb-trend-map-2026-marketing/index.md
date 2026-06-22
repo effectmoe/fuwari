@@ -50,10 +50,10 @@ draft: false
       </marker>
     </defs>
     <!-- LLMO 群を赤丸で強調 -->
-    <ellipse cx="22" cy="21" rx="10" ry="3" fill="none" stroke="#dc2626" stroke-width="0.6" stroke-dasharray="0.8 0.4" />
-    <text x="22" y="15.5" fill="#dc2626" font-size="2.5" font-weight="bold" text-anchor="middle">★中心命題</text>
+    <ellipse cx="23.5" cy="21" rx="11" ry="3" fill="none" stroke="#dc2626" stroke-width="0.6" stroke-dasharray="0.8 0.4" />
+    <text x="23.5" y="15.5" fill="#dc2626" font-size="2.5" font-weight="bold" text-anchor="middle">★中心命題</text>
     <!-- 能力のスライド軸（右下→左上の大きな矢印） -->
-    <path d="M 65 68 Q 46 48 33 23.5" stroke="rgba(220,38,38,0.55)" stroke-width="0.7" fill="none" marker-end="url(#dfb-arrow)" stroke-dasharray="1.5 0.8" />
+    <path d="M 65 68 Q 47 48 35 23" stroke="rgba(220,38,38,0.55)" stroke-width="0.7" fill="none" marker-end="url(#dfb-arrow)" stroke-dasharray="1.5 0.8" />
     <text x="48" y="48" fill="rgba(220,38,38,0.95)" font-size="3" font-weight="bold" transform="rotate(-32 48 48)">能力のスライド</text>
   </svg>
 </div>
