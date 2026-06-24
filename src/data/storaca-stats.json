@@ -1,18 +1,26 @@
 {
   "ratingValue": 4.94,
   "reviewCount": 219,
-  "studentsTaught": 462,
-  "repeatStudents": 255,
+  "studentsTaught": 464,
+  "repeatStudents": 256,
   "repeatRate": 55.2,
-  "sessionsTaught": 451,
-  "salesTotal": 1915450,
+  "sessionsTaught": 452,
+  "salesTotal": 1956250,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年6月24日",
-  "updatedAt": "2026-06-23T21:00:36.529Z",
+  "periodEnd": "2026年6月25日",
+  "updatedAt": "2026-06-24T21:00:27.171Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "AIと共に生きる40代以上のスタディコミュニティ",
+      "reviewer": "その他 30代",
+      "date": "2026-06",
+      "rating": 5,
+      "headline": null,
+      "text": "パソコンの雑多な書類やメモや画像をaiが整理整頓してくれるかも、ぐらいの考えでしたが、授業を受けていくと、自分の思考の分解掃除なんだなと。aiへの伝達には、エンジニア脳が必要とも気づきました。シュ先生のわかりやすく優しい授業とみんなと学べることが最大の魅力です。aiの勉強仲間がいるっていいですよ🎶"
+    },
     {
       "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
       "reviewer": "女性 40代",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "やりたいことが実現！！",
       "text": "claude codeの基礎的なところから教えていただき、非常にためになりました。しっかり最後まで、伴走していただいたおかげで、最終的な成果物は満足ものになりました。非常にオススメです！！"
-    },
-    {
-      "course": "最強AIツール！Claude Code バイブコーディング講座",
-      "reviewer": "男性 50代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "受講者のレベルに合わせた丁寧な説明をしてくれる講座",
-      "text": "受講前に具体的なやりたいことをイメージしていないで講座に臨みましたが、構造的な概念から丁寧に説明していただきました。また、その場で思いついた質問も即時答えていただいたので理解も深まり、終了時点で、次に何をすればよいのかが具体的なイメージを持って終わることが出来ました。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-06-23T21:01:15.682Z"
+  "testimonialsUpdatedAt": "2026-06-24T21:01:03.784Z"
 }
