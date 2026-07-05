@@ -1,18 +1,42 @@
 {
   "ratingValue": 4.94,
-  "reviewCount": 220,
-  "studentsTaught": 477,
-  "repeatStudents": 267,
-  "repeatRate": 56,
-  "sessionsTaught": 465,
-  "salesTotal": 2054050,
+  "reviewCount": 225,
+  "studentsTaught": 479,
+  "repeatStudents": 268,
+  "repeatRate": 55.9,
+  "sessionsTaught": 467,
+  "salesTotal": 2061050,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月5日",
-  "updatedAt": "2026-07-04T21:00:25.566Z",
+  "periodEnd": "2026年7月6日",
+  "updatedAt": "2026-07-05T21:00:24.796Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "ローカルLLM（AI）を身近なシステムに組み込み、無料で使い倒す！",
+      "reviewer": "その他 30代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "ローカルLLM初心者に最適なレクチャー",
+      "text": "普段はオンライン上でしかAIサービスを利用したことがなく、ローカルLLM導入については全くの初心者でしたが、一からヒアリングを行い、PCスペックや使いたい用途に最適なモデルやサービスを丁寧に教えてくださいました。先生の説明もわかりやすく親切で、続編講義もぜひ受講したいと思います。また来月、よろしくお願いいたします！"
+    },
+    {
+      "course": "AIと共に生きる40代以上のスタディコミュニティ",
+      "reviewer": "女性 40代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": null,
+      "text": "とても参考になります。グループでの学びもたのしくさんかさせてもらってます！"
+    },
+    {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-06",
+      "rating": 5,
+      "headline": "為になる",
+      "text": "いつもありがとうございます"
+    },
     {
       "course": "あなた専用Notionツールを講師がその場で作る超実践90分講座",
       "reviewer": "女性 40代",
@@ -30,20 +54,20 @@
       "text": "パソコンの雑多な書類やメモや画像をaiが整理整頓してくれるかも、ぐらいの考えでしたが、授業を受けていくと、自分の思考の分解掃除なんだなと。aiへの伝達には、エンジニア脳が必要とも気づきました。シュ先生のわかりやすく優しい授業とみんなと学べることが最大の魅力です。aiの勉強仲間がいるっていいですよ🎶"
     },
     {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-06",
+      "rating": 5,
+      "headline": "為になる",
+      "text": "いつもありがおうございます"
+    },
+    {
       "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
       "reviewer": "女性 40代",
       "date": "2026-06",
       "rating": 5,
       "headline": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
       "text": "いつも大変お世話になっています！次回は自分に合うタスク管理について先生にオリジナル仕様に構築してもらうことになりました!!よろしくお願いいたします！"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性 70代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "プログラムが出来そうな",
-      "text": "いつもありがとうございます"
     },
     {
       "course": "Claude Design 速習講座｜Canva＆パワポ連携可能！",
@@ -92,31 +116,7 @@
       "rating": 5,
       "headline": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
       "text": "いつもとても参考になっています！定期的に受講していきたいです！"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性 70代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "為になる講座でした",
-      "text": "ありがとうございました。"
-    },
-    {
-      "course": "SEOはLLMOへ！AI検索マーケティングのスキルを学ぶ60分",
-      "reviewer": "女性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "わかりやすくためになる講座",
-      "text": "丁寧に柔軟に教えて頂けました、ありがとうございました"
-    },
-    {
-      "course": "SEOはLLMOへ！AI検索に選ばれるWEBサイトを作る60分",
-      "reviewer": "女性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "LLMO対策の全体像が実例でつかめる講座",
-      "text": "これまでのSEOとLLMOがどう違うのか、というところから丁寧に教えてもらえて、頭の中が整理されました。JSON-LDやSchema.orgでの構造化データの作り方を、実際のサイトのソースコードやリッチリザルトの検証画面を見ながら解説してもらえたのが特によかったです。FAQや内部リンク、ピラー＆クラスターでサイトを回遊できる形にする考え方、医療系で重要なE-E-A-T（監修・出典・権威性）の話も具体的で、自社サイトのどこを直せばいいかが明確になりました。すぐ実践できる内容で、また次の講座も受けたいと思います。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-04T21:01:05.438Z"
+  "testimonialsUpdatedAt": "2026-07-05T21:05:40.309Z"
 }
