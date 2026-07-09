@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.94,
   "reviewCount": 225,
-  "studentsTaught": 484,
-  "repeatStudents": 272,
-  "repeatRate": 56.2,
+  "studentsTaught": 486,
+  "repeatStudents": 274,
+  "repeatRate": 56.4,
   "sessionsTaught": 472,
-  "salesTotal": 2089950,
+  "salesTotal": 2130250,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月9日",
-  "updatedAt": "2026-07-08T21:00:25.369Z",
+  "periodEnd": "2026年7月10日",
+  "updatedAt": "2026-07-09T21:00:25.366Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -108,15 +108,7 @@
       "rating": 5,
       "headline": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
       "text": "イラストも描きながら説明をしていただけるのでとてもわかりやすかったです。難しい言葉も使わないので余計に入ってきました。初心者の方にお勧めの講師ではないでしょうか。"
-    },
-    {
-      "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "reviewer": "女性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "text": "いつもとても参考になっています！定期的に受講していきたいです！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-08T21:01:04.944Z"
+  "testimonialsUpdatedAt": "2026-07-09T21:01:04.225Z"
 }
