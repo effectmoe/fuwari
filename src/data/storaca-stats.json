@@ -1,18 +1,26 @@
 {
-  "ratingValue": 4.94,
-  "reviewCount": 225,
-  "studentsTaught": 496,
+  "ratingValue": 4.95,
+  "reviewCount": 226,
+  "studentsTaught": 499,
   "repeatStudents": 284,
-  "repeatRate": 57.3,
-  "sessionsTaught": 480,
-  "salesTotal": 2205350,
+  "repeatRate": 56.9,
+  "sessionsTaught": 483,
+  "salesTotal": 2216150,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月14日",
-  "updatedAt": "2026-07-13T21:00:23.481Z",
+  "periodEnd": "2026年7月15日",
+  "updatedAt": "2026-07-14T21:00:24.545Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "AI×知識管理で劇的時短！Obsidian＆Claude活用術",
+      "reviewer": "男性",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "概念から教えてくれる非常に有意義な講座",
+      "text": "60分である程度の形になってしまったのには驚きました。先生の説明がいつも分かりやすく、ただやり方を学ぶだけでなく、根底にある背景や概念まで学ぶことができます。"
+    },
     {
       "course": "ローカルLLM（AI）を身近なシステムに組み込み、無料で使い倒す！",
       "reviewer": "その他 30代",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
       "text": "イラストも描きながら説明をしていただけるのでとてもわかりやすかったです。難しい言葉も使わないので余計に入ってきました。初心者の方にお勧めの講師ではないでしょうか。"
-    },
-    {
-      "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "reviewer": "女性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "text": "いつもとても参考になっています！定期的に受講していきたいです！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-13T21:01:06.018Z"
+  "testimonialsUpdatedAt": "2026-07-14T21:01:06.033Z"
 }
