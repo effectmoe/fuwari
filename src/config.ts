@@ -55,6 +55,10 @@ export const navBarConfig: NavBarConfig = {
 			url: "/ai-agent-course/",
 		},
 		{
+			name: "AIセントラル",
+			url: "/ai-central/",
+		},
+		{
 			name: "ストアカ",
 			url: "https://www.street-academy.com/steachers/271053",
 			external: true,

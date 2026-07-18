@@ -1,0 +1,780 @@
+---
+/*
+ * ai-central.astro — 士業向け「AIセントラル」ランディングページ（商品仕様 v2.0 準拠）
+ * 3プラン: AIセントラル ¥330,000 / ＋ ¥550,000 / パーフェクトセキュア ¥1,320,000
+ * 月額: 全プラン共通・必須 ¥34,800（週1×90分伴走 + 基本保守）
+ * コンテンツ正本: LLM Wiki wiki/EFFECT/lp-content-ai-central-20260715.md
+ * 実績数値は src/data/storaca-stats.json（日次自動更新）から取得
+ */
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
+import stats from "../data/storaca-stats.json";
+
+const contactEmail = "info@effect.moe";
+const mailtoSubject = encodeURIComponent("【AIセントラル】無料相談の申し込み");
+const mailtoBody = encodeURIComponent(
+  `株式会社EFFECT 御中
+
+AIセントラルの無料相談を希望します。
+
+■ 事務所名：
+■ 士業の種類（税理士・社労士・行政書士・司法書士・弁護士・その他）：
+■ ご担当者さまのお名前：
+■ ご相談内容・現在のお困りごと：
+
+※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
+);
+const mailtoLink = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+
+// ===== 課題提起: 士業×AIの3つの壁 =====
+const walls = [
+  {
+    icon: "material-symbols:lock-outline",
+    title: "守秘義務の壁",
+    body: "ChatGPT に顧問先の情報を貼り付けるわけにはいかない。クラウド AI は便利でも、顧客データを外部サーバーに送ること自体が士業には重すぎるリスクです。",
+    examples: "税理士：申告書の下書きに顧問先の数字を使えない ／ 弁護士：事件記録を AI に読ませられない",
+  },
+  {
+    icon: "material-symbols:psychology-alt-outline",
+    title: "忘れる AI の壁",
+    body: "毎回ゼロから説明し直す AI は、戦力になりません。顧問先の背景・過去の相談・事務所の型を覚えていない AI に、実務は任せられない。",
+    examples: "社労士：顧問先ごとの就業規則の経緯を毎回説明 ／ 行政書士：過去の許認可案件のノウハウが検索できない",
+  },
+  {
+    icon: "material-symbols:grid-off-outline",
+    title: "ツール分散の壁",
+    body: "メール・チャット・Excel・Notion・業務ソフト。情報が散らばったままでは、どんな AI を入れても「探す時間」は減りません。",
+    examples: "司法書士：案件情報がメールと紙に分散 ／ 会計事務所：担当者の頭の中にしかない顧問先知識",
+  },
+];
+
+// ===== 時代マッチ: AI進化の3段階 =====
+const stages = [
+  {
+    no: "第1段階",
+    name: "聞ける AI",
+    desc: "ChatGPT に質問して答えをもらう。便利だが、事務所のことは何も知らない。",
+    note: "多くの事務所がいまここで止まっています",
+    plans: null,
+  },
+  {
+    no: "第2段階",
+    name: "覚える AI",
+    desc: "事務所の顧問先・案件・ノウハウを記憶し、文脈を踏まえて答える。",
+    note: null,
+    plans: "AIセントラル ／ ＋",
+  },
+  {
+    no: "第3段階",
+    name: "働く AI",
+    desc: "記憶を土台に、指示すれば下書き・整理・定型業務を実際にこなす。",
+    note: null,
+    plans: "パーフェクトセキュア",
+  },
+];
+
+// ===== 必要性 6本 =====
+const reasons = [
+  {
+    icon: "material-symbols:balance",
+    title: "守秘義務と AI のジレンマに、答えが出た",
+    body: "問題の本質は「AI を使うこと」ではなく「どこの誰が管理しているか分からないサーバーに送ること」。運用ルールで線を引く方法と、そもそもデータが事務所から出ない構成——2つの答えを用意しました。守秘義務は AI を諦める理由ではなく、正しい構成を選ぶ理由です。",
+  },
+  {
+    icon: "material-symbols:search-off-rounded",
+    title: "「探す・思い出す・説明し直す」が見えないコスト",
+    body: "「あの件どうなってた」を、メールを遡り、担当者に聞き、フォルダを開いて確かめる。この時間は請求書に載りませんが、毎日発生しています。事務所の記憶を AI が持てば、その多くが「聞けば数秒」に変わります。",
+  },
+  {
+    icon: "material-symbols:group-off-outline",
+    title: "属人化と引き継ぎ — 頭の中の情報は資産にならない",
+    body: "顧問先の経緯・注意点・過去の判断が担当者の頭の中にしかない状態は、退職・異動・急病のたびに事務所の資産が失われるということ。日々の業務の中で自然に「事務所の記憶」が蓄積される仕組みが、その構造を変えます。",
+  },
+  {
+    icon: "material-symbols:alarm-on-outline",
+    title: "期限業務を「人の注意力」だけで守る時代の終わり",
+    body: "申告期限・手続き期限・更新期限。士業の信用は期限で決まります。人の注意力とダブルチェックに加えて、記憶と期限がつながった AI の「見張り番」をもう一枚重ねる時代です。",
+  },
+  {
+    icon: "material-symbols:trending-up-rounded",
+    title: "顧問先が、先に AI を使い始めている",
+    body: "顧問先の経営者はすでに ChatGPT で下調べをしてから相談に来ます。「AI ではこう出ましたが、先生はどう思いますか」に、AI の特性を踏まえて答えられる事務所が選ばれます。AI を業務に組み込んでいる事実そのものが、これからの営業力です。",
+  },
+  {
+    icon: "material-symbols:savings-outline-rounded",
+    title: "記憶は「早く始めた分だけ」貯まる",
+    body: "AIセントラルの本体はソフトウェアではなく、蓄積された事務所の記憶です。記憶は後からまとめて買えません。始めるのが1年早ければ、1年分賢い AI になります。だから33万円の第一歩を「小さく・今」踏み出せる設計にしました。",
+  },
+];
+
+// ===== ユースケース =====
+const commonCases = [
+  {
+    title: "「あの件どうなってた？」への即答",
+    before: "メール検索 → フォルダ探索 → 担当者に確認。1件あたり10〜20分。",
+    after: "AI に聞くと、経緯・現在の状態・未対応事項が数秒で返る（出典付きで確認可能）。",
+  },
+  {
+    title: "引き継ぎ・急な担当交代",
+    before: "引き継ぎ書の作成に数日。それでも「聞かないと分からないこと」が残る。",
+    after: "顧問先カルテと対応履歴が常に最新で存在。後任は AI に質問しながら業務を継続。",
+  },
+  {
+    title: "新人教育",
+    before: "先輩の時間を割いて OJT。同じ質問が毎年繰り返される。",
+    after: "「この手続きの事務所の型は？」を新人が AI に直接質問。先輩は判断が必要な質問だけ受ける。",
+  },
+];
+
+const proCases = [
+  {
+    field: "税理士・会計事務所",
+    icon: "material-symbols:calculate-outline",
+    scene: "「B 社の社長から電話。去年の役員報酬の話の続きらしい」→ AI が昨年の検討経緯と結論、保留になっていた論点を即座に提示。",
+    effect: "電話・面談前の「思い出す準備」が数分で完了。月次巡回の質が上がります。パーフェクトセキュアなら申告データそのものを下処理対象にできます。",
+  },
+  {
+    field: "社会保険労務士",
+    icon: "material-symbols:diversity-3-rounded",
+    scene: "「C 社の副業規定、どういう経緯でこの条文になったか」→ 改定時の議論・顧問先の意向・見送った代替案まで AI が提示。",
+    effect: "「経緯を知る人がいない」問題の解消。規程改定の提案スピードが上がります。※本システムの原型は、顧問先約100社の情報散在に悩む社労士法人向けに構築され、実際に稼働しているシステムです。",
+  },
+  {
+    field: "行政書士",
+    icon: "material-symbols:approval-outline",
+    scene: "「この業種の建設業許可、前にやった時に何かクセがあったはず」→ 過去案件の指摘事項・補正内容を AI が想起。",
+    effect: "2回目以降の同種案件の立ち上がりが速くなります。「前回の自分」が最高の参考資料になります。",
+  },
+  {
+    field: "司法書士",
+    icon: "material-symbols:gavel-rounded",
+    scene: "相続登記の相談で「似た構造の数次相続、前に扱った」→ 当時の整理メモと注意点を AI が提示。",
+    effect: "複雑案件の検討漏れ防止。期限管理が「人 + AI」の二重化になります。",
+  },
+  {
+    field: "弁護士",
+    icon: "material-symbols:menu-book-outline",
+    scene: "「この争点、以前の事件で似た主張を組み立てた」→ 当時の書面構成を AI が提示。",
+    effect: "リサーチと下書きの初速が変わります。事件記録は機微性が高いため、パーフェクトセキュア（完全事務所内処理）を推奨します。",
+  },
+];
+
+// ===== 競合比較 =====
+const comparisonRows = [
+  { label: "初期費用", big: "300万〜1,500万円", saas: "0円〜", ours: "33万〜132万円" },
+  { label: "月額", big: "保守費 数十万円〜", saas: "6千円〜11万円", ours: "34,800円（週1伴走つき）" },
+  { label: "顧客データの所在", big: "自社内", saas: "外部クラウド", ours: "事務所内（※）" },
+  { label: "AI が事務所の記憶を持つか", big: "構築次第（大規模開発）", saas: "持たない（汎用回答）", ours: "持つ（記憶を構築）" },
+  { label: "人の伴走", big: "なし〜別料金", saas: "なし", ours: "毎週90分（全プラン標準）" },
+  { label: "解約時", big: "—", saas: "データはサービス内に残る", ours: "全データがテキスト形式で手元に残る" },
+];
+
+// ===== 料金 3プラン =====
+const plans = [
+  {
+    name: "AIセントラル",
+    catch: "まず、AI に事務所を「覚えさせる」。",
+    price: "¥330,000",
+    highlight: false,
+    badge: null,
+    forWho: "ChatGPT は使ってみたが毎回ゼロから説明するのに疲れた／情報がメール・Excel・頭の中に散らばっている事務所に。",
+    features: [
+      { text: "顧問先カルテ・案件ログ・期限管理（AI 記憶ベース一式）", on: true },
+      { text: "ChatGPT メモ・Notion・Excel の取り込み", on: true },
+      { text: "既存フォルダはそのまま（動かさずに索引連携）", on: true },
+      { text: "士業テンプレート + 機微情報の運用ルール", on: true },
+      { text: "導入研修 1回 + 顧問先3社分の初期カルテ化を伴走", on: true },
+      { text: "Notion 双方向連携・カレンダー同期・類似案件検索", on: false },
+      { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
+    ],
+    note: "いまお使いのパソコンで導入できます（Mac / Windows・専用機不要）。AI はクラウド型を利用します。",
+  },
+  {
+    name: "AIセントラル＋",
+    catch: "事務所のツールが、全部つながる。",
+    price: "¥550,000",
+    highlight: false,
+    badge: null,
+    forWho: "Notion やスプレッドシートで顧問先・案件を管理している／予定と期限が分散している事務所に。",
+    features: [
+      { text: "「AIセントラル」の全内容", on: true },
+      { text: "Notion 連携（いまの Notion をそのまま使い続けるだけで AI の記憶に）", on: true },
+      { text: "Google カレンダー連携（期限・予定が記憶とつながる）", on: true },
+      { text: "類似案件検索（「前にも似た件がなかったか」を AI がたどる）", on: true },
+      { text: "導入研修 2回（Notion 運用特化回を含む）", on: true },
+      { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
+    ],
+    note: "いまお使いのパソコンで導入できます。AI 生成物の Notion への書き戻しは、先生の承認後のみ行う設計です。",
+  },
+  {
+    name: "AIセントラル パーフェクトセキュア",
+    catch: "顧客情報を1バイトも外に出さない。そして、AI が働く。",
+    price: "¥1,320,000",
+    highlight: true,
+    badge: "守秘義務・完全対応",
+    forWho: "マイナンバー・申告データ・事件記録など、外部クラウドに出せない情報こそ AI に扱わせたい事務所に。",
+    features: [
+      { text: "「AIセントラル＋」の全内容", on: true },
+      { text: "完全事務所内 AI（顧客データを外部サーバーに一切送信しない）", on: true },
+      { text: "外出先・スマホから本人認証経由で利用（VPN 機器不要）", on: true },
+      { text: "メール自動取込（放っておいても対応履歴が蓄積）", on: true },
+      { text: "申告・手続き期限のリマインド", on: true },
+      { text: "AI エージェント（指示すれば実作業。送信・確定は必ず先生の承認経由）", on: true },
+      { text: "導入研修 4回（自動化の線引き設計回を含む）", on: true },
+    ],
+    note: "事務所に AI 専用の Mac を1台設置します（実費別・目安30〜60万円・機種選定をお手伝いします）。皆さまの Windows パソコンはそのまま、ブラウザから利用できます。",
+  },
+];
+
+// ===== 導入の流れ =====
+const flowSteps = [
+  { no: "1", title: "無料相談・ヒアリング", body: "業務フロー・お困りごと・扱う情報の機密度を伺い、最適なプランをご提案します。" },
+  { no: "2", title: "構築・設置", body: "リモート中心で AI セントラル一式を構築します（目安 2〜4週間）。既存フォルダは動かしません。" },
+  { no: "3", title: "導入研修", body: "実際の業務データを使って、先生・スタッフの皆さまが日常業務で使えるところまでご一緒します。" },
+  { no: "4", title: "毎週の伴走（月額34,800円）", body: "週1回×90分、AI の記憶と活用範囲を一緒に育てます。基本保守も含まれます。" },
+];
+
+// ===== FAQ =====
+const faqs = [
+  {
+    q: "守秘義務との関係は大丈夫ですか？",
+    a: "プラン1・2では「機微情報を AI に触れさせない運用ルール」（3段階の線引き表）を研修でお渡しし、パーフェクトセキュアでは AI の処理がすべて事務所内の Mac で完結するため、顧客データが外部サーバーに送信されることはありません。また AI の役割は資料の下処理・過去案件の想起・文書の下書きに限定し、専門的判断は必ず先生が行う前提の運用設計です。",
+  },
+  {
+    q: "事務所は Windows ばかりですが、使えますか？",
+    a: "はい。プラン1・2はいまお使いの Windows パソコンで導入できます。パーフェクトセキュアで設置する Mac は「事務所に置く AI 専用機」であり、皆さまの既存パソコンは一切変更不要。普段のパソコンのブラウザから利用できます。",
+  },
+  {
+    q: "月額34,800円には何が含まれますか？",
+    a: "週1回×90分のオンライン伴走コンサル、メール相談、システムの基本保守（アップデート適用・軽微な調整）が含まれます。導入して終わりではなく、毎週一緒に AI の活用範囲を広げていくための必須セットです。大規模な改修や障害復旧作業は都度お見積りとなります。",
+  },
+  {
+    q: "パソコンが苦手なスタッフでも使えますか？",
+    a: "AI への質問は日本語の文章で話しかけるだけです。導入研修では実際の業務データを使い、スタッフの皆さまが日常業務で使えるところまで伴走します。毎週の月額コンサルでも、つまずきをその都度解消していきます。",
+  },
+  {
+    q: "解約したらデータはどうなりますか？",
+    a: "蓄積した記憶（カルテ・記録）はすべて誰でも読める標準的なテキスト形式で、事務所のお手元に残ります。特定のサービスに閉じ込められる「データの人質」は起きません。これは本システムの重要な設計思想です。",
+  },
+  {
+    q: "AI が勝手にメールを送ったりしませんか？",
+    a: "しません。パーフェクトセキュアの AI エージェントは「承認キュー」という仕組みで動き、下書き・整理などの作業は行いますが、送信・確定は必ず先生の承認を経由します。どの業務を任せてどこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
+  },
+  {
+    q: "遠方の事務所でも対応できますか？",
+    a: "ヒアリング・構築・研修・毎週の伴走はすべてオンライン（Zoom）で対応可能です。機器の設置もオンラインでご案内しながら進められます。",
+  },
+];
+
+// ===== 匿名事例 =====
+const cases = [
+  {
+    label: "社労士法人 S 様",
+    field: "社会保険労務士",
+    body: "複数の自社メディアの AI 検索対応（LLMO）・コンテンツ改善を継続支援。AI 時代の情報発信基盤を整備。",
+  },
+  {
+    label: "会計事務所 K 様",
+    field: "会計事務所",
+    body: "AI × ナレッジ管理ツールによる顧問先情報の整理と議事録運用を伴走支援。「AI に事務所の記憶を持たせる」運用を実践中。",
+  },
+  {
+    label: "人事労務 BPO 企業 C 様",
+    field: "人事労務アウトソーシング",
+    body: "AI による Web サイト監視2系統と月次レポートを月額で継続運用。定例ミーティングで改善を積み上げる伴走型支援。",
+  },
+];
+
+const testimonials = (stats.testimonials ?? []).filter((t) => t.text && t.text.length > 40).slice(0, 2);
+
+// ===== JSON-LD =====
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "AIセントラル",
+  serviceType: "士業向けAI・DXシステム構築およびコンサルティング",
+  description:
+    "士業事務所にAI記憶ベース（顧問先カルテ・案件ログ）を構築し、守秘義務に配慮した構成で業務の中心にAIを据えるDXシステム。全プランに週1回の伴走コンサル付き。",
+  provider: {
+    "@type": "Organization",
+    name: "株式会社EFFECT",
+    url: "https://effect.moe",
+    email: contactEmail,
+    address: { "@type": "PostalAddress", addressLocality: "福岡市中央区", addressRegion: "福岡県", addressCountry: "JP" },
+  },
+  areaServed: "JP",
+  audience: { "@type": "Audience", audienceType: "税理士・社会保険労務士・行政書士・司法書士・弁護士・会計事務所" },
+  offers: [
+    { "@type": "Offer", name: "AIセントラル", price: "330000", priceCurrency: "JPY" },
+    { "@type": "Offer", name: "AIセントラル＋", price: "550000", priceCurrency: "JPY" },
+    { "@type": "Offer", name: "AIセントラル パーフェクトセキュア", price: "1320000", priceCurrency: "JPY" },
+  ],
+};
+---
+
+<MainGridLayout
+  title="AIセントラル｜顧客情報を外に出さない、士業事務所専属のAI｜シュ コウメイ（株式会社EFFECT）"
+  description="士業（税理士・社労士・行政書士・司法書士・弁護士）向けAI・DXシステム構築。事務所にAIの記憶ベースを構築し、守秘義務を守ったままAIを業務の中心に。構築33万円〜+全プラン週1伴走コンサル月額34,800円。ストアカ評価★4.94のプロ講師が構築から伴走まで担当。"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+  <div class="flex flex-col gap-5 w-full">
+
+    <!-- ===== 1. Hero ===== -->
+    <div class="card-base overflow-hidden p-0">
+      <div class="bg-gradient-to-br from-[var(--primary)]/10 via-transparent to-[var(--primary)]/5 px-6 md:px-9 pt-8 pb-7">
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="inline-flex items-center gap-1 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1">
+            <Icon name="material-symbols:balance" class="text-sm" />
+            税理士・社労士・行政書士・司法書士・弁護士 対応
+          </span>
+          <span class="inline-flex items-center gap-1 text-xs font-bold text-75 bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1">
+            <Icon name="material-symbols:encrypted-outline" class="text-sm" />
+            事務所内オンプレ構成対応
+          </span>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
+          顧客情報を1バイトも外に出さない、<br />
+          <span class="text-[var(--primary)]">事務所専属 AI。</span>
+        </h1>
+        <p class="text-base md:text-lg text-90 font-bold leading-relaxed mb-2">
+          事務所のことも、顧問先のことも、覚えている。聞けば答え、言えば動く。
+        </p>
+        <p class="text-sm md:text-base text-75 leading-relaxed mb-6">
+          守秘義務の中で成立する、事務所の新しいチームのかたち — AIセントラル。
+        </p>
+        <div class="flex flex-wrap gap-3 mb-3">
+          <a
+            href={mailtoLink}
+            data-no-swup
+            class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
+          >
+            <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+            無料相談を申し込む
+          </a>
+          <a
+            href="#pricing"
+            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
+          >
+            料金を見る
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:neurology-outline" class="text-[var(--primary)] text-lg" />
+            AI が事務所の記憶を持つ
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:handshake-outline" class="text-[var(--primary)] text-lg" />
+            全プラン 週1回の伴走コンサル付き
+          </span>
+          <span class="flex items-center gap-1.5">
+            <Icon name="material-symbols:currency-yen" class="text-[var(--primary)] text-lg" />
+            構築 ¥330,000〜
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 2. 課題提起 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:report-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">士業の AI 活用には、3つの壁があります。</h2>
+      </div>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        「AI を使いたいが、うちの業務では無理だ」——そう感じている先生の多くは、次の3つの壁に阻まれています。
+      </p>
+      <div class="grid md:grid-cols-3 gap-4">
+        {walls.map((w) => (
+          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+            <Icon name={w.icon} class="text-3xl text-[var(--primary)] mb-2" />
+            <h3 class="text-lg font-bold text-90 mb-2">{w.title}</h3>
+            <p class="text-sm text-75 leading-relaxed mb-3">{w.body}</p>
+            <p class="text-xs text-50 leading-relaxed border-t border-black/5 dark:border-white/5 pt-2">{w.examples}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 3. 時代マッチ（図解1: AI進化の3段階） ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:rocket-launch-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">AI は、「道具」から「戦力」へ。</h2>
+      </div>
+      <p class="text-base font-bold text-90 mb-1">忘れない。漏らさない。働く。</p>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        この2〜3年で、AI は3つの段階を駆け上がりました。①検索の代わりに「聞ける」ようになり、②事務所の情報を「覚えられる」ようになり、③いま、指示すれば「働ける」ようになりました。AIセントラルの3プランは、この進化の3段階にそのまま対応しています。
+      </p>
+      <div class="grid md:grid-cols-3 gap-3">
+        {stages.map((s, i) => (
+          <div class={`rounded-xl p-5 border ${i === 0 ? "border-black/10 dark:border-white/10 opacity-80" : "border-[var(--primary)]/60 bg-[var(--btn-plain-bg)]"}`}>
+            <div class="text-xs font-bold text-50 mb-1">{s.no}</div>
+            <h3 class="text-lg font-bold text-90 mb-2 flex items-center gap-2">
+              {s.name}
+              {i > 0 && <Icon name="material-symbols:check-circle-rounded" class="text-lg text-[var(--primary)]" />}
+            </h3>
+            <p class="text-sm text-75 leading-relaxed mb-3">{s.desc}</p>
+            {s.note && <p class="text-xs text-50 border-t border-black/5 dark:border-white/5 pt-2">{s.note}</p>}
+            {s.plans && (
+              <p class="text-xs font-bold text-[var(--primary)] border-t border-black/5 dark:border-white/5 pt-2">対応プラン: {s.plans}</p>
+            )}
+          </div>
+        ))}
+      </div>
+      <p class="text-sm text-75 mt-4 leading-relaxed">
+        ChatGPT を使う＝第1段階。<strong class="text-90">AIセントラルは第2段階から始まり、最上位プランで第3段階まで到達します。</strong>事務所の現在地から無理なく始めて、時代の進化と一緒に階段を上れます。
+      </p>
+    </div>
+
+    <!-- ===== 4. 疑似記憶の体験シナリオ ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:neurology-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">昨日の顧問先対応を、AI が覚えている。</h2>
+      </div>
+      <p class="text-base text-75 mb-5 leading-relaxed">
+        一般的な AI チャットは、会話を閉じた瞬間にすべてを忘れます。AIセントラルは、事務所のメールや記録を記憶として蓄積し続けるため、<strong class="text-90">聞けば「事務所の過去」が返ってくる</strong> AI になります。
+      </p>
+      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5 flex flex-col gap-3 text-sm md:text-base">
+        <div class="flex gap-3">
+          <span class="shrink-0 font-bold text-90">先生：</span>
+          <span class="text-75">「A 社の労務相談、前回どこまで話したっけ？」</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-bold text-[var(--primary)]">AI：</span>
+          <span class="text-75">「先月14日のメールで、就業規則の副業規定の改定案を送付済みです。先方からは役員の取り扱いについて追加質問が届いており、未回答です。過去の類似案件では B 社（2年前）で同様の論点を整理しています。」</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-bold text-90">先生：</span>
+          <span class="text-75">「その B 社の整理を下敷きに、回答の下書きを作って。」</span>
+        </div>
+        <div class="flex gap-3">
+          <span class="shrink-0 font-bold text-[var(--primary)]">AI：</span>
+          <span class="text-75">「下書きを作成しました。判断が必要な箇所には印を付けています。」</span>
+        </div>
+      </div>
+      <p class="text-xs text-50 mt-3">※ 画面はイメージです。AI の役割は下処理・想起・下書きまでで、専門的判断は必ず先生が行う運用設計です。</p>
+    </div>
+
+    <!-- ===== 5. セキュリティ（図解2: データの流れ比較） ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:shield-lock-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">データは事務所から出ない。それでも、外から使える。</h2>
+      </div>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        これまで士業が AI を本気で使えなかった理由はただひとつ、<strong class="text-90">顧客情報を外部のサーバーに送れない</strong>から。状況を変えたのが、事務所に置ける小型・高性能なコンピュータの登場です。かつてサーバールームが必要だった「事務所内 AI」が、机の上の Mac 1台で動く時代になりました。
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+          <h3 class="text-base font-bold text-90 mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:cloud-outline" class="text-xl text-50" />
+            一般的なクラウド AI
+          </h3>
+          <ul class="text-sm text-75 leading-relaxed flex flex-col gap-2">
+            <li class="flex gap-2"><Icon name="material-symbols:arrow-upload-progress-rounded" class="text-lg text-amber-500 shrink-0 mt-0.5" />入力した内容は外部サーバーに送信される</li>
+            <li class="flex gap-2"><Icon name="material-symbols:warning-outline-rounded" class="text-lg text-amber-500 shrink-0 mt-0.5" />顧客の機微情報は入力できない（守秘義務）</li>
+            <li class="flex gap-2"><Icon name="material-symbols:psychology-alt-outline" class="text-lg text-50 shrink-0 mt-0.5" />事務所のことは何も覚えていない</li>
+          </ul>
+          <p class="text-xs text-50 mt-3 border-t border-black/5 dark:border-white/5 pt-2">※ プラン1・2はクラウド AI 型です。機微情報を扱わない運用ルール（3段階の線引き表）とセットでご提供します。</p>
+        </div>
+        <div class="rounded-xl border-2 border-[var(--primary)] p-5">
+          <h3 class="text-base font-bold text-90 mb-3 flex items-center gap-2">
+            <Icon name="material-symbols:home-work-outline" class="text-xl text-[var(--primary)]" />
+            AIセントラル パーフェクトセキュア
+          </h3>
+          <ul class="text-sm text-75 leading-relaxed flex flex-col gap-2">
+            <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />AI も記憶も原本も、すべて事務所の Mac の中</li>
+            <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />顧客データはこの線を越えない（外部 API に送信しない）</li>
+            <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />外出先・スマホからは本人認証を通った人だけ（VPN 不要）</li>
+            <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />スタッフは既存の Windows PC のブラウザから利用</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 6. 必要性 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:priority-high-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">AI 活用は「いつか」ではなく「どの段階から」の話になりました。</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4 mt-5">
+        {reasons.map((r) => (
+          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+            <h3 class="text-base font-bold text-90 mb-2 flex items-start gap-2">
+              <Icon name={r.icon} class="text-xl text-[var(--primary)] shrink-0 mt-0.5" />
+              {r.title}
+            </h3>
+            <p class="text-sm text-75 leading-relaxed">{r.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 7. ユースケース ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:cases-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">導入後、毎日の仕事はこう変わります。</h2>
+      </div>
+      <p class="text-xs text-50 mb-5">※ 効果は事務所の規模・業務内容により異なります。以下は働き方の変化を典型場面でご紹介するものです。</p>
+
+      <h3 class="text-lg font-bold text-90 mb-3">どの士業にも共通する3つの場面</h3>
+      <div class="grid md:grid-cols-3 gap-4 mb-7">
+        {commonCases.map((c) => (
+          <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5">
+            <h4 class="text-sm font-bold text-90 mb-3">{c.title}</h4>
+            <p class="text-xs text-50 mb-1 font-bold">これまで</p>
+            <p class="text-sm text-75 leading-relaxed mb-3">{c.before}</p>
+            <p class="text-xs font-bold text-[var(--primary)] mb-1">AIセントラル導入後</p>
+            <p class="text-sm text-75 leading-relaxed">{c.after}</p>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="text-lg font-bold text-90 mb-3">士業別のユースケース</h3>
+      <div class="flex flex-col gap-3">
+        {proCases.map((p) => (
+          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+            <h4 class="text-base font-bold text-90 mb-2 flex items-center gap-2">
+              <Icon name={p.icon} class="text-xl text-[var(--primary)]" />
+              {p.field}
+            </h4>
+            <p class="text-sm text-75 leading-relaxed mb-2"><strong class="text-90">場面：</strong>{p.scene}</p>
+            <p class="text-sm text-75 leading-relaxed">{p.effect}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5 mt-5">
+        <h4 class="text-sm font-bold text-90 mb-2">見込める変化のまとめ</h4>
+        <ul class="text-sm text-75 leading-relaxed flex flex-col gap-1.5">
+          <li class="flex gap-2"><Icon name="material-symbols:schedule-outline-rounded" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" /><span><strong class="text-90">時間</strong>：「探す・思い出す・説明し直す」が大幅に減る（試算例: 週4時間 → 年間約190時間 ≒ 24営業日分）</span></li>
+          <li class="flex gap-2"><Icon name="material-symbols:verified-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" /><span><strong class="text-90">品質</strong>：過去の経緯・類似案件を踏まえた対応が標準に。検討漏れ・期限漏れの防止網が一枚増える</span></li>
+          <li class="flex gap-2"><Icon name="material-symbols:diversity-3-rounded" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" /><span><strong class="text-90">組織</strong>：属人化の解消。引き継ぎ・新人教育のコストが構造的に下がる</span></li>
+          <li class="flex gap-2"><Icon name="material-symbols:database-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" /><span><strong class="text-90">資産</strong>：日々の業務が「事務所の記憶」として蓄積し、解約しても手元に残る</span></li>
+        </ul>
+        <p class="text-xs text-50 mt-3">※ 時間の数字は試算例であり、成果を保証するものではありません。AI の出力は必ず有資格者の確認・判断を経て使用する運用設計です。</p>
+      </div>
+    </div>
+
+    <!-- ===== 8. 競合比較 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:compare-arrows-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">「大手の数百万円」と「月額クラウド」の間にある、第三の選択肢。</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse min-w-[640px]">
+          <thead>
+            <tr class="border-b-2 border-black/10 dark:border-white/10">
+              <th class="text-left py-3 pr-3 text-50 font-normal w-[22%]"></th>
+              <th class="text-left py-3 px-3 text-90 font-bold w-[26%]">大手オンプレ AI 構築</th>
+              <th class="text-left py-3 px-3 text-90 font-bold w-[26%]">クラウド AI サービス</th>
+              <th class="text-left py-3 px-3 font-bold w-[26%] text-[var(--primary)] bg-[var(--btn-plain-bg)] rounded-t-lg">AIセントラル</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map((r) => (
+              <tr class="border-b border-black/5 dark:border-white/5">
+                <td class="py-3 pr-3 text-50">{r.label}</td>
+                <td class="py-3 px-3 text-75">{r.big}</td>
+                <td class="py-3 px-3 text-75">{r.saas}</td>
+                <td class="py-3 px-3 text-90 font-bold bg-[var(--btn-plain-bg)]">{r.ours}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-50 mt-3">※ 他社カテゴリの金額は 2026年7月時点の公開情報に基づく一般的な相場帯であり、特定のサービスを示すものではありません。※「事務所内」はパーフェクトセキュアの場合。プラン1・2はクラウド AI 型（機微情報を扱わない運用ルール付き）です。</p>
+    </div>
+
+    <!-- ===== 9. 実績 ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:workspace-premium-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">「毎日、自分の業務で使っている」講師が構築します。</h2>
+      </div>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        構築と毎週の伴走を担当するのは、シュ コウメイ。この仕組みを自社のクライアント業務でフル稼働させながら、AI 講師として累計 {stats.studentsTaught} 名以上に AI 活用を教えてきました（株式会社EFFECT）。カタログではなく、<strong class="text-90">毎日使っている実物</strong>をお届けします。
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        <div class="rounded-xl bg-[var(--btn-plain-bg)] p-4 text-center">
+          <div class="text-2xl md:text-3xl font-bold text-[var(--primary)]">★{stats.ratingValue}</div>
+          <div class="text-xs text-50 mt-1">講座総合評価（{stats.reviewCount}件）</div>
+        </div>
+        <div class="rounded-xl bg-[var(--btn-plain-bg)] p-4 text-center">
+          <div class="text-2xl md:text-3xl font-bold text-[var(--primary)]">{stats.studentsTaught}<span class="text-base">名</span></div>
+          <div class="text-xs text-50 mt-1">累計受講者数</div>
+        </div>
+        <div class="rounded-xl bg-[var(--btn-plain-bg)] p-4 text-center">
+          <div class="text-2xl md:text-3xl font-bold text-[var(--primary)]">{stats.sessionsTaught}<span class="text-base">回</span></div>
+          <div class="text-xs text-50 mt-1">累計開催回数</div>
+        </div>
+        <div class="rounded-xl bg-[var(--btn-plain-bg)] p-4 text-center">
+          <div class="text-2xl md:text-3xl font-bold text-[var(--primary)]">{stats.badge}</div>
+          <div class="text-xs text-50 mt-1">ストアカ講師ランク</div>
+        </div>
+      </div>
+      <p class="text-xs text-50 mb-6">※ ストアカ（ストリートアカデミー）講師実績・{stats.periodEnd}時点。</p>
+
+      <h3 class="text-lg font-bold text-90 mb-3">士業・専門サービス業のご支援実績（一部）</h3>
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        {cases.map((c) => (
+          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+            <div class="text-sm font-bold text-[var(--primary)] mb-1">{c.label}</div>
+            <div class="text-xs text-50 mb-2">{c.field}</div>
+            <p class="text-sm text-75 leading-relaxed">{c.body}</p>
+          </div>
+        ))}
+      </div>
+
+      {testimonials.length > 0 && (
+        <div>
+          <h3 class="text-lg font-bold text-90 mb-3">受講生の声（ストアカ公開レビューより）</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            {testimonials.map((t) => (
+              <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5">
+                <div class="flex items-center gap-1 mb-2">
+                  {Array.from({ length: t.rating }).map(() => (
+                    <Icon name="material-symbols:star-rounded" class="text-lg text-amber-400" />
+                  ))}
+                </div>
+                <p class="text-sm text-75 leading-relaxed mb-2">{t.text}</p>
+                <p class="text-xs text-50">{t.course} ／ {t.reviewer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <!-- ===== 10. 料金 ===== -->
+    <div class="card-base px-6 md:px-9 py-7" id="pricing">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:currency-yen" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">料金</h2>
+      </div>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        事務所の成長段階に合わせて選べる3プラン。どのプランにも<strong class="text-90">月額34,800円の「毎週の伴走コンサル」が必ず付きます</strong>。導入して終わりのシステム販売ではありません。表示はすべて税込です。
+      </p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        {plans.map((p) => (
+          <div class={`rounded-xl border p-5 flex flex-col ${p.highlight ? "border-[var(--primary)] border-2 relative" : "border-black/10 dark:border-white/10"}`}>
+            {p.badge && (
+              <span class="absolute -top-3 left-4 text-xs font-bold text-white bg-[var(--primary)] rounded-full px-3 py-0.5">{p.badge}</span>
+            )}
+            <h4 class="text-base font-bold text-90">{p.name}</h4>
+            <div class="text-2xl font-bold text-[var(--primary)] my-1">{p.price}</div>
+            <p class="text-xs font-bold text-90 mb-1">{p.catch}</p>
+            <p class="text-xs text-50 mb-4 leading-relaxed">{p.forWho}</p>
+            <ul class="text-sm text-75 leading-relaxed flex flex-col gap-1.5 mb-4">
+              {p.features.map((f) => (
+                <li class={`flex gap-2 ${f.on ? "" : "opacity-40"}`}>
+                  <Icon
+                    name={f.on ? "material-symbols:check-circle-outline" : "material-symbols:remove-rounded"}
+                    class={`text-base shrink-0 mt-0.5 ${f.on ? "text-[var(--primary)]" : "text-50"}`}
+                  />
+                  {f.text}
+                </li>
+              ))}
+            </ul>
+            <p class="text-xs text-50 mt-auto leading-relaxed">{p.note}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5 mb-4">
+        <h3 class="text-base font-bold text-90 mb-2 flex items-center gap-2">
+          <Icon name="material-symbols:handshake-outline" class="text-xl text-[var(--primary)]" />
+          月額 34,800円（全プラン共通・必須）— 毎週の伴走コンサル
+        </h3>
+        <ul class="text-sm text-75 leading-relaxed flex flex-col gap-1.5">
+          <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-base text-[var(--primary)] shrink-0 mt-0.5" />週1回×90分のオンライン伴走（使い方・活用範囲の拡大・つまずきの解消）</li>
+          <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-base text-[var(--primary)] shrink-0 mt-0.5" />メール相談はいつでも</li>
+          <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-base text-[var(--primary)] shrink-0 mt-0.5" />システムの基本保守（アップデート適用・軽微な調整）込み</li>
+        </ul>
+        <p class="text-sm text-75 mt-3 leading-relaxed">一般的な AI 顧問サービスの相場は月額10〜30万円です（2026年7月時点の公開情報）。この価格で週1回の伴走が成立するのは、年間数百回の講座・指導を行っている講師業の体制があるからです。</p>
+      </div>
+
+      <p class="text-xs text-50 leading-relaxed">
+        ※ 上位プランへは差額でアップグレードできます。蓄積した AI の記憶はそのまま引き継がれ、作り直しはありません。<br />
+        ※ クラウド AI の利用料（月数千円程度〜）は事務所さまのご契約となります。導入時に最適なプランをご案内します。
+      </p>
+    </div>
+
+    <!-- ===== 11. 導入の流れ ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:route-outline" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">導入の流れ</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-4">
+        {flowSteps.map((s) => (
+          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+            <div class="w-9 h-9 rounded-full bg-[var(--primary)] text-white font-bold flex items-center justify-center mb-3">{s.no}</div>
+            <h3 class="text-base font-bold text-90 mb-2">{s.title}</h3>
+            <p class="text-sm text-75 leading-relaxed">{s.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 12. FAQ ===== -->
+    <div class="card-base px-6 md:px-9 py-7">
+      <div class="flex items-center gap-2 mb-3">
+        <Icon name="material-symbols:help-outline-rounded" class="text-2xl text-[var(--primary)]" />
+        <h2 class="text-2xl font-bold text-90">よくあるご質問</h2>
+      </div>
+      <div class="flex flex-col gap-3">
+        {faqs.map((f) => (
+          <details class="rounded-xl border border-black/10 dark:border-white/10 px-5 py-4 group">
+            <summary class="cursor-pointer text-base font-bold text-90 list-none flex items-start gap-2">
+              <span class="text-[var(--primary)] shrink-0">Q.</span>
+              {f.q}
+            </summary>
+            <p class="text-sm text-75 leading-relaxed mt-3 pl-6">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- ===== 13. CTA ===== -->
+    <div class="card-base px-6 md:px-9 py-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは、事務所の現状をお聞かせください。</h2>
+      <p class="text-base text-75 mb-6 leading-relaxed">
+        「うちの業務のどこに効くのか」を、無料相談で具体的にご説明します。<br />
+        無理な営業は行いません。まず講座で講師の教え方を体験することもできます。
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mb-4">
+        <a
+          href={mailtoLink}
+          data-no-swup
+          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-3.5 rounded-lg hover:opacity-90 transition text-base"
+        >
+          <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+          無料相談を申し込む
+        </a>
+        <a
+          href={storacaProfileUrl}
+          target="_blank"
+          rel="noopener"
+          data-no-swup
+          class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-8 py-3.5 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
+        >
+          <Icon name="material-symbols:school-outline-rounded" class="text-xl" />
+          まず講座で体験する（ストアカ）
+        </a>
+      </div>
+      <p class="text-sm text-50">
+        構築・伴走: シュ コウメイ ／ 運営会社: 株式会社EFFECT（福岡市中央区）／ {contactEmail}
+      </p>
+    </div>
+
+  </div>
+</MainGridLayout>

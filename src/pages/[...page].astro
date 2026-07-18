@@ -22,6 +22,35 @@ const homeDescription =
 ---
 
 <MainGridLayout description={homeDescription}>
+    {page.currentPage === 1 && (
+      <div class="card-base px-6 md:px-8 py-6 mb-4 onload-animation">
+        <p class="text-xs font-bold text-[var(--primary)] mb-1">AI×構造化の実践者・ストアカ プロ講師</p>
+        <h2 class="text-xl md:text-2xl font-bold text-90 leading-snug mb-2">
+          シュ コウメイ — AI に「記憶」を持たせて、仕事の中心に据える。
+        </h2>
+        <p class="text-sm md:text-base text-75 leading-relaxed mb-4">
+          AI 開発・LLMO・知識管理を、コンサル現場の生実装で発信しています。
+          士業事務所向けには、顧客情報を外に出さずに AI へ事務所の記憶を持たせる「AIセントラル」を提供中。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/ai-central/"
+            class="inline-flex items-center gap-1.5 bg-[var(--primary)] text-white font-bold px-5 py-2.5 rounded-lg hover:opacity-90 transition text-sm"
+          >
+            AIセントラルを見る（士業向け）
+          </a>
+          <a
+            href="https://www.street-academy.com/steachers/271053"
+            target="_blank"
+            rel="noopener"
+            data-no-swup
+            class="inline-flex items-center gap-1.5 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-5 py-2.5 hover:bg-[var(--btn-plain-bg-hover)] transition text-sm"
+          >
+            講座で学ぶ（ストアカ）
+          </a>
+        </div>
+      </div>
+    )}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>
