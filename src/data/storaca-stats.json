@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 226,
-  "studentsTaught": 504,
+  "reviewCount": 229,
+  "studentsTaught": 506,
   "repeatStudents": 288,
-  "repeatRate": 57.1,
-  "sessionsTaught": 488,
-  "salesTotal": 2234950,
+  "repeatRate": 56.9,
+  "sessionsTaught": 490,
+  "salesTotal": 2256550,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月19日",
-  "updatedAt": "2026-07-18T21:00:23.404Z",
+  "periodEnd": "2026年7月20日",
+  "updatedAt": "2026-07-19T21:00:30.662Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -20,6 +20,22 @@
       "rating": 5,
       "headline": "概念から教えてくれる非常に有意義な講座",
       "text": "60分である程度の形になってしまったのには驚きました。先生の説明がいつも分かりやすく、ただやり方を学ぶだけでなく、根底にある背景や概念まで学ぶことができます。"
+    },
+    {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "少しずつ出来上がっていく講座",
+      "text": "いつもありがとうございます"
+    },
+    {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "プログラムを作り上げていく講座",
+      "text": "ワンポイントアドバイスありがとうございました"
     },
     {
       "course": "ローカルLLM（AI）を身近なシステムに組み込み、無料で使い倒す！",
@@ -100,23 +116,7 @@
       "rating": 5,
       "headline": "自分のやりたいことが前に進む講座",
       "text": "聞いて終わる講座ではなく、その場でコンサルをしながらシステムを構築して頂き成果物もついてきます。コストパフォーマンスがめちゃくちゃ高い講座だと思いました。"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "男性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "今回も楽しく学べました！",
-      "text": "いつもわかりやすいご説明で理解が進みます！今回は前回作ったものの不備を改善するお手伝いをしていただきました"
-    },
-    {
-      "course": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
-      "reviewer": "男性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
-      "text": "イラストも描きながら説明をしていただけるのでとてもわかりやすかったです。難しい言葉も使わないので余計に入ってきました。初心者の方にお勧めの講師ではないでしょうか。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-18T21:01:03.043Z"
+  "testimonialsUpdatedAt": "2026-07-19T21:01:10.768Z"
 }
