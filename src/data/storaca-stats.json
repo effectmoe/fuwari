@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 230,
-  "studentsTaught": 509,
-  "repeatStudents": 289,
+  "reviewCount": 231,
+  "studentsTaught": 512,
+  "repeatStudents": 291,
   "repeatRate": 56.8,
-  "sessionsTaught": 493,
-  "salesTotal": 2272550,
+  "sessionsTaught": 494,
+  "salesTotal": 2316850,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月21日",
-  "updatedAt": "2026-07-20T21:00:23.834Z",
+  "periodEnd": "2026年7月22日",
+  "updatedAt": "2026-07-21T21:00:27.613Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -20,6 +20,14 @@
       "rating": 5,
       "headline": "初心者でも実務で活用できるレベルまで習得出来る講座",
       "text": "ニーズに沿って、マンツーマンで課題解決へとつなげれる良い講座でした。受講しながらどんどんやりたいことが増えていくので90分はあっという間でした。"
+    },
+    {
+      "course": "Claude Codeで一歩先を行くAI経営チームを構築！実践講座",
+      "reviewer": "男性 40代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "ClaudeCodeの使い方を基礎から学べるマンツーマンレッスン",
+      "text": "Claude Codeの基礎から実践まで、受講生のPC画面を共有しながら学ぶことができます。受講生の状況に応じて臨機応変にご対応いただけるので、初心者からすでに利用している方まで幅広く受講できると思います。私はClaude Codeを少し触ったことがある程度でしたが、そのレベルに応じてやさしく教えていただけました。この度はありがとうございました！"
     },
     {
       "course": "AI×知識管理で劇的時短！Obsidian＆Claude活用術",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "Claude Design 速習講座｜Canva＆パワポ連携可能！",
       "text": "自分のやりたいことをベースに展開していただけるので大変助かります。"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "laude Codeであなたの作りたいを講師が伴走し構築 シュ コウメイ先生",
-      "text": "初心者の私に丁寧に教えてくれました。朝 早速作業に使ってみました。ありがとうございます。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-20T21:01:06.156Z"
+  "testimonialsUpdatedAt": "2026-07-21T21:01:09.261Z"
 }
