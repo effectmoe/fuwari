@@ -306,7 +306,7 @@ const faqLd = {
 				<p class="eyebrow text-sm font-bold tracking-[0.18em] text-[var(--primary)]">AI IMPLEMENTATION / LLMO / KNOWLEDGE SYSTEM</p>
 				<h1 class="mt-5 text-4xl font-bold leading-tight md:text-[3.55rem]">
 					AIに選ばれる会社へ。<br />
-					AIが働く現場へ。
+					<span class="marker">AIが働く現場へ。</span>
 				</h1>
 				<p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-200 md:text-lg">
 					effect.moe は、AI検索で見つかる仕組みと、記憶を持ったAIを業務の中枢に据える仕組みをつくるサイトです。シュ コウメイが、講座・設計・実装・伴走まで一気通貫で扱います。
@@ -434,7 +434,7 @@ const faqLd = {
 			<div class="grid gap-8 md:grid-cols-[0.68fr_1.32fr] md:items-end">
 				<div class="section-copy">
 					<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">ISSUES</p>
-					<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">こういう詰まりを、先に見える化する。</h2>
+					<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl"><span class="marker">こういう詰まりを</span>、先に見える化する。</h2>
 					<p class="mt-5 text-base leading-relaxed text-75">
 						AI検索とAI-DXの抽象論ではなく、読み手が「自分のことだ」と思える粒度まで落として、現場の詰まりから入ります。
 					</p>
@@ -451,19 +451,24 @@ const faqLd = {
 					<a href="/diagnosis/">入口を確認する →</a>
 				</div>
 			</div>
-			<div class="mt-10 grid gap-x-12 md:grid-cols-2">
+			<div class="qa-grid mt-10">
 				{issueCards.map((item, index) => (
-					<div class="flex gap-x-4 border-t border-black/10 py-6 first:border-t-0 md:border-t-0 md:py-5 md:[&:nth-child(2)]:border-t-0">
-						<span class="flex size-9 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/40 text-xs font-bold text-[var(--primary)]">
-							0{index + 1}
-						</span>
-						<div>
-							<div class="flex items-center gap-2">
-								<Icon name={item.icon} class="text-lg text-[var(--primary)]" />
-								<h3 class="text-base font-bold text-90">{item.title}</h3>
+					<div class="qa-card">
+						<div class="qa-card__body">
+							<p class="qa-card__q">Q{index + 1}</p>
+							<div class="qa-card__icon">
+								<Icon name={item.icon} />
 							</div>
-							<p class="mt-2 text-sm leading-relaxed text-75">{item.body}</p>
+							<p class="qa-card__title">{item.title}</p>
 						</div>
+						<details>
+							<summary class={`qa-bar-${Math.floor(index / 2) + 1}`}>
+								<Icon name="material-symbols:lightbulb-outline" class="text-lg" />
+								Answer
+								<Icon name="material-symbols:keyboard-arrow-down-rounded" class="qa-chevron text-xl" />
+							</summary>
+							<p class="qa-card__answer">{item.body}</p>
+						</details>
 					</div>
 				))}
 			</div>
@@ -3384,4 +3389,113 @@ const faqLd = {
 		.node-c { bottom: 18px; left: 14px; }
 		.node-d { right: 14px; bottom: 18px; }
 	}
+
+	/*
+	 * 蛍光マーカー強調 + Q&Aアコーディオン（quantum.ne.jp参考LP準拠）
+	 * 2026-07-27 トニー指示により、単一ゴールドアクセント原則の意図的な例外として導入。
+	 * 直接反応型広告LPのトーンに寄せるための施策。concept-anti-ai-ish-design.md の
+	 * 「1サイト1アクセントカラー」ルールを、この2箇所（マーカー・Q&A色分け）に限り上書きする。
+	 */
+	.marker {
+		position: relative;
+		display: inline;
+		isolation: isolate;
+		color: #1a1a1a;
+		white-space: nowrap;
+	}
+
+	.marker::after {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		left: -0.15em;
+		right: -0.15em;
+		top: 0.06em;
+		bottom: 0.02em;
+		background-color: #f6ff00;
+	}
+
+	.qa-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.qa-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1.25rem;
+		}
+	}
+
+	.qa-card {
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: #fff;
+		box-shadow: 0 10px 28px rgba(23, 32, 51, 0.08);
+	}
+
+	.qa-card__body {
+		padding: 1.3rem 1.1rem 1rem;
+		text-align: center;
+	}
+
+	.qa-card__q {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		font-size: 0.7rem;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+		color: #1a1a1a;
+	}
+
+	.qa-card__icon {
+		font-size: 2.1rem;
+		margin: 0.5rem 0;
+		color: #1a1a1a;
+	}
+
+	.qa-card__title {
+		font-size: 0.98rem;
+		font-weight: 800;
+		line-height: 1.45;
+		color: #1a1a1a;
+	}
+
+	.qa-card summary {
+		list-style: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.7rem;
+		font-size: 0.85rem;
+		font-weight: 800;
+		color: #fff;
+	}
+
+	.qa-card summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.qa-card summary :global(svg) {
+		transition: transform 0.2s ease;
+	}
+
+	.qa-card details[open] summary :global(.qa-chevron) {
+		transform: rotate(180deg);
+	}
+
+	.qa-card__answer {
+		padding: 0 1.1rem 1.1rem;
+		font-size: 0.85rem;
+		line-height: 1.7;
+		color: #444;
+	}
+
+	.qa-bar-1 { background: linear-gradient(90deg, #2a0a0a, #5a1414); }
+	.qa-bar-2 { background: linear-gradient(90deg, #2a2a0a, #5a5414); }
+	.qa-bar-3 { background: linear-gradient(90deg, #0a2a12, #145a2c); }
 </style>
