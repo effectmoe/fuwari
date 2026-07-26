@@ -311,12 +311,7 @@ const faqLd = {
 				<p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-200 md:text-lg">
 					effect.moe は、AI検索で見つかる仕組みと、記憶を持ったAIを業務の中枢に据える仕組みをつくるサイトです。シュ コウメイが、講座・設計・実装・伴走まで一気通貫で扱います。
 				</p>
-				<div class="hero-lab__route mt-7">
-					<div><span>01</span>AI検索で見つかる</div>
-					<div><span>02</span>無料診断で把握する</div>
-					<div><span>03</span>記憶AIを中枢に置く</div>
-				</div>
-				<div class="hero-lab__actions mt-8 flex flex-wrap gap-3">
+				<div class="hero-lab__actions mt-7 flex flex-wrap gap-3">
 					<a href="/diagnosis/" class="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-slate-950 transition hover:bg-[var(--primary)]/10">
 						<Icon name="material-symbols:search" class="text-xl" />
 						無料診断を受ける
@@ -325,6 +320,22 @@ const faqLd = {
 						AIセントラルを見る
 						<span>→</span>
 					</a>
+				</div>
+				<div class="hero-lab__proof mt-8 grid max-w-md grid-cols-2 gap-x-8">
+					<div>
+						<div class="flex gap-x-0.5 text-[var(--primary)]">
+							{Array.from({ length: 5 }).map(() => (
+								<Icon name="material-symbols:star" class="text-base" />
+							))}
+						</div>
+						<p class="mt-2 text-sm text-slate-300"><span class="font-bold text-white">4.95</span> / 5・231件のレビュー</p>
+					</div>
+					<div>
+						<div class="text-[var(--primary)]">
+							<Icon name="material-symbols:groups-outline" class="text-xl" />
+						</div>
+						<p class="mt-2 text-sm text-slate-300"><span class="font-bold text-white">500+</span> 累計受講者</p>
+					</div>
 				</div>
 			</div>
 			<div class="hero-lab__showcase">
