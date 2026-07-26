@@ -328,42 +328,23 @@ const faqLd = {
 				</div>
 			</div>
 			<div class="hero-lab__showcase">
-				<div class="hero-studio">
+				<div class="hero-studio hero-studio--unified">
 					<div class="hero-studio__photo">
 						<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="eager" decoding="async" />
+						<div class="hero-studio__badges">
+							<a href="/ai-traffic-report/" class="hero-photo-badge">
+								<Icon name="material-symbols:travel-explore" class="text-lg" />
+								<span>AIアクセス分析</span>
+							</a>
+							<a href="/ai-central/" class="hero-photo-badge">
+								<Icon name="material-symbols:memory-alt-outline" class="text-lg" />
+								<span>AIセントラル</span>
+							</a>
+						</div>
 						<div class="hero-studio__label">
 							<span>AI MEMORY LAYER</span>
 							<strong>業務情報を、AIが参照できる記憶へ。</strong>
 						</div>
-					</div>
-					<div class="hero-studio__diagram">
-						<div class="hero-diagram-node is-source">Web / FAQ / Blog</div>
-						<div class="hero-diagram-line"></div>
-						<div class="hero-diagram-core">
-							<Icon name="material-symbols:hub-outline" class="text-4xl" />
-							<strong>effect.moe</strong>
-							<span>AI検索 × 業務AI</span>
-						</div>
-						<div class="hero-diagram-line"></div>
-						<div class="hero-diagram-node is-output">診断 / 相談 / 構築</div>
-					</div>
-				</div>
-				<div class="hero-command-board">
-					<div class="hero-command-board__header">
-						<span></span><span></span><span></span>
-						<strong>AI Operating Console</strong>
-					</div>
-					<div class="hero-command-board__grid">
-						<a href="/ai-traffic-report/" class="hero-command-card is-access">
-							<Icon name="material-symbols:travel-explore" class="text-3xl" />
-							<span>AIアクセス分析</span>
-							<strong>AIに見つかる</strong>
-						</a>
-						<a href="/ai-central/" class="hero-command-card is-central">
-							<Icon name="material-symbols:memory-alt-outline" class="text-3xl" />
-							<span>AIセントラル</span>
-							<strong>AIが働く</strong>
-						</a>
 					</div>
 				</div>
 			</div>
@@ -1247,6 +1228,43 @@ const faqLd = {
 		grid-template-columns: minmax(0, 1fr) 15rem;
 		gap: 1rem;
 		align-items: stretch;
+	}
+
+	.hero-studio--unified {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.hero-studio__badges {
+		position: absolute;
+		z-index: 1;
+		top: 1.25rem;
+		right: 1.25rem;
+		display: grid;
+		gap: 0.6rem;
+		justify-items: end;
+	}
+
+	.hero-photo-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.94);
+		padding: 0.55rem 1.1rem;
+		font-size: 0.8rem;
+		font-weight: 800;
+		color: #1a1a1a;
+		box-shadow: 0 14px 30px rgba(2, 6, 23, 0.32);
+		backdrop-filter: blur(6px);
+		transition: transform 0.2s ease;
+	}
+
+	.hero-photo-badge :global(svg) {
+		color: var(--primary);
+	}
+
+	.hero-photo-badge:hover {
+		transform: translateY(-2px);
 	}
 
 	.hero-studio::after {
