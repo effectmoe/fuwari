@@ -1,0 +1,118 @@
+---
+import Layout from "./Layout.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+const navItems = [
+	{ href: "/", label: "Home" },
+	{ href: "/author/", label: "シュ コウメイ" },
+	{ href: "/ai-central/", label: "AIセントラル" },
+	{ href: "/ai-traffic-report/", label: "AIアクセス分析" },
+	{ href: "/blog/", label: "Blog" },
+	{ href: "/company/", label: "Company" },
+];
+---
+
+<Layout title={title} description={description} ogImage={ogImage}>
+	<div class="min-h-screen bg-[var(--page-bg)] text-90">
+		<header class="sticky top-0 z-[100] border-b border-black/10 bg-[var(--page-bg)]/88 backdrop-blur-xl dark:border-white/10">
+			<div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
+				<a href="/" class="group flex min-w-0 items-center gap-3" aria-label="effect.moe home">
+					<span class="grid size-10 flex-none place-items-center rounded-md border border-[var(--primary)]/35 bg-[var(--primary)]/10 font-bold text-[var(--primary)]">
+						E
+					</span>
+					<span class="min-w-0 leading-tight">
+						<span class="block truncate text-sm font-bold tracking-[0.08em] text-90">effect.moe</span>
+						<span class="block max-w-[11rem] truncate text-xs text-50 sm:max-w-none">シュ コウメイ / 株式会社EFFECT</span>
+					</span>
+				</a>
+				<nav class="hidden items-center gap-1 md:flex" aria-label="Landing navigation">
+					{navItems.map((item) => (
+						<a
+							href={item.href}
+							class="rounded-md px-3 py-2 text-sm font-medium text-75 transition hover:bg-[var(--btn-plain-bg-hover)] hover:text-90"
+						>
+							{item.label}
+						</a>
+					))}
+				</nav>
+				<div class="hidden items-center gap-2 md:flex">
+					<a
+						href="/diagnosis/"
+						style="background-color:#020617;color:#fff;"
+						class="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-bold transition hover:opacity-90"
+					>
+						無料診断
+					</a>
+				</div>
+				<details class="group relative z-[110] flex-none md:hidden">
+					<summary
+						class="grid size-11 cursor-pointer list-none place-items-center rounded-md border border-black/10 bg-[var(--btn-plain-bg)] text-90 transition hover:bg-[var(--btn-plain-bg-hover)] dark:border-white/10 [&::-webkit-details-marker]:hidden"
+						aria-label="メニューを開く"
+					>
+						<Icon name="material-symbols:menu-rounded" class="text-2xl group-open:hidden" />
+						<Icon name="material-symbols:close-rounded" class="hidden text-2xl group-open:block" />
+					</summary>
+					<div class="fixed left-4 right-4 top-[4.25rem] z-[9999] rounded-md border border-black/10 bg-white p-2 shadow-2xl dark:border-white/10 dark:bg-slate-950">
+						{navItems.map((item) => (
+							<a
+								href={item.href}
+								class="flex items-center justify-between rounded-md px-4 py-3 text-sm font-bold text-75 transition hover:bg-[var(--btn-plain-bg-hover)] hover:text-90"
+							>
+								{item.label}
+								<Icon name="material-symbols:chevron-right-rounded" class="text-xl text-50" />
+							</a>
+						))}
+						<a
+							href="/diagnosis/"
+							class="mt-2 flex items-center justify-center gap-2 rounded-md bg-slate-950 px-4 py-3 text-sm font-bold text-white transition hover:opacity-90 dark:bg-white dark:text-slate-950"
+						>
+							<Icon name="material-symbols:search-rounded" class="text-xl" />
+							無料診断
+						</a>
+					</div>
+				</details>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="border-t border-black/10 bg-[var(--btn-plain-bg)] dark:border-white/10">
+			<div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:grid-cols-[1.3fr_0.7fr_0.7fr] md:px-8">
+				<div>
+					<p class="text-lg font-bold text-90">effect.moe</p>
+					<p class="mt-3 max-w-xl text-sm leading-relaxed text-75">
+						シュ コウメイが構築・伴走する、AI実装とAI検索対応の商用サイトです。契約主体は株式会社EFFECTです。
+					</p>
+					<p class="mt-4 text-sm text-50">お問い合わせ: info@effect.moe</p>
+				</div>
+				<div>
+					<p class="text-sm font-bold text-90">Services</p>
+					<div class="mt-3 flex flex-col gap-2 text-sm text-75">
+						<a href="/ai-central/" class="hover:text-[var(--primary)]">AIセントラル</a>
+						<a href="/ai-traffic-report/" class="hover:text-[var(--primary)]">AIアクセス分析</a>
+						<a href="/diagnosis/" class="hover:text-[var(--primary)]">無料LLMO簡易診断</a>
+					</div>
+				</div>
+				<div>
+					<p class="text-sm font-bold text-90">Site</p>
+					<div class="mt-3 flex flex-col gap-2 text-sm text-75">
+						<a href="/author/" class="hover:text-[var(--primary)]">シュ コウメイ</a>
+						<a href="/blog/" class="hover:text-[var(--primary)]">Blog</a>
+						<a href="/ask/" class="hover:text-[var(--primary)]">AIチャット</a>
+						<a href="/company/" class="hover:text-[var(--primary)]">会社概要</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</Layout>
