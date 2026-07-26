@@ -451,15 +451,19 @@ const faqLd = {
 					<a href="/diagnosis/">入口を確認する →</a>
 				</div>
 			</div>
-			<div class="mt-8 grid gap-4 md:grid-cols-3">
+			<div class="mt-10 grid gap-x-12 md:grid-cols-2">
 				{issueCards.map((item, index) => (
-					<div class="issue-card-rich">
-						<div class="flex items-start justify-between gap-4">
-							<span class="issue-card-rich__no">0{index + 1}</span>
-							<Icon name={item.icon} class="text-3xl text-[var(--primary)]" />
+					<div class="flex gap-x-4 border-t border-black/10 py-6 first:border-t-0 md:border-t-0 md:py-5 md:[&:nth-child(2)]:border-t-0">
+						<span class="flex size-9 shrink-0 items-center justify-center rounded-full border border-[var(--primary)]/40 text-xs font-bold text-[var(--primary)]">
+							0{index + 1}
+						</span>
+						<div>
+							<div class="flex items-center gap-2">
+								<Icon name={item.icon} class="text-lg text-[var(--primary)]" />
+								<h3 class="text-base font-bold text-90">{item.title}</h3>
+							</div>
+							<p class="mt-2 text-sm leading-relaxed text-75">{item.body}</p>
 						</div>
-						<h3>{item.title}</h3>
-						<p>{item.body}</p>
 					</div>
 				))}
 			</div>
