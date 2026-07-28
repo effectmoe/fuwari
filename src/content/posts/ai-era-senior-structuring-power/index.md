@@ -21,7 +21,7 @@ draft: false
 
 ## なぜこの記事？
 
-先日、ある方が Facebook に投稿した一文がタイムラインを通り過ぎた。
+先日、[ある方が Facebook に投稿した一文](https://www.facebook.com/story.php?story_fbid=26890238053960756&id=100002037751243)がタイムラインを通り過ぎた。
 
 > 「『AI vs 人間』ではなく、『AIを使って、人間としてどう価値を出すか』の時代」
 
@@ -94,4 +94,5 @@ AIが返してきたものを、自分の経験で殴って弾く。
 
 ## 関連リンク
 
+- [元投稿 / Facebook (2026-05-25)](https://www.facebook.com/story.php?story_fbid=26890238053960756&id=100002037751243)
 - [DFBとは — AI時代の構造化メソッド](https://tony.effect.moe/posts/dfb-method-introduction/)
