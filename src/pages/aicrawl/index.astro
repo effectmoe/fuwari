@@ -5,6 +5,7 @@ import stats from "../../data/storaca-stats.json";
 import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg";
 
 const diagnosisHref = "/?inquiry=diagnosis&service=aicrawl#contact";
+const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
 const blogHref = "/blog/";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
@@ -159,7 +160,8 @@ const faqs = [
 						<Icon name="material-symbols:manage-search" />
 						無料診断で確認する
 					</a>
-					<a href="#checks" class="aicrawl-button aicrawl-button--secondary">診断内容を見る</a>
+					<a href={consultationHref} class="aicrawl-button aicrawl-button--secondary">無料相談する</a>
+					<a href="#checks" class="aicrawl-button aicrawl-button--ghost">診断内容を見る</a>
 				</div>
 			</div>
 
@@ -438,7 +440,7 @@ const faqs = [
 								</li>
 							))}
 						</ul>
-						<a href={diagnosisHref} class="aicrawl-price-card__cta">{plan.cta}</a>
+						<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
 					</article>
 				))}
 			</div>
@@ -476,6 +478,10 @@ const faqs = [
 			<a href={diagnosisHref} class="aicrawl-button aicrawl-button--primary">
 				<Icon name="material-symbols:edit-note-outline-rounded" />
 				無料診断を申し込む
+			</a>
+			<a href={consultationHref} class="aicrawl-button aicrawl-button--secondary">
+				<Icon name="material-symbols:forum-outline-rounded" />
+				無料相談する
 			</a>
 		</div>
 	</section>
@@ -630,6 +636,12 @@ const faqs = [
 			border: 1px solid rgba(69, 111, 69, 0.42);
 			background: rgba(255, 255, 255, 0.74);
 			color: #2d542d;
+		}
+
+		.aicrawl-button--ghost {
+			border: 1px solid rgba(185, 138, 45, 0.34);
+			background: rgba(255, 255, 255, 0.46);
+			color: #7a5811;
 		}
 
 		.crawl-visual {
