@@ -20,9 +20,9 @@ const curriculum = [
   {
     no: "03", tag: "DATABASE",
     title: "データ基盤とログ管理の設計",
-    learn: "SQLite / DuckDB によるスキーマ設計、業務データ永続化、エージェントの操作ログ・監査ログの自動記録と分析",
+    learn: "ローカルDBによるスキーマ設計、業務データ永続化、エージェントの操作ログ・監査ログの自動記録と分析",
     skill: "AIエージェントの行動履歴を蓄積・横断検索するデータ基盤の設計力、自社ナレッジDB構築",
-    practice: "エージェントの全操作ログを DuckDB に記録し、週次サマリーを自動生成する基盤を構築する",
+    practice: "エージェントの全操作ログをローカルDBに記録し、週次サマリーを自動生成する基盤を構築する",
   },
   {
     no: "04", tag: "MCP",
@@ -56,7 +56,7 @@ const features = [
   {
     no: "02",
     title: "エンジニアに頼らず、AI インフラを内製できる",
-    body: "カスタム MCP サーバー・DuckDB によるデータ基盤・Cloudflare Workers へのデプロイまでを講師自身が自社で日常運用する形で解説。「外注費ゼロで自社インフラを持つ」が現実になります。",
+    body: "カスタム MCP サーバー・軽量データベースによるデータ基盤・Cloudflare Workers へのデプロイまでを講師自身が自社で日常運用する形で解説。「外注費ゼロで自社インフラを持つ」が現実になります。",
   },
   {
     no: "03",
@@ -260,7 +260,7 @@ const tagColors: Record<string, string> = {
       <div class="grid sm:grid-cols-2 gap-3">
         {[
           { icon: "material-symbols:architecture-rounded", text: "複数エージェントを束ねたパイプラインを「設計図」から実装できる" },
-          { icon: "material-symbols:storage-rounded", text: "エージェントの行動履歴を DuckDB に蓄積し、横断分析できる" },
+          { icon: "material-symbols:storage-rounded", text: "エージェントの行動履歴をローカルDBに蓄積し、横断分析できる" },
           { icon: "material-symbols:extension-rounded", text: "自社 API を MCP 化し、Claude Code から自然言語で操作できる" },
           { icon: "material-symbols:cloud-done-rounded", text: "Cloudflare Workers に本番デプロイし、監視・アラートまで設計できる" },
           { icon: "material-symbols:hub-outline", text: "CLAUDE.md を組織共有し、非エンジニアでも AI を使える環境を作れる" },
@@ -428,12 +428,12 @@ const tagColors: Record<string, string> = {
           <p class="font-bold text-90 text-xl mb-0.5">シュ コウメイ</p>
           <p class="text-base text-75 mb-3">株式会社EFFECT ／ AI活用コンサルタント</p>
           <p class="text-base text-75 leading-relaxed mb-4">
-            自社業務・クライアント向け開発の双方で Claude Code を日常運用。カスタム MCP サーバー・DuckDB
+            自社業務・クライアント向け開発の双方で Claude Code を日常運用。カスタム MCP サーバー・ローカルDB
             ベースのナレッジ基盤・Cloudflare Workers 上の自動化システム等をすべて自社で内製化。本講座で
             扱うすべての技術を実際の本番システムとして稼働させている。LLMO 書籍著者。ストアカ講師評価 4.94。
           </p>
           <div class="flex flex-wrap gap-2 mb-4">
-            {["MCP サーバー内製", "DuckDB 自社運用", "Cloudflare Workers 本番稼働", "LLMO 書籍著者"].map(
+            {["MCP サーバー内製", "ローカルDB自社運用", "Cloudflare Workers 本番稼働", "LLMO 書籍著者"].map(
               (tag) => (
                 <span class="rounded-full bg-[var(--card-bg)] border border-[var(--line-divider)] px-3 py-1 text-sm font-medium text-75">
                   {tag}
