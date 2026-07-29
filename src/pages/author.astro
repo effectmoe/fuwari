@@ -38,7 +38,7 @@ const profileLd = {
 // ここで重複させると Google が「複数の平均評価」と判定してエラー化するため出さない。
 
 const pageDesc =
-	"構造化脳ブログ 著者 シュ コウメイ のプロフィール。AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント（株式会社EFFECT）。ストアカ人気講師（評価4.94・受講435人・プラチナ講師）、LLMO対策書籍の著者。Claude Code・LLMO・AIエージェント・Notion・Obsidian などを専門に、AIで事業を構造化する実装を発信。";
+	`構造化脳ブログ 著者 シュ コウメイ のプロフィール。AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント（株式会社EFFECT）。ストアカ人気講師（評価${rv.ratingValue}・受講${rv.studentsTaught}人・プロ講師）、LLMO対策書籍の著者。Claude Code・LLMO・AIエージェント・Notion・Obsidian などを専門に、AIで事業を構造化する実装を発信。`;
 
 // 専門領域チップ
 const expertise = seoConfig.knowsAbout;
@@ -85,7 +85,7 @@ const links = [
                 <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.studentsTaught}</span><div class="text-50 text-[0.7rem] mt-1">累計受講者数</div></div>
                 <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.sessionsTaught}</span><div class="text-50 text-[0.7rem] mt-1">開催回数</div></div>
                 <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.repeatRate}</span><div class="text-50 text-[0.7rem] mt-1">リピート率</div></div>
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 flex-1 min-w-[10rem]"><span class="text-[var(--primary)] text-base font-bold">プラチナランク</span><div class="text-50 text-[0.7rem] mt-1 text-center">2026年7月よりPro昇格</div></div>
+                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 flex-1 min-w-[10rem]"><span class="text-[var(--primary)] text-base font-bold">プロランク</span><div class="text-50 text-[0.7rem] mt-1 text-center">ストアカ内最高レベル</div></div>
             </div>
             <p class="text-xs text-50 mt-3">※ 評価はスキルシェア「ストアカ」での第三者の受講生レビュー（2024年8月〜）。</p>
         </div>

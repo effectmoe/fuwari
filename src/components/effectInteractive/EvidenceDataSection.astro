@@ -1,0 +1,969 @@
+---
+const timeSources = [
+	{
+		label: "APQC：社内情報探索時間",
+		href: "https://www.apqc.org/blog/km-makes-knowledge-workers-more-productive-and-less-stressed-out",
+	},
+	{
+		label: "Microsoft：Copilot利用時短",
+		href: "https://www.microsoft.com/en-us/worklab/work-trend-index/copilots-earliest-users-teach-us-about-generative-ai-at-work",
+	},
+	{
+		label: "McKinsey：知識労働の探索時間",
+		href: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/capturing-business-value-with-social-technologies",
+	},
+	{ label: "NBER：生産性向上", href: "https://www.nber.org/papers/w31161" },
+	{ label: "MIT/PubMed：作業時間短縮", href: "https://pubmed.ncbi.nlm.nih.gov/37440646/" },
+	{
+		label: "HBS：業務完了速度",
+		href: "https://aiinstitute.hbs.edu/navigating-the-jagged-technological-frontier/",
+	},
+];
+
+const metricCards = [
+	{ tag: "Microsoft 365 Copilot", title: "会議要約 43分 → 11分\n情報検索 24分 → 18分", value: "平均 1日14分削減" },
+	{ tag: "NBER", title: "生成AI支援でカスタマーサポート生産性向上", value: "全体 +14% / 新人層 +34%" },
+	{ tag: "MIT / Science", title: "文章業務におけるパフォーマンス変化", value: "作業時間 40%減 / 品質 18%向上" },
+	{ tag: "HBS / BCG", title: "コンサルティング業務におけるAI活用", value: "25.1%速く完了 / 品質40%超向上" },
+];
+
+const securitySources = [
+	{
+		label: "個人情報保護委員会",
+		href: "https://www.ppc.go.jp/news/careful_information/230602_AI_utilize_alert/",
+	},
+	{
+		label: "OWASP LLM Top 10",
+		href: "https://genai.owasp.org/llm-top-10/",
+	},
+	{
+		label: "NIST AI RMF",
+		href: "https://www.nist.gov/itl/ai-risk-management-framework",
+	},
+	{
+		label: "IBM Cost of a Data Breach",
+		href: "https://www.ibm.com/reports/data-breach",
+	},
+];
+---
+
+<section class="evidence-data" aria-labelledby="evidence-data-title">
+	<div class="evidence-data__inner">
+		<header class="evidence-data__header">
+			<h2 id="evidence-data-title">AIセントラルで、探す時間・説明し直す時間をどれだけ戻せるか。</h2>
+			<p>
+				AIセントラルは、単発チャットを増やす仕組みではありません。社内資料・顧客情報・対応履歴・FAQをAIの参照先にして、毎回の「探す」「思い出す」「説明し直す」「確認する」を減らすための業務基盤です。
+			</p>
+		</header>
+
+		<div class="evidence-data__lead">
+			<h3>まずは「業務時間のどこが消えるのか」を見える化する。</h3>
+			<p>時間削減の中心は、AIの回答速度そのものではなく、回答する前に発生している情報探索・文脈説明・転記・確認の削減です。公開データを根拠にしつつ、実際の相談では件数と作業分数に置き換えて試算します。</p>
+		</div>
+
+		<div class="time-saving-board">
+			<div class="time-saving-board__main">
+				<div class="time-saving-board__copy">
+					<span class="evidence-tag">TIME SAVING MODEL</span>
+					<h3>年間 約109時間から、業務試算では約190時間まで。</h3>
+					<p>APQCの公開データでは、知識労働者の社内情報探索は週2.8時間から0.7時間へ下がる余地が示されています。AIセントラルでは、この「探す時間」に加えて、案件説明・転記・確認の繰り返しも試算対象にします。</p>
+				</div>
+				<div class="time-saving-board__hero-number">
+					<strong>約190時間</strong>
+					<span>1人あたり年間で戻せる可能性がある時間の試算例</span>
+				</div>
+			</div>
+			<div class="time-saving-board__formula" aria-label="時間削減の計算式">
+				<div>
+					<span>1日</span>
+					<strong>5件</strong>
+					<small>探す・思い出す・説明し直す場面</small>
+				</div>
+				<b>×</b>
+				<div>
+					<span>1件</span>
+					<strong>10分</strong>
+					<small>資料確認・文脈説明・転記</small>
+				</div>
+				<b>×</b>
+				<div>
+					<span>年間</span>
+					<strong>230日</strong>
+					<small>稼働日の目安</small>
+				</div>
+				<b>=</b>
+				<div class="is-result">
+					<span>年間</span>
+					<strong>約190時間</strong>
+					<small>保証値ではなく、初回相談で置き換える試算値</small>
+				</div>
+			</div>
+			<div class="bar-chart" aria-label="通常の情報探索とエンタープライズ検索ありの比較">
+				<div class="bar-chart__row">
+					<div class="bar-chart__label">
+						<span>通常の情報探索</span>
+						<strong>2.8時間 / 週</strong>
+					</div>
+					<div class="bar-chart__rail"><span style="width: 100%"></span></div>
+				</div>
+				<div class="bar-chart__row">
+					<div class="bar-chart__label">
+						<span>エンタープライズ検索あり</span>
+						<strong>0.7時間 / 週</strong>
+					</div>
+					<div class="bar-chart__rail bar-chart__rail--saving"><span style="width: 25%"></span><em>削減余地: 2.1時間 / 週</em></div>
+				</div>
+			</div>
+			<p class="evidence-note">公開データ: APQC 2.1h × 52週 = 約109時間。導入試算例: 1日5件 × 10分 × 230日 = 約191.6時間。</p>
+		</div>
+
+		<div class="evidence-card evidence-card--large evidence-card--flow">
+			<span class="evidence-tag">業務フローの違い</span>
+			<h3>普通のAIと、記憶を持つAIの業務差</h3>
+			<p>違いは「AIの賢さ」だけではなく、業務の前後にある探索・転記・説明・確認の手間をどれだけ吸収できるかです。</p>
+			<div class="flow-compare">
+				<div class="flow-box">
+					<h4>普通のAIチャット</h4>
+					<div class="flow-steps flow-steps--plain">
+						<span>質問</span><span>検索</span><span>転記</span><span>説明</span><span>確認</span>
+					</div>
+					<p>案件・担当者・資料が変わるたびに、検索・転記・説明・確認を繰り返します。</p>
+				</div>
+				<div class="flow-box flow-box--memory">
+					<h4>記憶を持つAI</h4>
+					<div class="flow-steps flow-steps--memory">
+						<span>質問</span><span>ナレッジ参照</span><span>根拠付き回答</span><span>文脈を再利用</span>
+					</div>
+					<p>資料・履歴・FAQをAIの中枢に接続し、根拠付き回答と文脈の再利用で業務を短縮します。</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="metric-grid">
+			{metricCards.map((item) => (
+				<div class="metric-card">
+					<span class="evidence-tag">{item.tag}</span>
+					<h3>{item.title}</h3>
+					<strong>{item.value}</strong>
+				</div>
+			))}
+		</div>
+
+		<div class="source-card">
+			<h3>時間削減ロジックの出典</h3>
+			<p>上の数字は、社内情報探索・AI活用による作業時間短縮・生産性向上に関する公開資料をもとに整理しています。各リンクから元資料を確認できます。</p>
+			<div class="source-list">
+				{timeSources.map((item) => (
+					<a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+				))}
+			</div>
+		</div>
+
+			<div class="security-proof">
+				<div class="security-proof__copy">
+					<span class="evidence-tag">SECURITY DESIGN</span>
+					<h3>個人情報を外へ貼る運用から、AIの参照場所を管理する設計へ。</h3>
+					<p>AIセントラルで重要なのは、AIを増やすことではなく、顧客情報・契約情報・社内資料をどこで参照させ、誰が承認し、どのログを残すかを決めることです。</p>
+				</div>
+				<div class="security-proof__steps" aria-label="AIセントラルの安全設計">
+					<div>
+						<span>01</span>
+						<strong>外へ貼らない</strong>
+						<p>機密情報を外部チャットへ都度入力する運用を減らす。</p>
+					</div>
+					<div>
+						<span>02</span>
+						<strong>参照範囲を分ける</strong>
+						<p>部署・役割・案件ごとに、AIが見てよい情報を設計する。</p>
+					</div>
+					<div>
+						<span>03</span>
+						<strong>ログと承認を残す</strong>
+						<p>回答根拠、利用履歴、送信前の人間承認を追える状態にする。</p>
+					</div>
+				</div>
+				<div class="security-proof__sources">
+					<span>参考資料</span>
+					{securitySources.map((item) => (
+						<a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+<style>
+	.evidence-data {
+		background: #fcf8f9;
+		color: #1c1b1c;
+		padding: clamp(72px, 9vw, 120px) 24px;
+	}
+
+	.evidence-data__inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.evidence-data__header,
+	.evidence-data__lead {
+		max-width: 880px;
+		margin-bottom: 48px;
+	}
+
+	.evidence-data__header h2 {
+		margin: 0 0 28px;
+		font-size: clamp(36px, 4.4vw, 56px);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.16;
+	}
+
+	.evidence-data__header p,
+	.evidence-data__lead p,
+	.evidence-card p,
+	.source-card p,
+	.safety-card p {
+		color: #4e4538;
+		font-size: clamp(16px, 1.35vw, 18px);
+		line-height: 1.85;
+	}
+
+	.evidence-data__lead h3,
+	.evidence-card h3,
+	.metric-card h3,
+	.source-card h3,
+	.safety-card h3 {
+		margin: 0 0 16px;
+		color: #1c1b1c;
+		font-size: clamp(24px, 2.5vw, 34px);
+		font-weight: 800;
+		letter-spacing: 0;
+		line-height: 1.35;
+		white-space: pre-line;
+	}
+
+	.evidence-card,
+	.metric-card,
+	.source-card,
+	.safety-card,
+	.safety-table {
+		border: 1px solid #d2c5b2;
+		border-radius: 2rem;
+		background: #ffffff;
+	}
+
+	.evidence-visual-grid,
+	.safety-visual-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+		gap: 24px;
+		align-items: stretch;
+		margin-bottom: 24px;
+	}
+
+	.safety-visual-grid {
+		grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+	}
+
+	.safety-visual-grid--diagram {
+		grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+	}
+
+	.evidence-visual-grid .evidence-card,
+	.safety-visual-grid .safety-table {
+		margin-bottom: 0;
+	}
+
+	.evidence-photo-card {
+		position: relative;
+		overflow: hidden;
+		min-height: 100%;
+		margin: 0;
+		border: 1px solid #d2c5b2;
+		border-radius: 2rem;
+		background: #ffffff;
+		box-shadow: 0 10px 40px rgba(11, 11, 12, 0.04);
+	}
+
+	.evidence-photo-card img {
+		width: 100%;
+		height: 100%;
+		min-height: 420px;
+		object-fit: cover;
+		filter: saturate(0.96) contrast(1.02);
+	}
+
+	.evidence-photo-card::after {
+		position: absolute;
+		inset: 0;
+		content: "";
+		background:
+			linear-gradient(180deg, transparent 36%, rgba(252, 248, 249, 0.92)),
+			linear-gradient(120deg, rgba(255, 222, 168, 0.18), transparent 46%);
+	}
+
+	.evidence-photo-card figcaption {
+		position: absolute;
+		z-index: 1;
+		right: 24px;
+		bottom: 24px;
+		left: 24px;
+		border-left: 4px solid #b68c3c;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.92);
+		padding: 18px 20px;
+		backdrop-filter: blur(10px);
+	}
+
+	.evidence-photo-card span {
+		color: #7b5807;
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	.evidence-photo-card strong {
+		display: block;
+		margin-top: 8px;
+		font-size: clamp(18px, 1.5vw, 22px);
+		line-height: 1.45;
+	}
+
+	.evidence-card,
+	.source-card {
+		margin-bottom: 24px;
+		padding: clamp(28px, 4vw, 56px);
+	}
+
+	.time-saving-board {
+		display: grid;
+		gap: clamp(20px, 2.6vw, 32px);
+		margin-bottom: 24px;
+		border: 1px solid #d2c5b2;
+		border-radius: 2.2rem;
+		background:
+			radial-gradient(circle at 82% 14%, rgba(182, 140, 60, 0.14), transparent 30%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 226, 0.54)),
+			repeating-linear-gradient(90deg, rgba(182, 140, 60, 0.055) 0 1px, transparent 1px 42px),
+			repeating-linear-gradient(0deg, rgba(182, 140, 60, 0.05) 0 1px, transparent 1px 42px);
+		padding: clamp(28px, 4.5vw, 58px);
+		box-shadow: 0 24px 72px rgba(55, 38, 12, 0.08);
+	}
+
+	.time-saving-board__main {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.58fr);
+		gap: clamp(24px, 4vw, 52px);
+		align-items: stretch;
+	}
+
+	.time-saving-board__copy {
+		display: grid;
+		align-content: center;
+	}
+
+	.time-saving-board__main h3 {
+		margin: 0;
+		font-size: clamp(32px, 4vw, 54px);
+		font-weight: 950;
+		line-height: 1.18;
+	}
+
+	.time-saving-board__main p {
+		max-width: 720px;
+		margin: 18px 0 0;
+		color: #4e4538;
+		font-size: clamp(16px, 1.35vw, 18px);
+		font-weight: 680;
+		line-height: 1.85;
+	}
+
+	.time-saving-board__hero-number {
+		display: grid;
+		align-content: center;
+		min-height: 210px;
+		border: 1px solid rgba(182, 140, 60, 0.64);
+		border-radius: 1.8rem;
+		background:
+			linear-gradient(135deg, rgba(182, 140, 60, 0.98), rgba(123, 88, 7, 0.92)),
+			#b68c3c;
+		padding: clamp(24px, 3vw, 36px);
+		color: #ffffff;
+		box-shadow: 0 20px 54px rgba(123, 88, 7, 0.22);
+	}
+
+	.time-saving-board__hero-number strong {
+		display: block;
+		font-size: clamp(48px, 6.4vw, 86px);
+		font-weight: 950;
+		letter-spacing: 0;
+		line-height: 0.98;
+	}
+
+	.time-saving-board__hero-number span {
+		display: block;
+		margin-top: 18px;
+		font-size: clamp(15px, 1.25vw, 18px);
+		font-weight: 850;
+		line-height: 1.55;
+	}
+
+	.time-saving-board__formula {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 12px;
+		align-items: stretch;
+	}
+
+	.time-saving-board__formula > div {
+		display: grid;
+		align-content: center;
+		min-height: 150px;
+		border: 1px solid rgba(210, 197, 178, 0.82);
+		border-radius: 1.35rem;
+		background: rgba(255, 255, 255, 0.92);
+		padding: 20px;
+	}
+
+	.time-saving-board__formula > b {
+		display: none;
+	}
+
+	.time-saving-board__formula span,
+	.time-saving-board__formula small {
+		display: block;
+	}
+
+	.time-saving-board__formula span {
+		color: #7b5807;
+		font-size: 13px;
+		font-weight: 950;
+		letter-spacing: 0.06em;
+	}
+
+	.time-saving-board__formula strong {
+		display: block;
+		margin-top: 8px;
+		color: #1c1b1c;
+		font-size: clamp(26px, 3vw, 42px);
+		font-weight: 950;
+		line-height: 1.05;
+	}
+
+	.time-saving-board__formula small {
+		margin-top: 10px;
+		color: #4e4538;
+		font-size: clamp(13px, 1.05vw, 15px);
+		font-weight: 760;
+		line-height: 1.45;
+	}
+
+	.time-saving-board__formula .is-result {
+		border-color: rgba(182, 140, 60, 0.72);
+		background: rgba(239, 191, 106, 0.16);
+	}
+
+	.evidence-tag {
+		display: inline-flex;
+		min-height: 38px;
+		align-items: center;
+		border: 1px solid #d2c5b2;
+		border-radius: 999px;
+		background: #f6f3f4;
+		color: #6f5c3a;
+		padding: 8px 14px;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.35;
+		margin-bottom: 16px;
+	}
+
+	.bar-chart {
+		display: grid;
+		gap: 32px;
+		margin: 40px 0;
+	}
+
+	.bar-chart__label {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		margin-bottom: 12px;
+		font-size: 18px;
+		font-weight: 800;
+	}
+
+	.bar-chart__label strong {
+		font-size: clamp(24px, 2.8vw, 34px);
+	}
+
+	.bar-chart__rail {
+		position: relative;
+		overflow: hidden;
+		height: clamp(44px, 5vw, 64px);
+		border-radius: 999px;
+		background: #f0edee;
+	}
+
+	.bar-chart__rail span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background: #807666;
+	}
+
+	.bar-chart__rail--saving span {
+		background: #b68c3c;
+	}
+
+	.bar-chart__rail--saving em {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		color: #7b5807;
+		font-size: clamp(15px, 1.8vw, 20px);
+		font-style: normal;
+		font-weight: 900;
+	}
+
+	.evidence-note {
+		color: #807666 !important;
+		font-size: 15px !important;
+	}
+
+	.time-estimate-card {
+		border: 1px solid rgba(182, 140, 60, 0.72);
+		border-radius: 1.5rem;
+		background: rgba(239, 191, 106, 0.12);
+		padding: 22px;
+	}
+
+	.time-estimate-card span {
+		display: inline-flex;
+		margin-bottom: 10px;
+		color: #7b5807;
+		font-size: 14px;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+	}
+
+	.time-estimate-card strong {
+		display: block;
+		color: #1c1b1c;
+		font-size: clamp(20px, 2.1vw, 28px);
+		line-height: 1.4;
+	}
+
+	.time-estimate-card p {
+		margin-top: 12px;
+		font-size: 16px;
+		line-height: 1.75;
+	}
+
+	.flow-compare,
+	.metric-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.flow-box {
+		border: 1px solid #d2c5b2;
+		border-radius: 2rem;
+		background: #f6f3f4;
+		padding: clamp(24px, 3vw, 40px);
+	}
+
+	.flow-box--memory {
+		border-color: #b68c3c;
+		background: rgba(239, 191, 106, 0.12);
+	}
+
+	.flow-box h4 {
+		margin: 0 0 24px;
+		font-size: 24px;
+		font-weight: 800;
+	}
+
+	.flow-steps {
+		display: grid;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+
+	.flow-steps--plain {
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+	}
+
+	.flow-steps--memory {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.flow-steps span {
+		display: grid;
+		min-height: 72px;
+		place-items: center;
+		border-radius: 1rem;
+		background: #f0edee;
+		padding: 12px;
+		text-align: center;
+		font-size: 17px;
+		font-weight: 800;
+		line-height: 1.4;
+	}
+
+	.flow-steps--memory span {
+		background: #b68c3c;
+		color: #ffffff;
+	}
+
+	.metric-grid {
+		margin-bottom: 24px;
+	}
+
+	.metric-card,
+	.safety-card {
+		display: flex;
+		min-height: 250px;
+		flex-direction: column;
+		padding: clamp(28px, 3vw, 40px);
+	}
+
+	.metric-card strong {
+		margin-top: auto;
+		border-top: 1px solid rgba(210, 197, 178, 0.65);
+		padding-top: 24px;
+		color: #7b5807;
+		font-size: 18px;
+		font-weight: 900;
+	}
+
+	.source-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+		.source-list a {
+			display: inline-flex;
+			min-height: 52px;
+			align-items: center;
+		border: 1px solid #d2c5b2;
+		border-radius: 999px;
+		background: #ffffff;
+		color: #6f5c3a;
+		padding: 12px 20px;
+		font-size: 15px;
+		font-weight: 700;
+		text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		.security-proof {
+			display: grid;
+			grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+			gap: clamp(24px, 4vw, 52px);
+			align-items: start;
+			margin-top: clamp(48px, 6vw, 84px);
+			border: 1px solid #d2c5b2;
+			border-radius: 2rem;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 236, 0.64)),
+				repeating-linear-gradient(90deg, rgba(182, 140, 60, 0.045) 0 1px, transparent 1px 42px);
+			padding: clamp(28px, 4.2vw, 56px);
+			box-shadow: 0 18px 58px rgba(55, 38, 12, 0.06);
+		}
+
+		.security-proof__copy h3 {
+			margin: 0 0 18px;
+			color: #1c1b1c;
+			font-size: clamp(28px, 3.2vw, 42px);
+			font-weight: 900;
+			letter-spacing: 0;
+			line-height: 1.24;
+		}
+
+		.security-proof__steps {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 14px;
+		}
+
+		.security-proof__steps > div {
+			border: 1px solid rgba(210, 197, 178, 0.82);
+			border-radius: 1.25rem;
+			background: rgba(255, 255, 255, 0.9);
+			padding: clamp(18px, 2vw, 24px);
+		}
+
+		.security-proof__steps span {
+			display: inline-flex;
+			margin-bottom: 16px;
+			color: #7b5807;
+			font-size: 14px;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+		}
+
+		.security-proof__steps strong {
+			display: block;
+			color: #1c1b1c;
+			font-size: clamp(19px, 1.8vw, 24px);
+			font-weight: 900;
+			line-height: 1.35;
+		}
+
+		.security-proof__steps p {
+			margin-top: 10px;
+			font-size: clamp(14px, 1.15vw, 16px);
+			font-weight: 650;
+			line-height: 1.65;
+		}
+
+		.security-proof__sources {
+			grid-column: 1 / -1;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			align-items: center;
+			border-top: 1px solid rgba(210, 197, 178, 0.68);
+			padding-top: 20px;
+		}
+
+		.security-proof__sources span {
+			color: #7b5807;
+			font-size: 13px;
+			font-weight: 900;
+			letter-spacing: 0.08em;
+		}
+
+		.security-proof__sources a {
+			display: inline-flex;
+			min-height: 42px;
+			align-items: center;
+			border: 1px solid #d2c5b2;
+			border-radius: 999px;
+			background: #ffffff;
+			color: #6f5c3a;
+			padding: 9px 15px;
+			font-size: 14px;
+			font-weight: 800;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		.safety-table {
+			overflow-x: auto;
+			margin-bottom: 32px;
+	}
+
+	.safety-table table {
+		width: 100%;
+		min-width: 760px;
+		border-collapse: collapse;
+	}
+
+	.safety-table th,
+	.safety-table td {
+		border-bottom: 1px solid rgba(210, 197, 178, 0.55);
+		padding: 28px;
+		text-align: left;
+		font-size: 18px;
+		line-height: 1.75;
+	}
+
+	.safety-table th {
+		background: #f6f3f4;
+		font-weight: 900;
+	}
+
+	.safety-table td:first-child {
+		color: #1c1b1c;
+		font-weight: 900;
+	}
+
+	.safety-table td:last-child {
+		background: rgba(239, 191, 106, 0.12);
+		color: #7b5807;
+		font-weight: 900;
+	}
+
+	.controlled-ai-diagram {
+		display: grid;
+		gap: 18px;
+		border: 1px solid #d2c5b2;
+		border-radius: 2rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(252, 248, 249, 0.78)),
+			repeating-linear-gradient(90deg, rgba(182, 140, 60, 0.08) 0 1px, transparent 1px 34px),
+			repeating-linear-gradient(0deg, rgba(182, 140, 60, 0.08) 0 1px, transparent 1px 34px);
+		padding: clamp(24px, 3vw, 36px);
+	}
+
+	.controlled-ai-diagram__side {
+		border: 1px solid #d2c5b2;
+		border-radius: 1.4rem;
+		background: #ffffff;
+		padding: 22px;
+	}
+
+	.controlled-ai-diagram__side--outside {
+		background: #f6f3f4;
+	}
+
+	.controlled-ai-diagram__side--inside {
+		border-color: rgba(182, 140, 60, 0.72);
+		background: rgba(239, 191, 106, 0.12);
+	}
+
+	.controlled-ai-diagram__side span,
+	.controlled-ai-diagram__center div {
+		display: inline-flex;
+		margin-bottom: 10px;
+		color: #7b5807;
+		font-size: 14px;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+	}
+
+	.controlled-ai-diagram__side strong,
+	.controlled-ai-diagram__center strong {
+		display: block;
+		color: #1c1b1c;
+		font-size: clamp(20px, 2vw, 26px);
+		line-height: 1.35;
+	}
+
+	.controlled-ai-diagram__side ul {
+		display: grid;
+		gap: 10px;
+		margin: 18px 0 0;
+		padding: 0;
+		list-style: none;
+		color: #4e4538;
+		font-size: clamp(15px, 1.25vw, 17px);
+		font-weight: 700;
+		line-height: 1.55;
+	}
+
+	.controlled-ai-diagram__side li {
+		display: flex;
+		gap: 10px;
+		align-items: flex-start;
+	}
+
+	.controlled-ai-diagram__side li::before {
+		width: 10px;
+		height: 10px;
+		flex: 0 0 auto;
+		border-radius: 999px;
+		background: #b68c3c;
+		content: "";
+		margin-top: 0.55em;
+	}
+
+	.controlled-ai-diagram__center {
+		position: relative;
+		display: grid;
+		place-items: center;
+		text-align: center;
+		border: 2px solid rgba(182, 140, 60, 0.72);
+		border-radius: 999px;
+		background: #ffffff;
+		padding: 22px;
+		box-shadow: 0 14px 36px rgba(123, 88, 7, 0.1);
+	}
+
+	.controlled-ai-diagram__center::before,
+	.controlled-ai-diagram__center::after {
+		position: absolute;
+		left: 50%;
+		width: 2px;
+		height: 18px;
+		background: #b68c3c;
+		content: "";
+		transform: translateX(-50%);
+	}
+
+	.controlled-ai-diagram__center::before {
+		top: -19px;
+	}
+
+	.controlled-ai-diagram__center::after {
+		bottom: -19px;
+	}
+
+	.safety-card {
+		border-left: 4px solid #b68c3c;
+	}
+
+	.safety-card div {
+		margin-top: auto;
+		border-top: 1px solid rgba(210, 197, 178, 0.65);
+		padding-top: 20px;
+	}
+
+	.safety-card strong,
+	.safety-card a {
+		display: block;
+		font-size: 16px;
+		font-weight: 800;
+	}
+
+	.safety-card a {
+		margin-top: 10px;
+		color: #7b5807;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	@media (max-width: 900px) {
+			.time-saving-board__main,
+			.evidence-visual-grid,
+			.safety-visual-grid,
+			.flow-compare,
+			.metric-grid,
+			.security-proof,
+			.security-proof__steps {
+				grid-template-columns: 1fr;
+			}
+
+		.time-saving-board__formula {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.flow-steps--plain,
+		.flow-steps--memory {
+			grid-template-columns: 1fr;
+		}
+
+		.bar-chart__label {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 560px) {
+			.time-saving-board {
+				border-radius: 1.5rem;
+				padding: 22px;
+			}
+
+			.security-proof {
+				border-radius: 1.5rem;
+				padding: 22px;
+			}
+
+			.time-saving-board__formula {
+				grid-template-columns: 1fr;
+			}
+
+		.time-saving-board__formula > div {
+			min-height: 128px;
+		}
+
+		.time-saving-board__hero-number {
+			min-height: 176px;
+		}
+	}
+</style>

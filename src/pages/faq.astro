@@ -26,7 +26,7 @@ const faqLd = {
 };
 
 const pageDesc =
-	"構造化脳ブログのよくある質問と、AI用語集（Claude / Claude Code / MCP / Obsidian / LLMO / AIエージェント などをやさしく解説）。著者のシュ コウメイ（ストアカ評価4.94・LLMO書籍著者）が回答しています。";
+	`構造化脳ブログのよくある質問と、AI用語集（Claude / Claude Code / MCP / Obsidian / LLMO / AIエージェント などをやさしく解説）。著者のシュ コウメイ（ストアカ評価${seoConfig.reviews.ratingValue}・LLMO書籍著者）が回答しています。`;
 ---
 <MainGridLayout title="よくある質問・AI用語集" description={pageDesc}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>

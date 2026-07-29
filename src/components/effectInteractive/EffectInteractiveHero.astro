@@ -1,0 +1,297 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="stitch-top-hero" aria-labelledby="effect-hero-title">
+	<div class="stitch-top-hero__inner">
+		<div class="stitch-top-hero__copy">
+			<p class="stitch-top-hero__kicker">AI CENTRAL DESIGN / KNOWLEDGE SYSTEM</p>
+			<h1 id="effect-hero-title">記憶を持ったAIを社内の中枢へ組み込む、AIセントラルシステム</h1>
+			<p class="stitch-top-hero__lead">
+				社内資料・顧客情報・対応履歴・FAQを、管理された環境でAIが参照できる社内基盤へ整えます。社員一人一人の記憶を持ったAIが、検索・整理・作成・確認・分析を縦横無尽にこなし、人間は意思決定に集中できる状態をつくります。
+			</p>
+			<div class="stitch-top-hero__actions">
+				<a href="mailto:info@effect.moe?subject=%E3%80%90effect.moe%E3%80%91%E7%A4%BE%E5%86%85AI%E5%8C%96%E3%81%AE%E7%9B%B8%E8%AB%87" class="stitch-top-hero__primary">社内AI化の相談をする</a>
+				<a href="/author/" class="stitch-top-hero__secondary">設計者を見る</a>
+			</div>
+			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
+		</div>
+
+		<div class="stitch-top-hero__visual">
+			<div class="stitch-top-hero__image">
+				<img src="/lp/generated/hero-ai-central-human-v2.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
+			</div>
+			<div class="stitch-top-hero__orchestrator" aria-label="AIセントラルの役割">
+				<div class="stitch-top-hero__orchestrator-head">
+					<Icon name="material-symbols:memory-alt-outline" />
+					<span>AI CENTRAL</span>
+					<strong>記憶を持ったAIが業務を取り仕切る</strong>
+				</div>
+				<div class="stitch-top-hero__orchestrator-grid">
+					<span>社内情報を参照</span>
+					<span>5業務を実行</span>
+					<span>人に判断を渡す</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.stitch-top-hero {
+		--stitch-bg: #fcf8f9;
+		--stitch-surface: #ffffff;
+		--stitch-surface-low: #f6f3f4;
+		--stitch-ink: #1c1b1c;
+		--stitch-muted: #4e4538;
+		--stitch-primary: #7b5807;
+		--stitch-primary-container: #b68c3c;
+		--stitch-on-primary-container: #3c2800;
+		--stitch-line: #e5e1da;
+		background: var(--stitch-bg);
+		color: var(--stitch-ink);
+	}
+
+	.stitch-top-hero__inner {
+		display: grid;
+		grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+		gap: 32px;
+		align-items: center;
+		max-width: 1360px;
+		margin: 0 auto;
+		padding: clamp(96px, 11vw, 140px) 24px clamp(72px, 9vw, 120px);
+	}
+
+	.stitch-top-hero__copy {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.stitch-top-hero__kicker {
+		margin: 0 0 16px;
+		color: var(--stitch-primary);
+		font-size: 14px;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.stitch-top-hero h1 {
+		margin: 0 0 24px;
+		color: var(--stitch-ink);
+		font-size: clamp(36px, 4.6vw, 56px);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.1;
+	}
+
+	.stitch-top-hero__lead {
+		margin: 0 0 32px;
+		color: var(--stitch-muted);
+		font-size: clamp(16px, 1.45vw, 18px);
+		font-weight: 500;
+		letter-spacing: 0;
+		line-height: 1.8;
+	}
+
+	.stitch-top-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+
+	.stitch-top-hero__actions a {
+		display: inline-flex;
+		min-height: 56px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		padding: 16px 32px;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 1.2;
+		text-decoration: none;
+		transition:
+			opacity 0.18s ease,
+			background 0.18s ease,
+			transform 0.18s ease;
+	}
+
+	.stitch-top-hero__actions a:hover {
+		transform: translateY(-1px);
+		opacity: 0.9;
+	}
+
+	.stitch-top-hero__primary {
+		background: var(--stitch-primary-container);
+		color: #ffffff;
+	}
+
+	.stitch-top-hero__secondary {
+		border: 1.5px solid var(--stitch-primary-container);
+		background: transparent;
+		color: var(--stitch-primary-container);
+	}
+
+	.stitch-top-hero__secondary:hover {
+		background: var(--stitch-surface-low);
+	}
+
+	.stitch-top-hero__note {
+		margin: 0;
+		color: #807666;
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0;
+		line-height: 1.6;
+	}
+
+	.stitch-top-hero__visual {
+		position: relative;
+	}
+
+	.stitch-top-hero__image {
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+		border: 1px solid var(--stitch-line);
+		border-radius: 3rem;
+		background: var(--stitch-surface);
+		box-shadow: 0 10px 40px rgba(11, 11, 12, 0.04);
+	}
+
+	.stitch-top-hero__image img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		object-position: center;
+		transform: scale(1.08);
+		transform-origin: 62% center;
+	}
+
+	.stitch-top-hero__orchestrator {
+		position: absolute;
+		bottom: -38px;
+		left: 32px;
+		z-index: 2;
+		border: 1px solid var(--stitch-line);
+		border-radius: 1.6rem;
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: 0 16px 44px rgba(11, 11, 12, 0.1);
+		padding: 14px;
+		backdrop-filter: blur(12px);
+	}
+
+	.stitch-top-hero__orchestrator-head {
+		display: grid;
+		grid-template-columns: auto auto 1fr;
+		align-items: center;
+		gap: 8px;
+		color: var(--stitch-primary);
+	}
+
+	.stitch-top-hero__orchestrator-head :global(svg) {
+		font-size: 28px;
+	}
+
+	.stitch-top-hero__orchestrator-head span {
+		color: var(--stitch-muted);
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+	}
+
+	.stitch-top-hero__orchestrator-head strong {
+		color: var(--stitch-ink);
+		font-size: 14px;
+		font-weight: 900;
+		line-height: 1.25;
+	}
+
+	.stitch-top-hero__orchestrator-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.stitch-top-hero__orchestrator-grid span {
+		border: 1px solid rgba(210, 197, 178, 0.75);
+		border-radius: 999px;
+		background: #f6f3f4;
+		color: var(--stitch-muted);
+		padding: 8px 10px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: 800;
+		line-height: 1.25;
+	}
+
+	@media (max-width: 1023px) {
+		.stitch-top-hero__inner {
+			grid-template-columns: 1fr;
+			padding-top: 96px;
+			padding-bottom: 34px;
+		}
+
+		.stitch-top-hero__copy {
+			order: 2;
+		}
+
+		.stitch-top-hero__visual {
+			order: 1;
+			margin-bottom: 34px;
+		}
+
+		.stitch-top-hero__orchestrator {
+			bottom: -48px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.stitch-top-hero__inner {
+			padding-inline: 18px;
+		}
+
+		.stitch-top-hero__image {
+			border-radius: 2rem;
+		}
+
+		.stitch-top-hero__visual {
+			margin-bottom: 0;
+		}
+
+		.stitch-top-hero__orchestrator {
+			position: relative;
+			left: auto;
+			bottom: auto;
+			margin: -24px 16px 0;
+			padding: 12px;
+		}
+
+		.stitch-top-hero__orchestrator-head {
+			grid-template-columns: auto 1fr;
+		}
+
+		.stitch-top-hero__orchestrator-head span {
+			display: none;
+		}
+
+		.stitch-top-hero__orchestrator-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.stitch-top-hero__actions {
+			display: grid;
+		}
+
+		.stitch-top-hero__actions a {
+			width: 100%;
+		}
+	}
+</style>

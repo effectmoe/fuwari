@@ -6,8 +6,9 @@
  * コンテンツ正本: LLM Wiki wiki/EFFECT/lp-content-ai-central-20260715.md
  * 実績数値は src/data/storaca-stats.json（日次自動更新）から取得
  */
-import MainGridLayout from "../layouts/MainGridLayout.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
 import { Icon } from "astro-icon/components";
+import InlineConversion from "../components/landing/InlineConversion.astro";
 import stats from "../data/storaca-stats.json";
 
 const contactEmail = "info@effect.moe";
@@ -287,6 +288,31 @@ const cases = [
 ];
 
 const testimonials = (stats.testimonials ?? []).filter((t) => t.text && t.text.length > 40).slice(0, 2);
+const heroImage = "/lp/generated/bright-japanese-ai-consulting-hero.png";
+const workflowImage = "/lp/generated/bright-workflow-knowledge-design.png";
+
+const centralMap = [
+  {
+    title: "記憶",
+    body: "顧客情報・社内資料・対応履歴を、AIが参照できる知識として整理する。",
+    icon: "material-symbols:database-outline",
+  },
+  {
+    title: "検索",
+    body: "必要な情報をAIが探し、出典つきで人が確認できる状態にする。",
+    icon: "material-symbols:manage-search",
+  },
+  {
+    title: "下書き",
+    body: "メール・説明文・整理メモ・手続き前の材料をAIが準備する。",
+    icon: "material-symbols:edit-document-outline",
+  },
+  {
+    title: "承認",
+    body: "送信・判断・確定は人が行う。AIは中枢に置くが、決裁者にはしない。",
+    icon: "material-symbols:verified-user-outline",
+  },
+];
 
 // ===== JSON-LD =====
 const jsonLd = {
@@ -313,72 +339,409 @@ const jsonLd = {
 };
 ---
 
-<MainGridLayout
-  title="AIセントラル｜顧客情報を外に出さない、士業事務所専属のAI｜シュ コウメイ（株式会社EFFECT）"
-  description="士業（税理士・社労士・行政書士・司法書士・弁護士）向けAI・DXシステム構築。事務所にAIの記憶ベースを構築し、守秘義務を守ったままAIを業務の中心に。構築33万円〜+全プラン週1伴走コンサル月額34,800円。ストアカ評価★4.94のプロ講師が構築から伴走まで担当。"
+<LandingLayout
+  title="AIセントラル｜記憶を持ったAIをシステムの中枢へ｜シュ コウメイ（株式会社EFFECT）"
+  description="記憶を持ったAIをシステムの中枢に据え、顧客対応・資料整理・ナレッジ共有・判断前の下処理を加速するAI-DX。士業事務所をはじめ、個人情報・機密情報を扱う企業向けに構築から伴走まで支援します。構築33万円〜+全プラン週1伴走コンサル月額34,800円。"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
-  <div class="flex flex-col gap-5 w-full">
+  <div class="ai-central-page w-full">
 
     <!-- ===== 1. Hero ===== -->
-    <div class="card-base overflow-hidden p-0">
-      <div class="bg-gradient-to-br from-[var(--primary)]/10 via-transparent to-[var(--primary)]/5 px-6 md:px-9 pt-8 pb-7">
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="inline-flex items-center gap-1 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1">
-            <Icon name="material-symbols:balance" class="text-sm" />
-            税理士・社労士・行政書士・司法書士・弁護士 対応
-          </span>
-          <span class="inline-flex items-center gap-1 text-xs font-bold text-75 bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1">
-            <Icon name="material-symbols:encrypted-outline" class="text-sm" />
-            事務所内オンプレ構成対応
-          </span>
+    <section class="ai-central-hero relative isolate overflow-hidden">
+      <img
+        src={heroImage}
+        alt="日本人チームがAI活用と業務データの接続を相談している様子"
+        class="absolute inset-0 -z-20 h-full w-full object-cover opacity-28"
+        loading="eager"
+      />
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(255,255,255,0.96),rgba(238,245,243,0.88)_50%,rgba(250,246,237,0.76))]"></div>
+      <div class="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-[1.05fr_0.95fr] md:px-8 md:py-20">
+        <div>
+          <div class="mb-5 flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 rounded-md border border-black/10 bg-white/70 px-3 py-1 text-xs font-bold text-[var(--primary)] shadow-sm backdrop-blur">
+              <Icon name="material-symbols:memory-alt-outline" class="text-base" />
+              AI記憶ベース構築
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-md border border-black/10 bg-white/70 px-3 py-1 text-xs font-bold text-[var(--primary)] shadow-sm backdrop-blur">
+              <Icon name="material-symbols:shield-lock-outline" class="text-base" />
+              個人情報・機密情報対応
+            </span>
+          </div>
+          <p class="mb-4 text-sm font-bold tracking-[0.18em] text-[var(--primary)]">AI CENTRAL</p>
+          <h1 class="max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+            記憶を持ったAIを、<br />
+            システムの中枢へ。
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg font-bold leading-relaxed text-90 md:text-2xl">
+            あらゆる業務を加速する、AI-DXの中核基盤。
+          </p>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-75 md:text-lg">
+            顧客情報・社内資料・業務履歴を、必要な範囲でAIが扱える「記憶」へ。士業事務所だけでなく、個人情報や機密情報を扱う企業にも導入できる AIセントラルです。
+          </p>
+          <div class="central-hero-route mt-7">
+            {[
+              ["散在情報", "メール・資料・履歴"],
+              ["記憶AI", "参照できる中枢"],
+              ["業務加速", "下書き・整理・確認"],
+            ].map((item) => (
+              <div>
+                <span>{item[0]}</span>
+                <strong>{item[1]}</strong>
+              </div>
+            ))}
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href={mailtoLink}
+              data-no-swup
+              style="background-color:#020617;color:#fff;"
+              class="inline-flex items-center gap-2 rounded-md px-6 py-3 font-bold transition hover:opacity-90"
+            >
+              <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+              無料相談を申し込む
+            </a>
+            <a
+              href="#pricing"
+              class="inline-flex items-center gap-2 rounded-md border border-[var(--primary)] px-6 py-3 font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)]"
+            >
+              <Icon name="material-symbols:currency-yen" class="text-xl" />
+              料金を見る
+            </a>
+          </div>
         </div>
-        <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
-          顧客情報を1バイトも外に出さない、<br />
-          <span class="text-[var(--primary)]">事務所専属 AI。</span>
-        </h1>
-        <p class="text-base md:text-lg text-90 font-bold leading-relaxed mb-2">
-          事務所のことも、顧問先のことも、覚えている。聞けば答え、言えば動く。
-        </p>
-        <p class="text-sm md:text-base text-75 leading-relaxed mb-6">
-          守秘義務の中で成立する、事務所の新しいチームのかたち — AIセントラル。
-        </p>
-        <div class="flex flex-wrap gap-3 mb-3">
-          <a
-            href={mailtoLink}
-            data-no-swup
-            class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
-          >
-            <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
-            無料相談を申し込む
-          </a>
-          <a
-            href="#pricing"
-            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
-          >
-            料金を見る
-          </a>
-        </div>
-        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:neurology-outline" class="text-[var(--primary)] text-lg" />
-            AI が事務所の記憶を持つ
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:handshake-outline" class="text-[var(--primary)] text-lg" />
-            全プラン 週1回の伴走コンサル付き
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:currency-yen" class="text-[var(--primary)] text-lg" />
-            構築 ¥330,000〜
-          </span>
+        <div class="central-hero-showcase">
+          <div class="central-hero-photo">
+            <img src={heroImage} alt="日本人チームがAI導入と業務活用を相談している様子" loading="eager" decoding="async" />
+            <div>
+              <span>CORE PROMISE</span>
+              <strong>事務所のことも、顧問先のことも、覚えている。</strong>
+            </div>
+          </div>
+          <div class="central-hero-console">
+            <div class="central-hero-console__core">
+              <Icon name="material-symbols:memory-alt-outline" class="text-5xl" />
+              <strong>AI Central</strong>
+            </div>
+            <div class="central-hero-console__nodes">
+              {[
+                ["社内資料", "material-symbols:folder-managed-outline"],
+                ["顧客情報", "material-symbols:id-card-outline"],
+                ["対応履歴", "material-symbols:history-edu-outline"],
+                ["人の承認", "material-symbols:verified-user-outline"],
+              ].map((node) => (
+                <div>
+                  <Icon name={node[1]} class="text-2xl" />
+                  <span>{node[0]}</span>
+                </div>
+              ))}
+            </div>
+            <div class="central-hero-process">
+              <div><span>外に出せない情報</span><strong>ローカル/権限設計</strong></div>
+              <div><span>AIに任せる範囲</span><strong>人の承認で確定</strong></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="central-experience-strip border-b border-black/10 bg-white dark:border-white/10">
+      <div class="mx-auto grid max-w-7xl gap-5 px-4 py-8 md:grid-cols-[0.95fr_1.1fr_0.95fr] md:px-8 md:py-10">
+        <div class="central-experience-tile is-photo">
+          <img src={workflowImage} alt="業務フローと社内ナレッジをAI向けに整理している様子" loading="lazy" decoding="async" />
+          <div>
+            <p>散らばった情報を、AIが扱える記憶へ変える。</p>
+          </div>
+        </div>
+        <div class="central-experience-tile is-memory">
+          <p class="text-xs font-bold tracking-[0.16em] text-[var(--primary)]">MEMORY LAYER</p>
+          <div class="central-memory-map mt-5">
+            <div class="central-memory-map__core">
+              <Icon name="material-symbols:memory-alt-outline" class="text-4xl" />
+              <strong>記憶AI</strong>
+            </div>
+            <span class="node node-1">社内資料</span>
+            <span class="node node-2">顧客情報</span>
+            <span class="node node-3">対応履歴</span>
+            <span class="node node-4">期限情報</span>
+          </div>
+        </div>
+        <div class="central-experience-tile is-human">
+          <p class="text-xs font-bold text-50">HUMAN IN THE LOOP</p>
+          <div class="mt-4 grid gap-3">
+            {["AIが整理する", "人が確認する", "業務へ戻す"].map((label, index) => (
+              <div class="grid grid-cols-[auto_1fr] items-center gap-3 rounded-md bg-white/78 p-3 shadow-sm">
+                <span class="grid size-8 place-items-center rounded-md bg-[var(--primary)]/10 text-xs font-bold text-[var(--primary)]">0{index + 1}</span>
+                <strong class="text-sm text-90">{label}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-[var(--page-bg)] dark:border-white/10">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-8 md:py-20">
+        <div>
+          <p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">CENTRAL ARCHITECTURE</p>
+          <h2 class="mt-3 text-[1.72rem] font-bold leading-tight text-90 sm:text-3xl md:text-4xl">
+            AIを「便利ツール」ではなく、<br />業務の中枢に置く。
+          </h2>
+          <p class="mt-5 text-sm leading-relaxed text-75">
+            AIセントラルは、チャット画面を1つ増やすサービスではありません。散らばった資料・顧客情報・過去対応をAIの記憶につなぎ、人が判断する前の準備を一気に進める業務基盤です。
+          </p>
+          <div class="mt-7">
+            <a
+              href={mailtoLink}
+              data-no-swup
+              style="background-color:#020617;color:#fff;"
+              class="inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90 sm:w-auto"
+            >
+              <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+              無料相談で構成を確認する
+            </a>
+          </div>
+        </div>
+        <div class="rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:p-5">
+          <div class="grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div class="rounded-lg bg-slate-950 p-5 text-white">
+              <p class="text-xs font-bold tracking-[0.14em] text-blue-200">SYSTEM CENTER</p>
+              <div class="mt-5 grid place-items-center rounded-xl border border-white/15 bg-white/8 p-6">
+                <div class="grid size-36 place-items-center rounded-full border border-white/20 bg-white/10 shadow-2xl">
+                  <Icon name="material-symbols:memory-alt-outline" class="text-6xl text-white" />
+                  <p class="mt-1 text-center text-sm font-bold leading-tight">AI<br />Central</p>
+                </div>
+              </div>
+              <div class="mt-5 grid grid-cols-2 gap-2 text-center text-xs font-bold text-white/78">
+                <div class="rounded-md bg-white/10 p-3">社内資料</div>
+                <div class="rounded-md bg-white/10 p-3">顧客情報</div>
+                <div class="rounded-md bg-white/10 p-3">対応履歴</div>
+                <div class="rounded-md bg-white/10 p-3">期限情報</div>
+              </div>
+            </div>
+            <div class="grid gap-3">
+              {centralMap.map((item, index) => (
+                <div class="grid grid-cols-[auto_1fr] gap-3 rounded-lg bg-[var(--card-bg)] p-4 shadow-sm">
+                  <span class="grid size-11 place-items-center rounded-md bg-[var(--primary)] text-white">
+                    <Icon name={item.icon} class="text-2xl" />
+                  </span>
+                  <div>
+                    <p class="text-xs font-bold text-50">0{index + 1}</p>
+                    <h3 class="mt-1 text-base font-bold text-90">{item.title}</h3>
+                    <p class="mt-1 text-xs leading-relaxed text-75">{item.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="ローカルAIが必要か、自社の情報で切り分けます。"
+      body="外に出せる情報・出せない情報を整理し、無料相談または無料診断から始められます。"
+    />
+
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 md:px-8 md:py-14">
+
+    <!-- ===== Core 1. なぜAIをローカルで使う必要があるのか ===== -->
+    <section class="central-local-canvas card-base overflow-hidden p-0">
+      <div class="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
+        <div class="bg-slate-950 p-6 text-white md:p-9">
+          <p class="mb-3 text-sm font-bold tracking-[0.16em] text-white/52">CORE 01</p>
+          <h2 class="text-2xl font-bold leading-tight md:text-4xl">
+            なぜAIを、<br />
+            ローカルで使う必要があるのか。
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-white/72">
+            AIに本当に任せたい情報ほど、外に出せません。顧客情報・申告データ・事件記録・労務相談の履歴。そこにAIを届かせるには、AIの頭脳を情報の近くに置く必要があります。
+          </p>
+          <div class="mt-6 grid grid-cols-3 gap-2">
+            {["外に出せない", "でも使いたい", "だから中に置く"].map((label, index) => (
+              <div class="rounded-md border border-white/15 bg-white/8 p-3 text-center">
+                <p class="text-xs font-bold text-white/45">0{index + 1}</p>
+                <p class="mt-2 text-sm font-bold leading-snug text-white/88">{label}</p>
+              </div>
+            ))}
+          </div>
+          <div class="local-boundary-visual mt-8 hidden md:block">
+            <div class="local-boundary-visual__rail">
+              <span>CLIENT DATA</span>
+              <span>LOCAL MEMORY</span>
+              <span>AI PROCESS</span>
+            </div>
+            <div class="local-boundary-visual__core">
+              <Icon name="material-symbols:shield-lock-outline" class="text-3xl" />
+              <strong>DATA STAYS INSIDE</strong>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 md:p-9">
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="rounded-xl border border-amber-300/60 bg-amber-50 p-5 dark:bg-amber-950/20">
+              <p class="text-sm font-bold text-amber-700">クラウドAIだけに寄せる場合</p>
+              <div class="mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+                <div class="rounded-md bg-[var(--card-bg)] p-3 text-center">
+                  <Icon name="material-symbols:home-work-outline" class="mx-auto text-3xl text-90" />
+                  <p class="mt-2 text-xs font-bold text-90">事務所</p>
+                </div>
+                <div class="text-center text-amber-600">
+                  <Icon name="material-symbols:arrow-forward-rounded" class="mx-auto text-3xl" />
+                  <p class="text-[11px] font-bold leading-tight">外部へ送る</p>
+                </div>
+                <div class="rounded-md bg-amber-100 p-3 text-center dark:bg-amber-900/30">
+                  <Icon name="material-symbols:cloud-outline" class="mx-auto text-3xl text-amber-700" />
+                  <p class="mt-2 text-xs font-bold text-90">外部AI</p>
+                </div>
+              </div>
+              <ul class="mt-5 flex flex-col gap-2 text-sm leading-relaxed text-75">
+                <li class="flex gap-2"><Icon name="material-symbols:warning-outline-rounded" class="mt-0.5 shrink-0 text-lg text-amber-600" />機微情報を入れにくい</li>
+                <li class="flex gap-2"><Icon name="material-symbols:warning-outline-rounded" class="mt-0.5 shrink-0 text-lg text-amber-600" />情報の所在が説明しづらい</li>
+                <li class="flex gap-2"><Icon name="material-symbols:warning-outline-rounded" class="mt-0.5 shrink-0 text-lg text-amber-600" />AI活用が表面的な質問で止まる</li>
+              </ul>
+            </div>
+            <div class="rounded-xl border-2 border-[var(--primary)] bg-[var(--btn-plain-bg)] p-5">
+              <p class="text-sm font-bold text-[var(--primary)]">ローカルAIを置く場合</p>
+              <div class="mt-5 rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)] p-4">
+                <p class="text-center text-xs font-bold text-[var(--primary)]">顧客データはこの線の内側</p>
+                <div class="mt-3 grid grid-cols-3 gap-2">
+                  {["資料", "記憶", "AI"].map((label) => (
+                    <div class="rounded-md bg-[var(--btn-plain-bg)] p-3 text-center">
+                      <Icon name={label === "AI" ? "material-symbols:memory-alt-outline" : "material-symbols:database-outline"} class="mx-auto text-3xl text-[var(--primary)]" />
+                      <p class="mt-2 text-xs font-bold text-90">{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <ul class="mt-5 flex flex-col gap-2 text-sm leading-relaxed text-75">
+                <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="mt-0.5 shrink-0 text-lg text-[var(--primary)]" />外に出せない情報までAI活用の対象になる</li>
+                <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="mt-0.5 shrink-0 text-lg text-[var(--primary)]" />情報の所在を説明しやすい</li>
+                <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="mt-0.5 shrink-0 text-lg text-[var(--primary)]" />「調べるAI」から「業務に入るAI」へ進める</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-5 overflow-hidden rounded-xl border border-black/10 dark:border-white/10">
+            <div class="grid grid-cols-[0.9fr_1fr_1fr] bg-[var(--btn-plain-bg)] text-xs font-bold text-50">
+              <div class="p-3">判断軸</div>
+              <div class="p-3">クラウド中心</div>
+              <div class="p-3 text-[var(--primary)]">ローカル併用</div>
+            </div>
+            {[
+              ["扱える情報", "公開情報・一般論が中心", "機密情報に近い業務文脈まで届く"],
+              ["説明責任", "サービス規約と運用に依存", "情報の所在を事務所内として設計できる"],
+              ["使いどころ", "相談・文章作成の補助", "記憶・検索・下処理・承認前作業"],
+            ].map((row) => (
+              <div class="grid grid-cols-[0.9fr_1fr_1fr] border-t border-black/5 text-sm dark:border-white/5">
+                <div class="p-3 font-bold text-90">{row[0]}</div>
+                <div class="p-3 text-75">{row[1]}</div>
+                <div class="bg-[var(--btn-plain-bg)] p-3 font-bold text-90">{row[2]}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="AIをどこに置くべきか、業務フローから見ます。"
+      body="メール・資料・顧客情報・期限管理のどこから中枢化するか、まず小さく診断できます。"
+    />
+
+    <!-- ===== Core 2. なぜAIをシステムの真ん中に置く必要があるのか ===== -->
+    <section class="central-hub-canvas card-base px-6 py-7 md:px-9">
+      <div class="mb-6 grid gap-5 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">CORE 02</p>
+          <h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">
+            なぜAIを、<br />
+            システムの真ん中に置く必要があるのか。
+          </h2>
+        </div>
+        <p class="text-base leading-relaxed text-75">
+          AIを「横に置いた便利ツール」にすると、毎回コピーして、説明して、結果を戻す手作業が残ります。真ん中に置くと、メール・資料・カレンダー・顧客カルテがAIの記憶につながり、人の判断前まで業務が流れます。
+        </p>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-[0.95fr_1.1fr_0.95fr]">
+        <div class="rounded-xl border border-black/10 p-5 dark:border-white/10">
+          <p class="text-sm font-bold text-50">Before</p>
+          <h3 class="mt-2 text-xl font-bold text-90">AIが端にある状態</h3>
+          <div class="mt-5 grid gap-3">
+            {["メール", "Excel", "Notion", "カレンダー", "フォルダ"].map((label) => (
+              <div class="flex items-center justify-between rounded-md bg-[var(--btn-plain-bg)] px-4 py-3">
+                <span class="text-sm font-bold text-90">{label}</span>
+                <Icon name="material-symbols:content-copy-outline-rounded" class="text-xl text-50" />
+              </div>
+            ))}
+          </div>
+          <div class="mt-5 rounded-md border border-amber-300 bg-amber-50 p-4 text-sm leading-relaxed text-75 dark:bg-amber-950/20">
+            人が情報を探す → AIに貼る → 結果を戻す。結局、業務の流れは人力のまま。
+          </div>
+        </div>
+        <div class="rounded-xl bg-slate-950 p-5 text-white">
+          <p class="text-sm font-bold text-white/45">AI CENTRAL HUB</p>
+          <div class="mt-5 grid grid-cols-3 gap-2">
+            {["メール", "資料", "予定", "顧客", "案件", "ナレッジ"].map((label) => (
+              <div class="rounded-md border border-white/10 bg-white/8 p-3 text-center">
+                <Icon name="material-symbols:database-outline" class="mx-auto text-2xl text-white/75" />
+                <p class="mt-2 text-xs font-bold text-white/82">{label}</p>
+              </div>
+            ))}
+          </div>
+          <div class="relative my-5 grid place-items-center">
+            <div class="absolute h-px w-full bg-white/15"></div>
+            <div class="absolute h-full w-px bg-white/15"></div>
+            <div class="relative grid size-36 place-items-center rounded-full border border-white/20 bg-white text-center text-slate-950 shadow-2xl">
+              <Icon name="material-symbols:memory-alt-outline" class="text-4xl" />
+              <p class="mt-1 text-sm font-bold leading-tight">記憶を持った<br />AI</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            {["想起", "下書き", "要約"].map((label) => (
+              <div class="rounded-md bg-white/10 p-3 text-center text-sm font-bold text-white/88">{label}</div>
+            ))}
+          </div>
+        </div>
+        <div class="rounded-xl border-2 border-[var(--primary)] bg-[var(--btn-plain-bg)] p-5">
+          <p class="text-sm font-bold text-[var(--primary)]">After</p>
+          <h3 class="mt-2 text-xl font-bold text-90">AIが中枢にある状態</h3>
+          <div class="mt-5 flex flex-col gap-3">
+            {[
+              ["1", "情報が自動で記憶に入る"],
+              ["2", "AIが過去の経緯を踏まえる"],
+              ["3", "人は判断・承認に集中する"],
+              ["4", "対応履歴がまた記憶になる"],
+            ].map((item) => (
+              <div class="flex gap-3 rounded-md bg-[var(--card-bg)] p-3">
+                <span class="grid size-7 shrink-0 place-items-center rounded-full bg-[var(--primary)] text-xs font-bold text-white">{item[0]}</span>
+                <p class="text-sm font-bold text-90">{item[1]}</p>
+              </div>
+            ))}
+          </div>
+          <p class="mt-5 rounded-md bg-[var(--card-bg)] p-4 text-sm leading-relaxed text-75">
+            目的は「AIに全部任せる」ことではありません。AIに記憶と下処理を任せ、人が判断する位置を明確にすることです。
+          </p>
+        </div>
+      </div>
+      <div class="mt-6 grid gap-3 md:grid-cols-4">
+        {[
+          ["探す", "メール・資料・過去案件から該当情報を拾う"],
+          ["思い出す", "顧問先ごとの経緯や注意点を保持する"],
+          ["整える", "下書き・要約・チェックリストに変換する"],
+          ["残す", "対応結果を次回の記憶として蓄積する"],
+        ].map((item) => (
+          <div class="rounded-lg border border-black/10 p-4 dark:border-white/10">
+            <p class="text-lg font-bold text-[var(--primary)]">{item[0]}</p>
+            <p class="mt-2 text-sm leading-relaxed text-75">{item[1]}</p>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <!-- ===== 2. 課題提起 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-walls-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:report-outline-rounded" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">士業の AI 活用には、3つの壁があります。</h2>
@@ -386,6 +749,27 @@ const jsonLd = {
       <p class="text-base text-75 mb-6 leading-relaxed">
         「AI を使いたいが、うちの業務では無理だ」——そう感じている先生の多くは、次の3つの壁に阻まれています。
       </p>
+      <div class="mb-6 grid gap-3 rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:grid-cols-[0.8fr_1.4fr_0.8fr] md:items-center md:p-6">
+        <div class="rounded-lg bg-[var(--card-bg)] p-4 text-center shadow-sm">
+          <Icon name="material-symbols:person-outline" class="mx-auto text-4xl text-[var(--primary)]" />
+          <p class="mt-2 text-sm font-bold text-90">先生・スタッフ</p>
+          <p class="mt-1 text-xs text-50">顧問先対応 / 資料整理 / 期限管理</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          {walls.map((w) => (
+            <div class="relative min-h-36 rounded-md border border-amber-400/45 bg-amber-50 p-3 text-center dark:bg-amber-950/20">
+              <Icon name={w.icon} class="mx-auto text-3xl text-amber-600" />
+              <p class="mt-3 text-sm font-bold text-90">{w.title}</p>
+              <div class="absolute inset-x-3 bottom-3 h-1 rounded-full bg-amber-400/70"></div>
+            </div>
+          ))}
+        </div>
+        <div class="rounded-lg bg-[var(--card-bg)] p-4 text-center shadow-sm">
+          <Icon name="material-symbols:memory-alt-outline" class="mx-auto text-4xl text-[var(--primary)]" />
+          <p class="mt-2 text-sm font-bold text-90">記憶を持ったAI</p>
+          <p class="mt-1 text-xs text-50">聞けば答え、言えば動く</p>
+        </div>
+      </div>
       <div class="grid md:grid-cols-3 gap-4">
         {walls.map((w) => (
           <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
@@ -398,8 +782,14 @@ const jsonLd = {
       </div>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="3つの壁のうち、どこが一番詰まっているか確認します。"
+      body="守秘義務・記憶・情報分散のどこから着手するべきか、無料相談で整理します。"
+    />
+
     <!-- ===== 3. 時代マッチ（図解1: AI進化の3段階） ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-stages-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:rocket-launch-outline" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">AI は、「道具」から「戦力」へ。</h2>
@@ -408,11 +798,13 @@ const jsonLd = {
       <p class="text-base text-75 mb-6 leading-relaxed">
         この2〜3年で、AI は3つの段階を駆け上がりました。①検索の代わりに「聞ける」ようになり、②事務所の情報を「覚えられる」ようになり、③いま、指示すれば「働ける」ようになりました。AIセントラルの3プランは、この進化の3段階にそのまま対応しています。
       </p>
-      <div class="grid md:grid-cols-3 gap-3">
+      <div class="relative overflow-hidden rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:p-6">
+        <div class="absolute left-8 right-8 top-1/2 hidden h-0.5 bg-[var(--primary)]/35 md:block"></div>
+        <div class="grid gap-3 md:grid-cols-3 md:items-end">
         {stages.map((s, i) => (
-          <div class={`rounded-xl p-5 border ${i === 0 ? "border-black/10 dark:border-white/10 opacity-80" : "border-[var(--primary)]/60 bg-[var(--btn-plain-bg)]"}`}>
-            <div class="text-xs font-bold text-50 mb-1">{s.no}</div>
-            <h3 class="text-lg font-bold text-90 mb-2 flex items-center gap-2">
+          <div class={`relative rounded-lg border p-5 shadow-sm ${i === 0 ? "border-black/10 bg-[var(--card-bg)] opacity-80 dark:border-white/10" : "border-[var(--primary)]/60 bg-[var(--card-bg)]"} ${i === 1 ? "md:mb-8" : ""} ${i === 2 ? "md:mb-16" : ""}`}>
+            <div class="absolute -top-3 left-4 rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-bold text-white">{s.no}</div>
+            <h3 class="mt-3 text-xl font-bold text-90 mb-2 flex items-center gap-2">
               {s.name}
               {i > 0 && <Icon name="material-symbols:check-circle-rounded" class="text-lg text-[var(--primary)]" />}
             </h3>
@@ -423,14 +815,21 @@ const jsonLd = {
             )}
           </div>
         ))}
+        </div>
       </div>
       <p class="text-sm text-75 mt-4 leading-relaxed">
         ChatGPT を使う＝第1段階。<strong class="text-90">AIセントラルは第2段階から始まり、最上位プランで第3段階まで到達します。</strong>事務所の現在地から無理なく始めて、時代の進化と一緒に階段を上れます。
       </p>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="いまのAI活用が第何段階か、確認できます。"
+      body="聞けるAIで止まっているのか、覚えるAI・働くAIへ進めるべきかを診断します。"
+    />
+
     <!-- ===== 4. 疑似記憶の体験シナリオ ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-memory-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:neurology-outline" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">昨日の顧問先対応を、AI が覚えている。</h2>
@@ -438,29 +837,62 @@ const jsonLd = {
       <p class="text-base text-75 mb-5 leading-relaxed">
         一般的な AI チャットは、会話を閉じた瞬間にすべてを忘れます。AIセントラルは、事務所のメールや記録を記憶として蓄積し続けるため、<strong class="text-90">聞けば「事務所の過去」が返ってくる</strong> AI になります。
       </p>
-      <div class="rounded-xl bg-[var(--btn-plain-bg)] p-5 flex flex-col gap-3 text-sm md:text-base">
-        <div class="flex gap-3">
-          <span class="shrink-0 font-bold text-90">先生：</span>
-          <span class="text-75">「A 社の労務相談、前回どこまで話したっけ？」</span>
+      <div class="grid gap-4 rounded-xl bg-slate-950 p-4 text-sm text-white md:grid-cols-[0.9fr_1.1fr] md:p-6 md:text-base">
+        <div class="flex flex-col justify-between rounded-lg border border-white/10 bg-white/8 p-5">
+          <div>
+            <p class="text-xs font-bold tracking-[0.16em] text-white/45">MEMORY SOURCES</p>
+            <div class="mt-5 grid gap-3">
+              {["メール履歴", "顧問先カルテ", "過去案件メモ", "期限・予定"].map((label) => (
+                <div class="flex items-center gap-3 rounded-md bg-white/8 px-3 py-3">
+                  <Icon name="material-symbols:folder-managed-outline" class="text-xl text-white/75" />
+                  <span class="text-sm font-bold text-white/82">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p class="mt-5 text-xs leading-relaxed text-white/55">既存ファイルを無理に移動せず、AIが読める索引と記憶を構築します。</p>
         </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-bold text-[var(--primary)]">AI：</span>
-          <span class="text-75">「先月14日のメールで、就業規則の副業規定の改定案を送付済みです。先方からは役員の取り扱いについて追加質問が届いており、未回答です。過去の類似案件では B 社（2年前）で同様の論点を整理しています。」</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-bold text-90">先生：</span>
-          <span class="text-75">「その B 社の整理を下敷きに、回答の下書きを作って。」</span>
-        </div>
-        <div class="flex gap-3">
-          <span class="shrink-0 font-bold text-[var(--primary)]">AI：</span>
-          <span class="text-75">「下書きを作成しました。判断が必要な箇所には印を付けています。」</span>
+        <div class="rounded-lg border border-white/10 bg-white p-3 text-slate-900 shadow-2xl">
+          <div class="mb-3 flex items-center justify-between border-b border-slate-200 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="grid size-8 place-items-center rounded-full bg-slate-950 text-xs font-bold text-white">AI</span>
+              <div>
+                <p class="text-sm font-bold">AIセントラル</p>
+                <p class="text-xs text-slate-500">事務所の記憶から回答</p>
+              </div>
+            </div>
+            <span class="rounded-full bg-emerald-50 px-2 py-1 text-xs font-bold text-emerald-700">出典つき</span>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="ml-auto max-w-[86%] rounded-2xl rounded-tr-sm bg-slate-900 px-4 py-3 text-white">
+              A 社の労務相談、前回どこまで話したっけ？
+            </div>
+            <div class="max-w-[92%] rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-3 text-slate-800">
+              先月14日のメールで、副業規定の改定案を送付済みです。先方からは役員の取り扱いについて追加質問が届いており、未回答です。
+              <div class="mt-3 rounded-md border border-slate-200 bg-white p-3 text-xs text-slate-600">
+                参照: A社カルテ / 2026-06-14 メール / B社類似案件メモ
+              </div>
+            </div>
+            <div class="ml-auto max-w-[86%] rounded-2xl rounded-tr-sm bg-slate-900 px-4 py-3 text-white">
+              B 社の整理を下敷きに、回答の下書きを作って。
+            </div>
+            <div class="max-w-[92%] rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-3 text-slate-800">
+              下書きを作成しました。判断が必要な箇所には「要確認」ラベルを付けています。
+            </div>
+          </div>
         </div>
       </div>
       <p class="text-xs text-50 mt-3">※ 画面はイメージです。AI の役割は下処理・想起・下書きまでで、専門的判断は必ず先生が行う運用設計です。</p>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="この記憶シナリオを、自社の顧客対応に置き換えます。"
+      body="実際の業務場面を聞き、AIが覚えるべき情報と人が判断すべき範囲を整理します。"
+    />
+
     <!-- ===== 5. セキュリティ（図解2: データの流れ比較） ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-security-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:shield-lock-outline" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">データは事務所から出ない。それでも、外から使える。</h2>
@@ -468,12 +900,26 @@ const jsonLd = {
       <p class="text-base text-75 mb-6 leading-relaxed">
         これまで士業が AI を本気で使えなかった理由はただひとつ、<strong class="text-90">顧客情報を外部のサーバーに送れない</strong>から。状況を変えたのが、事務所に置ける小型・高性能なコンピュータの登場です。かつてサーバールームが必要だった「事務所内 AI」が、机の上の Mac 1台で動く時代になりました。
       </p>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+      <div class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border border-amber-300/60 bg-amber-50 p-5 dark:bg-amber-950/20">
           <h3 class="text-base font-bold text-90 mb-3 flex items-center gap-2">
-            <Icon name="material-symbols:cloud-outline" class="text-xl text-50" />
+            <Icon name="material-symbols:cloud-outline" class="text-xl text-amber-600" />
             一般的なクラウド AI
           </h3>
+          <div class="mb-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-lg bg-white/70 p-4 dark:bg-black/15">
+            <div class="rounded-md border border-black/10 bg-[var(--card-bg)] p-3 text-center dark:border-white/10">
+              <Icon name="material-symbols:home-work-outline" class="mx-auto text-3xl text-90" />
+              <p class="mt-2 text-xs font-bold text-90">事務所</p>
+            </div>
+            <div class="flex flex-col items-center text-amber-600">
+              <Icon name="material-symbols:arrow-forward-rounded" class="text-3xl" />
+              <p class="w-20 text-center text-[11px] font-bold leading-tight">顧客データが社外へ</p>
+            </div>
+            <div class="rounded-md border border-amber-300 bg-amber-100 p-3 text-center dark:bg-amber-900/30">
+              <Icon name="material-symbols:cloud-outline" class="mx-auto text-3xl text-amber-700" />
+              <p class="mt-2 text-xs font-bold text-90">外部サーバー</p>
+            </div>
+          </div>
           <ul class="text-sm text-75 leading-relaxed flex flex-col gap-2">
             <li class="flex gap-2"><Icon name="material-symbols:arrow-upload-progress-rounded" class="text-lg text-amber-500 shrink-0 mt-0.5" />入力した内容は外部サーバーに送信される</li>
             <li class="flex gap-2"><Icon name="material-symbols:warning-outline-rounded" class="text-lg text-amber-500 shrink-0 mt-0.5" />顧客の機微情報は入力できない（守秘義務）</li>
@@ -481,11 +927,26 @@ const jsonLd = {
           </ul>
           <p class="text-xs text-50 mt-3 border-t border-black/5 dark:border-white/5 pt-2">※ プラン1・2はクラウド AI 型です。機微情報を扱わない運用ルール（3段階の線引き表）とセットでご提供します。</p>
         </div>
-        <div class="rounded-xl border-2 border-[var(--primary)] p-5">
+        <div class="rounded-xl border-2 border-[var(--primary)] bg-[var(--btn-plain-bg)] p-5">
           <h3 class="text-base font-bold text-90 mb-3 flex items-center gap-2">
             <Icon name="material-symbols:home-work-outline" class="text-xl text-[var(--primary)]" />
             AIセントラル パーフェクトセキュア
           </h3>
+          <div class="mb-5 rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)] p-4">
+            <p class="mb-3 text-center text-xs font-bold text-[var(--primary)]">顧客データはこの線を越えない</p>
+            <div class="grid grid-cols-3 gap-2">
+              {["原本", "AI", "記憶"].map((label) => (
+                <div class="rounded-md bg-[var(--btn-plain-bg)] p-3 text-center">
+                  <Icon name={label === "AI" ? "material-symbols:memory-alt-outline" : "material-symbols:database-outline"} class="mx-auto text-3xl text-[var(--primary)]" />
+                  <p class="mt-2 text-xs font-bold text-90">{label}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-4 flex items-center justify-center gap-2 text-xs font-bold text-75">
+              <Icon name="material-symbols:lock-open-right-outline" class="text-lg text-[var(--primary)]" />
+              外出先からは本人認証を通った人だけ
+            </div>
+          </div>
           <ul class="text-sm text-75 leading-relaxed flex flex-col gap-2">
             <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />AI も記憶も原本も、すべて事務所の Mac の中</li>
             <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />顧客データはこの線を越えない（外部 API に送信しない）</li>
@@ -496,8 +957,14 @@ const jsonLd = {
       </div>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="クラウド型で足りるか、ローカル型が必要かを切り分けます。"
+      body="扱う情報の機密度に応じて、プラン1・2かパーフェクトセキュアかを整理します。"
+    />
+
     <!-- ===== 6. 必要性 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-reasons-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:priority-high-rounded" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">AI 活用は「いつか」ではなく「どの段階から」の話になりました。</h2>
@@ -515,8 +982,14 @@ const jsonLd = {
       </div>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="必要性は分かった。では、どこから始めるか。"
+      body="最初の一歩を33万円の構築にするか、無料診断から入るかを相談できます。"
+    />
+
     <!-- ===== 7. ユースケース ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-cases-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:cases-outline" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">導入後、毎日の仕事はこう変わります。</h2>
@@ -562,8 +1035,14 @@ const jsonLd = {
       </div>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="このユースケースを、自社の業務に当てはめます。"
+      body="税理士・社労士・行政書士・司法書士・弁護士以外の企業業務にも置き換えて確認できます。"
+    />
+
     <!-- ===== 8. 競合比較 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-compare-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:compare-arrows-rounded" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">「大手の数百万円」と「月額クラウド」の間にある、第三の選択肢。</h2>
@@ -593,8 +1072,14 @@ const jsonLd = {
       <p class="text-xs text-50 mt-3">※ 他社カテゴリの金額は 2026年7月時点の公開情報に基づく一般的な相場帯であり、特定のサービスを示すものではありません。※「事務所内」はパーフェクトセキュアの場合。プラン1・2はクラウド AI 型（機微情報を扱わない運用ルール付き）です。</p>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="大手構築・クラウドAI・AIセントラルのどれが合うか整理します。"
+      body="費用感・データ所在・伴走の必要性を並べて、導入判断を短くします。"
+    />
+
     <!-- ===== 9. 実績 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
+    <div class="central-proof-canvas card-base px-6 md:px-9 py-7">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:workspace-premium-outline" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">「毎日、自分の業務で使っている」講師が構築します。</h2>
@@ -602,6 +1087,19 @@ const jsonLd = {
       <p class="text-base text-75 mb-6 leading-relaxed">
         構築と毎週の伴走を担当するのは、シュ コウメイ。この仕組みを自社のクライアント業務でフル稼働させながら、AI 講師として累計 {stats.studentsTaught} 名以上に AI 活用を教えてきました（株式会社EFFECT）。カタログではなく、<strong class="text-90">毎日使っている実物</strong>をお届けします。
       </p>
+      <div class="proof-source-board mb-6">
+        <div>
+          <p class="text-xs font-bold tracking-[0.14em] text-[var(--primary)]">PUBLIC PROOF</p>
+          <h3 class="mt-2 text-xl font-bold text-90">講座・実装・公開ノートを、判断材料として並べる。</h3>
+          <p class="mt-3 text-sm leading-relaxed text-75">AIを作れるだけでなく、使う人に説明できること、マーケティングと構造化まで接続できることを、公開情報で確認できる形にしています。</p>
+        </div>
+        <div class="proof-source-board__flow">
+          <span>講座</span>
+          <span>構築</span>
+          <span>運用</span>
+          <span>記事</span>
+        </div>
+      </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
         <div class="rounded-xl bg-[var(--btn-plain-bg)] p-4 text-center">
           <div class="text-2xl md:text-3xl font-bold text-[var(--primary)]">★{stats.ratingValue}</div>
@@ -654,7 +1152,7 @@ const jsonLd = {
     </div>
 
     <!-- ===== 10. 料金 ===== -->
-    <div class="card-base px-6 md:px-9 py-7" id="pricing">
+    <div class="central-pricing-canvas card-base px-6 md:px-9 py-7" id="pricing">
       <div class="flex items-center gap-2 mb-3">
         <Icon name="material-symbols:currency-yen" class="text-2xl text-[var(--primary)]" />
         <h2 class="text-2xl font-bold text-90">料金</h2>
@@ -662,28 +1160,92 @@ const jsonLd = {
       <p class="text-base text-75 mb-6 leading-relaxed">
         事務所の成長段階に合わせて選べる3プラン。どのプランにも<strong class="text-90">月額34,800円の「毎週の伴走コンサル」が必ず付きます</strong>。導入して終わりのシステム販売ではありません。表示はすべて税込です。
       </p>
+      <div class="pricing-choice-map mb-6">
+        <div>
+          <span>01</span>
+          <strong>情報を覚える</strong>
+          <p>まず記憶基盤を作る。</p>
+        </div>
+        <div>
+          <span>02</span>
+          <strong>既存ツールとつなぐ</strong>
+          <p>Notion・予定・類似案件まで広げる。</p>
+        </div>
+        <div>
+          <span>03</span>
+          <strong>外に出さずに働く</strong>
+          <p>ローカルAIで機密情報に踏み込む。</p>
+        </div>
+      </div>
 
-      <div class="grid md:grid-cols-3 gap-4 mb-6">
+      <div class="mb-6 overflow-hidden rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:p-6">
+        <div class="grid gap-3 md:grid-cols-3 md:items-end">
+          {[
+            { step: "01", label: "覚える", price: "¥330,000", plan: "AIセントラル", height: "md:min-h-40" },
+            { step: "02", label: "つながる", price: "¥550,000", plan: "AIセントラル＋", height: "md:min-h-52" },
+            { step: "03", label: "完全セキュアで働く", price: "¥1,320,000", plan: "パーフェクトセキュア", height: "md:min-h-64" },
+          ].map((item) => (
+            <div class={`flex ${item.height} flex-col justify-end rounded-lg border border-[var(--primary)]/45 bg-[var(--card-bg)] p-5`}>
+              <p class="text-xs font-bold text-50">STEP {item.step}</p>
+              <p class="mt-2 text-2xl font-bold text-90">{item.label}</p>
+              <p class="mt-1 text-sm font-bold text-[var(--primary)]">{item.plan}</p>
+              <p class="mt-4 text-3xl font-bold text-[var(--primary)]">{item.price}</p>
+            </div>
+          ))}
+        </div>
+        <div style="background-color:#020617;color:#fff;" class="mt-3 rounded-lg px-4 py-3 text-center text-sm font-bold shadow-lg">
+          共通土台: 月額34,800円・毎週90分の伴走コンサル / 差額アップグレード可・記憶は引き継ぎ
+        </div>
+      </div>
+
+      <div class="mb-6 grid gap-3 rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:grid-cols-3">
+        {[
+          ["AIセントラル", "まず記憶を作る", "情報が散らばっている／毎回説明し直している"],
+          ["AIセントラル＋", "既存ツールとつなぐ", "Notion・カレンダー・類似案件検索まで進めたい"],
+          ["パーフェクトセキュア", "外に出さずに働かせる", "申告データ・事件記録・マイナンバー級の情報も扱いたい"],
+        ].map((row, index) => (
+          <div class="rounded-lg bg-[var(--card-bg)] p-4 shadow-sm">
+            <p class="text-xs font-bold text-[var(--primary)]">選び方 0{index + 1}</p>
+            <p class="mt-2 text-base font-bold text-90">{row[0]}</p>
+            <p class="mt-1 text-sm font-bold text-75">{row[1]}</p>
+            <p class="mt-2 text-xs leading-relaxed text-50">{row[2]}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid gap-4 mb-6 lg:grid-cols-3">
         {plans.map((p) => (
-          <div class={`rounded-xl border p-5 flex flex-col ${p.highlight ? "border-[var(--primary)] border-2 relative" : "border-black/10 dark:border-white/10"}`}>
+          <div class={`rounded-xl border p-5 flex flex-col ${p.highlight ? "border-[var(--primary)] border-2 relative bg-[var(--btn-plain-bg)]" : "border-black/10 dark:border-white/10"}`}>
             {p.badge && (
               <span class="absolute -top-3 left-4 text-xs font-bold text-white bg-[var(--primary)] rounded-full px-3 py-0.5">{p.badge}</span>
             )}
-            <h4 class="text-base font-bold text-90">{p.name}</h4>
-            <div class="text-2xl font-bold text-[var(--primary)] my-1">{p.price}</div>
-            <p class="text-xs font-bold text-90 mb-1">{p.catch}</p>
-            <p class="text-xs text-50 mb-4 leading-relaxed">{p.forWho}</p>
-            <ul class="text-sm text-75 leading-relaxed flex flex-col gap-1.5 mb-4">
-              {p.features.map((f) => (
-                <li class={`flex gap-2 ${f.on ? "" : "opacity-40"}`}>
-                  <Icon
-                    name={f.on ? "material-symbols:check-circle-outline" : "material-symbols:remove-rounded"}
-                    class={`text-base shrink-0 mt-0.5 ${f.on ? "text-[var(--primary)]" : "text-50"}`}
-                  />
-                  {f.text}
-                </li>
-              ))}
-            </ul>
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h4 class="text-lg font-bold text-90">{p.name}</h4>
+                <p class="mt-1 text-sm font-bold text-90">{p.catch}</p>
+              </div>
+              <Icon name={p.highlight ? "material-symbols:shield-lock-outline" : "material-symbols:memory-alt-outline"} class="shrink-0 text-3xl text-[var(--primary)]" />
+            </div>
+            <div class="my-5 rounded-lg bg-[var(--page-bg)] p-4">
+              <p class="text-xs font-bold text-50">初期構築</p>
+              <div class="mt-1 text-3xl font-bold text-[var(--primary)]">{p.price}</div>
+              <p class="mt-2 text-xs font-bold text-75">+ 月額34,800円（毎週90分伴走）</p>
+            </div>
+            <p class="text-sm text-75 mb-4 leading-relaxed">{p.forWho}</p>
+            <details class="mb-4 rounded-lg border border-black/10 bg-[var(--card-bg)] px-4 py-3 dark:border-white/10">
+              <summary class="cursor-pointer list-none text-sm font-bold text-90">含まれるものを見る</summary>
+              <ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-75">
+                {p.features.map((f) => (
+                  <li class={`flex gap-2 ${f.on ? "" : "opacity-40"}`}>
+                    <Icon
+                      name={f.on ? "material-symbols:check-circle-outline" : "material-symbols:remove-rounded"}
+                      class={`text-base shrink-0 mt-0.5 ${f.on ? "text-[var(--primary)]" : "text-50"}`}
+                    />
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
+            </details>
             <p class="text-xs text-50 mt-auto leading-relaxed">{p.note}</p>
           </div>
         ))}
@@ -708,73 +1270,961 @@ const jsonLd = {
       </p>
     </div>
 
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="どのプランが合うかは、扱う情報の機密度で変わります。"
+      body="顧客情報・社内資料・期限管理・既存ツールの状況を聞いたうえで、必要十分な構成に絞ります。"
+    />
+
     <!-- ===== 11. 導入の流れ ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-3">
-        <Icon name="material-symbols:route-outline" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">導入の流れ</h2>
+    <div class="central-flow-canvas card-base px-6 md:px-9 py-7">
+      <div class="mb-6 grid gap-4 md:grid-cols-[0.72fr_1.28fr] md:items-end">
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">IMPLEMENTATION FLOW</p>
+          <h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">導入の流れ</h2>
+        </div>
+        <p class="text-sm leading-relaxed text-75">
+          業務を聞いて、記憶を設計し、小さく試し、毎週調整します。AIを置いて終わりではなく、現場に合う使い方まで整えます。
+        </p>
       </div>
-      <div class="grid md:grid-cols-4 gap-4">
+      <div class="central-flow-track grid gap-4 md:grid-cols-4">
         {flowSteps.map((s) => (
-          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
-            <div class="w-9 h-9 rounded-full bg-[var(--primary)] text-white font-bold flex items-center justify-center mb-3">{s.no}</div>
-            <h3 class="text-base font-bold text-90 mb-2">{s.title}</h3>
-            <p class="text-sm text-75 leading-relaxed">{s.body}</p>
+          <div class="central-flow-step">
+            <div class="central-flow-step__num">{s.no}</div>
+            <h3 class="mb-2 text-base font-bold text-90">{s.title}</h3>
+            <p class="text-sm leading-relaxed text-75">{s.body}</p>
           </div>
         ))}
+      </div>
+      <div class="flow-note mt-6">
+        <Icon name="material-symbols:sync-alt-rounded" class="text-3xl text-[var(--primary)]" />
+        <div>
+          <p class="text-sm font-bold text-90">構築して終わりではなく、毎週の伴走で記憶を育てます。</p>
+          <p class="mt-1 text-xs leading-relaxed text-75">初期構築後に、実際の業務・スタッフの使い方・判断の線引きを毎週調整します。</p>
+        </div>
       </div>
     </div>
 
     <!-- ===== 12. FAQ ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-3">
-        <Icon name="material-symbols:help-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">よくあるご質問</h2>
-      </div>
-      <div class="flex flex-col gap-3">
-        {faqs.map((f) => (
-          <details class="rounded-xl border border-black/10 dark:border-white/10 px-5 py-4 group">
-            <summary class="cursor-pointer text-base font-bold text-90 list-none flex items-start gap-2">
-              <span class="text-[var(--primary)] shrink-0">Q.</span>
-              {f.q}
-            </summary>
-            <p class="text-sm text-75 leading-relaxed mt-3 pl-6">{f.a}</p>
-          </details>
-        ))}
+    <div class="central-faq-canvas card-base px-6 md:px-9 py-7">
+      <div class="grid gap-5 md:grid-cols-[0.62fr_1.38fr]">
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">FAQ</p>
+          <h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">よくあるご質問</h2>
+          <p class="mt-4 text-sm leading-relaxed text-75">守秘義務、費用、運用負荷、AIの判断範囲について、相談前に確認されやすい点をまとめています。</p>
+        </div>
+        <div class="flex flex-col gap-3">
+          {faqs.map((f) => (
+            <details class="central-faq-item group">
+              <summary class="flex cursor-pointer list-none items-start gap-2 text-base font-bold text-90">
+                <span class="shrink-0 text-[var(--primary)]">Q.</span>
+                {f.q}
+              </summary>
+              <p class="mt-3 pl-6 text-sm leading-relaxed text-75">{f.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
     </div>
 
     <!-- ===== 13. CTA ===== -->
-    <div class="card-base px-6 md:px-9 py-8 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは、事務所の現状をお聞かせください。</h2>
-      <p class="text-base text-75 mb-6 leading-relaxed">
-        「うちの業務のどこに効くのか」を、無料相談で具体的にご説明します。<br />
-        無理な営業は行いません。まず講座で講師の教え方を体験することもできます。
-      </p>
-      <div class="flex flex-wrap justify-center gap-3 mb-4">
-        <a
-          href={mailtoLink}
-          data-no-swup
-          class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-3.5 rounded-lg hover:opacity-90 transition text-base"
-        >
-          <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
-          無料相談を申し込む
-        </a>
-        <a
-          href={storacaProfileUrl}
-          target="_blank"
-          rel="noopener"
-          data-no-swup
-          class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-8 py-3.5 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
-        >
-          <Icon name="material-symbols:school-outline-rounded" class="text-xl" />
-          まず講座で体験する（ストアカ）
-        </a>
+    <div class="central-final-cta overflow-hidden rounded-md p-0 text-white">
+      <div class="grid gap-6 p-6 md:grid-cols-[0.85fr_1.15fr] md:p-9">
+        <div class="central-final-profile flex items-center gap-4 border border-white/10 bg-white/8 p-5">
+          <img
+            src="/ai-agent-course/tony-portrait.jpg"
+            alt="シュ コウメイ"
+            class="size-20 rounded-full object-cover"
+            loading="lazy"
+          />
+          <div>
+            <p class="text-sm font-bold text-white/55">BUILD & CONSULTING</p>
+            <p class="mt-1 text-xl font-bold">シュ コウメイが直接対応します。</p>
+            <p class="mt-2 text-sm leading-relaxed text-white/68">構築・伴走はシュ コウメイ、契約主体は株式会社EFFECTです。</p>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold mb-3">まずは、業務のどこにAIの記憶を置くべきか。</h2>
+          <p class="text-base text-white/72 mb-6 leading-relaxed">
+            「うちの業務のどこに効くのか」を、無料相談で具体的に整理します。無理な営業は行いません。まず講座で講師の進め方を体験することもできます。
+          </p>
+          <div class="flex flex-wrap gap-3 mb-4">
+            <a
+              href={mailtoLink}
+              data-no-swup
+              class="inline-flex items-center gap-2 rounded-md bg-white px-8 py-3.5 text-base font-bold text-slate-950 transition hover:bg-white/90"
+            >
+              <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+              無料相談を申し込む
+            </a>
+            <a
+              href={storacaProfileUrl}
+              target="_blank"
+              rel="noopener"
+              data-no-swup
+              class="inline-flex items-center gap-2 rounded-md border border-white/35 px-8 py-3.5 text-base font-bold text-white transition hover:bg-white/10"
+            >
+              <Icon name="material-symbols:school-outline-rounded" class="text-xl" />
+              まず講座で体験する
+            </a>
+          </div>
+          <p class="text-sm text-white/50">お問い合わせ: {contactEmail}</p>
+        </div>
       </div>
-      <p class="text-sm text-50">
-        構築・伴走: シュ コウメイ ／ 運営会社: 株式会社EFFECT（福岡市中央区）／ {contactEmail}
-      </p>
     </div>
 
+    </div>
   </div>
-</MainGridLayout>
+
+  <style>
+    .ai-central-page {
+      --central-ink: #101820;
+      --central-blue: #285d92;
+      --central-green: #4f7661;
+      --central-gold: #b78c2a;
+      background: #f7f8f4;
+      color: var(--central-ink);
+    }
+
+    .ai-central-hero {
+      background:
+        radial-gradient(circle at 76% 18%, rgba(40, 93, 146, 0.14), transparent 30%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(238, 245, 243, 0.9) 52%, rgba(250, 246, 237, 0.86));
+    }
+
+    .ai-central-hero::before {
+      position: absolute;
+      inset: 12% 0 auto;
+      height: 24rem;
+      content: "";
+      background:
+        linear-gradient(115deg, rgba(40, 93, 146, 0.09), transparent 46%),
+        linear-gradient(245deg, rgba(79, 118, 97, 0.09), transparent 48%),
+        linear-gradient(180deg, rgba(183, 140, 42, 0.08), transparent 62%);
+      clip-path: polygon(0 18%, 100% 0, 100% 76%, 0 100%);
+      pointer-events: none;
+    }
+
+    .ai-central-hero > img {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ai-central-hero > div:first-of-type {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+    }
+
+    .ai-central-hero > div:last-of-type {
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-central-hero > div:last-of-type {
+      min-height: min(780px, calc(100vh - 128px));
+    }
+
+    .central-hero-showcase {
+      position: relative;
+      display: grid;
+      gap: 1rem;
+      align-self: center;
+    }
+
+    .central-hero-showcase::before {
+      position: absolute;
+      inset: 9% auto auto 10%;
+      width: 18rem;
+      height: 18rem;
+      content: "";
+      border: 1px solid rgba(40, 93, 146, 0.18);
+      transform: rotate(-10deg);
+    }
+
+    .central-hero-route {
+      display: grid;
+      max-width: 42rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .central-hero-route div {
+      position: relative;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.9rem;
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .central-hero-route div:not(:last-child)::after {
+      position: absolute;
+      top: 50%;
+      right: -0.78rem;
+      width: 0.8rem;
+      height: 2px;
+      content: "";
+      background: var(--primary);
+    }
+
+    .central-hero-route span,
+    .central-hero-process span {
+      display: block;
+      color: rgba(16, 24, 32, 0.52);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .central-hero-route strong,
+    .central-hero-process strong {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--central-ink);
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .central-hero-photo {
+      position: relative;
+      min-height: 21rem;
+      overflow: hidden;
+      border: 1px solid rgba(16, 24, 32, 0.12);
+      border-radius: 0.375rem;
+      box-shadow: 0 34px 84px rgba(23, 32, 51, 0.18);
+    }
+
+    .central-hero-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+    }
+
+    .central-hero-photo::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(180deg, rgba(16, 24, 32, 0.04), rgba(16, 24, 32, 0.64)),
+        radial-gradient(circle at 70% 28%, rgba(183, 140, 42, 0.24), transparent 34%);
+    }
+
+    .central-hero-photo div {
+      position: absolute;
+      z-index: 1;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      display: grid;
+      gap: 0.3rem;
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.14);
+      padding: 1rem;
+      color: #fff;
+      backdrop-filter: blur(14px);
+    }
+
+    .central-hero-photo span {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.66);
+    }
+
+    .central-hero-photo strong {
+      font-size: 1.2rem;
+      line-height: 1.35;
+    }
+
+    .central-hero-console {
+      position: relative;
+      margin-top: -4rem;
+      margin-left: 4rem;
+      overflow: hidden;
+      border: 1px solid rgba(16, 24, 32, 0.12);
+      border-radius: 0.375rem;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 245, 243, 0.84)),
+        #fff;
+      padding: 1rem;
+      box-shadow: 0 30px 70px rgba(23, 32, 51, 0.16);
+    }
+
+    .central-hero-console::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(90deg, rgba(40, 93, 146, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(40, 93, 146, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+    }
+
+    .central-hero-console > :global(*) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .central-hero-console__core {
+      display: grid;
+      min-height: 8rem;
+      place-items: center;
+      border-radius: 0.375rem;
+      background: #101820;
+      color: #fff;
+      text-align: center;
+    }
+
+    .central-hero-console__core strong {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.95rem;
+    }
+
+    .central-hero-console__nodes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .central-hero-console__nodes div {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.55rem;
+      align-items: center;
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.82);
+      padding: 0.75rem;
+      color: var(--central-ink);
+      font-size: 0.82rem;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(23, 32, 51, 0.08);
+    }
+
+    .central-hero-console__nodes :global(svg) {
+      color: var(--primary);
+    }
+
+    .central-hero-process {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .central-hero-process div {
+      border: 1px solid rgba(16, 24, 32, 0.08);
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.74);
+      padding: 0.85rem;
+    }
+
+    .ai-central-page :global(.card-base) {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.375rem;
+      border-color: rgba(16, 24, 32, 0.1);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 248, 244, 0.76)),
+        var(--card-bg);
+      box-shadow: 0 22px 58px rgba(23, 32, 51, 0.07);
+    }
+
+    .ai-central-page :global(.card-base > *) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .central-experience-strip {
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(238, 245, 243, 0.86)),
+        #fff;
+    }
+
+    .central-experience-strip::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(90deg, rgba(40, 93, 146, 0.07) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(40, 93, 146, 0.05) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+    }
+
+    .central-experience-strip > :global(*) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .central-experience-tile {
+      position: relative;
+      min-height: 13rem;
+      overflow: hidden;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      border-radius: 0.375rem;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 248, 244, 0.72)),
+        #fff;
+      padding: 1.25rem;
+      box-shadow: 0 18px 48px rgba(23, 32, 51, 0.07);
+    }
+
+    .central-experience-tile.is-photo {
+      display: flex;
+      align-items: flex-end;
+      padding: 0;
+      color: #fff;
+    }
+
+    .central-experience-tile.is-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .central-experience-tile.is-photo::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(180deg, transparent, rgba(16, 24, 32, 0.72));
+    }
+
+    .central-experience-tile.is-photo div {
+      position: relative;
+      z-index: 1;
+      padding: 1.25rem;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .central-experience-tile.is-memory {
+      background:
+        linear-gradient(135deg, rgba(40, 93, 146, 0.12), rgba(183, 140, 42, 0.08)),
+        #eef4f1;
+    }
+
+    .central-memory-map {
+      position: relative;
+      min-height: 9.4rem;
+    }
+
+    .central-memory-map::before,
+    .central-memory-map::after {
+      position: absolute;
+      inset: 50% 14% auto;
+      height: 1px;
+      content: "";
+      background: rgba(16, 24, 32, 0.18);
+    }
+
+    .central-memory-map::after {
+      inset: 16% auto 16% 50%;
+      width: 1px;
+      height: auto;
+    }
+
+    .central-memory-map__core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      width: 6.5rem;
+      height: 6.5rem;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border-radius: 0.375rem;
+      background: #101820;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 18px 38px rgba(23, 32, 51, 0.18);
+    }
+
+    .central-memory-map__core strong {
+      font-size: 0.8rem;
+    }
+
+    .central-memory-map .node {
+      position: absolute;
+      z-index: 3;
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #101820;
+      box-shadow: 0 10px 24px rgba(23, 32, 51, 0.09);
+    }
+
+    .central-memory-map .node-1 { left: 0; top: 0.35rem; }
+    .central-memory-map .node-2 { right: 0; top: 0.35rem; }
+    .central-memory-map .node-3 { left: 0; bottom: 0.35rem; }
+    .central-memory-map .node-4 { right: 0; bottom: 0.35rem; }
+
+    .central-experience-tile.is-human {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 246, 237, 0.8)),
+        #fff;
+    }
+
+    .central-local-canvas {
+      background:
+        radial-gradient(circle at 78% 18%, rgba(40, 93, 146, 0.12), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 245, 243, 0.72));
+    }
+
+    .central-local-canvas::before,
+    .central-hub-canvas::before,
+    .central-memory-canvas::before,
+    .central-security-canvas::before,
+    .central-pricing-canvas::before {
+      position: absolute;
+      inset: 12% 0 auto;
+      height: 18rem;
+      content: "";
+      background: linear-gradient(110deg, rgba(40, 93, 146, 0.08), transparent 46%), linear-gradient(250deg, rgba(183, 140, 42, 0.09), transparent 50%);
+      clip-path: polygon(0 28%, 100% 0, 100% 70%, 0 100%);
+      pointer-events: none;
+    }
+
+    .central-local-canvas > div > div:first-child,
+    .central-memory-canvas > div,
+    .central-final-cta {
+      box-shadow: 0 32px 78px rgba(2, 6, 23, 0.16);
+    }
+
+    .local-boundary-visual {
+      position: relative;
+      margin-top: 3rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        rgba(255, 255, 255, 0.04);
+      background-size: 36px 36px;
+      padding: 1.1rem;
+    }
+
+    .local-boundary-visual__rail {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    .local-boundary-visual__rail span {
+      min-height: 4.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.9rem;
+      color: rgba(226, 232, 240, 0.68);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+    }
+
+    .local-boundary-visual__core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: grid;
+      min-width: 14rem;
+      place-items: center;
+      gap: 0.25rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: white;
+      color: #020617;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 20px 58px rgba(0, 0, 0, 0.28);
+      transform: translate(-50%, -50%);
+    }
+
+    .local-boundary-visual__core strong {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    .central-local-canvas :global(.grid.grid-cols-\[0\.9fr_1fr_1fr\]) {
+      border-radius: 0.375rem;
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .central-hub-canvas {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(79, 118, 97, 0.1), transparent 24%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 248, 244, 0.82));
+    }
+
+    .central-hub-canvas > div:nth-of-type(2) {
+      position: relative;
+    }
+
+    .central-hub-canvas > div:nth-of-type(2)::before {
+      position: absolute;
+      inset: 24% 8% auto;
+      height: 10rem;
+      content: "";
+      background: linear-gradient(90deg, rgba(40, 93, 146, 0.08), rgba(79, 118, 97, 0.1), rgba(183, 140, 42, 0.08));
+      transform: rotate(-1.5deg);
+    }
+
+    .central-hub-canvas > div:nth-of-type(2) > :global(*) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .central-walls-canvas {
+      background:
+        radial-gradient(circle at 84% 18%, rgba(183, 140, 42, 0.12), transparent 26%),
+        linear-gradient(135deg, rgba(250, 246, 237, 0.9), rgba(255, 255, 255, 0.94));
+    }
+
+    .central-walls-canvas :global(.md\:grid-cols-\[0\.8fr_1\.4fr_0\.8fr\]) {
+      box-shadow: inset 0 0 0 1px rgba(183, 140, 42, 0.14), 0 20px 56px rgba(23, 32, 51, 0.08);
+    }
+
+    .central-stages-canvas {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 245, 243, 0.72));
+    }
+
+    .central-stages-canvas > div:nth-of-type(1) {
+      box-shadow: inset 0 0 0 1px rgba(40, 93, 146, 0.08), 0 22px 60px rgba(23, 32, 51, 0.07);
+    }
+
+    .central-memory-canvas {
+      background:
+        radial-gradient(circle at 16% 82%, rgba(40, 93, 146, 0.12), transparent 28%),
+        linear-gradient(135deg, rgba(247, 248, 244, 0.96), rgba(255, 255, 255, 0.94));
+    }
+
+    .central-memory-canvas > div {
+      border-radius: 0.375rem;
+    }
+
+    .central-security-canvas {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(250, 246, 237, 0.78));
+    }
+
+    .central-security-canvas > div:nth-of-type(1) {
+      align-items: stretch;
+    }
+
+    .central-reasons-canvas {
+      background:
+        radial-gradient(circle at 80% 18%, rgba(79, 118, 97, 0.11), transparent 26%),
+        linear-gradient(135deg, rgba(238, 245, 243, 0.82), rgba(255, 255, 255, 0.94));
+    }
+
+    .central-reasons-canvas :global(.md\:grid-cols-2 > div) {
+      background: rgba(255, 255, 255, 0.64);
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.05);
+    }
+
+    .central-cases-canvas {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 248, 244, 0.82));
+    }
+
+    .central-cases-canvas :global(.md\:grid-cols-3 > div:nth-child(2)) {
+      transform: translateY(0.75rem);
+    }
+
+    .central-cases-canvas :global(.md\:grid-cols-3 > div:nth-child(3)) {
+      transform: translateY(-0.4rem);
+    }
+
+    .central-compare-canvas {
+      background:
+        radial-gradient(circle at 72% 18%, rgba(40, 93, 146, 0.1), transparent 25%),
+        linear-gradient(135deg, rgba(247, 248, 244, 0.92), rgba(255, 255, 255, 0.96));
+    }
+
+    .central-compare-canvas table {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .central-proof-canvas {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 245, 243, 0.78));
+    }
+
+    .proof-source-board {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1rem;
+      align-items: stretch;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(238, 245, 243, 0.58)),
+        rgba(255, 255, 255, 0.72);
+      padding: 1.25rem;
+      box-shadow: 0 20px 54px rgba(23, 32, 51, 0.07);
+    }
+
+    .proof-source-board__flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+    .proof-source-board__flow span {
+      display: grid;
+      min-height: 7rem;
+      place-items: center;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(40, 93, 146, 0.16);
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--central-ink);
+      font-weight: 800;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.52);
+    }
+
+    .proof-source-board__flow span:nth-child(2),
+    .proof-source-board__flow span:nth-child(4) {
+      transform: translateY(0.65rem);
+    }
+
+    .central-proof-canvas :global(.grid-cols-2 > div) {
+      box-shadow: 0 16px 42px rgba(23, 32, 51, 0.06);
+    }
+
+    .central-pricing-canvas {
+      background:
+        radial-gradient(circle at 82% 14%, rgba(183, 140, 42, 0.12), transparent 26%),
+        linear-gradient(135deg, rgba(250, 246, 237, 0.92), rgba(255, 255, 255, 0.96));
+    }
+
+    .pricing-choice-map {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      position: relative;
+    }
+
+    .pricing-choice-map::before {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 2px;
+      content: "";
+      background: linear-gradient(90deg, rgba(40, 93, 146, 0.15), rgba(79, 118, 97, 0.2), rgba(183, 140, 42, 0.2));
+      transform: translateY(-50%);
+    }
+
+    .pricing-choice-map div {
+      position: relative;
+      min-height: 8.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      background: rgba(255, 255, 255, 0.82);
+      padding: 1rem;
+      box-shadow: 0 16px 42px rgba(23, 32, 51, 0.06);
+    }
+
+    .pricing-choice-map div:nth-child(2) {
+      transform: translateY(0.9rem);
+    }
+
+    .pricing-choice-map div:nth-child(3) {
+      transform: translateY(1.8rem);
+    }
+
+    .pricing-choice-map span {
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .pricing-choice-map strong {
+      display: block;
+      margin-top: 1.2rem;
+      color: var(--text-90);
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .pricing-choice-map p {
+      margin-top: 0.65rem;
+      color: var(--text-75);
+      font-size: 0.78rem;
+      line-height: 1.6;
+    }
+
+    .central-pricing-canvas :global(.lg\:grid-cols-3 > div) {
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 18px 48px rgba(23, 32, 51, 0.06);
+    }
+
+    .central-flow-canvas,
+    .central-faq-canvas {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 248, 244, 0.86));
+    }
+
+    .central-flow-track {
+      position: relative;
+      border-radius: 0.375rem;
+      background:
+        linear-gradient(135deg, rgba(40, 93, 146, 0.09), rgba(79, 118, 97, 0.08)),
+        #eef4f1;
+      padding: 1rem;
+    }
+
+    .central-flow-step {
+      min-height: 12rem;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(16, 24, 32, 0.09);
+      background: rgba(255, 255, 255, 0.84);
+      padding: 1.15rem;
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.06);
+    }
+
+    .central-flow-step__num {
+      display: grid;
+      width: 2.55rem;
+      height: 2.55rem;
+      place-items: center;
+      margin-bottom: 1rem;
+      border-radius: 0.375rem;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(23, 32, 51, 0.08);
+    }
+
+    .flow-note {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(40, 93, 146, 0.14);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(238, 245, 243, 0.62)),
+        rgba(255, 255, 255, 0.76);
+      padding: 1rem;
+    }
+
+    .central-faq-item {
+      border-radius: 0.375rem;
+      border: 1px solid rgba(16, 24, 32, 0.09);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 1rem 1.25rem;
+    }
+
+    .central-final-cta {
+      position: relative;
+      border-radius: 0.375rem;
+      background:
+        linear-gradient(120deg, rgba(40, 93, 146, 0.38), transparent 48%),
+        linear-gradient(280deg, rgba(183, 140, 42, 0.25), transparent 44%),
+        #101820;
+    }
+
+    .central-final-cta::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+    }
+
+    .central-final-cta > :global(*) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .central-final-profile {
+      border-radius: 0.375rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    @media (max-width: 767px) {
+      .ai-central-hero > div:last-of-type {
+        min-height: auto;
+      }
+
+      .central-hero-showcase {
+        margin-top: 1rem;
+      }
+
+      .central-hero-showcase::before {
+        display: none;
+      }
+
+      .central-hero-photo {
+        min-height: 15rem;
+      }
+
+      .central-hero-console {
+        margin-top: -2rem;
+        margin-left: 1rem;
+      }
+
+      .central-hero-route,
+      .central-hero-console__nodes,
+      .central-hero-process {
+        grid-template-columns: 1fr;
+      }
+
+      .central-hero-route div:not(:last-child)::after {
+        display: none;
+      }
+
+      .central-cases-canvas :global(.md\:grid-cols-3 > div:nth-child(2)),
+      .central-cases-canvas :global(.md\:grid-cols-3 > div:nth-child(3)) {
+        transform: none;
+      }
+
+      .proof-source-board,
+      .pricing-choice-map {
+        grid-template-columns: 1fr;
+      }
+
+      .proof-source-board__flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .proof-source-board__flow span:nth-child(2),
+      .proof-source-board__flow span:nth-child(4),
+      .pricing-choice-map div:nth-child(2),
+      .pricing-choice-map div:nth-child(3) {
+        transform: none;
+      }
+
+      .pricing-choice-map::before {
+        display: none;
+      }
+
+      .central-flow-step {
+        min-height: auto;
+      }
+    }
+  </style>
+</LandingLayout>

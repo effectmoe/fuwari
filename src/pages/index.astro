@@ -1,9 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
 import LandingLayout from "../layouts/LandingLayout.astro";
+import EffectInteractiveHero from "../components/effectInteractive/EffectInteractiveHero.astro";
+import StitchCoreSections from "../components/effectInteractive/StitchCoreSections.astro";
+import EvidenceDataSection from "../components/effectInteractive/EvidenceDataSection.astro";
 import InlineConversion from "../components/landing/InlineConversion.astro";
 import stats from "../data/storaca-stats.json";
 import { getSortedPosts } from "../utils/content-utils";
+import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
 const latestPosts = (await getSortedPosts()).slice(0, 3);
 const testimonials = stats.testimonials.slice(0, 2);
@@ -22,10 +26,10 @@ const statCards = [
 ];
 
 const referenceProofStats = [
-	{ value: `★${stats.ratingValue}`, label: "講座レビュー評価", note: `${stats.reviewCount}件のレビュー` },
-	{ value: `${stats.studentsTaught}+`, label: "累計受講者", note: "AI活用を教えてきた人数" },
-	{ value: `${stats.sessionsTaught}+`, label: "累計開催", note: "継続して講座・伴走を実施" },
-	{ value: stats.badge, label: "講師ランク", note: "公開プロフィール由来の実績" },
+	{ value: `★${stats.ratingValue}`, label: "講座レビュー評価" },
+	{ value: `${stats.reviewCount}件`, label: "公開レビュー" },
+	{ value: `${stats.studentsTaught}+`, label: "累計受講者" },
+	{ value: `${stats.sessionsTaught}+`, label: "累計開催" },
 ];
 
 const issueCards = [
@@ -88,27 +92,6 @@ const caseCards = [
 	},
 ];
 
-const products = [
-	{
-		label: "AIに記憶を持たせたい企業・士業向け",
-		title: "AIセントラル",
-		body: "記憶を持ったAIをシステムの中枢に据え、あらゆる業務を加速するAI-DX。顧客情報・個人情報・社内資料を扱う現場に、専属AIを置きます。",
-		href: "/ai-central/",
-		price: "構築 ¥330,000〜 / 月額 ¥34,800",
-		icon: "material-symbols:hub-outline",
-		points: ["記憶基盤", "業務AI", "守秘設計"],
-	},
-	{
-		label: "AI検索・LLMOを毎月改善したい方向け",
-		title: "AIアクセス分析",
-		body: "ChatGPT、Claude、Perplexity などAI検索での見え方と流入を分析し、次に直すべきページ・構造・導線まで毎月整理します。",
-		href: "/ai-traffic-report/",
-		price: "月額 ¥12,800〜",
-		icon: "material-symbols:query-stats",
-		points: ["AI検索", "流入分析", "改善支援"],
-	},
-];
-
 const pillars = [
 	{
 		title: "AI構築",
@@ -145,7 +128,7 @@ const systemMap = [
 	{
 		step: "03",
 		title: "業務の記憶をAIに持たせる",
-		body: "AIセントラルで、顧客情報・社内資料・対応履歴を扱えるAI-DX基盤を作ります。",
+		body: "AIセントラルで、顧客情報・社内資料・対応履歴を扱える社内AI基盤を作ります。",
 		icon: "material-symbols:memory-alt-outline",
 		tone: "amber",
 	},
@@ -253,26 +236,67 @@ const blogAngles = [
 	},
 ];
 
+const aiCentralPricing = [
+	{
+		name: "AIセントラル",
+		label: "まず記憶を作る",
+		price: "¥330,000",
+		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整理します。",
+		features: ["顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
+		cta: "この構成で相談する",
+		icon: "material-symbols:memory-alt-outline",
+		popular: true,
+	},
+	{
+		name: "AIセントラル＋",
+		label: "業務ツールとつなぐ",
+		price: "¥550,000",
+		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げます。",
+		features: ["外部ツール連携", "期限・予定と接続", "類似案件検索"],
+		cta: "連携範囲を相談する",
+		icon: "material-symbols:hub-outline",
+		recommended: true,
+	},
+	{
+		name: "パーフェクトセキュア",
+		label: "ローカルLLMで守る",
+		price: "¥1,320,000",
+		description: "顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
+		features: ["完全ローカル構成", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
+		cta: "セキュリティ前提で相談する",
+		icon: "material-symbols:shield-lock-outline",
+		secure: true,
+	},
+];
+
 const topFaqs = [
 	{
 		q: "AIセントラルは士業事務所向けだけですか？",
-		a: "士業事務所は強い適用先ですが、それだけではありません。AIに記憶を持たせたい企業、個人情報や顧客情報を扱う企業にも向いています。",
+		a: "士業事務所は強い適用先ですが、それだけではありません。AIに記憶を持たせたい企業、個人情報や顧客情報を扱う企業、社内ナレッジをAIで活用したい企業にも向いています。",
 	},
 	{
-		q: "AIアクセス分析では何を見ますか？",
-		a: "AI検索での見え方、AIクローラー到達、引用されやすさ、サイト構造、記事やサービスページの改善点を確認します。",
+		q: "既存のファイルやフォルダを移動する必要はありますか？",
+		a: "原則として既存のデータ資産はそのまま活かします。PDF、Word、Excel、Google Drive、社内フォルダなどを無理に移行するのではなく、AIが参照できる記憶の網を上から構築します。",
 	},
 	{
-		q: "シュ コウメイに相談する理由は何ですか？",
-		a: "AI構築、業務システム、知識管理、LLMO、マーケティング導線を横断して扱えるため、AIを作るだけで終わらせず、使われる状態まで見ます。",
+		q: "顧客情報や個人情報をAIに扱わせても大丈夫ですか？",
+		a: "扱う情報の性質に合わせて設計します。外部クラウドに出せない情報がある場合は、ローカルLLMや管理下AIの構成を検討し、権限、ログ、承認フローを前提にします。",
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
-		a: "いいえ。記憶・検索・整理・下書きはAIが担い、最終判断や送信は人が行う設計を前提にします。",
+		a: "いいえ。検索、整理、下書き、確認、分析はAIが先に進めますが、最終判断、送信、承認、責任を伴う判断は人間が担う設計にします。",
+	},
+	{
+		q: "月額22,000円には何が含まれますか？",
+		a: "隔週90分の伴走コンサル、基本保守、チャット対応を含みます。作って終わりではなく、業務に定着するまで一緒に育てます。",
+	},
+	{
+		q: "パーフェクトセキュアは何が違いますか？",
+		a: "1台のPCを預かり、完全オリジナル仕様に構築します。社内PCや社内ネットワーク内でAIを動かす前提で、機密情報を外へ出しにくい構成を作ります。",
 	},
 	{
 		q: "最初は何から始めるべきですか？",
-		a: "まず無料LLMO簡易診断でAIにどう見えているかを確認し、必要に応じてAIアクセス分析またはAIセントラルへ進む流れが自然です。",
+		a: "まず無料診断で、社内資料、顧客情報、業務フロー、セキュリティ要件を確認します。その上でAIセントラル、AIセントラル＋、パーフェクトセキュアのどれが合うかを整理します。",
 	},
 ];
 
@@ -291,866 +315,1039 @@ const faqLd = {
 ---
 
 <LandingLayout
-	title="effect.moe｜AIに選ばれる会社へ。AIが働く現場へ。"
-	description="シュ コウメイが構築・伴走する株式会社EFFECTの商用サイト。AIセントラル、AIアクセス分析、無料LLMO簡易診断、AI実装ブログを統合したハブです。"
-	ogImage="/lp/effect-hero-ai-core.jpg"
+	title="effect.moe｜記憶を持ったAIを社内の中枢へ組み込む、AIセントラルシステム"
+	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQを、管理された環境でAIが参照できる社内基盤へ整えます。"
+	ogImage="/lp/generated/bright-japanese-ai-consulting-hero.png"
 >
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
 
 	<div class="effect-home-design">
-	<section class="hero-lab relative overflow-hidden border-b border-black/10 bg-slate-950 text-white dark:border-white/10">
-		<div class="hero-lab__wash absolute inset-0"></div>
-		<div class="hero-lab__grid absolute inset-0"></div>
-		<div class="hero-lab__content relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-8">
-			<div class="hero-lab__copy max-w-3xl">
-				<p class="eyebrow text-sm font-bold tracking-[0.18em] text-[var(--primary)]">AI IMPLEMENTATION / LLMO / KNOWLEDGE SYSTEM</p>
-				<h1 class="mt-5 text-4xl font-bold leading-tight md:text-[3.55rem]">
-					AIに選ばれる会社へ。<br />
-					<span class="marker">AIが働く現場へ。</span>
-				</h1>
-				<p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-200 md:text-lg">
-					effect.moe は、AI検索で見つかる仕組みと、記憶を持ったAIを業務の中枢に据える仕組みをつくるサイトです。シュ コウメイが、講座・設計・実装・伴走まで一気通貫で扱います。
-				</p>
-				<div class="hero-lab__actions mt-7 flex flex-wrap gap-3">
-					<a href="/diagnosis/" class="inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 font-bold text-slate-950 transition hover:bg-[var(--primary)]/10">
-						<Icon name="material-symbols:search" class="text-xl" />
-						無料診断を受ける
-					</a>
-					<a href="/ai-central/" class="inline-flex items-center gap-2 rounded-md border border-white/40 px-5 py-3 font-bold text-white transition hover:bg-white/10">
-						AIセントラルを見る
-						<span>→</span>
-					</a>
-				</div>
-				<div class="hero-lab__proof mt-8 grid max-w-md grid-cols-2 gap-x-8">
-					<div>
-						<div class="flex gap-x-0.5 text-[var(--primary)]">
-							{Array.from({ length: 5 }).map(() => (
-								<Icon name="material-symbols:star" class="text-base" />
-							))}
-						</div>
-						<p class="mt-2 text-sm text-slate-300"><span class="font-bold text-white">4.95</span> / 5・231件のレビュー</p>
-					</div>
-					<div>
-						<div class="text-[var(--primary)]">
-							<Icon name="material-symbols:groups-outline" class="text-xl" />
-						</div>
-						<p class="mt-2 text-sm text-slate-300"><span class="font-bold text-white">500+</span> 累計受講者</p>
-					</div>
-				</div>
-			</div>
-			<div class="hero-lab__showcase">
-				<div class="hero-studio hero-studio--unified">
-					<div class="hero-studio__photo">
-						<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="eager" decoding="async" />
-						<div class="hero-studio__badges">
-							<a href="/ai-traffic-report/" class="hero-photo-badge">
-								<Icon name="material-symbols:travel-explore" class="text-lg" />
-								<span>AIアクセス分析</span>
-							</a>
-							<a href="/ai-central/" class="hero-photo-badge">
-								<Icon name="material-symbols:memory-alt-outline" class="text-lg" />
-								<span>AIセントラル</span>
-							</a>
-						</div>
-						<div class="hero-studio__label">
-							<span>AI MEMORY LAYER</span>
-							<strong>業務情報を、AIが参照できる記憶へ。</strong>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+		<EffectInteractiveHero />
 
-	<section class="digirise-proof-strip border-b border-black/10 bg-white dark:border-white/10 dark:bg-slate-950">
-		<div class="mx-auto max-w-7xl px-4 py-7 md:px-8">
-			<div class="grid gap-3 md:grid-cols-[1.1fr_1.8fr] md:items-center">
-				<div>
-					<p class="text-xs font-bold tracking-[0.16em] text-[var(--primary)]">PUBLIC PROOF</p>
-					<p class="mt-2 text-lg font-bold leading-snug text-90">まず、公開されている数字で信用を見せる。</p>
+	<section class="digirise-proof-strip border-b border-black/10">
+		<div class="mx-auto max-w-7xl px-4 py-3 md:px-8 md:py-4">
+			<div class="proof-compact-row">
+				<div class="proof-compact-heading">
+					<div class="storaca-wordmark" aria-label="ストアカ">ストアカ</div>
+					<p>日本最大級のまなびのマーケット</p>
+					<strong>ストアカ内最高ランクの講師が構築する。</strong>
+					<small>ストアカは講座を探して受講できる学習サービス。評価・レビュー・受講者数が公開されるため、第三者評価として確認できます。</small>
 				</div>
-				<div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+				<div class="proof-compact-stats">
 					{referenceProofStats.map((item) => (
 						<div class="proof-stat-tile">
 							<strong>{item.value}</strong>
 							<span>{item.label}</span>
-							<small>{item.note}</small>
 						</div>
 					))}
 				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="home-what-panel border-b border-black/10 bg-[var(--page-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.74fr_1.26fr] md:items-center md:px-8 md:py-20">
-			<div class="section-copy">
-				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">WHAT IS EFFECT.MOE</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">AIに読まれる外側と、AIが働く内側を作る。</h2>
-				<p class="mt-5 text-base leading-relaxed text-75">
-					サービスの説明より先に、「何が変わるのか」を画面で見せます。effect.moe では、AI検索と業務AIを分けず、入口から中枢までを一つの流れとして設計します。
-				</p>
-				<div class="mt-7 flex flex-wrap gap-3">
-					<a href="/diagnosis/" style="background-color:#020617;color:#fff;" class="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90">
-						<Icon name="material-symbols:search" class="text-xl" />
-						無料診断で入口を見る
-					</a>
-					<a href="/author/" class="inline-flex items-center gap-2 rounded-md border border-[var(--primary)] px-5 py-3 text-sm font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)]">
-						シュ コウメイを見る
-					</a>
-				</div>
-			</div>
-			<div class="what-operating-board">
-				<div class="what-operating-board__photo">
-					<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="lazy" decoding="async" />
-					<div>
-						<span>AI OPERATING SYSTEM</span>
-						<strong>サイト・FAQ・業務情報・顧客情報を、AIが参照できる形へ。</strong>
-					</div>
-				</div>
-				<div class="what-flow">
-					<div>
-						<Icon name="material-symbols:travel-explore" class="text-3xl" />
-						<strong>AI検索</strong>
-						<span>見え方・引用・流入</span>
-					</div>
-					<div>
-						<Icon name="material-symbols:hub-outline" class="text-3xl" />
-						<strong>診断</strong>
-						<span>現状把握・優先順位</span>
-					</div>
-					<div>
-						<Icon name="material-symbols:memory-alt-outline" class="text-3xl" />
-						<strong>業務AI</strong>
-						<span>記憶・承認・実装</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="home-issues-panel border-b border-black/10 bg-white dark:border-white/10 dark:bg-slate-950">
-		<div class="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-			<div class="grid gap-8 md:grid-cols-[0.68fr_1.32fr] md:items-end">
-				<div class="section-copy">
-					<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">ISSUES</p>
-					<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl"><span class="marker">こういう詰まりを</span>、先に見える化する。</h2>
-					<p class="mt-5 text-base leading-relaxed text-75">
-						AI検索とAI-DXの抽象論ではなく、読み手が「自分のことだ」と思える粒度まで落として、現場の詰まりから入ります。
-					</p>
-				</div>
-				<div class="issue-command-card">
-					<div>
-						<span>無料診断</span>
-						<strong>AIにどう見えているか</strong>
-					</div>
-					<div>
-						<span>無料相談</span>
-						<strong>AIをどこに置くべきか</strong>
-					</div>
-					<a href="/diagnosis/">入口を確認する →</a>
-				</div>
-			</div>
-			<div class="qa-grid mt-10">
-				{issueCards.map((item, index) => (
-					<div class="qa-card">
-						<div class="qa-card__body">
-							<p class="qa-card__q">Q{index + 1}</p>
-							<div class="qa-card__icon">
-								<Icon name={item.icon} />
-							</div>
-							<p class="qa-card__title">{item.title}</p>
-						</div>
-						<details>
-							<summary class={`qa-bar-${Math.floor(index / 2) + 1}`}>
-								<Icon name="material-symbols:lightbulb-outline" class="text-lg" />
-								Answer
-								<Icon name="material-symbols:keyboard-arrow-down-rounded" class="qa-chevron text-xl" />
-							</summary>
-							<p class="qa-card__answer">{item.body}</p>
-						</details>
-					</div>
-				))}
-			</div>
-		</div>
-	</section>
-
-	<section class="home-case-showcase border-b border-black/10 bg-[var(--btn-plain-bg)] dark:border-white/10">
-		<div class="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-			<div class="grid gap-8 md:grid-cols-[0.7fr_1.3fr] md:items-center">
-				<div class="section-copy">
-					<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">SHOWCASE</p>
-					<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">課題から、実装後の姿まで見せる。</h2>
-					<p class="mt-5 text-base leading-relaxed text-75">
-						商品カードを並べるだけでなく、「何に困っていて、どう変わるのか」を事例カードとして見せます。
-					</p>
-				</div>
-				<div class="case-showcase-stage">
-					{caseCards.map((item) => (
-						<a href={item.href} class="case-rich-card group">
-							<div class="case-rich-card__top">
-								<span>{item.kicker}</span>
-								<Icon name={item.icon} class="text-3xl" />
-							</div>
-							<h3>{item.title}</h3>
-							<div class="case-before-after">
-								<div>
-									<span>Before</span>
-									<strong>{item.before}</strong>
-								</div>
-								<Icon name="material-symbols:arrow-forward-rounded" class="hidden text-2xl text-[var(--primary)] md:block" />
-								<Icon name="material-symbols:arrow-downward-rounded" class="text-2xl text-[var(--primary)] md:hidden" />
-								<div>
-									<span>After</span>
-									<strong>{item.after}</strong>
-								</div>
-							</div>
-							<p>詳しく見る <span class="transition group-hover:translate-x-1">→</span></p>
-						</a>
-					))}
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="home-media-rail border-b border-black/10 bg-white dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-5 px-4 py-8 md:grid-cols-[0.92fr_1.18fr_0.9fr] md:px-8 md:py-10">
-			<div class="home-media-card is-photo">
-				<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="lazy" decoding="async" />
-				<div>
-					<p>AIに見つかる外側と、AIが働く内側をつなぐ。</p>
-				</div>
-			</div>
-			<div class="home-media-card is-product">
-				<p class="text-xs font-bold tracking-[0.16em] text-[var(--primary)]">TWO PRODUCT ENGINES</p>
-				<div class="mt-5 grid gap-3 md:grid-cols-2">
-					<a href="/ai-traffic-report/" class="home-product-mini">
-						<Icon name="material-symbols:travel-explore" class="text-3xl" />
-						<strong>AIアクセス分析</strong>
-						<span>AI検索でどう見られ、引用されるかを測る</span>
-					</a>
-					<a href="/ai-central/" class="home-product-mini">
-						<Icon name="material-symbols:memory-alt-outline" class="text-3xl" />
-						<strong>AIセントラル</strong>
-						<span>記憶を持ったAIを業務の中枢に置く</span>
-					</a>
-				</div>
-			</div>
-			<div class="home-media-card is-profile">
-				<div class="flex items-center gap-3">
-					<img src="/ai-agent-course/tony-portrait.jpg" alt="シュ コウメイ" loading="lazy" decoding="async" />
-					<div>
-						<p class="text-xs font-bold text-50">DIRECTED BY</p>
-						<strong class="text-base text-90">シュ コウメイ</strong>
-					</div>
-				</div>
-				<p class="mt-4 text-sm font-bold leading-relaxed text-90">AI構築、業務システム、LLMO、マーケティング導線まで横断して設計します。</p>
-			</div>
-		</div>
-	</section>
-
-	<section class="section-paper operating-canvas border-b border-black/10 bg-[var(--page-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-8 md:py-20">
-			<div class="section-copy">
-				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">OPERATING MAP</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">AIに見つかり、AIが働く。その流れを作る。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					effect.moe が扱うのは、単発のAI導入ではありません。外からAIに見つけられる状態を作り、内側では記憶を持ったAIが業務を支える状態までつなぎます。
-				</p>
-				<div class="mt-7">
-					<a href="/diagnosis/" style="background-color:#020617;color:#fff;" class="inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90 sm:w-auto">
-						<Icon name="material-symbols:search-rounded" class="text-xl" />
-						無料診断から始める
-					</a>
-				</div>
-			</div>
-			<div class="diagram-shell operating-stage rounded-md border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:p-5">
-				<div class="stage-chrome" aria-hidden="true">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-				<div class="stage-watermark" aria-hidden="true">effect.moe</div>
-				<div class="grid gap-3">
-					<div class="grid gap-3 md:grid-cols-3">
-						{systemMap.map((item, index) => (
-							<div class="map-card relative rounded-md border border-[var(--primary)]/25 bg-[var(--primary)]/8 p-5 shadow-sm">
-								<div class="flex items-center justify-between gap-3">
-									<span class="text-xs font-bold text-50">{item.step}</span>
-									<Icon name={item.icon} class="text-3xl text-[var(--primary)]" />
-								</div>
-								<h3 class="mt-4 text-lg font-bold leading-snug text-90">{item.title}</h3>
-								<p class="mt-3 text-xs leading-relaxed text-75">{item.body}</p>
-								{index < systemMap.length - 1 && (
-									<div class="absolute -bottom-7 left-1/2 z-10 grid size-8 -translate-x-1/2 place-items-center rounded-full border border-black/10 bg-[var(--card-bg)] text-[var(--primary)] shadow-sm dark:border-white/10 md:-right-7 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0">
-										<Icon name="material-symbols:arrow-downward-rounded" class="text-xl md:hidden" />
-										<Icon name="material-symbols:arrow-forward-rounded" class="hidden text-xl md:block" />
-									</div>
-								)}
-							</div>
-						))}
-					</div>
-					<div class="rounded-md bg-slate-950 p-5 text-white">
-						<div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-center">
-							<div>
-								<p class="eyebrow text-xs font-bold tracking-[0.14em] text-[var(--primary)]">RESULT</p>
-								<p class="mt-2 text-xl font-bold leading-snug">外側はAI検索、内側はAI-DX。</p>
-							</div>
-							<div class="grid grid-cols-3 gap-2 text-center text-xs font-bold text-white/78">
-								<div class="rounded-md bg-white/10 p-3">引用される</div>
-								<div class="rounded-md bg-white/10 p-3">相談が増える</div>
-								<div class="rounded-md bg-white/10 p-3">業務が速くなる</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<div class="mx-auto max-w-7xl px-4 py-8 md:px-8">
-		<InlineConversion
-			consultationHref={consultationHref}
-			title="どちらに進むべきか、最初に切り分けます。"
-			body="AI検索の見え方から始めるべきか、業務AIの記憶基盤から始めるべきか。無料診断と無料相談のどちらからでも入れます。"
-		/>
-	</div>
-
-	<section class="service-showcase section-paper mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-		<div class="grid gap-8 md:grid-cols-[0.82fr_1.18fr] md:items-end">
-			<div class="section-copy">
-				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">TWO SERVICES</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">入口は2つ。目的は同じ。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					AIに見つけられる状態をつくる。AIが社内で働ける状態をつくる。無料診断を共通の玄関にして、必要な段階へ進みます。
-				</p>
-			</div>
-			<div class="service-bridge rounded-md border border-black/10 bg-[var(--btn-plain-bg)] p-5 dark:border-white/10">
-				<div class="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
-					<div class="rounded-md bg-[var(--page-bg)] p-4 text-center shadow-sm">
-						<p class="text-xs font-bold text-50">見つかる</p>
-						<p class="mt-1 text-lg font-bold text-90">AIアクセス分析</p>
-					</div>
-					<div class="grid place-items-center text-[var(--primary)]">
-						<Icon name="material-symbols:arrow-forward" class="hidden text-3xl md:block" />
-						<Icon name="material-symbols:arrow-downward" class="text-3xl md:hidden" />
-					</div>
-					<div class="rounded-md bg-[var(--page-bg)] p-4 text-center shadow-sm">
-						<p class="text-xs font-bold text-50">働く</p>
-						<p class="mt-1 text-lg font-bold text-90">AIセントラル</p>
-					</div>
-				</div>
-				<p class="mt-4 text-center text-xs leading-relaxed text-50">無料診断 → 月次分析 → スポット改善 → 業務AI構築</p>
-			</div>
-		</div>
-
-			<div class="service-card-field mt-8 grid gap-5 md:grid-cols-2">
-				{products.map((product) => (
-					<a href={product.href} class="service-card group block rounded-md border border-black/10 bg-[var(--card-bg)] p-6 shadow-sm transition hover:-translate-y-1 hover:border-[var(--primary)]/60 hover:shadow-xl dark:border-white/10">
-						<div class="service-card__visual mb-6 overflow-hidden rounded-md border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10">
-							{product.title === "AIセントラル" ? (
-								<div class="relative grid min-h-48 place-items-center">
-									<div class="absolute inset-x-4 top-5 grid grid-cols-3 gap-3">
-										<div class="h-20 rounded-md bg-white/70 shadow-sm dark:bg-white/10"></div>
-										<div class="h-20 rounded-md bg-white/70 shadow-sm dark:bg-white/10"></div>
-										<div class="h-20 rounded-md bg-white/70 shadow-sm dark:bg-white/10"></div>
-									</div>
-									<div class="absolute bottom-4 left-4 rounded-md border border-[var(--primary)]/20 bg-[var(--page-bg)] px-4 py-3 text-xs font-bold text-75 shadow-sm">社内資料</div>
-									<div class="absolute bottom-4 right-4 rounded-md border border-[var(--primary)]/20 bg-[var(--page-bg)] px-4 py-3 text-xs font-bold text-75 shadow-sm">顧客情報</div>
-									<div class="relative grid size-28 place-items-center rounded-md border border-[var(--primary)]/30 bg-[var(--primary)]/10 shadow-lg shadow-[var(--primary)]/10">
-										<div class="absolute size-16 rounded-md bg-[var(--primary)]/35 blur-xl"></div>
-										<Icon name="material-symbols:memory-alt-outline" class="relative text-5xl text-[var(--primary)]" />
-									</div>
-									<div class="absolute left-1/2 top-12 h-20 w-px bg-[var(--primary)]/30"></div>
-									<div class="absolute bottom-16 left-20 h-px w-28 bg-[var(--primary)]/30"></div>
-									<div class="absolute bottom-16 right-20 h-px w-28 bg-[var(--primary)]/30"></div>
-								</div>
-							) : (
-								<div class="relative min-h-48">
-									<div class="absolute inset-0 rounded-md bg-[var(--primary)]/8"></div>
-									<div class="relative grid min-h-48 gap-3 p-3">
-										<div class="grid grid-cols-[1fr_auto] gap-3">
-											<div class="rounded-md bg-[var(--page-bg)] p-4 shadow-sm">
-												<p class="text-xs font-bold text-50">AI検索</p>
-												<div class="mt-3 h-3 w-3/4 rounded-full bg-[var(--primary)]/30"></div>
-												<div class="mt-2 h-3 w-1/2 rounded-full bg-[var(--primary)]/25"></div>
-											</div>
-											<div class="grid size-16 place-items-center rounded-md bg-[var(--primary)] text-white shadow-sm">
-												<Icon name="material-symbols:travel-explore" class="text-3xl" />
-											</div>
-										</div>
-										<div class="grid grid-cols-3 items-end gap-3">
-											<div class="h-14 rounded-md bg-[var(--primary)]/30"></div>
-											<div class="h-24 rounded-md bg-[var(--primary)]/25"></div>
-											<div class="h-32 rounded-md bg-[var(--primary)]/45"></div>
-										</div>
-										<p class="text-center text-xs font-bold text-50">見え方 → 流入 → 改善点</p>
-									</div>
-								</div>
-							)}
-						</div>
-						<div class="flex items-start justify-between gap-4">
-							<div>
-								<p class="text-sm font-bold text-[var(--primary)]">{product.label}</p>
-							<h3 class="mt-2 text-3xl font-bold text-90">{product.title}</h3>
-						</div>
-						<span class="grid size-14 place-items-center rounded-md bg-[var(--primary)]/10 text-[var(--primary)]">
-							<Icon name={product.icon} class="text-3xl" />
-						</span>
-					</div>
-					<div class="mt-6 grid grid-cols-3 gap-2">
-						{product.points.map((point) => (
-							<span class="rounded-md border border-[var(--primary)]/20 bg-[var(--primary)]/5 px-3 py-2 text-center text-xs font-bold text-[var(--primary)]">
-								{point}
-							</span>
-						))}
-					</div>
-					<p class="mt-5 text-base leading-relaxed text-75">{product.body}</p>
-					<div class="mt-6 flex flex-wrap items-center justify-between gap-3">
-						<p class="text-sm font-bold text-90">{product.price}</p>
-						<p class="inline-flex items-center gap-2 text-sm font-bold text-[var(--primary)]">
-							詳しく見る <span class="transition group-hover:translate-x-1">→</span>
-						</p>
-					</div>
-				</a>
-			))}
-		</div>
-	</section>
-
-	<section class="visual-story web-immersive border-y border-black/10 bg-white dark:border-white/10 dark:bg-slate-950">
-		<div class="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-			<div class="grid gap-10 md:grid-cols-[0.62fr_1.38fr] md:items-center">
-				<div class="section-copy">
-					<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI PLACEMENT</p>
-					<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">AIは「魔法」ではなく、置き場所で決まる。</h2>
-					<p class="mt-5 text-sm leading-relaxed text-75">
-						外側ではAIが会社をどう読むか。内側ではAIがどの情報を記憶し、どこで人に戻すか。effect.moe はこの2つを、図で見える状態にしてから作ります。
-					</p>
-				</div>
-				<div class="visual-split web-immersive__stage">
-					<div class="web-orbit" aria-hidden="true"></div>
-					<div class="visual-panel">
-						<p class="visual-panel__label">OUTSIDE / LLMO</p>
-						<div class="search-illustration" style="min-height:280px;" aria-hidden="true">
-							<div class="search-illustration__bar">ChatGPT / Claude / Perplexity</div>
-							<div class="search-illustration__beam"></div>
-							<div class="search-illustration__site">
-								<span>service</span>
-								<span>faq</span>
-								<span>proof</span>
-							</div>
-							<div class="search-illustration__answer">AIが引用できる状態へ</div>
-						</div>
-					</div>
-					<div class="visual-panel">
-						<p class="visual-panel__label">INSIDE / AI CENTRAL</p>
-						<div class="central-illustration" style="min-height:280px;" aria-hidden="true">
-							<div class="central-illustration__core">記憶AI</div>
-							<div class="central-illustration__node node-a">社内資料</div>
-							<div class="central-illustration__node node-b">顧客情報</div>
-							<div class="central-illustration__node node-c">対応履歴</div>
-							<div class="central-illustration__node node-d">人の承認</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="starting-canvas section-paper border-y border-black/10 bg-[var(--page-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.68fr_1.32fr] md:items-center md:px-8 md:py-20">
-			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">STARTING POINT</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">いま困っていることから、入口を選ぶ。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					effect.moe は、AI検索対策だけのサイトでも、AIシステム構築だけのサイトでもありません。外側からAIに参照される力と、内側でAIが記憶を使って働く力を、同じ設計思想でつなぎます。
-				</p>
-				<div class="mt-7 grid grid-cols-2 gap-3">
-					<a href="/diagnosis/" style="background-color:#020617;color:#fff;" class="rounded-md border border-[var(--primary)] px-4 py-3 text-center text-sm font-bold transition hover:opacity-90">
-						無料診断
-					</a>
-					<a href={consultationHref} data-no-swup class="rounded-md border border-[var(--primary)] px-4 py-3 text-center text-sm font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)]">
-						無料相談
-					</a>
-				</div>
-			</div>
-			<div class="decision-field">
-				{decisionRows.map((row) => (
-					<div class="decision-card">
-						<div class="decision-card__top">
-							<p class="decision-card__issue">{row.issue}</p>
-							<span>{row.first}</span>
-						</div>
-						<div class="decision-card__route">
-							<span>{row.first}</span>
-							<Icon name="material-symbols:arrow-forward-rounded" class="text-xl" />
-							<strong>{row.next}</strong>
-						</div>
-						<p class="decision-card__reason">{row.reason}</p>
-					</div>
-				))}
-			</div>
-		</div>
-	</section>
-
-	<section class="trust-canvas section-paper border-y border-black/10 bg-[var(--btn-plain-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.8fr_1.2fr] md:px-8 md:py-20">
-			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">WHO / E-E-A-T</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">AIに詳しい人、では足りない。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					必要なのは、AIを作れること、業務に置けること、マーケティングの入口まで見られること。シュ コウメイの実績ページへ、トップから明確に導線を置きます。
-				</p>
-				<a href="/author/" style="background-color:#020617;color:#fff;" class="mt-7 inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90">
-					<Icon name="material-symbols:person-outline" class="text-xl" />
-					シュ コウメイを見る
-				</a>
-			</div>
-			<div class="trust-stage grid gap-4 md:grid-cols-[0.82fr_1.18fr]">
-				<div class="trust-profile rounded-md border border-black/10 bg-[var(--page-bg)] p-5 dark:border-white/10">
-					<div class="flex items-center gap-4">
-						<img
-							src="/ai-agent-course/tony-portrait.jpg"
-							alt="シュ コウメイ"
-							class="size-16 rounded-full border border-black/10 object-cover object-[50%_20%] dark:border-white/10"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div>
-							<p class="text-lg font-bold text-90">シュ コウメイ</p>
-							<p class="mt-1 text-xs leading-relaxed text-50">AI構築・AI検索支援・講座伴走</p>
-						</div>
-					</div>
-					<div class="trust-stack mt-6 space-y-4 border-t border-black/10 pt-4 dark:border-white/10">
-						<div class="flex items-baseline gap-3">
-							<span class="text-xs font-bold text-[var(--primary)]">BUILD</span>
-							<p class="text-sm font-bold text-90">記憶を持つAIを構築</p>
-						</div>
-						<div class="flex items-baseline gap-3">
-							<span class="text-xs font-bold text-[var(--primary)]">MEASURE</span>
-							<p class="text-sm font-bold text-90">AI検索での見え方を分析</p>
-						</div>
-						<div class="flex items-baseline gap-3">
-							<span class="text-xs font-bold text-[var(--primary)]">TEACH</span>
-							<p class="text-sm font-bold text-90">使う人の理解まで伴走</p>
-						</div>
-					</div>
-				</div>
-				<div class="grid gap-4">
-					{trustBlocks.map((item) => (
-						<a href={item.href} class="group rounded-md border border-black/10 bg-[var(--page-bg)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--primary)]/55 hover:shadow-md dark:border-white/10">
-							<div class="flex gap-4">
-								<span class="grid size-11 shrink-0 place-items-center rounded-md bg-[var(--primary)]/10 text-[var(--primary)]">
-									<Icon name={item.icon} class="text-2xl" />
-								</span>
-								<div>
-									<h3 class="text-base font-bold text-90">{item.title}</h3>
-									<p class="mt-2 text-sm leading-relaxed text-75">{item.body}</p>
-									<p class="mt-3 text-xs font-bold text-[var(--primary)]">確認する <span class="inline-block transition group-hover:translate-x-1">→</span></p>
-								</div>
-							</div>
-						</a>
-					))}
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<div class="mx-auto max-w-7xl px-4 py-8 md:px-8">
-		<InlineConversion
-			consultationHref={consultationHref}
-			title="信用材料を見たうえで、具体的な相談へ進めます。"
-			body="シュ コウメイの実績・講座評価・運営会社情報を確認したあと、無料相談または無料診断へ戻れる導線を置いています。"
-		/>
-	</div>
-
-	<section class="proof-canvas section-paper mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-		<div class="grid gap-8 md:grid-cols-[0.72fr_1.28fr] md:items-center">
-			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">PROOF</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">数字で見える、教えて終わらない実装力。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					ストアカでの受講者数・レビュー・開催回数を、トップの信用材料として大きく見せます。講座で得た知見を、AI構築とAI検索支援へ接続します。
-				</p>
-				<div class="mt-7 grid gap-2">
-					{proofFlow.map((item, index) => (
-						<div class="grid grid-cols-[auto_1fr] gap-3 rounded-md border border-black/10 bg-[var(--btn-plain-bg)] p-3 dark:border-white/10">
-							<span class="grid size-10 place-items-center rounded-md bg-[var(--primary)]/10 text-[var(--primary)]">
-								<Icon name={item.icon} class="text-2xl" />
-							</span>
-							<div>
-								<p class="text-xs font-bold text-50">0{index + 1} / {item.label}</p>
-								<p class="mt-1 text-sm font-bold text-90">{item.title}</p>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-			<div class="proof-board overflow-hidden rounded-md border border-black/10 bg-slate-950 text-white shadow-xl dark:border-white/10">
-				<div class="proof-board__label">
-					<span>PUBLIC TRUST SOURCE</span>
-					<span>AI BUILD / LLMO</span>
-				</div>
-				<div class="grid gap-4 border-t border-white/10 bg-white/[0.04] p-5 md:grid-cols-2">
-					{testimonials.map((item) => (
-						<blockquote class="rounded-md border border-white/10 bg-white/10 p-4 text-sm leading-relaxed text-slate-200">
-							<p class="font-bold text-white">「{item.headline ?? item.course}」</p>
-							<p class="mt-2 line-clamp-3">{item.text}</p>
-						</blockquote>
-					))}
-				</div>
-				<div class="proof-evidence-grid border-t border-white/10 p-5">
-					<div>
-						<p class="text-xs font-bold tracking-[0.14em] text-[var(--primary)]">EVIDENCE</p>
-						<p class="mt-2 text-sm leading-relaxed text-slate-200">公開実績、講座レビュー、実装記事を、AIから見ても人から見ても確認できる信用材料に整理します。</p>
-					</div>
-					<div class="proof-timeline">
-						<span>講座</span>
-						<span>実装</span>
-						<span>記事</span>
-						<span>診断</span>
-					</div>
-				</div>
-				<div class="border-t border-white/10 p-5">
-					<div class="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
-						<p class="text-sm font-bold leading-relaxed text-slate-200">
-							講座評価だけで終わらせず、まずは自社サイトがAIにどう見えているかを確認します。
-						</p>
-						<a href="/diagnosis/" class="rounded-md bg-white px-5 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-[var(--primary)]/10">無料診断へ</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="diagnosis-canvas section-paper border-y border-black/10 bg-[var(--btn-plain-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.82fr_1.18fr] md:px-8 md:py-20">
-			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">FREE DIAGNOSIS</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">まず、AIにどう見えているかを診断します。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					無料LLMO簡易診断は、AIアクセス分析とAIセントラルの共通玄関です。診断結果から、継続計測・スポット改善・業務AI構築へ分岐します。
-				</p>
-				<div class="mt-7 flex flex-wrap gap-3">
-					<a href="/diagnosis/" style="background-color:#020617;color:#fff;" class="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90">
-						<Icon name="material-symbols:search" class="text-xl" />
-						無料診断へ
-					</a>
-					<a href="/ai-traffic-report/" class="inline-flex items-center gap-2 rounded-md border border-[var(--primary)] px-5 py-3 text-sm font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)]">
-						AIアクセス分析を見る
-					</a>
-				</div>
-			</div>
-			<div class="diagnosis-board rounded-md border border-black/10 bg-[var(--page-bg)] p-5 shadow-sm dark:border-white/10">
-				<div class="grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
-					<div class="rounded-md bg-slate-950 p-5 text-white">
-						<p class="text-xs font-bold tracking-[0.14em] text-[var(--primary)]">AI VIEW SNAPSHOT</p>
-						<div class="mt-5 grid place-items-center rounded-xl border border-white/12 bg-white/8 p-6">
-							<div class="grid size-32 place-items-center rounded-full border-8 border-white/10 bg-white text-slate-950 shadow-2xl">
-								<Icon name="material-symbols:manage-search" class="text-5xl" />
-								<p class="mt-1 text-center text-xs font-bold leading-tight">AI<br />診断</p>
-							</div>
-						</div>
-						<div class="ai-view-lines mt-5">
-							<div><span>robots</span><strong>到達可否</strong></div>
-							<div><span>schema</span><strong>理解補助</strong></div>
-							<div><span>LLM answer</span><strong>引用候補</strong></div>
-						</div>
-						<div class="mt-5 grid grid-cols-3 gap-2 text-center text-xs font-bold text-white/78">
-							<div class="rounded-md bg-white/10 p-3">到達</div>
-							<div class="rounded-md bg-white/10 p-3">理解</div>
-							<div class="rounded-md bg-white/10 p-3">改善</div>
-						</div>
-					</div>
-					<div class="grid gap-3">
-						{diagnosisChecks.map((item) => (
-							<div class="grid grid-cols-[auto_1fr] gap-3 rounded-md border border-black/10 bg-[var(--card-bg)] p-4 dark:border-white/10">
-								<span class="grid size-10 place-items-center rounded-md bg-[var(--primary)]/10 text-xs font-bold text-[var(--primary)]">{item.step}</span>
-								<div>
-									<p class="text-base font-bold text-90">{item.title}</p>
-									<p class="mt-1 text-xs leading-relaxed text-75">{item.body}</p>
-								</div>
-							</div>
-						))}
-						<div class="rounded-md border border-[var(--primary)]/25 bg-[var(--primary)]/5 p-4">
-							<p class="text-sm font-bold text-90">診断は「売り込み」ではなく、入口の切り分けです。</p>
-							<p class="mt-2 text-xs leading-relaxed text-75">AIアクセス分析で足りるのか、AIセントラルの相談へ進むべきかを整理します。</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section id="notes" class="notes-canvas section-paper mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
-		<div class="grid gap-8 md:grid-cols-[0.78fr_1.22fr] md:items-center">
-			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">IMPLEMENTATION NOTES</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">ブログは、実装と思考の証拠です。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					AI検索、構造化、知識管理、Astro運用など、判断材料になる記事へつなぎます。単なる読み物ではなく、AI検索支援とAI構築をどう考えているかの公開ノートです。
-				</p>
-				<div class="notes-feature-visual mt-7">
-					<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="lazy" decoding="async" />
-					<div>
-						<span>PUBLIC KNOWLEDGE</span>
-						<strong>記事は、AI構築とAI検索支援の判断材料です。</strong>
-					</div>
-				</div>
-			</div>
-			<div class="notes-topic-board">
-				{blogAngles.map((item) => (
-					<div class="notes-topic-row">
+				<a href="https://www.street-academy.com/steachers/271053" class="proof-action-card" target="_blank" rel="noopener noreferrer" aria-label="ストアカの先生ページを見る">
+					<img class="proof-action-card__avatar" src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" />
+					<div class="proof-rank-card" aria-label="ストアカ講師ランク">
 						<span>
-							<Icon name={item.icon} class="text-2xl" />
+							<small>STREET ACADEMY</small>
+							<strong>AI講師ランク <em>Proバッジ</em></strong>
 						</span>
-						<div>
-							<p class="text-base font-bold text-90">{item.title}</p>
-							<p class="mt-1 text-xs leading-relaxed text-75">{item.body}</p>
-						</div>
 					</div>
-				))}
-				<a href="/blog/" class="notes-topic-cta">
-					ブログをすべて読む
-					<span>→</span>
+					<span class="proof-action-card__button">先生ページを見る →</span>
 				</a>
 			</div>
 		</div>
-		<div class="note-card-field mt-8 grid gap-4 md:grid-cols-3">
-			{latestPosts.map((post, index) => (
-				<a href={`/posts/${post.slug}/`} class="note-card group flex min-h-72 flex-col justify-between rounded-md border border-black/10 bg-[var(--card-bg)] p-5 transition hover:-translate-y-1 hover:border-[var(--primary)]/55 hover:shadow-xl dark:border-white/10">
-					<div>
-						<div class={`note-card__media note-card__media--${index + 1} mb-5`}>
-							<div class="note-diagram" aria-hidden="true">
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>
-							<div class="grid size-14 place-items-center rounded-md bg-white text-[var(--primary)] shadow-sm">
-								<Icon name="material-symbols:article-outline" class="text-4xl" />
-							</div>
-							<p class="text-sm font-bold text-50">NOTE 0{index + 1}</p>
-						</div>
-						<p class="text-xs text-50">{post.data.published.toLocaleDateString("ja-JP")}</p>
-						<h3 class="mt-3 text-xl font-bold leading-snug text-90">{post.data.title}</h3>
-						<p class="mt-3 line-clamp-4 text-sm leading-relaxed text-75">{post.data.description}</p>
-					</div>
-					<p class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--primary)]">
-						読む <span class="transition group-hover:translate-x-1">→</span>
-					</p>
-				</a>
-			))}
-		</div>
 	</section>
 
-	<section id="faq" class="faq-canvas section-paper border-y border-black/10 bg-[var(--btn-plain-bg)] dark:border-white/10">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.78fr_1.22fr] md:px-8 md:py-20">
+	<section class="home-what-panel home-decision-panel border-b border-black/10 bg-[var(--page-bg)]">
+		<div class="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
 			<div class="section-copy">
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">FAQ</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">最初に確認されること。</h2>
-				<p class="mt-5 text-sm leading-relaxed text-75">
-					サービスの対象、AIの役割、シュ コウメイへ相談する理由を、トップ上で先に答えます。
+				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI CENTRAL AFTER INSTALLATION</p>
+				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">システム導入でAIが検索・整理・作成・確認・分析を先に進む。人間は「意思決定」に集中する。</h2>
+				<p class="mt-5 max-w-3xl text-base leading-relaxed text-75">
+					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが業務の下処理を進め、人間は判断・承認・方針決定・最終責任に集中します。
 				</p>
-				<div class="faq-visual-panel mt-7">
-					<img src="/lp/effect-hero-ai-core.jpg" alt="AIがドキュメントとサイト構造を読み取り、業務データと接続するイメージイラスト" loading="lazy" decoding="async" />
-					<div class="faq-visual-panel__overlay">
-						<span>QUESTION FLOW</span>
-						<strong>対象・情報の扱い・AIの役割を確認し、診断か相談へ進む。</strong>
-					</div>
-					<div class="faq-route-map">
-						<div>
-							<span>01</span>
-							<strong>対象を確認</strong>
-						</div>
-						<div>
-							<span>02</span>
-							<strong>情報の扱い</strong>
-						</div>
-						<div>
-							<span>03</span>
-							<strong>次の行動</strong>
-						</div>
-					</div>
-				</div>
 			</div>
-			<div class="faq-stack flex flex-col gap-3">
-				{topFaqs.map((item) => (
-					<details class="rounded-md border border-black/10 bg-[var(--page-bg)] p-5 dark:border-white/10">
-						<summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-base font-bold text-90">
-							<span>{item.q}</span>
-							<Icon name="material-symbols:expand-more" class="mt-0.5 shrink-0 text-2xl text-[var(--primary)]" />
-						</summary>
-						<p class="mt-4 text-sm leading-relaxed text-75">{item.a}</p>
-					</details>
-				))}
+			<div class="decision-map" aria-label="AIセントラル設計でAIが担う業務と人間が担う意思決定">
+				<div class="decision-map__column decision-map__column--source">
+					<p><Icon name="material-symbols:database-outline" /><b>AIが参照する記憶</b><small>会社に散らばる情報を、AIが使える状態へ整える。</small></p>
+					<span><Icon name="material-symbols:description-outline" /><b>社内資料</b><small>規程・マニュアル・提案資料</small></span>
+					<span><Icon name="material-symbols:contact-page-outline" /><b>顧客情報</b><small>属性・契約・注意点</small></span>
+					<span><Icon name="material-symbols:history-edu-outline" /><b>対応履歴</b><small>過去のやり取り・判断</small></span>
+					<span><Icon name="material-symbols:help-outline" /><b>FAQ・規程</b><small>回答ルール・社内基準</small></span>
+				</div>
+				<div class="decision-map__center">
+					<div class="decision-map__memory-stack">
+						<div><strong>営業担当AI</strong><span>商談履歴・提案文脈</span></div>
+						<div><strong>管理担当AI</strong><span>規程・承認・処理基準</span></div>
+						<div><strong>顧客対応AI</strong><span>問い合わせ履歴・FAQ</span></div>
+					</div>
+					<div class="decision-map__core">
+						<span class="decision-map__core-mark" aria-hidden="true">
+							<i></i><i></i><i></i><i></i><i></i>
+						</span>
+						<strong>記憶を持ったAI</strong>
+						<small>社員ごとの文脈を束ね、業務を取り仕切る</small>
+					</div>
+					<p class="decision-map__flow-note"><Icon name="material-symbols:automation" />人に聞く前に、AIが必要な情報を探し、整理し、下書きする。</p>
+				</div>
+				<div class="decision-map__column decision-map__column--work">
+					<p><Icon name="material-symbols:task-alt" /><b>AIが担う業務</b><small>人の前段にある作業をAIが先に進める。</small></p>
+					<span><Icon name="material-symbols:manage-search" /><b>検索</b><small>必要資料と過去履歴を探す</small></span>
+					<span><Icon name="material-symbols:sort" /><b>整理</b><small>案件ごとに情報をまとめる</small></span>
+					<span><Icon name="material-symbols:edit-document-outline" /><b>作成</b><small>メール・説明文を下書きする</small></span>
+					<span><Icon name="material-symbols:fact-check-outline" /><b>確認</b><small>根拠と抜け漏れを照合する</small></span>
+					<span><Icon name="material-symbols:monitoring" /><b>分析</b><small>傾向・リスク・次の打ち手を見る</small></span>
+					<span><Icon name="material-symbols:automation" /><b>自動実行</b><small>個別に設定した自動実行をオーガナイズ</small></span>
+				</div>
+				<div class="decision-map__decision">
+					<Icon name="material-symbols:verified-user-outline" />
+					<strong>人間の意思決定</strong>
+					<span>判断・承認・方針決定・最終責任だけに集中する。</span>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<div class="mx-auto max-w-7xl px-4 py-8 md:px-8">
-		<InlineConversion
-			consultationHref={consultationHref}
-			title="FAQで不安が残る場合は、そのまま聞いてください。"
-			body="AIに任せる範囲、個人情報の扱い、AI検索での見え方など、最初の相談で切り分けます。"
-		/>
-	</div>
+		<StitchCoreSections />
 
-	<section class="bg-slate-950 text-white">
-		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.95fr_1.05fr] md:items-center md:px-8 md:py-20">
-			<div>
-				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">NEXT STEP</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight md:text-4xl">AIの入口を、今日ひとつ作る。</h2>
-				<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300">
-					AI検索の見え方を測る。組織の記憶をAIに持たせる。どちらも、最初の一歩は現状を見ることから始まります。
-				</p>
-				<div class="mt-7 flex flex-wrap gap-3">
-					<a href="/diagnosis/" class="rounded-md bg-white px-5 py-3 font-bold text-slate-950 transition hover:bg-[var(--primary)]/10">無料診断</a>
-					<a href="/company/" class="rounded-md border border-white/35 px-5 py-3 font-bold text-white transition hover:bg-white/10">運営情報を見る</a>
+		<EvidenceDataSection />
+
+		<section class="pricing-section" id="pricing">
+			<div class="pricing-section__inner">
+				<div class="pricing-section__header">
+					<p>AI CENTRAL PRICING</p>
+					<h2>AIセントラルは、記憶の深さと安全性で価格が変わります。</h2>
+					<span>汎用チャットの月額課金ではなく、社内資料・顧客情報・承認範囲・ローカルLLMの必要性に合わせて構築するシステムです。</span>
 				</div>
-			</div>
-			<div class="rounded-md border border-white/12 bg-white/8 p-5 backdrop-blur">
-				<div class="grid gap-3">
-					<div class="rounded-md bg-white/10 p-4">
-						<p class="text-xs font-bold text-[var(--primary)]">ROUTE A</p>
-						<p class="mt-1 text-lg font-bold">AIに見つかる状態を作る</p>
-						<p class="mt-2 text-sm leading-relaxed text-slate-300">無料診断からAIアクセス分析へ進み、サイトの見え方を継続改善します。</p>
+
+				<div class="pricing-support">
+					<div class="pricing-support__icon">
+						<Icon name="material-symbols:support-agent" />
 					</div>
-					<div class="rounded-md bg-white/10 p-4">
-						<p class="text-xs font-bold text-[var(--primary)]">ROUTE B</p>
-						<p class="mt-1 text-lg font-bold">AIが働く現場を作る</p>
-						<p class="mt-2 text-sm leading-relaxed text-slate-300">顧客情報・社内資料・業務記録を扱うAIセントラルへ進みます。</p>
+					<div>
+						<span>月額費用</span>
+						<strong>月額 ¥22,000</strong>
+						<p>隔週90分の伴走コンサル + 基本保守＋チャット対応。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
 					</div>
 				</div>
+
+				<div class="pricing-cards" aria-label="AIセントラルの料金プラン">
+					{aiCentralPricing.map((plan) => (
+						<article class:list={["pricing-card", { "is-recommended": plan.recommended, "is-secure": plan.secure }]}>
+							{plan.popular && <span class="pricing-card__badge pricing-card__badge--popular">AI Central 33万円が人気</span>}
+							{plan.recommended && <span class="pricing-card__badge">RECOMMENDED</span>}
+							{plan.secure && <span class="pricing-card__badge pricing-card__badge--secure">個人情報・顧客情報を扱う企業向け</span>}
+							<div class="pricing-card__icon"><Icon name={plan.icon} /></div>
+							<p>{plan.label}</p>
+							<h3>{plan.name}</h3>
+							<div class="pricing-card__price">
+								<span>初期構築費用</span>
+								<strong>{plan.price}</strong>
+							</div>
+							<div class="pricing-card__description">{plan.description}</div>
+							<ul>
+								{plan.features.map((feature) => (
+									<li><Icon name="material-symbols:check-circle-outline" />{feature}</li>
+								))}
+							</ul>
+							<a href={consultationHref}>{plan.cta}</a>
+						</article>
+					))}
+				</div>
+
+				<div class="pricing-flow" aria-label="AIセントラルの導入段階">
+					<div><span>01</span><strong>小さく始める</strong><p>まず社内資料と対応履歴をAIの記憶へ。</p></div>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+					<div><span>02</span><strong>連携する</strong><p>メール・予定・表計算・CRMまで参照先を広げる。</p></div>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+					<div><span>03</span><strong>完全ローカルで守る</strong><p>機密情報を外へ出さず、社内環境でAIを動かす。</p></div>
+				</div>
+
+				<div class="pricing-note">
+					<p>表示は税込・初期構築費用の目安です。月額費用は全プラン共通で別途 ¥22,000。既存資料の量、連携ツール数、権限設計の範囲により調整します。</p>
+					<div>
+						<a class="pricing-note__primary" href={consultationHref}>無料相談で見積もる</a>
+						<a class="pricing-note__secondary" href="/ai-central/#pricing">詳しい料金を見る</a>
+					</div>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+
+		<section class="lp-faq-section" id="faq">
+			<div class="lp-faq-section__inner">
+				<div class="lp-faq-section__header">
+					<span>FAQ</span>
+					<h2>最初に確認されること。</h2>
+					<p>AIセントラルの対象、データの扱い、導入範囲、費用、相談前の確認点をまとめています。</p>
+				</div>
+
+				<div class="lp-faq-list" aria-label="AIセントラルのよくある質問">
+					{topFaqs.map((item, index) => (
+						<details class="lp-faq-item" open={index === 0}>
+							<summary>
+								<span>{String(index + 1).padStart(2, "0")}</span>
+								<strong>{item.q}</strong>
+								<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+							</summary>
+							<p>{item.a}</p>
+						</details>
+					))}
+				</div>
+
+				<div class="lp-faq-cta">
+					<p>まだ判断できない場合は、現在の業務と情報の置き場所を一緒に整理します。</p>
+					<div>
+						<a class="lp-faq-cta__primary" href="/diagnosis/">無料診断を受ける</a>
+						<a class="lp-faq-cta__secondary" href={consultationHref}>AIセントラルを相談する</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+			<section class="contact-form-section" id="contact">
+			<div class="contact-form-section__inner">
+				<div class="contact-form-heading">
+					<div class="contact-form-heading__icon">
+						<Icon name="material-symbols:mail-outline-rounded" />
+					</div>
+					<span>CONTACT</span>
+					<h2>無料診断・ご相談</h2>
+					<p>AIセントラルの導入可否、社内データの扱い、ローカル構成の必要性などを確認します。まずは現在の業務と情報の置き場所をお聞かせください。</p>
+				</div>
+
+				<div class="contact-trust-row" aria-label="問い合わせ前の確認事項">
+					<span><Icon name="material-symbols:handshake-outline" />無理な営業なし</span>
+					<span><Icon name="material-symbols:folder-managed-outline" />既存データはそのまま相談可</span>
+					<span><Icon name="material-symbols:shield-lock-outline" />セキュリティ前提で確認</span>
+				</div>
+
+				<form class="contact-form-card" action={`mailto:${contactEmail}`} method="post" enctype="text/plain">
+					<div class="contact-form-grid">
+						<label>
+							<span>会社名 <b>必須</b></span>
+							<input name="会社名" type="text" required />
+						</label>
+						<label>
+							<span>所属部署名</span>
+							<input name="所属部署名" type="text" />
+						</label>
+						<label>
+							<span>お名前 <b>必須</b></span>
+							<input name="お名前" type="text" required />
+						</label>
+						<label>
+							<span>メールアドレス <b>必須</b></span>
+							<input name="メールアドレス" type="email" required />
+						</label>
+						<label>
+							<span>電話番号</span>
+							<input name="電話番号" type="tel" />
+						</label>
+						<label>
+							<span>ご検討内容 <b>必須</b></span>
+							<select name="ご検討内容" required>
+								<option value="">選択してください</option>
+								<option>AIセントラル</option>
+								<option>AIセントラル＋</option>
+								<option>パーフェクトセキュア</option>
+								<option>まず無料診断したい</option>
+								<option>まだ決まっていない</option>
+							</select>
+						</label>
+						<label class="contact-form-grid__wide">
+							<span>現在の情報の置き場所 <b>必須</b></span>
+							<select name="現在の情報の置き場所" required>
+								<option value="">選択してください</option>
+								<option>Google Drive</option>
+								<option>社内フォルダ</option>
+								<option>Excel・Spreadsheet</option>
+								<option>Notion・Obsidian</option>
+								<option>CRM・顧客カルテ</option>
+								<option>まだ整理できていない</option>
+							</select>
+						</label>
+						<label class="contact-form-grid__wide">
+							<span>メッセージ <b>必須</b></span>
+							<textarea name="メッセージ" rows="7" placeholder="現在困っている業務、扱いたい資料、セキュリティ面の不安などをご記入ください。" required></textarea>
+						</label>
+					</div>
+
+					<div class="contact-submit-area">
+						<button type="submit">送信する</button>
+						<p>送信内容を確認後、シュ コウメイよりご連絡します。契約主体は株式会社EFFECTです。</p>
+					</div>
+				</form>
+			</div>
+		</section>
 	</div>
 </LandingLayout>
 
 <style>
 	.effect-home-design {
-		--effect-ink: #172033;
-		--effect-paper: #f7f8f4;
-		--effect-paper-2: #eef5f3;
-		--effect-blue: #285d92;
-		--effect-green: #4f7661;
-		--effect-coral: #b96043;
-		--effect-gold: #b78c2a;
-		--effect-line: rgba(23, 32, 51, 0.16);
-		background:
-			linear-gradient(180deg, rgba(247, 248, 244, 0.86), rgba(238, 245, 243, 0.6) 34%, transparent 62%),
-			var(--page-bg);
-	}
-
-	.effect-home-design :global(h1),
-	.effect-home-design :global(h2),
-	.effect-home-design :global(h3) {
-		font-family: "Shippori Mincho", serif;
-		letter-spacing: 0.02em;
+		--background: #fcf8f9;
+		--page-bg: #fcf8f9;
+		--surface: #fcf8f9;
+		--surface-bright: #fcf8f9;
+		--surface-container-lowest: #ffffff;
+		--surface-container-low: #f6f3f4;
+		--surface-container: #f0edee;
+		--surface-container-high: #ebe7e8;
+		--primary: #7b5807;
+		--primary-container: #b68c3c;
+		--primary-fixed: #ffdea8;
+		--on-primary-container: #3c2800;
+		--on-surface: #1c1b1c;
+		--on-surface-variant: #4e4538;
+		--outline: #807666;
+		--outline-variant: #d2c5b2;
+		--card-bg: #ffffff;
+		--btn-plain-bg: #f6f3f4;
+		--btn-plain-bg-hover: #f0edee;
+		--effect-ink: #1c1b1c;
+		--effect-paper: #fcf8f9;
+		--effect-paper-2: #f6f3f4;
+		--effect-blue: #3b5f92;
+		--effect-green: #6f5c3a;
+		--effect-coral: #b68c3c;
+		--effect-gold: #b68c3c;
+		--effect-line: #d2c5b2;
+		background: var(--page-bg);
 	}
 
 	.effect-home-design :global(.rounded-xl) {
 		border-radius: 8px;
+	}
+
+	.pricing-section {
+		border-top: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 76% 16%, rgba(109, 137, 91, 0.12), transparent 32%),
+			linear-gradient(180deg, #fcf8f9 0%, #f6f3f4 100%);
+		color: var(--on-surface);
+		padding: clamp(64px, 8vw, 118px) 24px;
+	}
+
+	.pricing-section__inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.pricing-section__header {
+		max-width: 920px;
+		margin-bottom: clamp(28px, 4vw, 48px);
+	}
+
+	.pricing-section__header p {
+		margin: 0 0 14px;
+		color: var(--primary);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.14em;
+	}
+
+	.pricing-section__header h2 {
+		margin: 0;
+		color: var(--effect-ink);
+		font-size: clamp(34px, 4.6vw, 58px);
+		font-weight: 950;
+		line-height: 1.12;
+		letter-spacing: 0;
+		text-wrap: balance;
+	}
+
+	.pricing-section__header span {
+		display: block;
+		max-width: 760px;
+		margin-top: 22px;
+		color: var(--on-surface-variant);
+		font-size: clamp(16px, 1.35vw, 19px);
+		font-weight: 600;
+		line-height: 1.85;
+	}
+
+	.pricing-support {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 18px;
+		align-items: center;
+		margin-bottom: 26px;
+		border: 1px solid rgba(109, 137, 91, 0.32);
+		border-radius: 1.35rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(237, 245, 234, 0.72)),
+			#ffffff;
+		padding: clamp(20px, 2.6vw, 32px);
+		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.06);
+	}
+
+	.pricing-support__icon {
+		display: grid;
+		place-items: center;
+		width: 64px;
+		aspect-ratio: 1;
+		border-radius: 1.15rem;
+		background: rgba(109, 137, 91, 0.12);
+		color: #52683f;
+		font-size: 34px;
+	}
+
+	.pricing-support span,
+	.pricing-card > p,
+	.pricing-flow span {
+		color: var(--primary);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.1em;
+	}
+
+	.pricing-support span {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border: 1px solid rgba(109, 137, 91, 0.24);
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.1);
+		padding: 0.28rem 0.62rem;
+		color: #52683f;
+	}
+
+	.pricing-support strong {
+		display: block;
+		margin-top: 4px;
+		color: var(--effect-ink);
+		font-size: clamp(26px, 2.8vw, 38px);
+		font-weight: 950;
+		line-height: 1.18;
+	}
+
+	.pricing-support p {
+		margin: 8px 0 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(15px, 1.22vw, 17px);
+		font-weight: 650;
+		line-height: 1.7;
+	}
+
+	.pricing-cards {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+		align-items: stretch;
+	}
+
+	.pricing-card {
+		position: relative;
+		display: grid;
+		grid-template-rows: auto auto auto auto 1fr auto auto;
+		gap: 14px;
+		overflow: hidden;
+		border: 1px solid rgba(210, 197, 178, 0.78);
+		border-radius: 1.35rem;
+		background: rgba(255, 255, 255, 0.86);
+		padding: clamp(22px, 2.6vw, 32px);
+		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.055);
+	}
+
+	.pricing-card.is-recommended {
+		border-color: rgba(109, 137, 91, 0.5);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(237, 245, 234, 0.72)),
+			#ffffff;
+		box-shadow: 0 22px 58px rgba(82, 104, 63, 0.13);
+	}
+
+	.pricing-card.is-secure {
+		border-color: rgba(123, 88, 7, 0.42);
+		background:
+			linear-gradient(145deg, rgba(36, 31, 25, 0.96), rgba(71, 59, 38, 0.92)),
+			#2f281f;
+		color: #ffffff;
+	}
+
+	.pricing-card__badge {
+		position: absolute;
+		top: 18px;
+		right: 18px;
+		border-radius: 999px;
+		background: #6d895b;
+		padding: 7px 10px;
+		color: #ffffff;
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.pricing-card__badge--popular {
+		background: #b68c3c;
+		color: #ffffff;
+		box-shadow: 0 10px 22px rgba(123, 88, 7, 0.16);
+	}
+
+	.pricing-card__badge--secure {
+		background: rgba(255, 245, 226, 0.12);
+		color: #ffdea8;
+		font-size: 10px;
+	}
+
+	.pricing-card__icon {
+		display: grid;
+		place-items: center;
+		width: 54px;
+		aspect-ratio: 1;
+		border-radius: 1rem;
+		background: rgba(182, 140, 60, 0.12);
+		color: var(--primary);
+		font-size: 30px;
+	}
+
+	.pricing-card.is-recommended .pricing-card__icon {
+		background: rgba(109, 137, 91, 0.12);
+		color: #52683f;
+	}
+
+	.pricing-card.is-secure .pricing-card__icon {
+		background: rgba(255, 245, 226, 0.11);
+		color: #ffdea8;
+	}
+
+	.pricing-card h3 {
+		margin: 0;
+		color: var(--effect-ink);
+		font-size: clamp(24px, 2.1vw, 32px);
+		font-weight: 950;
+		line-height: 1.18;
+	}
+
+	.pricing-card.is-secure h3,
+	.pricing-card.is-secure .pricing-card__price strong,
+	.pricing-card.is-secure li,
+	.pricing-card.is-secure .pricing-card__description {
+		color: #ffffff;
+	}
+
+	.pricing-card.is-secure > p,
+	.pricing-card.is-secure .pricing-card__price span {
+		color: #ffdea8;
+	}
+
+	.pricing-card__price {
+		display: grid;
+		gap: 4px;
+		border-top: 1px solid rgba(210, 197, 178, 0.65);
+		padding-top: 16px;
+	}
+
+	.pricing-card.is-secure .pricing-card__price {
+		border-color: rgba(255, 222, 168, 0.24);
+	}
+
+	.pricing-card__price span {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border: 1px solid rgba(182, 140, 60, 0.24);
+		border-radius: 999px;
+		background: rgba(182, 140, 60, 0.08);
+		padding: 0.28rem 0.58rem;
+		color: var(--on-surface-variant);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.pricing-card__price strong {
+		color: var(--effect-ink);
+		font-size: clamp(30px, 3vw, 42px);
+		font-weight: 950;
+		line-height: 1.1;
+	}
+
+	.pricing-card__description {
+		color: var(--on-surface-variant);
+		font-size: clamp(15px, 1.16vw, 17px);
+		font-weight: 650;
+		line-height: 1.72;
+	}
+
+	.pricing-card ul {
+		display: grid;
+		gap: 12px;
+		margin: 6px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.pricing-card li {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 9px;
+		align-items: start;
+		color: var(--effect-ink);
+		font-size: 15px;
+		font-weight: 850;
+		line-height: 1.45;
+	}
+
+	.pricing-card li :global(svg) {
+		margin-top: 2px;
+		color: #6d895b;
+		font-size: 19px;
+	}
+
+	.pricing-card.is-secure li :global(svg) {
+		color: #ffdea8;
+	}
+
+	.pricing-card a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 52px;
+		margin-top: 6px;
+		border: 1px solid rgba(123, 88, 7, 0.32);
+		border-radius: 999px;
+		background: #ffffff;
+		color: var(--primary);
+		padding: 0 18px;
+		font-size: 15px;
+		font-weight: 950;
+		text-decoration: none;
+	}
+
+	.pricing-card.is-recommended a {
+		border-color: transparent;
+		background: #6d895b;
+		color: #ffffff;
+		box-shadow: 0 12px 26px rgba(82, 104, 63, 0.2);
+	}
+
+	.pricing-card.is-secure a {
+		border-color: rgba(255, 222, 168, 0.32);
+		background: #ffdea8;
+		color: #3c2800;
+	}
+
+	.pricing-flow {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+		gap: 12px;
+		align-items: stretch;
+		margin-top: 26px;
+	}
+
+	.pricing-flow > div {
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.74);
+		padding: 18px;
+	}
+
+	.pricing-flow > :global(svg) {
+		align-self: center;
+		color: var(--primary);
+		font-size: 26px;
+	}
+
+	.pricing-flow strong {
+		display: block;
+		margin-top: 6px;
+		color: var(--effect-ink);
+		font-size: clamp(18px, 1.45vw, 22px);
+		font-weight: 950;
+		line-height: 1.3;
+	}
+
+	.pricing-flow p {
+		margin: 8px 0 0;
+		color: var(--on-surface-variant);
+		font-size: 14px;
+		font-weight: 650;
+		line-height: 1.62;
+	}
+
+	.pricing-note {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 22px;
+		margin-top: 28px;
+		border: 1px solid rgba(210, 197, 178, 0.76);
+		border-radius: 999px;
+		background: #ffffff;
+		padding: 10px 10px 10px 26px;
+		box-shadow: 0 16px 40px rgba(55, 38, 12, 0.05);
+	}
+
+	.pricing-note p {
+		margin: 0;
+		color: var(--on-surface-variant);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.55;
+	}
+
+	.pricing-note div {
+		display: flex;
+		flex: 0 0 auto;
+		gap: 10px;
+	}
+
+	.pricing-note a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 52px;
+		border-radius: 999px;
+		padding: 0 22px;
+		font-size: 15px;
+		font-weight: 950;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.pricing-note__primary {
+		background: var(--primary-container);
+		color: #3c2800;
+	}
+
+	.pricing-note__secondary {
+		border: 1px solid rgba(123, 88, 7, 0.34);
+		color: var(--primary);
+	}
+
+	.lp-faq-section {
+		border-top: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 18% 24%, rgba(182, 140, 60, 0.08), transparent 30%),
+			linear-gradient(180deg, #fcf8f9 0%, #f5f0f1 100%);
+		color: var(--on-surface);
+		padding: clamp(66px, 8vw, 112px) 24px;
+	}
+
+	.lp-faq-section__inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.lp-faq-section__header {
+		max-width: 820px;
+		margin: 0 auto clamp(30px, 4vw, 48px);
+		text-align: center;
+	}
+
+	.lp-faq-section__header span,
+	.contact-form-heading > span {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid rgba(210, 197, 178, 0.76);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.7);
+		padding: 8px 14px;
+		color: var(--primary);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.lp-faq-section__header h2,
+	.contact-form-heading h2 {
+		margin: 18px 0 0;
+		color: var(--effect-ink);
+		font-size: clamp(34px, 4.2vw, 54px);
+		font-weight: 950;
+		line-height: 1.13;
+		letter-spacing: 0;
+	}
+
+	.lp-faq-section__header p,
+	.contact-form-heading p {
+		max-width: 760px;
+		margin: 18px auto 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(16px, 1.3vw, 19px);
+		font-weight: 600;
+		line-height: 1.85;
+	}
+
+	.lp-faq-list {
+		display: grid;
+		gap: 14px;
+		max-width: 980px;
+		margin: 0 auto;
+	}
+
+	.lp-faq-item {
+		overflow: hidden;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 1.1rem;
+		background: rgba(255, 255, 255, 0.84);
+		box-shadow: 0 16px 42px rgba(55, 38, 12, 0.045);
+	}
+
+	.lp-faq-item summary {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 16px;
+		align-items: center;
+		min-height: 76px;
+		padding: 20px 24px;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.lp-faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.lp-faq-item summary span {
+		display: grid;
+		place-items: center;
+		width: 38px;
+		aspect-ratio: 1;
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.1);
+		color: #52683f;
+		font-size: 13px;
+		font-weight: 950;
+	}
+
+	.lp-faq-item summary strong {
+		color: var(--effect-ink);
+		font-size: clamp(17px, 1.45vw, 21px);
+		font-weight: 900;
+		line-height: 1.45;
+	}
+
+	.lp-faq-item summary :global(svg) {
+		color: var(--primary);
+		font-size: 28px;
+		transition: transform 0.2s ease;
+	}
+
+	.lp-faq-item[open] summary :global(svg) {
+		transform: rotate(180deg);
+	}
+
+	.lp-faq-item p {
+		margin: 0;
+		border-top: 1px solid rgba(210, 197, 178, 0.58);
+		padding: 18px 24px 26px 78px;
+		color: var(--on-surface-variant);
+		font-size: clamp(15px, 1.18vw, 17px);
+		font-weight: 600;
+		line-height: 1.85;
+	}
+
+	.lp-faq-cta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 22px;
+		max-width: 980px;
+		margin: 28px auto 0;
+		border: 1px solid rgba(109, 137, 91, 0.28);
+		border-radius: 1.3rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(237, 245, 234, 0.72)),
+			#ffffff;
+		padding: 20px;
+		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.055);
+	}
+
+	.lp-faq-cta p {
+		margin: 0;
+		color: var(--effect-ink);
+		font-size: clamp(15px, 1.18vw, 17px);
+		font-weight: 850;
+		line-height: 1.65;
+	}
+
+	.lp-faq-cta div {
+		display: flex;
+		flex: 0 0 auto;
+		gap: 10px;
+	}
+
+	.lp-faq-cta a,
+	.contact-submit-area button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 54px;
+		border-radius: 999px;
+		padding: 0 24px;
+		font-size: 15px;
+		font-weight: 950;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.lp-faq-cta__primary,
+	.contact-submit-area button {
+		border: 0;
+		background: #6d895b;
+		color: #ffffff;
+		box-shadow: 0 14px 28px rgba(82, 104, 63, 0.18);
+	}
+
+	.lp-faq-cta__secondary {
+		border: 1px solid rgba(123, 88, 7, 0.34);
+		background: #ffffff;
+		color: var(--primary);
+	}
+
+	.contact-form-section {
+		border-top: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 85% 15%, rgba(109, 137, 91, 0.12), transparent 32%),
+			radial-gradient(circle at 12% 88%, rgba(182, 140, 60, 0.09), transparent 28%),
+			linear-gradient(180deg, #fbf8f9 0%, #f2eeef 100%);
+		color: var(--on-surface);
+		padding: clamp(70px, 8.4vw, 120px) 24px;
+	}
+
+	.contact-form-section__inner {
+		max-width: 1040px;
+		margin: 0 auto;
+	}
+
+	.contact-form-heading {
+		text-align: center;
+	}
+
+	.contact-form-heading__icon {
+		display: grid;
+		place-items: center;
+		width: 74px;
+		aspect-ratio: 1;
+		margin: 0 auto 18px;
+		border-radius: 50%;
+		background: #1c1b1c;
+		color: #ffffff;
+		font-size: 34px;
+		box-shadow: 0 18px 40px rgba(55, 38, 12, 0.12);
+	}
+
+	.contact-trust-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
+		margin: 28px auto 22px;
+	}
+
+	.contact-trust-row span {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		border: 1px solid rgba(109, 137, 91, 0.24);
+		border-radius: 999px;
+		background: rgba(237, 245, 234, 0.72);
+		color: #52683f;
+		padding: 10px 14px;
+		font-size: 14px;
+		font-weight: 850;
+	}
+
+	.contact-trust-row :global(svg) {
+		font-size: 20px;
+	}
+
+	.contact-form-card {
+		border: 1px solid rgba(210, 197, 178, 0.78);
+		border-radius: 1.45rem;
+		background: rgba(255, 255, 255, 0.88);
+		padding: clamp(22px, 3vw, 36px);
+		box-shadow: 0 24px 62px rgba(55, 38, 12, 0.075);
+	}
+
+	.contact-form-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.contact-form-grid label {
+		display: grid;
+		gap: 9px;
+		color: var(--effect-ink);
+		font-size: 15px;
+		font-weight: 900;
+		line-height: 1.4;
+	}
+
+	.contact-form-grid label span {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.contact-form-grid b {
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.14);
+		color: #52683f;
+		padding: 4px 8px;
+		font-size: 11px;
+		font-weight: 950;
+		line-height: 1;
+	}
+
+	.contact-form-grid input,
+	.contact-form-grid select,
+	.contact-form-grid textarea {
+		width: 100%;
+		border: 1px solid rgba(210, 197, 178, 0.86);
+		border-radius: 0.9rem;
+		background: #ffffff;
+		color: var(--effect-ink);
+		font: inherit;
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.5;
+	}
+
+	.contact-form-grid input,
+	.contact-form-grid select {
+		min-height: 56px;
+		padding: 0 16px;
+	}
+
+	.contact-form-grid textarea {
+		min-height: 180px;
+		padding: 16px;
+		resize: vertical;
+	}
+
+	.contact-form-grid input:focus,
+	.contact-form-grid select:focus,
+	.contact-form-grid textarea:focus {
+		border-color: rgba(109, 137, 91, 0.78);
+		box-shadow: 0 0 0 4px rgba(109, 137, 91, 0.1);
+		outline: none;
+	}
+
+	.contact-form-grid__wide {
+		grid-column: 1 / -1;
+	}
+
+	.contact-submit-area {
+		display: grid;
+		justify-items: center;
+		gap: 14px;
+		margin-top: 28px;
+		text-align: center;
+	}
+
+	.contact-submit-area button {
+		min-width: 220px;
+		cursor: pointer;
+	}
+
+	.contact-submit-area p {
+		max-width: 680px;
+		margin: 0;
+		color: var(--on-surface-variant);
+		font-size: 13px;
+		font-weight: 650;
+		line-height: 1.6;
 	}
 
 	.hero-lab {
@@ -1539,25 +1736,129 @@ const faqLd = {
 	.digirise-proof-strip {
 		position: relative;
 		background:
-			linear-gradient(90deg, rgba(255, 255, 255, 0.98), rgba(238, 245, 243, 0.9)),
-			#fff;
+			radial-gradient(circle at 16% 20%, rgba(210, 168, 83, 0.18), transparent 30%),
+			linear-gradient(100deg, rgba(255, 249, 239, 0.98), rgba(251, 239, 231, 0.94) 54%, rgba(246, 234, 223, 0.92)),
+			#fbf0e9;
+	}
+
+	.digirise-proof-strip::before {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		content: "";
+		background:
+			linear-gradient(90deg, rgba(183, 140, 42, 0.055) 1px, transparent 1px),
+			linear-gradient(180deg, rgba(183, 140, 42, 0.045) 1px, transparent 1px);
+		background-size: 44px 44px;
+		mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+	}
+
+	.proof-compact-row {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: minmax(280px, 1fr) minmax(420px, 1.55fr) minmax(280px, 0.82fr);
+		gap: 0.7rem;
+		align-items: center;
+	}
+
+	.storaca-wordmark {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		min-height: 30px;
+		border: 2px solid rgba(182, 140, 60, 0.45);
+		border-radius: 999px;
+		background: #ffffff;
+		padding: 0.22rem 0.76rem;
+		color: #0f8d68;
+		font-size: 0.88rem;
+		font-weight: 950;
+		line-height: 1;
+		box-shadow: 0 10px 24px rgba(23, 32, 51, 0.06);
+	}
+
+	.proof-compact-heading p {
+		margin: 0.34rem 0 0;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 950;
+		letter-spacing: 0.16em;
+	}
+
+	.proof-compact-heading strong {
+		display: block;
+		margin-top: 0.22rem;
+		color: var(--effect-ink);
+		font-size: clamp(1.02rem, 1.35vw, 1.24rem);
+		font-weight: 950;
+		line-height: 1.22;
+	}
+
+	.proof-compact-heading small {
+		display: block;
+		margin-top: 0.22rem;
+		color: var(--on-surface-variant);
+		font-size: 0.7rem;
+		font-weight: 650;
+		line-height: 1.32;
+	}
+
+	.proof-compact-stats {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.42rem;
+		align-self: center;
 	}
 
 	.proof-stat-tile {
+		position: relative;
 		display: grid;
-		min-height: 8.5rem;
 		align-content: center;
-		border: 1px solid rgba(23, 32, 51, 0.1);
-		border-radius: 0.375rem;
-		background: rgba(255, 255, 255, 0.82);
-		padding: 1rem;
-		box-shadow: 0 18px 46px rgba(23, 32, 51, 0.08);
+		justify-items: center;
+		min-height: 72px;
+		overflow: hidden;
+		border: 1px solid rgba(182, 140, 60, 0.34);
+		border-radius: 1rem;
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 245, 219, 0.78)),
+			#ffffff;
+		padding: 0.64rem 0.66rem;
+		text-align: center;
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.92),
+			0 14px 34px rgba(98, 69, 24, 0.1);
+	}
+
+	.proof-stat-tile::before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 4px;
+		content: "";
+		background: linear-gradient(90deg, #b68c3c, rgba(182, 140, 60, 0.22));
+	}
+
+	.proof-stat-tile::after {
+		position: absolute;
+		right: -18px;
+		bottom: -22px;
+		width: 58px;
+		height: 58px;
+		content: "";
+		border-radius: 999px;
+		background: rgba(182, 140, 60, 0.1);
 	}
 
 	.proof-stat-tile strong {
+		position: relative;
+		z-index: 1;
 		display: block;
-		color: var(--effect-ink);
-		font-size: 2rem;
+		color: #7c5c12;
+		font-size: clamp(1.08rem, 1.72vw, 1.42rem);
+		font-weight: 950;
 		line-height: 1;
 	}
 
@@ -1567,10 +1868,13 @@ const faqLd = {
 	}
 
 	.proof-stat-tile span {
-		margin-top: 0.7rem;
+		position: relative;
+		z-index: 1;
+		margin-top: 0.28rem;
 		color: var(--effect-ink);
-		font-size: 0.82rem;
+		font-size: 0.68rem;
 		font-weight: 900;
+		line-height: 1.25;
 	}
 
 	.proof-stat-tile small {
@@ -1579,6 +1883,143 @@ const faqLd = {
 		font-size: 0.72rem;
 		font-weight: 700;
 		line-height: 1.4;
+	}
+
+	.proof-action-card {
+		position: relative;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.58rem 0.72rem;
+		align-items: center;
+		min-height: 96px;
+		overflow: hidden;
+		border: 1px solid rgba(182, 140, 60, 0.55);
+		border-radius: 1.2rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 243, 214, 0.98)),
+			#ffffff;
+		padding: 0.72rem 0.78rem 0.74rem;
+		color: var(--effect-ink);
+		text-decoration: none;
+		box-shadow: 0 16px 38px rgba(182, 140, 60, 0.16);
+		transition:
+			transform 0.18s ease,
+			box-shadow 0.18s ease,
+			border-color 0.18s ease;
+	}
+
+	.proof-action-card:hover {
+		border-color: rgba(182, 140, 60, 0.72);
+		box-shadow: 0 18px 44px rgba(182, 140, 60, 0.18);
+		transform: translateY(-2px);
+	}
+
+	.proof-action-card__avatar {
+		position: relative;
+		z-index: 1;
+		grid-row: 1;
+		flex: 0 0 auto;
+		width: 46px;
+		aspect-ratio: 1;
+		border: 2px solid rgba(255, 255, 255, 0.96);
+		border-radius: 999px;
+		object-fit: cover;
+		box-shadow: 0 10px 22px rgba(92, 67, 24, 0.18);
+	}
+
+	.proof-action-card::after {
+		position: absolute;
+		top: -42px;
+		right: -36px;
+		width: 92px;
+		height: 92px;
+		content: "";
+		border-radius: 999px;
+		background: rgba(182, 140, 60, 0.22);
+	}
+
+	.proof-rank-card {
+		position: relative;
+		z-index: 1;
+		min-width: 0;
+	}
+
+	.proof-rank-card span,
+	.proof-rank-card b {
+		position: relative;
+		z-index: 1;
+		display: block;
+	}
+
+	.proof-rank-card small {
+		color: var(--primary);
+		font-size: 0.62rem;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+		line-height: 1.1;
+	}
+
+	.proof-rank-card strong {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.34rem;
+		align-items: center;
+		margin-top: 0.22rem;
+		color: var(--effect-ink);
+		font-size: 0.92rem;
+		font-weight: 950;
+		line-height: 1.15;
+	}
+
+	.proof-rank-card em {
+		display: inline-flex;
+		width: fit-content;
+		border-radius: 999px;
+		background: linear-gradient(135deg, #b68c3c, #7c5c12);
+		padding: 0.22rem 0.5rem;
+		color: #ffffff;
+		font-size: 0.62rem;
+		font-style: normal;
+		font-weight: 900;
+		line-height: 1;
+		white-space: nowrap;
+		box-shadow: 0 8px 16px rgba(123, 88, 7, 0.16);
+	}
+
+	.proof-action-card__button {
+		position: relative;
+		grid-column: 1 / -1;
+		z-index: 2;
+		display: inline-flex;
+		justify-content: center;
+		width: 100%;
+		margin-top: 0;
+		border: 1px solid rgba(182, 140, 60, 0.28);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 0.5rem 0.72rem;
+		color: var(--primary);
+		font-size: 0.72rem;
+		font-weight: 900;
+		line-height: 1;
+		white-space: nowrap;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+	}
+
+	@media (max-width: 1180px) {
+		.proof-compact-row {
+			grid-template-columns: minmax(0, 1fr) minmax(280px, 0.86fr);
+			align-items: center;
+		}
+
+		.proof-compact-stats {
+			grid-column: 1 / -1;
+			grid-row: 2;
+		}
+
+		.proof-action-card {
+			min-height: 96px;
+		}
 	}
 
 	.home-what-panel,
@@ -1605,6 +2046,382 @@ const faqLd = {
 		z-index: 1;
 	}
 
+	.home-decision-panel .section-copy {
+		max-width: 1000px;
+		margin-bottom: clamp(2rem, 4vw, 3rem);
+	}
+
+	.decision-map {
+		display: grid;
+		grid-template-columns: minmax(210px, 0.86fr) minmax(320px, 1.08fr) minmax(300px, 1.16fr);
+		gap: clamp(1rem, 2vw, 1.4rem);
+		align-items: start;
+		border: 1px solid var(--outline-variant);
+		border-radius: 2.4rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(252, 248, 249, 0.86)),
+			repeating-linear-gradient(90deg, rgba(182, 140, 60, 0.06) 0 1px, transparent 1px 42px),
+			repeating-linear-gradient(0deg, rgba(182, 140, 60, 0.05) 0 1px, transparent 1px 42px);
+		padding: clamp(1.1rem, 2.6vw, 2rem);
+		box-shadow: 0 24px 70px rgba(11, 11, 12, 0.07);
+	}
+
+	.decision-map__column,
+	.decision-map__decision {
+		display: grid;
+		gap: 0.95rem;
+		align-content: stretch;
+	}
+
+	.decision-map__column {
+		grid-template-rows: auto;
+	}
+
+	.decision-map__column--work {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-rows: auto;
+	}
+
+	.decision-map__column--work p {
+		grid-column: 1 / -1;
+	}
+
+	.decision-map__column p {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		column-gap: 0.85rem;
+		row-gap: 0.16rem;
+		margin: 0 0 0.1rem;
+		border: 1px solid rgba(182, 140, 60, 0.55);
+		border-radius: 1.35rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 245, 226, 0.9)),
+			#ffffff;
+		padding: 0.95rem 1rem;
+		color: var(--effect-ink);
+		box-shadow: 0 14px 34px rgba(123, 88, 7, 0.08);
+	}
+
+	.decision-map__column p :global(svg) {
+		grid-row: span 2;
+		display: grid;
+		width: 3rem;
+		height: 3rem;
+		place-items: center;
+		border-radius: 1rem;
+		background: var(--primary-container);
+		color: #fff;
+		padding: 0.58rem;
+		font-size: 1.8rem;
+	}
+
+	.decision-map__column p b {
+		color: var(--effect-ink);
+		font-size: clamp(1.1rem, 1.55vw, 1.32rem);
+		font-weight: 950;
+		line-height: 1.2;
+	}
+
+	.decision-map__column p small {
+		color: var(--on-surface-variant);
+		font-size: 0.78rem;
+		font-weight: 760;
+		line-height: 1.35;
+	}
+
+	.decision-map__column span {
+		display: grid;
+		grid-template-columns: 1fr;
+		min-height: 6.35rem;
+		align-items: center;
+		align-content: center;
+		justify-items: start;
+		gap: 0.48rem;
+		border: 1px solid rgba(210, 197, 178, 0.86);
+		border-radius: 1.35rem;
+		background: #ffffff;
+		padding: 1rem;
+		color: var(--effect-ink);
+		font-size: clamp(1rem, 1.32vw, 1.12rem);
+		font-weight: 900;
+		line-height: 1.35;
+		box-shadow: 0 12px 30px rgba(11, 11, 12, 0.045);
+	}
+
+	.decision-map__column span :global(svg) {
+		display: grid;
+		width: 2.85rem;
+		height: 2.85rem;
+		place-items: center;
+		border-radius: 1rem;
+		background: rgba(182, 140, 60, 0.12);
+		color: var(--primary);
+		padding: 0.58rem;
+		font-size: 1.72rem;
+	}
+
+	.decision-map__column span b {
+		display: block;
+		color: var(--effect-ink);
+		font-size: clamp(1rem, 1.3vw, 1.12rem);
+		font-weight: 950;
+		line-height: 1.15;
+	}
+
+	.decision-map__column span small {
+		display: block;
+		margin-top: 0.05rem;
+		color: var(--on-surface-variant);
+		font-size: 0.78rem;
+		font-weight: 760;
+		line-height: 1.42;
+	}
+
+	.decision-map__center {
+		position: relative;
+		display: grid;
+		grid-template-rows: auto auto auto;
+		align-self: start;
+		align-content: start;
+		align-items: stretch;
+		min-height: auto;
+		gap: 0.9rem;
+		border: 1px solid rgba(182, 140, 60, 0.55);
+		border-radius: 2rem;
+		background: radial-gradient(circle at 50% 50%, rgba(239, 191, 106, 0.2), rgba(255, 255, 255, 0.88) 58%);
+		overflow: hidden;
+		padding: clamp(1rem, 2vw, 1.35rem);
+	}
+
+	.decision-map__memory-ring {
+		position: absolute;
+		inset: 1.2rem;
+	}
+
+	.decision-map__memory-ring span {
+		position: absolute;
+		border: 1px solid rgba(210, 197, 178, 0.9);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.94);
+		padding: 0.75rem 1rem;
+		color: var(--on-surface-variant);
+		font-size: 0.86rem;
+		font-weight: 900;
+		box-shadow: 0 10px 28px rgba(11, 11, 12, 0.055);
+	}
+
+	.decision-map__memory-ring span:nth-child(1) {
+		top: 0.6rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.decision-map__memory-ring span:nth-child(2) {
+		top: 48%;
+		left: 0;
+		transform: translateY(-50%);
+	}
+
+	.decision-map__memory-ring span:nth-child(3) {
+		right: 0;
+		bottom: 1rem;
+	}
+
+	.decision-map__core {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		justify-items: center;
+		align-self: start;
+		overflow: hidden;
+		border: 2px solid rgba(182, 140, 60, 0.82);
+		border-radius: 1.8rem;
+		background:
+			radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.82), rgba(255, 248, 232, 0.45) 45%, transparent 68%),
+			linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 245, 223, 0.9)),
+			#ffffff;
+		padding: 1.15rem 1.35rem 1.3rem;
+		text-align: center;
+		box-shadow:
+			inset 0 0 0 12px rgba(239, 191, 106, 0.11),
+			0 26px 66px rgba(123, 88, 7, 0.2);
+	}
+
+	.decision-map__core::before {
+		position: absolute;
+		inset: -42% 18% auto;
+		height: 7rem;
+		content: "";
+		border-radius: 999px;
+		background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(239, 191, 106, 0.18), transparent 70%);
+	}
+
+	.decision-map__memory-stack {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		gap: 0.55rem;
+		align-self: start;
+	}
+
+	.decision-map__memory-stack div {
+		display: grid;
+		grid-template-columns: minmax(96px, auto) 1fr;
+		align-items: center;
+		gap: 0.75rem;
+		border: 1px solid rgba(210, 197, 178, 0.88);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.92);
+		padding: 0.58rem 0.78rem;
+		box-shadow: 0 10px 28px rgba(11, 11, 12, 0.055);
+	}
+
+	.decision-map__memory-stack strong {
+		color: var(--primary);
+		font-size: 0.86rem;
+		font-weight: 950;
+		line-height: 1.2;
+	}
+
+	.decision-map__memory-stack span {
+		color: var(--on-surface-variant);
+		font-size: 0.78rem;
+		font-weight: 780;
+		line-height: 1.3;
+	}
+
+	.decision-map__core-mark {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		width: clamp(3.8rem, 6vw, 4.8rem);
+		height: clamp(3.8rem, 6vw, 4.8rem);
+		place-items: center;
+		margin: -0.15rem 0 0.36rem;
+		border: 2px solid rgba(123, 88, 7, 0.58);
+		border-radius: 1.15rem;
+		background:
+			linear-gradient(90deg, transparent 48%, rgba(123, 88, 7, 0.2) 48% 52%, transparent 52%),
+			linear-gradient(0deg, transparent 48%, rgba(123, 88, 7, 0.18) 48% 52%, transparent 52%),
+			rgba(255, 255, 255, 0.78);
+		box-shadow: 0 12px 26px rgba(123, 88, 7, 0.12);
+	}
+
+	.decision-map__core-mark::before,
+	.decision-map__core-mark::after,
+	.decision-map__core-mark i {
+		position: absolute;
+		content: "";
+		border-radius: 999px;
+		background: var(--primary);
+		box-shadow: 0 0 0 5px rgba(182, 140, 60, 0.12);
+	}
+
+	.decision-map__core-mark::before {
+		width: 0.86rem;
+		height: 0.86rem;
+	}
+
+	.decision-map__core-mark::after {
+		width: 0.48rem;
+		height: 0.48rem;
+		top: 19%;
+		left: 22%;
+	}
+
+	.decision-map__core-mark i {
+		width: 0.42rem;
+		height: 0.42rem;
+	}
+
+	.decision-map__core-mark i:nth-child(1) { top: 20%; right: 22%; }
+	.decision-map__core-mark i:nth-child(2) { bottom: 21%; left: 24%; }
+	.decision-map__core-mark i:nth-child(3) { right: 19%; bottom: 25%; }
+	.decision-map__core-mark i:nth-child(4) { top: 48%; left: 18%; }
+	.decision-map__core-mark i:nth-child(5) { top: 48%; right: 18%; }
+
+	.decision-map__core-mark i:nth-child(4),
+	.decision-map__core-mark i:nth-child(5) {
+		background: #d4a94a;
+	}
+
+	.decision-map__core strong {
+		position: relative;
+		z-index: 1;
+		display: block;
+		color: var(--effect-ink);
+		font-size: clamp(1.28rem, 2vw, 1.72rem);
+		font-weight: 950;
+		line-height: 1.2;
+	}
+
+	.decision-map__core small {
+		position: relative;
+		z-index: 1;
+		display: block;
+		color: var(--on-surface-variant);
+		font-size: 0.92rem;
+		font-weight: 800;
+		line-height: 1.5;
+	}
+
+	.decision-map__flow-note {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		gap: 0.65rem;
+		margin: 0;
+		border: 1px solid rgba(182, 140, 60, 0.44);
+		border-radius: 1rem;
+		background: rgba(255, 245, 226, 0.9);
+		padding: 0.95rem 1rem;
+		color: var(--primary);
+		font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+		font-weight: 900;
+		line-height: 1.45;
+		align-self: end;
+	}
+
+	.decision-map__flow-note :global(svg) {
+		font-size: 1.75rem;
+	}
+
+	.decision-map__decision {
+		grid-column: 1 / -1;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		border: 1.5px solid rgba(182, 140, 60, 0.78);
+		border-radius: 1.6rem;
+		background:
+			linear-gradient(135deg, rgba(255, 246, 226, 0.96), rgba(255, 255, 255, 0.92)),
+			rgba(239, 191, 106, 0.14);
+		padding: clamp(1.15rem, 2.2vw, 1.55rem);
+		box-shadow: 0 18px 44px rgba(123, 88, 7, 0.09);
+	}
+
+	.decision-map__decision :global(svg) {
+		grid-row: span 2;
+		color: var(--primary);
+		font-size: 3rem;
+	}
+
+	.decision-map__decision strong {
+		color: var(--effect-ink);
+		font-size: clamp(1.2rem, 2vw, 1.6rem);
+		font-weight: 950;
+		line-height: 1.25;
+	}
+
+	.decision-map__decision span {
+		color: var(--on-surface-variant);
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.5;
+	}
+
 	.what-operating-board {
 		position: relative;
 		display: grid;
@@ -1612,157 +2429,190 @@ const faqLd = {
 	}
 
 	.what-operating-board::before {
-		position: absolute;
-		inset: -1rem 9% auto auto;
-		width: 14rem;
-		height: 14rem;
-		content: "";
-		border: 1px solid rgba(183, 140, 42, 0.18);
-		transform: rotate(10deg);
+		display: none;
 	}
 
-	.what-operating-board__photo {
-		position: relative;
-		min-height: 24rem;
-		overflow: hidden;
-		border: 1px solid rgba(23, 32, 51, 0.12);
-		border-radius: 0.375rem;
-		box-shadow: 0 34px 84px rgba(23, 32, 51, 0.14);
-	}
-
-	.what-operating-board__photo img {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transform: scale(1.04);
-	}
-
-	.what-operating-board__photo::after {
-		position: absolute;
-		inset: 0;
-		content: "";
-		background:
-			linear-gradient(180deg, rgba(16, 24, 32, 0.02), rgba(16, 24, 32, 0.72)),
-			radial-gradient(circle at 70% 28%, rgba(183, 140, 42, 0.26), transparent 34%);
-	}
-
-	.what-operating-board__photo div {
-		position: absolute;
-		z-index: 1;
-		right: 1.25rem;
-		bottom: 1.25rem;
-		left: 1.25rem;
-		border-radius: 0.375rem;
-		background: rgba(255, 255, 255, 0.14);
-		padding: 1rem;
-		color: #fff;
-		backdrop-filter: blur(14px);
-	}
-
-	.what-operating-board__photo span {
-		display: block;
-		color: rgba(255, 255, 255, 0.66);
-		font-size: 0.72rem;
-		font-weight: 900;
-		letter-spacing: 0.16em;
-	}
-
-	.what-operating-board__photo strong {
-		display: block;
-		margin-top: 0.3rem;
-		font-size: 1.1rem;
-		line-height: 1.35;
-	}
-
-	.what-flow {
+	.what-operating-map {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: minmax(0, 1fr) minmax(140px, 0.38fr) minmax(0, 1fr);
+		align-items: stretch;
+		gap: 1rem;
+		position: relative;
+		border: 1px solid var(--outline-variant);
+		border-radius: 2rem;
+		background: rgba(255, 255, 255, 0.88);
+		padding: clamp(1rem, 2vw, 1.4rem);
+		box-shadow: 0 18px 60px rgba(11, 11, 12, 0.06);
+	}
+
+	.what-operating-map::before {
+		position: absolute;
+		inset: 50% 1.8rem auto;
+		height: 1px;
+		content: "";
+		background: linear-gradient(90deg, transparent, rgba(182, 140, 60, 0.45), transparent);
+	}
+
+	.what-operating-map__lane {
+		display: grid;
 		gap: 0.75rem;
-		margin-top: -3rem;
-		padding-inline: 1rem;
 	}
 
-	.what-flow div {
-		position: relative;
-		z-index: 2;
-		display: grid;
-		gap: 0.45rem;
-		border: 1px solid rgba(23, 32, 51, 0.1);
-		border-radius: 0.375rem;
-		background: rgba(255, 255, 255, 0.92);
-		padding: 1rem;
+	.what-operating-map__lane > p {
+		margin: 0;
+		border-left: 4px solid var(--primary-container);
+		border-radius: 0.7rem;
+		background: var(--surface-container-low);
+		padding: 0.75rem 0.9rem;
 		color: var(--effect-ink);
-		box-shadow: 0 18px 44px rgba(23, 32, 51, 0.12);
+		font-size: 0.86rem;
+		font-weight: 950;
+		letter-spacing: 0.02em;
 	}
 
-	.what-flow :global(svg) {
+	.what-operating-map__node {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		column-gap: 0.8rem;
+		row-gap: 0.25rem;
+		min-height: 5.7rem;
+		border: 1px solid rgba(210, 197, 178, 0.82);
+		border-radius: 1.25rem;
+		background: #fff;
+		padding: 1rem;
+		box-shadow: 0 10px 34px rgba(11, 11, 12, 0.045);
+	}
+
+	.what-operating-map__node :global(svg) {
+		grid-row: span 2;
 		color: var(--primary);
+		font-size: 2rem;
 	}
 
-	.what-flow strong,
-	.what-flow span {
+	.what-operating-map__node strong {
+		color: var(--effect-ink);
+		font-size: 1rem;
+		font-weight: 950;
+		line-height: 1.35;
+	}
+
+	.what-operating-map__node span {
+		color: var(--on-surface-variant);
+		font-size: 0.78rem;
+		font-weight: 760;
+		line-height: 1.45;
+	}
+
+	.what-operating-map__node.is-result {
+		border-color: rgba(182, 140, 60, 0.58);
+		background: rgba(255, 245, 226, 0.85);
+	}
+
+	.what-operating-map__arrow {
+		color: var(--primary);
+		text-align: center;
+		font-size: 1.25rem;
+		font-weight: 950;
+		line-height: 1;
+	}
+
+	.what-operating-map__center {
+		display: grid;
+		align-content: center;
+		gap: 0.75rem;
+	}
+
+	.what-operating-map__center div {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		justify-items: center;
+		border: 1px solid rgba(182, 140, 60, 0.7);
+		border-radius: 1.25rem;
+		background: #fff;
+		padding: 1rem 0.8rem;
+		text-align: center;
+		box-shadow: 0 12px 34px rgba(123, 88, 7, 0.08);
+	}
+
+	.what-operating-map__center :global(svg) {
+		color: var(--primary);
+		font-size: 2rem;
+	}
+
+	.what-operating-map__center strong,
+	.what-operating-map__center span {
 		display: block;
 	}
 
-	.what-flow strong {
+	.what-operating-map__center strong {
+		margin-top: 0.35rem;
 		font-size: 1rem;
+		font-weight: 950;
 	}
 
-	.what-flow span {
-		color: rgba(23, 32, 51, 0.58);
-		font-size: 0.75rem;
-		font-weight: 800;
-		line-height: 1.35;
+	.what-operating-map__center span {
+		margin-top: 0.35rem;
+		color: var(--on-surface-variant);
+		font-size: 0.72rem;
+		font-weight: 760;
+		line-height: 1.45;
+	}
+
+	.what-operating-map__center i {
+		display: block;
+		width: 1px;
+		height: 2.4rem;
+		margin: 0 auto;
+		background: rgba(182, 140, 60, 0.55);
 	}
 
 	.home-issues-panel {
 		position: relative;
-		background:
-			linear-gradient(180deg, #fff, rgba(238, 245, 243, 0.72)),
-			#fff;
+		background: var(--surface);
 	}
 
 	.issue-command-card {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 0.75rem;
-		border: 1px solid rgba(23, 32, 51, 0.1);
-		border-radius: 0.375rem;
-		background: #101820;
+		gap: 1rem;
+		border: 1px solid var(--outline-variant);
+		border-radius: 2rem;
+		background: var(--surface-container-lowest);
 		padding: 1rem;
-		color: #fff;
-		box-shadow: 0 28px 70px rgba(23, 32, 51, 0.16);
+		color: var(--on-surface);
+		box-shadow: 0 10px 40px rgba(11, 11, 12, 0.04);
 	}
 
 	.issue-command-card div,
 	.issue-command-card a {
-		border-radius: 0.375rem;
-		background: rgba(255, 255, 255, 0.1);
-		padding: 1rem;
+		border: 1px solid rgba(210, 197, 178, 0.75);
+		border-radius: 999px;
+		background: var(--surface-container-low);
+		padding: 1rem 1.2rem;
 	}
 
 	.issue-command-card span {
 		display: block;
-		color: rgba(232, 214, 168, 0.86);
-		font-size: 0.72rem;
+		color: var(--primary);
+		font-size: 0.78rem;
 		font-weight: 900;
-		letter-spacing: 0.12em;
+		letter-spacing: 0;
 	}
 
 	.issue-command-card strong {
 		display: block;
-		margin-top: 0.25rem;
-		font-size: 0.9rem;
+		margin-top: 0.3rem;
+		font-size: 0.95rem;
 		line-height: 1.35;
 	}
 
 	.issue-command-card a {
 		display: grid;
 		place-items: center;
-		background: #fff;
-		color: #101820;
+		background: var(--primary-container);
+		color: var(--on-primary-container);
 		font-weight: 900;
 		text-align: center;
 	}
@@ -1816,23 +2666,23 @@ const faqLd = {
 
 	.case-showcase-stage {
 		display: grid;
-		gap: 1rem;
+		gap: 1.25rem;
 	}
 
 	.case-rich-card {
 		display: grid;
-		gap: 1rem;
-		border: 1px solid rgba(23, 32, 51, 0.1);
-		border-radius: 0.375rem;
-		background: rgba(255, 255, 255, 0.86);
-		padding: 1.2rem;
-		box-shadow: 0 22px 60px rgba(23, 32, 51, 0.1);
+		gap: 1.35rem;
+		border: 1px solid var(--outline-variant);
+		border-radius: 2rem;
+		background: var(--surface-container-lowest);
+		padding: clamp(1.5rem, 2.4vw, 2.25rem);
+		box-shadow: 0 10px 40px rgba(11, 11, 12, 0.04);
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.case-rich-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 30px 78px rgba(23, 32, 51, 0.14);
+		transform: translateY(-2px);
+		box-shadow: 0 18px 48px rgba(11, 11, 12, 0.08);
 	}
 
 	.case-rich-card__top {
@@ -1844,14 +2694,14 @@ const faqLd = {
 	}
 
 	.case-rich-card__top span {
-		font-size: 0.74rem;
+		font-size: 0.78rem;
 		font-weight: 900;
-		letter-spacing: 0.14em;
+		letter-spacing: 0.08em;
 	}
 
 	.case-rich-card h3 {
-		color: var(--effect-ink);
-		font-size: 1.45rem;
+		color: var(--on-surface);
+		font-size: clamp(1.55rem, 2vw, 2.1rem);
 		font-weight: 900;
 		line-height: 1.3;
 	}
@@ -1864,9 +2714,10 @@ const faqLd = {
 	}
 
 	.case-before-after div {
-		border-radius: 0.375rem;
-		background: rgba(238, 245, 243, 0.9);
-		padding: 1rem;
+		border: 1px solid rgba(210, 197, 178, 0.55);
+		border-radius: 1rem;
+		background: var(--surface-container-low);
+		padding: 1.15rem;
 	}
 
 	.case-before-after span {
@@ -1880,8 +2731,8 @@ const faqLd = {
 	.case-before-after strong {
 		display: block;
 		margin-top: 0.35rem;
-		color: var(--effect-ink);
-		font-size: 0.88rem;
+		color: var(--on-surface);
+		font-size: 0.95rem;
 		line-height: 1.55;
 	}
 
@@ -3129,7 +3980,153 @@ const faqLd = {
 		}
 	}
 
+	@media (min-width: 768px) and (max-width: 1080px) {
+		.pricing-cards {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.pricing-card.is-secure {
+			grid-column: 1 / -1;
+		}
+
+		.pricing-flow {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-flow > :global(svg) {
+			justify-self: center;
+			transform: rotate(90deg);
+		}
+
+		.pricing-note {
+			align-items: stretch;
+			border-radius: 1.4rem;
+			flex-direction: column;
+			padding: 22px;
+		}
+	}
+
 	@media (max-width: 767px) {
+		.pricing-section {
+			padding-inline: 18px;
+		}
+
+		.pricing-support {
+			grid-template-columns: 1fr;
+			border-radius: 1.1rem;
+		}
+
+		.pricing-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-card {
+			grid-template-rows: none;
+		}
+
+		.pricing-card__badge {
+			position: static;
+			width: fit-content;
+			margin-bottom: 2px;
+		}
+
+		.pricing-flow {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-flow > :global(svg) {
+			justify-self: center;
+			transform: rotate(90deg);
+		}
+
+		.pricing-note {
+			align-items: stretch;
+			border-radius: 1.4rem;
+			flex-direction: column;
+			padding: 20px;
+		}
+
+		.pricing-note div {
+			flex-direction: column;
+		}
+
+		.pricing-note a {
+			width: 100%;
+		}
+
+		.lp-faq-section,
+		.contact-form-section {
+			padding-inline: 18px;
+		}
+
+		.lp-faq-section__header,
+		.contact-form-heading {
+			text-align: left;
+		}
+
+		.lp-faq-section__header p,
+		.contact-form-heading p {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		.lp-faq-item summary {
+			grid-template-columns: auto 1fr auto;
+			gap: 12px;
+			min-height: 70px;
+			padding: 18px;
+		}
+
+		.lp-faq-item summary span {
+			width: 34px;
+		}
+
+		.lp-faq-item p {
+			padding: 16px 18px 22px;
+			font-size: 15px;
+		}
+
+		.lp-faq-cta {
+			align-items: stretch;
+			flex-direction: column;
+			border-radius: 1.1rem;
+			padding: 18px;
+		}
+
+		.lp-faq-cta div {
+			flex-direction: column;
+		}
+
+		.lp-faq-cta a {
+			width: 100%;
+		}
+
+		.contact-form-heading__icon {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		.contact-trust-row {
+			justify-content: flex-start;
+		}
+
+		.contact-form-card {
+			border-radius: 1.1rem;
+			padding: 18px;
+		}
+
+		.contact-form-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.contact-form-grid__wide {
+			grid-column: auto;
+		}
+
+		.contact-form-grid textarea {
+			min-height: 150px;
+		}
+
 		.hero-lab__content {
 			max-width: 100vw;
 			min-height: auto;
@@ -3230,33 +4227,69 @@ const faqLd = {
 			grid-template-columns: 1fr;
 		}
 
+		.proof-compact-row {
+			grid-template-columns: 1fr;
+		}
+
+		.proof-compact-stats {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
 		.proof-stat-tile {
 			min-height: auto;
 		}
 
-		.what-operating-board::before {
-			display: none;
-		}
-
-		.what-operating-board__photo {
-			min-height: 17rem;
-		}
-
-		.what-operating-board__photo strong {
-			font-size: 0.98rem;
-			overflow-wrap: anywhere;
-			line-break: anywhere;
-		}
-
-		.what-flow,
+		.what-operating-map,
+		.decision-map,
 		.issue-command-card,
 		.case-before-after {
 			grid-template-columns: 1fr;
 		}
 
-		.what-flow {
-			margin-top: -1.5rem;
-			padding-inline: 0.75rem;
+		.decision-map__center {
+			grid-template-rows: auto auto auto;
+			min-height: auto;
+			align-content: start;
+		}
+
+		.decision-map__decision {
+			grid-template-columns: auto 1fr;
+		}
+
+		.decision-map__column {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-rows: none;
+			align-content: start;
+		}
+
+		.decision-map__column p {
+			grid-column: 1 / -1;
+		}
+
+		.decision-map__memory-ring span {
+			font-size: 0.74rem;
+			padding: 0.62rem 0.8rem;
+		}
+
+		.decision-map__memory-stack div {
+			grid-template-columns: 1fr;
+			gap: 0.2rem;
+			border-radius: 1rem;
+		}
+
+		.what-operating-map::before {
+			display: none;
+		}
+
+		.what-operating-map__center {
+			grid-template-columns: 1fr auto 1fr;
+			align-items: stretch;
+		}
+
+		.what-operating-map__center i {
+			width: 2.4rem;
+			height: 1px;
+			align-self: center;
 		}
 
 		.issue-card-rich {
@@ -3498,4 +4531,38 @@ const faqLd = {
 	.qa-bar-1 { background: #3d1414; }
 	.qa-bar-2 { background: #3d3714; }
 	.qa-bar-3 { background: #14351d; }
+
+	@media (max-width: 520px) {
+		.decision-map__column {
+			gap: 0.7rem;
+		}
+
+		.decision-map__column span {
+			min-height: 6.2rem;
+			border-radius: 1.05rem;
+			padding: 0.82rem;
+		}
+
+		.decision-map__column span :global(svg) {
+			width: 2.5rem;
+			height: 2.5rem;
+			border-radius: 0.85rem;
+			padding: 0.48rem;
+			font-size: 1.55rem;
+		}
+
+		.decision-map__column span b {
+			font-size: 0.94rem;
+		}
+
+		.decision-map__column span small {
+			font-size: 0.72rem;
+		}
+
+		.proof-compact-stats {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+	}
+
 </style>

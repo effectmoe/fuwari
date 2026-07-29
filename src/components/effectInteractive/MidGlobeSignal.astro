@@ -1,0 +1,239 @@
+---
+---
+
+<section class="mid-globe-signal" aria-labelledby="mid-globe-signal-title">
+	<div class="mid-globe-signal__inner">
+		<div class="mid-globe-signal__copy">
+			<p class="mid-globe-signal__eyebrow">AI SEARCH SIGNAL</p>
+			<h2 id="mid-globe-signal-title">AIから見える場所に、会社の情報を置く。</h2>
+			<p>
+				AI検索の時代は、Webサイトを公開するだけでは足りません。サービスページ、FAQ、実績、運営者情報、記事をAIが読み取り、根拠として扱える状態に整える必要があります。
+			</p>
+			<div class="mid-globe-signal__points">
+				<div>
+					<span>01</span>
+					<strong>AIが読む</strong>
+					<p>ページ構造・FAQ・出典・プロフィールを整理する。</p>
+				</div>
+				<div>
+					<span>02</span>
+					<strong>AIが引用する</strong>
+					<p>サービス内容と根拠を、回答に使いやすい形へ直す。</p>
+				</div>
+				<div>
+					<span>03</span>
+					<strong>人が相談する</strong>
+					<p>AI回答から無料診断・相談導線へ戻れる状態にする。</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="mid-globe-signal__visual" aria-hidden="true">
+			<canvas id="mid-globe-signal-canvas"></canvas>
+			<div class="mid-globe-signal__caption">
+				<span>LLMO / AI ACCESS</span>
+				<strong>AIが参照できる情報網へ</strong>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.mid-globe-signal {
+		--globe-bg: #fcf8f9;
+		--globe-ink: #050505;
+		--globe-muted: #5d6470;
+		--globe-line: rgba(5, 5, 5, 0.14);
+		--globe-accent: #b98a2e;
+		position: relative;
+		overflow: hidden;
+		border-block: 1px solid var(--globe-line);
+		background:
+			linear-gradient(90deg, rgba(5, 5, 5, 0.08) 1px, transparent 1px),
+			linear-gradient(180deg, rgba(5, 5, 5, 0.06) 1px, transparent 1px),
+			var(--globe-bg);
+		background-size: min(24vw, 280px) 100%, 100% 132px, auto;
+		color: var(--globe-ink);
+	}
+
+	.mid-globe-signal__inner {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.74fr) minmax(0, 1.12fr);
+		gap: clamp(36px, 5vw, 84px);
+		align-items: center;
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: clamp(72px, 8vw, 128px) clamp(20px, 5vw, 72px);
+	}
+
+	.mid-globe-signal__eyebrow {
+		display: inline-flex;
+		border-left: 4px solid #66717f;
+		background: rgba(255, 255, 255, 0.86);
+		padding: 10px 14px;
+		color: #20252b;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: clamp(0.9rem, 1vw, 1.05rem);
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		line-height: 1;
+	}
+
+	.mid-globe-signal h2 {
+		margin: 30px 0 0;
+		max-width: 680px;
+		color: var(--globe-ink);
+		font-size: clamp(2.8rem, 5.4vw, 5.8rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.04;
+	}
+
+	.mid-globe-signal__copy > p:not(.mid-globe-signal__eyebrow) {
+		margin: 28px 0 0;
+		max-width: 650px;
+		color: #20252b;
+		font-size: clamp(1.08rem, 1.38vw, 1.32rem);
+		font-weight: 650;
+		line-height: 1.85;
+	}
+
+	.mid-globe-signal__points {
+		display: grid;
+		gap: 14px;
+		margin-top: 34px;
+	}
+
+	.mid-globe-signal__points div {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 6px 16px;
+		border: 1px solid var(--globe-line);
+		background: rgba(255, 255, 255, 0.74);
+		padding: 18px 20px;
+	}
+
+	.mid-globe-signal__points span {
+		grid-row: span 2;
+		color: var(--globe-accent);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: 1.15rem;
+		font-weight: 900;
+	}
+
+	.mid-globe-signal__points strong {
+		color: var(--globe-ink);
+		font-size: 1.15rem;
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.mid-globe-signal__points p {
+		margin: 0;
+		color: var(--globe-muted);
+		font-size: 0.98rem;
+		font-weight: 650;
+		line-height: 1.65;
+	}
+
+	.mid-globe-signal__visual {
+		position: relative;
+		min-height: clamp(520px, 58vw, 760px);
+		overflow: hidden;
+		border: 2px solid rgba(5, 5, 5, 0.16);
+		background: #fcf8f9;
+		box-shadow: 0 28px 72px rgba(30, 24, 18, 0.1);
+	}
+
+	#mid-globe-signal-canvas {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		opacity: 0.92;
+	}
+
+	.mid-globe-signal__caption {
+		position: absolute;
+		right: clamp(18px, 3vw, 42px);
+		bottom: clamp(18px, 3vw, 42px);
+		display: grid;
+		gap: 8px;
+		max-width: min(330px, calc(100% - 36px));
+		border: 1px solid rgba(5, 5, 5, 0.18);
+		background: rgba(255, 255, 255, 0.86);
+		padding: 18px 20px;
+		color: var(--globe-ink);
+		backdrop-filter: blur(12px);
+	}
+
+	.mid-globe-signal__caption span {
+		color: rgba(5, 5, 5, 0.56);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: 0.84rem;
+		font-weight: 900;
+		letter-spacing: 0.12em;
+	}
+
+	.mid-globe-signal__caption strong {
+		color: var(--globe-ink);
+		font-size: 1.25rem;
+		font-weight: 900;
+		line-height: 1.45;
+	}
+
+	@media (max-width: 1023px) {
+		.mid-globe-signal__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.mid-globe-signal__visual {
+			min-height: 520px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.mid-globe-signal {
+			background-size: 50vw 100%, 100% 116px, auto;
+		}
+
+		.mid-globe-signal__inner {
+			padding: 64px 18px;
+		}
+
+		.mid-globe-signal h2 {
+			font-size: clamp(2.6rem, 13vw, 4rem);
+		}
+
+		.mid-globe-signal__visual {
+			min-height: 430px;
+		}
+	}
+</style>
+
+<script>
+	import { GlobeRenderer } from "./globe.ts";
+
+	const canvas = document.getElementById("mid-globe-signal-canvas") as HTMLCanvasElement | null;
+	let renderer: GlobeRenderer | null = null;
+
+	if (canvas) {
+		renderer = new GlobeRenderer(canvas, {
+			fontPx: 10,
+			lineH: 1.25,
+			rotSpeed: 0.0018,
+			globeRadius: 0.44,
+			colors: {
+				bg: "#fcf8f9",
+				grid: "#d2c5b2",
+				ocean: "#9f9b92",
+				coast: "#b98a2e",
+				land: "#383631",
+				dense: "#050505",
+			},
+		});
+	}
+
+	document.addEventListener("astro:before-swap", () => renderer?.destroy());
+</script>

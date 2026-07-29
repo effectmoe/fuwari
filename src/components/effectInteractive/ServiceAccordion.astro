@@ -1,0 +1,340 @@
+---
+const servicePanels = [
+	{
+		id: "01",
+		title: "AIアクセス分析",
+		description:
+			"ChatGPT、Claude、Perplexity などで自社がどう理解され、どのページが引用されやすいかを継続的に確認します。",
+		tags: ["AI検索", "流入分析", "引用改善"],
+		image: "/lp/generated/bright-ai-search-analysis.png",
+		href: "/ai-traffic-report/",
+	},
+	{
+		id: "02",
+		title: "AIセントラル",
+		description:
+			"記憶を持ったAIをシステムの中枢に据え、社内資料・顧客情報・対応履歴を参照できる業務AI基盤を構築します。",
+		tags: ["記憶基盤", "ローカルAI", "守秘設計"],
+		image: "/lp/generated/bright-workflow-knowledge-design.png",
+		href: "/ai-central/",
+	},
+	{
+		id: "03",
+		title: "無料LLMO診断",
+		description:
+			"robots、llms.txt、構造化データ、見出し、内部リンクを確認し、AIに読まれる入口が整っているかを切り分けます。",
+		tags: ["無料診断", "ページ単位", "初期判断"],
+		image: "/lp/generated/bright-ai-search-analysis.png",
+		href: "/diagnosis/",
+	},
+	{
+		id: "04",
+		title: "AI実装伴走",
+		description:
+			"講座、設計、実装、運用改善までを一続きで扱い、AI検索と業務AIを分断せずに事業側へ接続します。",
+		tags: ["講座", "実装支援", "マーケティング"],
+		image: "/lp/generated/bright-time-saving-ai-workflow.png",
+		href: "/author/",
+	},
+];
+---
+
+<section class="service-accordion" aria-labelledby="service-accordion-title">
+	<div class="service-accordion__heading">
+		<p class="service-accordion__label">OUR SERVICES</p>
+		<h2 id="service-accordion-title">AI Solutions</h2>
+		<p>
+			AIに見つけられる外側と、AIが業務で働く内側を分けて整理し、無料診断から必要な支援へ進めます。
+		</p>
+	</div>
+
+	<div class="service-accordion__track" data-service-accordion>
+		{servicePanels.map((panel, index) => (
+			<a
+				href={panel.href}
+				class:list={["service-accordion__panel", { "is-active": index === 1 }]}
+				data-service-panel
+			>
+				<span class="service-accordion__number">{panel.id}</span>
+				<span class="service-accordion__collapsed-title">{panel.title}</span>
+				<div class="service-accordion__content">
+					<div class="service-accordion__image">
+						<img src={panel.image} alt={`${panel.title}のイメージ`} loading="lazy" decoding="async" />
+					</div>
+					<h3>{panel.title}</h3>
+					<p class="service-accordion__description">{panel.description}</p>
+					<div>
+						<p class="service-accordion__include">Include:</p>
+						<p class="service-accordion__tags">{panel.tags.join(" ・ ")}</p>
+					</div>
+					<span class="service-accordion__link">詳しく見る →</span>
+				</div>
+			</a>
+		))}
+	</div>
+</section>
+
+<script>
+	const panels = document.querySelectorAll<HTMLElement>("[data-service-panel]");
+	const isMobile = () => window.innerWidth < 1024;
+
+	function activate(index: number) {
+		panels.forEach((panel, i) => panel.classList.toggle("is-active", i === index));
+	}
+
+	panels.forEach((panel, index) => {
+		panel.addEventListener("mouseenter", () => {
+			if (!isMobile()) activate(index);
+		});
+		panel.addEventListener("focus", () => activate(index));
+		panel.addEventListener("click", () => {
+			if (isMobile() && !panel.classList.contains("is-active")) {
+				activate(index);
+			}
+		});
+	});
+</script>
+
+<style>
+	.service-accordion {
+		position: relative;
+		margin-top: 56px;
+		padding: clamp(56px, 7vw, 96px) 0 0;
+		border-top: 1px solid rgba(5, 5, 5, 0.12);
+		background:
+			linear-gradient(90deg, rgba(5, 5, 5, 0.08) 1px, transparent 1px) 0 0 / 25% 100%,
+			transparent;
+	}
+
+	.service-accordion__heading {
+		display: grid;
+		justify-items: center;
+		gap: 22px;
+		margin: 0 auto clamp(44px, 5vw, 72px);
+		text-align: center;
+	}
+
+	.service-accordion__label {
+		display: inline-flex;
+		align-items: center;
+		border-left: 5px solid #64748b;
+		background: rgba(255, 255, 255, 0.8);
+		padding: 9px 14px;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(0.94rem, 1vw, 1.08rem);
+		font-weight: 900;
+		line-height: 1.2;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.service-accordion h2 {
+		margin: 0;
+		font-size: clamp(4rem, 9vw, 8rem);
+		font-weight: 950;
+		line-height: 0.9;
+		letter-spacing: 0;
+		color: #050505;
+	}
+
+	.service-accordion__heading > p:last-child {
+		max-width: 980px;
+		margin: 0;
+		font-size: clamp(1.22rem, 1.8vw, 1.72rem);
+		font-weight: 650;
+		line-height: 1.75;
+		color: rgba(5, 5, 5, 0.78);
+	}
+
+	.service-accordion__track {
+		display: flex;
+		width: 100%;
+		height: clamp(620px, 56vw, 760px);
+		gap: 2px;
+		padding: 2px;
+		background: rgba(5, 5, 5, 0.16);
+		border: 1px solid rgba(5, 5, 5, 0.14);
+	}
+
+	.service-accordion__panel {
+		position: relative;
+		min-width: 0;
+		flex: 1;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.9) !important;
+		color: #050505;
+		text-decoration: none;
+		transition: flex 0.62s cubic-bezier(0.34, 1.05, 0.64, 1), background 0.22s ease;
+		will-change: flex;
+	}
+
+	.service-accordion__panel:hover,
+	.service-accordion__panel:focus-visible {
+		background: #fff !important;
+	}
+
+	.service-accordion__panel.is-active {
+		flex: 5;
+	}
+
+	.service-accordion__number {
+		position: absolute;
+		left: clamp(20px, 2.2vw, 34px);
+		top: clamp(20px, 2.2vw, 34px);
+		z-index: 3;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+		font-weight: 900;
+		letter-spacing: 0.03em;
+	}
+
+	.service-accordion__collapsed-title {
+		position: absolute;
+		left: clamp(20px, 2.2vw, 34px);
+		right: clamp(20px, 2.2vw, 34px);
+		bottom: clamp(22px, 2.2vw, 36px);
+		z-index: 3;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(1.35rem, 2vw, 2rem);
+		font-weight: 900;
+		letter-spacing: 0.06em;
+		transition: opacity 0.18s ease;
+	}
+
+	.service-accordion__panel.is-active .service-accordion__collapsed-title {
+		opacity: 0;
+	}
+
+	.service-accordion__content {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		padding: clamp(72px, 5vw, 96px) clamp(26px, 3.2vw, 54px) clamp(28px, 3vw, 48px);
+		opacity: 0;
+		transform: translateY(10px);
+		pointer-events: none;
+		transition: opacity 0.18s ease, transform 0.18s ease;
+	}
+
+	.service-accordion__panel.is-active .service-accordion__content {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+		transition: opacity 0.36s ease 0.18s, transform 0.36s ease 0.18s;
+	}
+
+	.service-accordion__image {
+		min-height: 0;
+		flex: 1;
+		overflow: hidden;
+		border-radius: 12px;
+		border: 1px solid rgba(5, 5, 5, 0.1);
+		background: #f3f0ea;
+	}
+
+	.service-accordion__image img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.service-accordion h3 {
+		margin: clamp(22px, 2vw, 32px) 0 0;
+		font-size: clamp(2.25rem, 4vw, 4.2rem);
+		font-weight: 950;
+		line-height: 1;
+		letter-spacing: 0;
+	}
+
+	.service-accordion__description {
+		max-width: 780px;
+		margin: 18px 0 0;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(1.08rem, 1.5vw, 1.45rem);
+		font-weight: 700;
+		line-height: 1.75;
+		color: rgba(5, 5, 5, 0.78);
+	}
+
+	.service-accordion__include {
+		margin: 24px 0 0;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(1.05rem, 1.3vw, 1.3rem);
+		font-weight: 900;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #64748b;
+	}
+
+	.service-accordion__tags {
+		margin: 8px 0 0;
+		font-family: "Courier New", Courier, monospace;
+		font-size: clamp(1.02rem, 1.35vw, 1.3rem);
+		font-weight: 750;
+		line-height: 1.7;
+		color: rgba(5, 5, 5, 0.68);
+	}
+
+	.service-accordion__link {
+		margin-top: 24px;
+		display: inline-flex;
+		width: max-content;
+		border-bottom: 2px solid rgba(5, 5, 5, 0.22);
+		padding-bottom: 5px;
+		font-size: 1.05rem;
+		font-weight: 900;
+	}
+
+	@media (max-width: 1023px) {
+		.service-accordion {
+			background:
+				linear-gradient(90deg, rgba(5, 5, 5, 0.08) 1px, transparent 1px) 0 0 / 50% 100%,
+				transparent;
+		}
+
+		.service-accordion__heading {
+			justify-items: start;
+			text-align: left;
+		}
+
+		.service-accordion h2 {
+			font-size: clamp(3.4rem, 17vw, 5.8rem);
+		}
+
+		.service-accordion__track {
+			flex-direction: column;
+			height: auto;
+		}
+
+		.service-accordion__panel {
+			flex: none;
+			height: 86px;
+			transition: height 0.42s ease;
+		}
+
+		.service-accordion__panel.is-active {
+			height: 620px;
+		}
+
+		.service-accordion__collapsed-title {
+			left: 86px;
+			top: 50%;
+			bottom: auto;
+			transform: translateY(-50%);
+		}
+
+		.service-accordion__content {
+			padding: 82px 22px 24px;
+		}
+
+		.service-accordion__image {
+			max-height: 250px;
+		}
+	}
+</style>
