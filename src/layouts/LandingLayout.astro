@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import { Icon } from "astro-icon/components";
+import Search from "../components/Search.svelte";
 
 interface Props {
 	title?: string;
@@ -9,53 +10,152 @@ interface Props {
 }
 
 const { title, description, ogImage } = Astro.props;
+const currentPath = Astro.url.pathname;
+const brandRoutes = [
+	{ match: (path: string) => path.startsWith("/aicrawl"), label: "AI CRAWL", href: "/aicrawl/" },
+	{ match: (path: string) => path.startsWith("/ai-agent-course"), label: "AI COURSE", href: "/ai-agent-course/" },
+	{ match: (path: string) => path.startsWith("/blog") || path.startsWith("/posts"), label: "BLOG", href: "/blog/" },
+	{ match: (path: string) => path.startsWith("/company"), label: "COMPANY", href: "/company/" },
+	{ match: (path: string) => path.startsWith("/changelog"), label: "CHANGELOG", href: "/changelog/" },
+	{ match: (path: string) => path.startsWith("/structurepedia"), label: "STRUCTUREPEDIA", href: "/structurepedia/" },
+	{ match: (path: string) => path.startsWith("/diagnosis"), label: "DIAGNOSIS", href: "/diagnosis/" },
+];
+const activeBrandRoute = brandRoutes.find((route) => route.match(currentPath));
+const headerBrand = activeBrandRoute?.label ?? "AI CENTRAL";
+const headerBrandHref = activeBrandRoute?.href ?? "/";
+const headerBrandAria = `${headerBrand} by effect.moe home`;
+
+const serviceNavGroups = [
+	{
+		label: "AI セントラル",
+		href: "/",
+		items: [
+			{ href: "/", label: "トップ" },
+			{ href: "/#proof", label: "実績・信頼" },
+			{ href: "/#decision", label: "記憶と意思決定" },
+			{ href: "/#inventory", label: "業務棚卸し" },
+			{ href: "/#boundary", label: "丸投げしない設計" },
+			{ href: "/#secure", label: "ローカルLLM" },
+			{ href: "/#ai-central", label: "ツール連携" },
+			{ href: "/#time-saving", label: "時間削減" },
+			{ href: "/#pricing", label: "料金" },
+			{ href: "/#faq", label: "FAQ" },
+			{ href: "/diagnosis/", label: "無料診断" },
+			{ href: "/#contact", label: "無料相談" },
+		],
+	},
+	{
+		label: "AI クロール",
+		href: "/aicrawl/",
+		items: [
+			{ href: "/aicrawl/", label: "トップ" },
+			{ href: "/aicrawl/#overview", label: "AI流入分析" },
+			{ href: "/aicrawl/#checks", label: "診断内容" },
+			{ href: "/aicrawl/#signals", label: "流入の判別" },
+			{ href: "/aicrawl/#central-bridge", label: "AIセントラル連携" },
+			{ href: "/aicrawl/#output", label: "レポート" },
+			{ href: "/aicrawl/#case", label: "改善事例" },
+			{ href: "/aicrawl/#operator", label: "運用者" },
+			{ href: "/aicrawl/#pricing", label: "料金" },
+			{ href: "/aicrawl/#faq", label: "FAQ" },
+			{ href: "/?inquiry=diagnosis&service=aicrawl#contact", label: "無料診断" },
+		],
+	},
+	{
+		label: "AI講座",
+		href: "/ai-agent-course/",
+		items: [
+			{ href: "/ai-agent-course/", label: "トップ" },
+			{ href: "/ai-agent-course/#newsletter", label: "メルマガ" },
+			{ href: "/ai-agent-course/#agent-shift", label: "エージェント化" },
+			{ href: "/ai-agent-course/#outputs", label: "作れるもの" },
+			{ href: "/ai-agent-course/#curriculum", label: "カリキュラム" },
+			{ href: "/ai-agent-course/#price", label: "料金・助成金" },
+			{ href: "/ai-agent-course/#instructor", label: "講師" },
+			{ href: "/ai-agent-course/#faq", label: "FAQ" },
+			{ href: "/ai-agent-course/#contact", label: "無料相談" },
+		],
+	},
+];
 
 const navItems = [
-	{ href: "/#ai-central", label: "AIセントラル" },
-	{ href: "/#pricing", label: "料金" },
-	{ href: "/ai-traffic-report/", label: "AI検索支援" },
 	{ href: "/blog/", label: "ブログ" },
-	{ href: "/#faq", label: "FAQ" },
+	{ href: "/changelog/", label: "変更履歴" },
+	{ href: "/company/", label: "会社概要" },
 ];
 ---
 
 <Layout title={title} description={description} ogImage={ogImage}>
+	<Fragment slot="head">
+		<slot name="head" />
+	</Fragment>
 	<div class="min-h-screen bg-[var(--page-bg)] text-90 effect-shell">
 		<header class="effect-landing-header">
 			<div class="effect-landing-header__inner">
-				<a href="/" class="effect-landing-header__brand" aria-label="effect.moe home">
-					effect.moe
+				<a href={headerBrandHref} class="effect-landing-header__brand" aria-label={headerBrandAria}>
+					<span>{headerBrand}</span>
+					<small>by effect.moe</small>
 				</a>
 				<nav class="effect-landing-header__nav" aria-label="Landing navigation">
+					<a href="/" class="effect-landing-header__nav-link">ホーム</a>
+					{serviceNavGroups.map((group) => (
+						<div class="effect-landing-header__nav-group">
+							<a href={group.href} class="effect-landing-header__nav-parent">
+								{group.label}
+								<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+							</a>
+							<div class="effect-landing-header__dropdown">
+								{group.items.map((item) => (
+									<a href={item.href}>{item.label}</a>
+								))}
+							</div>
+						</div>
+					))}
 					{navItems.map((item) => (
-						<a href={item.href}>{item.label}</a>
+						<a href={item.href} class="effect-landing-header__nav-link">{item.label}</a>
 					))}
 				</nav>
-				<div class="effect-landing-header__actions">
-					<a href="/diagnosis/">無料診断</a>
-				</div>
-				<details class="effect-landing-header__menu">
-					<summary aria-label="メニューを開く">
-						<Icon name="material-symbols:menu-rounded" class="effect-landing-header__menu-open" />
-						<Icon name="material-symbols:close-rounded" class="effect-landing-header__menu-close" />
-					</summary>
-					<div class="effect-landing-header__panel">
-						{navItems.map((item) => (
-							<a href={item.href}>
-								{item.label}
+				<div class="effect-landing-header__tools">
+					<Search client:only="svelte" />
+					<details class="effect-landing-header__menu">
+						<summary aria-label="メニューを開く">
+							<Icon name="material-symbols:menu-rounded" class="effect-landing-header__menu-open" />
+							<Icon name="material-symbols:close-rounded" class="effect-landing-header__menu-close" />
+						</summary>
+						<div class="effect-landing-header__panel">
+							<a href="/">
+								ホーム
 								<Icon name="material-symbols:chevron-right-rounded" />
 							</a>
-						))}
-						<a href="/diagnosis/" class="effect-landing-header__panel-cta">
-							<Icon name="material-symbols:manage-search" />
-							無料診断
-						</a>
-					</div>
-				</details>
+							{serviceNavGroups.map((group) => (
+								<section class="effect-landing-header__panel-group">
+									<a href={group.href} class="effect-landing-header__panel-heading">
+										{group.label}
+										<Icon name="material-symbols:chevron-right-rounded" />
+									</a>
+									<div>
+										{group.items.map((item) => (
+											<a href={item.href}>
+												{item.label}
+												<Icon name="material-symbols:chevron-right-rounded" />
+											</a>
+										))}
+									</div>
+								</section>
+							))}
+							{navItems.map((item) => (
+								<a href={item.href}>
+									{item.label}
+									<Icon name="material-symbols:chevron-right-rounded" />
+								</a>
+							))}
+						</div>
+					</details>
+				</div>
 			</div>
 		</header>
 
-		<main>
+		<main data-pagefind-body>
 			<slot />
 		</main>
 
@@ -65,23 +165,52 @@ const navItems = [
 					<div>
 						<a href="/" class="effect-landing-footer__brand">effect.moe</a>
 						<p>
-							シュ コウメイが構築・伴走する、AIセントラル設計とAI検索支援の商用サイトです。契約主体は株式会社EFFECTです。
+							シュ コウメイが構築・伴走する、AIセントラル設計の商用サイトです。契約主体は株式会社EFFECTです。
 						</p>
-						<span>お問い合わせ: info@effect.moe</span>
+						<span>お問い合わせはフォームから受け付けています。</span>
 					</div>
-					<nav aria-label="Footer services">
-						<strong>Services</strong>
-						<a href="/#ai-central">AIセントラル</a>
+					<nav aria-label="Footer AI Central links">
+						<strong>AI セントラル</strong>
+						<a href="/">トップ</a>
+						<a href="/#decision">記憶と意思決定</a>
+						<a href="/#inventory">業務棚卸し</a>
+						<a href="/#secure">ローカルLLM</a>
+						<a href="/#ai-central">ツール連携</a>
+						<a href="/#time-saving">時間削減</a>
 						<a href="/#pricing">料金</a>
-						<a href="/ai-traffic-report/">AI検索支援</a>
+						<a href="/#faq">FAQ</a>
 						<a href="/diagnosis/">無料診断</a>
 					</nav>
-					<nav aria-label="Footer site links">
-						<strong>Site</strong>
-						<a href="/author/">シュ コウメイ</a>
-						<a href="/company/">会社概要</a>
+					<nav aria-label="Footer AI Crawl links">
+						<strong>AI クロール</strong>
+						<a href="/aicrawl/">トップ</a>
+						<a href="/aicrawl/#overview">AI流入分析</a>
+						<a href="/aicrawl/#checks">診断内容</a>
+						<a href="/aicrawl/#signals">流入の判別</a>
+						<a href="/aicrawl/#output">レポート</a>
+						<a href="/aicrawl/#operator">運用者</a>
+						<a href="/aicrawl/#pricing">料金</a>
+						<a href="/aicrawl/#faq">FAQ</a>
+						<a href="/?inquiry=diagnosis&service=aicrawl#contact">無料診断</a>
+					</nav>
+					<nav aria-label="Footer AI course links">
+						<strong>AI講座</strong>
+						<a href="/ai-agent-course/">トップ</a>
+						<a href="/ai-agent-course/#agent-shift">エージェント化</a>
+						<a href="/ai-agent-course/#outputs">作れるもの</a>
+						<a href="/ai-agent-course/#curriculum">カリキュラム</a>
+						<a href="/ai-agent-course/#price">料金・助成金</a>
+						<a href="/ai-agent-course/#instructor">講師</a>
+						<a href="/ai-agent-course/#faq">FAQ</a>
+						<a href="/ai-agent-course/#contact">無料相談</a>
+					</nav>
+					<nav aria-label="Footer company links">
+						<strong>サイト情報</strong>
 						<a href="/blog/">ブログ</a>
-						<a href="/#faq">FAQ</a>
+						<a href="/changelog/">変更履歴</a>
+						<a href="/company/">会社概要</a>
+						<a href="/author/">シュ コウメイ</a>
+						<a href="/#contact">お問い合わせ</a>
 					</nav>
 				</div>
 				<div class="effect-landing-footer__bottom">
@@ -105,7 +234,7 @@ const navItems = [
 
 		.effect-landing-header__inner {
 			display: grid;
-			grid-template-columns: auto 1fr auto;
+			grid-template-columns: auto minmax(0, 1fr) auto;
 			align-items: center;
 			gap: 24px;
 			max-width: 1280px;
@@ -123,25 +252,128 @@ const navItems = [
 			text-decoration: none;
 		}
 
-		.effect-landing-header__nav {
-			display: flex;
-			justify-content: center;
-			gap: clamp(18px, 2.6vw, 38px);
+		.effect-landing-header__brand {
+			display: inline-flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 2px;
+			white-space: nowrap;
+			transform: translateY(5px);
 		}
 
-		.effect-landing-header__nav a {
+		.effect-landing-header__brand span {
+			font-size: clamp(18px, 1.8vw, 22px);
+			line-height: 1;
+			letter-spacing: 0.02em;
+		}
+
+		.effect-landing-header__brand small {
+			color: rgba(78, 69, 56, 0.74);
+			font-size: 10px;
+			font-weight: 850;
+			line-height: 1;
+			letter-spacing: 0;
+		}
+
+		.effect-landing-header__nav {
+			display: flex;
+			align-items: center;
+			align-self: stretch;
+			justify-content: center;
+			gap: clamp(18px, 2.6vw, 34px);
+			height: 100%;
+		}
+
+		.effect-landing-header__nav a,
+		.effect-landing-header__nav-parent {
 			color: #4e4538;
 			font-size: 15px;
 			font-weight: 750;
+			line-height: 1;
 			text-decoration: none;
 			transition: color 0.2s ease;
 		}
 
-		.effect-landing-header__nav a:hover {
+		.effect-landing-header__nav a:hover,
+		.effect-landing-header__nav-group:hover .effect-landing-header__nav-parent {
 			color: #7b5807;
 		}
 
-		.effect-landing-header__actions a,
+		.effect-landing-header__nav-group {
+			position: relative;
+			display: flex;
+			align-items: center;
+			height: 100%;
+		}
+
+		.effect-landing-header__nav-parent {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			height: 100%;
+		}
+
+		.effect-landing-header__nav-link {
+			display: flex;
+			align-items: center;
+			height: 100%;
+		}
+
+		.effect-landing-header__nav-parent svg {
+			width: 19px;
+			height: 19px;
+			transition: transform 0.18s ease;
+		}
+
+		.effect-landing-header__nav-group:hover .effect-landing-header__nav-parent svg {
+			transform: rotate(180deg);
+		}
+
+		.effect-landing-header__dropdown {
+			position: absolute;
+			top: calc(100% - 8px);
+			left: 50%;
+			z-index: 120;
+			display: grid;
+			min-width: 220px;
+			gap: 4px;
+			border: 1px solid rgba(210, 197, 178, 0.86);
+			border-radius: 1rem;
+			background: rgba(255, 255, 255, 0.96);
+			padding: 8px;
+			box-shadow: 0 22px 54px rgba(55, 38, 12, 0.16);
+			opacity: 0;
+			pointer-events: none;
+			transform: translate(-50%, 8px);
+			transition:
+				opacity 0.16s ease,
+				transform 0.16s ease;
+		}
+
+		.effect-landing-header__nav-group:hover .effect-landing-header__dropdown,
+		.effect-landing-header__nav-group:focus-within .effect-landing-header__dropdown {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translate(-50%, 0);
+		}
+
+		.effect-landing-header__dropdown a {
+			display: flex;
+			align-items: center;
+			min-height: 38px;
+			border-radius: 0.75rem;
+			padding: 0 12px;
+			color: #1c1b1c;
+			font-size: 14px;
+			font-weight: 850;
+			white-space: nowrap;
+		}
+
+		.effect-landing-header__dropdown a:hover {
+			background: #f7f1ec;
+			color: #7b5807;
+		}
+
 		.effect-landing-header__panel-cta {
 			display: inline-flex;
 			align-items: center;
@@ -158,7 +390,129 @@ const navItems = [
 		}
 
 		.effect-landing-header__menu {
+			display: block;
+			justify-self: end;
+		}
+
+		.effect-landing-header__menu summary {
+			display: grid;
+			width: 44px;
+			height: 44px;
+			place-items: center;
+			border: 1px solid rgba(210, 197, 178, 0.82);
+			border-radius: 0.8rem;
+			background: rgba(255, 255, 255, 0.76);
+			color: #1c1b1c;
+			cursor: pointer;
+			list-style: none;
+		}
+
+		.effect-landing-header__menu summary::-webkit-details-marker {
 			display: none;
+		}
+
+		.effect-landing-header__menu-close {
+			display: none;
+		}
+
+		.effect-landing-header__menu[open] .effect-landing-header__menu-open {
+			display: none;
+		}
+
+		.effect-landing-header__menu[open] .effect-landing-header__menu-close {
+			display: block;
+		}
+
+		.effect-landing-header__panel {
+			position: fixed;
+			top: 76px;
+			right: 18px;
+			z-index: 9999;
+			display: grid;
+			width: min(460px, calc(100vw - 36px));
+			max-height: calc(100vh - 92px);
+			overflow: auto;
+			gap: 8px;
+			border: 1px solid rgba(210, 197, 178, 0.86);
+			border-radius: 1.2rem;
+			background: rgba(255, 255, 255, 0.97);
+			padding: 10px;
+			box-shadow: 0 24px 60px rgba(55, 38, 12, 0.18);
+			opacity: 0;
+			pointer-events: none;
+			transform: translateY(-6px);
+			transition:
+				opacity 0.16s ease,
+				transform 0.16s ease;
+		}
+
+		.effect-landing-header__menu[open] .effect-landing-header__panel {
+			opacity: 1;
+			pointer-events: auto;
+			transform: translateY(0);
+		}
+
+		.effect-landing-header__panel a,
+		.effect-landing-header__panel-heading {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			min-height: 42px;
+			border-radius: 0.9rem;
+			padding: 11px 14px;
+			color: #1c1b1c;
+			font-size: 15px;
+			font-weight: 850;
+			line-height: 1.35;
+			text-decoration: none;
+		}
+
+		.effect-landing-header__panel a:hover,
+		.effect-landing-header__panel-heading:hover {
+			background: #f6f3f4;
+		}
+
+		.effect-landing-header__panel > a {
+			background: #fbf7ef;
+			color: #7b5807;
+			font-weight: 950;
+		}
+
+		.effect-landing-header__panel-group {
+			border: 1px solid rgba(210, 197, 178, 0.66);
+			border-radius: 0.95rem;
+			background: rgba(252, 248, 249, 0.68);
+			overflow: hidden;
+		}
+
+		.effect-landing-header__panel-heading {
+			background: rgba(251, 247, 239, 0.9);
+			color: #7b5807;
+			font-size: 14px;
+			font-weight: 950;
+		}
+
+		.effect-landing-header__panel-group div {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 4px;
+			padding: 6px;
+		}
+
+		.effect-landing-header__panel-group div a {
+			min-height: 40px;
+			background: rgba(255, 255, 255, 0.78);
+			font-size: 13px;
+			font-weight: 820;
+		}
+
+		.effect-landing-header__tools {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 8px;
+			min-width: 0;
 		}
 
 		.effect-landing-footer {
@@ -177,7 +531,7 @@ const navItems = [
 
 		.effect-landing-footer__grid {
 			display: grid;
-			grid-template-columns: minmax(0, 1.5fr) minmax(160px, 0.55fr) minmax(160px, 0.55fr);
+			grid-template-columns: minmax(0, 1.3fr) repeat(4, minmax(132px, 0.45fr));
 			gap: clamp(28px, 4vw, 56px);
 		}
 
@@ -235,6 +589,25 @@ const navItems = [
 			letter-spacing: 0.02em;
 		}
 
+		@media (max-width: 1180px) {
+			.effect-landing-header__inner {
+				grid-template-columns: auto auto;
+				height: 68px;
+				padding: 0 18px;
+			}
+
+			.effect-landing-header__nav {
+				display: none;
+			}
+
+			.effect-landing-header__panel {
+				top: 76px;
+				right: 14px;
+				left: auto;
+				width: min(360px, calc(100vw - 28px));
+			}
+		}
+
 		@media (max-width: 860px) {
 			.effect-landing-header__inner {
 				grid-template-columns: auto auto;
@@ -247,75 +620,19 @@ const navItems = [
 				display: none;
 			}
 
-			.effect-landing-header__menu {
-				display: block;
-				justify-self: end;
-			}
-
-			.effect-landing-header__menu summary {
-				display: grid;
-				width: 44px;
-				height: 44px;
-				place-items: center;
-				border: 1px solid rgba(210, 197, 178, 0.82);
-				border-radius: 0.8rem;
-				background: rgba(255, 255, 255, 0.76);
-				color: #1c1b1c;
-				cursor: pointer;
-				list-style: none;
-			}
-
-			.effect-landing-header__menu summary::-webkit-details-marker {
-				display: none;
-			}
-
-			.effect-landing-header__menu-close {
-				display: none;
-			}
-
-			.effect-landing-header__menu[open] .effect-landing-header__menu-open {
-				display: none;
-			}
-
-			.effect-landing-header__menu[open] .effect-landing-header__menu-close {
-				display: block;
-			}
-
 			.effect-landing-header__panel {
-				position: fixed;
 				top: 76px;
 				right: 14px;
 				left: 14px;
-				z-index: 9999;
-				display: grid;
-				gap: 6px;
-				border: 1px solid rgba(210, 197, 178, 0.86);
-				border-radius: 1.2rem;
-				background: rgba(255, 255, 255, 0.96);
-				padding: 10px;
-				box-shadow: 0 24px 60px rgba(55, 38, 12, 0.18);
+				width: auto;
 			}
 
-			.effect-landing-header__panel a {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				border-radius: 0.9rem;
-				padding: 13px 14px;
-				color: #1c1b1c;
-				font-size: 15px;
-				font-weight: 850;
-				text-decoration: none;
+			.effect-landing-header__panel-group div {
+				grid-template-columns: 1fr;
 			}
 
-			.effect-landing-header__panel a:hover {
-				background: #f6f3f4;
-			}
-
-			.effect-landing-header__panel-cta {
-				justify-content: center !important;
-				gap: 8px;
-				margin-top: 4px;
+			.effect-landing-header__panel-group div a {
+				font-size: 14px;
 			}
 
 			.effect-landing-footer__bottom {

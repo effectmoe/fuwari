@@ -1,30 +1,33 @@
 ---
-const timeSources = [
+const metricCards = [
 	{
-		label: "APQC：社内情報探索時間",
-		href: "https://www.apqc.org/blog/km-makes-knowledge-workers-more-productive-and-less-stressed-out",
-	},
-	{
-		label: "Microsoft：Copilot利用時短",
+		tag: "Microsoft 365 Copilot",
+		value: "平均 1日14分削減",
+		title: "会議要約 43分 → 11分\n情報検索 24分 → 18分",
+		sourceLabel: "Microsoft WorkLab",
 		href: "https://www.microsoft.com/en-us/worklab/work-trend-index/copilots-earliest-users-teach-us-about-generative-ai-at-work",
 	},
 	{
-		label: "McKinsey：知識労働の探索時間",
-		href: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/capturing-business-value-with-social-technologies",
+		tag: "NBER",
+		value: "全体 +14% / 新人層 +34%",
+		title: "生成AI支援でカスタマーサポート生産性向上",
+		sourceLabel: "NBER Working Paper",
+		href: "https://www.nber.org/papers/w31161",
 	},
-	{ label: "NBER：生産性向上", href: "https://www.nber.org/papers/w31161" },
-	{ label: "MIT/PubMed：作業時間短縮", href: "https://pubmed.ncbi.nlm.nih.gov/37440646/" },
 	{
-		label: "HBS：業務完了速度",
+		tag: "MIT / Science",
+		value: "作業時間 40%減 / 品質 18%向上",
+		title: "文章業務におけるパフォーマンス変化",
+		sourceLabel: "Science / PubMed",
+		href: "https://pubmed.ncbi.nlm.nih.gov/37440646/",
+	},
+	{
+		tag: "HBS / BCG",
+		value: "25.1%速く完了 / 品質40%超向上",
+		title: "コンサルティング業務におけるAI活用",
+		sourceLabel: "HBS AI Institute",
 		href: "https://aiinstitute.hbs.edu/navigating-the-jagged-technological-frontier/",
 	},
-];
-
-const metricCards = [
-	{ tag: "Microsoft 365 Copilot", title: "会議要約 43分 → 11分\n情報検索 24分 → 18分", value: "平均 1日14分削減" },
-	{ tag: "NBER", title: "生成AI支援でカスタマーサポート生産性向上", value: "全体 +14% / 新人層 +34%" },
-	{ tag: "MIT / Science", title: "文章業務におけるパフォーマンス変化", value: "作業時間 40%減 / 品質 18%向上" },
-	{ tag: "HBS / BCG", title: "コンサルティング業務におけるAI活用", value: "25.1%速く完了 / 品質40%超向上" },
 ];
 
 const securitySources = [
@@ -47,7 +50,7 @@ const securitySources = [
 ];
 ---
 
-<section class="evidence-data" aria-labelledby="evidence-data-title">
+<section id="time-saving" class="evidence-data" aria-labelledby="evidence-data-title">
 	<div class="evidence-data__inner">
 		<header class="evidence-data__header">
 			<h2 id="evidence-data-title">AIセントラルで、探す時間・説明し直す時間をどれだけ戻せるか。</h2>
@@ -63,14 +66,41 @@ const securitySources = [
 
 		<div class="time-saving-board">
 			<div class="time-saving-board__main">
-				<div class="time-saving-board__copy">
+				<div class="time-saving-board__evidence">
 					<span class="evidence-tag">TIME SAVING MODEL</span>
-					<h3>年間 約109時間から、業務試算では約190時間まで。</h3>
-					<p>APQCの公開データでは、知識労働者の社内情報探索は週2.8時間から0.7時間へ下がる余地が示されています。AIセントラルでは、この「探す時間」に加えて、案件説明・転記・確認の繰り返しも試算対象にします。</p>
+					<h3>外部データで見える「探す時間」と、現場で膨らむ「説明し直す時間」。</h3>
+					<div class="time-saving-board__source-callout" aria-label="時間削減モデルの根拠">
+						<span>外部公開データ</span>
+						<a href="https://www.apqc.org/blog/km-makes-knowledge-workers-more-productive-and-less-stressed-out" target="_blank" rel="noopener noreferrer">APQC: 社内情報探索時間 2.8h/週 → 0.7h/週</a>
+					</div>
+					<div class="bar-chart" aria-label="通常の情報探索とエンタープライズ検索ありの比較">
+						<div class="bar-chart__row">
+							<div class="bar-chart__label">
+								<span>通常の情報探索</span>
+								<strong>2.8時間 / 週</strong>
+							</div>
+							<div class="bar-chart__rail"><span style="width: 100%"></span></div>
+						</div>
+						<div class="bar-chart__row">
+							<div class="bar-chart__label">
+								<span>エンタープライズ検索あり</span>
+								<strong>0.7時間 / 週</strong>
+							</div>
+							<div class="bar-chart__rail bar-chart__rail--saving"><span style="width: 25%"></span><em>削減余地 2.1時間 / 週</em></div>
+						</div>
+					</div>
 				</div>
-				<div class="time-saving-board__hero-number">
-					<strong>約190時間</strong>
-					<span>1人あたり年間で戻せる可能性がある時間の試算例</span>
+				<div class="time-saving-board__numbers" aria-label="時間削減の主要数値">
+					<div class="time-saving-board__hero-number">
+						<span>情報検索だけの外部データ換算</span>
+						<strong>約109時間</strong>
+						<small>2.1h × 52週</small>
+					</div>
+					<div class="time-saving-board__hero-number time-saving-board__hero-number--primary">
+						<span>AIセントラル導入前ヒアリング用モデル</span>
+						<strong>約190時間</strong>
+						<small>探す・説明し直す・転記・確認まで含めた試算例</small>
+					</div>
 				</div>
 			</div>
 			<div class="time-saving-board__formula" aria-label="時間削減の計算式">
@@ -98,23 +128,24 @@ const securitySources = [
 					<small>保証値ではなく、初回相談で置き換える試算値</small>
 				</div>
 			</div>
-			<div class="bar-chart" aria-label="通常の情報探索とエンタープライズ検索ありの比較">
-				<div class="bar-chart__row">
-					<div class="bar-chart__label">
-						<span>通常の情報探索</span>
-						<strong>2.8時間 / 週</strong>
-					</div>
-					<div class="bar-chart__rail"><span style="width: 100%"></span></div>
+			<div class="time-saving-board__similar-search" aria-label="FORGE類似検索による時間短縮">
+				<div>
+					<span>FORGE / AIセントラル PLUS以上</span>
+					<strong>キーワードで探す前に、似た案件・似た相談・過去の対応を呼び出す。</strong>
+					<p>フォルダ名や担当者の記憶に頼る検索ではなく、内容の近さから過去資料を探せるため、「どこにあったか思い出す時間」と「前提を説明し直す時間」を減らしやすくなります。</p>
 				</div>
-				<div class="bar-chart__row">
-					<div class="bar-chart__label">
-						<span>エンタープライズ検索あり</span>
-						<strong>0.7時間 / 週</strong>
-					</div>
-					<div class="bar-chart__rail bar-chart__rail--saving"><span style="width: 25%"></span><em>削減余地: 2.1時間 / 週</em></div>
-				</div>
+				<ul>
+					<li>似た顧客カルテ</li>
+					<li>過去の提案書</li>
+					<li>類似トラブル対応</li>
+					<li>FAQ・議事録</li>
+				</ul>
 			</div>
-			<p class="evidence-note">公開データ: APQC 2.1h × 52週 = 約109時間。導入試算例: 1日5件 × 10分 × 230日 = 約191.6時間。</p>
+			<div class="time-saving-board__model-note">
+				<strong>約190時間は保証値ではありません。</strong>
+				<span>EFFECT試算: 1日5件 × 10分 × 230日。初回相談では、実際の件数・分数・対象業務に置き換えて試算します。</span>
+			</div>
+			<p class="evidence-note">出典明示: 約109時間はAPQC公開データの差分 2.1h × 52週。約190時間はEFFECTの導入前ヒアリング用モデル 1日5件 × 10分 × 230日 = 約191.6時間。</p>
 		</div>
 
 		<div class="evidence-card evidence-card--large evidence-card--flow">
@@ -143,20 +174,11 @@ const securitySources = [
 			{metricCards.map((item) => (
 				<div class="metric-card">
 					<span class="evidence-tag">{item.tag}</span>
-					<h3>{item.title}</h3>
 					<strong>{item.value}</strong>
+					<h3>{item.title}</h3>
+					<a href={item.href} target="_blank" rel="noopener noreferrer">出典: {item.sourceLabel}</a>
 				</div>
 			))}
-		</div>
-
-		<div class="source-card">
-			<h3>時間削減ロジックの出典</h3>
-			<p>上の数字は、社内情報探索・AI活用による作業時間短縮・生産性向上に関する公開資料をもとに整理しています。各リンクから元資料を確認できます。</p>
-			<div class="source-list">
-				{timeSources.map((item) => (
-					<a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
-				))}
-			</div>
 		</div>
 
 			<div class="security-proof">
@@ -169,7 +191,7 @@ const securitySources = [
 					<div>
 						<span>01</span>
 						<strong>外へ貼らない</strong>
-						<p>機密情報を外部チャットへ都度入力する運用を減らす。</p>
+						<p>機密情報を外部チャットへ都度貼り付ける運用を減らす。</p>
 					</div>
 					<div>
 						<span>02</span>
@@ -337,36 +359,38 @@ const securitySources = [
 
 	.time-saving-board {
 		display: grid;
-		gap: clamp(20px, 2.6vw, 32px);
+		gap: clamp(18px, 2.4vw, 28px);
 		margin-bottom: 24px;
 		border: 1px solid #d2c5b2;
 		border-radius: 2.2rem;
 		background:
-			radial-gradient(circle at 82% 14%, rgba(182, 140, 60, 0.14), transparent 30%),
-			linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 226, 0.54)),
-			repeating-linear-gradient(90deg, rgba(182, 140, 60, 0.055) 0 1px, transparent 1px 42px),
-			repeating-linear-gradient(0deg, rgba(182, 140, 60, 0.05) 0 1px, transparent 1px 42px);
+			radial-gradient(circle at 88% 10%, rgba(109, 137, 91, 0.12), transparent 32%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 239, 0.74));
 		padding: clamp(28px, 4.5vw, 58px);
-		box-shadow: 0 24px 72px rgba(55, 38, 12, 0.08);
+		box-shadow: 0 24px 72px rgba(55, 38, 12, 0.075);
 	}
 
 	.time-saving-board__main {
 		display: grid;
-		grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.58fr);
-		gap: clamp(24px, 4vw, 52px);
+		grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+		gap: clamp(20px, 3vw, 36px);
 		align-items: stretch;
 	}
 
-	.time-saving-board__copy {
+	.time-saving-board__evidence {
 		display: grid;
-		align-content: center;
+		align-content: start;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 1.65rem;
+		background: rgba(255, 255, 255, 0.9);
+		padding: clamp(22px, 3vw, 34px);
 	}
 
 	.time-saving-board__main h3 {
 		margin: 0;
-		font-size: clamp(32px, 4vw, 54px);
+		font-size: clamp(25px, 2.6vw, 38px);
 		font-weight: 950;
-		line-height: 1.18;
+		line-height: 1.26;
 	}
 
 	.time-saving-board__main p {
@@ -378,23 +402,38 @@ const securitySources = [
 		line-height: 1.85;
 	}
 
+	.time-saving-board__numbers {
+		display: grid;
+		gap: 14px;
+	}
+
 	.time-saving-board__hero-number {
 		display: grid;
 		align-content: center;
-		min-height: 210px;
-		border: 1px solid rgba(182, 140, 60, 0.64);
-		border-radius: 1.8rem;
+		min-height: 174px;
+		border: 1px solid rgba(210, 197, 178, 0.82);
+		border-radius: 1.45rem;
 		background:
-			linear-gradient(135deg, rgba(182, 140, 60, 0.98), rgba(123, 88, 7, 0.92)),
-			#b68c3c;
-		padding: clamp(24px, 3vw, 36px);
+			linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(246, 243, 244, 0.92)),
+			#ffffff;
+		padding: clamp(22px, 2.5vw, 30px);
+		color: #1c1b1c;
+		box-shadow: 0 16px 38px rgba(55, 38, 12, 0.055);
+	}
+
+	.time-saving-board__hero-number--primary {
+		border-color: rgba(82, 104, 63, 0.42);
+		background:
+			linear-gradient(135deg, rgba(82, 104, 63, 0.98), rgba(54, 78, 43, 0.96)),
+			#52683f;
 		color: #ffffff;
-		box-shadow: 0 20px 54px rgba(123, 88, 7, 0.22);
+		box-shadow: 0 20px 48px rgba(54, 78, 43, 0.22);
 	}
 
 	.time-saving-board__hero-number strong {
 		display: block;
-		font-size: clamp(48px, 6.4vw, 86px);
+		margin-top: 8px;
+		font-size: clamp(42px, 5vw, 72px);
 		font-weight: 950;
 		letter-spacing: 0;
 		line-height: 0.98;
@@ -402,31 +441,50 @@ const securitySources = [
 
 	.time-saving-board__hero-number span {
 		display: block;
-		margin-top: 18px;
-		font-size: clamp(15px, 1.25vw, 18px);
+		color: inherit;
+		font-size: clamp(14px, 1.15vw, 16px);
 		font-weight: 850;
 		line-height: 1.55;
 	}
 
+	.time-saving-board__hero-number small {
+		display: block;
+		margin-top: 12px;
+		color: inherit;
+		font-size: clamp(13px, 1vw, 15px);
+		font-weight: 760;
+		line-height: 1.45;
+		opacity: 0.78;
+	}
+
 	.time-saving-board__formula {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 12px;
+		grid-template-columns: minmax(130px, 1fr) auto minmax(130px, 1fr) auto minmax(130px, 1fr) auto minmax(190px, 1.25fr);
+		gap: 10px;
 		align-items: stretch;
+		border: 1px solid rgba(82, 104, 63, 0.22);
+		border-radius: 1.3rem;
+		background: rgba(82, 104, 63, 0.07);
+		padding: 12px;
 	}
 
 	.time-saving-board__formula > div {
 		display: grid;
 		align-content: center;
-		min-height: 150px;
-		border: 1px solid rgba(210, 197, 178, 0.82);
-		border-radius: 1.35rem;
+		min-height: 118px;
+		min-width: 150px;
+		border: 1px solid rgba(210, 197, 178, 0.7);
+		border-radius: 1rem;
 		background: rgba(255, 255, 255, 0.92);
-		padding: 20px;
+		padding: 16px;
 	}
 
 	.time-saving-board__formula > b {
-		display: none;
+		display: grid;
+		place-items: center;
+		color: #7b5807;
+		font-size: 22px;
+		font-weight: 950;
 	}
 
 	.time-saving-board__formula span,
@@ -459,8 +517,132 @@ const securitySources = [
 	}
 
 	.time-saving-board__formula .is-result {
-		border-color: rgba(182, 140, 60, 0.72);
-		background: rgba(239, 191, 106, 0.16);
+		min-width: 210px;
+		border-color: rgba(82, 104, 63, 0.45);
+		background: rgba(255, 255, 255, 0.98);
+	}
+
+	.time-saving-board__similar-search {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+		gap: clamp(16px, 2.4vw, 28px);
+		align-items: center;
+		border: 1px solid rgba(82, 104, 63, 0.28);
+		border-radius: 1.45rem;
+		background:
+			linear-gradient(135deg, rgba(82, 104, 63, 0.1), rgba(255, 255, 255, 0.86)),
+			#ffffff;
+		padding: clamp(20px, 3vw, 32px);
+		box-shadow: 0 18px 44px rgba(54, 78, 43, 0.08);
+	}
+
+	.time-saving-board__similar-search span {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border-radius: 999px;
+		background: rgba(82, 104, 63, 0.14);
+		color: #52683f;
+		padding: 0.42rem 0.72rem;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.time-saving-board__similar-search strong {
+		display: block;
+		margin-top: 12px;
+		color: #1c1b1c;
+		font-size: clamp(20px, 2.05vw, 30px);
+		font-weight: 950;
+		line-height: 1.36;
+	}
+
+	.time-saving-board__similar-search p {
+		margin: 12px 0 0;
+		color: #4e4538;
+		font-size: clamp(15px, 1.16vw, 17px);
+		font-weight: 720;
+		line-height: 1.75;
+	}
+
+	.time-saving-board__similar-search ul {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.time-saving-board__similar-search li {
+		display: grid;
+		min-height: 74px;
+		place-items: center;
+		border: 1px solid rgba(82, 104, 63, 0.2);
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.78);
+		color: #31472a;
+		padding: 12px;
+		text-align: center;
+		font-size: clamp(14px, 1.08vw, 16px);
+		font-weight: 900;
+		line-height: 1.35;
+	}
+
+	.time-saving-board__source-callout {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 12px;
+		align-items: center;
+		margin: 18px 0 2px;
+		border: 1px solid rgba(82, 104, 63, 0.22);
+		border-radius: 999px;
+		background: rgba(82, 104, 63, 0.07);
+		padding: 10px 12px;
+	}
+
+	.time-saving-board__source-callout span {
+		border-radius: 999px;
+		background: #52683f;
+		color: #ffffff;
+		padding: 0.42rem 0.72rem;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.time-saving-board__source-callout a {
+		color: #7b5807;
+		font-size: clamp(15px, 1.18vw, 17px);
+		font-weight: 900;
+		line-height: 1.55;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	.time-saving-board__model-note {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 14px;
+		align-items: center;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 1.15rem;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 16px 18px;
+	}
+
+	.time-saving-board__model-note strong {
+		color: #1c1b1c;
+		font-size: clamp(15px, 1.15vw, 17px);
+		font-weight: 950;
+	}
+
+	.time-saving-board__model-note span {
+		color: #5d5448;
+		font-size: clamp(13px, 1vw, 15px);
+		font-weight: 700;
+		line-height: 1.65;
 	}
 
 	.evidence-tag {
@@ -631,34 +813,39 @@ const securitySources = [
 	}
 
 	.metric-card strong {
+		display: block;
+		margin: 0 0 18px;
+		border-bottom: 1px solid rgba(210, 197, 178, 0.65);
+		padding-bottom: 18px;
+		color: #52683f;
+		font-size: clamp(24px, 2.55vw, 36px);
+		font-weight: 950;
+		line-height: 1.24;
+		letter-spacing: 0;
+	}
+
+	.metric-card h3 {
+		margin-top: 0;
+		font-size: clamp(19px, 1.85vw, 27px);
+		line-height: 1.42;
+	}
+
+	.metric-card a {
+		display: inline-flex;
+		width: fit-content;
+		min-height: 40px;
+		align-items: center;
 		margin-top: auto;
-		border-top: 1px solid rgba(210, 197, 178, 0.65);
-		padding-top: 24px;
-		color: #7b5807;
-		font-size: 18px;
-		font-weight: 900;
-	}
-
-	.source-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-	}
-
-		.source-list a {
-			display: inline-flex;
-			min-height: 52px;
-			align-items: center;
 		border: 1px solid #d2c5b2;
 		border-radius: 999px;
-		background: #ffffff;
+		background: rgba(255, 248, 236, 0.72);
 		color: #6f5c3a;
-		padding: 12px 20px;
-		font-size: 15px;
-		font-weight: 700;
+		padding: 8px 14px;
+		font-size: 13px;
+		font-weight: 850;
 		text-decoration: underline;
-			text-underline-offset: 3px;
-		}
+		text-underline-offset: 3px;
+	}
 
 		.security-proof {
 			display: grid;
@@ -920,6 +1107,7 @@ const securitySources = [
 
 	@media (max-width: 900px) {
 			.time-saving-board__main,
+			.time-saving-board__similar-search,
 			.evidence-visual-grid,
 			.safety-visual-grid,
 			.flow-compare,
@@ -931,6 +1119,10 @@ const securitySources = [
 
 		.time-saving-board__formula {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.time-saving-board__formula > b {
+			display: none;
 		}
 
 		.flow-steps--plain,
@@ -957,6 +1149,10 @@ const securitySources = [
 			.time-saving-board__formula {
 				grid-template-columns: 1fr;
 			}
+
+		.time-saving-board__similar-search ul {
+			grid-template-columns: 1fr;
+		}
 
 		.time-saving-board__formula > div {
 			min-height: 128px;

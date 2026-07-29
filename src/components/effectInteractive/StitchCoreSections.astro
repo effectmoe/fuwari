@@ -10,6 +10,27 @@ const problems = [
 	{ icon: "material-symbols:fact-check-outline", title: "根拠・承認・ログを\nどこに残すか" },
 ];
 
+const aiCentralClarityCards = [
+	{
+		label: "WHAT IS MEMORY",
+		title: "AIの記憶は、勝手に覚え込ませることではありません。",
+		body: "社内資料・顧客情報・対応履歴・FAQ・判断基準を、AIが参照できる形に整理する設計です。どの情報を見てよいか、どの範囲で使うかを明確にします。",
+		icon: "material-symbols:memory-alt-outline",
+	},
+	{
+		label: "SMALL START",
+		title: "いきなり全社導入ではなく、小さく始められます。",
+		body: "まずは一部署、一業務、一つの資料フォルダから始め、検索・整理・下書き・確認が実務で使えるかを確かめながら広げます。",
+		icon: "material-symbols:stairs-outline",
+	},
+	{
+		label: "DATA HANDLING",
+		title: "情報の置き場所と承認範囲を、構築前に決めます。",
+		body: "個人情報や顧客情報を扱う場合は、権限・ログ・承認フロー・ローカルLLMの必要性を整理し、人が承認できる運用にします。",
+		icon: "material-symbols:shield-lock-outline",
+	},
+];
+
 const aiRows = [
 	["顧客名や金額を伏せて質問する", "実データを参照して回答・下書きできる"],
 	["社内資料を探して、毎回貼り付ける", "必要資料をAIが横断参照する"],
@@ -253,14 +274,14 @@ const operationPanels = [
 
 ---
 
-<section class="stitch-core stitch-core--problems">
+<section id="inventory" class="stitch-core stitch-core--problems">
 	<div class="stitch-core__inner">
 		<div class="stitch-core__intro-media">
 			<div class="stitch-core__heading">
 				<h2>社内システムを棚卸して、<br />AI化のボトルネックを抽出する。</h2>
 				<p>社内資料、顧客情報、対応履歴、承認フロー、担当者ごとの判断基準が、どのシステムにあり、どこで分断され、どこで人依存になっているかを整理します。その棚卸しから、AIセントラルで最初に接続すべき記憶と業務を見極めます。</p>
 			</div>
-			<figure class="photo-panel">
+			<figure class="photo-panel photo-panel--inventory">
 				<img src="/lp/generated/system-inventory-bottleneck-workshop.png" alt="社内システムの棚卸しと業務ボトルネックを整理している相談風景" loading="lazy" decoding="async" />
 				<figcaption>
 					<span>SYSTEM INVENTORY</span>
@@ -279,7 +300,27 @@ const operationPanels = [
 	</div>
 </section>
 
-<section class="stitch-core stitch-core--band">
+<section id="boundary" class="stitch-core ai-central-clarity" aria-labelledby="ai-central-clarity-title">
+	<div class="stitch-core__inner ai-central-clarity__inner">
+		<div class="ai-central-clarity__heading">
+			<span>BEFORE IMPLEMENTATION</span>
+			<h2 id="ai-central-clarity-title">AIセントラルは、AIに丸投げする仕組みではありません。</h2>
+			<p>社内システムを棚卸したうえで、参照させる情報、AIに任せる範囲、人間が判断する境界を設計します。</p>
+		</div>
+		<div class="ai-central-clarity__cards">
+			{aiCentralClarityCards.map((item) => (
+				<article>
+					<span><Icon name={item.icon} /></span>
+					<small>{item.label}</small>
+					<strong>{item.title}</strong>
+					<p>{item.body}</p>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<section id="secure" class="stitch-core stitch-core--band">
 		<div class="stitch-core__inner safe-ai-editorial">
 			<div class="safe-ai-editorial__heading">
 				<span>SECURE AI PLACEMENT</span>
@@ -324,7 +365,7 @@ const operationPanels = [
 		</div>
 	<div class="stitch-cta">
 		<span>無料相談で安全なAI活用の前提を確認する。</span>
-		<a href="mailto:info@effect.moe?subject=%E3%80%90effect.moe%E3%80%91AI%E3%82%BB%E3%83%B3%E3%83%88%E3%83%A9%E3%83%AB%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87">無料相談する</a>
+		<a href="#contact">無料相談する</a>
 	</div>
 </section>
 
@@ -339,7 +380,7 @@ const operationPanels = [
 				<strong>既存ツールを入れ替えず、AIが参照できる入口を作る。</strong>
 			</div>
 			<div class="operating-map__actions">
-				<a class="primary-pill" href="mailto:info@effect.moe?subject=%E3%80%90effect.moe%E3%80%91AI%E3%82%BB%E3%83%B3%E3%83%88%E3%83%A9%E3%83%AB%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87">無料相談で設計を確認する</a>
+				<a class="primary-pill" href="#contact">無料相談で設計を確認する</a>
 				<a class="text-link" href="#ai-central">導入イメージを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 			</div>
 		</div>
@@ -546,6 +587,37 @@ const operationPanels = [
 		line-height: 1.42;
 	}
 
+	.photo-panel--inventory img {
+		aspect-ratio: 16 / 8.7;
+		object-position: center 42%;
+	}
+
+	.photo-panel--inventory::after {
+		background: linear-gradient(180deg, transparent 48%, rgba(28, 24, 18, 0.28) 100%);
+	}
+
+	.photo-panel--inventory figcaption {
+		width: min(560px, calc(100% - 36px));
+		border: 1px solid rgba(246, 228, 188, 0.72);
+		border-left: 0;
+		border-radius: 999px;
+		background: rgba(52, 38, 18, 0.88);
+		padding: 12px 20px 13px;
+		color: #fffaf0;
+		box-shadow: 0 18px 36px rgba(35, 22, 8, 0.22);
+		backdrop-filter: blur(16px) saturate(1.1);
+	}
+
+	.photo-panel--inventory span {
+		color: #f7d88d;
+		font-size: 11px;
+	}
+
+	.photo-panel--inventory strong {
+		margin-top: 4px;
+		color: #fffdf7;
+	}
+
 	.inline-photo {
 		margin: 0 0 28px;
 		border-radius: 2rem;
@@ -608,6 +680,120 @@ const operationPanels = [
 		font-size: clamp(19px, 1.7vw, 23px);
 		font-weight: 800;
 		line-height: 1.35;
+	}
+
+	.ai-central-clarity {
+		border-top: 1px solid rgba(210, 197, 178, 0.46);
+		border-bottom: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 82% 16%, rgba(109, 137, 91, 0.11), transparent 31%),
+			linear-gradient(180deg, #fcf8f9 0%, #f8f2f3 100%);
+		padding-top: clamp(56px, 7vw, 90px);
+		padding-bottom: clamp(56px, 7vw, 90px);
+	}
+
+	.ai-central-clarity__inner {
+		display: grid;
+		grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
+		gap: clamp(28px, 5vw, 56px);
+		align-items: start;
+	}
+
+	.ai-central-clarity__heading span {
+		display: inline-flex;
+		margin-bottom: 16px;
+		border-left: 4px solid #b68c3c;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 8px 12px;
+		color: #7b5807;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.ai-central-clarity__heading h2 {
+		margin: 0;
+		color: #1c1b1c;
+		font-size: clamp(32px, 4vw, 52px);
+		font-weight: 950;
+		letter-spacing: 0;
+		line-height: 1.14;
+		text-wrap: balance;
+	}
+
+	.ai-central-clarity__heading p {
+		margin: 20px 0 0;
+		color: #4e4538;
+		font-size: clamp(16px, 1.35vw, 19px);
+		font-weight: 650;
+		line-height: 1.85;
+	}
+
+	.ai-central-clarity__cards {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.ai-central-clarity__cards article {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid rgba(210, 197, 178, 0.78);
+		border-radius: 1.25rem;
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 236, 0.74)),
+			#ffffff;
+		padding: clamp(20px, 2.3vw, 28px);
+		box-shadow: 0 16px 42px rgba(55, 38, 12, 0.06);
+	}
+
+	.ai-central-clarity__cards article:nth-child(2) {
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(237, 245, 234, 0.74)),
+			#ffffff;
+	}
+
+	.ai-central-clarity__cards article > span {
+		display: grid;
+		place-items: center;
+		width: 52px;
+		aspect-ratio: 1;
+		margin-bottom: 18px;
+		border-radius: 1rem;
+		background: rgba(182, 140, 60, 0.12);
+		color: #7b5807;
+		font-size: 28px;
+	}
+
+	.ai-central-clarity__cards article:nth-child(2) > span,
+	.ai-central-clarity__cards article:nth-child(3) > span {
+		background: rgba(109, 137, 91, 0.12);
+		color: #52683f;
+	}
+
+	.ai-central-clarity__cards small {
+		display: block;
+		color: #7b5807;
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.11em;
+	}
+
+	.ai-central-clarity__cards strong {
+		display: block;
+		margin-top: 8px;
+		color: #1c1b1c;
+		font-size: clamp(18px, 1.7vw, 22px);
+		font-weight: 950;
+		line-height: 1.32;
+	}
+
+	.ai-central-clarity__cards p {
+		margin: 14px 0 0;
+		color: #4e4538;
+		font-size: clamp(14px, 1.12vw, 16px);
+		font-weight: 650;
+		line-height: 1.72;
 	}
 
 	.stitch-core__split {
@@ -2579,6 +2765,14 @@ const operationPanels = [
 			grid-template-columns: 1fr;
 		}
 
+		.ai-central-clarity__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.ai-central-clarity__cards {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
 		.photo-panel::after {
 			background: linear-gradient(180deg, transparent 64%, rgba(252, 248, 249, 0.5));
 		}
@@ -2774,6 +2968,14 @@ const operationPanels = [
 	}
 
 	@media (max-width: 560px) {
+		.ai-central-clarity__cards {
+			grid-template-columns: 1fr;
+		}
+
+		.ai-central-clarity__cards article {
+			border-radius: 1.1rem;
+		}
+
 		.safe-ai-feature-card {
 			border-radius: 1.25rem;
 		}

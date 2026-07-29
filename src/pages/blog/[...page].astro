@@ -1,10 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { Icon } from "astro-icon/components";
 import Pagination from "../../components/control/Pagination.astro";
-import PostPage from "../../components/PostPage.astro";
+import { substackEmbedUrl } from "../../config";
 import { PAGE_SIZE } from "../../constants/constants";
-import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
 import { getSortedPosts } from "../../utils/content-utils";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import { getCategoryUrl, getDir, getPostUrlBySlug, getTagUrl } from "../../utils/url-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -13,12 +16,805 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props;
 const len = page.data.length;
+const posts = page.data;
+const featured = posts[0];
+const pickups = posts.slice(1, 4);
+const articleGrid = posts.slice(4);
+const topTags = Array.from(new Set(posts.flatMap((post) => post.data.tags ?? []))).slice(0, 8);
 
 const blogDescription =
 	"シュ コウメイによるAI開発・LLMO対策・知識管理・構造化の実装ノート。effect.moe の商用サイト内ブログです。";
+
+const thumbnailPositions: Record<string, string> = {
+	"obsidian-claude-idea-source": "center 88%",
+	"content/posts/obsidian-claude-idea-source/index.md": "center 88%",
+	"astro-fuwari-workflow-vs-wordpress": "center 84%",
+	"content/posts/astro-fuwari-workflow-vs-wordpress/index.md": "center 84%",
+};
+
+const getThumbnailPosition = (post: { id: string; slug: string }) =>
+	thumbnailPositions[post.slug] ?? thumbnailPositions[getDir(post.id)] ?? thumbnailPositions[post.id] ?? "center";
+
+const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id).replace(/\/$/, "")}.jpg`;
 ---
 
-<MainGridLayout title="Blog" description={blogDescription}>
-	<PostPage page={page}></PostPage>
-	<Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}></Pagination>
-</MainGridLayout>
+<LandingLayout title="effect.moe Blog" description={blogDescription}>
+	<section class="blog-hero">
+		<div class="blog-shell blog-hero__grid">
+			<div class="blog-hero__copy">
+				<p class="blog-kicker">PUBLIC KNOWLEDGE / AI CENTRAL NOTES</p>
+				<h1>AI実装と、記憶を持つAIのための公開ノート。</h1>
+				<p>
+					AIセントラル設計、業務ナレッジ、LLMO、構造化、マーケティングまで。講座と実装の現場で得た判断材料を、商用サイトの中に蓄積していきます。
+				</p>
+				<div class="blog-hero__resources">
+					<div class="blog-newsletter-card">
+						<div>
+							<p class="blog-resource-label">MAIL MAGAZINE</p>
+							<h2>構造化とAI実装のメルマガを受け取る。</h2>
+							<p>新着記事、実装メモ、構造化の考え方をメールで配信しています。</p>
+						</div>
+						{substackEmbedUrl ? (
+							<iframe src={substackEmbedUrl} title="Substack メルマガ登録フォーム" loading="lazy"></iframe>
+						) : (
+							<a href="https://kangmyung.substack.com/" target="_blank" rel="noopener noreferrer" class="blog-button blog-button--primary">登録ページを見る</a>
+						)}
+					</div>
+					<a href="/structurepedia/" class="blog-pedia-card">
+						<img src="/dfb/thumb.jpg" alt="構造化ペディア DFB構造化メソッド大全" loading="lazy" />
+						<span>STRUCTUREPEDIA</span>
+						<strong>構造化ペディア</strong>
+						<p>AI時代に書き換わった「考える」を再定義する DFB大全。</p>
+						<small>大全を読む <Icon name="material-symbols:arrow-forward-rounded" /></small>
+					</a>
+				</div>
+			</div>
+
+			{featured && (
+				<a href={getPostUrlBySlug(featured.slug)} class="blog-featured">
+					<div class="blog-featured__meta">
+						<span>FEATURED</span>
+						<span>{formatDateToYYYYMMDD(featured.data.published)}</span>
+					</div>
+					{(featured.data.thumbnail || featured.data.image) && (
+						<div class="blog-featured__image" style={`--thumb-position: ${getThumbnailPosition(featured)}; --thumb-url: url(${getBlogThumbSrc(featured)});`}>
+							<img src={getBlogThumbSrc(featured)} alt={featured.data.imageAlt || featured.data.title} loading="eager" decoding="async" />
+						</div>
+					)}
+					<h2>{featured.data.title}</h2>
+					<p>{featured.data.description}</p>
+					<div class="blog-featured__footer">
+						<span>{featured.data.category ?? "AI NOTE"}</span>
+						<Icon name="material-symbols:arrow-forward-rounded" />
+					</div>
+				</a>
+			)}
+		</div>
+	</section>
+
+	<section class="blog-pickup">
+		<div class="blog-shell">
+			<div class="blog-section-heading">
+				<p class="blog-kicker">PICK UP</p>
+				<h2>まず読んでほしい記事</h2>
+			</div>
+			<div class="blog-pickup__grid">
+				{pickups.map((post, index) => (
+					<a href={getPostUrlBySlug(post.slug)} class="blog-pickup-card">
+						<div class="blog-card-thumb" style={`--thumb-position: ${getThumbnailPosition(post)}; --thumb-url: url(${getBlogThumbSrc(post)});`}>
+							{(post.data.thumbnail || post.data.image) && (
+								<img src={getBlogThumbSrc(post)} alt={post.data.imageAlt || post.data.title} loading="eager" decoding="async" />
+							)}
+							<span class="blog-card-badge">0{index + 1}</span>
+						</div>
+						<div>
+							<p>{post.data.category ?? "Knowledge"}</p>
+							<h3>{post.data.title}</h3>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="blog-index">
+		<div class="blog-shell blog-index__layout">
+			<aside class="blog-sidebar">
+				<p class="blog-kicker">EXPLORE</p>
+				<h2>テーマから探す</h2>
+				<p>AIセントラルとAI Crawlに関係する公開ナレッジを、必要な文脈ごとに読み進められます。</p>
+				<div class="blog-tag-list">
+					{topTags.map((tag) => (
+						<a href={getTagUrl(tag)}>{tag}</a>
+					))}
+					<a href="/archive/">すべての記事</a>
+				</div>
+			</aside>
+
+			<div class="blog-article-list">
+				{articleGrid.length > 0 ? (
+					articleGrid.map((post) => (
+						<article class="blog-article-card">
+							<a
+								href={getPostUrlBySlug(post.slug)}
+								class="blog-card-thumb"
+								style={`--thumb-position: ${getThumbnailPosition(post)}; --thumb-url: url(${getBlogThumbSrc(post)});`}
+								aria-label={`${post.data.title}を読む`}
+							>
+								{(post.data.thumbnail || post.data.image) && (
+									<img src={getBlogThumbSrc(post)} alt={post.data.imageAlt || post.data.title} loading="eager" decoding="async" />
+								)}
+							</a>
+							<div class="blog-article-card__top">
+								<a href={getCategoryUrl(post.data.category ?? null)}>{post.data.category ?? "Uncategorized"}</a>
+								<time datetime={post.data.published.toISOString()}>{formatDateToYYYYMMDD(post.data.published)}</time>
+							</div>
+							<h3>
+								<a href={getPostUrlBySlug(post.slug)}>{post.data.title}</a>
+							</h3>
+							<p>{post.data.description}</p>
+							<div class="blog-article-card__bottom">
+								<div>
+									{(post.data.tags ?? []).slice(0, 3).map((tag) => (
+										<a href={getTagUrl(tag)}>{tag}</a>
+									))}
+								</div>
+								<a href={getPostUrlBySlug(post.slug)} class="blog-read-link">
+									読む
+									<Icon name="material-symbols:arrow-forward-rounded" />
+								</a>
+							</div>
+						</article>
+					))
+				) : (
+					<div class="blog-empty">
+						<h3>記事を準備中です</h3>
+						<p>公開ノートは順次追加していきます。</p>
+					</div>
+				)}
+			</div>
+		</div>
+	</section>
+
+	<section class="blog-cta">
+		<div class="blog-shell blog-cta__panel">
+			<div>
+				<p class="blog-kicker">NEXT ACTION</p>
+				<h2>記事を読んだあと、社内のAI化余地を診断する。</h2>
+				<p>現在のフォルダ、顧客情報、FAQ、メール、チャット、表計算がAIの参照先になるかを整理します。</p>
+			</div>
+			<a href="/diagnosis/" class="blog-button blog-button--primary">無料診断へ進む</a>
+		</div>
+	</section>
+
+	<div class="blog-pagination">
+		<Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`} />
+	</div>
+</LandingLayout>
+
+<style>
+	:global(:root) {
+		--page-bg: #f4f6fb;
+		--blog-ink: #182132;
+		--blog-muted: #606a7d;
+		--blog-accent: #3f6f9f;
+		--blog-accent-deep: #183f6d;
+		--blog-sage: #8e7d62;
+		--blog-line: rgba(94, 111, 137, 0.28);
+		--blog-card: rgba(255, 255, 255, 0.82);
+	}
+
+	.blog-shell {
+		width: min(1180px, calc(100% - 48px));
+		margin: 0 auto;
+	}
+
+	.blog-hero {
+		padding: 144px 0 76px;
+		border-bottom: 1px solid var(--blog-line);
+		background:
+			linear-gradient(90deg, rgba(246, 248, 252, 0.88), rgba(238, 243, 250, 0.96)),
+			radial-gradient(circle at 76% 22%, rgba(63, 111, 159, 0.16), transparent 34%),
+			radial-gradient(circle at 14% 74%, rgba(142, 125, 98, 0.13), transparent 32%);
+	}
+
+	.blog-hero__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.8fr);
+		gap: clamp(32px, 5vw, 72px);
+		align-items: stretch;
+	}
+
+	.blog-kicker {
+		margin: 0 0 14px;
+		color: var(--blog-accent-deep);
+		font-size: 13px;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.blog-hero h1,
+	.blog-section-heading h2,
+	.blog-sidebar h2,
+	.blog-cta h2 {
+		margin: 0;
+		color: var(--blog-ink);
+		font-weight: 950;
+		letter-spacing: 0;
+	}
+
+	.blog-hero h1 {
+		max-width: 780px;
+		font-size: clamp(44px, 6.2vw, 76px);
+		line-height: 1.08;
+	}
+
+	.blog-hero__copy > p:not(.blog-kicker),
+	.blog-sidebar > p,
+	.blog-cta p {
+		max-width: 690px;
+		margin: 24px 0 0;
+		color: var(--blog-muted);
+		font-size: 18px;
+		font-weight: 650;
+		line-height: 1.9;
+	}
+
+	.blog-hero__resources {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.75fr);
+		gap: 14px;
+		margin-top: 34px;
+		max-width: 760px;
+	}
+
+	.blog-newsletter-card,
+	.blog-pedia-card {
+		border: 1px solid var(--blog-line);
+		border-radius: 24px;
+		background: rgba(255, 255, 255, 0.78);
+		box-shadow: 0 18px 42px rgba(23, 32, 42, 0.08);
+	}
+
+	.blog-newsletter-card {
+		display: grid;
+		gap: 12px;
+		padding: 20px;
+	}
+
+	.blog-resource-label,
+	.blog-pedia-card span {
+		margin: 0;
+		color: var(--blog-accent-deep);
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.blog-newsletter-card h2 {
+		margin: 6px 0 0;
+		color: var(--blog-ink);
+		font-size: clamp(20px, 2.1vw, 28px);
+		font-weight: 950;
+		line-height: 1.3;
+	}
+
+	.blog-newsletter-card p:not(.blog-resource-label) {
+		margin: 8px 0 0;
+		color: var(--blog-muted);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.7;
+	}
+
+	.blog-newsletter-card iframe {
+		display: block;
+		width: 100%;
+		height: 122px;
+		border: 1px solid rgba(104, 130, 136, 0.2);
+		border-radius: 16px;
+		background: #fff;
+	}
+
+	.blog-pedia-card {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding: 12px;
+		color: inherit;
+		text-decoration: none;
+		transition:
+			border-color 0.2s ease,
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.blog-pedia-card:hover {
+		border-color: rgba(46, 111, 115, 0.5);
+		box-shadow: 0 22px 48px rgba(23, 32, 42, 0.12);
+		transform: translateY(-2px);
+	}
+
+	.blog-pedia-card img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		border: 1px solid rgba(104, 130, 136, 0.24);
+		border-radius: 16px;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.blog-pedia-card span {
+		margin-top: 13px;
+	}
+
+	.blog-pedia-card strong {
+		margin-top: 5px;
+		color: var(--blog-ink);
+		font-size: 19px;
+		font-weight: 950;
+		line-height: 1.3;
+	}
+
+	.blog-pedia-card p {
+		margin: 6px 0 0;
+		color: var(--blog-muted);
+		font-size: 13px;
+		font-weight: 750;
+		line-height: 1.55;
+	}
+
+	.blog-pedia-card small {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		margin-top: auto;
+		padding-top: 12px;
+		color: var(--blog-accent);
+		font-size: 13px;
+		font-weight: 950;
+	}
+
+	.blog-pedia-card small svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.blog-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 54px;
+		padding: 0 22px;
+		border: 1px solid rgba(46, 111, 115, 0.42);
+		border-radius: 999px;
+		font-size: 15px;
+		font-weight: 900;
+		text-decoration: none;
+	}
+
+	.blog-button svg {
+		width: 20px;
+		height: 20px;
+		margin-right: 8px;
+	}
+
+	.blog-button--primary {
+		background: var(--blog-accent-deep);
+		color: #fff;
+		box-shadow: 0 16px 34px rgba(22, 72, 78, 0.22);
+	}
+
+	.blog-button--ghost {
+		background: rgba(255, 255, 255, 0.72);
+		color: var(--blog-accent-deep);
+	}
+
+	.blog-featured {
+		display: flex;
+		flex-direction: column;
+		min-height: 420px;
+		padding: clamp(28px, 4vw, 46px);
+		border: 1px solid var(--blog-line);
+		border-radius: 32px;
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(233, 242, 241, 0.76)),
+			radial-gradient(circle at 90% 0%, rgba(46, 111, 115, 0.17), transparent 36%);
+		color: inherit;
+		text-decoration: none;
+		box-shadow: 0 24px 70px rgba(23, 32, 42, 0.1);
+	}
+
+	.blog-featured__image {
+		position: relative;
+		display: block;
+		overflow: hidden;
+		aspect-ratio: 16 / 10;
+		margin: 24px 0 26px;
+		border: 1px solid rgba(104, 130, 136, 0.32);
+		border-radius: 24px;
+		background-image: var(--thumb-url);
+		background-position: var(--thumb-position, center);
+		background-size: cover;
+		background-repeat: no-repeat;
+		box-shadow: 0 18px 44px rgba(23, 32, 42, 0.11);
+	}
+
+	.blog-featured__image :global(img),
+	.blog-card-thumb :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: var(--thumb-position, center) !important;
+	}
+
+	.blog-featured__meta,
+	.blog-featured__footer,
+	.blog-article-card__top,
+	.blog-article-card__bottom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+	}
+
+	.blog-article-card__top {
+		margin-top: 2px;
+	}
+
+	.blog-featured__meta span,
+	.blog-featured__footer span,
+	.blog-article-card__top a,
+	.blog-article-card__top time {
+		color: var(--blog-accent-deep);
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		text-decoration: none;
+	}
+
+	.blog-featured h2 {
+		margin: 0 0 16px;
+		color: var(--blog-ink);
+		font-size: clamp(28px, 3.2vw, 44px);
+		font-weight: 950;
+		line-height: 1.22;
+	}
+
+	.blog-featured p {
+		margin: 0 0 32px;
+		color: var(--blog-muted);
+		font-size: 17px;
+		font-weight: 700;
+		line-height: 1.8;
+	}
+
+	.blog-featured__footer svg {
+		width: 28px;
+		height: 28px;
+		color: var(--blog-accent);
+	}
+
+	.blog-pickup,
+	.blog-index,
+	.blog-cta {
+		padding: 78px 0;
+	}
+
+	.blog-section-heading {
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		gap: 24px;
+		margin-bottom: 28px;
+	}
+
+	.blog-section-heading h2,
+	.blog-sidebar h2,
+	.blog-cta h2 {
+		font-size: clamp(30px, 4vw, 50px);
+		line-height: 1.15;
+	}
+
+	.blog-pickup__grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.blog-pickup-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		min-height: 180px;
+		padding: 18px;
+		border: 1px solid var(--blog-line);
+		border-radius: 26px;
+		background: rgba(255, 255, 255, 0.72);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.blog-card-thumb {
+		position: relative;
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		border: 1px solid rgba(104, 130, 136, 0.3);
+		border-radius: 20px;
+		background:
+			linear-gradient(135deg, rgba(231, 241, 241, 0.76), rgba(255, 255, 255, 0.88)),
+			#edf4f3;
+		background-image:
+			var(--thumb-url),
+			linear-gradient(135deg, rgba(231, 241, 241, 0.76), rgba(255, 255, 255, 0.88));
+		background-position: var(--thumb-position, center), center;
+		background-size: cover, auto;
+		background-repeat: no-repeat;
+		box-shadow: 0 14px 34px rgba(23, 32, 42, 0.08);
+	}
+
+	.blog-card-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		display: grid;
+		place-items: center;
+		min-width: 48px;
+		height: 38px;
+		border: 1px solid rgba(46, 111, 115, 0.34);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.9);
+		color: var(--blog-accent-deep);
+		font-size: 16px;
+		font-weight: 950;
+		box-shadow: 0 10px 24px rgba(23, 32, 42, 0.1);
+	}
+
+	.blog-pickup-card p {
+		margin: 0 0 10px;
+		color: var(--blog-accent);
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.blog-pickup-card h3,
+	.blog-article-card h3 {
+		margin: 0;
+		color: var(--blog-ink);
+		font-weight: 950;
+		line-height: 1.35;
+	}
+
+	.blog-pickup-card h3 {
+		font-size: 22px;
+	}
+
+	.blog-index {
+		border-top: 1px solid var(--blog-line);
+		border-bottom: 1px solid var(--blog-line);
+		background:
+			linear-gradient(rgba(46, 111, 115, 0.055) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(46, 111, 115, 0.055) 1px, transparent 1px),
+			linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(232, 241, 240, 0.72));
+		background-size: 44px 44px, 44px 44px, auto;
+	}
+
+	.blog-index__layout {
+		display: grid;
+		grid-template-columns: 320px minmax(0, 1fr);
+		gap: 42px;
+		align-items: start;
+	}
+
+	.blog-sidebar {
+		position: sticky;
+		top: 104px;
+	}
+
+	.blog-tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: 26px;
+	}
+
+	.blog-tag-list a,
+	.blog-article-card__bottom div a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 36px;
+		padding: 0 13px;
+		border: 1px solid rgba(46, 111, 115, 0.32);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.72);
+		color: var(--blog-accent-deep);
+		font-size: 13px;
+		font-weight: 850;
+		text-decoration: none;
+	}
+
+	.blog-article-list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.blog-article-card,
+	.blog-empty {
+		min-height: 300px;
+		padding: 18px;
+		border: 1px solid var(--blog-line);
+		border-radius: 26px;
+		background: var(--blog-card);
+		box-shadow: 0 20px 55px rgba(23, 32, 42, 0.07);
+	}
+
+	.blog-article-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.blog-article-card h3 {
+		margin-top: 0;
+		font-size: 24px;
+	}
+
+	.blog-article-card h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.blog-article-card > p {
+		margin: 0 0 10px;
+		color: var(--blog-muted);
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.75;
+	}
+
+	.blog-article-card__bottom {
+		margin-top: auto;
+		align-items: end;
+		padding-top: 8px;
+	}
+
+	.blog-article-card__bottom div {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.blog-read-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--blog-accent);
+		font-size: 15px;
+		font-weight: 950;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.blog-read-link svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.blog-cta {
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.52), rgba(226, 239, 238, 0.68));
+	}
+
+	.blog-cta__panel {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 28px;
+		padding: 34px;
+		border: 1px solid var(--blog-line);
+		border-radius: 30px;
+		background: rgba(255, 255, 255, 0.78);
+		box-shadow: 0 24px 70px rgba(23, 32, 42, 0.08);
+	}
+
+	.blog-cta p {
+		margin-top: 16px;
+	}
+
+	.blog-pagination {
+		padding: 0 0 80px;
+	}
+
+	@media (max-width: 980px) {
+		.blog-hero__grid,
+		.blog-index__layout {
+			grid-template-columns: 1fr;
+		}
+
+		.blog-hero__resources {
+			grid-template-columns: minmax(0, 1fr) minmax(240px, 0.75fr);
+			max-width: none;
+		}
+
+		.blog-featured {
+			min-height: 340px;
+		}
+
+		.blog-pickup__grid,
+		.blog-article-list {
+			grid-template-columns: 1fr;
+		}
+
+		.blog-sidebar {
+			position: static;
+		}
+
+		.blog-cta__panel {
+			align-items: stretch;
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.blog-shell {
+			width: min(100% - 32px, 1180px);
+		}
+
+		.blog-hero {
+			padding: 112px 0 54px;
+		}
+
+		.blog-hero h1 {
+			font-size: 40px;
+		}
+
+		.blog-hero__copy > p:not(.blog-kicker),
+		.blog-sidebar > p,
+		.blog-cta p {
+			font-size: 16px;
+		}
+
+		.blog-hero__resources {
+			grid-template-columns: 1fr;
+		}
+
+		.blog-newsletter-card,
+		.blog-pedia-card {
+			border-radius: 20px;
+		}
+
+		.blog-newsletter-card {
+			padding: 16px;
+		}
+
+		.blog-pickup,
+		.blog-index,
+		.blog-cta {
+			padding: 54px 0;
+		}
+
+		.blog-pickup-card {
+			grid-template-columns: 1fr;
+			min-height: 0;
+		}
+
+		.blog-article-card {
+			min-height: 0;
+		}
+
+		.blog-article-card__bottom {
+			align-items: start;
+			flex-direction: column;
+		}
+	}
+</style>

@@ -2,21 +2,7 @@
 import { Icon } from "astro-icon/components";
 import LandingLayout from "../layouts/LandingLayout.astro";
 
-const contactEmail = "info@effect.moe";
-const mailtoSubject = encodeURIComponent("【無料スナップショット診断】申し込み");
-const mailtoBody = encodeURIComponent(
-	`株式会社EFFECT 御中
-
-無料スナップショット診断を希望します。
-
-■ 診断したいサイトURL：
-■ 会社名・屋号：
-■ ご担当者さまのお名前：
-■ 気になっていること（任意）：
-
-※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
-);
-const mailtoLink = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+const diagnosisFormHref = "/?inquiry=diagnosis#contact";
 
 const checks = [
 	{
@@ -60,11 +46,10 @@ const outputs = [
 					まず無料で、AI検索での出方・AIクローラーの到達・改善候補をスナップショットで確認します。
 				</p>
 				<a
-					href={mailtoLink}
-					data-no-swup
+					href={diagnosisFormHref}
 					class="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-slate-950 transition hover:bg-white/90 sm:w-auto"
 				>
-					<Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+					<Icon name="material-symbols:edit-note-outline-rounded" class="text-xl" />
 					無料診断を申し込む
 				</a>
 			</div>
@@ -110,7 +95,7 @@ const outputs = [
 					<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">FLOW</p>
 					<h2 class="mt-3 text-2xl font-bold leading-tight text-90 md:text-4xl">申し込み後の流れ</h2>
 					<p class="mt-4 text-base leading-relaxed text-75">
-						現在はメール受付で運用します。URLをいただいた後、無料範囲で確認できる内容を整理して返信します。
+						フォームからURLをいただいた後、無料範囲で確認できる内容を整理して返信します。
 					</p>
 				</div>
 				<div class="p-6 md:p-9">
@@ -118,7 +103,7 @@ const outputs = [
 						{[
 							["1", "サイトURLを送る", "メール本文に診断したいURLを記入してください。"],
 							["2", "AI検索での見え方を確認", "主要AI検索での出方と到達状態を簡易チェックします。"],
-							["3", "改善候補を返信", "必要に応じて、AIアクセス分析・構造化データ実装へ進めます。"],
+							["3", "改善候補を返信", "必要に応じて、AI Crawl・構造化データ実装へ進めます。"],
 						].map(([no, title, body]) => (
 							<div class="flex gap-3 rounded-lg border border-black/10 p-4 dark:border-white/10">
 								<span class="grid size-9 shrink-0 place-items-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">{no}</span>
@@ -139,11 +124,10 @@ const outputs = [
 				AIに参照されているか、AIからどう見られているか。最初の状態を見てから、必要な施策だけ判断できます。
 			</p>
 			<a
-				href={mailtoLink}
-				data-no-swup
+				href={diagnosisFormHref}
 				class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-md bg-white px-6 py-3 font-bold text-slate-950 transition hover:bg-white/90 sm:w-auto"
 			>
-				<Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+				<Icon name="material-symbols:edit-note-outline-rounded" class="text-xl" />
 				無料診断を申し込む
 			</a>
 		</section>

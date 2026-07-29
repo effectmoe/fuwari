@@ -39,31 +39,33 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		LinkPreset.Home,
 		{
-			name: "Blog",
-			url: "/blog/",
+			name: "ホーム",
+			url: "/",
 		},
 		{
 			name: "AIセントラル",
 			url: "/ai-central/",
 		},
 		{
-			name: "AIアクセス分析",
-			url: "/ai-traffic-report/",
+			name: "AIクロール",
+			url: "/aicrawl/",
 		},
 		{
-			name: "無料診断",
-			url: "/diagnosis/",
+			name: "ブログ",
+			url: "/blog/",
 		},
 		{
-			name: "Company",
+			name: "AI講座",
+			url: "/ai-agent-course/",
+		},
+		{
+			name: "会社概要",
 			url: "/company/",
 		},
 		{
-			name: "ストアカ",
-			url: "https://www.street-academy.com/steachers/271053",
-			external: true,
+			name: "チェンジログ",
+			url: "/changelog/",
 		},
 	],
 };

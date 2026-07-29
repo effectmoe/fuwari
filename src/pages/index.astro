@@ -11,17 +11,11 @@ import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
 const latestPosts = (await getSortedPosts()).slice(0, 3);
 const testimonials = stats.testimonials.slice(0, 2);
-const contactEmail = "info@effect.moe";
-const mailtoSubject = encodeURIComponent("【effect.moe】無料相談の申し込み");
-const mailtoBody = encodeURIComponent(
-	"シュ コウメイ / 株式会社EFFECT 宛\n\n相談したい内容:\n\n会社・屋号:\n\nお名前:\n\nWebサイトURL:\n\n"
-);
-const consultationHref = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+const consultationHref = "#contact";
 
 const statCards = [
 	{ value: `★${stats.ratingValue}`, label: `レビュー ${stats.reviewCount}件` },
 	{ value: `${stats.studentsTaught}名`, label: "累計受講者数" },
-	{ value: `${stats.sessionsTaught}回`, label: "累計開催回数" },
 	{ value: stats.badge, label: "ストアカ講師ランク" },
 ];
 
@@ -29,7 +23,6 @@ const referenceProofStats = [
 	{ value: `★${stats.ratingValue}`, label: "講座レビュー評価" },
 	{ value: `${stats.reviewCount}件`, label: "公開レビュー" },
 	{ value: `${stats.studentsTaught}+`, label: "累計受講者" },
-	{ value: `${stats.sessionsTaught}+`, label: "累計開催" },
 ];
 
 const issueCards = [
@@ -68,11 +61,11 @@ const issueCards = [
 const caseCards = [
 	{
 		kicker: "CASE 01",
-		title: "AI検索の入口を作る",
-		before: "AIがサービス名・料金・FAQを拾えない",
-		after: "AIアクセス分析で見え方を把握し、引用される構造へ直す",
-		href: "/ai-traffic-report/",
-		icon: "material-symbols:travel-explore",
+		title: "導入前に業務を棚卸する",
+		before: "資料・顧客情報・対応履歴がどこにあるか曖昧",
+		after: "無料診断で、AI CENTRALに接続すべき情報と詰まりを整理する",
+		href: "/diagnosis/",
+		icon: "material-symbols:inventory-2-outline",
 	},
 	{
 		kicker: "CASE 02",
@@ -99,9 +92,9 @@ const pillars = [
 		icon: "material-symbols:deployed-code-outline",
 	},
 	{
-		title: "AI検索支援",
-		body: "AIがサイトをどう読み、どう引用し、どこで詰まるかを見て、LLMOの改善に接続します。",
-		icon: "material-symbols:travel-explore",
+		title: "業務棚卸し",
+		body: "既存ファイル・フォルダ・顧客情報・業務フローを見て、AI CENTRALに入れるべき記憶を整理します。",
+		icon: "material-symbols:inventory-2-outline",
 	},
 	{
 		title: "講座・伴走",
@@ -113,16 +106,16 @@ const pillars = [
 const systemMap = [
 	{
 		step: "01",
-		title: "AIにどう見えるかを知る",
-		body: "無料診断で、AI検索での出方・AIクローラー到達・構造の弱点を確認します。",
+		title: "社内の情報資産を棚卸する",
+		body: "無料診断で、資料・顧客情報・対応履歴・業務フローがどこにあるかを確認します。",
 		icon: "material-symbols:radar",
 		tone: "blue",
 	},
 	{
 		step: "02",
-		title: "AI検索で選ばれる形に直す",
-		body: "AIアクセス分析で、引用されやすいページ・FAQ・構造化データ・導線へ改善します。",
-		icon: "material-symbols:travel-explore",
+		title: "AI化のボトルネックを抽出する",
+		body: "どの情報をAIに参照させ、どこに人の承認を残すべきかを切り分けます。",
+		icon: "material-symbols:account-tree-outline",
 		tone: "teal",
 	},
 	{
@@ -136,16 +129,16 @@ const systemMap = [
 
 const decisionRows = [
 	{
-		issue: "AI検索で自社が出てこない",
+		issue: "社内情報がどこにあるか整理できていない",
 		first: "無料診断",
-		next: "AIアクセス分析",
-		reason: "AIクローラー到達・引用されやすさ・サイト構造を先に確認する。",
+		next: "AIセントラル",
+		reason: "既存ファイルや顧客情報をそのまま活かし、AIが参照できる記憶基盤へ整理する。",
 	},
 	{
-		issue: "AIからどう見られているか分からない",
+		issue: "AIに何を任せてよいか分からない",
 		first: "無料診断",
-		next: "AIアクセス分析",
-		reason: "ChatGPT / Claude / Perplexity などでの認識差を継続的に見る。",
+		next: "AIセントラル",
+		reason: "検索・整理・作成・確認・分析のうち、AIが先に進める範囲を切り分ける。",
 	},
 	{
 		issue: "社内情報をAIに覚えさせたい",
@@ -170,7 +163,7 @@ const trustBlocks = [
 	},
 	{
 		title: "マーケティングまで接続",
-		body: "LLMO、記事構造、AIアクセス分析まで扱うため、作ったAIとサイト上の見え方を分断せずに設計できます。",
+		body: "記事構造や問い合わせ導線まで扱うため、AI CENTRALの説明と集客ページを分断せずに設計できます。",
 		icon: "material-symbols:monitoring",
 		href: "/blog/",
 	},
@@ -185,7 +178,7 @@ const trustBlocks = [
 const proofFlow = [
 	{
 		label: "実績を見る",
-		title: "講座評価・受講者数・開催回数",
+		title: "講座評価・受講者数・Proランク",
 		icon: "material-symbols:workspace-premium-outline",
 	},
 	{
@@ -195,7 +188,7 @@ const proofFlow = [
 	},
 	{
 		label: "次を決める",
-		title: "AIアクセス分析かAIセントラルへ",
+		title: "AI CENTRALを入れるべきか判断",
 		icon: "material-symbols:alt-route",
 	},
 ];
@@ -214,7 +207,7 @@ const diagnosisChecks = [
 	{
 		step: "03",
 		title: "次にどこを直すか",
-		body: "AIアクセス分析、記事改善、構造化、AIセントラルのどこへ進むかを整理します。",
+		body: "AI CENTRALを導入すべきか、通常相談で十分か、ローカル構成が必要かを整理します。",
 	},
 ];
 
@@ -238,21 +231,21 @@ const blogAngles = [
 
 const aiCentralPricing = [
 	{
-		name: "AIセントラル",
+		name: "AI セントラル",
 		label: "まず記憶を作る",
 		price: "¥330,000",
-		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整理します。",
-		features: ["顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
+		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整えます。",
+		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
 		cta: "この構成で相談する",
 		icon: "material-symbols:memory-alt-outline",
 		popular: true,
 	},
 	{
-		name: "AIセントラル＋",
+		name: "AI セントラル PLUS",
 		label: "業務ツールとつなぐ",
 		price: "¥550,000",
-		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げます。",
-		features: ["外部ツール連携", "期限・予定と接続", "類似案件検索"],
+		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
+		features: ["AI セントラルの機能すべて", "外部ツール連携", "期限・予定と接続", "類似案件検索"],
 		cta: "連携範囲を相談する",
 		icon: "material-symbols:hub-outline",
 		recommended: true,
@@ -262,7 +255,7 @@ const aiCentralPricing = [
 		label: "ローカルLLMで守る",
 		price: "¥1,320,000",
 		description: "顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
-		features: ["完全ローカル構成", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
+		features: ["AI セントラル PLUS の機能すべて", "完全ローカル構成", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
 		cta: "セキュリティ前提で相談する",
 		icon: "material-symbols:shield-lock-outline",
 		secure: true,
@@ -271,16 +264,28 @@ const aiCentralPricing = [
 
 const topFaqs = [
 	{
-		q: "AIセントラルは士業事務所向けだけですか？",
-		a: "士業事務所は強い適用先ですが、それだけではありません。AIに記憶を持たせたい企業、個人情報や顧客情報を扱う企業、社内ナレッジをAIで活用したい企業にも向いています。",
+		q: "どのような業種に向いていますか？",
+		a: "士業事務所、コンサルティング、医療・福祉、教育、営業組織、顧客対応部門など、社内資料・顧客情報・対応履歴を扱う業種に向いています。特に、個人情報や顧客情報を扱いながら、社内ナレッジをAIで活用したい企業と相性が良いです。",
 	},
 	{
 		q: "既存のファイルやフォルダを移動する必要はありますか？",
-		a: "原則として既存のデータ資産はそのまま活かします。PDF、Word、Excel、Google Drive、社内フォルダなどを無理に移行するのではなく、AIが参照できる記憶の網を上から構築します。",
+		a: "原則として既存のデータ資産はそのまま活かします。PDF、Word、Excel、Google Drive、社内フォルダなどを無理に移行するのではなく、AIが参照できる記憶の網を重ねて構築します。",
+	},
+	{
+		q: "小さく始めることはできますか？",
+		a: "可能です。最初から全社の情報をAI化するのではなく、まずは一部署、一業務、一つの資料フォルダなど、効果を確認しやすい範囲から始めます。運用できる状態を確認してから、対象業務や参照範囲を広げます。",
+	},
+	{
+		q: "AIの記憶とは、何を覚えさせることですか？",
+		a: "社内資料、顧客情報、対応履歴、FAQ、判断基準などを、AIが参照できる形に整理することです。AIに勝手に記憶させるのではなく、どの情報を見てよいか、どの範囲で使うかを設計します。",
+	},
+	{
+		q: "類似検索では何ができますか？",
+		a: "AIセントラル PLUSプラン以上では、FORGEによる類似検索を使い、キーワードが一致しなくても、似た案件、似た相談、過去の対応、関連資料を内容の近さから探せます。担当者の記憶やフォルダ名に頼る検索を減らせます。",
 	},
 	{
 		q: "顧客情報や個人情報をAIに扱わせても大丈夫ですか？",
-		a: "扱う情報の性質に合わせて設計します。外部クラウドに出せない情報がある場合は、ローカルLLMや管理下AIの構成を検討し、権限、ログ、承認フローを前提にします。",
+		a: "扱う情報の性質に合わせて設計します。外部クラウドに出せない情報がある場合は、ローカルLLMや管理下AIの構成を検討し、権限、ログ、承認フローを前提に整理します。",
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
@@ -288,15 +293,19 @@ const topFaqs = [
 	},
 	{
 		q: "月額22,000円には何が含まれますか？",
-		a: "隔週90分の伴走コンサル、基本保守、チャット対応を含みます。作って終わりではなく、業務に定着するまで一緒に育てます。",
+		a: "半年間の伴走期間として、隔週90分の伴走コンサル、基本保守、チャット対応を含みます。作って終わりではなく、業務に定着するまで一緒に育てます。",
+	},
+	{
+		q: "伴走期間中の情報はどのように扱いますか？",
+		a: "相談時点で、共有できる情報と共有しない情報を分けて確認します。機密情報や個人情報を扱う場合は、伏せ字、サンプル化、ローカル構成、権限管理など、情報の扱いを決めてから構築・伴走します。",
 	},
 	{
 		q: "パーフェクトセキュアは何が違いますか？",
-		a: "1台のPCを預かり、完全オリジナル仕様に構築します。社内PCや社内ネットワーク内でAIを動かす前提で、機密情報を外へ出しにくい構成を作ります。",
+		a: "1台のPCを預かり、完全オリジナル仕様に構築します。社内PCや社内ネットワーク内でAIを動かす前提で、機密情報を外部クラウドへ出しにくい構成を作ります。",
 	},
 	{
 		q: "最初は何から始めるべきですか？",
-		a: "まず無料診断で、社内資料、顧客情報、業務フロー、セキュリティ要件を確認します。その上でAIセントラル、AIセントラル＋、パーフェクトセキュアのどれが合うかを整理します。",
+		a: "まず無料診断で、社内資料、顧客情報、業務フロー、セキュリティ要件を確認します。その上でAIセントラル、AIセントラル PLUS、パーフェクトセキュアのどれが合うかを整理します。",
 	},
 ];
 
@@ -324,13 +333,13 @@ const faqLd = {
 	<div class="effect-home-design">
 		<EffectInteractiveHero />
 
-	<section class="digirise-proof-strip border-b border-black/10">
+	<section id="proof" class="digirise-proof-strip border-b border-black/10">
 		<div class="mx-auto max-w-7xl px-4 py-3 md:px-8 md:py-4">
 			<div class="proof-compact-row">
 				<div class="proof-compact-heading">
 					<div class="storaca-wordmark" aria-label="ストアカ">ストアカ</div>
 					<p>日本最大級のまなびのマーケット</p>
-					<strong>ストアカ内最高ランクの講師が構築する。</strong>
+					<strong>ストアカProランクの講師が構築</strong>
 					<small>ストアカは講座を探して受講できる学習サービス。評価・レビュー・受講者数が公開されるため、第三者評価として確認できます。</small>
 				</div>
 				<div class="proof-compact-stats">
@@ -355,13 +364,13 @@ const faqLd = {
 		</div>
 	</section>
 
-	<section class="home-what-panel home-decision-panel border-b border-black/10 bg-[var(--page-bg)]">
+	<section id="decision" class="home-what-panel home-decision-panel border-b border-black/10 bg-[var(--page-bg)]">
 		<div class="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
 			<div class="section-copy">
 				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI CENTRAL AFTER INSTALLATION</p>
-				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">システム導入でAIが検索・整理・作成・確認・分析を先に進む。人間は「意思決定」に集中する。</h2>
+				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">AIが参照する記憶と、人が判断する境界を設計する。</h2>
 				<p class="mt-5 max-w-3xl text-base leading-relaxed text-75">
-					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが業務の下処理を進め、人間は判断・承認・方針決定・最終責任に集中します。
+					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが業務の下処理を進め、人間は判断・承認・方針決定・最終確認に集中します。
 				</p>
 			</div>
 			<div class="decision-map" aria-label="AIセントラル設計でAIが担う業務と人間が担う意思決定">
@@ -389,6 +398,7 @@ const faqLd = {
 				</div>
 				<div class="decision-map__column decision-map__column--work">
 					<p><Icon name="material-symbols:task-alt" /><b>AIが担う業務</b><small>人の前段にある作業をAIが先に進める。</small></p>
+					<span class="decision-map__similar-search"><Icon name="material-symbols:travel-explore" /><em>AI セントラル PLUSプラン以上</em><b>類似検索</b><small>キーワードではなく、似た案件・相談・過去対応を呼び出す</small></span>
 					<span><Icon name="material-symbols:manage-search" /><b>検索</b><small>必要資料と過去履歴を探す</small></span>
 					<span><Icon name="material-symbols:sort" /><b>整理</b><small>案件ごとに情報をまとめる</small></span>
 					<span><Icon name="material-symbols:edit-document-outline" /><b>作成</b><small>メール・説明文を下書きする</small></span>
@@ -399,7 +409,7 @@ const faqLd = {
 				<div class="decision-map__decision">
 					<Icon name="material-symbols:verified-user-outline" />
 					<strong>人間の意思決定</strong>
-					<span>判断・承認・方針決定・最終責任だけに集中する。</span>
+					<span>判断・承認・方針決定・最終確認に集中する。</span>
 				</div>
 			</div>
 		</div>
@@ -414,7 +424,37 @@ const faqLd = {
 				<div class="pricing-section__header">
 					<p>AI CENTRAL PRICING</p>
 					<h2>AIセントラルは、記憶の深さと安全性で価格が変わります。</h2>
-					<span>汎用チャットの月額課金ではなく、社内資料・顧客情報・承認範囲・ローカルLLMの必要性に合わせて構築するシステムです。</span>
+					<span>料金は、初期導入費用と月額コンサル費用の両方がかかります。カード内の金額は初期導入費用、月額 ¥22,000 は導入後6ヶ月の伴走・基本保守・チャット対応です。</span>
+				</div>
+
+				<div class="pricing-clarity-grid" aria-label="料金表示の前提">
+					<div>
+						<span>必須 01</span>
+						<strong>記憶基盤・連携・ローカル構成の構築費</strong>
+					</div>
+					<div>
+						<span>必須 02</span>
+						<strong>6ヶ月伴走・基本保守・チャット対応</strong>
+					</div>
+					<div>
+						<span>導入範囲</span>
+						<strong>一部署・一業務から小さく開始可能</strong>
+					</div>
+					<div>
+						<span>設計支援</span>
+						<strong>棚卸し・ボトルネック抽出・参照範囲設計を含む</strong>
+					</div>
+				</div>
+
+				<div class="pricing-payment-row" aria-label="支払い方法">
+					<div>
+						<span>初回費用</span>
+						<strong>銀行振込</strong>
+					</div>
+					<div>
+						<span>月額費用</span>
+						<strong>クレジットカード払い</strong>
+					</div>
 				</div>
 
 				<div class="pricing-support">
@@ -422,23 +462,26 @@ const faqLd = {
 						<Icon name="material-symbols:support-agent" />
 					</div>
 					<div>
-						<span>月額費用</span>
-						<strong>月額 ¥22,000</strong>
-						<p>隔週90分の伴走コンサル + 基本保守＋チャット対応。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
+						<span>全プラン共通で必要な月額コンサル費用</span>
+						<div class="pricing-support__price-row">
+							<strong>月額 ¥22,000</strong>
+							<em>6ヶ月伴走</em>
+						</div>
+						<p>初期導入費用とは別に、隔週90分の伴走コンサル、基本保守、チャット対応を半年間提供します。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
 					</div>
 				</div>
 
 				<div class="pricing-cards" aria-label="AIセントラルの料金プラン">
 					{aiCentralPricing.map((plan) => (
 						<article class:list={["pricing-card", { "is-recommended": plan.recommended, "is-secure": plan.secure }]}>
-							{plan.popular && <span class="pricing-card__badge pricing-card__badge--popular">AI Central 33万円が人気</span>}
+							{plan.popular && <span class="pricing-card__badge pricing-card__badge--popular">AI セントラル 33万円が人気</span>}
 							{plan.recommended && <span class="pricing-card__badge">RECOMMENDED</span>}
 							{plan.secure && <span class="pricing-card__badge pricing-card__badge--secure">個人情報・顧客情報を扱う企業向け</span>}
 							<div class="pricing-card__icon"><Icon name={plan.icon} /></div>
 							<p>{plan.label}</p>
 							<h3>{plan.name}</h3>
 							<div class="pricing-card__price">
-								<span>初期構築費用</span>
+								<span>初期導入費用</span>
 								<strong>{plan.price}</strong>
 							</div>
 							<div class="pricing-card__description">{plan.description}</div>
@@ -461,10 +504,10 @@ const faqLd = {
 				</div>
 
 				<div class="pricing-note">
-					<p>表示は税込・初期構築費用の目安です。月額費用は全プラン共通で別途 ¥22,000。既存資料の量、連携ツール数、権限設計の範囲により調整します。</p>
+					<p>表示は税込・初期導入費用の目安です。導入時は、各プランの初期導入費用と、全プラン共通の月額コンサル費用 ¥22,000（6ヶ月）の両方がかかります。初回費用は銀行振込、月額費用はクレジットカード払いです。</p>
 					<div>
 						<a class="pricing-note__primary" href={consultationHref}>無料相談で見積もる</a>
-						<a class="pricing-note__secondary" href="/ai-central/#pricing">詳しい料金を見る</a>
+						<a class="pricing-note__secondary" href="#pricing">詳しい料金を見る</a>
 					</div>
 				</div>
 			</div>
@@ -518,12 +561,16 @@ const faqLd = {
 						</div>
 					</div>
 
-					<form class="contact-form-card" action={`mailto:${contactEmail}`} method="post" enctype="text/plain">
+					<form class="contact-form-card" action="/api/contact" method="post" data-contact-form>
 						<div class="contact-form-card__head">
 							<strong>お問い合わせ内容</strong>
 							<span>送信前に要点だけ整理します</span>
 						</div>
 						<div class="contact-form-grid">
+							<label class="contact-form-grid__trap" aria-hidden="true">
+								<span>Webサイト</span>
+								<input name="website" type="text" tabindex="-1" autocomplete="off" />
+							</label>
 							<label>
 								<span>会社名 <b>必須</b></span>
 								<input name="会社名" type="text" required />
@@ -549,7 +596,7 @@ const faqLd = {
 								<select name="ご検討内容" required>
 									<option value="">選択してください</option>
 									<option>AIセントラル</option>
-									<option>AIセントラル＋</option>
+									<option>AIセントラル PLUS</option>
 									<option>パーフェクトセキュア</option>
 									<option>まず無料診断したい</option>
 									<option>まだ決まっていない</option>
@@ -567,6 +614,95 @@ const faqLd = {
 									<option>まだ整理できていない</option>
 								</select>
 							</label>
+							<div class="diagnosis-questionnaire contact-form-grid__wide" data-diagnosis-questionnaire hidden>
+								<div class="diagnosis-questionnaire__head">
+									<span>無料診断カルテ</span>
+									<strong>AI CENTRALを導入すべきか、Zoom前に判断材料を整理します。</strong>
+									<p>現状の社内ワークフロー、情報資産、セキュリティ要件、AIに任せたい範囲を確認します。</p>
+								</div>
+								<div class="diagnosis-questionnaire__grid">
+									<label>
+										<span>一番AI化したい業務</span>
+										<select name="AI化したい業務" data-diagnosis-required>
+											<option value="">選択してください</option>
+											<option>顧客対応・問い合わせ対応</option>
+											<option>社内資料の検索・要約</option>
+											<option>案件管理・顧客カルテ整理</option>
+											<option>メール・チャットの整理</option>
+											<option>見積・提案・報告書作成</option>
+											<option>まだ絞れていない</option>
+										</select>
+									</label>
+									<label>
+										<span>個人情報・顧客情報の扱い</span>
+										<select name="情報の機密度" data-diagnosis-required>
+											<option value="">選択してください</option>
+											<option>個人情報・顧客情報を多く扱う</option>
+											<option>一部扱う</option>
+											<option>ほとんど扱わない</option>
+											<option>判断できていない</option>
+										</select>
+									</label>
+								</div>
+								<fieldset>
+									<legend>いま詰まっていること</legend>
+									<div class="diagnosis-checks">
+										<label><input type="checkbox" name="ボトルネック" value="資料が散らばって探せない" />資料が散らばって探せない</label>
+										<label><input type="checkbox" name="ボトルネック" value="担当者しか経緯を知らない" />担当者しか経緯を知らない</label>
+										<label><input type="checkbox" name="ボトルネック" value="毎回AIに前提を説明している" />毎回AIに前提を説明している</label>
+										<label><input type="checkbox" name="ボトルネック" value="承認や確認に時間がかかる" />承認や確認に時間がかかる</label>
+										<label><input type="checkbox" name="ボトルネック" value="個人情報の扱いが不安" />個人情報の扱いが不安</label>
+										<label><input type="checkbox" name="ボトルネック" value="どこからAI化すべきか不明" />どこからAI化すべきか不明</label>
+									</div>
+								</fieldset>
+								<fieldset>
+									<legend>現在使っている主なツール</legend>
+									<div class="diagnosis-checks diagnosis-checks--tools">
+										<label><input type="checkbox" name="利用ツール" value="メール" />メール</label>
+										<label><input type="checkbox" name="利用ツール" value="Slack / Chatwork" />Slack / Chatwork</label>
+										<label><input type="checkbox" name="利用ツール" value="Google Drive" />Google Drive</label>
+										<label><input type="checkbox" name="利用ツール" value="Excel / Spreadsheet" />Excel / Spreadsheet</label>
+										<label><input type="checkbox" name="利用ツール" value="Notion / Obsidian" />Notion / Obsidian</label>
+										<label><input type="checkbox" name="利用ツール" value="CRM / 顧客カルテ" />CRM / 顧客カルテ</label>
+										<label><input type="checkbox" name="利用ツール" value="Googleカレンダー / ToDo" />Googleカレンダー / ToDo</label>
+										<label><input type="checkbox" name="利用ツール" value="社内ファイルサーバー" />社内ファイルサーバー</label>
+									</div>
+								</fieldset>
+								<div class="diagnosis-questionnaire__grid">
+									<label>
+										<span>AIに任せたい範囲</span>
+										<select name="AIに任せたい範囲">
+											<option value="">選択してください</option>
+											<option>検索・整理まで</option>
+											<option>下書き・要約まで</option>
+											<option>確認・分析まで</option>
+											<option>承認前の自動実行まで</option>
+											<option>相談しながら決めたい</option>
+										</select>
+									</label>
+									<label>
+										<span>セキュリティ要件</span>
+										<select name="セキュリティ要件">
+											<option value="">選択してください</option>
+											<option>完全ローカルで動かしたい</option>
+											<option>社内PC・社内ネットワーク内を優先したい</option>
+											<option>クラウド連携も検討できる</option>
+											<option>まだ判断できない</option>
+										</select>
+									</label>
+								</div>
+								<fieldset>
+									<legend>期待する成果</legend>
+									<div class="diagnosis-checks">
+										<label><input type="checkbox" name="期待成果" value="探す時間を減らしたい" />探す時間を減らしたい</label>
+										<label><input type="checkbox" name="説明し直す時間を減らしたい" />説明し直す時間を減らしたい</label>
+										<label><input type="checkbox" name="問い合わせ対応を標準化したい" />問い合わせ対応を標準化したい</label>
+										<label><input type="checkbox" name="属人化を減らしたい" />属人化を減らしたい</label>
+										<label><input type="checkbox" name="類似案件を探せるようにしたい" />類似案件を探せるようにしたい</label>
+										<label><input type="checkbox" name="安全に社内AIを使いたい" />安全に社内AIを使いたい</label>
+									</div>
+								</fieldset>
+							</div>
 							<label class="contact-form-grid__wide">
 								<span>メッセージ <b>必須</b></span>
 								<textarea name="メッセージ" rows="7" placeholder="現在困っている業務、扱いたい資料、セキュリティ面の不安などをご記入ください。" required></textarea>
@@ -575,13 +711,96 @@ const faqLd = {
 
 						<div class="contact-submit-area">
 							<button type="submit">送信する</button>
-							<p>送信内容を確認後、シュ コウメイよりご連絡します。契約主体は株式会社EFFECTです。</p>
+							<p data-contact-status>送信内容を確認後、シュ コウメイよりご連絡します。契約主体は株式会社EFFECTです。</p>
 						</div>
 					</form>
 				</div>
 			</div>
 		</section>
 	</div>
+
+	<script>
+		const contactForm = document.querySelector("[data-contact-form]") as HTMLFormElement | null;
+		const diagnosisQuestionnaire = contactForm?.querySelector("[data-diagnosis-questionnaire]") as HTMLElement | null;
+		const diagnosisRequiredFields = Array.from(contactForm?.querySelectorAll("[data-diagnosis-required]") ?? []) as HTMLSelectElement[];
+		const interestSelect = contactForm?.elements.namedItem("ご検討内容") as HTMLSelectElement | null;
+
+		const toggleDiagnosisQuestionnaire = () => {
+			const isDiagnosis = interestSelect?.value === "まず無料診断したい";
+			if (diagnosisQuestionnaire) diagnosisQuestionnaire.hidden = !isDiagnosis;
+			diagnosisRequiredFields.forEach((field) => {
+				field.required = Boolean(isDiagnosis);
+			});
+		};
+
+		const inquiryFromUrl = new URLSearchParams(window.location.search).get("inquiry");
+		const serviceFromUrl = new URLSearchParams(window.location.search).get("service");
+		if (contactForm && inquiryFromUrl === "diagnosis") {
+			if (interestSelect) interestSelect.value = "まず無料診断したい";
+			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
+			if (messageField && serviceFromUrl === "aicrawl" && !messageField.value) {
+				messageField.value = "AI CRAWLの無料診断を希望します。AIからの流入状況、読まれているページ、改善の方向性を確認したいです。";
+			}
+		}
+		toggleDiagnosisQuestionnaire();
+		interestSelect?.addEventListener("change", toggleDiagnosisQuestionnaire);
+
+		contactForm?.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const submitButton = contactForm.querySelector("button[type='submit']") as HTMLButtonElement | null;
+			const status = contactForm.querySelector("[data-contact-status]") as HTMLElement | null;
+			const formData = new FormData(contactForm);
+			const payload = {
+				website: String(formData.get("website") || ""),
+				inquiryType: String(formData.get("ご検討内容") || "") === "まず無料診断したい" ? "free_diagnosis" : "free_consultation",
+				company: String(formData.get("会社名") || ""),
+				department: String(formData.get("所属部署名") || ""),
+				name: String(formData.get("お名前") || ""),
+				email: String(formData.get("メールアドレス") || ""),
+				phone: String(formData.get("電話番号") || ""),
+				interest: String(formData.get("ご検討内容") || ""),
+				dataLocation: String(formData.get("現在の情報の置き場所") || ""),
+					message: String(formData.get("メッセージ") || ""),
+					primaryWorkflow: String(formData.get("AI化したい業務") || ""),
+					bottlenecks: formData.getAll("ボトルネック").map(String),
+					tools: formData.getAll("利用ツール").map(String),
+					sensitiveData: String(formData.get("情報の機密度") || ""),
+					aiScope: String(formData.get("AIに任せたい範囲") || ""),
+					securityRequirement: String(formData.get("セキュリティ要件") || ""),
+					expectedOutcome: formData.getAll("期待成果").map(String),
+					pagePath: window.location.pathname,
+					pageUrl: window.location.href,
+					source: "effect_moe_lp",
+			};
+
+			if (submitButton) {
+				submitButton.disabled = true;
+				submitButton.textContent = "送信中...";
+			}
+			if (status) status.textContent = "送信しています。少しお待ちください。";
+
+			try {
+				const response = await fetch("/api/contact", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				});
+				const result = await response.json().catch(() => null);
+				if (!response.ok || !result?.ok) throw new Error(result?.error || "送信に失敗しました");
+
+				contactForm.reset();
+				if (status) status.textContent = "送信しました。内容を確認後、シュ コウメイよりご連絡します。";
+				if (submitButton) submitButton.textContent = "送信済み";
+			} catch {
+				if (status) status.textContent = "送信に失敗しました。時間をおいて再度お試しください。お急ぎの場合は info@effect.moe までご連絡ください。";
+				if (submitButton) {
+					submitButton.disabled = false;
+					submitButton.textContent = "再送信する";
+				}
+			}
+		});
+	</script>
 </LandingLayout>
 
 <style>
@@ -667,6 +886,74 @@ const faqLd = {
 		line-height: 1.85;
 	}
 
+	.pricing-clarity-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 12px;
+		margin: -12px 0 22px;
+	}
+
+	.pricing-clarity-grid div {
+		border: 1px solid rgba(210, 197, 178, 0.74);
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 16px 18px;
+		box-shadow: 0 12px 30px rgba(55, 38, 12, 0.045);
+	}
+
+	.pricing-clarity-grid span {
+		display: inline-flex;
+		width: fit-content;
+		margin-bottom: 8px;
+		border-radius: 999px;
+		background: rgba(182, 140, 60, 0.12);
+		padding: 0.24rem 0.56rem;
+		color: var(--primary);
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.pricing-clarity-grid strong {
+		display: block;
+		color: var(--effect-ink);
+		font-size: clamp(15px, 1.2vw, 17px);
+		font-weight: 900;
+		line-height: 1.48;
+	}
+
+	.pricing-payment-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 12px;
+		margin: 0 0 22px;
+	}
+
+	.pricing-payment-row div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		border: 1px solid rgba(118, 139, 98, 0.24);
+		border-radius: 999px;
+		background: linear-gradient(135deg, rgba(249, 252, 243, 0.92), rgba(255, 255, 255, 0.86));
+		padding: 12px 18px;
+		box-shadow: 0 12px 28px rgba(59, 75, 42, 0.045);
+	}
+
+	.pricing-payment-row span {
+		color: var(--on-surface-variant);
+		font-size: 13px;
+		font-weight: 850;
+		letter-spacing: 0.04em;
+	}
+
+	.pricing-payment-row strong {
+		color: #526a45;
+		font-size: clamp(15px, 1.2vw, 18px);
+		font-weight: 950;
+	}
+
 	.pricing-support {
 		display: grid;
 		grid-template-columns: auto 1fr;
@@ -716,11 +1003,34 @@ const faqLd = {
 
 	.pricing-support strong {
 		display: block;
-		margin-top: 4px;
 		color: var(--effect-ink);
 		font-size: clamp(26px, 2.8vw, 38px);
 		font-weight: 950;
 		line-height: 1.18;
+	}
+
+	.pricing-support__price-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+		margin-top: 6px;
+	}
+
+	.pricing-support__price-row em {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid rgba(182, 140, 60, 0.34);
+		border-radius: 999px;
+		background: rgba(182, 140, 60, 0.14);
+		padding: 0.4rem 0.72rem;
+		color: #7b5807;
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 950;
+		letter-spacing: 0.04em;
+		white-space: nowrap;
 	}
 
 	.pricing-support p {
@@ -740,8 +1050,8 @@ const faqLd = {
 
 	.pricing-card {
 		position: relative;
-		display: grid;
-		grid-template-rows: auto auto auto auto 1fr auto auto;
+		display: flex;
+		flex-direction: column;
 		gap: 14px;
 		overflow: hidden;
 		border: 1px solid rgba(210, 197, 178, 0.82);
@@ -886,12 +1196,13 @@ const faqLd = {
 		font-size: clamp(15px, 1.16vw, 17px);
 		font-weight: 650;
 		line-height: 1.72;
+		min-height: 5.2em;
 	}
 
 	.pricing-card ul {
 		display: grid;
 		gap: 12px;
-		margin: 6px 0 0;
+		margin: 6px 0 18px;
 		padding: 0;
 		list-style: none;
 	}
@@ -922,7 +1233,7 @@ const faqLd = {
 		align-items: center;
 		justify-content: center;
 		min-height: 54px;
-		margin-top: 6px;
+		margin-top: auto;
 		border: 1px solid rgba(123, 88, 7, 0.32);
 		border-radius: 999px;
 		background: #ffffff;
@@ -1351,6 +1662,14 @@ const faqLd = {
 		line-height: 1.4;
 	}
 
+	.contact-form-grid__trap {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
 	.contact-form-grid label span {
 		display: flex;
 		align-items: center;
@@ -1405,6 +1724,98 @@ const faqLd = {
 		grid-column: 1 / -1;
 	}
 
+	.diagnosis-questionnaire {
+		border: 1px solid rgba(109, 137, 91, 0.26);
+		border-radius: 1.25rem;
+		background:
+			linear-gradient(135deg, rgba(109, 137, 91, 0.09), rgba(190, 142, 46, 0.08)),
+			rgba(255, 255, 255, 0.88);
+		padding: clamp(18px, 2.3vw, 28px);
+	}
+
+	.diagnosis-questionnaire[hidden] {
+		display: none;
+	}
+
+	.diagnosis-questionnaire__head {
+		display: grid;
+		gap: 8px;
+		margin-bottom: 18px;
+	}
+
+	.diagnosis-questionnaire__head > span {
+		color: #6d895b;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.diagnosis-questionnaire__head strong {
+		color: var(--effect-ink);
+		font-size: clamp(20px, 1.8vw, 25px);
+		font-weight: 950;
+		line-height: 1.35;
+	}
+
+	.diagnosis-questionnaire__head p {
+		margin: 0;
+		color: var(--on-surface-variant);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.7;
+	}
+
+	.diagnosis-questionnaire__grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.diagnosis-questionnaire fieldset {
+		border: 0;
+		margin: 18px 0 0;
+		padding: 0;
+	}
+
+	.diagnosis-questionnaire legend {
+		margin-bottom: 10px;
+		color: var(--effect-ink);
+		font-size: 15px;
+		font-weight: 950;
+	}
+
+	.diagnosis-checks {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+	}
+
+	.diagnosis-checks--tools {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	.contact-form-grid .diagnosis-checks label {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		min-height: 48px;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 0.85rem;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 11px 12px;
+		font-size: 13px;
+		font-weight: 850;
+		line-height: 1.35;
+	}
+
+	.diagnosis-checks input {
+		flex: 0 0 auto;
+		width: 18px;
+		height: 18px;
+		accent-color: #6d895b;
+	}
+
 	.contact-submit-area {
 		display: grid;
 		justify-items: center;
@@ -1416,6 +1827,11 @@ const faqLd = {
 	.contact-submit-area button {
 		min-width: 220px;
 		cursor: pointer;
+	}
+
+	.contact-submit-area button:disabled {
+		cursor: wait;
+		opacity: 0.72;
 	}
 
 	.contact-submit-area p {
@@ -1884,7 +2300,7 @@ const faqLd = {
 
 	.proof-compact-stats {
 		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 0.42rem;
 		align-self: center;
 	}
@@ -2253,6 +2669,40 @@ const faqLd = {
 		font-size: 0.78rem;
 		font-weight: 760;
 		line-height: 1.42;
+	}
+
+	.decision-map__column--work .decision-map__similar-search {
+		grid-column: 1 / -1;
+		grid-template-columns: auto 1fr;
+		column-gap: 0.9rem;
+		row-gap: 0.18rem;
+		min-height: 6.2rem;
+		border-color: rgba(109, 137, 91, 0.42);
+		background:
+			linear-gradient(135deg, rgba(109, 137, 91, 0.15), rgba(255, 255, 255, 0.92)),
+			#ffffff;
+		box-shadow: 0 16px 36px rgba(82, 104, 63, 0.1);
+	}
+
+	.decision-map__similar-search :global(svg) {
+		grid-row: span 3;
+		background: rgba(109, 137, 91, 0.16) !important;
+		color: #52683f !important;
+	}
+
+	.decision-map__similar-search em {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border-radius: 999px;
+		background: #52683f;
+		color: #ffffff;
+		padding: 0.28rem 0.58rem;
+		font-size: 0.68rem;
+		font-style: normal;
+		font-weight: 950;
+		letter-spacing: 0.04em;
+		line-height: 1;
 	}
 
 	.decision-map__center {
@@ -4074,6 +4524,10 @@ const faqLd = {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
+		.pricing-clarity-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
 		.pricing-card.is-secure {
 			grid-column: 1 / -1;
 		}
@@ -4093,6 +4547,10 @@ const faqLd = {
 			flex-direction: column;
 			padding: 22px;
 		}
+
+		.diagnosis-checks--tools {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 
 	@media (max-width: 767px) {
@@ -4100,9 +4558,33 @@ const faqLd = {
 			padding-inline: 18px;
 		}
 
+		.pricing-clarity-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-payment-row {
+			grid-template-columns: 1fr;
+		}
+
 		.pricing-support {
 			grid-template-columns: 1fr;
 			border-radius: 1.1rem;
+		}
+
+		.diagnosis-questionnaire__grid,
+		.diagnosis-checks,
+		.diagnosis-checks--tools {
+			grid-template-columns: 1fr;
+		}
+
+		.diagnosis-questionnaire {
+			border-radius: 1rem;
+			padding: 16px;
+		}
+
+		.contact-form-grid .diagnosis-checks label {
+			min-height: 46px;
+			font-size: 14px;
 		}
 
 		.pricing-cards {
@@ -4110,7 +4592,11 @@ const faqLd = {
 		}
 
 		.pricing-card {
-			grid-template-rows: none;
+			gap: 13px;
+		}
+
+		.pricing-card__description {
+			min-height: 0;
 		}
 
 		.pricing-card__badge {

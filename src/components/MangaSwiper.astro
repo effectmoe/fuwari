@@ -10,10 +10,8 @@
  *   ]} />
  *
  * 機能:
- *   - Swiper.js v12（web components 版・軽量）
- *   - キーボード操作・タッチ対応
- *   - ページネーション + ナビゲーションボタン
- *   - 1〜4 コマ可変対応
+ *   - ネイティブ横スクロール + CSS scroll snap
+ *   - JS依存なしで1〜4コマ可変対応
  */
 
 interface PanelInput {
@@ -31,34 +29,19 @@ const { panels, autoplay = false, delay = 4000 } = Astro.props;
 ---
 
 <div class="manga-tldr-swiper">
-  <swiper-container
-    pagination="true"
-    navigation="true"
-    keyboard="true"
-    slides-per-view="1"
-    space-between="16"
-    loop="true"
-    autoplay-delay={autoplay ? String(delay) : undefined}
-    autoplay-disable-on-interaction={autoplay ? "true" : undefined}
-  >
+  <div class="manga-tldr-track" data-autoplay={autoplay ? String(delay) : undefined}>
     {
       panels.map((p) => (
-        <swiper-slide>
+        <div class="manga-tldr-panel">
           <figure>
             <img src={p.src} alt={p.caption} loading="lazy" />
             <figcaption>{p.caption}</figcaption>
           </figure>
-        </swiper-slide>
+        </div>
       ))
     }
-  </swiper-container>
+  </div>
 </div>
-
-<script>
-  // Swiper web components 登録
-  import { register } from "swiper/element/bundle";
-  register();
-</script>
 
 <style>
   .manga-tldr-swiper {
@@ -68,9 +51,17 @@ const { panels, autoplay = false, delay = 4000 } = Astro.props;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   }
-  swiper-container {
-    --swiper-theme-color: var(--primary, #2563eb);
-    --swiper-navigation-size: 28px;
+  .manga-tldr-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .manga-tldr-panel {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
   }
   figure {
     margin: 0;

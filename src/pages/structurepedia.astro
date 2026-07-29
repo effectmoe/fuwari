@@ -4,7 +4,7 @@
  * Wikipedia 風レイアウトの固定ページ
  * 提唱者: シュ コウメイ / 2025年〜
  */
-import MainGridLayout from "../layouts/MainGridLayout.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
 import Infobox from "../components/wikipedia/Infobox.astro";
 import TableOfContents from "../components/wikipedia/TableOfContents.astro";
 import Section from "../components/wikipedia/Section.astro";
@@ -21,7 +21,7 @@ import InternalLink from "../components/wikipedia/InternalLink.astro";
 import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
-const PAGE_URL = "https://effect.moe/dfb-complete-guide/";
+const PAGE_URL = "https://effect.moe/structurepedia/";
 const PAGE_TITLE = "DFB構造化メソッド大全";
 const PAGE_DESC =
   "DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。";
@@ -185,7 +185,7 @@ const externalLinks = [
 ];
 ---
 
-<MainGridLayout title="構造化ペディア: DFB構造化メソッド大全" description="DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。" fullWidth={true} setOGTypeArticle={true}>
+<LandingLayout title="構造化ペディア: DFB構造化メソッド大全" description="DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。">
 
   <!-- ─── JSON-LD 構造化データ（head に注入） ─── -->
   <Fragment slot="head">
@@ -194,7 +194,8 @@ const externalLinks = [
     <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
   </Fragment>
 
-  <article class="card-base px-6 md:px-10 py-8 w-full">
+  <section class="structurepedia-shell">
+  <article class="card-base px-6 md:px-10 py-8 w-full structurepedia-article">
 
     <!-- ページタイトル（全幅）+ 目次トグルボタン -->
     <header class="border-b-4 border-double border-stone-400 dark:border-stone-600 pb-3 mb-6 flex items-start gap-3">
@@ -642,16 +643,28 @@ const externalLinks = [
     </div><!-- /2カラム grid -->
 
   </article>
-</MainGridLayout>
+  </section>
 
 <!-- Lightbox（FigureLightbox の制御スクリプト・ページに1つだけ） -->
 <LightboxScript />
 
 <!-- 「上に戻る」ボタン（右下に固定・スクロールで表示） -->
 <BackToTop />
+</LandingLayout>
 
 <!-- 2カラム grid: CSS @media 主体（JS matchMedia 依存を排除） -->
 <style is:global>
+  .structurepedia-shell {
+    width: 100%;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: clamp(96px, 10vw, 124px) clamp(16px, 3vw, 40px) clamp(48px, 7vw, 88px);
+  }
+  .structurepedia-article {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(210, 197, 178, 0.78);
+    box-shadow: 0 24px 70px rgba(55, 38, 12, 0.08);
+  }
   .dfb-2col-grid {
     display: grid;
     grid-template-columns: 1fr;

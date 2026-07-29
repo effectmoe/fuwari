@@ -3,46 +3,95 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { url } from "@utils/url-utils.ts";
-import { onMount } from "svelte";
+import { onMount, tick } from "svelte";
 import type { SearchResult } from "@/global";
 
-let keywordDesktop = "";
-let keywordMobile = "";
+let keyword = "";
 let result: SearchResult[] = [];
 let isSearching = false;
 let pagefindLoaded = false;
 let initialized = false;
+let isPanelOpen = false;
+let searchInput: HTMLInputElement;
 
-const fakeResult: SearchResult[] = [
-	{
-		url: url("/"),
-		meta: {
-			title: "This Is a Fake Search Result",
-		},
-		excerpt:
-			"Because the search cannot work in the <mark>dev</mark> environment.",
-	},
-	{
-		url: url("/"),
-		meta: {
-			title: "If You Want to Test the Search",
-		},
-		excerpt: "Try running <mark>npm build && npm preview</mark> instead.",
-	},
-];
+type FallbackSearchItem = {
+	url: string;
+	title: string;
+	excerpt: string;
+	section?: string;
+	tags?: string[];
+};
 
-const togglePanel = () => {
+let fallbackIndex: FallbackSearchItem[] | null = null;
+
+const escapeRegExp = (value: string): string =>
+	value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const highlight = (text: string, keyword: string): string => {
+	if (!keyword.trim()) return text;
+	const pattern = new RegExp(`(${escapeRegExp(keyword.trim())})`, "ig");
+	return text.replace(pattern, "<mark>$1</mark>");
+};
+
+const loadFallbackIndex = async (): Promise<FallbackSearchItem[]> => {
+	if (fallbackIndex) return fallbackIndex;
+	const response = await fetch(url("/search-index.json"));
+	if (!response.ok) {
+		throw new Error(`Fallback search index not found: ${response.status}`);
+	}
+	fallbackIndex = await response.json();
+	return fallbackIndex || [];
+};
+
+const fallbackSearch = async (keyword: string): Promise<SearchResult[]> => {
+	const normalizedKeyword = keyword.trim().toLowerCase();
+	const index = await loadFallbackIndex();
+	return index
+		.map((item) => {
+			const haystack = [
+				item.title,
+				item.excerpt,
+				item.section,
+				...(item.tags || []),
+			]
+				.filter(Boolean)
+				.join(" ")
+				.toLowerCase();
+
+			if (!haystack.includes(normalizedKeyword)) return null;
+
+			return {
+				url: url(item.url),
+				meta: { title: item.title },
+				excerpt: highlight(item.excerpt, keyword),
+			} satisfies SearchResult;
+		})
+		.filter((item): item is SearchResult => Boolean(item))
+		.slice(0, 10);
+};
+
+const openPanel = async () => {
 	const panel = document.getElementById("search-panel");
-	panel?.classList.toggle("float-panel-closed");
+	isPanelOpen = true;
+	panel?.classList.remove("float-panel-closed");
+	await tick();
+	searchInput?.focus();
+};
+
+const closePanel = () => {
+	const panel = document.getElementById("search-panel");
+	isPanelOpen = false;
+	panel?.classList.add("float-panel-closed");
 };
 
 const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
 	const panel = document.getElementById("search-panel");
-	if (!panel || !isDesktop) return;
+	if (!panel) return;
 
-	if (show) {
+	if (show && isPanelOpen) {
 		panel.classList.remove("float-panel-closed");
 	} else {
+		isPanelOpen = false;
 		panel.classList.add("float-panel-closed");
 	}
 };
@@ -68,11 +117,8 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 			searchResults = await Promise.all(
 				response.results.map((item) => item.data()),
 			);
-		} else if (import.meta.env.DEV) {
-			searchResults = fakeResult;
 		} else {
-			searchResults = [];
-			console.error("Pagefind is not available in production environment.");
+			searchResults = await fallbackSearch(keyword);
 		}
 
 		result = searchResults;
@@ -94,14 +140,10 @@ onMount(() => {
 			!!window.pagefind &&
 			typeof window.pagefind.search === "function";
 		console.log("Pagefind status on init:", pagefindLoaded);
-		if (keywordDesktop) search(keywordDesktop, true);
-		if (keywordMobile) search(keywordMobile, false);
+			if (keyword) search(keyword, true);
 	};
 
 	if (import.meta.env.DEV) {
-		console.log(
-			"Pagefind is not available in development mode. Using mock data.",
-		);
 		initializeSearch();
 	} else {
 		document.addEventListener("pagefindready", () => {
@@ -125,51 +167,35 @@ onMount(() => {
 	}
 });
 
-$: if (initialized && keywordDesktop) {
+$: if (initialized && keyword) {
 	(async () => {
-		await search(keywordDesktop, true);
-	})();
-}
-
-$: if (initialized && keywordMobile) {
-	(async () => {
-		await search(keywordMobile, false);
+		await search(keyword, true);
 	})();
 }
 </script>
 
-<!-- search bar for desktop view -->
-<div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
-      bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
-      dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
-">
-    <Icon icon="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-    <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordDesktop} on:focus={() => search(keywordDesktop, true)}
-           class="transition-all pl-10 text-sm bg-transparent outline-0
-         h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
-    >
-</div>
-
-<!-- toggle btn for phone/tablet view -->
-<button on:click={togglePanel} aria-label="Search Panel" id="search-switch"
-        class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90">
-    <Icon icon="material-symbols:search" class="text-[1.25rem]"></Icon>
+<!-- search trigger -->
+<button on:click={openPanel} aria-label="検索を開く" id="search-switch"
+        class="btn-plain scale-animation search-trigger w-11 h-11 active:scale-90">
+    <Icon icon="material-symbols:search-rounded" class="text-[1.75rem]"></Icon>
 </button>
 
 <!-- search panel -->
-<div id="search-panel" class="float-panel float-panel-closed search-panel absolute md:w-[30rem]
-top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
+<div id="search-panel" hidden={!isPanelOpen} class:float-panel-closed={!isPanelOpen} class="float-panel search-panel fixed md:w-[34rem]
+top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-3">
 
-    <!-- search bar inside panel for phone/tablet -->
-    <div id="search-bar-inside" class="flex relative lg:hidden transition-all items-center h-11 rounded-xl
+    <div id="search-bar" class="flex relative transition-all items-center h-12 rounded-xl
       bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
       dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
   ">
         <Icon icon="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-        <input placeholder="Search" bind:value={keywordMobile}
-               class="pl-10 absolute inset-0 text-sm bg-transparent outline-0
-               focus:w-60 text-black/50 dark:text-white/50"
+        <input placeholder="{i18n(I18nKey.search)}" bind:this={searchInput} bind:value={keyword}
+               class="pl-10 pr-12 absolute inset-0 text-sm bg-transparent outline-0 text-black/70 dark:text-white/70"
         >
+        <button type="button" on:click={closePanel} aria-label="検索を閉じる"
+                class="absolute right-2 grid place-items-center w-8 h-8 rounded-lg text-black/45 hover:text-black/70 hover:bg-black/[0.06] dark:text-white/45 dark:hover:text-white/70 dark:hover:bg-white/10">
+            <Icon icon="material-symbols:close-rounded" class="text-[1.15rem]"></Icon>
+        </button>
     </div>
 
     <!-- search results -->
@@ -185,6 +211,11 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
             </div>
         </a>
     {/each}
+    {#if initialized && keyword && !isSearching && result.length === 0}
+        <div class="px-3 py-4 text-sm text-50">
+            検索結果が見つかりませんでした。
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -194,5 +225,19 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
   .search-panel {
     max-height: calc(100vh - 100px);
     overflow-y: auto;
+    z-index: 10000;
+  }
+  .search-trigger {
+    display: inline-grid;
+    place-items: center;
+    color: #2b2722;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .search-trigger:hover {
+    color: #8a6408;
+    background: transparent;
+    transform: translateY(-1px);
   }
 </style>
