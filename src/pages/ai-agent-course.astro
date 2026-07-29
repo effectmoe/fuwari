@@ -3,6 +3,7 @@ import LandingLayout from "../layouts/LandingLayout.astro";
 import { Icon } from "astro-icon/components";
 import { substackEmbedUrl } from "../config";
 import stats from "../data/storaca-stats.json";
+import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
 const curriculum = [
 	{
@@ -144,9 +145,8 @@ const faqs = [
 	},
 ];
 
-const mailtoSubject = encodeURIComponent("AIエージェント入門講座 無料相談");
-const mailtoBody = encodeURIComponent("【お問い合わせ内容】\n受講希望人数：\n希望時期：\n相談したい業務テーマ：\n");
-const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
+const diagnosisHref = "/?inquiry=diagnosis&service=ai-course#contact";
+const consultationHref = "/?inquiry=consultation&service=ai-course#contact";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 ---
 
@@ -164,11 +164,12 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 					GitHub・Webhook・API・MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を、全6回の実践研修で習得します。
 				</p>
 				<div class="course-actions">
-					<a href={mailtoLink} data-no-swup class="course-button course-button--primary">
+					<a href={consultationHref} class="course-button course-button--primary">
 						<Icon name="material-symbols:mail-outline-rounded" />
 						無料相談を申し込む
 					</a>
-					<a href="#curriculum" class="course-button course-button--secondary">カリキュラムを見る</a>
+					<a href={diagnosisHref} class="course-button course-button--secondary">無料診断を受ける</a>
+					<a href="#curriculum" class="course-button course-button--ghost">カリキュラムを見る</a>
 				</div>
 				<div class="course-metrics" aria-label="講座概要">
 					<span><strong>全6回</strong>実践研修</span>
@@ -342,9 +343,7 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 	<section id="instructor" class="course-section">
 		<div class="course-shell instructor-card">
 			<div class="instructor-profile">
-				<div class="instructor-profile__mark" aria-hidden="true">
-					<Icon name="material-symbols:school-outline-rounded" />
-				</div>
+				<img class="instructor-profile__mark" src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" decoding="async" />
 				<div>
 					<span>Instructor</span>
 					<strong>シュ コウメイ</strong>
@@ -393,8 +392,8 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 			<h2>AIに任せる、新しい働き方を。</h2>
 			<p>受講人数、助成金、業務テーマに合わせて、最初の進め方を整理します。</p>
 			<div class="course-actions">
-				<a href={mailtoLink} data-no-swup class="course-button course-button--primary">無料相談を申し込む</a>
-				<a href="https://kangmyung.substack.com/" target="_blank" rel="noopener noreferrer" class="course-button course-button--secondary">メルマガを見る</a>
+				<a href={consultationHref} class="course-button course-button--primary">無料相談を申し込む</a>
+				<a href={diagnosisHref} class="course-button course-button--secondary">無料診断を受ける</a>
 			</div>
 		</div>
 	</section>
@@ -523,6 +522,12 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		border: 1px solid rgba(255, 255, 255, 0.42);
 		background: rgba(255, 255, 255, 0.08);
 		color: inherit;
+	}
+
+	.course-button--ghost {
+		border: 1px solid rgba(0, 180, 216, 0.28);
+		background: rgba(255, 255, 255, 0.04);
+		color: rgba(255, 255, 255, 0.82);
 	}
 
 	.course-metrics {
@@ -1088,22 +1093,13 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 	}
 
 	.instructor-profile__mark {
-		display: grid;
 		width: 86px;
 		height: 86px;
-		place-items: center;
 		border: 1px solid rgba(0, 86, 179, 0.2);
 		border-radius: 999px;
-		background:
-			radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.9), transparent 35%),
-			linear-gradient(135deg, rgba(0, 86, 179, 0.16), rgba(0, 180, 216, 0.12));
-		color: var(--course-blue);
+		object-fit: cover;
+		object-position: center top;
 		box-shadow: 0 14px 34px rgba(10, 25, 47, 0.1);
-	}
-
-	.instructor-profile__mark svg {
-		width: 38px;
-		height: 38px;
 	}
 
 	.instructor-profile span {

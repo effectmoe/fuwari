@@ -599,6 +599,7 @@ const faqLd = {
 									<option>AIセントラル PLUS</option>
 									<option>パーフェクトセキュア</option>
 									<option>AI CRAWL</option>
+									<option>AI講座</option>
 									<option>まず無料診断したい</option>
 									<option>まだ決まっていない</option>
 								</select>
@@ -742,12 +743,22 @@ const faqLd = {
 			if (messageField && serviceFromUrl === "aicrawl" && !messageField.value) {
 				messageField.value = "AI CRAWLの無料診断を希望します。AIからの流入状況、読まれているページ、改善の方向性を確認したいです。";
 			}
+			if (messageField && serviceFromUrl === "ai-course" && !messageField.value) {
+				messageField.value = "AI講座の無料診断を希望します。受講人数、業務テーマ、現在のAI活用状況を確認したいです。";
+			}
 		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aicrawl") {
 			if (interestSelect) interestSelect.value = "AI CRAWL";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
 			if (messageField && !messageField.value) {
 				messageField.value = "AI CRAWLの無料相談を希望します。AIからの流入状況、レポート内容、料金プランについて相談したいです。";
+			}
+		}
+		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "ai-course") {
+			if (interestSelect) interestSelect.value = "AI講座";
+			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
+			if (messageField && !messageField.value) {
+				messageField.value = "AI講座の無料相談を希望します。受講人数、希望時期、業務テーマについて相談したいです。";
 			}
 		}
 		toggleDiagnosisQuestionnaire();
