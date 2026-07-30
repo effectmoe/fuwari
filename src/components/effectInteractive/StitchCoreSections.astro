@@ -2801,11 +2801,21 @@ const operationPanels = [
 		}
 
 		.photo-panel--inventory figcaption {
-			bottom: 12px;
+			bottom: -30px;
 			left: 12px;
 			width: calc(100% - 24px);
 			border-radius: 1.35rem;
 			padding: 12px 15px 13px;
+		}
+
+		.photo-panel--inventory {
+			overflow: visible;
+			margin-bottom: 48px;
+		}
+
+		.photo-panel--inventory img,
+		.photo-panel--inventory::after {
+			border-radius: inherit;
 		}
 
 		.problem-grid {
