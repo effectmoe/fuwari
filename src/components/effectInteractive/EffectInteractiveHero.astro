@@ -20,7 +20,7 @@ import { Icon } from "astro-icon/components";
 		<div class="stitch-top-hero__visual">
 			<div class="stitch-top-hero__image">
 				<picture>
-					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-portrait-20260730.png" />
+					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-20260730.png" />
 					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
 				</picture>
 			</div>
@@ -31,9 +31,10 @@ import { Icon } from "astro-icon/components";
 					<strong>必要な情報を探し、整理して、判断材料を用意する</strong>
 				</div>
 				<div class="stitch-top-hero__orchestrator-grid">
-					<span>資料・履歴を読む</span>
-					<span>検索から分析まで進める</span>
-					<span>判断材料を返す</span>
+					<span><small>01</small>情報収集</span>
+					<span><small>02</small>分析・整理</span>
+					<span><small>03</small>提案・戦略</span>
+					<span><small>04</small>実行・改善</span>
 				</div>
 			</div>
 		</div>
@@ -172,6 +173,11 @@ import { Icon } from "astro-icon/components";
 		box-shadow: 0 18px 58px rgba(55, 38, 12, 0.11);
 	}
 
+	.stitch-top-hero__image::before {
+		content: "";
+		display: none;
+	}
+
 	.stitch-top-hero__image picture,
 	.stitch-top-hero__image img {
 		display: block;
@@ -229,12 +235,16 @@ import { Icon } from "astro-icon/components";
 
 	.stitch-top-hero__orchestrator-grid {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 8px;
 		margin-top: 12px;
 	}
 
 	.stitch-top-hero__orchestrator-grid span {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
 		border: 1px solid rgba(210, 197, 178, 0.75);
 		border-radius: 999px;
 		background: #f6f3f4;
@@ -244,6 +254,14 @@ import { Icon } from "astro-icon/components";
 		font-size: 12px;
 		font-weight: 800;
 		line-height: 1.25;
+	}
+
+	.stitch-top-hero__orchestrator-grid small {
+		color: var(--stitch-primary);
+		font-size: 10px;
+		font-weight: 900;
+		letter-spacing: 0.02em;
+		line-height: 1;
 	}
 
 	@media (max-width: 1023px) {
@@ -275,6 +293,16 @@ import { Icon } from "astro-icon/components";
 			border-radius: 2rem;
 		}
 
+		.stitch-top-hero__image::before {
+			position: absolute;
+			inset: 0 auto 0 0;
+			z-index: 2;
+			display: block;
+			width: 54px;
+			pointer-events: none;
+			background: linear-gradient(90deg, rgba(252, 248, 249, 0.94), rgba(252, 248, 249, 0.68) 48%, rgba(252, 248, 249, 0));
+		}
+
 		.stitch-top-hero__image img {
 			aspect-ratio: 4 / 5;
 			object-fit: cover;
@@ -292,13 +320,14 @@ import { Icon } from "astro-icon/components";
 			right: auto;
 			bottom: auto;
 			box-sizing: border-box;
-			width: calc(100% - 20px);
-			margin: -18px auto 0;
+			width: calc(100% - 24px);
+			margin: -22px auto 0;
 			padding: 12px;
 		}
 
 		.stitch-top-hero__orchestrator-head {
 			grid-template-columns: auto 1fr;
+			gap: 10px;
 		}
 
 		.stitch-top-hero__orchestrator-head span {
@@ -307,6 +336,15 @@ import { Icon } from "astro-icon/components";
 
 		.stitch-top-hero__orchestrator-grid {
 			grid-template-columns: 1fr;
+			gap: 7px;
+		}
+
+		.stitch-top-hero__orchestrator-grid span {
+			justify-content: flex-start;
+			min-height: 42px;
+			padding: 9px 14px;
+			text-align: left;
+			font-size: 13px;
 		}
 
 		.stitch-top-hero__actions {
