@@ -1,48 +1,50 @@
 ---
 import { Icon } from "astro-icon/components";
 import LandingLayout from "../layouts/LandingLayout.astro";
+import { importantChangelogEvents } from "../data/changelog-events";
+import { getSortedPosts } from "../utils/content-utils";
+import { getPostUrlBySlug } from "../utils/url-utils";
 
 const focusItems = [
 	["AIセントラル", "運用導線を改善中", "Update Active"],
 	["AIクロール", "レポート訴求を調整中", "Reviewing"],
 	["ブログ", "記事カードと導線を整備中", "Optimizing"],
-	["問い合わせ", "診断フォームと受付DBを整備", "Stable"],
+	["問い合わせ", "無料相談フォームと受付DBを整備", "Stable"],
 ];
 
-const releases = [
-	{
-		date: "2026.07.30",
-		version: "v0.4",
-		product: "AI講座",
-		status: "公開前調整",
-		title: "AIエージェント講座ページを再設計",
-		items: ["ヒーローを実務AIエージェントの画面に変更", "カリキュラムを6回構成で整理", "料金・講師・FAQ導線を整備"],
-	},
-	{
-		date: "2026.07.30",
-		version: "v0.3",
-		product: "ブログ",
-		status: "調整済み",
-		title: "ブログカードとサムネイル表示を調整",
-		items: ["サムネイル画像を表示", "記事カードの高さとトリミングを統一", "メルマガと構造化ペディア導線を追加"],
-	},
-	{
-		date: "2026.07.30",
-		version: "v0.2",
-		product: "AIクロール",
-		status: "レビュー中",
-		title: "AI CRAWL の訴求と料金を整理",
-		items: ["AI流入総合分析のラベルを追加", "3プラン構成を整理", "FAQとストアカPro講師ブロックを追加"],
-	},
-	{
-		date: "2026.07.29",
-		version: "v0.1",
-		product: "AIセントラル",
-		status: "調整済み",
-		title: "AIセントラルLPの主要ブロックを整備",
-		items: ["料金・FAQ・診断フォーム・問い合わせ受付DBを追加", "Nexus Cレビューを反映", "ヘッダーとフッター導線を整理"],
-	},
-];
+const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
+	year: "numeric",
+	month: "2-digit",
+	day: "2-digit",
+});
+
+const formatDate = (value: string | Date) => dateFormatter.format(new Date(value)).replaceAll("/", ".");
+const blogPosts = await getSortedPosts();
+
+const importantReleases = importantChangelogEvents.map((event) => ({
+	...event,
+	date: formatDate(event.date),
+	sortDate: event.date,
+}));
+
+const blogReleases = blogPosts.map((post) => ({
+	date: formatDate(post.data.published),
+	sortDate: post.data.published,
+	version: "BLOG",
+	product: "ブログ",
+	status: "公開",
+	title: `記事を公開：${post.data.title}`,
+	items: [
+		post.data.description ?? "新しい記事を公開しました。",
+		...(post.data.tags?.length ? [`関連テーマ：${post.data.tags.slice(0, 3).join(" / ")}`] : []),
+	],
+	href: getPostUrlBySlug(post.slug),
+	type: "blog",
+}));
+
+const releases = [...importantReleases, ...blogReleases]
+	.sort((a, b) => new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime())
+	.slice(0, 14);
 
 ---
 
@@ -56,11 +58,11 @@ const releases = [
 				<p class="changelog-kicker">CHANGELOG / SYSTEM UPDATES</p>
 				<h1>effect.moe の改善履歴。</h1>
 				<p>
-					AIセントラル、AIクロール、AI講座、ブログ、問い合わせ導線など、公開サイトと業務システムの改善内容を記録します。
+					AIセントラル、AIクロール、AI講座、ブログ、問い合わせ導線など、公開サイトと業務システムの改善内容を記録します。軽微な文言修正は除外し、システム改修・ブログ公開・サービス内容の変更だけを掲載します。
 				</p>
 				<div class="changelog-actions">
 					<a href="/" class="changelog-button changelog-button--primary">最新のサービスを見る</a>
-					<a href="/#contact" class="changelog-button changelog-button--ghost">お問い合わせ</a>
+					<a href="/#contact" class="changelog-button changelog-button--ghost">無料相談する</a>
 				</div>
 			</div>
 
@@ -86,7 +88,7 @@ const releases = [
 		<div class="changelog-shell">
 			<div class="changelog-section-heading">
 				<p class="changelog-kicker">LATEST RELEASES</p>
-				<h2>最新の更新</h2>
+				<h2>主要な更新だけを自動で表示</h2>
 			</div>
 			<div class="changelog-timeline">
 				{releases.map((release, index) => (
@@ -103,11 +105,26 @@ const releases = [
 									<li><Icon name="material-symbols:check-circle-rounded" />{item}</li>
 								))}
 							</ul>
+							<a href={release.href} class="changelog-release-card__link">
+								詳細を見る
+								<Icon name="material-symbols:arrow-forward-rounded" />
+							</a>
 						</div>
 						<div class="changelog-version-mark">{release.version}</div>
 					</article>
 				))}
 			</div>
+		</div>
+	</section>
+
+	<section class="changelog-consult">
+		<div class="changelog-shell changelog-consult__panel">
+			<div>
+				<p class="changelog-kicker">FREE CONSULTATION</p>
+				<h2>自社にも同じような改善を入れたい場合は、無料相談で確認できます。</h2>
+				<p>AIセントラル、AIクロール、ブログ統合、問い合わせ導線など、どこから整えるべきかを一緒に整理します。</p>
+			</div>
+			<a href="/#contact" class="changelog-button changelog-button--primary">無料相談する</a>
 		</div>
 	</section>
 
@@ -290,6 +307,40 @@ const releases = [
 			padding: clamp(76px, 9vw, 128px) 0;
 		}
 
+		.changelog-consult {
+			padding: 0 0 clamp(76px, 9vw, 128px);
+		}
+
+		.changelog-consult__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			gap: 28px;
+			align-items: center;
+			border: 1px solid rgba(210, 197, 178, 0.72);
+			border-radius: 30px;
+			background:
+				radial-gradient(circle at 88% 10%, rgba(13, 111, 91, 0.14), transparent 32%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(250, 244, 232, 0.84));
+			padding: clamp(28px, 4vw, 44px);
+			box-shadow: 0 20px 58px rgba(51, 42, 31, 0.08);
+		}
+
+		.changelog-consult h2 {
+			margin: 0;
+			color: #1f2023;
+			font-size: clamp(26px, 3.2vw, 42px);
+			font-weight: 950;
+			line-height: 1.24;
+		}
+
+		.changelog-consult p:not(.changelog-kicker) {
+			margin: 14px 0 0;
+			color: #5f544a;
+			font-size: 16px;
+			font-weight: 720;
+			line-height: 1.75;
+		}
+
 		.changelog-section-heading {
 			margin-bottom: 48px;
 		}
@@ -405,6 +456,28 @@ const releases = [
 			margin-top: 2px;
 		}
 
+		.changelog-release-card__link {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			width: fit-content;
+			margin-top: 22px;
+			color: #8a6408;
+			font-size: 14px;
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.changelog-release-card__link svg {
+			width: 18px;
+			height: 18px;
+			transition: transform 0.18s ease;
+		}
+
+		.changelog-release-card__link:hover svg {
+			transform: translateX(3px);
+		}
+
 		.changelog-version-mark {
 			color: rgba(138, 100, 8, 0.12);
 			font-size: clamp(64px, 9vw, 130px);
@@ -418,7 +491,8 @@ const releases = [
 			}
 
 			.changelog-hero__grid,
-			.changelog-policy {
+			.changelog-policy,
+			.changelog-consult__panel {
 				grid-template-columns: 1fr;
 			}
 

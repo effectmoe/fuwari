@@ -5,18 +5,14 @@ interface Props {
 	title?: string;
 	body?: string;
 	consultationHref: string;
-	diagnosisHref?: string;
 	consultationLabel?: string;
-	diagnosisLabel?: string;
 }
 
 const {
 	title = "この内容を、自社の状況に当てはめて確認できます。",
-	body = "無料相談では具体的な業務・サイト状況を整理し、無料診断では現状の入口を確認します。",
+	body = "無料相談で、具体的な業務・サイト状況と次の進め方を整理します。",
 	consultationHref,
-	diagnosisHref = "/diagnosis/",
 	consultationLabel = "無料相談",
-	diagnosisLabel = "無料診断",
 } = Astro.props;
 ---
 
@@ -36,14 +32,6 @@ const {
 			>
 				<Icon name="material-symbols:mail-outline-rounded" class="text-lg" />
 				{consultationLabel}
-			</a>
-			<a
-				href={diagnosisHref}
-				data-no-swup
-				class="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-[var(--primary)] px-4 py-2 text-sm font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)] sm:w-auto"
-			>
-				<Icon name="material-symbols:search" class="text-lg" />
-				{diagnosisLabel}
 			</a>
 		</div>
 	</div>

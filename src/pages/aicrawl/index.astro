@@ -4,7 +4,6 @@ import LandingLayout from "../../layouts/LandingLayout.astro";
 import stats from "../../data/storaca-stats.json";
 import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg";
 
-const diagnosisHref = "/?inquiry=diagnosis&service=aicrawl#contact";
 const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
 const blogHref = "/blog/";
@@ -126,7 +125,7 @@ const faqs = [
 	],
 	[
 		"支払い方法は何ですか？",
-		"お支払いはクレジットカード払いです。プラン内容や開始時期は、無料診断または事前相談で確認したうえでご案内します。",
+		"お支払いはクレジットカード払いです。プラン内容や開始時期は、無料相談で確認したうえでご案内します。",
 	],
 	[
 		"AI CENTRALとは何が違いますか？",
@@ -156,11 +155,11 @@ const faqs = [
 					AI CRAWLは、どのAIから、どのページへ、どれくらい流入しているかを整理し、ユーザーの動機を推定するレポートサービスです。レポートでは流入実績を可視化し、コンサル以上ではAIに受け入れられやすくするための改善戦略まで落とし込みます。
 				</p>
 				<div class="aicrawl-actions">
-					<a href={diagnosisHref} class="aicrawl-button aicrawl-button--primary">
+					<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
 						<Icon name="material-symbols:manage-search" />
-						無料診断で確認する
+						無料相談で確認する
 					</a>
-					<a href={consultationHref} class="aicrawl-button aicrawl-button--secondary">無料相談する</a>
+					<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">料金を見る</a>
 					<a href="#checks" class="aicrawl-button aicrawl-button--ghost">診断内容を見る</a>
 				</div>
 			</div>
@@ -471,17 +470,17 @@ const faqs = [
 	<section class="aicrawl-cta">
 		<div class="aicrawl-container aicrawl-cta__panel">
 			<div>
-				<p class="aicrawl-eyebrow">FREE DIAGNOSIS</p>
+				<p class="aicrawl-eyebrow">FREE CONSULTATION</p>
 				<h2>AIからの流入を、戦略に変えられる状態か確認しましょう。</h2>
 				<p>対象URLを送るだけで、AI経由で読まれているページ、導線の弱さ、AIに紹介されるための大きな欠落を確認します。</p>
 			</div>
-			<a href={diagnosisHref} class="aicrawl-button aicrawl-button--primary">
+			<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
 				<Icon name="material-symbols:edit-note-outline-rounded" />
-				無料診断を申し込む
+				無料相談を申し込む
 			</a>
-			<a href={consultationHref} class="aicrawl-button aicrawl-button--secondary">
+			<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">
 				<Icon name="material-symbols:forum-outline-rounded" />
-				無料相談する
+				料金を見る
 			</a>
 		</div>
 	</section>
@@ -1652,14 +1651,77 @@ const faqs = [
 		@media (max-width: 700px) {
 			.aicrawl-container {
 				width: min(100% - 32px, 1240px);
+				max-width: 100%;
 			}
 
 			.aicrawl-hero {
 				padding-top: 112px;
+				overflow: hidden;
+			}
+
+			.aicrawl-copy,
+			.aicrawl-copy h1,
+			.aicrawl-copy h1 strong,
+			.aicrawl-copy p,
+			.aicrawl-section h2,
+			.aicrawl-section p {
+				min-width: 0;
+				max-width: 100%;
+				overflow-wrap: anywhere;
 			}
 
 			.aicrawl-copy h1 {
-				font-size: 40px;
+				font-size: clamp(32px, 10vw, 38px);
+				line-height: 1.18;
+			}
+
+			.aicrawl-copy p:not(.aicrawl-eyebrow) {
+				font-size: 16px;
+				line-height: 1.85;
+			}
+
+			.aicrawl-hero-label {
+				max-width: 100%;
+				white-space: normal;
+				line-height: 1.35;
+			}
+
+			.aicrawl-actions {
+				display: grid;
+				grid-template-columns: 1fr;
+				width: 100%;
+				gap: 12px;
+			}
+
+			.aicrawl-button {
+				width: 100%;
+				min-width: 0;
+				padding: 0 18px;
+				text-align: center;
+				white-space: normal;
+				line-height: 1.35;
+			}
+
+			.crawl-browser {
+				border-radius: 24px;
+			}
+
+			.crawl-browser__body {
+				padding: 16px;
+			}
+
+			.crawl-browser__bar strong {
+				min-width: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			.report-title strong,
+			.report-insights strong,
+			.report-chart__head strong {
+				font-size: 16px;
+				white-space: normal;
 			}
 
 			.report-title,
@@ -1681,6 +1743,14 @@ const faqs = [
 			.report-chart__head strong,
 			.report-insights strong {
 				white-space: normal;
+			}
+
+			.report-kpis div {
+				text-align: left;
+			}
+
+			.report-kpis strong {
+				font-size: 30px;
 			}
 
 			.crawl-check-grid,

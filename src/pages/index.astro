@@ -63,8 +63,8 @@ const caseCards = [
 		kicker: "CASE 01",
 		title: "導入前に業務を棚卸する",
 		before: "資料・顧客情報・対応履歴がどこにあるか曖昧",
-		after: "無料診断で、AI CENTRALに接続すべき情報と詰まりを整理する",
-		href: "/diagnosis/",
+		after: "無料相談で、AI CENTRALに接続すべき情報と詰まりを整理する",
+		href: "#contact",
 		icon: "material-symbols:inventory-2-outline",
 	},
 	{
@@ -80,7 +80,7 @@ const caseCards = [
 		title: "人が承認するAI運用へ",
 		before: "AIに任せる範囲が曖昧で、現場が使いにくい",
 		after: "下書き・整理・検索はAI、判断と送信は人に分ける",
-		href: "/diagnosis/",
+		href: "#contact",
 		icon: "material-symbols:verified-user-outline",
 	},
 ];
@@ -107,7 +107,7 @@ const systemMap = [
 	{
 		step: "01",
 		title: "社内の情報資産を棚卸する",
-		body: "無料診断で、資料・顧客情報・対応履歴・業務フローがどこにあるかを確認します。",
+		body: "無料相談で、資料・顧客情報・対応履歴・業務フローがどこにあるかを確認します。",
 		icon: "material-symbols:radar",
 		tone: "blue",
 	},
@@ -130,13 +130,13 @@ const systemMap = [
 const decisionRows = [
 	{
 		issue: "社内情報がどこにあるか整理できていない",
-		first: "無料診断",
+		first: "無料相談",
 		next: "AIセントラル",
 		reason: "既存ファイルや顧客情報をそのまま活かし、AIが参照できる記憶基盤へ整理する。",
 	},
 	{
 		issue: "AIに何を任せてよいか分からない",
-		first: "無料診断",
+		first: "無料相談",
 		next: "AIセントラル",
 		reason: "検索・整理・作成・確認・分析のうち、AIが先に進める範囲を切り分ける。",
 	},
@@ -305,7 +305,7 @@ const topFaqs = [
 	},
 	{
 		q: "最初は何から始めるべきですか？",
-		a: "まず無料診断で、社内資料、顧客情報、業務フロー、セキュリティ要件を確認します。その上でAIセントラル、AIセントラル PLUS、パーフェクトセキュアのどれが合うかを整理します。",
+		a: "まず無料相談で、社内資料、顧客情報、業務フロー、セキュリティ要件を確認します。その上でAIセントラル、AIセントラル PLUS、パーフェクトセキュアのどれが合うかを整理します。",
 	},
 ];
 
@@ -324,7 +324,7 @@ const faqLd = {
 ---
 
 <LandingLayout
-	title="effect.moe｜記憶を持ったAIを社内の中枢へ組み込む、AIセントラルシステム"
+	title="effect.moe｜記憶を持ったAIを社内の中枢へ組み込むAIシステム"
 	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQを、管理された環境でAIが参照できる社内基盤へ整えます。"
 	ogImage="/lp/generated/bright-japanese-ai-consulting-hero.png"
 >
@@ -370,12 +370,33 @@ const faqLd = {
 				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI CENTRAL AFTER INSTALLATION</p>
 				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">AIが参照する記憶と、人が判断する境界を設計する。</h2>
 				<p class="mt-5 max-w-3xl text-base leading-relaxed text-75">
-					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが業務の下処理を進め、人間は判断・承認・方針決定・最終確認に集中します。
+					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが必要な情報を探し、整理し、判断材料を用意することで、人間は判断・承認・方針決定・最終確認に集中します。
 				</p>
 			</div>
 			<div class="decision-map" aria-label="AIセントラル設計でAIが担う業務と人間が担う意思決定">
+				<div class="decision-map__flow-rail" aria-label="AIセントラル導入後の業務フロー">
+					<span><b>01</b>記憶を整える</span>
+					<span><b>02</b>担当AIに束ねる</span>
+					<span><b>03</b>AIが先に進める</span>
+					<span><b>04</b>人が決める</span>
+				</div>
 				<div class="decision-map__column decision-map__column--source">
 					<p><Icon name="material-symbols:database-outline" /><b>AIが参照する記憶</b><small>会社に散らばる情報を、AIが使える状態へ整える。</small></p>
+					<div class="decision-map__memory-bases" aria-label="EFFECT独自の二層記憶基盤">
+						<div>
+							<Icon name="material-symbols:database-outline" />
+							<span>標準記憶基盤</span>
+							<strong>資料・履歴を、AIが読める索引へ</strong>
+							<small>既存ファイルや顧客情報を動かさず、参照できる状態に整える。</small>
+						</div>
+						<div>
+							<Icon name="material-symbols:travel-explore" />
+							<span>類似検索基盤</span>
+							<em>AIプラスプラン以上限定</em>
+							<strong>似た案件・相談を、意味の近さで探す</strong>
+							<small>キーワード一致に頼らない検索を追加する。</small>
+						</div>
+					</div>
 					<span><Icon name="material-symbols:description-outline" /><b>社内資料</b><small>規程・マニュアル・提案資料</small></span>
 					<span><Icon name="material-symbols:contact-page-outline" /><b>顧客情報</b><small>属性・契約・注意点</small></span>
 					<span><Icon name="material-symbols:history-edu-outline" /><b>対応履歴</b><small>過去のやり取り・判断</small></span>
@@ -398,7 +419,7 @@ const faqLd = {
 				</div>
 				<div class="decision-map__column decision-map__column--work">
 					<p><Icon name="material-symbols:task-alt" /><b>AIが担う業務</b><small>人の前段にある作業をAIが先に進める。</small></p>
-					<span class="decision-map__similar-search"><Icon name="material-symbols:travel-explore" /><em>AI セントラル PLUS以上限定</em><b>類似検索</b><small>キーワードではなく、似た案件・相談・過去対応を呼び出す</small></span>
+					<span class="decision-map__similar-search"><Icon name="material-symbols:travel-explore" /><em>AIプラスプラン以上限定</em><b>類似検索</b><small>キーワードではなく、似た案件・相談・過去対応を呼び出す</small></span>
 					<span><Icon name="material-symbols:manage-search" /><b>検索</b><small>必要資料と過去履歴を探す</small></span>
 					<span><Icon name="material-symbols:sort" /><b>整理</b><small>案件ごとに情報をまとめる</small></span>
 					<span><Icon name="material-symbols:edit-document-outline" /><b>作成</b><small>メール・説明文を下書きする</small></span>
@@ -537,8 +558,8 @@ const faqLd = {
 				<div class="lp-faq-cta">
 					<p>まだ判断できない場合は、現在の業務と情報の置き場所を一緒に整理します。</p>
 					<div>
-						<a class="lp-faq-cta__primary" href="/diagnosis/">無料診断を受ける</a>
-						<a class="lp-faq-cta__secondary" href={consultationHref}>AIセントラルを相談する</a>
+						<a class="lp-faq-cta__primary" href={consultationHref}>無料相談する</a>
+						<a class="lp-faq-cta__secondary" href="#pricing">料金を見る</a>
 					</div>
 				</div>
 			</div>
@@ -600,7 +621,6 @@ const faqLd = {
 									<option>パーフェクトセキュア</option>
 									<option>AI CRAWL</option>
 									<option>AI講座</option>
-									<option>まず無料診断したい</option>
 									<option>まだ決まっていない</option>
 								</select>
 							</label>
@@ -616,95 +636,6 @@ const faqLd = {
 									<option>まだ整理できていない</option>
 								</select>
 							</label>
-							<div class="diagnosis-questionnaire contact-form-grid__wide" data-diagnosis-questionnaire hidden>
-								<div class="diagnosis-questionnaire__head">
-									<span>無料診断カルテ</span>
-									<strong>AI CENTRALを導入すべきか、Zoom前に判断材料を整理します。</strong>
-									<p>現状の社内ワークフロー、情報資産、セキュリティ要件、AIに任せたい範囲を確認します。</p>
-								</div>
-								<div class="diagnosis-questionnaire__grid">
-									<label>
-										<span>一番AI化したい業務</span>
-										<select name="AI化したい業務" data-diagnosis-required>
-											<option value="">選択してください</option>
-											<option>顧客対応・問い合わせ対応</option>
-											<option>社内資料の検索・要約</option>
-											<option>案件管理・顧客カルテ整理</option>
-											<option>メール・チャットの整理</option>
-											<option>見積・提案・報告書作成</option>
-											<option>まだ絞れていない</option>
-										</select>
-									</label>
-									<label>
-										<span>個人情報・顧客情報の扱い</span>
-										<select name="情報の機密度" data-diagnosis-required>
-											<option value="">選択してください</option>
-											<option>個人情報・顧客情報を多く扱う</option>
-											<option>一部扱う</option>
-											<option>ほとんど扱わない</option>
-											<option>判断できていない</option>
-										</select>
-									</label>
-								</div>
-								<fieldset>
-									<legend>いま詰まっていること</legend>
-									<div class="diagnosis-checks">
-										<label><input type="checkbox" name="ボトルネック" value="資料が散らばって探せない" />資料が散らばって探せない</label>
-										<label><input type="checkbox" name="ボトルネック" value="担当者しか経緯を知らない" />担当者しか経緯を知らない</label>
-										<label><input type="checkbox" name="ボトルネック" value="毎回AIに前提を説明している" />毎回AIに前提を説明している</label>
-										<label><input type="checkbox" name="ボトルネック" value="承認や確認に時間がかかる" />承認や確認に時間がかかる</label>
-										<label><input type="checkbox" name="ボトルネック" value="個人情報の扱いが不安" />個人情報の扱いが不安</label>
-										<label><input type="checkbox" name="ボトルネック" value="どこからAI化すべきか不明" />どこからAI化すべきか不明</label>
-									</div>
-								</fieldset>
-								<fieldset>
-									<legend>現在使っている主なツール</legend>
-									<div class="diagnosis-checks diagnosis-checks--tools">
-										<label><input type="checkbox" name="利用ツール" value="メール" />メール</label>
-										<label><input type="checkbox" name="利用ツール" value="Slack / Chatwork" />Slack / Chatwork</label>
-										<label><input type="checkbox" name="利用ツール" value="Google Drive" />Google Drive</label>
-										<label><input type="checkbox" name="利用ツール" value="Excel / Spreadsheet" />Excel / Spreadsheet</label>
-										<label><input type="checkbox" name="利用ツール" value="Notion / Obsidian" />Notion / Obsidian</label>
-										<label><input type="checkbox" name="利用ツール" value="CRM / 顧客カルテ" />CRM / 顧客カルテ</label>
-										<label><input type="checkbox" name="利用ツール" value="Googleカレンダー / ToDo" />Googleカレンダー / ToDo</label>
-										<label><input type="checkbox" name="利用ツール" value="社内ファイルサーバー" />社内ファイルサーバー</label>
-									</div>
-								</fieldset>
-								<div class="diagnosis-questionnaire__grid">
-									<label>
-										<span>AIに任せたい範囲</span>
-										<select name="AIに任せたい範囲">
-											<option value="">選択してください</option>
-											<option>検索・整理まで</option>
-											<option>下書き・要約まで</option>
-											<option>確認・分析まで</option>
-											<option>承認前の自動実行まで</option>
-											<option>相談しながら決めたい</option>
-										</select>
-									</label>
-									<label>
-										<span>セキュリティ要件</span>
-										<select name="セキュリティ要件">
-											<option value="">選択してください</option>
-											<option>完全ローカルで動かしたい</option>
-											<option>社内PC・社内ネットワーク内を優先したい</option>
-											<option>クラウド連携も検討できる</option>
-											<option>まだ判断できない</option>
-										</select>
-									</label>
-								</div>
-								<fieldset>
-									<legend>期待する成果</legend>
-									<div class="diagnosis-checks">
-										<label><input type="checkbox" name="期待成果" value="探す時間を減らしたい" />探す時間を減らしたい</label>
-										<label><input type="checkbox" name="説明し直す時間を減らしたい" />説明し直す時間を減らしたい</label>
-										<label><input type="checkbox" name="問い合わせ対応を標準化したい" />問い合わせ対応を標準化したい</label>
-										<label><input type="checkbox" name="属人化を減らしたい" />属人化を減らしたい</label>
-										<label><input type="checkbox" name="類似案件を探せるようにしたい" />類似案件を探せるようにしたい</label>
-										<label><input type="checkbox" name="安全に社内AIを使いたい" />安全に社内AIを使いたい</label>
-									</div>
-								</fieldset>
-							</div>
 							<label class="contact-form-grid__wide">
 								<span>メッセージ <b>必須</b></span>
 								<textarea name="メッセージ" rows="7" placeholder="現在困っている業務、扱いたい資料、セキュリティ面の不安などをご記入ください。" required></textarea>
@@ -723,30 +654,10 @@ const faqLd = {
 
 	<script>
 		const contactForm = document.querySelector("[data-contact-form]") as HTMLFormElement | null;
-		const diagnosisQuestionnaire = contactForm?.querySelector("[data-diagnosis-questionnaire]") as HTMLElement | null;
-		const diagnosisRequiredFields = Array.from(contactForm?.querySelectorAll("[data-diagnosis-required]") ?? []) as HTMLSelectElement[];
 		const interestSelect = contactForm?.elements.namedItem("ご検討内容") as HTMLSelectElement | null;
-
-		const toggleDiagnosisQuestionnaire = () => {
-			const isDiagnosis = interestSelect?.value === "まず無料診断したい";
-			if (diagnosisQuestionnaire) diagnosisQuestionnaire.hidden = !isDiagnosis;
-			diagnosisRequiredFields.forEach((field) => {
-				field.required = Boolean(isDiagnosis);
-			});
-		};
 
 		const inquiryFromUrl = new URLSearchParams(window.location.search).get("inquiry");
 		const serviceFromUrl = new URLSearchParams(window.location.search).get("service");
-		if (contactForm && inquiryFromUrl === "diagnosis") {
-			if (interestSelect) interestSelect.value = "まず無料診断したい";
-			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
-			if (messageField && serviceFromUrl === "aicrawl" && !messageField.value) {
-				messageField.value = "AI CRAWLの無料診断を希望します。AIからの流入状況、読まれているページ、改善の方向性を確認したいです。";
-			}
-			if (messageField && serviceFromUrl === "ai-course" && !messageField.value) {
-				messageField.value = "AI講座の無料診断を希望します。受講人数、業務テーマ、現在のAI活用状況を確認したいです。";
-			}
-		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aicrawl") {
 			if (interestSelect) interestSelect.value = "AI CRAWL";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
@@ -761,8 +672,6 @@ const faqLd = {
 				messageField.value = "AI講座の無料相談を希望します。受講人数、希望時期、業務テーマについて相談したいです。";
 			}
 		}
-		toggleDiagnosisQuestionnaire();
-		interestSelect?.addEventListener("change", toggleDiagnosisQuestionnaire);
 
 		contactForm?.addEventListener("submit", async (event) => {
 			event.preventDefault();
@@ -772,7 +681,7 @@ const faqLd = {
 			const formData = new FormData(contactForm);
 			const payload = {
 				website: String(formData.get("website") || ""),
-				inquiryType: String(formData.get("ご検討内容") || "") === "まず無料診断したい" ? "free_diagnosis" : "free_consultation",
+				inquiryType: "free_consultation",
 				company: String(formData.get("会社名") || ""),
 				department: String(formData.get("所属部署名") || ""),
 				name: String(formData.get("お名前") || ""),
@@ -2568,6 +2477,9 @@ const faqLd = {
 		grid-template-columns: minmax(210px, 0.86fr) minmax(320px, 1.08fr) minmax(300px, 1.16fr);
 		gap: clamp(1rem, 2vw, 1.4rem);
 		align-items: start;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: 100%;
 		border: 1px solid var(--outline-variant);
 		border-radius: 2.4rem;
 		background:
@@ -2576,10 +2488,13 @@ const faqLd = {
 			repeating-linear-gradient(0deg, rgba(182, 140, 60, 0.05) 0 1px, transparent 1px 42px);
 		padding: clamp(1.1rem, 2.6vw, 2rem);
 		box-shadow: 0 24px 70px rgba(11, 11, 12, 0.07);
+		overflow: hidden;
 	}
 
 	.decision-map__column,
+	.decision-map__center,
 	.decision-map__decision {
+		min-width: 0;
 		display: grid;
 		gap: 0.95rem;
 		align-content: stretch;
@@ -2587,6 +2502,91 @@ const faqLd = {
 
 	.decision-map__column {
 		grid-template-rows: auto;
+	}
+
+	.decision-map__flow-rail {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.55rem;
+		margin-bottom: 0.15rem;
+		border: 1px solid rgba(182, 140, 60, 0.38);
+		border-radius: 999px;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 249, 239, 0.86)),
+			#ffffff;
+		padding: 0.42rem;
+		box-shadow: 0 12px 34px rgba(123, 88, 7, 0.055);
+	}
+
+	.decision-map__flow-rail span {
+		position: relative;
+		display: flex;
+		min-width: 0;
+		align-items: center;
+		justify-content: center;
+		gap: 0.42rem;
+		border-radius: 999px;
+		padding: 0.62rem 0.75rem;
+		color: var(--effect-ink);
+		font-size: clamp(0.76rem, 1vw, 0.88rem);
+		font-weight: 950;
+		letter-spacing: 0.02em;
+		line-height: 1.2;
+		text-align: center;
+		white-space: nowrap;
+	}
+
+	.decision-map__flow-rail span:not(:last-child)::after {
+		position: absolute;
+		right: -0.48rem;
+		z-index: 2;
+		color: rgba(123, 88, 7, 0.62);
+		content: "→";
+		font-size: 1rem;
+		font-weight: 950;
+	}
+
+	.decision-map__flow-rail span:nth-child(1),
+	.decision-map__flow-rail span:nth-child(2) {
+		background: rgba(182, 140, 60, 0.1);
+	}
+
+	.decision-map__flow-rail span:nth-child(3) {
+		background: rgba(109, 137, 91, 0.14);
+		color: #52683f;
+	}
+
+	.decision-map__flow-rail span:nth-child(4) {
+		background: rgba(255, 255, 255, 0.92);
+		border: 1px solid rgba(182, 140, 60, 0.28);
+	}
+
+	.decision-map__flow-rail b {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 1.8rem;
+		height: 1.8rem;
+		border-radius: 999px;
+		background: var(--primary-container);
+		color: #ffffff;
+		font-size: 0.76rem;
+		font-weight: 950;
+		line-height: 1;
+	}
+
+	.decision-map__flow-rail span:nth-child(3) b {
+		background: #52683f;
+	}
+
+	.decision-map__column--source {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.decision-map__column--source p,
+	.decision-map__column--source .decision-map__memory-bases {
+		grid-column: 1 / -1;
 	}
 
 	.decision-map__column--work {
@@ -2690,6 +2690,145 @@ const faqLd = {
 		line-height: 1.42;
 	}
 
+	.decision-map__column--source > span {
+		min-height: 5.3rem;
+		padding: 0.82rem;
+	}
+
+	.decision-map__column--source > span :global(svg) {
+		width: 2.45rem;
+		height: 2.45rem;
+		border-radius: 0.86rem;
+		padding: 0.5rem;
+		font-size: 1.48rem;
+	}
+
+	.decision-map__column--source > span b {
+		font-size: clamp(0.92rem, 1.08vw, 1rem);
+	}
+
+	.decision-map__column--source > span small {
+		font-size: 0.7rem;
+		line-height: 1.36;
+	}
+
+	.decision-map__memory-bases {
+		display: grid;
+		gap: 0.72rem;
+	}
+
+	.decision-map__memory-bases div {
+		position: relative;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		column-gap: 0.76rem;
+		row-gap: 0.24rem;
+		align-items: center;
+		overflow: hidden;
+		border: 1px solid rgba(109, 137, 91, 0.28);
+		border-radius: 1.25rem;
+		background:
+			linear-gradient(135deg, rgba(250, 253, 244, 0.96), rgba(255, 249, 240, 0.9)),
+			#ffffff;
+		padding: 0.86rem 0.9rem;
+		box-shadow: 0 14px 34px rgba(82, 104, 63, 0.075);
+	}
+
+	.decision-map__memory-bases div::before {
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 4px;
+		content: "";
+		background: linear-gradient(180deg, #6d895b, #b68c3c);
+	}
+
+	.decision-map__memory-bases div:nth-child(2) {
+		border-color: rgba(182, 140, 60, 0.42);
+		background:
+			linear-gradient(135deg, rgba(255, 247, 230, 0.96), rgba(244, 250, 239, 0.88)),
+			#ffffff;
+	}
+
+	.decision-map__column .decision-map__memory-bases :global(svg) {
+		grid-row: span 3;
+		display: grid;
+		width: 2.55rem;
+		height: 2.55rem;
+		place-items: center;
+		border-radius: 0.9rem;
+		background: rgba(109, 137, 91, 0.14);
+		color: #52683f;
+		padding: 0.52rem;
+		font-size: 1.55rem;
+	}
+
+	.decision-map__column .decision-map__memory-bases div:nth-child(2) :global(svg) {
+		background: rgba(182, 140, 60, 0.14);
+		color: #7b5807;
+	}
+
+	.decision-map__column .decision-map__memory-bases span {
+		display: inline-flex;
+		width: fit-content;
+		min-height: 0;
+		border: 0;
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.12);
+		padding: 0.22rem 0.48rem;
+		color: #52683f;
+		font-size: 0.68rem;
+		font-weight: 950;
+		letter-spacing: 0.06em;
+		line-height: 1;
+		box-shadow: none;
+	}
+
+	.decision-map__column .decision-map__memory-bases div:nth-child(2) span {
+		background: rgba(182, 140, 60, 0.14);
+		color: #7b5807;
+	}
+
+	.decision-map__column .decision-map__memory-bases strong {
+		color: var(--effect-ink);
+		font-size: clamp(0.92rem, 1.12vw, 1.02rem);
+		font-weight: 950;
+		line-height: 1.32;
+		overflow-wrap: normal;
+		word-break: keep-all;
+	}
+
+	.decision-map__column .decision-map__memory-bases em {
+		display: inline-flex;
+		width: fit-content;
+		max-width: 100%;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: #52683f;
+		padding: 0.3rem 0.62rem;
+		color: #ffffff;
+		font-size: 0.68rem;
+		font-style: normal;
+		font-weight: 950;
+		letter-spacing: 0.04em;
+		line-height: 1.15;
+		text-align: center;
+		white-space: normal;
+		box-shadow: 0 9px 20px rgba(82, 104, 63, 0.18);
+	}
+
+	.decision-map__column .decision-map__memory-bases div:nth-child(2) strong,
+	.decision-map__column .decision-map__memory-bases div:nth-child(2) small {
+		grid-column: 1 / -1;
+	}
+
+	.decision-map__column .decision-map__memory-bases small {
+		color: var(--on-surface-variant);
+		font-size: 0.72rem;
+		font-weight: 760;
+		line-height: 1.48;
+	}
+
 	.decision-map__column--work .decision-map__similar-search {
 		grid-column: 1 / -1;
 		grid-template-columns: auto 1fr;
@@ -2712,7 +2851,9 @@ const faqLd = {
 	.decision-map__similar-search em {
 		display: inline-flex;
 		width: fit-content;
+		max-width: 100%;
 		align-items: center;
+		justify-content: center;
 		border-radius: 999px;
 		background: #52683f;
 		color: #ffffff;
@@ -2721,7 +2862,9 @@ const faqLd = {
 		font-style: normal;
 		font-weight: 950;
 		letter-spacing: 0.04em;
-		line-height: 1;
+		line-height: 1.15;
+		text-align: center;
+		white-space: normal;
 	}
 
 	.decision-map__center {
@@ -2966,6 +3109,51 @@ const faqLd = {
 		font-size: 1rem;
 		font-weight: 800;
 		line-height: 1.5;
+	}
+
+	@media (max-width: 1180px) {
+		.decision-map {
+			grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+			gap: 1rem;
+			border-radius: 2rem;
+			padding: clamp(1rem, 2vw, 1.35rem);
+		}
+
+		.decision-map__column--source {
+			grid-column: 1;
+		}
+
+		.decision-map__center {
+			grid-column: 2;
+		}
+
+		.decision-map__column--work {
+			grid-column: 1 / -1;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.decision-map__column--work p,
+		.decision-map__column--work .decision-map__similar-search {
+			grid-column: span 3;
+		}
+
+		.decision-map__column span,
+		.decision-map__memory-bases div {
+			min-width: 0;
+		}
+
+		.decision-map__flow-rail {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			border-radius: 1.45rem;
+		}
+
+		.decision-map__flow-rail span {
+			white-space: normal;
+		}
+
+		.decision-map__flow-rail span:not(:last-child)::after {
+			display: none;
+		}
 	}
 
 	.what-operating-board {
@@ -4867,7 +5055,8 @@ const faqLd = {
 			align-content: start;
 		}
 
-		.decision-map__column p {
+		.decision-map__column p,
+		.decision-map__column--work .decision-map__similar-search {
 			grid-column: 1 / -1;
 		}
 
@@ -5137,15 +5326,146 @@ const faqLd = {
 	.qa-bar-2 { background: #3d3714; }
 	.qa-bar-3 { background: #14351d; }
 
-	@media (max-width: 520px) {
+	@media (max-width: 767px) {
+		.decision-map {
+			display: flex;
+			flex-direction: column;
+			gap: 0.9rem;
+			border-radius: 1.55rem;
+			padding: clamp(0.82rem, 4vw, 1rem);
+			overflow: visible;
+		}
+
+		.decision-map__flow-rail {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			width: 100%;
+			gap: 0.45rem;
+			margin: 0;
+			border-radius: 1.15rem;
+			padding: 0.52rem;
+		}
+
+		.decision-map__flow-rail span {
+			display: flex;
+			grid-template-columns: auto 1fr;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 0.45rem;
+			min-width: 0;
+			min-height: 3.45rem;
+			padding: 0.66rem 0.62rem;
+			font-size: clamp(0.78rem, 3.35vw, 0.9rem);
+			line-height: 1.25;
+			text-align: left;
+			white-space: normal;
+			writing-mode: horizontal-tb !important;
+			text-orientation: mixed;
+			word-break: keep-all;
+			overflow-wrap: normal;
+		}
+
+		.decision-map__flow-rail span:not(:last-child)::after {
+			display: none;
+		}
+
+		.decision-map__flow-rail b {
+			min-width: 1.75rem;
+			height: 1.75rem;
+			font-size: 0.72rem;
+		}
+
+		.decision-map__column,
+		.decision-map__center,
+		.decision-map__decision {
+			width: 100%;
+			min-width: 0;
+			grid-column: auto;
+		}
+
+		.decision-map__center {
+			order: 2;
+			display: grid;
+			grid-template-rows: none;
+			gap: 0.7rem;
+			min-height: 0;
+			align-content: start;
+			border-radius: 1.4rem;
+			padding: 0.9rem;
+		}
+
+		.decision-map__column--source {
+			order: 3;
+		}
+
+		.decision-map__column--work {
+			order: 4;
+		}
+
+		.decision-map__decision {
+			order: 5;
+		}
+
+		.decision-map__memory-stack {
+			gap: 0.45rem;
+		}
+
+		.decision-map__memory-stack div {
+			grid-template-columns: minmax(5.6rem, auto) 1fr;
+			border-radius: 1rem;
+			padding: 0.62rem 0.72rem;
+		}
+
+		.decision-map__core {
+			border-radius: 1.25rem;
+			padding: 0.95rem;
+		}
+
+		.decision-map__flow-note {
+			border-radius: 1rem;
+			padding: 0.82rem;
+			font-size: 0.9rem;
+		}
+
 		.decision-map__column {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 			gap: 0.7rem;
 		}
 
-		.decision-map__column span {
-			min-height: 6.2rem;
+		.decision-map__memory-bases {
+			grid-template-columns: 1fr;
+		}
+
+		.decision-map__column .decision-map__memory-bases div {
+			grid-template-columns: auto minmax(0, 1fr);
+			border-radius: 1.05rem;
+			padding: 0.78rem 0.82rem;
+		}
+
+		.decision-map__column .decision-map__memory-bases em {
+			white-space: normal;
+		}
+
+		.decision-map__column p {
+			grid-column: 1 / -1;
 			border-radius: 1.05rem;
 			padding: 0.82rem;
+		}
+
+		.decision-map__column p :global(svg) {
+			width: 2.55rem;
+			height: 2.55rem;
+			border-radius: 0.85rem;
+			padding: 0.5rem;
+			font-size: 1.55rem;
+		}
+
+		.decision-map__column span {
+			min-height: 5.2rem;
+			border-radius: 1.05rem;
+			padding: 0.82rem;
+			justify-items: center;
+			text-align: center;
 		}
 
 		.decision-map__column span :global(svg) {
@@ -5164,8 +5484,35 @@ const faqLd = {
 			font-size: 0.72rem;
 		}
 
+		.decision-map__decision {
+			grid-template-columns: auto minmax(0, 1fr);
+			border-radius: 1.15rem;
+			padding: 0.95rem;
+		}
+
+		.decision-map__decision :global(svg) {
+			font-size: 2.2rem;
+		}
+
 		.proof-compact-stats {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.34rem;
+		}
+
+		.proof-stat-tile {
+			min-height: 74px;
+			border-radius: 0.86rem;
+			padding: 0.56rem 0.34rem;
+		}
+
+		.proof-stat-tile strong {
+			font-size: clamp(1rem, 5vw, 1.22rem);
+		}
+
+		.proof-stat-tile span {
+			margin-top: 0.22rem;
+			font-size: clamp(0.58rem, 2.7vw, 0.68rem);
+			line-height: 1.22;
 		}
 
 	}

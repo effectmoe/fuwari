@@ -130,7 +130,7 @@ const securitySources = [
 			</div>
 			<div class="time-saving-board__similar-search" aria-label="類似検索基盤による時間短縮">
 				<div>
-					<span>独自の類似検索基盤 / AIセントラル PLUS以上限定</span>
+					<span>AIプラスプラン以上限定</span>
 					<strong>キーワードで探す前に、似た案件・似た相談・過去の対応を呼び出す。</strong>
 					<p>フォルダ名や担当者の記憶に頼る検索ではなく、内容の近さから過去資料を探せるため、「どこにあったか思い出す時間」と「前提を説明し直す時間」を減らしやすくなります。</p>
 				</div>
@@ -1136,10 +1136,95 @@ const securitySources = [
 	}
 
 	@media (max-width: 560px) {
-			.time-saving-board {
-				border-radius: 1.5rem;
-				padding: 22px;
-			}
+		.time-saving-board {
+			gap: 18px;
+			border-radius: 1.35rem;
+			padding: 16px;
+		}
+
+		.time-saving-board__evidence {
+			border-radius: 1.2rem;
+			padding: 18px;
+		}
+
+		.time-saving-board__main h3 {
+			font-size: 28px;
+			line-height: 1.36;
+			letter-spacing: 0;
+		}
+
+		.time-saving-board__main p {
+			margin-top: 14px;
+			font-size: 15px;
+			line-height: 1.75;
+		}
+
+		.time-saving-board__source-callout {
+			display: grid;
+			gap: 10px;
+			align-items: start;
+			margin: 18px 0 24px;
+			border-radius: 1.15rem;
+			padding: 12px;
+		}
+
+		.time-saving-board__source-callout span {
+			width: fit-content;
+			padding: 0.52rem 0.78rem;
+			font-size: 12px;
+		}
+
+		.time-saving-board__source-callout a {
+			font-size: 15px;
+			line-height: 1.52;
+			overflow-wrap: anywhere;
+			text-underline-offset: 3px;
+		}
+
+		.bar-chart {
+			gap: 26px;
+			margin: 28px 0 8px;
+		}
+
+		.bar-chart__label {
+			gap: 8px;
+			margin-bottom: 10px;
+			font-size: 17px;
+			line-height: 1.35;
+		}
+
+		.bar-chart__label strong {
+			font-size: 32px;
+			line-height: 1.12;
+		}
+
+		.bar-chart__rail {
+			height: 48px;
+		}
+
+		.bar-chart__rail--saving {
+			display: grid;
+			grid-template-columns: 25% 1fr;
+			background: #f0edee;
+		}
+
+		.bar-chart__rail--saving span {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.bar-chart__rail--saving em {
+			position: static;
+			grid-column: 2;
+			grid-row: 1;
+			display: grid;
+			place-items: center;
+			min-width: 0;
+			padding: 0 12px;
+			font-size: 15px;
+			line-height: 1.25;
+			text-align: center;
+		}
 
 			.security-proof {
 				border-radius: 1.5rem;

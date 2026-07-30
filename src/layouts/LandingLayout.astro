@@ -17,8 +17,9 @@ const brandRoutes = [
 	{ match: (path: string) => path.startsWith("/blog") || path.startsWith("/posts"), label: "BLOG", href: "/blog/" },
 	{ match: (path: string) => path.startsWith("/company"), label: "COMPANY", href: "/company/" },
 	{ match: (path: string) => path.startsWith("/changelog"), label: "CHANGELOG", href: "/changelog/" },
+	{ match: (path: string) => path.startsWith("/faq"), label: "FAQ", href: "/faq/" },
+	{ match: (path: string) => path.startsWith("/trust"), label: "TRUST", href: "/trust/" },
 	{ match: (path: string) => path.startsWith("/structurepedia"), label: "STRUCTUREPEDIA", href: "/structurepedia/" },
-	{ match: (path: string) => path.startsWith("/diagnosis"), label: "DIAGNOSIS", href: "/diagnosis/" },
 ];
 const activeBrandRoute = brandRoutes.find((route) => route.match(currentPath));
 const headerBrand = activeBrandRoute?.label ?? "AI CENTRAL";
@@ -40,7 +41,6 @@ const serviceNavGroups = [
 			{ href: "/#time-saving", label: "時間削減" },
 			{ href: "/#pricing", label: "料金" },
 			{ href: "/#faq", label: "FAQ" },
-			{ href: "/diagnosis/", label: "無料診断" },
 			{ href: "/#contact", label: "無料相談" },
 		],
 	},
@@ -58,7 +58,6 @@ const serviceNavGroups = [
 			{ href: "/aicrawl/#operator", label: "運用者" },
 			{ href: "/aicrawl/#pricing", label: "料金" },
 			{ href: "/aicrawl/#faq", label: "FAQ" },
-			{ href: "/?inquiry=diagnosis&service=aicrawl#contact", label: "無料診断" },
 			{ href: "/?inquiry=consultation&service=aicrawl#contact", label: "無料相談" },
 		],
 	},
@@ -74,7 +73,6 @@ const serviceNavGroups = [
 			{ href: "/ai-agent-course/#price", label: "料金・助成金" },
 			{ href: "/ai-agent-course/#instructor", label: "講師" },
 			{ href: "/ai-agent-course/#faq", label: "FAQ" },
-			{ href: "/?inquiry=diagnosis&service=ai-course#contact", label: "無料診断" },
 			{ href: "/?inquiry=consultation&service=ai-course#contact", label: "無料相談" },
 		],
 	},
@@ -82,8 +80,8 @@ const serviceNavGroups = [
 
 const navItems = [
 	{ href: "/blog/", label: "ブログ" },
-	{ href: "/changelog/", label: "変更履歴" },
-	{ href: "/company/", label: "会社概要" },
+	{ href: "/faq/", label: "FAQ" },
+	{ href: "/author/", label: "アバウト" },
 ];
 ---
 
@@ -130,11 +128,11 @@ const navItems = [
 								<Icon name="material-symbols:chevron-right-rounded" />
 							</a>
 							{serviceNavGroups.map((group) => (
-								<section class="effect-landing-header__panel-group">
-									<a href={group.href} class="effect-landing-header__panel-heading">
+								<details class="effect-landing-header__panel-group">
+									<summary class="effect-landing-header__panel-heading">
 										{group.label}
-										<Icon name="material-symbols:chevron-right-rounded" />
-									</a>
+										<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+									</summary>
 									<div>
 										{group.items.map((item) => (
 											<a href={item.href}>
@@ -143,7 +141,7 @@ const navItems = [
 											</a>
 										))}
 									</div>
-								</section>
+								</details>
 							))}
 							{navItems.map((item) => (
 								<a href={item.href}>
@@ -169,7 +167,7 @@ const navItems = [
 						<p>
 							シュ コウメイが構築・伴走する、AIセントラル設計の商用サイトです。契約主体は株式会社EFFECTです。
 						</p>
-						<span>お問い合わせはフォームから受け付けています。</span>
+						<span>無料相談はフォームから受け付けています。</span>
 					</div>
 					<nav aria-label="Footer AI Central links">
 						<strong>AI セントラル</strong>
@@ -181,7 +179,7 @@ const navItems = [
 						<a href="/#time-saving">時間削減</a>
 						<a href="/#pricing">料金</a>
 						<a href="/#faq">FAQ</a>
-						<a href="/diagnosis/">無料診断</a>
+						<a href="/#contact">無料相談</a>
 					</nav>
 					<nav aria-label="Footer AI Crawl links">
 						<strong>AI クロール</strong>
@@ -193,7 +191,6 @@ const navItems = [
 						<a href="/aicrawl/#operator">運用者</a>
 						<a href="/aicrawl/#pricing">料金</a>
 						<a href="/aicrawl/#faq">FAQ</a>
-						<a href="/?inquiry=diagnosis&service=aicrawl#contact">無料診断</a>
 						<a href="/?inquiry=consultation&service=aicrawl#contact">無料相談</a>
 					</nav>
 					<nav aria-label="Footer AI course links">
@@ -205,16 +202,18 @@ const navItems = [
 						<a href="/ai-agent-course/#price">料金・助成金</a>
 						<a href="/ai-agent-course/#instructor">講師</a>
 						<a href="/ai-agent-course/#faq">FAQ</a>
-						<a href="/?inquiry=diagnosis&service=ai-course#contact">無料診断</a>
 						<a href="/?inquiry=consultation&service=ai-course#contact">無料相談</a>
 					</nav>
 					<nav aria-label="Footer company links">
 						<strong>サイト情報</strong>
 						<a href="/blog/">ブログ</a>
+						<a href="/faq/">総合FAQ</a>
+						<a href="/trust/">信頼性・制作方針</a>
 						<a href="/changelog/">変更履歴</a>
 						<a href="/company/">会社概要</a>
-						<a href="/author/">シュ コウメイ</a>
-						<a href="/#contact">お問い合わせ</a>
+						<a href="/author/">アバウト</a>
+						<a href="/sitemap/">サイトマップ</a>
+						<a href="/#contact">無料相談</a>
 					</nav>
 				</div>
 				<div class="effect-landing-footer__bottom">
@@ -398,7 +397,7 @@ const navItems = [
 			justify-self: end;
 		}
 
-		.effect-landing-header__menu summary {
+		.effect-landing-header__menu > summary {
 			display: grid;
 			width: 44px;
 			height: 44px;
@@ -411,7 +410,7 @@ const navItems = [
 			list-style: none;
 		}
 
-		.effect-landing-header__menu summary::-webkit-details-marker {
+		.effect-landing-header__menu > summary::-webkit-details-marker {
 			display: none;
 		}
 
@@ -494,6 +493,23 @@ const navItems = [
 			color: #7b5807;
 			font-size: 14px;
 			font-weight: 950;
+			cursor: pointer;
+			list-style: none;
+		}
+
+		.effect-landing-header__panel-heading::-webkit-details-marker {
+			display: none;
+		}
+
+		.effect-landing-header__panel-heading svg {
+			width: 22px;
+			height: 22px;
+			flex: 0 0 auto;
+			transition: transform 0.18s ease;
+		}
+
+		.effect-landing-header__panel-group[open] .effect-landing-header__panel-heading svg {
+			transform: rotate(180deg);
 		}
 
 		.effect-landing-header__panel-group div {

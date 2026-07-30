@@ -37,9 +37,10 @@ const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
 const mangaPanels =
 	entry.data.manga_tldr?.length
 		? entry.data.manga_tldr
-		: entry.data.imageAlt?.includes("4コマ")
-			? [{ src: blogThumbSrc, caption: entry.data.imageAlt }]
-			: [];
+		: [{
+			src: blogThumbSrc,
+			caption: entry.data.imageAlt || `${entry.data.title}を視覚的に要約した漫画・イメージ`,
+		}];
 
 let ogImageUrl = `${siteUrl}og-image.jpg`;
 if (coverSource) {
@@ -80,6 +81,7 @@ const blogPostingLd = {
 	articleSection: entry.data.category || undefined,
 	wordCount: remarkPluginFrontmatter.words,
 	url: postUrl,
+	isPartOf: { "@id": `${siteUrl}#website` },
 	author: {
 		"@type": "Person",
 		"@id": `${siteUrl}#person`,
@@ -89,15 +91,8 @@ const blogPostingLd = {
 		knowsAbout: seoConfig.knowsAbout,
 		sameAs: seoConfig.sameAs,
 	},
-	publisher: {
-		"@type": "Organization",
-		name: seoConfig.organization.name,
-		url: seoConfig.organization.url,
-		logo: {
-			"@type": "ImageObject",
-			url: `${siteUrl}og-image.jpg`,
-		},
-	},
+	reviewedBy: { "@id": `${siteUrl}#person` },
+	publisher: { "@id": `${siteUrl}#organization` },
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
 	dateModified: formatDateToYYYYMMDD(entry.data.updated || entry.data.published),
 	inLanguage: inLang,
@@ -172,6 +167,24 @@ const breadcrumbLd = {
 					<Content />
 				</Markdown>
 
+				<section class="commercial-post-trust commercial-post-module" aria-label="この記事の制作方針">
+					<div class="commercial-post-trust__icon">
+						<Icon name="material-symbols:verified-user-outline-rounded" />
+					</div>
+					<div>
+						<span>EDITORIAL TRUST</span>
+						<h2>この記事の制作・確認について</h2>
+						<p>
+							この記事は {profileConfig.name} が編集・確認しています。AIを下書きや整理に使う場合でも、公開前の判断、表現、リンク、更新日は人間が確認します。
+						</p>
+						<nav aria-label="この記事の信頼性に関するリンク">
+							<a href="/author/">著者プロフィール</a>
+							<a href="/trust/">制作方針</a>
+							<a href="/changelog/">変更履歴</a>
+						</nav>
+					</div>
+				</section>
+
 				<CourseCTA
 					tags={entry.data.tags}
 					category={entry.data.category}
@@ -193,13 +206,16 @@ const breadcrumbLd = {
 					</a>
 				</div>
 
-				<a href="/#ai-central" class="commercial-post-ai-cta">
+				<div class="commercial-post-ai-cta">
 					<span>
 						<small>AI CENTRAL</small>
 						<strong>社内情報を、AIが参照できる記憶基盤へ。</strong>
 					</span>
-					<Icon name="material-symbols:arrow-forward-rounded" />
-				</a>
+					<div>
+						<a href="/#ai-central">AIセントラルを見る</a>
+						<a href="/#contact">無料相談する</a>
+					</div>
+				</div>
 
 				<RelatedLinks links={entry.data.relatedLinks} class="commercial-post-module" />
 				<ArticleFAQ faq={entry.data.faq} class="commercial-post-module" />
@@ -505,6 +521,78 @@ const breadcrumbLd = {
 		padding: 26px 8px;
 	}
 
+	.commercial-post-trust {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 18px;
+		border: 1px solid rgba(63, 111, 159, 0.28);
+		border-radius: 24px;
+		background:
+			radial-gradient(circle at 100% 0%, rgba(142, 125, 98, 0.16), transparent 34%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 246, 249, 0.88));
+		padding: clamp(20px, 3vw, 30px);
+	}
+
+	.commercial-post-trust__icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 56px;
+		height: 56px;
+		border-radius: 18px;
+		background: rgba(63, 111, 159, 0.12);
+		color: var(--post-accent-deep);
+	}
+
+	.commercial-post-trust__icon svg {
+		width: 30px;
+		height: 30px;
+	}
+
+	.commercial-post-trust span {
+		color: var(--post-accent);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.commercial-post-trust h2 {
+		margin: 8px 0 0;
+		color: var(--post-ink);
+		font-size: clamp(22px, 2.3vw, 30px);
+		font-weight: 950;
+		line-height: 1.28;
+	}
+
+	.commercial-post-trust p {
+		margin: 12px 0 0;
+		color: var(--post-muted);
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 1.82;
+	}
+
+	.commercial-post-trust nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 16px;
+	}
+
+	.commercial-post-trust a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 36px;
+		border: 1px solid rgba(63, 111, 159, 0.28);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.74);
+		padding: 0 12px;
+		color: var(--post-accent-deep);
+		font-size: 13px;
+		font-weight: 950;
+		text-decoration: none;
+	}
+
 	.commercial-post-ai-cta {
 		display: flex;
 		align-items: center;
@@ -518,7 +606,6 @@ const breadcrumbLd = {
 			#ffffff;
 		padding: 22px 24px;
 		color: var(--post-ink);
-		text-decoration: none;
 	}
 
 	.commercial-post-ai-cta small {
@@ -537,11 +624,36 @@ const breadcrumbLd = {
 		line-height: 1.35;
 	}
 
-	.commercial-post-ai-cta svg {
-		flex: 0 0 auto;
-		width: 30px;
-		height: 30px;
-		color: var(--post-accent);
+	.commercial-post-ai-cta div {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: flex-end;
+	}
+
+	.commercial-post-ai-cta a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		border-radius: 999px;
+		padding: 0 18px;
+		font-size: 13px;
+		font-weight: 950;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.commercial-post-ai-cta a:first-child {
+		border: 1px solid rgba(46, 111, 115, 0.28);
+		color: var(--post-accent-deep);
+		background: rgba(255, 255, 255, 0.72);
+	}
+
+	.commercial-post-ai-cta a:last-child {
+		background: var(--post-accent);
+		color: #ffffff;
+		box-shadow: 0 14px 28px rgba(46, 111, 115, 0.16);
 	}
 
 	.commercial-post-share--bottom {
@@ -616,9 +728,18 @@ const breadcrumbLd = {
 			padding: 22px 18px;
 		}
 
+		.commercial-post-trust {
+			grid-template-columns: 1fr;
+		}
+
 		.commercial-post-ai-cta {
 			align-items: flex-start;
 			flex-direction: column;
+		}
+
+		.commercial-post-ai-cta div,
+		.commercial-post-ai-cta a {
+			width: 100%;
 		}
 	}
 </style>

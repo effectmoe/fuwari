@@ -1,0 +1,307 @@
+---
+import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { getSortedPosts } from "../utils/content-utils";
+import { getPostUrlBySlug } from "../utils/url-utils";
+
+const posts = await getSortedPosts();
+const pageTitle = "サイトマップ";
+const pageDescription = "effect.moe の主要ページ、サービス、ブログ記事、構造化ペディアへのリンクをまとめたサイトマップです。";
+
+const groups = [
+	{
+		title: "主要ページ",
+		description: "effect.moe 全体の入口です。",
+		links: [
+			{ label: "ホーム / AI CENTRAL", href: "/" },
+			{ label: "AI CRAWL", href: "/aicrawl/" },
+			{ label: "AI講座", href: "/ai-agent-course/" },
+			{ label: "ブログ", href: "/blog/" },
+			{ label: "総合FAQ", href: "/faq/" },
+			{ label: "信頼性・制作方針", href: "/trust/" },
+			{ label: "会社概要", href: "/company/" },
+			{ label: "アバウト", href: "/author/" },
+			{ label: "変更履歴", href: "/changelog/" },
+			{ label: "構造化ペディア", href: "/structurepedia/" },
+		],
+	},
+	{
+		title: "AI CENTRAL",
+		description: "社内AIの記憶設計に関する主要セクションです。",
+		links: [
+			{ label: "実績・信頼", href: "/#proof" },
+			{ label: "記憶と意思決定", href: "/#decision" },
+			{ label: "業務棚卸し", href: "/#inventory" },
+			{ label: "丸投げしない設計", href: "/#boundary" },
+			{ label: "ローカルLLM", href: "/#secure" },
+			{ label: "ツール連携", href: "/#ai-central" },
+			{ label: "時間削減", href: "/#time-saving" },
+			{ label: "料金", href: "/#pricing" },
+			{ label: "FAQ", href: "/#faq" },
+			{ label: "無料相談", href: "/#contact" },
+		],
+	},
+	{
+		title: "AI CRAWL",
+		description: "AI流入分析サービスの主要セクションです。",
+		links: [
+			{ label: "トップ", href: "/aicrawl/" },
+			{ label: "AI流入分析", href: "/aicrawl/#overview" },
+			{ label: "診断内容", href: "/aicrawl/#checks" },
+			{ label: "流入の判別", href: "/aicrawl/#signals" },
+			{ label: "レポート", href: "/aicrawl/#output" },
+			{ label: "運用者", href: "/aicrawl/#operator" },
+			{ label: "料金", href: "/aicrawl/#pricing" },
+			{ label: "FAQ", href: "/aicrawl/#faq" },
+			{ label: "無料相談", href: "/?inquiry=consultation&service=aicrawl#contact" },
+		],
+	},
+	{
+		title: "AI講座",
+		description: "AIエージェント講座の主要セクションです。",
+		links: [
+			{ label: "トップ", href: "/ai-agent-course/" },
+			{ label: "エージェント化", href: "/ai-agent-course/#agent-shift" },
+			{ label: "作れるもの", href: "/ai-agent-course/#outputs" },
+			{ label: "カリキュラム", href: "/ai-agent-course/#curriculum" },
+			{ label: "料金・助成金", href: "/ai-agent-course/#price" },
+			{ label: "講師", href: "/ai-agent-course/#instructor" },
+			{ label: "FAQ", href: "/ai-agent-course/#faq" },
+			{ label: "無料相談", href: "/?inquiry=consultation&service=ai-course#contact" },
+		],
+	},
+];
+---
+
+<LandingLayout title={pageTitle} description={pageDescription}>
+	<div class="sitemap-page">
+		<Breadcrumbs class="sitemap-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "サイトマップ", href: "/sitemap/" },
+		]} />
+
+		<section class="sitemap-hero">
+			<div class="sitemap-container">
+				<p class="sitemap-eyebrow">SITEMAP / CRAWLER ACCESS</p>
+				<h1>サイトマップ</h1>
+				<p>Google 検索クローラー、AI検索クローラー、そして訪問者が、effect.moe の主要ページへ迷わず到達できるように整理しています。</p>
+				<div class="sitemap-xml-links">
+					<a href="/sitemap-index.xml">XML sitemap</a>
+					<a href="/robots.txt">robots.txt</a>
+					<a href="/llms.txt">llms.txt</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="sitemap-section">
+			<div class="sitemap-container sitemap-grid">
+				{groups.map((group) => (
+					<div class="sitemap-card">
+						<h2>{group.title}</h2>
+						<p>{group.description}</p>
+						<ul>
+							{group.links.map((link) => (
+								<li><a href={link.href}>{link.label}</a></li>
+							))}
+						</ul>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="sitemap-section sitemap-posts">
+			<div class="sitemap-container">
+				<div class="sitemap-posts__head">
+					<p class="sitemap-eyebrow">BLOG INDEX</p>
+					<h2>ブログ記事</h2>
+					<p>構造化、AI活用、Astro/Fuwari、LLMO に関する記事一覧です。</p>
+				</div>
+				<div class="sitemap-post-list">
+					{posts.map((post) => (
+						<a href={getPostUrlBySlug(post.slug)}>
+							<span>{post.data.published.toISOString().slice(0, 10)}</span>
+							<strong>{post.data.title}</strong>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<style>
+		.sitemap-page {
+			--sitemap-bg: #fbf7f8;
+			--sitemap-ink: #1c1b1c;
+			--sitemap-muted: #6f655b;
+			--sitemap-gold: #a77713;
+			--sitemap-line: rgba(197, 178, 151, 0.62);
+			background:
+				linear-gradient(90deg, rgba(183, 140, 42, 0.045) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(183, 140, 42, 0.035) 1px, transparent 1px),
+				var(--sitemap-bg);
+			background-size: 56px 56px;
+			color: var(--sitemap-ink);
+		}
+
+		.sitemap-breadcrumbs {
+			padding-top: 96px;
+			padding-bottom: 12px;
+		}
+
+		.sitemap-container {
+			width: min(1180px, calc(100% - 48px));
+			margin: 0 auto;
+		}
+
+		.sitemap-hero {
+			padding: 46px 0 58px;
+			border-bottom: 1px solid var(--sitemap-line);
+		}
+
+		.sitemap-eyebrow {
+			margin: 0 0 14px;
+			color: var(--sitemap-gold);
+			font-size: 0.82rem;
+			font-weight: 950;
+			letter-spacing: 0.16em;
+		}
+
+		.sitemap-hero h1,
+		.sitemap-posts__head h2 {
+			margin: 0;
+			color: var(--sitemap-ink);
+			font-size: clamp(3rem, 7vw, 6rem);
+			font-weight: 950;
+			line-height: 1;
+			letter-spacing: 0;
+		}
+
+		.sitemap-hero p,
+		.sitemap-posts__head p,
+		.sitemap-card p {
+			max-width: 760px;
+			margin: 20px 0 0;
+			color: var(--sitemap-muted);
+			font-size: 1rem;
+			font-weight: 650;
+			line-height: 1.8;
+		}
+
+		.sitemap-xml-links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 28px;
+		}
+
+		.sitemap-xml-links a {
+			display: inline-flex;
+			align-items: center;
+			min-height: 42px;
+			border: 1px solid rgba(167, 119, 19, 0.42);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.72);
+			padding: 0 18px;
+			color: var(--sitemap-gold);
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.sitemap-section {
+			padding: 64px 0;
+		}
+
+		.sitemap-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.sitemap-card {
+			border: 1px solid var(--sitemap-line);
+			border-radius: 24px;
+			background: rgba(255, 255, 255, 0.74);
+			padding: clamp(22px, 3vw, 32px);
+		}
+
+		.sitemap-card h2 {
+			margin: 0;
+			font-size: 1.55rem;
+			font-weight: 950;
+		}
+
+		.sitemap-card ul {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 8px 12px;
+			margin: 22px 0 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.sitemap-card a,
+		.sitemap-post-list a {
+			color: var(--sitemap-ink);
+			font-weight: 850;
+			text-decoration: none;
+		}
+
+		.sitemap-card a:hover,
+		.sitemap-post-list a:hover strong {
+			color: var(--sitemap-gold);
+		}
+
+		.sitemap-posts {
+			border-top: 1px solid var(--sitemap-line);
+			padding-bottom: 96px;
+		}
+
+		.sitemap-post-list {
+			display: grid;
+			gap: 10px;
+			margin-top: 30px;
+		}
+
+		.sitemap-post-list a {
+			display: grid;
+			grid-template-columns: 120px minmax(0, 1fr);
+			gap: 18px;
+			align-items: center;
+			border: 1px solid var(--sitemap-line);
+			border-radius: 16px;
+			background: rgba(255, 255, 255, 0.74);
+			padding: 16px 18px;
+		}
+
+		.sitemap-post-list span {
+			color: var(--sitemap-gold);
+			font-size: 0.82rem;
+			font-weight: 950;
+		}
+
+		.sitemap-post-list strong {
+			font-size: 1rem;
+			line-height: 1.45;
+		}
+
+		@media (max-width: 780px) {
+			.sitemap-container {
+				width: min(100% - 32px, 1180px);
+			}
+
+			.sitemap-breadcrumbs {
+				padding-top: 88px;
+			}
+
+			.sitemap-grid,
+			.sitemap-card ul {
+				grid-template-columns: 1fr;
+			}
+
+			.sitemap-post-list a {
+				grid-template-columns: 1fr;
+				gap: 6px;
+			}
+		}
+	</style>
+</LandingLayout>

@@ -1,137 +1,1034 @@
 ---
 import { Icon } from "astro-icon/components";
-import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { faqConfig, profileConfig, seoConfig } from "../config";
-import { url } from "../utils/url-utils";
+import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { profileConfig } from "../config";
 
-const siteUrl = Astro.site ? Astro.site.toString() : "/";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const pageTitle = "総合FAQ｜effect.moe";
+const pageDescription =
+	"AIセントラル、AIクロール、AI講座、構造化、料金、セキュリティ、無料相談まで、effect.moe 全体のよくある質問をジャンル別にまとめた総合FAQです。";
 
-// ピラーFAQ: general + glossary を 1 つの FAQPage 構造化データに
-const allFaq = [...faqConfig.general, ...faqConfig.glossary];
+type FaqItem = {
+	q: string;
+	a: string;
+	links?: { label: string; href: string }[];
+};
+
+type FaqCategory = {
+	id: string;
+	label: string;
+	lead: string;
+	icon: string;
+	items: FaqItem[];
+};
+
+const faqCategories: FaqCategory[] = [
+	{
+		id: "ai-central",
+		label: "AIセントラル",
+		lead: "記憶を持ったAIを社内の中枢に置くサービスについて。",
+		icon: "material-symbols:memory-alt-outline-rounded",
+		items: [
+			{
+				q: "AIセントラルとは何ですか？",
+				a: '<a href="/">AIセントラル</a>は、社内資料、顧客情報、対応履歴、FAQ、判断基準などをAIが参照できる形に整理し、日々の検索・整理・下書き・確認材料づくりを先に進めるための業務AI基盤です。AIに何でも任せるのではなく、人間が意思決定しやすい状態をつくることを目的にしています。',
+				links: [
+					{ label: "AIセントラルのトップを見る", href: "/" },
+					{ label: "AIと人間の役割分担を見る", href: "/#decision" },
+				],
+			},
+			{
+				q: "AIの記憶とは何を指しますか？",
+				a: "ここでいう記憶とは、AIが勝手に覚える曖昧なものではありません。会社の資料、顧客対応履歴、社内ルール、FAQ、過去の判断を、AIが参照しやすい形に整えたナレッジベースです。詳しい考え方は<a href=\"/#decision\">記憶と意思決定</a>のブロックで説明しています。",
+				links: [
+					{ label: "記憶と意思決定", href: "/#decision" },
+					{ label: "構造化ペディア", href: "/structurepedia/" },
+				],
+			},
+			{
+				q: "既存のファイルやフォルダを全部移行する必要がありますか？",
+				a: "基本的には、既存のファイルやフォルダを無理に作り替える前提ではありません。いまあるデータ資産を活かしながら、AIが参照できる記憶の網を設計します。社内システムや資料の状態は、まず<a href=\"/#inventory\">業務棚卸し</a>で確認します。",
+				links: [
+					{ label: "業務棚卸し", href: "/#inventory" },
+					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
+				],
+			},
+			{
+				q: "AIに何でも任せる仕組みですか？",
+				a: "違います。AIセントラルは、AIが検索・整理・下書き・確認材料の準備を担い、人間が判断、承認、方針決定、最終確認に集中するための設計です。丸投げではなく、役割分担を明確にすることが重要です。",
+				links: [
+					{ label: "丸投げしない設計", href: "/#boundary" },
+					{ label: "時間削減モデル", href: "/#time-saving" },
+				],
+			},
+			{
+				q: "類似検索はどのプランで使えますか？",
+				a: "キーワード一致だけに頼らない類似検索は、AIセントラル PLUS以上のプランで扱う機能です。社内の記憶を横断し、似た案件、近い相談、過去の判断にたどり着きやすくします。通常の検索で見落としやすい「表現は違うが意味が近い情報」を拾うための仕組みです。",
+				links: [
+					{ label: "AIセントラルの料金", href: "/#pricing" },
+					{ label: "記憶横断検索の位置づけを見る", href: "/#ai-central" },
+				],
+			},
+		],
+	},
+	{
+		id: "aicrawl",
+		label: "AIクロール",
+		lead: "AIからの流入を読み解き、改善戦略へつなげるサービスについて。",
+		icon: "material-symbols:travel-explore-rounded",
+		items: [
+			{
+				q: "AIクロールとは何ですか？",
+				a: '<a href="/aicrawl/">AIクロール</a>は、自社サイトへどのAIから、どのページへ、どのくらい流入しているかを整理し、ユーザーの動機を推定するAI流入総合分析サービスです。アクセス実績をもとに、AIがどの情報を読んでいるか、どこで相談や購入の導線が途切れているかを見ます。',
+				links: [
+					{ label: "AIクロールのトップを見る", href: "/aicrawl/" },
+					{ label: "診断内容を見る", href: "/aicrawl/#checks" },
+				],
+			},
+			{
+				q: "AI流入では何を見ますか？",
+				a: "AI別の流入、ページ別の流入、流入頻度、読まれているページ、相談や購入につながりにくいページ、改善すべき導線やFAQの候補を見ます。単なるアクセス数ではなく、AI経由で見込み客がどの文脈で来ているかを読み解きます。",
+				links: [
+					{ label: "流入の判別", href: "/aicrawl/#signals" },
+					{ label: "レポート", href: "/aicrawl/#output" },
+				],
+			},
+			{
+				q: "AIクロールの料金プランはどう違いますか？",
+				a: "レポートプランは週次・月次レポート、コンサルプランはレポートに加えて隔週90分相談とチャットワーク相談、グロースプランは改善ロードマップ策定と支援まで含む構成です。詳しくは<a href=\"/aicrawl/#pricing\">AIクロールの料金</a>をご確認ください。",
+				links: [
+					{ label: "AIクロール料金", href: "/aicrawl/#pricing" },
+					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+				],
+			},
+			{
+				q: "AIに紹介されるサイトへ変えるとはどういうことですか？",
+				a: "AIが商品名、対象者、料金、根拠、FAQ、運営者情報を誤解なく読み取れる状態に整えることです。AIクロールでは、実際のAI流入を見ながら、どのページを補強すべきか、どのFAQや根拠ページを増やすべきか、どの導線を直すべきかを整理します。",
+				links: [
+					{ label: "AI流入分析", href: "/aicrawl/#overview" },
+					{ label: "構造化ペディア", href: "/structurepedia/" },
+				],
+			},
+		],
+	},
+	{
+		id: "course",
+		label: "AI講座",
+		lead: "AIエージェント講座、現場導入、学習導線について。",
+		icon: "material-symbols:school-outline-rounded",
+		items: [
+			{
+				q: "AI講座は誰に向いていますか？",
+				a: '<a href="/ai-agent-course/">AI講座</a>は、AIを触って終わりにせず、業務の中で使える形に落とし込みたい人向けです。個人事業主、士業、マーケター、社内担当者、経営者など、AIを実務に接続したい方を想定しています。',
+				links: [
+					{ label: "AI講座を見る", href: "/ai-agent-course/" },
+					{ label: "講師を見る", href: "/ai-agent-course/#instructor" },
+				],
+			},
+			{
+				q: "講座では何が作れるようになりますか？",
+				a: "AIエージェント、業務プロンプト、Notionやスプレッドシートと連携する業務フロー、社内ナレッジの整理などを扱います。具体的な内容は<a href=\"/ai-agent-course/#outputs\">作れるもの</a>と<a href=\"/ai-agent-course/#curriculum\">カリキュラム</a>をご確認ください。",
+				links: [
+					{ label: "作れるもの", href: "/ai-agent-course/#outputs" },
+					{ label: "カリキュラム", href: "/ai-agent-course/#curriculum" },
+				],
+			},
+			{
+				q: "AIセントラルとAI講座はどう違いますか？",
+				a: "AIセントラルは、会社やチームの業務AI基盤をこちらが設計・構築するサービスです。AI講座は、AIを使う人自身の理解と実装力を高める学習サービスです。まず自分で作れるようになりたい場合は<a href=\"/ai-agent-course/\">AI講座</a>、業務基盤を作って運用したい場合は<a href=\"/\">AIセントラル</a>が入口になります。",
+				links: [
+					{ label: "AIセントラル", href: "/" },
+					{ label: "AI講座", href: "/ai-agent-course/" },
+				],
+			},
+		],
+	},
+	{
+		id: "structure",
+		label: "構造化・DFB",
+		lead: "構造化ペディア、DFB、ブログで扱う思考法について。",
+		icon: "material-symbols:account-tree-outline-rounded",
+		items: [
+			{
+				q: "構造化ペディアとは何ですか？",
+				a: '<a href="/structurepedia/">構造化ペディア</a>は、AI時代に必要な「情報を分解し、関係を整理し、再利用できる形にする」考え方をまとめた知識ページです。AIセントラルやAI講座で使う考え方の背景を、あとから確認できる参照先として用意しています。',
+				links: [
+					{ label: "構造化ペディア", href: "/structurepedia/" },
+					{ label: "ブログを見る", href: "/blog/" },
+				],
+			},
+			{
+				q: "DFBとは何ですか？",
+				a: "DFBは、Decompose、Frame、Buildの流れで情報や業務を組み立て直す考え方です。たとえば「AIに問い合わせ対応を任せたい」という曖昧な要望を、目的、参照資料、回答ルール、承認範囲、出力形式に分けて、実装できる形へ変えるために使います。",
+				links: [
+					{ label: "DFB完全ガイド", href: "/dfb-complete-guide/" },
+					{ label: "アバウト", href: "/author/" },
+				],
+			},
+			{
+				q: "ブログではどんな内容を扱っていますか？",
+				a: '<a href="/blog/">ブログ</a>では、AI活用、構造化、LLMO、Astro/Fuwari、業務AI設計などの記事を公開しています。記事から関連するFAQや用語集へ戻れるようにし、サイト全体をトピッククラスターとして読める構造にしています。',
+				links: [
+					{ label: "ブログ", href: "/blog/" },
+					{ label: "総合FAQ", href: "/faq/" },
+				],
+			},
+		],
+	},
+	{
+		id: "price",
+		label: "料金・支払い",
+		lead: "初期費用、月額費用、支払い方法、相談導線について。",
+		icon: "material-symbols:paid-outline",
+		items: [
+			{
+				q: "AIセントラルは初期費用と月額費用の両方がかかりますか？",
+				a: "はい。AIセントラルは初期導入費用に加えて、半年間の月額伴走コンサルがかかります。初期費用は銀行振込、月額費用はクレジットカード払いを想定しています。詳細は<a href=\"/#pricing\">料金ブロック</a>をご確認ください。",
+				links: [
+					{ label: "AIセントラル料金", href: "/#pricing" },
+					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
+				],
+			},
+			{
+				q: "AIクロールの支払い方法は何ですか？",
+				a: "AIクロールは月額プランとして、クレジットカード払いを想定しています。レポート、コンサル、グロースの3プランがあり、上位プランほどレポート後の相談や改善ロードマップ策定まで含みます。",
+				links: [
+					{ label: "AIクロール料金", href: "/aicrawl/#pricing" },
+					{ label: "AIクロール無料相談", href: "/?inquiry=consultation&service=aicrawl#contact" },
+				],
+			},
+			{
+				q: "料金だけ見て相談しても大丈夫ですか？",
+				a: "大丈夫です。プランの選び方、初期導入費用と月額費用の違い、どの範囲まで対応するべきかは、<a href=\"/#contact\">無料相談</a>で確認できます。まだ導入を決めていない段階でも問題ありません。",
+				links: [
+					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
+					{ label: "会社概要", href: "/company/" },
+				],
+			},
+		],
+	},
+	{
+		id: "security",
+		label: "セキュリティ",
+		lead: "ローカルLLM、顧客情報、個人情報、運用ルールについて。",
+		icon: "material-symbols:verified-user-outline",
+		items: [
+			{
+				q: "顧客情報や個人情報を扱う場合でも相談できますか？",
+				a: "相談できます。顧客情報や個人情報を扱う場合は、AIをどこで動かすか、どの情報を参照させるか、ログや承認フローをどう残すかを先に設計します。詳しくは<a href=\"/#secure\">ローカルLLM</a>と<a href=\"/#boundary\">丸投げしない設計</a>をご確認ください。",
+				links: [
+					{ label: "ローカルLLM", href: "/#secure" },
+					{ label: "丸投げしない設計", href: "/#boundary" },
+				],
+			},
+			{
+				q: "パーフェクトセキュアとは何ですか？",
+				a: "パーフェクトセキュアは、顧客情報や個人情報を扱う企業向けに、社内PCや社内ネットワーク内でAIを動かす構成を想定したプランです。1台のPCを預かり、完全オリジナル仕様に構築する考え方を含みます。",
+				links: [
+					{ label: "AIセントラル料金", href: "/#pricing" },
+					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
+				],
+			},
+			{
+				q: "クラウドAIを使わない方が安全ですか？",
+				a: "単純にクラウドを使わないから安全、という話ではありません。重要なのは、情報の置き場所、参照範囲、権限、ログ、承認フローを設計することです。完全ローカル構成が必要かどうかは、扱う情報と業務内容によって判断します。",
+				links: [
+					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
+					{ label: "会社概要", href: "/company/" },
+				],
+			},
+		],
+	},
+	{
+		id: "operator",
+		label: "運営者・信頼",
+		lead: "誰が設計・運用するのか、E-E-A-Tに関する情報。",
+		icon: "material-symbols:workspace-premium-outline-rounded",
+		items: [
+			{
+				q: "誰が設計・運用していますか？",
+				a: "シュ コウメイが設計・構築・伴走を行います。運営主体は株式会社EFFECTです。プロフィール、実績、専門領域は<a href=\"/author/\">アバウト</a>と<a href=\"/company/\">会社概要</a>にまとめています。",
+				links: [
+					{ label: "アバウト", href: "/author/" },
+					{ label: "会社概要", href: "/company/" },
+				],
+			},
+			{
+				q: "ストアカPro講師とは何ですか？",
+				a: "ストアカ内で講師として活動していることを示す外部確認可能な信頼材料の一つです。AIセントラルやAIクロールのページでは、サービスを誰が責任を持って運用するのかを明示するために掲載しています。実際の講座評価やレビューは、ストアカの先生ページで確認できます。",
+				links: [
+					{ label: "アバウトで運営者を見る", href: "/author/" },
+					{ label: "AIクロール運用者", href: "/aicrawl/#operator" },
+				],
+			},
+			{
+				q: "更新履歴は確認できますか？",
+				a: '<a href="/changelog/">変更履歴</a>ページで、サービス内容の変更、サイト改善、ブログ投稿などを確認できます。軽微な文言修正ではなく、利用者に意味のある更新を中心に記録していく想定です。',
+				links: [
+					{ label: "変更履歴", href: "/changelog/" },
+					{ label: "サイトマップ", href: "/sitemap/" },
+				],
+			},
+		],
+	},
+	{
+		id: "consultation",
+		label: "無料相談・導線",
+		lead: "問い合わせ、相談前の準備、サイト内導線について。",
+		icon: "material-symbols:contact-support-outline-rounded",
+		items: [
+			{
+				q: "無料相談では何を相談できますか？",
+				a: "AIセントラル、AIクロール、AI講座のどれが合っているか、現状の業務やサイトをどう整理すべきか、料金感や導入範囲を相談できます。入口は<a href=\"/#contact\">無料相談フォーム</a>に統一しています。",
+				links: [
+					{ label: "無料相談フォーム", href: "/?inquiry=consultation#contact" },
+					{ label: "サイトマップ", href: "/sitemap/" },
+				],
+			},
+			{
+				q: "問い合わせフォームはどこにつながりますか？",
+				a: "問い合わせ内容はサイト側で受付し、後から確認できる形で管理する前提です。メールだけで埋もれないように、問い合わせデータベースで管理し、相談種別、対象サービス、会社名、相談内容を確認できるようにしています。",
+				links: [
+					{ label: "無料相談フォーム", href: "/?inquiry=consultation#contact" },
+					{ label: "会社概要", href: "/company/" },
+				],
+			},
+			{
+				q: "どのページから見ればよいですか？",
+				a: "社内AIの導入なら<a href=\"/\">AIセントラル</a>、AIからのサイト流入分析なら<a href=\"/aicrawl/\">AIクロール</a>、AIを学びたいなら<a href=\"/ai-agent-course/\">AI講座</a>が入口です。迷う場合は、この総合FAQか<a href=\"/sitemap/\">サイトマップ</a>から辿れます。",
+				links: [
+					{ label: "AIセントラル", href: "/" },
+					{ label: "AIクロール", href: "/aicrawl/" },
+					{ label: "AI講座", href: "/ai-agent-course/" },
+				],
+			},
+		],
+	},
+];
+
+const serviceGuide = [
+	{
+		label: "社内AIを作りたい",
+		title: "AIセントラル",
+		body: "社内資料・顧客情報・対応履歴を、AIが参照できる記憶基盤へ整えます。",
+		href: "/",
+	},
+	{
+		label: "AI流入を見たい",
+		title: "AIクロール",
+		body: "どのAIから、どのページへ、どんな動機で来ているかをレポート化します。",
+		href: "/aicrawl/",
+	},
+	{
+		label: "自分で使えるようになりたい",
+		title: "AI講座",
+		body: "AIエージェントや業務プロンプトを、自分の仕事に接続する力を育てます。",
+		href: "/ai-agent-course/",
+	},
+];
+
+const trustGuide = [
+	{ label: "運営主体", value: "株式会社EFFECT", href: "/company/" },
+	{ label: "設計・運用者", value: "シュ コウメイ", href: "/author/" },
+	{ label: "更新確認", value: "変更履歴", href: "/changelog/" },
+	{ label: "全体導線", value: "サイトマップ", href: "/sitemap/" },
+];
+
+const allFaqItems = faqCategories.flatMap((category) =>
+	category.items.map((item) => ({ ...item, category: category.label })),
+);
+const stripHtml = (value: string) => value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 const faqLd = {
 	"@context": "https://schema.org",
 	"@type": "FAQPage",
 	"@id": `${siteUrl}faq/#faqpage`,
-	// 著者が回答していることを構造化データでも明示（E-E-A-T）
+	name: "effect.moe 総合FAQ",
+	description: pageDescription,
 	author: { "@id": `${siteUrl}#person` },
-	mainEntity: allFaq.map((f) => ({
+	mainEntity: allFaqItems.map((item) => ({
 		"@type": "Question",
-		name: f.q,
+		name: item.q,
 		acceptedAnswer: {
 			"@type": "Answer",
-			text: f.a,
+			text: stripHtml(item.a),
 			author: { "@type": "Person", name: profileConfig.name, url: `${siteUrl}author/` },
 		},
 	})),
 };
-
-const pageDesc =
-	`構造化脳ブログのよくある質問と、AI用語集（Claude / Claude Code / MCP / Obsidian / LLMO / AIエージェント などをやさしく解説）。著者のシュ コウメイ（ストアカ評価${seoConfig.reviews.ratingValue}・LLMO書籍著者）が回答しています。`;
 ---
-<MainGridLayout title="よくある質問・AI用語集" description={pageDesc}>
-    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)}></script>
 
-    <div class="flex flex-col gap-4 w-full">
-        <!-- ヘッダー -->
-        <div class="card-base px-6 md:px-9 py-7">
-            <h1 class="text-3xl font-bold text-90 mb-2">よくある質問・AI用語集</h1>
-            <p class="text-sm text-75 leading-relaxed mb-4">
-                このブログや講座・サービスについてのよくある質問と、記事に出てくる
-                AI用語をやさしく解説した用語集です。専門用語は、できるだけ
-                かんたんな言葉でかみくだいています。
-            </p>
-            <!-- 著者が回答している明示（E-E-A-T）-->
-            <a href={url('/author/')} class="inline-flex items-center gap-2 rounded-xl bg-[var(--btn-plain-bg)] hover:bg-[var(--btn-plain-bg-hover)] transition px-4 py-2.5 active:scale-95">
-                <Icon name="material-symbols:verified-outline-rounded" class="text-[1.2rem] text-[var(--primary)]" />
-                <span class="text-sm text-75">
-                    回答者：<span class="font-bold text-90">{profileConfig.name}</span>
-                    <span class="text-50">／ ストアカ評価 {seoConfig.reviews.ratingValue}・LLMO書籍著者 → プロフィール</span>
-                </span>
-            </a>
-        </div>
+<LandingLayout title={pageTitle} description={pageDescription}>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
+	<div class="faq-page">
+		<Breadcrumbs class="faq-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "総合FAQ", href: "/faq/" },
+		]} />
 
-        <!-- よくある質問 -->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:help-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">よくある質問</h2>
-            </div>
-            <div class="flex flex-col gap-2">
-                {faqConfig.general.map((f) => (
-                    <details class="faq-item rounded-xl border border-black/5 dark:border-white/10 overflow-hidden">
-                        <summary class="cursor-pointer select-none px-4 py-3 font-bold text-75 text-sm flex flex-row items-center justify-between gap-2 transition hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
-                            <span>{f.q}</span>
-                            <span class="faq-mark text-[var(--primary)] text-lg shrink-0">＋</span>
-                        </summary>
-                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">
-                            <p>{f.a}</p>
-                            {f.links && f.links.length > 0 && (
-                                <div class="mt-3 flex flex-col gap-1.5">
-                                    {f.links.map((l) => (
-                                        <a href={l.href.startsWith('http') ? l.href : url(l.href)}
-                                           target={l.href.startsWith('http') ? '_blank' : undefined}
-                                           rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                           class="inline-flex items-center gap-1 text-[var(--primary)] text-xs font-medium hover:underline">
-                                            <Icon name="material-symbols:arrow-forward-rounded" class="text-[0.9rem]" />{l.label}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                            <div class="mt-3 text-xs text-50">— {profileConfig.name}</div>
-                        </div>
-                    </details>
-                ))}
-            </div>
-        </div>
+		<section class="faq-hero">
+			<div class="faq-container faq-hero__grid">
+				<div>
+					<p class="faq-eyebrow">FAQ HUB / TOPIC CLUSTER</p>
+					<h1>effect.moe 総合FAQ</h1>
+					<p>
+						AIセントラル、AIクロール、AI講座、構造化、料金、セキュリティ、無料相談まで。
+						サービスごとのFAQを横断し、回答の中から関連ページへ進めるように整理しました。
+					</p>
+				</div>
+				<div class="faq-hero__card">
+					<strong>回答の根拠と次のページを明示</strong>
+					<span>説明だけで終わらせず、料金、運営者、更新履歴、各サービスの詳細へ進めるように整理しています。</span>
+					<div>
+						<a href="/">AIセントラル</a>
+						<a href="/aicrawl/">AIクロール</a>
+						<a href="/ai-agent-course/">AI講座</a>
+						<a href="/structurepedia/">構造化</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-        <!-- AI用語集 -->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:book-2-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">AI用語集</h2>
-            </div>
-            <div class="flex flex-col gap-2">
-                {faqConfig.glossary.map((f) => (
-                    <details class="faq-item rounded-xl border border-black/5 dark:border-white/10 overflow-hidden">
-                        <summary class="cursor-pointer select-none px-4 py-3 font-bold text-75 text-sm flex flex-row items-center justify-between gap-2 transition hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
-                            <span>{f.q}</span>
-                            <span class="faq-mark text-[var(--primary)] text-lg shrink-0">＋</span>
-                        </summary>
-                        <div class="px-4 pb-4 pt-1 text-sm text-75 leading-relaxed">
-                            <p>{f.a}</p>
-                            {f.links && f.links.length > 0 && (
-                                <div class="mt-3 flex flex-col gap-1.5">
-                                    {f.links.map((l) => (
-                                        <a href={l.href.startsWith('http') ? l.href : url(l.href)}
-                                           target={l.href.startsWith('http') ? '_blank' : undefined}
-                                           rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                           class="inline-flex items-center gap-1 text-[var(--primary)] text-xs font-medium hover:underline">
-                                            <Icon name="material-symbols:arrow-forward-rounded" class="text-[0.9rem]" />{l.label}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                            <div class="mt-3 text-xs text-50">— {profileConfig.name}</div>
-                        </div>
-                    </details>
-                ))}
-            </div>
-        </div>
+		<section class="faq-guide faq-container" aria-label="サービスの選び方と信頼情報">
+			<div class="faq-guide__head">
+				<p class="faq-eyebrow">QUICK GUIDE</p>
+				<h2>まず、どの入口を見るべきか。</h2>
+			</div>
+			<div class="faq-guide__services">
+				{serviceGuide.map((item) => (
+					<a href={item.href}>
+						<span>{item.label}</span>
+						<strong>{item.title}</strong>
+						<p>{item.body}</p>
+					</a>
+				))}
+			</div>
+			<div class="faq-guide__trust">
+				{trustGuide.map((item) => (
+					<a href={item.href}>
+						<span>{item.label}</span>
+						<strong>{item.value}</strong>
+					</a>
+				))}
+			</div>
+		</section>
 
-        <!-- 著者ページへの導線 -->
-        <div class="card-base px-6 md:px-9 py-6">
-            <p class="text-sm text-75 mb-3">これらの回答は、実際にAI講座を多数開講し、LLMO書籍を執筆している著者が書いています。</p>
-            <a href={url('/author/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
-                <Icon name="fa6-solid:user" class="text-[0.9rem]" />
-                著者プロフィール（経歴・専門・実績）を見る
-            </a>
-        </div>
-    </div>
-</MainGridLayout>
+		<nav class="faq-category-nav faq-container" aria-label="FAQカテゴリ">
+			{faqCategories.map((category) => (
+				<a href={`#${category.id}`}>
+					<Icon name={category.icon} />
+					<span>{category.label}</span>
+				</a>
+			))}
+		</nav>
 
-<style>
-.faq-item > summary::-webkit-details-marker { display: none; }
-.faq-item > summary::marker { content: ""; }
-.faq-item[open] .faq-mark { transform: rotate(45deg); }
-.faq-mark { transition: transform 0.2s ease; display: inline-block; }
-</style>
+		<section class="faq-body">
+			<div class="faq-container">
+				{faqCategories.map((category) => (
+					<section class="faq-category" id={category.id}>
+						<div class="faq-category__head">
+							<div>
+								<Icon name={category.icon} />
+							</div>
+							<div>
+								<p>{category.label}</p>
+								<h2>{category.label}のよくある質問</h2>
+								<span>{category.lead}</span>
+							</div>
+						</div>
+						<div class="faq-list">
+							{category.items.map((item, index) => (
+								<details class="faq-item" open={index === 0}>
+									<summary>
+										<span>Q</span>
+										<strong>{item.q}</strong>
+										<Icon name="material-symbols:add-rounded" />
+									</summary>
+									<div class="faq-answer">
+										<p set:html={item.a} />
+										{item.links && item.links.length > 0 && (
+											<div class="faq-answer__links" aria-label="関連リンク">
+												{item.links.map((link) => (
+													<a href={link.href}>{link.label}</a>
+												))}
+											</div>
+										)}
+									</div>
+								</details>
+							))}
+						</div>
+					</section>
+				))}
+			</div>
+		</section>
+
+		<section class="faq-cta">
+			<div class="faq-container faq-cta__inner">
+				<div>
+					<p class="faq-eyebrow">NEXT ACTION</p>
+					<h2>迷ったら、無料相談で入口を整理しましょう。</h2>
+					<p>AIセントラル、AIクロール、AI講座のどれから始めるべきか、現状を聞いたうえで整理します。</p>
+				</div>
+				<div class="faq-cta__actions">
+					<a href="/?inquiry=consultation#contact">無料相談する</a>
+					<a href="/sitemap/">サイトマップを見る</a>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<style>
+		.faq-page {
+			--faq-bg: #fbf7f8;
+			--faq-surface: rgba(255, 255, 255, 0.82);
+			--faq-ink: #1c1b1c;
+			--faq-muted: #62594e;
+			--faq-gold: #9a700d;
+			--faq-green: #5f7f4e;
+			--faq-line: rgba(205, 190, 169, 0.72);
+			background:
+				linear-gradient(90deg, rgba(154, 112, 13, 0.05) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(154, 112, 13, 0.04) 1px, transparent 1px),
+				linear-gradient(180deg, #fbf7f8 0%, #f8f4ee 52%, #fbf7f8 100%);
+			background-size: 64px 64px, 64px 64px, auto;
+			color: var(--faq-ink);
+		}
+
+		.faq-breadcrumbs {
+			padding-top: 96px;
+			padding-bottom: 10px;
+		}
+
+		.faq-container {
+			width: min(1180px, calc(100% - 48px));
+			margin: 0 auto;
+		}
+
+		.faq-hero {
+			padding: clamp(42px, 7vw, 92px) 0 clamp(28px, 5vw, 58px);
+			border-bottom: 1px solid var(--faq-line);
+		}
+
+		.faq-hero__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+			align-items: end;
+			gap: clamp(28px, 5vw, 72px);
+		}
+
+		.faq-eyebrow {
+			margin: 0 0 16px;
+			color: var(--faq-gold);
+			font-size: 13px;
+			font-weight: 950;
+			letter-spacing: 0.16em;
+		}
+
+		.faq-hero h1 {
+			max-width: 760px;
+			margin: 0;
+			font-size: clamp(44px, 7.2vw, 92px);
+			font-weight: 950;
+			line-height: 1.02;
+			letter-spacing: -0.02em;
+		}
+
+		.faq-hero p {
+			max-width: 760px;
+			margin: 24px 0 0;
+			color: var(--faq-muted);
+			font-size: clamp(17px, 2vw, 21px);
+			font-weight: 700;
+			line-height: 1.9;
+		}
+
+		.faq-hero__card {
+			border: 1px solid var(--faq-line);
+			border-radius: 28px;
+			background:
+				radial-gradient(circle at 86% 0%, rgba(95, 127, 78, 0.18), transparent 38%),
+				rgba(255, 255, 255, 0.74);
+			padding: clamp(22px, 3vw, 34px);
+			box-shadow: 0 24px 60px rgba(92, 62, 8, 0.1);
+		}
+
+		.faq-hero__card strong {
+			display: block;
+			font-size: clamp(22px, 3vw, 32px);
+			font-weight: 950;
+			line-height: 1.25;
+		}
+
+		.faq-hero__card span {
+			display: block;
+			margin-top: 14px;
+			color: var(--faq-muted);
+			font-size: 15px;
+			font-weight: 750;
+			line-height: 1.75;
+		}
+
+		.faq-hero__card div {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 24px;
+		}
+
+		.faq-hero__card a,
+		.faq-category-nav a,
+		.faq-answer__links a,
+		.faq-cta__actions a {
+			text-decoration: none;
+		}
+
+		.faq-hero__card a {
+			display: inline-flex;
+			align-items: center;
+			min-height: 38px;
+			border: 1px solid rgba(154, 112, 13, 0.28);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.86);
+			color: #6f5108;
+			padding: 0 14px;
+			font-size: 13px;
+			font-weight: 950;
+		}
+
+		.faq-category-nav {
+			position: sticky;
+			top: 76px;
+			z-index: 10;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			padding: 18px 0;
+			background: rgba(251, 247, 248, 0.88);
+			backdrop-filter: blur(16px);
+		}
+
+		.faq-guide {
+			display: grid;
+			grid-template-columns: minmax(0, 0.52fr) minmax(0, 1fr);
+			gap: 18px;
+			padding: clamp(28px, 5vw, 54px) 0 18px;
+		}
+
+		.faq-guide__head {
+			grid-row: span 2;
+			border: 1px solid var(--faq-line);
+			border-radius: 28px;
+			background:
+				radial-gradient(circle at 18% 14%, rgba(154, 112, 13, 0.14), transparent 34%),
+				rgba(255, 255, 255, 0.74);
+			padding: clamp(22px, 3vw, 34px);
+			box-shadow: 0 18px 48px rgba(92, 62, 8, 0.06);
+		}
+
+		.faq-guide__head h2 {
+			margin: 0;
+			font-size: clamp(28px, 4vw, 50px);
+			font-weight: 950;
+			line-height: 1.14;
+		}
+
+		.faq-guide__services,
+		.faq-guide__trust {
+			display: grid;
+			gap: 12px;
+		}
+
+		.faq-guide__services {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.faq-guide__services a,
+		.faq-guide__trust a {
+			border: 1px solid var(--faq-line);
+			background: rgba(255, 255, 255, 0.78);
+			color: var(--faq-ink);
+			text-decoration: none;
+			box-shadow: 0 14px 34px rgba(92, 62, 8, 0.05);
+		}
+
+		.faq-guide__services a {
+			min-height: 168px;
+			border-radius: 22px;
+			padding: 20px;
+		}
+
+		.faq-guide__services span,
+		.faq-guide__trust span {
+			display: block;
+			color: var(--faq-gold);
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.faq-guide__services strong {
+			display: block;
+			margin-top: 10px;
+			font-size: clamp(20px, 2vw, 26px);
+			font-weight: 950;
+			line-height: 1.25;
+		}
+
+		.faq-guide__services p {
+			margin: 14px 0 0;
+			color: var(--faq-muted);
+			font-size: 14px;
+			font-weight: 750;
+			line-height: 1.72;
+		}
+
+		.faq-guide__trust {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		.faq-guide__trust a {
+			display: grid;
+			align-content: center;
+			min-height: 78px;
+			border-radius: 18px;
+			padding: 14px 16px;
+		}
+
+		.faq-guide__trust strong {
+			margin-top: 6px;
+			font-size: 16px;
+			font-weight: 950;
+		}
+
+		.faq-category-nav a {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			min-height: 42px;
+			border: 1px solid var(--faq-line);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.78);
+			color: var(--faq-ink);
+			padding: 0 15px;
+			font-size: 14px;
+			font-weight: 950;
+			box-shadow: 0 10px 24px rgba(92, 62, 8, 0.05);
+		}
+
+		.faq-category-nav :global(svg) {
+			width: 19px;
+			height: 19px;
+			color: var(--faq-gold);
+		}
+
+		.faq-body {
+			padding: clamp(34px, 6vw, 76px) 0;
+		}
+
+		.faq-category {
+			scroll-margin-top: 150px;
+			display: grid;
+			grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr);
+			gap: clamp(24px, 4vw, 52px);
+			border-top: 1px solid var(--faq-line);
+			padding: clamp(34px, 6vw, 70px) 0;
+		}
+
+		.faq-category:first-child {
+			border-top: 0;
+			padding-top: 0;
+		}
+
+		.faq-category__head {
+			position: sticky;
+			top: 152px;
+			align-self: start;
+			display: grid;
+			gap: 18px;
+		}
+
+		.faq-category__head > div:first-child {
+			display: grid;
+			width: 64px;
+			height: 64px;
+			place-items: center;
+			border: 1px solid rgba(154, 112, 13, 0.26);
+			border-radius: 20px;
+			background: linear-gradient(135deg, rgba(183, 140, 60, 0.18), rgba(95, 127, 78, 0.12));
+			color: var(--faq-gold);
+		}
+
+		.faq-category__head :global(svg) {
+			width: 31px;
+			height: 31px;
+		}
+
+		.faq-category__head p {
+			margin: 0 0 8px;
+			color: var(--faq-gold);
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.14em;
+		}
+
+		.faq-category__head h2 {
+			margin: 0;
+			font-size: clamp(27px, 3.4vw, 42px);
+			font-weight: 950;
+			line-height: 1.16;
+		}
+
+		.faq-category__head span {
+			display: block;
+			margin-top: 14px;
+			color: var(--faq-muted);
+			font-size: 15px;
+			font-weight: 750;
+			line-height: 1.75;
+		}
+
+		.faq-list {
+			display: grid;
+			gap: 14px;
+		}
+
+		.faq-item {
+			border: 1px solid var(--faq-line);
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.72);
+			box-shadow: 0 16px 46px rgba(92, 62, 8, 0.06);
+			overflow: hidden;
+		}
+
+		.faq-item[open] {
+			background: rgba(255, 255, 255, 0.9);
+		}
+
+		.faq-item summary {
+			display: grid;
+			grid-template-columns: 42px minmax(0, 1fr) 28px;
+			align-items: center;
+			gap: 14px;
+			min-height: 78px;
+			padding: 18px 22px;
+			cursor: pointer;
+			list-style: none;
+		}
+
+		.faq-item summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.faq-item summary > span {
+			display: grid;
+			width: 42px;
+			height: 42px;
+			place-items: center;
+			border-radius: 50%;
+			background: rgba(95, 127, 78, 0.14);
+			color: var(--faq-green);
+			font-size: 15px;
+			font-weight: 950;
+		}
+
+		.faq-item summary strong {
+			font-size: clamp(18px, 1.8vw, 22px);
+			font-weight: 950;
+			line-height: 1.5;
+		}
+
+		.faq-item summary :global(svg) {
+			width: 26px;
+			height: 26px;
+			color: var(--faq-gold);
+			transition: transform 0.18s ease;
+		}
+
+		.faq-item[open] summary :global(svg) {
+			transform: rotate(45deg);
+		}
+
+		.faq-answer {
+			border-top: 1px solid rgba(205, 190, 169, 0.56);
+			padding: 22px clamp(22px, 4vw, 58px) 24px 78px;
+		}
+
+		.faq-answer p {
+			margin: 0;
+			color: #403a32;
+			font-size: clamp(16px, 1.7vw, 18px);
+			font-weight: 650;
+			line-height: 2;
+		}
+
+		.faq-answer :global(a) {
+			color: #6a7f42;
+			font-weight: 950;
+			text-decoration: underline;
+			text-decoration-color: rgba(106, 127, 66, 0.34);
+			text-underline-offset: 4px;
+		}
+
+		.faq-answer__links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.faq-answer__links a {
+			display: inline-flex;
+			align-items: center;
+			min-height: 38px;
+			border: 1px solid rgba(95, 127, 78, 0.24);
+			border-radius: 999px;
+			background: rgba(95, 127, 78, 0.1);
+			color: #405d32;
+			padding: 0 14px;
+			font-size: 13px;
+			font-weight: 950;
+		}
+
+		.faq-cta {
+			border-top: 1px solid var(--faq-line);
+			padding: clamp(42px, 7vw, 86px) 0;
+		}
+
+		.faq-cta__inner {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) auto;
+			align-items: center;
+			gap: 28px;
+			border: 1px solid var(--faq-line);
+			border-radius: 30px;
+			background:
+				radial-gradient(circle at 88% 18%, rgba(95, 127, 78, 0.2), transparent 32%),
+				rgba(255, 255, 255, 0.78);
+			padding: clamp(26px, 5vw, 48px);
+			box-shadow: 0 24px 64px rgba(92, 62, 8, 0.08);
+		}
+
+		.faq-cta h2 {
+			margin: 0;
+			font-size: clamp(28px, 4vw, 50px);
+			font-weight: 950;
+			line-height: 1.18;
+		}
+
+		.faq-cta p:not(.faq-eyebrow) {
+			max-width: 760px;
+			margin: 16px 0 0;
+			color: var(--faq-muted);
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 1.85;
+		}
+
+		.faq-cta__actions {
+			display: grid;
+			gap: 12px;
+			min-width: 260px;
+		}
+
+		.faq-cta__actions a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 54px;
+			border-radius: 999px;
+			padding: 0 24px;
+			font-size: 15px;
+			font-weight: 950;
+		}
+
+		.faq-cta__actions a:first-child {
+			background: #b88d36;
+			color: #211602;
+			box-shadow: 0 16px 30px rgba(154, 112, 13, 0.18);
+		}
+
+		.faq-cta__actions a:last-child {
+			border: 1px solid rgba(154, 112, 13, 0.32);
+			background: rgba(255, 255, 255, 0.8);
+			color: #6f5108;
+		}
+
+		@media (max-width: 900px) {
+			.faq-container {
+				width: min(100% - 32px, 720px);
+			}
+
+			.faq-hero__grid,
+			.faq-guide,
+			.faq-category,
+			.faq-cta__inner {
+				grid-template-columns: 1fr;
+			}
+
+			.faq-guide__head {
+				grid-row: auto;
+			}
+
+			.faq-category__head {
+				position: static;
+			}
+
+			.faq-category-nav {
+				position: static;
+			}
+
+			.faq-answer {
+				padding: 20px 20px 22px;
+			}
+
+			.faq-item summary {
+				grid-template-columns: 38px minmax(0, 1fr) 24px;
+				min-height: 72px;
+				padding: 16px;
+			}
+
+			.faq-item summary > span {
+				width: 38px;
+				height: 38px;
+			}
+
+			.faq-cta__actions {
+				min-width: 0;
+			}
+		}
+
+		@media (max-width: 560px) {
+			.faq-breadcrumbs {
+				padding-top: 86px;
+			}
+
+			.faq-hero h1 {
+				font-size: clamp(39px, 12vw, 54px);
+			}
+
+			.faq-category-nav {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.faq-guide__services,
+			.faq-guide__trust {
+				grid-template-columns: 1fr;
+			}
+
+			.faq-category-nav a {
+				justify-content: center;
+				padding: 0 10px;
+				font-size: 13px;
+			}
+
+			.faq-item summary strong {
+				font-size: 17px;
+			}
+
+			.faq-answer p {
+				font-size: 15px;
+			}
+		}
+	</style>
+</LandingLayout>

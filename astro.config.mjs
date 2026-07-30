@@ -115,7 +115,12 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		sitemap(),
+		sitemap({
+			filter: (page) => {
+				const pathname = new URL(page).pathname;
+				return !pathname.startsWith("/admin/") && !pathname.startsWith("/ai-traffic-report/");
+			},
+		}),
 	],
 	markdown: {
 		remarkPlugins: [

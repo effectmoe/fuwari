@@ -88,7 +88,32 @@ const canonicalURL = Astro.site
 const ogImageURL = ogImage || `${siteUrl}og-image.jpg`;
 const metaDescription = description || pageTitle;
 
-// --- 構造化データ JSON-LD: WebSite + Person（全ページ共通・LLMO の核） ---
+// --- 構造化データ JSON-LD: Organization + WebSite + Person（全ページ共通・LLMO の核） ---
+const organizationLd = {
+	"@type": "Organization",
+	"@id": `${siteUrl}#organization`,
+	name: seoConfig.organization.name,
+	legalName: "株式会社EFFECT",
+	url: siteUrl,
+	email: "info@effect.moe",
+	address: {
+		"@type": "PostalAddress",
+		addressCountry: "JP",
+		addressRegion: "福岡県",
+		addressLocality: "福岡市中央区",
+		streetAddress: "天神2-2-12 T&Jビルディング7F",
+	},
+	founder: { "@id": `${siteUrl}#person` },
+	contactPoint: [
+		{
+			"@type": "ContactPoint",
+			contactType: "customer support",
+			email: "info@effect.moe",
+			availableLanguage: ["ja"],
+		},
+	],
+	sameAs: seoConfig.sameAs,
+};
 const personLd = {
 	"@type": "Person",
 	"@id": `${siteUrl}#person`,
@@ -99,11 +124,7 @@ const personLd = {
 	image: `${siteUrl}og-image.jpg`,
 	jobTitle: seoConfig.jobTitle,
 	description: profileConfig.bio,
-	worksFor: {
-		"@type": "Organization",
-		name: seoConfig.organization.name,
-		url: seoConfig.organization.url,
-	},
+	worksFor: { "@id": `${siteUrl}#organization` },
 	knowsAbout: seoConfig.knowsAbout,
 	sameAs: [...seoConfig.sameAs, seoConfig.reviews.reviewUrl],
 	// ⚠️ Person に aggregateRating を付けると Google のレビュースニペット対象外で「無効」判定される。
@@ -118,7 +139,7 @@ const websiteLd = {
 	description: profileConfig.bio,
 	inLanguage: siteConfig.lang.replace("_", "-"),
 	keywords: seoConfig.keywords.join(", "),
-	publisher: { "@id": `${siteUrl}#person` },
+	publisher: { "@id": `${siteUrl}#organization` },
 	author: { "@id": `${siteUrl}#person` },
 };
 // Google レビュースニペット対象タイプとして ProfessionalService に集約評価を載せる。
@@ -131,7 +152,7 @@ const serviceLd = {
 		`AI実装・LLMO対策・Notion知識管理・システム開発を扱う個人事業のコンサルティングサービス。ストアカで★評価${seoConfig.reviews.ratingValue}/5。`,
 	url: siteUrl,
 	image: `${siteUrl}og-image.jpg`,
-	provider: { "@id": `${siteUrl}#person` },
+	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: { "@type": "Country", name: "Japan" },
 	aggregateRating: {
 		"@type": "AggregateRating",
@@ -140,10 +161,69 @@ const serviceLd = {
 		bestRating: seoConfig.reviews.bestRating,
 	},
 };
-const baseGraphLd = {
+const baseGraphLd: {
+	"@context": string;
+	"@graph": Record<string, unknown>[];
+} = {
 	"@context": "https://schema.org",
-	"@graph": [websiteLd, personLd, serviceLd],
+	"@graph": [organizationLd, websiteLd, personLd, serviceLd],
 };
+
+const breadcrumbLabelMap: Record<string, string> = {
+	"": "ホーム",
+	aicrawl: "AI CRAWL",
+	"ai-agent-course": "AI COURSE",
+	blog: "ブログ",
+	posts: "ブログ",
+	company: "会社概要",
+	changelog: "CHANGELOG",
+	structurepedia: "STRUCTUREPEDIA",
+	author: "アバウト",
+	trust: "信頼性・制作方針",
+	sitemap: "サイトマップ",
+	archive: "アーカイブ",
+	faq: "FAQ",
+	about: "受講生の声",
+};
+const breadcrumbSegments = Astro.url.pathname.replace(/^\/|\/$/g, "").split("/").filter(Boolean);
+const breadcrumbItems = [
+	{
+		"@type": "ListItem",
+		position: 1,
+		name: "ホーム",
+		item: siteUrl,
+	},
+];
+if (breadcrumbSegments.length > 0) {
+	if (breadcrumbSegments[0] === "posts") {
+		breadcrumbItems.push({
+			"@type": "ListItem",
+			position: 2,
+			name: "ブログ",
+			item: new URL("blog/", siteUrl).toString(),
+		});
+		breadcrumbItems.push({
+			"@type": "ListItem",
+			position: 3,
+			name: title || "記事",
+			item: canonicalURL,
+		});
+	} else {
+		const first = breadcrumbSegments[0];
+		breadcrumbItems.push({
+			"@type": "ListItem",
+			position: 2,
+			name: breadcrumbLabelMap[first] || title || first,
+			item: canonicalURL,
+		});
+	}
+}
+const breadcrumbLd = {
+	"@type": "BreadcrumbList",
+	"@id": `${canonicalURL}#breadcrumb`,
+	itemListElement: breadcrumbItems,
+};
+baseGraphLd["@graph"].push(breadcrumbLd);
 ---
 
 <!DOCTYPE html>
@@ -208,7 +288,7 @@ const baseGraphLd = {
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="generator" content={Astro.generator} />
 
-		<!-- 構造化データ: WebSite + Person（LLMO/E-E-A-T の核・全ページ共通） -->
+		<!-- 構造化データ: Organization + WebSite + Person（LLMO/E-E-A-T の核・全ページ共通） -->
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(baseGraphLd)} />
 
 		<!-- AI クローラ向け llms.txt の所在を明示 -->

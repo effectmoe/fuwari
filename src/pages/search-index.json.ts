@@ -5,7 +5,7 @@ const staticPages = [
 	{
 		url: "/",
 		title: "AIセントラル",
-		excerpt: "記憶を持ったAIを社内の中枢へ組み込む、AIセントラルシステム。",
+		excerpt: "記憶を持ったAIを社内の中枢へ組み込むAIシステム。",
 		section: "Service",
 	},
 	{
@@ -43,12 +43,6 @@ const staticPages = [
 		title: "チェンジログ",
 		excerpt: "effect.moeのサイト、サービス、問い合わせ導線の改善履歴。",
 		section: "Changelog",
-	},
-	{
-		url: "/diagnosis/",
-		title: "無料診断",
-		excerpt: "AIセントラルやAIクロールの導入前に、社内ワークフローやサイト状況を確認する診断フォーム。",
-		section: "Diagnosis",
 	},
 ];
 

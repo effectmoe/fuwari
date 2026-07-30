@@ -1,0 +1,576 @@
+---
+import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { profileConfig, seoConfig } from "../config";
+
+const pageTitle = "信頼性・制作方針｜effect.moe";
+const pageDescription =
+	"effect.moe の運営者、制作方針、AI利用方針、出典・実績の扱い、問い合わせと訂正方針をまとめた信頼性ページです。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const canonicalUrl = new URL("/trust/", siteUrl).toString();
+
+const trustPolicyLd = {
+	"@context": "https://schema.org",
+	"@type": "AboutPage",
+	"@id": `${canonicalUrl}#webpage`,
+	url: canonicalUrl,
+	name: pageTitle,
+	description: pageDescription,
+	inLanguage: "ja",
+	isPartOf: { "@id": `${siteUrl}#website` },
+	about: [
+		{ "@id": `${siteUrl}#organization` },
+		{ "@id": `${siteUrl}#person` },
+	],
+	author: { "@id": `${siteUrl}#person` },
+	publisher: { "@id": `${siteUrl}#organization` },
+	reviewedBy: { "@id": `${siteUrl}#person` },
+	dateModified: "2026-07-30",
+};
+
+const policyCards = [
+	{
+		label: "WHO",
+		title: "誰が運営しているか",
+		body: "契約主体は株式会社EFFECT、設計・構築・伴走の中心はシュ コウメイです。会社情報、プロフィール、公開できる外部実績を分けて確認できるようにしています。",
+		icon: "material-symbols:badge-outline-rounded",
+		links: [
+			{ href: "/company/", label: "会社概要" },
+			{ href: "/author/", label: "アバウト" },
+		],
+	},
+	{
+		label: "HOW",
+		title: "どう制作・更新しているか",
+		body: "AIを下書きや整理に使う場合でも、公開前の判断、表現、価格、サービス範囲は人間が確認します。未確定の実績や架空の権威づけは掲載しません。",
+		icon: "material-symbols:edit-note-outline-rounded",
+		links: [
+			{ href: "/changelog/", label: "変更履歴" },
+			{ href: "/faq/", label: "総合FAQ" },
+		],
+	},
+	{
+		label: "WHY",
+		title: "なぜこのサイトを作っているか",
+		body: "AIを単なるチャットではなく、業務に組み込む設計対象として扱うためです。AIセントラル、AIクロール、AI講座を通じて、検索・整理・判断の現場実装を支援します。",
+		icon: "material-symbols:hub-outline",
+		links: [
+			{ href: "/", label: "AIセントラル" },
+			{ href: "/aicrawl/", label: "AIクロール" },
+			{ href: "/ai-agent-course/", label: "AI講座" },
+		],
+	},
+];
+
+const sourceLinks = [
+	{
+		name: "ストアカ講師ページ",
+		body: "講師ランク、講座レビュー、公開プロフィールの確認先です。",
+		href: seoConfig.reviews.profileUrl,
+	},
+	{
+		name: "ストアカレビュー",
+		body: "公開レビューと評価件数の確認先です。",
+		href: seoConfig.reviews.reviewUrl,
+	},
+	{
+		name: "Amazon 著者ページ",
+		body: "LLMO 関連書籍の著者性を確認するための外部リンクです。",
+		href: "https://www.amazon.co.jp/dp/B0F7QQF392",
+	},
+	{
+		name: "LinkedIn",
+		body: "公開プロフィールの補助的な確認先です。",
+		href: "https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/",
+	},
+];
+---
+
+<LandingLayout title={pageTitle} description={pageDescription}>
+	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(trustPolicyLd)}></script>
+
+	<div class="trust-page">
+		<Breadcrumbs class="trust-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "信頼性・制作方針", href: "/trust/" },
+		]} />
+
+		<section class="trust-hero">
+			<div class="trust-shell trust-hero__grid">
+				<div>
+					<p class="trust-kicker">TRUST / E-E-A-T POLICY</p>
+					<h1>誰が、どの責任で、何を根拠に発信しているか。</h1>
+					<p>
+						effect.moe は、AI実装・AI流入分析・AI講座を扱う商用サイトです。だからこそ、運営主体、設計者、外部実績、制作方針、訂正方針をまとめて公開します。
+					</p>
+					<div class="trust-actions">
+						<a href="/author/">設計者を見る</a>
+						<a href="/company/">会社概要を見る</a>
+					</div>
+				</div>
+				<aside class="trust-identity-card">
+					<span>OPERATED BY</span>
+					<strong>株式会社EFFECT</strong>
+					<p>構築・伴走: {profileConfig.name}</p>
+					<dl>
+						<div>
+							<dt>外部評価</dt>
+							<dd>ストアカ {seoConfig.reviews.ratingValue} / 5</dd>
+						</div>
+						<div>
+							<dt>レビュー</dt>
+							<dd>{seoConfig.reviews.reviewCount}件</dd>
+						</div>
+						<div>
+							<dt>講師ランク</dt>
+							<dd>{seoConfig.reviews.badge}</dd>
+						</div>
+					</dl>
+				</aside>
+			</div>
+		</section>
+
+		<section class="trust-section">
+			<div class="trust-shell trust-policy-grid">
+				{policyCards.map((card) => (
+					<article class="trust-policy-card">
+						<div class="trust-policy-card__icon"><Icon name={card.icon} /></div>
+						<span>{card.label}</span>
+						<h2>{card.title}</h2>
+						<p>{card.body}</p>
+						<div>
+							{card.links.map((link) => (
+								<a href={link.href}>{link.label}</a>
+							))}
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="trust-section trust-section--surface">
+			<div class="trust-shell trust-two-column">
+				<div class="trust-section-head">
+					<p class="trust-kicker">EDITORIAL STANDARD</p>
+					<h2>AIは補助。公開責任は人間が持つ。</h2>
+					<p>
+						生成AIを制作補助に使う場合があります。ただし、サービス内容、料金、実績、法的な注意事項、導入条件の表現は、人間が確認したうえで公開します。
+					</p>
+				</div>
+				<div class="trust-standard-list">
+					<div>
+						<strong>実績の扱い</strong>
+						<p>公開ページや管理画面で確認できる数値のみを使い、未確認の受賞・導入社数・顧客名は掲載しません。</p>
+					</div>
+					<div>
+						<strong>価格の扱い</strong>
+						<p>初期導入費用、月額費用、支払い方法、対象範囲をできる限り同じブロック内で確認できるようにします。</p>
+					</div>
+					<div>
+						<strong>AI表現の扱い</strong>
+						<p>「AIに何でも任せる」ではなく、人間の意思決定を前提に、検索・整理・下書き・分析を支える仕組みとして説明します。</p>
+					</div>
+					<div>
+						<strong>訂正の扱い</strong>
+						<p>古い情報や誤記が見つかった場合は修正し、重要な変更は<a href="/changelog/">変更履歴</a>で確認できるようにします。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="trust-section">
+			<div class="trust-shell">
+				<div class="trust-section-head trust-section-head--center">
+					<p class="trust-kicker">PUBLIC SOURCES</p>
+					<h2>外部から確認できる根拠。</h2>
+					<p>effect.moe が一方的に主張するのではなく、外部プロフィールや公開レビューへ到達できる動線を用意します。</p>
+				</div>
+				<div class="trust-source-grid">
+					{sourceLinks.map((link) => (
+						<a href={link.href} target="_blank" rel="noopener noreferrer" class="trust-source-card">
+							<span>外部リンク</span>
+							<strong>{link.name}</strong>
+							<p>{link.body}</p>
+							<Icon name="material-symbols:open-in-new-rounded" />
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="trust-final">
+			<div class="trust-shell trust-final__panel">
+				<div>
+					<p class="trust-kicker">CONTACT / CORRECTION</p>
+					<h2>不明点や訂正依頼は、問い合わせから確認できます。</h2>
+					<p>サービス範囲、支払い方法、記事内容、プロフィール情報について確認したい場合は、無料相談フォームからご連絡ください。</p>
+				</div>
+				<a href="/#contact">無料相談する</a>
+			</div>
+		</section>
+	</div>
+
+	<style>
+		.trust-page {
+			--trust-bg: #fbf7f8;
+			--trust-surface: #fffdfb;
+			--trust-ink: #1d1b1b;
+			--trust-muted: #655c54;
+			--trust-gold: #9a6a05;
+			--trust-green: #547247;
+			--trust-line: rgba(190, 173, 151, 0.62);
+			background:
+				linear-gradient(90deg, rgba(156, 106, 5, 0.045) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(156, 106, 5, 0.035) 1px, transparent 1px),
+				var(--trust-bg);
+			background-size: 56px 56px;
+			color: var(--trust-ink);
+		}
+
+		.trust-breadcrumbs {
+			padding-top: 96px;
+			padding-bottom: 10px;
+		}
+
+		.trust-shell {
+			width: min(1180px, calc(100% - 48px));
+			margin: 0 auto;
+		}
+
+		.trust-hero {
+			padding: clamp(46px, 8vw, 92px) 0 clamp(54px, 8vw, 88px);
+			border-bottom: 1px solid var(--trust-line);
+		}
+
+		.trust-hero__grid,
+		.trust-two-column {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+			gap: clamp(28px, 5vw, 68px);
+			align-items: center;
+		}
+
+		.trust-kicker {
+			margin: 0 0 14px;
+			color: var(--trust-gold);
+			font-size: 0.82rem;
+			font-weight: 950;
+			letter-spacing: 0.15em;
+		}
+
+		.trust-hero h1,
+		.trust-section-head h2,
+		.trust-final h2 {
+			margin: 0;
+			color: var(--trust-ink);
+			font-size: clamp(2.4rem, 6vw, 5.2rem);
+			font-weight: 950;
+			line-height: 1.08;
+			letter-spacing: 0;
+			text-wrap: balance;
+		}
+
+		.trust-hero p,
+		.trust-section-head p,
+		.trust-final p {
+			max-width: 760px;
+			margin: 24px 0 0;
+			color: var(--trust-muted);
+			font-size: clamp(1rem, 1.45vw, 1.18rem);
+			font-weight: 700;
+			line-height: 1.95;
+		}
+
+		.trust-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 30px;
+		}
+
+		.trust-actions a,
+		.trust-final a {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 52px;
+			border-radius: 999px;
+			padding: 0 24px;
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.trust-actions a:first-child,
+		.trust-final a {
+			background: var(--trust-gold);
+			color: #fffdf8;
+			box-shadow: 0 18px 38px rgba(154, 106, 5, 0.18);
+		}
+
+		.trust-actions a:last-child {
+			border: 1px solid var(--trust-line);
+			background: rgba(255, 255, 255, 0.66);
+			color: var(--trust-gold);
+		}
+
+		.trust-identity-card {
+			border: 1px solid var(--trust-line);
+			border-radius: 28px;
+			background:
+				radial-gradient(circle at 100% 0%, rgba(84, 114, 71, 0.18), transparent 40%),
+				rgba(255, 253, 251, 0.86);
+			padding: clamp(24px, 4vw, 38px);
+			box-shadow: 0 28px 70px rgba(79, 62, 43, 0.12);
+		}
+
+		.trust-identity-card > span,
+		.trust-policy-card > span,
+		.trust-source-card > span {
+			color: var(--trust-gold);
+			font-size: 0.74rem;
+			font-weight: 950;
+			letter-spacing: 0.14em;
+		}
+
+		.trust-identity-card > strong {
+			display: block;
+			margin-top: 10px;
+			color: var(--trust-ink);
+			font-size: clamp(2rem, 4vw, 3rem);
+			font-weight: 950;
+			line-height: 1.08;
+		}
+
+		.trust-identity-card > p {
+			margin: 12px 0 24px;
+			color: var(--trust-muted);
+			font-weight: 850;
+		}
+
+		.trust-identity-card dl {
+			display: grid;
+			gap: 10px;
+			margin: 0;
+		}
+
+		.trust-identity-card dl div {
+			display: flex;
+			justify-content: space-between;
+			gap: 14px;
+			border-top: 1px solid rgba(190, 173, 151, 0.5);
+			padding-top: 12px;
+		}
+
+		.trust-identity-card dt,
+		.trust-identity-card dd {
+			margin: 0;
+			font-weight: 900;
+		}
+
+		.trust-identity-card dt {
+			color: var(--trust-muted);
+		}
+
+		.trust-identity-card dd {
+			color: var(--trust-ink);
+			text-align: right;
+		}
+
+		.trust-section {
+			padding: clamp(58px, 8vw, 98px) 0;
+		}
+
+		.trust-section--surface {
+			border-top: 1px solid var(--trust-line);
+			border-bottom: 1px solid var(--trust-line);
+			background: rgba(255, 255, 255, 0.42);
+		}
+
+		.trust-policy-grid,
+		.trust-source-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.trust-policy-card,
+		.trust-source-card,
+		.trust-standard-list > div {
+			border: 1px solid var(--trust-line);
+			border-radius: 24px;
+			background: rgba(255, 253, 251, 0.82);
+			box-shadow: 0 20px 52px rgba(79, 62, 43, 0.08);
+		}
+
+		.trust-policy-card {
+			padding: 26px;
+		}
+
+		.trust-policy-card__icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 54px;
+			height: 54px;
+			margin-bottom: 20px;
+			border-radius: 18px;
+			background: rgba(154, 106, 5, 0.1);
+			color: var(--trust-gold);
+		}
+
+		.trust-policy-card__icon svg {
+			width: 28px;
+			height: 28px;
+		}
+
+		.trust-policy-card h2 {
+			margin: 12px 0 0;
+			font-size: clamp(1.45rem, 2.2vw, 2rem);
+			font-weight: 950;
+			line-height: 1.25;
+		}
+
+		.trust-policy-card p,
+		.trust-source-card p,
+		.trust-standard-list p {
+			margin: 14px 0 0;
+			color: var(--trust-muted);
+			font-size: 0.96rem;
+			font-weight: 700;
+			line-height: 1.82;
+		}
+
+		.trust-policy-card div:last-child {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 20px;
+		}
+
+		.trust-policy-card a {
+			display: inline-flex;
+			border: 1px solid rgba(154, 106, 5, 0.26);
+			border-radius: 999px;
+			padding: 8px 12px;
+			color: var(--trust-gold);
+			font-size: 0.84rem;
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.trust-standard-list {
+			display: grid;
+			gap: 14px;
+		}
+
+		.trust-standard-list > div {
+			padding: 20px 22px;
+		}
+
+		.trust-standard-list strong {
+			display: block;
+			color: var(--trust-ink);
+			font-size: 1.15rem;
+			font-weight: 950;
+		}
+
+		.trust-standard-list a {
+			color: var(--trust-gold);
+			font-weight: 950;
+		}
+
+		.trust-section-head--center {
+			max-width: 820px;
+			margin: 0 auto 30px;
+			text-align: center;
+		}
+
+		.trust-source-card {
+			position: relative;
+			display: block;
+			min-height: 210px;
+			padding: 24px;
+			color: inherit;
+			text-decoration: none;
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.trust-source-card:hover {
+			border-color: rgba(84, 114, 71, 0.58);
+			transform: translateY(-2px);
+		}
+
+		.trust-source-card strong {
+			display: block;
+			margin-top: 10px;
+			color: var(--trust-ink);
+			font-size: 1.45rem;
+			font-weight: 950;
+			line-height: 1.25;
+		}
+
+		.trust-source-card svg {
+			position: absolute;
+			right: 22px;
+			bottom: 22px;
+			width: 24px;
+			height: 24px;
+			color: var(--trust-green);
+		}
+
+		.trust-final {
+			padding: 0 0 clamp(64px, 8vw, 100px);
+		}
+
+		.trust-final__panel {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			border: 1px solid var(--trust-line);
+			border-radius: 30px;
+			background: linear-gradient(135deg, rgba(84, 114, 71, 0.12), rgba(255, 253, 251, 0.95));
+			padding: clamp(26px, 5vw, 44px);
+			box-shadow: 0 26px 64px rgba(79, 62, 43, 0.1);
+		}
+
+		.trust-final h2 {
+			font-size: clamp(1.8rem, 4vw, 3.2rem);
+		}
+
+		@media (max-width: 920px) {
+			.trust-hero__grid,
+			.trust-two-column,
+			.trust-policy-grid,
+			.trust-source-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.trust-final__panel {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+		}
+
+		@media (max-width: 640px) {
+			.trust-shell {
+				width: min(100% - 32px, 1180px);
+			}
+
+			.trust-identity-card dl div {
+				display: block;
+			}
+
+			.trust-identity-card dd {
+				margin-top: 4px;
+				text-align: left;
+			}
+
+			.trust-actions a,
+			.trust-final a {
+				width: 100%;
+			}
+		}
+	</style>
+</LandingLayout>
