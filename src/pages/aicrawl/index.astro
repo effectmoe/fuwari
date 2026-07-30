@@ -463,6 +463,10 @@ const faqs = [
 						<p>{a}</p>
 					</details>
 				))}
+				<a href="/faq/" class="faq-hub-link">
+					<span>総合FAQページでさらに確認する</span>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
 			</div>
 		</div>
 	</section>
@@ -1592,6 +1596,27 @@ const faqs = [
 			font-size: 16px;
 			font-weight: 650;
 			line-height: 1.85;
+		}
+
+		.faq-hub-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			margin-top: 8px;
+			border: 1px solid rgba(69, 111, 69, 0.28);
+			border-radius: 999px;
+			background: linear-gradient(135deg, rgba(245, 250, 242, 0.96), rgba(235, 243, 229, 0.92));
+			padding: 14px 18px;
+			color: var(--crawl-green);
+			font-size: 15px;
+			font-weight: 900;
+			box-shadow: 0 16px 34px rgba(31, 57, 33, 0.1);
+		}
+
+		.faq-hub-link svg {
+			flex-shrink: 0;
+			font-size: 20px;
 		}
 
 		.aicrawl-cta {

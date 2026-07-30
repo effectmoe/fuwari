@@ -381,6 +381,10 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 						<p>{item.a}</p>
 					</details>
 				))}
+				<a href="/faq/" class="faq-hub-link">
+					<span>総合FAQページでさらに確認する</span>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
 			</div>
 		</div>
 	</section>
@@ -1224,6 +1228,27 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 
 	.faq-list p {
 		margin: 14px 0 0;
+	}
+
+	.faq-hub-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-top: 8px;
+		border: 1px solid rgba(0, 86, 179, 0.24);
+		border-radius: 999px;
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(235, 244, 255, 0.94));
+		padding: 14px 18px;
+		color: var(--course-blue);
+		font-size: 15px;
+		font-weight: 900;
+		box-shadow: 0 16px 34px rgba(10, 25, 47, 0.08);
+	}
+
+	.faq-hub-link svg {
+		flex-shrink: 0;
+		font-size: 20px;
 	}
 
 	.course-final {
