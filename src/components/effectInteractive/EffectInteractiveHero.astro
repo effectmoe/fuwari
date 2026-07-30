@@ -20,7 +20,7 @@ import { Icon } from "astro-icon/components";
 		<div class="stitch-top-hero__visual">
 			<div class="stitch-top-hero__image">
 				<picture>
-					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-20260730.png" />
+					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-v2-20260730.png" />
 					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
 				</picture>
 			</div>
@@ -294,19 +294,15 @@ import { Icon } from "astro-icon/components";
 		}
 
 		.stitch-top-hero__image::before {
-			position: absolute;
-			inset: 0 auto 0 0;
-			z-index: 2;
 			display: block;
-			width: 54px;
-			pointer-events: none;
-			background: linear-gradient(90deg, rgba(252, 248, 249, 0.94), rgba(252, 248, 249, 0.68) 48%, rgba(252, 248, 249, 0));
+			width: 0;
+			background: none;
 		}
 
 		.stitch-top-hero__image img {
-			aspect-ratio: 4 / 5;
+			aspect-ratio: 9 / 13;
 			object-fit: cover;
-			object-position: center;
+			object-position: center top;
 			transform: none;
 		}
 
@@ -320,8 +316,8 @@ import { Icon } from "astro-icon/components";
 			right: auto;
 			bottom: auto;
 			box-sizing: border-box;
-			width: calc(100% - 24px);
-			margin: -22px auto 0;
+			width: calc(100% - 20px);
+			margin: -18px auto 0;
 			padding: 12px;
 		}
 
