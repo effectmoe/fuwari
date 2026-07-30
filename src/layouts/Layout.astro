@@ -7,7 +7,12 @@ import "@fontsource/shippori-mincho/600.css";
 import "@fontsource/shippori-mincho/800.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import { profileConfig, seoConfig, siteConfig } from "@/config";
+import {
+	analyticsConfig,
+	profileConfig,
+	seoConfig,
+	siteConfig,
+} from "@/config";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -67,6 +72,11 @@ if (!lang) {
 	lang = `${siteConfig.lang}`;
 }
 const siteLang = lang.replace("_", "-");
+const googleTagManagerId = analyticsConfig.googleTagManagerId.trim();
+const googleSearchConsoleVerification =
+	analyticsConfig.googleSearchConsoleVerification.trim();
+const microsoftClarityProjectId =
+	analyticsConfig.microsoftClarityProjectId.trim();
 
 const bannerOffsetByPosition = {
 	top: `${BANNER_HEIGHT_EXTEND}vh`,
@@ -232,15 +242,17 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 >
 	<head>
 
-		<!-- Google Tag Manager（最優先ロード・GTM-T9L3VSK2）GA4(G-571MN39B7X) を配信 -->
-		<script is:inline>
+		{googleTagManagerId && (
+		<!-- Google Tag Manager（最優先ロード）GA4 は GTM 側で配信 -->
+		<script is:inline define:vars={{ googleTagManagerId }}>
 		(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-T9L3VSK2');
+		})(window,document,'script','dataLayer',googleTagManagerId);
 		</script>
 		<!-- End Google Tag Manager -->
+		)}
 
 		<title>{pageTitle}</title>
 
@@ -249,6 +261,18 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 		<meta name="author" content={profileConfig.name}>
 		<meta name="keywords" content={seoConfig.keywords.join(", ")}>
 		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+		{googleSearchConsoleVerification && (
+			<meta name="google-site-verification" content={googleSearchConsoleVerification}>
+		)}
+		{microsoftClarityProjectId && (
+			<script is:inline define:vars={{ microsoftClarityProjectId }}>
+				(function(c,l,a,r,i,t,y){
+					c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+					t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+					y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+				})(window, document, "clarity", "script", microsoftClarityProjectId);
+			</script>
+		)}
 
 		<!-- PWA -->
 		<link rel="manifest" href="/manifest.webmanifest">
@@ -343,10 +367,14 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
-		<!-- Google Tag Manager (noscript) JS無効環境用フォールバック -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9L3VSK2"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+		{googleTagManagerId && (
+			<>
+				<!-- Google Tag Manager (noscript) JS無効環境用フォールバック -->
+				<noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+				height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+				<!-- End Google Tag Manager (noscript) -->
+			</>
+		)}
 
 		<ConfigCarrier></ConfigCarrier>
 		<slot />

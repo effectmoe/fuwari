@@ -284,7 +284,7 @@ const operationPanels = [
 			<figure class="photo-panel photo-panel--inventory">
 				<img src="/lp/generated/system-inventory-bottleneck-workshop.png" alt="社内システムの棚卸しと業務ボトルネックを整理している相談風景" loading="lazy" decoding="async" />
 				<figcaption>
-					<span>SYSTEM INVENTORY</span>
+					<span>業務棚卸し</span>
 					<strong>記憶へ接続すべき情報を、業務の詰まりから決める。</strong>
 				</figcaption>
 			</figure>
@@ -588,8 +588,8 @@ const operationPanels = [
 	}
 
 	.photo-panel--inventory img {
-		aspect-ratio: 16 / 8.7;
-		object-position: center 42%;
+		aspect-ratio: 16 / 8;
+		object-position: center top;
 	}
 
 	.photo-panel--inventory::after {
@@ -2765,6 +2765,11 @@ const operationPanels = [
 			grid-template-columns: 1fr;
 		}
 
+		.stitch-core__intro-media {
+			gap: 28px;
+			margin-bottom: 36px;
+		}
+
 		.ai-central-clarity__inner {
 			grid-template-columns: 1fr;
 		}
@@ -2793,6 +2798,14 @@ const operationPanels = [
 			margin-top: 4px;
 			font-size: 15px;
 			line-height: 1.38;
+		}
+
+		.photo-panel--inventory figcaption {
+			bottom: 12px;
+			left: 12px;
+			width: calc(100% - 24px);
+			border-radius: 1.35rem;
+			padding: 12px 15px 13px;
 		}
 
 		.problem-grid {

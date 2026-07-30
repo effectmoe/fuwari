@@ -70,6 +70,20 @@ export const navBarConfig: NavBarConfig = {
 	],
 };
 
+export const analyticsConfig = {
+	// GTM is the primary delivery layer. GA4 is configured inside this container.
+	googleTagManagerId:
+		import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID || "GTM-T9L3VSK2",
+	googleAnalyticsMeasurementId:
+		import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || "G-571MN39B7X",
+	// Set after Google Search Console issues the HTML tag token.
+	googleSearchConsoleVerification:
+		import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+	// Set after Microsoft Clarity project creation.
+	microsoftClarityProjectId:
+		import.meta.env.PUBLIC_MICROSOFT_CLARITY_PROJECT_ID || "",
+};
+
 /* Substack メールマガ購読フォーム埋込 URL（サイドバープロフィール下に常設）
    - publication URL: https://<publication>.substack.com/embed の形
    - 正式 URL 未確定の場合は空文字 ""（コンポーネントで空なら非表示）
