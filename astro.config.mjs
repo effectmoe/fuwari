@@ -51,7 +51,11 @@ export default defineConfig({
 			// （@swup/astro は linkSelector を受け付けず ignore オプションで指定する。
 			//   デフォルトのままだと mailto も SPA 遷移として捕まえてしまい、
 			//   ブラウザがメーラを起動できない不具合になる）
+			// 固定LP・ブログ・百科ページの間で <main> だけを差し替えると、
+			// ページ固有のHTML/CSS/JS適用タイミングがずれてコード片のような表示が
+			// 一瞬見えることがあるため、内部リンクは通常遷移に戻す。
 			ignore: [
+				'a[href^="/"]',
 				'a[href^="mailto:"]',
 				'a[href^="tel:"]',
 				'a[href^="javascript:"]',
