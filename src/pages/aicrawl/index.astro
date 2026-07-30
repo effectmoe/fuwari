@@ -471,6 +471,28 @@ const faqs = [
 		</div>
 	</section>
 
+	<section class="aicrawl-related">
+		<div class="aicrawl-container aicrawl-related__panel">
+			<div>
+				<p class="aicrawl-eyebrow">RELATED SERVICES</p>
+				<h2>AI流入の次に、社内AIと学習導線へつなげる。</h2>
+				<p>AIから読まれる入口を整えたら、社内の記憶基盤やAIエージェント活用にも展開できます。</p>
+			</div>
+			<div class="aicrawl-related__links">
+				<a href="/">
+					<span>AIセントラル</span>
+					<strong>記憶を持ったAIを社内の中枢へ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+				<a href="/ai-agent-course/">
+					<span>AI講座</span>
+					<strong>AIエージェント活用を学ぶ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
+
 	<section class="aicrawl-cta">
 		<div class="aicrawl-container aicrawl-cta__panel">
 			<div>
@@ -1619,6 +1641,87 @@ const faqs = [
 			font-size: 20px;
 		}
 
+		.aicrawl-related {
+			padding: clamp(18px, 3vw, 34px) 0 clamp(70px, 8vw, 96px);
+		}
+
+		.aicrawl-related__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+			gap: 22px;
+			align-items: stretch;
+			border: 1px solid rgba(69, 111, 69, 0.24);
+			border-radius: 28px;
+			background:
+				radial-gradient(circle at 88% 18%, rgba(220, 235, 205, 0.9), transparent 30%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(242, 248, 238, 0.78));
+			padding: clamp(22px, 3vw, 34px);
+			box-shadow: 0 22px 54px rgba(31, 57, 33, 0.09);
+		}
+
+		.aicrawl-related h2 {
+			margin: 0;
+			color: var(--crawl-ink);
+			font-size: clamp(24px, 3vw, 36px);
+			font-weight: 950;
+			line-height: 1.24;
+		}
+
+		.aicrawl-related p {
+			margin: 14px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 650;
+			line-height: 1.8;
+		}
+
+		.aicrawl-related__links {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+		}
+
+		.aicrawl-related__links a {
+			position: relative;
+			display: grid;
+			min-height: 138px;
+			align-content: space-between;
+			border: 1px solid rgba(69, 111, 69, 0.22);
+			border-radius: 22px;
+			background: rgba(255, 255, 255, 0.86);
+			padding: 20px;
+			color: var(--crawl-ink);
+			box-shadow: 0 16px 34px rgba(31, 57, 33, 0.07);
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.aicrawl-related__links a:hover {
+			transform: translateY(-2px);
+			border-color: rgba(69, 111, 69, 0.48);
+		}
+
+		.aicrawl-related__links span {
+			color: var(--crawl-green);
+			font-size: 13px;
+			font-weight: 950;
+		}
+
+		.aicrawl-related__links strong {
+			display: block;
+			padding-right: 30px;
+			font-size: clamp(17px, 1.7vw, 21px);
+			font-weight: 950;
+			line-height: 1.42;
+		}
+
+		.aicrawl-related__links svg {
+			position: absolute;
+			right: 18px;
+			bottom: 18px;
+			color: var(--crawl-green);
+			font-size: 24px;
+		}
+
 		.aicrawl-cta {
 			padding: clamp(72px, 9vw, 108px) 0;
 		}
@@ -1645,12 +1748,17 @@ const faqs = [
 
 		@media (max-width: 1020px) {
 			.aicrawl-hero__grid,
-			.aicrawl-intro__grid,
-			.aicrawl-signal__grid,
-			.aicrawl-bridge,
-			.aicrawl-case__grid {
-				grid-template-columns: 1fr;
-			}
+				.aicrawl-intro__grid,
+				.aicrawl-signal__grid,
+				.aicrawl-bridge,
+				.aicrawl-case__grid,
+				.aicrawl-related__panel {
+					grid-template-columns: 1fr;
+				}
+
+				.aicrawl-related__links {
+					grid-template-columns: 1fr;
+				}
 
 			.aicrawl-proof__panel,
 			.aicrawl-proof__summary {

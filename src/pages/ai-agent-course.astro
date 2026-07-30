@@ -389,6 +389,28 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		</div>
 	</section>
 
+	<section class="course-related">
+		<div class="course-shell course-related__panel">
+			<div>
+				<p class="course-kicker">RELATED SERVICES</p>
+				<h2>学んだ先で、社内AIとAI流入分析へつなげる。</h2>
+				<p>AIエージェントを扱う力を身につけたら、社内の記憶基盤づくりや、AIから読まれるサイト設計にも広げられます。</p>
+			</div>
+			<div class="course-related__links">
+				<a href="/">
+					<span>AIセントラル</span>
+					<strong>記憶を持ったAIを社内の中枢へ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+				<a href="/aicrawl/">
+					<span>AIクロール</span>
+					<strong>AIからのサイト流入を分析する</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
+
 	<section id="contact" class="course-final">
 		<div class="course-shell course-final__inner">
 			<p class="course-kicker">START WITH CONSULTATION</p>
@@ -1251,6 +1273,88 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		font-size: 20px;
 	}
 
+	.course-related {
+		padding: 28px 0 84px;
+		background: var(--course-surface);
+	}
+
+	.course-related__panel {
+		display: grid;
+		grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+		gap: 22px;
+		align-items: stretch;
+		border: 1px solid rgba(0, 194, 255, 0.18);
+		border-radius: 26px;
+		background:
+			radial-gradient(circle at 90% 16%, rgba(0, 194, 255, 0.14), transparent 34%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 247, 255, 0.9));
+		padding: clamp(22px, 3vw, 34px);
+		box-shadow: 0 22px 54px rgba(10, 25, 47, 0.08);
+	}
+
+	.course-related h2 {
+		margin: 0;
+		color: var(--course-navy);
+		font-size: clamp(24px, 3vw, 36px);
+		font-weight: 950;
+		line-height: 1.24;
+	}
+
+	.course-related p {
+		margin: 14px 0 0;
+		color: var(--course-muted);
+		font-size: 15px;
+		font-weight: 650;
+		line-height: 1.8;
+	}
+
+	.course-related__links {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.course-related__links a {
+		position: relative;
+		display: grid;
+		min-height: 138px;
+		align-content: space-between;
+		border: 1px solid rgba(0, 86, 179, 0.18);
+		border-radius: 20px;
+		background: rgba(255, 255, 255, 0.9);
+		padding: 20px;
+		color: var(--course-navy);
+		box-shadow: 0 16px 34px rgba(10, 25, 47, 0.07);
+		transition: transform 0.2s ease, border-color 0.2s ease;
+	}
+
+	.course-related__links a:hover {
+		transform: translateY(-2px);
+		border-color: rgba(0, 86, 179, 0.42);
+	}
+
+	.course-related__links span {
+		color: var(--course-blue);
+		font-size: 13px;
+		font-weight: 950;
+	}
+
+	.course-related__links strong {
+		display: block;
+		padding-right: 30px;
+		font-size: clamp(17px, 1.7vw, 21px);
+		font-weight: 950;
+		line-height: 1.42;
+	}
+
+	.course-related__links svg {
+		position: absolute;
+		right: 18px;
+		bottom: 18px;
+		color: var(--course-blue);
+		font-size: 24px;
+	}
+
 	.course-final {
 		padding: 92px 0 110px;
 	}
@@ -1281,7 +1385,12 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		.price-grid,
 		.instructor-card,
 		.faq-grid,
+		.course-related__panel,
 		.newsletter-strip__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.course-related__links {
 			grid-template-columns: 1fr;
 		}
 
