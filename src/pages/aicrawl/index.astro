@@ -49,9 +49,19 @@ const pricingPlans = [
 		name: "AI CRAWL レポート",
 		label: "週次＆月次レポート",
 		price: "¥3,300",
-		body: "AI経由の流入、読まれたページ、頻度をまず継続的に見える化する入口プラン。改善アドバイスは含めません。",
-		features: ["週次レポート", "月次サマリー", "AI別流入の集計", "ページ別流入の集計", "改善戦略はコンサル以上で対応"],
-		cta: "レポート範囲を確認する",
+		// 🔴 2026-08-01 改稿: 旧文面は5行中2行が「含まれません」という引き算で、
+		// 入口商品が自ら魅力を削いでいた。差別化は上位カード側で語れば足りる。
+		// あわせて相場を1行だけ添える（お得さを自称せず、事実を置いて読者に判断させる）。
+		body: "毎週月曜、AIが自社サイトのどのページを読みに来たかを実数でお届けします。続けるほど、先月と今月を比べられるようになります。",
+		features: [
+			"週次レポート（毎週月曜）",
+			"月次サマリー",
+			"AI別の巡回数（ChatGPT・Claude・Perplexity 等）",
+			"ページ別の巡回数と、AI経由の訪問・CV",
+			"継続するほど蓄積される時系列データ",
+		],
+		note: "同種のAI流入計測サービスは月1万円台〜が中心です。",
+		cta: "このプランを申し込む",
 		featured: false,
 	},
 	{
@@ -439,13 +449,14 @@ const faqs = [
 								</li>
 							))}
 						</ul>
+						{plan.note && <p class="aicrawl-price-card__note">{plan.note}</p>}
 						<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
 					</article>
 				))}
 			</div>
 
 			<p class="aicrawl-pricing-note">
-				お支払いはクレジットカード払いです。¥3,300プランは週次＆月次の見える化レポートです。ユーザー動機の深掘り、AIに紹介されるための改善整理、実装判断はコンサル以上のプランで対応します。
+				お支払いはクレジットカード払いです。¥3,300プランは、AIの巡回と流入を継続的に記録してお届けするレポートです。数値の読み解きや改善方針のご相談は、コンサル以上のプランで承ります。
 			</p>
 		</div>
 	</section>
@@ -1332,6 +1343,16 @@ const faqs = [
 			margin-top: 1px;
 			flex: 0 0 auto;
 			color: var(--crawl-green);
+		}
+
+		/* 相場の一行。主張しすぎず、しかし読み飛ばされない程度の存在感にする */
+		.aicrawl-price-card__note {
+			margin: 0 0 14px;
+			padding-top: 12px;
+			border-top: 1px dashed rgba(69, 111, 69, 0.22);
+			font-size: 0.78rem;
+			line-height: 1.6;
+			color: rgba(38, 54, 38, 0.62);
 		}
 
 		.aicrawl-price-card__cta {
