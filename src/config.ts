@@ -76,12 +76,13 @@ export const analyticsConfig = {
 		import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID || "GTM-T9L3VSK2",
 	googleAnalyticsMeasurementId:
 		import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || "G-571MN39B7X",
-	// Set after Google Search Console issues the HTML tag token.
+	// effect.moe is verified in Search Console as a DNS-verified Domain property
+	// (covers all subdomains/protocols), so the HTML tag method is not needed here.
 	googleSearchConsoleVerification:
 		import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || "",
-	// Set after Microsoft Clarity project creation.
+	// Microsoft Clarity project "effect.moe" (created 2026-08-01, owner: info@effect.moe)
 	microsoftClarityProjectId:
-		import.meta.env.PUBLIC_MICROSOFT_CLARITY_PROJECT_ID || "",
+		import.meta.env.PUBLIC_MICROSOFT_CLARITY_PROJECT_ID || "xv67ecazgl",
 };
 
 /* Substack メールマガ購読フォーム埋込 URL（サイドバープロフィール下に常設）
