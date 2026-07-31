@@ -12,11 +12,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.playwright-cli/
+output/
 
 # environment variables
 .env
 .env.production
 .effect-moe-admin-token
+.dev.vars*
+.wrangler/
+local-doc.html.md
 
 # macOS-specific files
 .DS_Store
