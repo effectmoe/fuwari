@@ -1,0 +1,87 @@
+---
+import { Icon } from "astro-icon/components";
+import { serviceConfig } from "../../config";
+
+/**
+ * 記事末の自社サービス誘導CTA。
+ *
+ * 講座CTA（CourseCTA）が「学びたい人」を受けるのに対し、こちらは
+ * 「課題を解きたい人」を受ける。記事末では本コンポーネントを先に置く。
+ *
+ * マッチしなければ**何も描画しない**。無関係な記事に商品リンクを貼ると
+ * 記事の信頼を削るため、fallback は意図的に設けていない
+ * （CourseCTA は fallback があるが、それは講座という性質上の判断）。
+ */
+interface Props {
+	tags?: string[];
+	category?: string | null;
+	serviceId?: string; // frontmatter で明示指定された場合（最優先）
+	class?: string;
+}
+
+const { tags = [], category, serviceId = "", class: className } = Astro.props;
+
+const disabled = serviceId === "none";
+
+function pickService() {
+	if (disabled) return null;
+	if (serviceId) {
+		const found = serviceConfig.services.find((s) => s.id === serviceId);
+		if (found) return found;
+	}
+	const haystack = [...tags, category]
+		.filter(Boolean)
+		.map((t) => String(t).toLowerCase());
+	let best: (typeof serviceConfig.services)[number] | null = null;
+	let bestScore = 0;
+	for (const s of serviceConfig.services) {
+		const score = s.match.filter((m) => haystack.includes(m.toLowerCase())).length;
+		if (score > bestScore) {
+			bestScore = score;
+			best = s;
+		}
+	}
+	return bestScore > 0 ? best : null;
+}
+
+const service = pickService();
+---
+{service && (
+	<div
+		class:list={[
+			"service-cta rounded-[var(--radius-large)] px-6 md:px-8 py-6 relative overflow-hidden",
+			className,
+		]}
+		style="background: rgba(191,155,74,0.10); border: 1px solid rgba(191,155,74,0.32);"
+	>
+		<div class="flex flex-row items-center gap-2 mb-2">
+			<Icon
+				name="material-symbols:radar"
+				class="text-[1.3rem]"
+				style="color:#a8862f;"
+			/>
+			<span class="text-sm font-bold" style="color:#a8862f;">{service.label}</span>
+		</div>
+
+		<div class="text-lg md:text-xl font-bold text-90 mb-2 leading-snug">
+			{service.title}
+		</div>
+		<p class="text-sm text-75 leading-relaxed mb-2">{service.pitch}</p>
+		<p class="text-xs text-50 leading-relaxed mb-4">{service.note}</p>
+
+		<a
+			href={service.url}
+			class="inline-flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-lg transition"
+			style="background:#bf9b4a; color:#fff;"
+		>
+			{service.cta}
+			<Icon name="material-symbols:arrow-forward-rounded" class="text-[1.1rem]" />
+		</a>
+	</div>
+)}
+
+<style>
+	.service-cta a:hover {
+		filter: brightness(1.08);
+	}
+</style>

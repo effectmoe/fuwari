@@ -2,6 +2,7 @@
 import path from "node:path";
 import ArticleFAQ from "@components/widget/ArticleFAQ.astro";
 import CourseCTA from "@components/widget/CourseCTA.astro";
+import ServiceCTA from "@components/widget/ServiceCTA.astro";
 import RelatedLinks from "@components/widget/RelatedLinks.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import MangaSwiper from "@components/MangaSwiper.astro";
@@ -184,6 +185,13 @@ const breadcrumbLd = {
 						</nav>
 					</div>
 				</section>
+
+				<ServiceCTA
+					tags={entry.data.tags}
+					category={entry.data.category}
+					serviceId={entry.data.service}
+					class="commercial-post-module"
+				/>
 
 				<CourseCTA
 					tags={entry.data.tags}

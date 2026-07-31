@@ -251,6 +251,59 @@ export const seoConfig = {
    topics は記事の tags（構造化軸キーワード）と揃えると当たりやすい。
    新講座が増えたらここに1件足すだけで全記事の自動誘導に乗る（SSOT）。
    ============================================================ */
+/* ============================================================
+   サービスCTA（記事末：自社サービスへの誘導・SSOT）
+
+   講座CTA（courseConfig）が「学びたい人」を受けるのに対し、
+   こちらは「自社の課題を解きたい人」を受ける。記事末では
+   サービスCTA → 講座CTA の順に置く（商品接触を先にする）。
+
+   出し分け:
+   - frontmatter `service: "<id>"` があればそれを最優先
+   - なければ tags / category が match に当たったものを表示
+   - どれも当たらなければ何も出さない（無関係なCTAを貼らない）
+   - `service: "none"` で明示的に非表示
+
+   🔴 誇大表現の禁止: ここに書く文言は商品の実態と一致させること。
+   AI Crawl の 3,300円プランは「集計（事実の可視化）」であり、
+   人的な読解・改善提案は上位プランの領域。
+   （strategy-ai-traffic-report-tier-differentiation-20260728.md の運用憲法）
+   ============================================================ */
+export const serviceConfig = {
+	services: [
+		{
+			id: "aicrawl",
+			label: "AI流入をまず「見える化」する",
+			title: "AI CRAWL 週次レポート（月額3,300円）",
+			pitch:
+				"ChatGPT や Claude が自社サイトのどのページを読みに来ているかを、毎週メールでお届けします。まずは事実を継続的に観測するところから。",
+			// 記事末に出す一言。数値の断定や効果保証はしない
+			note: "AI別・ページ別の巡回数と、AI経由の訪問・CVを自動集計します。",
+			url: "https://effect.moe/aicrawl/",
+			cta: "レポート内容を見る",
+			match: [
+				"LLMO", "AIO", "AI流入", "AIクローラー", "GPTBot", "ClaudeBot",
+				"SEO", "検索順位", "Search Console", "GA4", "アクセス解析",
+				"AI検索", "生成AI", "構造化データ", "E-E-A-T", "被引用",
+			],
+		},
+		{
+			id: "ai-central",
+			label: "社内のAI活用を設計する",
+			title: "AI CENTRAL（記憶を持ったAIを社内の中枢へ）",
+			pitch:
+				"社内資料・顧客情報・対応履歴を、AIが参照できる社内基盤として整えます。まずは一部署・一業務から。",
+			note: "個人情報を扱う場合はローカルLLM構成もご相談いただけます。",
+			url: "https://effect.moe/",
+			cta: "AI CENTRAL を見る",
+			match: [
+				"社内AI", "ナレッジ", "知識管理", "Obsidian", "Notion",
+				"業務効率化", "ローカルLLM", "RAG", "議事録", "情報整理",
+			],
+		},
+	],
+} as const;
+
 export const courseConfig = {
 	// マッチしなかった記事に出す保険CTA（実益=コンサルへ）
 	fallbackId: "ai-consulting",

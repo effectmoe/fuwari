@@ -23,6 +23,11 @@ const postsCollection = defineCollection({
 		   "none" を指定すると非表示。 */
 		course: z.string().optional().default(""),
 
+		/* 自社サービスCTA: serviceConfig の id（"aicrawl" / "ai-central"）。
+		   未指定なら tags から自動マッチし、当たらなければ非表示（fallback無し）。
+		   "none" で明示的に非表示。講座CTAより上に描画される。2026-08-01 */
+		service: z.string().optional().default(""),
+
 		/* 用語の補足・FAQ（クラスターFAQ / 難語の注記）。
 		   記事末に表示 + FAQPage 構造化データ化（トピッククラスター・2026-06-14）*/
 		faq: z.array(z.object({
