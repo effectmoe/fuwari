@@ -1,7 +1,6 @@
 ---
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { Icon } from "astro-icon/components";
-import { substackEmbedUrl } from "../config";
 import stats from "../data/storaca-stats.json";
 import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
@@ -223,21 +222,6 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 					<span>GitHub</span><span>Webhook</span><span>API</span><span>MCP</span><span>Notion</span>
 				</div>
 			</div>
-		</div>
-	</section>
-
-	<section id="newsletter" class="newsletter-strip">
-		<div class="course-shell newsletter-strip__inner">
-			<div>
-				<p class="course-kicker">NEWSLETTER</p>
-				<h2>AI活用と構造化の実践メモを受け取る</h2>
-				<p>ブログ更新、講座情報、AI活用の現場メモをメールで届けます。</p>
-			</div>
-			{substackEmbedUrl ? (
-				<iframe src={substackEmbedUrl} title="Substack メルマガ登録フォーム" loading="lazy"></iframe>
-			) : (
-				<a href="https://kangmyung.substack.com/" target="_blank" rel="noopener noreferrer" class="course-button course-button--primary">登録ページを見る</a>
-			)}
 		</div>
 	</section>
 
@@ -780,45 +764,10 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		font-weight: 900;
 	}
 
-	.newsletter-strip,
 	.course-section,
 	.course-final {
 		background: var(--course-surface);
 		color: var(--course-text);
-	}
-
-	.newsletter-strip__inner {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(360px, 0.55fr);
-		gap: 28px;
-		align-items: center;
-		margin-top: -34px;
-		border: 1px solid var(--course-line);
-		border-radius: 1rem;
-		background: rgba(255, 255, 255, 0.95);
-		padding: 24px;
-		box-shadow: 0 26px 70px rgba(10, 25, 47, 0.12);
-	}
-
-	.newsletter-strip h2 {
-		margin: 0;
-		font-size: clamp(24px, 3vw, 34px);
-		font-weight: 950;
-	}
-
-	.newsletter-strip p {
-		margin: 10px 0 0;
-		color: var(--course-muted);
-		font-weight: 700;
-		line-height: 1.7;
-	}
-
-	.newsletter-strip iframe {
-		width: 100%;
-		height: 150px;
-		border: 0;
-		border-radius: 0.8rem;
-		background: #fff;
 	}
 
 	.course-section {
@@ -1385,8 +1334,7 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		.price-grid,
 		.instructor-card,
 		.faq-grid,
-		.course-related__panel,
-		.newsletter-strip__inner {
+		.course-related__panel {
 			grid-template-columns: 1fr;
 		}
 
@@ -1395,7 +1343,25 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		}
 
 		.agent-visual {
-			min-height: 460px;
+			display: grid;
+			gap: 14px;
+			width: min(100%, 720px);
+			min-height: auto;
+			margin: 8px auto 0;
+		}
+
+		.agent-window--main,
+		.agent-window--log,
+		.agent-tools {
+			position: relative;
+			inset: auto;
+			width: 100%;
+			max-width: none;
+			margin: 0;
+		}
+
+		.agent-tools {
+			justify-content: center;
 		}
 
 		.build-grid,
@@ -1416,20 +1382,6 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 
 		.course-hero {
 			padding-top: 112px;
-		}
-
-		.agent-window--main,
-		.agent-window--log,
-		.agent-tools {
-			position: relative;
-			inset: auto;
-			width: 100%;
-			max-width: none;
-			margin-top: 14px;
-		}
-
-		.agent-visual {
-			min-height: auto;
 		}
 
 		.before-after,
