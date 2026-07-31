@@ -32,10 +32,10 @@ const aiCentralClarityCards = [
 ];
 
 const aiRows = [
-	["顧客名や金額を伏せて質問する", "実データを参照して回答・下書きできる"],
+	["顧客名や金額を伏せて質問する", "扱える情報を線引きしてAIに参照させる"],
 	["社内資料を探して、毎回貼り付ける", "必要資料をAIが横断参照する"],
 	["担当者ごとに回答や判断が揺れる", "承認済みナレッジで回答をそろえる"],
-	["機密情報は結局AIに渡せない", "ローカル環境で扱える範囲を設計する"],
+	["外部に出せない情報はAI化を諦める", "ローカル構成を別プランとして選べる"],
 	["AIの出力根拠を追いづらい", "根拠・ログを残して人が承認する"],
 ];
 
@@ -323,33 +323,34 @@ const operationPanels = [
 <section id="secure" class="stitch-core stitch-core--band">
 		<div class="stitch-core__inner safe-ai-editorial">
 			<div class="safe-ai-editorial__heading">
-				<span>SECURE AI PLACEMENT</span>
-				<h2>顧客情報・社内情報を扱うなら、ローカルLLMの置き場所から設計する。</h2>
-				<p>顧客情報や契約情報を外部AIへ送らず、社内PC・社内ネットワーク内でローカルLLMを動かします。AIセントラルは、外部クラウドへアップロードしない前提で、参照範囲・権限・ログ・承認フローを設計する業務AIシステムです。</p>
+				<span>安全なAI配置設計</span>
+				<h2>扱う情報の機微度に合わせて、AIの置き場所と参照範囲を設計する。</h2>
+				<p>AIセントラルは、社内資料・顧客情報・対応履歴をいきなりAIへ丸投げする仕組みではありません。クラウドAI型のプランでは機微情報を扱わない運用ルール、参照範囲、権限、ログ、承認フローを先に設計します。外部クラウドに出せない情報を扱う場合は、パーフェクトセキュアで社内PC・社内ネットワーク内のローカル構成を選べます。</p>
 			</div>
 			<div class="safe-ai-feature-card">
 				<div class="safe-ai-feature-card__copy">
-					<span class="safe-ai-feature-card__label">LOCAL LLM SECURITY</span>
-					<h3>外へ送らない。<br />社内PCの中でAIを動かす。</h3>
-					<p>社内資料・顧客情報・対応履歴を、外部クラウドへ渡さずローカルLLMが参照できる形に整理します。AIは社内ネットワーク内で検索・要約・下書きを行い、人が承認します。</p>
+					<span class="safe-ai-feature-card__label">プラン差を明示</span>
+					<h3>クラウド型とローカル型を、情報の扱いで選び分ける。</h3>
+					<p>通常のAIセントラル / AIセントラル PLUSはクラウドAI型です。機微情報を直接扱わせず、参照させる情報と人が承認する範囲を設計します。パーフェクトセキュアでは、外部クラウドに出せない情報を社内PC・社内ネットワーク内で扱える構成にします。</p>
 					<ul>
-						<li>社内PC・社内ネットワーク内で動作</li>
-						<li>外部クラウドへのアップロードを前提にしない</li>
-						<li>参照範囲・権限・ログを設計</li>
-						<li>最終判断と送信は人が承認</li>
+						<li>AIセントラル / PLUS: クラウドAI型</li>
+						<li>機微情報を扱わない運用ルールを設計</li>
+						<li>参照範囲・権限・ログ・承認フローを整理</li>
+						<li>パーフェクトセキュア: ローカル構成</li>
 					</ul>
+					<p class="safe-ai-feature-card__note">※ 社内PC・社内ネットワーク内でAIを動かすローカル構成は、パーフェクトセキュアの場合です。</p>
 				</div>
 				<figure class="safe-ai-feature-card__media">
 					<img src="/lp/generated/local-llm-security-system.png" alt="社内PC上のローカルLLMが顧客情報と社内資料を外部クラウドに送らず保護するシステムのイメージ" loading="lazy" decoding="async" />
 					<figcaption>
-						<span>LOCAL LLM SYSTEM</span>
-						<strong>社内PC・社内ネットワーク内でAIを動かし、外部送信を前提にしない。</strong>
+						<span>パーフェクトセキュアの場合</span>
+						<strong>外部クラウドに出せない情報は、ローカル構成で扱える範囲を設計する。</strong>
 					</figcaption>
 				</figure>
 			</div>
 			<div class="safe-ai-compare-heading">
-				<span>BEFORE / AFTER</span>
-				<strong>セキュリティで止めるのではなく、機密情報を使えるAIに変える。</strong>
+				<span>利用前 / 導入後</span>
+				<strong>セキュリティで止めるのではなく、扱える情報と扱わない情報を分けてAI化する。</strong>
 			</div>
 			<div class="safe-ai-compare-panel" aria-label="一般的なAI利用と安全な業務AIの違い">
 				{aiRows.map((row) => (
@@ -875,11 +876,23 @@ const operationPanels = [
 		line-height: 1.82;
 	}
 
+	.safe-ai-feature-card__note {
+		border: 1px solid rgba(109, 134, 83, 0.28);
+		border-left: 4px solid #6f8b52;
+		border-radius: 1rem;
+		background: rgba(247, 251, 242, 0.86);
+		padding: 14px 16px;
+		color: #3d5130;
+		font-size: clamp(14px, 1.15vw, 16px);
+		font-weight: 800;
+		line-height: 1.65;
+	}
+
 	.safe-ai-feature-card ul {
 		display: grid;
 		gap: 0;
 		margin: auto 0 0;
-		padding: 34px 0 0;
+		padding: 28px 0 0;
 		list-style: none;
 	}
 
