@@ -1,0 +1,1939 @@
+---
+import { Icon } from "astro-icon/components";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+import stats from "../../data/storaca-stats.json";
+import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg";
+
+const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
+const centralHref = "/#ai-central";
+const blogHref = "/blog/";
+const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+
+const auditSignals = [
+	["流入", "どのAIから、どのページへ来ているか", "ChatGPT / Claude / Perplexity / Gemini"],
+	["頻度", "どれくらいの頻度で読まれているか", "週次 / 月次 / URL別 / AI別"],
+	["意図", "どんな動機でアクセスした可能性があるか", "比較 / 料金確認 / 専門性確認 / 問題解決"],
+	["戦略", "次にどのページを伸ばすべきか", "改善優先度 / 導線 / FAQ / 根拠ページ"],
+];
+
+const crawlChecks = [
+	{
+		title: "AI流入の可視化",
+		body: "どのAIから、どのページへ、どれくらい流入しているかをURL単位で整理します。",
+		items: ["AI別流入", "URL別流入", "頻度", "流入推移"],
+		icon: "material-symbols:radar",
+	},
+	{
+		title: "流入意図の推定",
+		body: "ユーザーがどのAIから、どんな動機でサイトへ来た可能性が高いかを読み解きます。",
+		items: ["比較検討", "料金確認", "課題解決", "専門性確認"],
+		icon: "material-symbols:account-tree-outline",
+	},
+	{
+		title: "AI受入戦略",
+		body: "現状の流入実績から、AIに紹介されやすくなるための改善順を立てます。",
+		items: ["根拠ページ", "FAQ追加", "導線改善", "次の施策"],
+		icon: "material-symbols:fact-check-outline",
+	},
+];
+
+const deliverables = [
+	["01", "AI別の流入", "ChatGPT、Claude、Perplexityなど、どのAIから来ているかを整理します。"],
+	["02", "ページ別の頻度", "どのページに、どれくらいの頻度で、何回流入しているかを見ます。"],
+	["03", "ユーザー意図", "流入先ページから、比較・料金確認・課題解決などの動機を推定します。"],
+	["04", "AI受入戦略", "実績から現状を分析し、次にAIへ紹介されるための改善順を作ります。"],
+];
+
+const pricingPlans = [
+	{
+		name: "AI CRAWL レポート",
+		label: "週次＆月次レポート",
+		price: "¥3,300",
+		body: "AI経由の流入、読まれたページ、頻度をまず継続的に見える化する入口プラン。改善アドバイスは含めません。",
+		features: ["週次レポート", "月次サマリー", "AI別流入の集計", "ページ別流入の集計", "改善戦略はコンサル以上で対応"],
+		cta: "レポート範囲を確認する",
+		featured: false,
+	},
+	{
+		name: "AI CRAWL コンサル",
+		label: "伴走コンサル",
+		price: "¥19,800",
+		body: "レポートを見て終わりにせず、AI流入の意図を読み解き、AIに受け入れられる改善を相談しながら進めたい方向け。",
+		features: ["レポートプランの内容すべて", "2週間に1回の90分相談", "Chatworkでの随時相談", "AI受入戦略の整理"],
+		cta: "伴走内容を相談する",
+		featured: true,
+	},
+	{
+		name: "AI CRAWL グロース",
+		label: "AI流入 成長運用",
+		price: "¥33,000",
+		body: "実装代行までは不要だが、AIに紹介されるために何を直すべきか、具体的な改善プランまで欲しい方向け。",
+		features: [
+			"コンサルプランの内容すべて",
+			"月次のAI流入戦略レビュー",
+			"具体的な改善プランの提示",
+			"AIに引用されやすいFAQ・根拠ページ・相談導線の改善優先順位",
+			"戦略ロードマップ策定と支援",
+		],
+		cta: "成長運用を相談する",
+		featured: false,
+	},
+];
+
+const cases = [
+	{
+		title: "サービスページがAIに説明されない",
+		before: "料金・対象者・提供範囲が別ページに散らばっている",
+		after: "AIが引用しやすい説明とFAQを同じ導線に整理",
+	},
+	{
+		title: "会社名は出るが、強みが出ない",
+		before: "プロフィールや実績が文章として弱く、根拠が足りない",
+		after: "著者・会社・実績・出典をAIが参照できる形に補強",
+	},
+	{
+		title: "記事はあるが、商談につながらない",
+		before: "記事単体で終わり、診断・相談への入口が弱い",
+		after: "記事、診断、相談導線を一本の流れに接続",
+	},
+];
+
+const faqs = [
+	[
+		"AI CRAWLは何をするサービスですか？",
+		"ChatGPT、Claude、Perplexity、GeminiなどのAIから、どのページへ、どれくらいの頻度で流入しているかを見える化します。コンサル以上では、AIに紹介されやすくなるための改善戦略まで整理します。",
+	],
+	[
+		"どのAIから来たかまで分かりますか？",
+		"AI経由のアクセス元やクローラー情報、流入先ページ、読まれた頻度をもとに、どのAIからの流入が多いかを確認します。取得できる範囲はアクセスログや計測環境に依存します。",
+	],
+	[
+		"ユーザーの動機まで分かりますか？",
+		"個人を特定するものではありませんが、アクセス元のAI、流入先ページ、ページ内容、頻度を組み合わせて、比較検討・料金確認・課題解決・専門性確認などの関心を推定します。",
+	],
+	[
+		"レポートでは何が分かりますか？",
+		"AI別の流入、ページ別の流入、週次・月次の推移、読まれているが相談や購入につながりにくいページ、次に改善すべき導線やFAQの候補を整理します。",
+	],
+	[
+		"3,300円プランとコンサルプランの違いは何ですか？",
+		"3,300円プランは週次＆月次の見える化レポートです。AI経由ユーザーの動機分析、改善方針の相談、AIに紹介されるための戦略整理はコンサル以上で対応します。",
+	],
+	[
+		"AI CRAWL グロースはどのような方向けですか？",
+		"レポートを見るだけでなく、AIに紹介されるページを増やすために、改善ロードマップ、FAQ・根拠ページ・導線改善、複数サイト運用まで継続的に進めたい方向けです。",
+	],
+	[
+		"支払い方法は何ですか？",
+		"お支払いはクレジットカード払いです。プラン内容や開始時期は、無料相談で確認したうえでご案内します。",
+	],
+	[
+		"AI CENTRALとは何が違いますか？",
+		"AI CRAWLは外側、つまりAIからの流入とサイト改善を見るサービスです。AI CENTRALは内側、つまり社内情報を記憶として扱う業務AIを設計するサービスです。",
+	],
+	[
+		"まだサービスが固まっていない段階でも相談できますか？",
+		"可能です。サービス内容、料金、対象者、FAQが固まりきっていない場合も、AIに誤解されにくい情報設計と、AI流入を受け止める導線づくりから整理できます。",
+	],
+];
+---
+
+<LandingLayout
+	title="AI CRAWL｜AI流入を分析し、改善戦略へ｜effect.moe"
+	description="AI CRAWLは、どのAIから、どのページへ、どれくらい流入しているかを分析し、ユーザー動機の推定とAIに紹介されるための改善戦略づくりへつなげるレポートサービスです。"
+>
+	<section class="aicrawl-hero">
+		<div class="aicrawl-container aicrawl-hero__grid">
+			<div class="aicrawl-copy">
+				<p class="aicrawl-eyebrow">AI CRAWL / SEARCH VISIBILITY</p>
+				<div class="aicrawl-hero-label">
+					<Icon name="material-symbols:analytics-outline-rounded" />
+					<span>AI流入総合分析</span>
+				</div>
+				<h1>自社サイトへの<strong>AI流入を読み解き、AIが立ち寄るサイトへ近づける。</strong></h1>
+				<p>
+					AI CRAWLは、どのAIから、どのページへ、どれくらい流入しているかを整理し、ユーザーの動機を推定するレポートサービスです。レポートでは流入実績を可視化し、コンサル以上ではAIに受け入れられやすくするための改善戦略まで落とし込みます。
+				</p>
+				<div class="aicrawl-actions">
+					<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
+						<Icon name="material-symbols:manage-search" />
+						無料相談で確認する
+					</a>
+					<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">料金を見る</a>
+					<a href="#checks" class="aicrawl-button aicrawl-button--ghost">診断内容を見る</a>
+				</div>
+			</div>
+
+			<div class="crawl-visual" aria-label="AI Crawl diagnostic preview">
+				<div class="crawl-browser">
+					<div class="crawl-browser__bar">
+						<span></span><span></span><span></span>
+						<strong>AI CRAWL 週次レポート</strong>
+					</div>
+					<div class="crawl-browser__body">
+						<div class="report-title">
+							<div>
+								<span>REPORT</span>
+								<strong>AI流入週次レポート</strong>
+								<p>2026-04-12〜2026-07-28</p>
+							</div>
+							<em>自動集計</em>
+						</div>
+
+						<div class="report-kpis">
+							<div>
+								<span>AIクローラー巡回</span>
+								<strong>15,239</strong>
+								<p>受け入れ率 100%</p>
+							</div>
+							<div>
+								<span>AI経由の訪問</span>
+								<strong>29</strong>
+								<p>CV 0件</p>
+							</div>
+							<div>
+								<span>主要対話型AI</span>
+								<strong>9,248</strong>
+								<p>ChatGPT・Claude 等</p>
+							</div>
+						</div>
+
+						<div class="report-chart">
+							<div class="report-chart__head">
+								<span>日次のクロール数</span>
+								<strong>AIクローラーの巡回推移</strong>
+							</div>
+							<div class="report-bars" aria-hidden="true">
+								<span style="--h: 28%"></span>
+								<span style="--h: 38%"></span>
+								<span style="--h: 31%"></span>
+								<span style="--h: 47%"></span>
+								<span style="--h: 26%"></span>
+								<span style="--h: 40%"></span>
+								<span style="--h: 84%"></span>
+								<span style="--h: 69%"></span>
+								<span style="--h: 47%"></span>
+								<span style="--h: 55%"></span>
+								<span style="--h: 43%"></span>
+								<span style="--h: 33%"></span>
+							</div>
+						</div>
+
+						<div class="report-insights">
+							<div>
+								<span>AI経由で読まれたページ</span>
+								<strong>トップ / 会社概要 / サービスページ</strong>
+							</div>
+							<div>
+								<span>推定された流入動機</span>
+								<strong>料金確認・サービス比較・専門性確認</strong>
+							</div>
+							<div class="report-insights__highlight">
+								<span>今週の改善ポイント</span>
+								<strong>AIに読まれているページから、相談につながる導線を優先改善</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="crawl-floating crawl-floating--left">
+					<Icon name="material-symbols:assignment" />
+					<span>診断レポート</span>
+				</div>
+				<div class="crawl-floating crawl-floating--right">
+					<Icon name="material-symbols:priority-high-rounded" />
+					<span>改善優先度つき</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="overview" class="aicrawl-section aicrawl-intro">
+		<div class="aicrawl-container aicrawl-intro__grid">
+			<div>
+				<p class="aicrawl-eyebrow">WHY IT MATTERS</p>
+				<h2>AIから来ている実績を見なければ、次の戦略は立てられない。</h2>
+			</div>
+			<div class="aicrawl-intro__body">
+				<p>
+					ユーザーが検索結果を一つずつ読む前に、AIが候補を要約し、比較し、推薦する場面が増えています。だからこそ、AIがどのページを読んでいるのか、どんな文脈で人を連れてきているのかを把握し、次に紹介されるためのページ設計へつなげる必要があります。
+				</p>
+				<a href={blogHref}>関連ノートを読む <Icon name="material-symbols:arrow-forward-rounded" /></a>
+			</div>
+		</div>
+	</section>
+
+	<section class="aicrawl-section aicrawl-section--soft" id="checks">
+		<div class="aicrawl-container">
+			<div class="aicrawl-section-head">
+				<p class="aicrawl-eyebrow">CHECK POINTS</p>
+				<h2>AI CRAWLで見るのは、AI流入の実績と、その先の改善戦略です。</h2>
+			</div>
+			<div class="crawl-check-grid">
+				{crawlChecks.map((check) => (
+					<article class="crawl-check-card">
+						<Icon name={check.icon} />
+						<h3>{check.title}</h3>
+						<p>{check.body}</p>
+						<ul>
+							{check.items.map((item) => <li>{item}</li>)}
+						</ul>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="aicrawl-section" id="signals">
+		<div class="aicrawl-container aicrawl-signal__grid">
+			<div>
+				<p class="aicrawl-eyebrow">DIAGNOSTIC MAP</p>
+				<h2>AI別、ページ別、頻度、動機。分けて見ると、伸ばすべき場所が見える。</h2>
+				<p>
+					「AI検索に出るか」だけでは、次の施策がぼやけます。AI CRAWLでは、AIからの流入実績を分解し、どのページを補強すれば未来のパフォーマンスを最大化できるかを見える化します。
+				</p>
+			</div>
+			<div class="signal-board">
+				{auditSignals.map(([label, title, body]) => (
+					<div>
+						<span>{label}</span>
+						<strong>{title}</strong>
+						<p>{body}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="central-bridge" class="aicrawl-section aicrawl-section--green">
+		<div class="aicrawl-container aicrawl-bridge">
+			<div>
+				<p class="aicrawl-eyebrow">OUTSIDE / INSIDE</p>
+				<h2>外側はAI Crawl。内側はAI CENTRAL。</h2>
+				<p>
+					AI CRAWLは、AIからの流入を分析し、外側の集客戦略を整えます。AI CENTRALは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
+				</p>
+			</div>
+			<div class="bridge-cards">
+				<a href="/aicrawl/" class="bridge-card">
+					<span>Outside</span>
+					<h3>AI Crawl</h3>
+					<p>AI流入、読まれたページ、推定動機を見て、紹介されるための戦略へ接続。</p>
+				</a>
+				<a href={centralHref} class="bridge-card bridge-card--light">
+					<span>Inside</span>
+					<h3>AI CENTRAL</h3>
+					<p>社内資料、顧客情報、対応履歴を記憶として業務AIへ接続。</p>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="output" class="aicrawl-section">
+		<div class="aicrawl-container">
+			<div class="aicrawl-section-head">
+				<p class="aicrawl-eyebrow">OUTPUT</p>
+				<h2>レポート後は、AIに紹介されるための順番まで落とし込む。</h2>
+			</div>
+			<div class="deliverable-grid">
+				{deliverables.map(([no, title, body]) => (
+					<article>
+						<span>{no}</span>
+						<h3>{title}</h3>
+						<p>{body}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="case" class="aicrawl-section aicrawl-section--soft">
+		<div class="aicrawl-container aicrawl-case__grid">
+			<div>
+				<p class="aicrawl-eyebrow">BEFORE / AFTER</p>
+				<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
+			</div>
+			<div class="case-list">
+				{cases.map((item) => (
+					<article>
+						<h3>{item.title}</h3>
+						<div>
+							<p><span>Before</span>{item.before}</p>
+							<Icon name="material-symbols:arrow-forward-rounded" />
+							<p><span>After</span>{item.after}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="operator" class="aicrawl-section aicrawl-proof">
+		<div class="aicrawl-container aicrawl-proof__panel">
+			<div class="aicrawl-proof__body">
+				<p class="aicrawl-eyebrow">E-E-A-T / OPERATOR</p>
+				<h2>ストアカPro講師が、責任を持って運用します。</h2>
+				<p>
+					AI CRAWLは、単に数値を並べるレポートではありません。AIにどう読まれ、どのページへ人が流入し、次に何を直すべきかを、AI実装・LLMO対策・サイト改善の実務視点で読み解きます。
+				</p>
+			</div>
+			<div class="aicrawl-proof__summary">
+				<div class="aicrawl-proof__teacher">
+					<img src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" />
+					<div>
+						<span>運用責任者</span>
+						<strong>シュ コウメイ</strong>
+						<em>ストアカ Proランク講師</em>
+					</div>
+				</div>
+				<div class="aicrawl-proof__stats" aria-label="ストアカ公開実績">
+					<div>
+						<strong>★{stats.ratingValue}</strong>
+						<span>講座レビュー評価</span>
+					</div>
+					<div>
+						<strong>{stats.reviewCount}件</strong>
+						<span>公開レビュー</span>
+					</div>
+					<div>
+						<strong>{stats.studentsTaught}+名</strong>
+						<span>累計受講者</span>
+					</div>
+				</div>
+				<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="aicrawl-proof__link">
+					ストアカの先生ページを見る
+					<Icon name="material-symbols:arrow-outward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="aicrawl-section aicrawl-section--pricing" id="pricing">
+		<div class="aicrawl-container">
+			<div class="aicrawl-pricing-head">
+				<div>
+					<p class="aicrawl-eyebrow">PRICE</p>
+					<h2>AI CRAWLの料金</h2>
+				</div>
+				<p>
+					AI別の流入、ページ別の頻度、推定されるユーザー動機、改善戦略をどこまで継続的に扱うかで選べます。
+				</p>
+			</div>
+
+			<div class="aicrawl-pricing-grid">
+				{pricingPlans.map((plan) => (
+					<article class={`aicrawl-price-card ${plan.featured ? "is-featured" : ""}`}>
+						<div class="aicrawl-price-card__top">
+							<span>{plan.label}</span>
+							<h3>{plan.name}</h3>
+							<p>{plan.body}</p>
+						</div>
+						<div class="aicrawl-price-card__price">
+							<strong>{plan.price}</strong>
+							<span>/ 月</span>
+						</div>
+						<ul>
+							{plan.features.map((feature) => (
+								<li>
+									<Icon name="material-symbols:check-circle-outline-rounded" />
+									{feature}
+								</li>
+							))}
+						</ul>
+						<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
+					</article>
+				))}
+			</div>
+
+			<p class="aicrawl-pricing-note">
+				お支払いはクレジットカード払いです。¥3,300プランは週次＆月次の見える化レポートです。ユーザー動機の深掘り、AIに紹介されるための改善整理、実装判断はコンサル以上のプランで対応します。
+			</p>
+		</div>
+	</section>
+
+	<section id="faq" class="aicrawl-section">
+		<div class="aicrawl-container faq-grid">
+			<div>
+				<p class="aicrawl-eyebrow">FAQ</p>
+				<h2>最初に確認されること。</h2>
+			</div>
+			<div class="faq-list">
+				{faqs.map(([q, a]) => (
+					<details>
+						<summary>{q}<Icon name="material-symbols:keyboard-arrow-down-rounded" /></summary>
+						<p>{a}</p>
+					</details>
+				))}
+				<a href="/faq/" class="faq-hub-link">
+					<span>総合FAQページでさらに確認する</span>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="aicrawl-related">
+		<div class="aicrawl-container aicrawl-related__panel">
+			<div>
+				<p class="aicrawl-eyebrow">RELATED SERVICES</p>
+				<h2>AI流入の次に、社内AIと学習導線へつなげる。</h2>
+				<p>AIから読まれる入口を整えたら、社内の記憶基盤やAIエージェント活用にも展開できます。</p>
+			</div>
+			<div class="aicrawl-related__links">
+				<a href="/">
+					<span>AIセントラル</span>
+					<strong>記憶を持ったAIを社内の中枢へ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+				<a href="/ai-agent-course/">
+					<span>AI講座</span>
+					<strong>AIエージェント活用を学ぶ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="aicrawl-cta">
+		<div class="aicrawl-container aicrawl-cta__panel">
+			<div>
+				<p class="aicrawl-eyebrow">FREE CONSULTATION</p>
+				<h2>AIからの流入を、戦略に変えられる状態か確認しましょう。</h2>
+				<p>対象URLを送るだけで、AI経由で読まれているページ、導線の弱さ、AIに紹介されるための大きな欠落を確認します。</p>
+			</div>
+			<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
+				<Icon name="material-symbols:edit-note-outline-rounded" />
+				無料相談を申し込む
+			</a>
+			<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">
+				<Icon name="material-symbols:forum-outline-rounded" />
+				料金を見る
+			</a>
+		</div>
+	</section>
+
+	<style>
+		:global(:root) {
+			--crawl-bg: #fbf8f9;
+			--crawl-soft: #f5f0ea;
+			--crawl-ink: #1d1d1b;
+			--crawl-muted: #5f5a52;
+			--crawl-gold: #b98a2d;
+			--crawl-green: #456f45;
+			--crawl-green-dark: #203921;
+			--crawl-line: rgba(192, 175, 151, 0.58);
+			--crawl-card: rgba(255, 255, 255, 0.78);
+		}
+
+		.aicrawl-hero,
+		.aicrawl-section,
+		.aicrawl-cta {
+			background: var(--crawl-bg);
+			color: var(--crawl-ink);
+		}
+
+		.aicrawl-container {
+			width: min(1240px, calc(100% - 48px));
+			margin-inline: auto;
+		}
+
+		.aicrawl-hero {
+			position: relative;
+			overflow: hidden;
+			padding: clamp(128px, 15vw, 176px) 0 clamp(72px, 9vw, 108px);
+			border-bottom: 1px solid var(--crawl-line);
+			background:
+				linear-gradient(90deg, rgba(251, 248, 249, 0.96), rgba(251, 248, 249, 0.62)),
+				radial-gradient(circle at 76% 22%, rgba(69, 111, 69, 0.14), transparent 32%),
+				linear-gradient(var(--crawl-line) 1px, transparent 1px),
+				linear-gradient(90deg, var(--crawl-line) 1px, transparent 1px);
+			background-size: auto, auto, 56px 56px, 56px 56px;
+		}
+
+		.aicrawl-hero__grid,
+		.aicrawl-intro__grid,
+		.aicrawl-signal__grid,
+		.aicrawl-bridge,
+		.aicrawl-case__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 0.92fr) minmax(440px, 1.08fr);
+			gap: clamp(34px, 5vw, 74px);
+			align-items: center;
+		}
+
+		.aicrawl-eyebrow {
+			margin: 0;
+			color: #8a650f;
+			font-size: 13px;
+			font-weight: 950;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+		}
+
+		.aicrawl-hero-label {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			min-height: 46px;
+			margin-top: 18px;
+			border: 1px solid rgba(69, 111, 69, 0.32);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.86);
+			color: #203921;
+			padding: 0 18px;
+			box-shadow: 0 16px 34px rgba(50, 59, 42, 0.08);
+			font-size: clamp(16px, 1.5vw, 19px);
+			font-weight: 950;
+			line-height: 1;
+			width: fit-content;
+		}
+
+		.aicrawl-hero-label svg {
+			width: 22px;
+			height: 22px;
+			color: var(--crawl-green);
+		}
+
+		.aicrawl-copy h1,
+		.aicrawl-section h2,
+		.aicrawl-cta h2 {
+			margin: 16px 0 0;
+			color: var(--crawl-ink);
+			font-size: clamp(42px, 5.6vw, 74px);
+			font-weight: 950;
+			line-height: 1.08;
+			letter-spacing: 0;
+		}
+
+		.aicrawl-section h2,
+		.aicrawl-cta h2 {
+			font-size: clamp(34px, 4.3vw, 58px);
+			line-height: 1.15;
+		}
+
+		.aicrawl-copy p:not(.aicrawl-eyebrow),
+		.aicrawl-intro__body p,
+		.aicrawl-signal__grid > div > p,
+		.aicrawl-bridge > div > p,
+		.aicrawl-cta p {
+			max-width: 700px;
+			color: var(--crawl-muted);
+			font-size: clamp(16px, 1.45vw, 19px);
+			font-weight: 650;
+			line-height: 1.9;
+		}
+
+		.aicrawl-copy p:not(.aicrawl-eyebrow) {
+			margin-top: 24px;
+		}
+
+		.aicrawl-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px;
+			margin-top: 34px;
+		}
+
+		.aicrawl-button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 9px;
+			min-height: 56px;
+			border-radius: 999px;
+			padding: 0 26px;
+			font-size: 15px;
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.aicrawl-button svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		.aicrawl-button--primary {
+			background: var(--crawl-green);
+			color: #fff;
+			box-shadow: 0 18px 42px rgba(69, 111, 69, 0.18);
+		}
+
+		.aicrawl-button--secondary {
+			border: 1px solid rgba(69, 111, 69, 0.42);
+			background: rgba(255, 255, 255, 0.74);
+			color: #2d542d;
+		}
+
+		.aicrawl-button--ghost {
+			border: 1px solid rgba(185, 138, 45, 0.34);
+			background: rgba(255, 255, 255, 0.46);
+			color: #7a5811;
+		}
+
+		.crawl-visual {
+			position: relative;
+			min-height: 470px;
+		}
+
+		.crawl-browser {
+			position: relative;
+			z-index: 1;
+			overflow: hidden;
+			border: 1px solid var(--crawl-line);
+			border-radius: 34px;
+			background: rgba(255, 255, 255, 0.84);
+			box-shadow: 0 32px 90px rgba(50, 59, 42, 0.16);
+		}
+
+		.crawl-browser__bar {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 16px 20px;
+			border-bottom: 1px solid var(--crawl-line);
+			background: #fffaf5;
+		}
+
+		.crawl-browser__bar span {
+			width: 11px;
+			height: 11px;
+			border-radius: 50%;
+			background: #d9c6a5;
+		}
+
+		.crawl-browser__bar strong {
+			margin-left: 10px;
+			color: #6b6259;
+			font-size: 13px;
+			font-weight: 850;
+		}
+
+		.crawl-browser__body {
+			padding: clamp(22px, 3.4vw, 38px);
+			background:
+				linear-gradient(rgba(185, 138, 45, 0.08) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(185, 138, 45, 0.08) 1px, transparent 1px),
+				#fff;
+			background-size: 34px 34px;
+		}
+
+		.report-title,
+		.report-kpis div,
+		.report-chart,
+		.report-insights div {
+			border: 1px solid rgba(192, 175, 151, 0.62);
+			background: rgba(255, 255, 255, 0.88);
+		}
+
+		.report-title {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			gap: 16px;
+			align-items: center;
+			border-radius: 18px;
+			padding: 16px 18px;
+		}
+
+		.report-title span,
+		.report-kpis span,
+		.report-chart span,
+		.report-insights span,
+		.crawl-floating span {
+			color: #3c372f;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.report-title span,
+		.report-kpis span,
+		.report-chart span,
+		.report-insights span {
+			display: inline-flex;
+			width: fit-content;
+			border: 1px solid rgba(69, 111, 69, 0.2);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.94);
+			padding: 5px 9px;
+			box-shadow: 0 8px 18px rgba(50, 59, 42, 0.06);
+		}
+
+		.report-title strong {
+			display: block;
+			margin-top: 6px;
+			overflow: hidden;
+			color: #242322;
+			font-size: clamp(20px, 2.4vw, 28px);
+			font-weight: 950;
+			line-height: 1.2;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.report-title p {
+			margin: 6px 0 0;
+			color: #403b34;
+			font-size: 13px;
+			font-weight: 900;
+		}
+
+		.report-title em {
+			border-radius: 999px;
+			background: #456f45;
+			color: #fff;
+			padding: 8px 12px;
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 950;
+			box-shadow: 0 10px 24px rgba(69, 111, 69, 0.18);
+		}
+
+		.report-kpis {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.report-kpis div {
+			border-radius: 18px;
+			padding: 16px 14px;
+			text-align: center;
+		}
+
+		.report-kpis strong {
+			display: block;
+			margin-top: 4px;
+			color: var(--crawl-green);
+			font-size: clamp(28px, 3.4vw, 42px);
+			font-weight: 950;
+			line-height: 1;
+		}
+
+		.report-kpis p {
+			margin: 5px 0 0;
+			color: #403b34;
+			font-size: 12px;
+			font-weight: 950;
+			line-height: 1.35;
+		}
+
+		.report-chart {
+			overflow: hidden;
+			margin-top: 18px;
+			border-radius: 22px;
+			padding: 18px;
+		}
+
+		.report-chart__head {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 14px;
+		}
+
+		.report-chart__head strong {
+			color: #2d2b28;
+			font-size: 15px;
+			font-weight: 950;
+			text-align: right;
+		}
+
+		.report-bars {
+			display: flex;
+			align-items: end;
+			gap: 7px;
+			height: 118px;
+			margin-top: 14px;
+			padding: 10px 4px 0;
+			border-radius: 16px;
+			background:
+				linear-gradient(rgba(69, 111, 69, 0.08) 1px, transparent 1px) 0 0 / 100% 28px,
+				#f7f5f0;
+		}
+
+		.report-bars span {
+			flex: 1;
+			height: var(--h);
+			min-width: 10px;
+			border-radius: 8px 8px 2px 2px;
+			background: linear-gradient(180deg, #8a9a5b, #3e6b3a);
+		}
+
+		.report-insights {
+			display: grid;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.report-insights div {
+			border-radius: 16px;
+			padding: 14px 16px;
+		}
+
+		.report-insights strong {
+			display: block;
+			margin-top: 5px;
+			color: #2d2b28;
+			font-size: 15px;
+			font-weight: 950;
+			line-height: 1.55;
+		}
+
+		.report-insights__highlight {
+			background: #fff8f0 !important;
+			border-color: #ecd5b3 !important;
+		}
+
+		.report-insights__highlight strong {
+			color: #7d5b10;
+		}
+
+		.report-title em,
+		.report-kpis strong,
+		.report-chart__head strong,
+		.report-insights strong {
+			white-space: nowrap;
+		}
+
+		.crawl-floating {
+			position: absolute;
+			z-index: 2;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			border: 1px solid rgba(69, 111, 69, 0.42);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.98);
+			padding: 13px 17px;
+			box-shadow: 0 18px 46px rgba(50, 59, 42, 0.18);
+			backdrop-filter: blur(12px);
+		}
+
+		.crawl-floating svg {
+			width: 22px;
+			height: 22px;
+			color: #7d5b10;
+		}
+
+		.crawl-floating span {
+			color: #172917;
+			font-size: 13px;
+			letter-spacing: 0.03em;
+		}
+
+		.crawl-floating--right {
+			background: var(--crawl-green);
+			color: #fff;
+		}
+
+		.crawl-floating--right svg,
+		.crawl-floating--right span {
+			color: #fff;
+		}
+
+		.crawl-floating--left {
+			left: -18px;
+			bottom: 72px;
+		}
+
+		.crawl-floating--right {
+			right: -10px;
+			top: 74px;
+		}
+
+		.aicrawl-section {
+			padding: clamp(72px, 9vw, 112px) 0;
+		}
+
+		.aicrawl-section--soft {
+			border-block: 1px solid var(--crawl-line);
+			background: var(--crawl-soft);
+		}
+
+		.aicrawl-intro__grid,
+		.aicrawl-signal__grid,
+		.aicrawl-case__grid {
+			align-items: start;
+		}
+
+		.aicrawl-intro__body a {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			margin-top: 20px;
+			color: var(--crawl-green);
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.aicrawl-intro__body svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		.aicrawl-section-head {
+			max-width: 880px;
+			margin-bottom: 34px;
+		}
+
+		.crawl-check-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 20px;
+		}
+
+		.crawl-check-card,
+		.signal-board,
+		.bridge-card,
+		.deliverable-grid article,
+		.case-list article,
+		.faq-list details {
+			border: 1px solid var(--crawl-line);
+			background: var(--crawl-card);
+			box-shadow: 0 22px 58px rgba(50, 59, 42, 0.08);
+		}
+
+		.crawl-check-card {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			min-height: 360px;
+			border-radius: 28px;
+			padding: clamp(24px, 3vw, 34px);
+			text-align: center;
+		}
+
+		.crawl-check-card > svg {
+			width: 52px;
+			height: 52px;
+			color: var(--crawl-green);
+		}
+
+		.crawl-check-card h3,
+		.bridge-card h3,
+		.deliverable-grid h3,
+		.case-list h3 {
+			margin: 20px 0 0;
+			color: var(--crawl-ink);
+			font-size: clamp(22px, 2vw, 30px);
+			font-weight: 950;
+			line-height: 1.3;
+		}
+
+		.crawl-check-card p,
+		.bridge-card p,
+		.deliverable-grid p {
+			margin: 14px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 650;
+			line-height: 1.8;
+		}
+
+		.crawl-check-card ul {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 9px;
+			width: 100%;
+			max-width: 280px;
+			margin: 24px 0 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.crawl-check-card li {
+			border-radius: 999px;
+			background: rgba(69, 111, 69, 0.1);
+			color: #2f552f;
+			padding: 9px 11px;
+			font-size: 13px;
+			font-weight: 900;
+			text-align: center;
+		}
+
+		.signal-board {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			overflow: hidden;
+			border-radius: 30px;
+			background: rgba(255, 255, 255, 0.82);
+		}
+
+		.signal-board div {
+			min-height: 210px;
+			padding: 28px;
+			border-right: 1px solid var(--crawl-line);
+			border-bottom: 1px solid var(--crawl-line);
+		}
+
+		.signal-board div:nth-child(2n) {
+			border-right: 0;
+		}
+
+		.signal-board div:nth-last-child(-n + 2) {
+			border-bottom: 0;
+		}
+
+		.signal-board span,
+		.bridge-card span,
+		.deliverable-grid span {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 34px;
+			border-radius: 999px;
+			background: rgba(185, 138, 45, 0.12);
+			color: #7d5b10;
+			padding: 0 12px;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.signal-board strong {
+			display: block;
+			margin-top: 22px;
+			color: var(--crawl-ink);
+			font-size: 22px;
+			font-weight: 950;
+			line-height: 1.35;
+		}
+
+		.signal-board p {
+			margin: 12px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 700;
+			line-height: 1.7;
+		}
+
+		.aicrawl-section--green {
+			background:
+				radial-gradient(circle at 80% 0%, rgba(234, 215, 173, 0.18), transparent 32%),
+				linear-gradient(135deg, #203921, #3f633c);
+			color: #fff;
+		}
+
+		.aicrawl-section--green .aicrawl-eyebrow,
+		.aicrawl-section--green h2,
+		.aicrawl-section--green p {
+			color: #fff;
+		}
+
+		.aicrawl-section--green .aicrawl-bridge > div > p {
+			color: rgba(255, 255, 255, 0.9);
+			font-weight: 780;
+			text-shadow: 0 1px 18px rgba(0, 0, 0, 0.22);
+		}
+
+		.aicrawl-section--green .aicrawl-eyebrow {
+			color: rgba(255, 255, 255, 0.72);
+		}
+
+		.aicrawl-section--green .bridge-card p {
+			color: rgba(255, 255, 255, 0.94);
+			font-weight: 850;
+		}
+
+		.bridge-cards {
+			display: grid;
+			gap: 18px;
+		}
+
+		.bridge-card {
+			display: block;
+			border-color: rgba(255, 255, 255, 0.22);
+			border-radius: 28px;
+			padding: 30px;
+			background: rgba(255, 255, 255, 0.1);
+			color: #fff;
+			text-decoration: none;
+		}
+
+		.aicrawl-section--green .bridge-card span {
+			background: rgba(255, 255, 255, 0.96);
+			color: #203921;
+			border: 1px solid rgba(255, 255, 255, 0.56);
+			box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+		}
+
+		.bridge-card h3,
+		.bridge-card p {
+			color: #fff;
+		}
+
+		.bridge-card--light {
+			background: rgba(255, 255, 255, 0.18);
+		}
+
+		.deliverable-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 18px;
+		}
+
+		.deliverable-grid article {
+			min-height: 260px;
+			border-radius: 26px;
+			padding: 26px;
+		}
+
+		.aicrawl-section--pricing {
+			border-block: 1px solid var(--crawl-line);
+			background:
+				radial-gradient(circle at 12% 0%, rgba(69, 111, 69, 0.1), transparent 26%),
+				radial-gradient(circle at 92% 18%, rgba(185, 138, 45, 0.14), transparent 28%),
+				var(--crawl-bg);
+		}
+
+		.aicrawl-pricing-head {
+			display: grid;
+			grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.7fr);
+			gap: clamp(26px, 5vw, 70px);
+			align-items: end;
+			margin-bottom: 34px;
+		}
+
+		.aicrawl-pricing-head h2 {
+			margin: 16px 0 0;
+			color: var(--crawl-ink);
+			font-size: clamp(34px, 4.3vw, 58px);
+			font-weight: 950;
+			line-height: 1.12;
+		}
+
+		.aicrawl-pricing-head p {
+			margin: 0;
+			color: var(--crawl-muted);
+			font-size: clamp(16px, 1.45vw, 19px);
+			font-weight: 700;
+			line-height: 1.85;
+		}
+
+		.aicrawl-pricing-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 20px;
+			align-items: stretch;
+		}
+
+		.aicrawl-price-card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-height: 500px;
+			overflow: hidden;
+			border: 1px solid var(--crawl-line);
+			border-radius: 30px;
+			background:
+				linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(255, 250, 243, 0.78)),
+				var(--crawl-card);
+			padding: clamp(24px, 3vw, 34px);
+			box-shadow: 0 28px 74px rgba(50, 59, 42, 0.1);
+		}
+
+		.aicrawl-price-card::before {
+			content: "";
+			position: absolute;
+			inset: 0 0 auto;
+			height: 7px;
+			background: linear-gradient(90deg, #d7b061, #7b9a69);
+		}
+
+		.aicrawl-price-card.is-featured {
+			border-color: rgba(69, 111, 69, 0.52);
+			background:
+				linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(239, 247, 237, 0.9)),
+				var(--crawl-card);
+			box-shadow: 0 34px 88px rgba(69, 111, 69, 0.16);
+		}
+
+		.aicrawl-price-card__top > span {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 34px;
+			border-radius: 999px;
+			background: rgba(69, 111, 69, 0.12);
+			color: #315331;
+			padding: 0 13px;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.06em;
+		}
+
+		.aicrawl-price-card.is-featured .aicrawl-price-card__top > span {
+			background: var(--crawl-green);
+			color: #fff;
+		}
+
+		.aicrawl-price-card h3 {
+			margin: 22px 0 0;
+			color: var(--crawl-ink);
+			font-size: clamp(26px, 2.5vw, 38px);
+			font-weight: 950;
+			line-height: 1.16;
+		}
+
+		.aicrawl-price-card__top p {
+			margin: 16px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 720;
+			line-height: 1.8;
+		}
+
+		.aicrawl-price-card__price {
+			display: flex;
+			align-items: end;
+			gap: 8px;
+			margin-top: 24px;
+			padding-top: 22px;
+			border-top: 1px solid rgba(192, 175, 151, 0.56);
+		}
+
+		.aicrawl-price-card__price strong {
+			color: var(--crawl-green-dark);
+			font-size: clamp(38px, 4.2vw, 56px);
+			font-weight: 950;
+			line-height: 0.98;
+		}
+
+		.aicrawl-price-card__price span {
+			margin-bottom: 6px;
+			color: #7d5b10;
+			font-size: 15px;
+			font-weight: 950;
+		}
+
+		.aicrawl-price-card ul {
+			display: grid;
+			gap: 13px;
+			margin: 28px 0 24px;
+			padding: 0;
+			list-style: none;
+		}
+
+		.aicrawl-price-card li {
+			display: flex;
+			align-items: flex-start;
+			gap: 10px;
+			color: #302e2b;
+			font-size: 15px;
+			font-weight: 850;
+			line-height: 1.55;
+		}
+
+		.aicrawl-price-card li svg {
+			width: 20px;
+			height: 20px;
+			margin-top: 1px;
+			flex: 0 0 auto;
+			color: var(--crawl-green);
+		}
+
+		.aicrawl-price-card__cta {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 54px;
+			margin-top: auto;
+			border: 1px solid rgba(69, 111, 69, 0.36);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.78);
+			color: #254825;
+			padding: 0 20px;
+			font-size: 15px;
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.aicrawl-price-card.is-featured .aicrawl-price-card__cta {
+			border-color: var(--crawl-green);
+			background: var(--crawl-green);
+			color: #fff;
+			box-shadow: 0 18px 38px rgba(69, 111, 69, 0.2);
+		}
+
+		.aicrawl-pricing-note {
+			margin: 22px 0 0;
+			border: 1px solid rgba(192, 175, 151, 0.62);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.78);
+			color: var(--crawl-muted);
+			padding: 14px 20px;
+			font-size: 14px;
+			font-weight: 800;
+			line-height: 1.65;
+			text-align: center;
+		}
+
+		.aicrawl-proof {
+			background:
+				radial-gradient(circle at 18% 12%, rgba(185, 138, 45, 0.16), transparent 28%),
+				radial-gradient(circle at 86% 20%, rgba(69, 111, 69, 0.11), transparent 30%),
+				var(--crawl-bg);
+		}
+
+		.aicrawl-proof__panel {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: clamp(22px, 3vw, 34px);
+			align-items: start;
+			border: 1px solid var(--crawl-line);
+			border-radius: 34px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: clamp(26px, 4vw, 42px);
+			box-shadow: 0 28px 74px rgba(50, 59, 42, 0.1);
+		}
+
+		.aicrawl-proof__body p:not(.aicrawl-eyebrow) {
+			max-width: 760px;
+			color: var(--crawl-muted);
+			font-size: clamp(16px, 1.45vw, 19px);
+			font-weight: 700;
+			line-height: 1.9;
+		}
+
+		.aicrawl-proof__summary {
+			display: grid;
+			grid-template-columns: minmax(260px, 0.95fr) minmax(360px, 1.25fr) auto;
+			gap: 14px;
+			align-items: stretch;
+		}
+
+		.aicrawl-proof__teacher {
+			display: grid;
+			grid-template-columns: 76px 1fr;
+			gap: 16px;
+			align-items: center;
+			border: 1px solid rgba(192, 175, 151, 0.62);
+			border-radius: 24px;
+			background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 243, 0.82));
+			padding: 16px;
+			box-shadow: 0 18px 44px rgba(50, 59, 42, 0.07);
+		}
+
+		.aicrawl-proof__teacher img {
+			width: 76px;
+			height: 76px;
+			border: 3px solid #fff;
+			border-radius: 50%;
+			object-fit: cover;
+			object-position: center;
+			box-shadow: 0 12px 26px rgba(50, 59, 42, 0.16);
+		}
+
+		.aicrawl-proof__teacher span {
+			display: block;
+			color: #7d5b10;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.1em;
+		}
+
+		.aicrawl-proof__teacher strong {
+			display: block;
+			margin-top: 4px;
+			color: #203921;
+			font-size: 24px;
+			font-weight: 950;
+			line-height: 1.15;
+		}
+
+		.aicrawl-proof__teacher em {
+			display: inline-flex;
+			width: fit-content;
+			margin-top: 8px;
+			border-radius: 999px;
+			background: rgba(69, 111, 69, 0.12);
+			color: #315331;
+			padding: 6px 10px;
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 950;
+		}
+
+		.aicrawl-proof__stats {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 10px;
+			margin-top: 0;
+		}
+
+		.aicrawl-proof__stats div {
+			border: 1px solid rgba(192, 175, 151, 0.62);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.82);
+			padding: 14px;
+			box-shadow: 0 18px 44px rgba(50, 59, 42, 0.07);
+		}
+
+		.aicrawl-proof__stats strong {
+			display: block;
+			color: var(--crawl-green-dark);
+			font-size: clamp(20px, 2vw, 28px);
+			font-weight: 950;
+			line-height: 1.1;
+		}
+
+		.aicrawl-proof__stats span {
+			display: block;
+			margin-top: 8px;
+			color: #7d5b10;
+			font-size: 12px;
+			font-weight: 900;
+			line-height: 1.4;
+		}
+
+		.aicrawl-proof__link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			min-height: 50px;
+			margin-top: 0;
+			border-radius: 999px;
+			background: var(--crawl-green);
+			color: #fff;
+			padding: 0 24px;
+			font-size: 15px;
+			font-weight: 950;
+			text-decoration: none;
+			box-shadow: 0 18px 42px rgba(69, 111, 69, 0.18);
+			white-space: nowrap;
+		}
+
+		.aicrawl-proof__link svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		.case-list {
+			display: grid;
+			gap: 16px;
+		}
+
+		.case-list article {
+			border-radius: 26px;
+			padding: 24px;
+		}
+
+		.case-list h3 {
+			margin-top: 0;
+			font-size: 24px;
+		}
+
+		.faq-grid {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 28px;
+			align-items: start;
+		}
+
+		.faq-grid > div:first-child {
+			max-width: 820px;
+		}
+
+		.case-list article > div {
+			display: grid;
+			grid-template-columns: 1fr auto 1fr;
+			gap: 16px;
+			align-items: center;
+			margin-top: 18px;
+		}
+
+		.case-list p {
+			margin: 0;
+			border-radius: 18px;
+			background: rgba(69, 111, 69, 0.08);
+			color: var(--crawl-ink);
+			padding: 18px;
+			font-size: 15px;
+			font-weight: 800;
+			line-height: 1.7;
+		}
+
+		.case-list p span {
+			display: block;
+			margin-bottom: 8px;
+			color: #7d5b10;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.case-list svg {
+			width: 28px;
+			height: 28px;
+			color: var(--crawl-gold);
+		}
+
+		.faq-list {
+			display: grid;
+			gap: 12px;
+		}
+
+		.faq-list details {
+			border-radius: 20px;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		.faq-list summary {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			cursor: pointer;
+			padding: 24px 26px;
+			color: var(--crawl-ink);
+			font-size: 18px;
+			font-weight: 950;
+			list-style: none;
+		}
+
+		.faq-list summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.faq-list summary svg {
+			width: 26px;
+			height: 26px;
+			color: var(--crawl-green);
+			transition: transform 0.2s ease;
+		}
+
+		.faq-list details[open] summary svg {
+			transform: rotate(180deg);
+		}
+
+		.faq-list details p {
+			margin: 0;
+			padding: 0 26px 26px;
+			color: var(--crawl-muted);
+			font-size: 16px;
+			font-weight: 650;
+			line-height: 1.85;
+		}
+
+		.faq-hub-link {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			margin-top: 8px;
+			border: 1px solid rgba(69, 111, 69, 0.28);
+			border-radius: 999px;
+			background: linear-gradient(135deg, rgba(245, 250, 242, 0.96), rgba(235, 243, 229, 0.92));
+			padding: 14px 18px;
+			color: var(--crawl-green);
+			font-size: 15px;
+			font-weight: 900;
+			box-shadow: 0 16px 34px rgba(31, 57, 33, 0.1);
+		}
+
+		.faq-hub-link svg {
+			flex-shrink: 0;
+			font-size: 20px;
+		}
+
+		.aicrawl-related {
+			padding: clamp(18px, 3vw, 34px) 0 clamp(70px, 8vw, 96px);
+		}
+
+		.aicrawl-related__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+			gap: 22px;
+			align-items: stretch;
+			border: 1px solid rgba(69, 111, 69, 0.24);
+			border-radius: 28px;
+			background:
+				radial-gradient(circle at 88% 18%, rgba(220, 235, 205, 0.9), transparent 30%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(242, 248, 238, 0.78));
+			padding: clamp(22px, 3vw, 34px);
+			box-shadow: 0 22px 54px rgba(31, 57, 33, 0.09);
+		}
+
+		.aicrawl-related h2 {
+			margin: 0;
+			color: var(--crawl-ink);
+			font-size: clamp(24px, 3vw, 36px);
+			font-weight: 950;
+			line-height: 1.24;
+		}
+
+		.aicrawl-related p {
+			margin: 14px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 650;
+			line-height: 1.8;
+		}
+
+		.aicrawl-related__links {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 14px;
+		}
+
+		.aicrawl-related__links a {
+			position: relative;
+			display: grid;
+			min-height: 138px;
+			align-content: space-between;
+			border: 1px solid rgba(69, 111, 69, 0.22);
+			border-radius: 22px;
+			background: rgba(255, 255, 255, 0.86);
+			padding: 20px;
+			color: var(--crawl-ink);
+			box-shadow: 0 16px 34px rgba(31, 57, 33, 0.07);
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.aicrawl-related__links a:hover {
+			transform: translateY(-2px);
+			border-color: rgba(69, 111, 69, 0.48);
+		}
+
+		.aicrawl-related__links span {
+			color: var(--crawl-green);
+			font-size: 13px;
+			font-weight: 950;
+		}
+
+		.aicrawl-related__links strong {
+			display: block;
+			padding-right: 30px;
+			font-size: clamp(17px, 1.7vw, 21px);
+			font-weight: 950;
+			line-height: 1.42;
+		}
+
+		.aicrawl-related__links svg {
+			position: absolute;
+			right: 18px;
+			bottom: 18px;
+			color: var(--crawl-green);
+			font-size: 24px;
+		}
+
+		.aicrawl-cta {
+			padding: clamp(72px, 9vw, 108px) 0;
+		}
+
+		.aicrawl-cta__panel {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 28px;
+			border: 1px solid var(--crawl-line);
+			border-radius: 34px;
+			background: rgba(255, 255, 255, 0.82);
+			padding: clamp(28px, 4vw, 46px);
+			box-shadow: 0 26px 70px rgba(50, 59, 42, 0.1);
+		}
+
+		.aicrawl-cta h2 {
+			max-width: 820px;
+		}
+
+		.aicrawl-cta p {
+			margin-top: 18px;
+		}
+
+		@media (max-width: 1020px) {
+			.aicrawl-hero__grid,
+				.aicrawl-intro__grid,
+				.aicrawl-signal__grid,
+				.aicrawl-bridge,
+				.aicrawl-case__grid,
+				.aicrawl-related__panel {
+					grid-template-columns: 1fr;
+				}
+
+				.aicrawl-related__links {
+					grid-template-columns: 1fr;
+				}
+
+			.aicrawl-proof__panel,
+			.aicrawl-proof__summary {
+				grid-template-columns: 1fr;
+			}
+
+			.crawl-check-grid,
+			.deliverable-grid,
+			.aicrawl-pricing-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.aicrawl-pricing-head {
+				grid-template-columns: 1fr;
+				align-items: start;
+			}
+
+			.crawl-visual {
+				min-height: 0;
+			}
+		}
+
+		@media (max-width: 700px) {
+			.aicrawl-container {
+				width: min(100% - 32px, 1240px);
+				max-width: 100%;
+			}
+
+			.aicrawl-hero {
+				padding-top: 112px;
+				overflow: hidden;
+			}
+
+			.aicrawl-copy,
+			.aicrawl-copy h1,
+			.aicrawl-copy h1 strong,
+			.aicrawl-copy p,
+			.aicrawl-section h2,
+			.aicrawl-section p {
+				min-width: 0;
+				max-width: 100%;
+				overflow-wrap: anywhere;
+			}
+
+			.aicrawl-copy h1 {
+				font-size: clamp(32px, 10vw, 38px);
+				line-height: 1.18;
+			}
+
+			.aicrawl-copy p:not(.aicrawl-eyebrow) {
+				font-size: 16px;
+				line-height: 1.85;
+			}
+
+			.aicrawl-hero-label {
+				max-width: 100%;
+				white-space: normal;
+				line-height: 1.35;
+			}
+
+			.aicrawl-actions {
+				display: grid;
+				grid-template-columns: 1fr;
+				width: 100%;
+				gap: 12px;
+			}
+
+			.aicrawl-button {
+				width: 100%;
+				min-width: 0;
+				padding: 0 18px;
+				text-align: center;
+				white-space: normal;
+				line-height: 1.35;
+			}
+
+			.crawl-browser {
+				border-radius: 24px;
+			}
+
+			.crawl-browser__body {
+				padding: 16px;
+			}
+
+			.crawl-browser__bar strong {
+				min-width: 0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			.report-title strong,
+			.report-insights strong,
+			.report-chart__head strong {
+				font-size: 16px;
+				white-space: normal;
+			}
+
+			.report-title,
+			.report-kpis,
+			.report-chart__head,
+			.case-list article > div,
+			.aicrawl-cta__panel {
+				grid-template-columns: 1fr;
+			}
+
+			.report-chart__head,
+			.aicrawl-cta__panel {
+				align-items: stretch;
+				flex-direction: column;
+			}
+
+			.report-title em,
+			.report-kpis strong,
+			.report-chart__head strong,
+			.report-insights strong {
+				white-space: normal;
+			}
+
+			.report-kpis div {
+				text-align: left;
+			}
+
+			.report-kpis strong {
+				font-size: 30px;
+			}
+
+			.crawl-check-grid,
+			.deliverable-grid,
+			.aicrawl-pricing-grid,
+			.aicrawl-proof__stats,
+			.signal-board {
+				grid-template-columns: 1fr;
+			}
+
+			.aicrawl-proof__teacher {
+				grid-template-columns: 64px 1fr;
+			}
+
+			.aicrawl-proof__teacher img {
+				width: 64px;
+				height: 64px;
+			}
+
+			.signal-board div,
+			.signal-board div:nth-child(2n),
+			.signal-board div:nth-last-child(-n + 2) {
+				border-right: 0;
+				border-bottom: 1px solid var(--crawl-line);
+			}
+
+			.signal-board div:last-child {
+				border-bottom: 0;
+			}
+
+			.crawl-floating {
+				position: static;
+				width: fit-content;
+				margin-top: 12px;
+			}
+
+			.crawl-floating--right {
+				margin-left: auto;
+			}
+
+			.crawl-check-card,
+			.deliverable-grid article,
+			.aicrawl-price-card {
+				min-height: 0;
+			}
+
+			.aicrawl-pricing-note {
+				border-radius: 22px;
+				text-align: left;
+			}
+		}
+	</style>
+</LandingLayout>

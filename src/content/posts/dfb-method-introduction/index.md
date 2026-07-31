@@ -6,6 +6,9 @@ image: "./cover.jpg"
 thumbnail: "./thumb.jpg"
 tags: ["DFB", "構造化思考", "AI活用"]
 category: "AI"
+manga_tldr:
+  - src: "/dfb/cover.jpg"
+    caption: "DFB構造化メソッドを4コマで象徴する漫画。推論はAIに、構造化は人間に、という核心を視覚化しています。"
 draft: false
 ---
 
@@ -58,4 +61,4 @@ DFB が機能するためには、**割るに値する経験の塊** が要る�
 ## 関連リンク
 
 - <a href="/dfb-complete-guide/" data-no-swup>DFB構造化メソッド大全（構造化ペディア）</a> — 全14セクション + 脚注・関連項目・FAQ・JSON-LD完備のピラー記事
-- [AI時代に『シニア有利』の本質は構造化能力にある](https://tony.effect.moe/posts/ai-era-senior-structuring-power/)
+- [AI時代に『シニア有利』の本質は構造化能力にある](/posts/ai-era-senior-structuring-power/)

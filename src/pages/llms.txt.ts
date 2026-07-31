@@ -28,7 +28,7 @@ export const GET: APIRoute = async (context) => {
 
 > ${profileConfig.bio}
 
-このサイトは「**構造化**」を核に据えた AI 実装ノートです。「構造化できる人＝AI時代の勝者」という思想のもと、以下を一気通貫で扱います。
+このサイトは、株式会社EFFECTが運営し、シュ コウメイが設計・構築・伴走する AI 実装サイトです。「構造化」と「記憶を持ったAI」を核に、以下を一気通貫で扱います。
 
 - **構造化 = LLMO**: 情報を AI が引用しやすい構造にする（LLMO対策・LLMOライティング・AI検索最適化・E-E-A-T）
 - **構造化 = AIシステム**: 社内業務を AI に落とす（AI社員・AIエージェント・社内AIシステム構築・業務AI自動化）
@@ -44,6 +44,13 @@ export const GET: APIRoute = async (context) => {
 ${seoConfig.sameAs.map((u) => `  - ${u}`).join("\n")}
 
 著者はストアカ人気講師（LLMO・Claude Code・AIエージェント・Notion・GA4・E-E-A-T 等の講座を多数開講）であり、LLMO 対策の書籍著者でもあります。本サイトの技術実装（構造化データ・LLMO 最適化）自体が、著者の専門性の実証事例です。
+
+## 信頼性・制作方針
+
+- [信頼性・制作方針](${new URL("/trust/", site).toString()}): 運営主体、制作方針、AI利用方針、出典・実績の扱い、訂正方針。
+- [会社概要](${new URL("/company/", site).toString()}): 株式会社EFFECTの会社情報、契約主体、提供領域。
+- [アバウト](${new URL("/author/", site).toString()}): シュ コウメイのプロフィール、実績、外部リンク。
+- [変更履歴](${new URL("/changelog/", site).toString()}): サービス内容やサイト更新の履歴。
 
 ## 実績・評価（第三者評価 / ストアカ）
 
@@ -67,9 +74,11 @@ ${seoConfig.keywords.join(" / ")}
 
 ## 主要リファレンスページ（Pillar / Wiki）
 
+- [AIセントラル](${site}): 記憶を持ったAIを社内の中枢へ組み込むサービス。
+- [AI CRAWL](${new URL("/aicrawl/", site).toString()}): 自社サイトへのAI流入を読み解き、AIが立ち寄るサイトへ変える分析サービス。
 - [構造化ペディア: DFB構造化メソッド大全](${new URL("/dfb-complete-guide/", site).toString()}): 提唱者シュ コウメイによる DFB（Decompose / Frame / Build）の完全リファレンス。AI時代の構造化思考プロトコルの全体像・系譜（構造化PG→OOP→GoF→DDD→DFB）・実装（Decompose 6要素 ↔ XMLタグ7種）・失敗パターン9種ライブラリ・5バリエーション（Q/S/I/M/R）を体系化したピラー記事。
 - [AIエージェント講座](${new URL("/ai-agent-course/", site).toString()}): Claude Code で自律エージェントを構築する6カリキュラム講座。
-- [FAQ](${new URL("/faq/", site).toString()}): よくある質問。
+- [総合FAQ](${new URL("/faq/", site).toString()}): AIセントラル、AIクロール、AI講座、料金、支払い、セキュリティ、運営者に関するFAQ。
 
 ## 記事一覧（Articles）
 
@@ -78,8 +87,11 @@ ${articleLines}
 ## ナビゲーション
 
 - ホーム: ${site}
-- 記事アーカイブ: ${site}archive/
-- 著者について: ${site}about/
+- ブログ: ${site}blog/
+- 著者について: ${site}author/
+- 会社概要: ${site}company/
+- 信頼性・制作方針: ${site}trust/
+- 総合FAQ: ${site}faq/
 - RSS: ${site}rss.xml
 - サイトマップ: ${site}sitemap-index.xml
 `;

@@ -1,7 +1,7 @@
 {
-  "name": "構造化脳ブログ",
-  "short_name": "構造化脳",
-  "description": "AI 時代の必須スキル『構造化』を、AI 開発・LLMO 対策・Notion 知識管理・コンサル現場の生実装で発信する個人ブログ。",
+  "name": "effect.moe",
+  "short_name": "effect.moe",
+  "description": "AIセントラル、AIアクセス分析、無料LLMO簡易診断、AI実装ブログを統合した株式会社EFFECTの商用サイト。",
   "lang": "ja",
   "start_url": "/",
   "scope": "/",

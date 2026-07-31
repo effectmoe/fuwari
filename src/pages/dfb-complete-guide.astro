@@ -21,7 +21,7 @@ import InternalLink from "../components/wikipedia/InternalLink.astro";
 import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
-const PAGE_URL = "https://tony.effect.moe/dfb-complete-guide/";
+const PAGE_URL = "https://effect.moe/dfb-complete-guide/";
 const PAGE_TITLE = "DFB構造化メソッド大全";
 const PAGE_DESC =
   "DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。";
@@ -31,7 +31,7 @@ const articleLd = {
   "@type": "Article",
   headline: PAGE_TITLE,
   description: PAGE_DESC,
-  image: ["https://tony.effect.moe/dfb/cover.jpg", "https://tony.effect.moe/dfb/thumb.jpg"],
+  image: ["https://effect.moe/dfb/cover.jpg", "https://effect.moe/dfb/thumb.jpg"],
   datePublished: "2026-06-20",
   dateModified: "2026-06-20",
   inLanguage: "ja",
@@ -40,7 +40,7 @@ const articleLd = {
   author: {
     "@type": "Person",
     name: profileConfig.name,
-    url: "https://tony.effect.moe/about/",
+    url: "https://effect.moe/company/",
     jobTitle: seoConfig.jobTitle,
     sameAs: seoConfig.sameAs,
   },
@@ -120,7 +120,7 @@ const breadcrumbLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "ホーム", item: "https://tony.effect.moe/" },
+    { "@type": "ListItem", position: 1, name: "ホーム", item: "https://effect.moe/" },
     { "@type": "ListItem", position: 2, name: "構造化ペディア", item: PAGE_URL },
     { "@type": "ListItem", position: 3, name: PAGE_TITLE, item: PAGE_URL },
   ],
@@ -136,7 +136,7 @@ const infoboxFields = [
   { label: "思想系譜", value: "構造化PG → OOP → GoF → DDD → DFB" },
   { label: "核心命題", value: "推論はAIに、構造化は人間に" },
   { label: "応用分野", value: "プロンプト最適化・要件構造化・教育・経営判断" },
-  { label: "公式リファレンス", value: '<a href="https://tony.effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">tony.effect.moe</a>' },
+  { label: "公式リファレンス", value: '<a href="https://effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">effect.moe</a>' },
 ];
 
 // ── 目次（TOC） ─────────────────────────
@@ -218,7 +218,7 @@ const externalLinks = [
           DFB構造化メソッド
         </h1>
         <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 m-0">
-          構造化ペディア・大全（ピラー記事）/ 出典: <a href="https://tony.effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">tony.effect.moe</a>
+          構造化ペディア・大全（ピラー記事）/ 出典: <a href="https://effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">effect.moe</a>
         </p>
       </div>
     </header>
@@ -608,8 +608,8 @@ const externalLinks = [
 
     <Section id="proponent" number="14" title="提唱者">
       <p>
-        <strong>シュ コウメイ</strong>（Tony Chu / 朱 剛明）は、AI 時代の構造化メソッド「DFB」を 2025 年に提唱した実務家です。
-        日々 10 社以上のクライアント業務で AI（ChatGPT・Claude などの LLM）を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発しました。
+        <strong>シュ コウメイ</strong>は、AI 時代の構造化メソッド「DFB」を 2025 年に提唱した実務家です。
+        クライアント業務で AI（ChatGPT・Claude などの LLM）を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発しました。
       </p>
       <p>
         DFB は机上の理論ではなく、<strong>現場の実装試行から逆算</strong> して組まれています。プロンプト 1 通の最適化から、社内 AI システム設計、クライアント業務の自動化、ピラー記事構成、講座カリキュラム設計まで、扱う粒度はバラバラ。でも「底に流れる構造化の手順は同じだ」という観察から、DFB という汎用プロトコルが結晶化しました。

@@ -1,0 +1,96 @@
+---
+type BreadcrumbItem = {
+	label: string;
+	href: string;
+};
+
+interface Props {
+	items: BreadcrumbItem[];
+	class?: string;
+}
+
+const { items, class: className = "" } = Astro.props;
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const normalizedItems = items.map((item) => ({
+	...item,
+	href: item.href.startsWith("http") ? item.href : new URL(item.href, siteUrl).toString(),
+}));
+const breadcrumbLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: normalizedItems.map((item, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		name: item.label,
+		item: item.href,
+	})),
+};
+---
+
+<nav class:list={["effect-breadcrumbs", className]} aria-label="パンくずリスト">
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+	<ol>
+		{items.map((item, index) => (
+			<li>
+				{index < items.length - 1 ? (
+					<a href={item.href}>{item.label}</a>
+				) : (
+					<span aria-current="page">{item.label}</span>
+				)}
+			</li>
+		))}
+	</ol>
+</nav>
+
+<style>
+	.effect-breadcrumbs {
+		width: min(1180px, calc(100% - 48px));
+		margin: 0 auto;
+		color: rgba(78, 69, 56, 0.74);
+		font-size: 0.82rem;
+		font-weight: 750;
+	}
+
+	.effect-breadcrumbs ol {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.effect-breadcrumbs li {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		min-width: 0;
+	}
+
+	.effect-breadcrumbs li:not(:last-child)::after {
+		color: rgba(123, 88, 7, 0.55);
+		content: "/";
+	}
+
+	.effect-breadcrumbs a {
+		color: inherit;
+		text-decoration: none;
+		transition: color 0.18s ease;
+	}
+
+	.effect-breadcrumbs a:hover {
+		color: #7b5807;
+	}
+
+	.effect-breadcrumbs span {
+		color: #1c1b1c;
+	}
+
+	@media (max-width: 640px) {
+		.effect-breadcrumbs {
+			width: min(100% - 32px, 1180px);
+			font-size: 0.78rem;
+		}
+	}
+</style>

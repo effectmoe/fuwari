@@ -1,20 +1,25 @@
 ---
 import { Icon } from "astro-icon/components";
-import MainGridLayout from "../layouts/MainGridLayout.astro";
-import ImageWrapper from "../components/misc/ImageWrapper.astro";
-import { profileConfig, seoConfig, faqConfig } from "../config";
-import { url } from "../utils/url-utils";
+import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { profileConfig, seoConfig } from "../config";
+import stats from "../data/storaca-stats.json";
+import authorDogPortrait from "../assets/images/tony-avatar.jpg";
 
-const siteUrl = Astro.site ? Astro.site.toString() : "/";
-const rv = seoConfig.reviews;
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const pageTitle = "アバウト｜シュ コウメイ";
+const pageDescription =
+	"AI CENTRAL、AI CRAWL、AI講座を設計・運用するシュ コウメイのプロフィール。構造化・AI実装・LLMO・Notion・システム開発を、講座と現場実装の両面から支援します。";
+const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+const consultationHref = "/#contact";
 
-// ProfilePage + Person（E-E-A-T の正典・著者エンティティページ）
-// ⚠️ Person 自体に aggregateRating を付けると Google のレビュースニペット対象外で「無効」判定される。
-// そのため Person ノードは純粋なプロフィール表現のみ。レビュー表現は別ノード ProfessionalService に分離。
 const profileLd = {
 	"@context": "https://schema.org",
 	"@type": "ProfilePage",
 	"@id": `${siteUrl}author/#profilepage`,
+	url: `${siteUrl}author/`,
+	name: pageTitle,
+	description: pageDescription,
 	mainEntity: {
 		"@type": "Person",
 		"@id": `${siteUrl}#person`,
@@ -34,118 +39,1222 @@ const profileLd = {
 	},
 };
 
-// レビュー集約（aggregateRating）は Layout.astro の serviceLd が全ページに提供している。
-// ここで重複させると Google が「複数の平均評価」と判定してエラー化するため出さない。
+const summaryBadges = [
+	{ label: "ストアカProランク講師", icon: "material-symbols:workspace-premium-outline-rounded" },
+	{ label: "AI＆DXコンサルタント", icon: "material-symbols:business-center-outline-rounded" },
+	{ label: "AIシステムエンジニア", icon: "material-symbols:account-tree-outline-rounded" },
+	{ label: "AI検索エキスパート", icon: "material-symbols:hub-outline" },
+];
 
-const pageDesc =
-	"構造化脳ブログ 著者 シュ コウメイ のプロフィール。AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント（株式会社EFFECT）。ストアカ人気講師（評価4.94・受講435人・プラチナ講師）、LLMO対策書籍の著者。Claude Code・LLMO・AIエージェント・Notion・Obsidian などを専門に、AIで事業を構造化する実装を発信。";
+const proofStats = [
+	{ value: `★${stats.ratingValue}`, label: "講座レビュー評価" },
+	{ value: `${stats.reviewCount}件`, label: "公開レビュー" },
+	{ value: `${stats.studentsTaught}+`, label: "累計受講者" },
+	{ value: "Pro", label: "AI講師ランク" },
+];
 
-// 専門領域チップ
-const expertise = seoConfig.knowsAbout;
+const evidenceLinks = [
+	{
+		title: "ストアカ先生ページ",
+		label: "外部で確認できる講師実績",
+		body: "講座レビュー、受講者数、講師ランクなどは、ストアカ上の先生ページで確認できます。",
+		href: storacaProfileUrl,
+		external: true,
+	},
+	{
+		title: "会社概要",
+		label: "運営主体の確認",
+		body: "サービスの運営主体、連絡先、事業領域は株式会社EFFECTの会社概要ページにまとめています。",
+		href: "/company/",
+		external: false,
+	},
+	{
+		title: "変更履歴",
+		label: "継続的な更新確認",
+		body: "サイト改善、サービス内容の変更、ブログ投稿など、利用者に意味のある更新を記録します。",
+		href: "/changelog/",
+		external: false,
+	},
+];
 
-// 主なリンク（sameAs を人間向けラベルで）
-const links = [
-	{ label: "ストアカ講師ページ", href: rv.profileUrl, icon: "fa6-solid:chalkboard-user" },
-	{ label: "オフィスク（法人研修講師）", href: "https://office.street-academy.com/teacher/shu-koumei", icon: "fa6-solid:building" },
-	{ label: "Amazon（LLMO対策 書籍）", href: "https://www.amazon.co.jp/dp/B0F7QQF392", icon: "fa6-brands:amazon" },
-	{ label: "LinkedIn", href: "https://www.linkedin.com/in/%E5%89%9B%E6%98%8E-%E6%9C%B1-66a45b2b8/", icon: "fa6-brands:linkedin" },
+const services = [
+	{
+		title: "AI CENTRAL",
+		label: "社内AIの記憶設計",
+		body: "記憶を持ったAIを社内の中枢に組み込み、検索・整理・作成・確認・分析を先に進める業務基盤を設計します。",
+		href: "/",
+		icon: "material-symbols:memory-alt-outline-rounded",
+	},
+	{
+		title: "AI CRAWL",
+		label: "AI流入総合分析",
+		body: "どのAIから、どのページへ、どのような動機で流入しているかを整理し、AIが立ち寄るサイトへ近づけます。",
+		href: "/aicrawl/",
+		icon: "material-symbols:travel-explore-rounded",
+	},
+	{
+		title: "AI講座",
+		label: "AIエージェント実践",
+		body: "AIを眺める側ではなく、実際に自分の業務へ組み込む側へ進むための講座と伴走を提供します。",
+		href: "/ai-agent-course/",
+		icon: "material-symbols:school-outline-rounded",
+	},
+	{
+		title: "構造化ペディア",
+		label: "構造化思考の知識ベース",
+		body: "AI時代の思考法、DFB、構造化の知見を体系化し、ブログや講座の裏側にある判断基準として公開しています。",
+		href: "/structurepedia/",
+		icon: "material-symbols:menu-book-outline-rounded",
+	},
+];
+
+const profileFacts = [
+	{ term: "所属", desc: "株式会社EFFECT" },
+	{ term: "役割", desc: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント" },
+	{ term: "専門領域", desc: "LLM活用設計・構造化思考・Cloudflare Zero Trust・SEO/LLMO・マルチエージェント基盤" },
+	{ term: "連絡先", desc: "info@effect.moe" },
+];
+
+const dfbSteps = [
+	{
+		label: "Decompose / 分解",
+		body: "「AIに任せたい」という曖昧な要望を、目的・前提・材料・制約・判断軸へ分ける。",
+	},
+	{
+		label: "Frame / 枠付け",
+		body: "参照してよい情報、回答してよい範囲、承認が必要な範囲を決める。",
+	},
+	{
+		label: "Build / 組立",
+		body: "業務で繰り返し使えるプロンプト、ナレッジ、入力フォーム、運用ルールへ落とす。",
+	},
+];
+
+const responsibilityItems = [
+	{
+		title: "設計すること",
+		body: "AIに渡す情報、参照範囲、権限、承認、問い合わせ導線を業務に合わせて整理します。",
+	},
+	{
+		title: "作ること",
+		body: "サイト、フォーム、レポート、ナレッジベース、AIの使い方を実際に動く形へ落とし込みます。",
+	},
+	{
+		title: "残すこと",
+		body: "導入後に属人化しないよう、判断基準、更新手順、運用ログを確認できる状態にします。",
+	},
+];
+
+const principles = [
+	{
+		title: "仕組みで伝える",
+		body: "説明だけで終わらせず、サイト・問い合わせ導線・検索・記憶・レポートの形に落とし込みます。",
+	},
+	{
+		title: "現場に合わせる",
+		body: "既存ツール、ファイル、業務フロー、担当者の理解度に合わせて、使い続けられる形を優先します。",
+	},
+	{
+		title: "人間の判断を残す",
+		body: "AIに何でも任せるのではなく、AIが準備し、人間が判断する役割分担を設計します。",
+	},
+];
+
+const relatedLinks = [
+	{ label: "AI CENTRALを見る", href: "/" },
+	{ label: "AI CRAWLを見る", href: "/aicrawl/" },
+	{ label: "AI講座を見る", href: "/ai-agent-course/" },
+	{ label: "会社概要を見る", href: "/company/" },
 ];
 ---
-<MainGridLayout title="著者プロフィール｜シュ コウメイ" description={pageDesc}>
-    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(profileLd)}></script>
 
-    <div class="flex flex-col gap-4 w-full">
-        <!-- ヘッダー -->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
-                <div class="w-28 h-28 shrink-0 rounded-2xl overflow-hidden">
-                    <ImageWrapper src={profileConfig.avatar} alt={profileConfig.name} class="w-full h-full" />
-                </div>
-                <div class="text-center sm:text-left">
-                    <div class="text-xs text-[var(--primary)] font-bold mb-1">著者プロフィール</div>
-                    <h1 class="text-3xl font-bold text-90 mb-1">{profileConfig.name}</h1>
-                    <div class="text-sm text-50 mb-3">{seoConfig.jobTitle}</div>
-                    <p class="text-sm text-75 leading-relaxed">{profileConfig.bio}</p>
-                </div>
-            </div>
-        </div>
+<LandingLayout title={pageTitle} description={pageDescription} ogImage={authorDogPortrait.src}>
+	<Fragment slot="head">
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(profileLd)} />
+	</Fragment>
 
-        <!-- 実績サマリ（信頼の数字）-->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:trophy-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">実績</h2>
-            </div>
-            <div class="flex flex-row flex-wrap gap-3">
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]">
-                    <div class="flex items-baseline gap-1"><span class="text-[var(--primary)] text-2xl font-bold">{rv.ratingValue}</span><span class="text-50 text-xs">/ 5</span></div>
-                    <div class="text-[var(--primary)] text-sm leading-none mt-0.5">★★★★★</div>
-                    <div class="text-50 text-[0.7rem] mt-1">{rv.reviewCount} 件のレビュー</div>
-                </div>
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.studentsTaught}</span><div class="text-50 text-[0.7rem] mt-1">累計受講者数</div></div>
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.sessionsTaught}</span><div class="text-50 text-[0.7rem] mt-1">開催回数</div></div>
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 min-w-[6rem]"><span class="text-90 text-2xl font-bold">{rv.repeatRate}</span><div class="text-50 text-[0.7rem] mt-1">リピート率</div></div>
-                <div class="flex flex-col items-center justify-center rounded-xl bg-[var(--btn-plain-bg)] px-5 py-3 flex-1 min-w-[10rem]"><span class="text-[var(--primary)] text-base font-bold">プラチナランク</span><div class="text-50 text-[0.7rem] mt-1 text-center">2026年7月よりPro昇格</div></div>
-            </div>
-            <p class="text-xs text-50 mt-3">※ 評価はスキルシェア「ストアカ」での第三者の受講生レビュー（2024年8月〜）。</p>
-        </div>
+	<div class="author-page">
+		<Breadcrumbs class="author-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "アバウト", href: "/author/" },
+		]} />
 
-        <!-- 著者について（Experience / Expertise）-->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:person-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">著者について</h2>
-            </div>
-            <div class="text-sm text-75 leading-relaxed flex flex-col gap-3">
-                <p>株式会社EFFECT 所属。肩書きは<strong>「AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント」</strong>。「AIで事業を構造化して加速する」をテーマに、AIの実装支援・講座・コンサルティングを行っています。テクニックを教える前に「なぜそうなるのか」という<strong>仕組みの理解</strong>を大切にし、初心者にも専門用語をかみくだいて伝えることを信条にしています。</p>
-                <p>強みは、<strong>「教える人」であると同時に「自分で実装する人」</strong>である点です。たとえば、このブログ（構造化脳ブログ）自体が、私が講座で教えているLLMO対策・構造化データ・AI自動化の技術で実際に作られています。<a href={url('/faq/')} class="text-[var(--primary)] font-medium hover:underline">よくある質問・AI用語集</a>の回答もすべて私自身が書いています。「教えている内容を、自分のサイトで証明する」——これが私の発信のスタイルです。</p>
-                <p><strong>著書・出版</strong>：<a href="https://www.amazon.co.jp/dp/B0F7QQF392" target="_blank" rel="noopener noreferrer" class="text-[var(--primary)] font-medium hover:underline">LLMO対策に関する書籍を Amazon Kindle で出版</a>しています。検索（SEO）とAI検索（LLMO）の両方に選ばれるコンテンツ設計を、書籍・講座・このブログの3つで体系化しています。</p>
-                <p>提唱している<strong>DFB理論（Decompose / Frame / Build ＝ 分・枠・組）</strong>は、複雑な物事を「分けて・枠にはめて・組み立てる」ことで、AIに渡せる形に構造化する考え方です。これがLLMO・AIシステム構築・知識管理すべての土台になっています。</p>
-            </div>
-        </div>
+		<section class="author-hero">
+			<div class="author-container author-hero__grid">
+				<div class="author-hero__copy">
+					<p class="author-eyebrow">AUTHOR / TRUST PROFILE</p>
+					<h1><span>シュ コウメイ</span></h1>
+					<p class="author-lead">AIを「使える仕組み」に変える、構造化と実装の設計者。</p>
+					<p class="author-body">
+						effect.moe の AI CENTRAL、AI CRAWL、AI講座は、株式会社EFFECTのもとでシュ コウメイが設計・運用を担当します。AI時代の必須スキル「構造化」を、現場に定着するAI活用として、講座・設計・実装・改善まで一貫して扱います。
+					</p>
+					<div class="author-actions">
+						<a href={consultationHref} class="author-button author-button--primary">無料相談する</a>
+						<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="author-button author-button--ghost">ストアカ先生ページを見る</a>
+					</div>
+				</div>
+				<figure class="author-profile-card" aria-label="シュ コウメイ プロフィール概要">
+					<img src={authorDogPortrait.src} alt="犬を抱くシュ コウメイの横顔" loading="eager" decoding="async" />
+					<div class="author-photo-tags" aria-hidden="true">
+						<span>STRUCTURED THINKING</span>
+						<span>AI IMPLEMENTATION</span>
+						<span>LLMO / NOTION</span>
+					</div>
+					<div class="author-profile-card__body">
+						<span>STRUCTURED THINKING / AI IMPLEMENTATION</span>
+						<strong>AIで事業を構造化して加速する</strong>
+						<p>講座で説明した考え方を、サイト、社内AI、分析レポート、問い合わせ導線へ実装します。</p>
+					</div>
+				</figure>
+			</div>
+		</section>
 
-        <!-- 専門領域（knowsAbout）-->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:workspace-premium-outline-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">専門領域</h2>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-                {expertise.map((t) => (
-                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="background: var(--btn-plain-bg); color: var(--btn-content);">{t}</span>
-                ))}
-            </div>
-            <p class="text-xs text-50 mt-4">これらはストアカで実際に開講している講座テーマでもあります。各用語のやさしい解説は <a href={url('/faq/')} class="text-[var(--primary)] font-medium hover:underline">AI用語集</a> をご覧ください。</p>
-        </div>
+		<section class="author-summary">
+			<div class="author-container">
+				<div class="author-summary__grid">
+					{summaryBadges.map((badge) => (
+						<div class="author-summary-card">
+							<Icon name={badge.icon} />
+							<span>{badge.label}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
 
-        <!-- 主な活動・リンク（Authoritativeness）-->
-        <div class="card-base px-6 md:px-9 py-7">
-            <div class="flex flex-row items-center gap-2 mb-4">
-                <Icon name="material-symbols:link-rounded" class="text-[1.4rem] text-[var(--primary)]" />
-                <h2 class="text-2xl font-bold text-90">活動・リンク</h2>
-            </div>
-            <div class="flex flex-col gap-2">
-                {links.map((l) => (
-                    <a href={l.href} target="_blank" rel="noopener noreferrer"
-                       class="flex flex-row items-center gap-3 rounded-xl bg-[var(--btn-plain-bg)] hover:bg-[var(--btn-plain-bg-hover)] transition px-4 py-3 active:scale-95">
-                        <Icon name={l.icon} class="text-[1.2rem] text-[var(--primary)]" />
-                        <span class="text-sm font-medium text-75">{l.label}</span>
-                        <Icon name="material-symbols:arrow-outward-rounded" class="text-[1rem] text-50 ml-auto" />
-                    </a>
-                ))}
-            </div>
-        </div>
+		<section class="author-section author-origin">
+			<div class="author-container author-origin__grid">
+				<div class="author-origin__copy">
+					<p class="author-eyebrow">ABOUT / BACKGROUND</p>
+					<h2>講座で教え、現場で作り、運用で磨く。</h2>
+					<p>
+						AI開発、LLMO対策、Notion知識管理、コンサル現場の実装を通じて、AIに伝わる情報設計と、人が使い続けられる業務設計を扱っています。
+					</p>
+					<p>
+						アバウトでは「誰が設計しているか」を示し、会社概要では「どの会社が運営しているか」を示します。人物の専門性と、運営主体の情報を分けて確認できるようにしています。
+					</p>
+				</div>
+				<div class="author-fact-panel">
+					<div class="author-fact-panel__head">
+						<p>PROFILE</p>
+						<strong>AI実装・構造化・LLMOを横断する実務プロフィール</strong>
+					</div>
+					<dl class="author-profile-facts">
+						{profileFacts.map((item) => (
+							<div>
+								<dt>{item.term}</dt>
+								<dd>{item.desc}</dd>
+							</div>
+						))}
+					</dl>
+				</div>
+			</div>
+		</section>
 
-        <!-- 相互リンク（FAQ / 受講生の声）-->
-        <div class="card-base px-6 md:px-9 py-6">
-            <div class="flex flex-row flex-wrap gap-3">
-                <a href={url('/faq/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
-                    <Icon name="material-symbols:help-outline-rounded" class="text-[1rem]" />よくある質問・AI用語集
-                </a>
-                <a href={url('/about/')} class="btn-regular inline-flex items-center gap-2 rounded-lg px-4 h-10 font-bold active:scale-95">
-                    <Icon name="material-symbols:reviews-outline-rounded" class="text-[1rem]" />受講生の声を見る
-                </a>
-            </div>
-        </div>
-    </div>
-</MainGridLayout>
+		<section class="author-section author-evidence">
+			<div class="author-container author-evidence__grid">
+				<div class="author-section__copy">
+					<p class="author-eyebrow">VERIFY / SOURCES</p>
+					<h2>信頼材料は、外部確認できる形で置く。</h2>
+					<p>
+						講師実績はストアカ、運営主体は会社概要、サイトの継続改善は変更履歴へ接続します。自己紹介だけで完結させず、確認できるページへ進めるようにしています。
+					</p>
+				</div>
+				<div class="author-evidence__cards">
+					{evidenceLinks.map((item) => (
+						<a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+							<span>{item.label}</span>
+							<strong>{item.title}</strong>
+							<p>{item.body}</p>
+							<Icon name={item.external ? "material-symbols:open-in-new-rounded" : "material-symbols:arrow-forward-rounded"} />
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-dfb">
+			<div class="author-container author-dfb__grid">
+				<div class="author-section__copy">
+					<p class="author-eyebrow">DFB METHOD</p>
+					<h2>雑な依頼を、AIが答えられる構造へ変える。</h2>
+					<p>
+						DFBは、曖昧なプロンプトや業務依頼を、AIが迷わず処理できる構造化命令に変えるための思考メソッドです。たとえば「問い合わせ対応をAI化したい」を、参照資料、回答ルール、承認範囲、更新手順へ分解します。
+					</p>
+				</div>
+				<div class="author-dfb__steps">
+					{dfbSteps.map((step, index) => (
+						<div class="author-dfb-card">
+							<span>{String(index + 1).padStart(2, "0")}</span>
+							<strong>{step.label}</strong>
+							<p>{step.body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section">
+			<div class="author-container author-proof">
+				<div class="author-section__copy">
+					<p class="author-eyebrow">STREET ACADEMY PROOF</p>
+					<h2>ストアカProランク講師が構築</h2>
+					<p>受講生のつまずき、現場で出る質問、導入時の不安を知っているから、AIシステムを「作って終わり」にしません。</p>
+				</div>
+				<div class="author-proof__panel">
+					<div class="author-proof__stats">
+						{proofStats.map((item) => (
+							<div>
+								<strong>{item.value}</strong>
+								<span>{item.label}</span>
+							</div>
+						))}
+					</div>
+					<div class="author-proof__badges">
+						<span>Proバッジ</span>
+						<span>AI講師ランク</span>
+						<span>受講生レビュー</span>
+						<span>講座運用</span>
+					</div>
+					<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer">先生ページを見る →</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-responsibility">
+			<div class="author-container author-responsibility__panel">
+				<div class="author-section__copy">
+					<p class="author-eyebrow">RESPONSIBILITY</p>
+					<h2>相談を受けたあと、何に責任を持つか。</h2>
+					<p>
+						AI導入は、ツールを入れるだけでは終わりません。誰が何を判断し、AIがどこまで準備し、どの情報を参照するかまで設計します。
+					</p>
+				</div>
+				<div class="author-responsibility__items">
+					{responsibilityItems.map((item, index) => (
+						<div>
+							<span>{String(index + 1).padStart(2, "0")}</span>
+							<strong>{item.title}</strong>
+							<p>{item.body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-services">
+			<div class="author-container">
+				<div class="author-section__center">
+					<p class="author-eyebrow">WHAT I DESIGN</p>
+					<h2>何を設計しているか。</h2>
+				</div>
+				<div class="author-service-grid">
+					{services.map((service) => (
+						<a href={service.href} class="author-service-card">
+							<Icon name={service.icon} />
+							<span>{service.label}</span>
+							<strong>{service.title}</strong>
+							<p>{service.body}</p>
+						</a>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section">
+			<div class="author-container author-philosophy">
+				<div>
+					<p class="author-eyebrow">DESIGN PHILOSOPHY</p>
+					<h2>教えるだけでなく、自分で作って検証する。</h2>
+					<p>
+						AI活用は、説明だけでは現場に残りません。実際のサイト、問い合わせ導線、検索・記憶・レポートの仕組みまで作り、運用しながら改善します。
+					</p>
+				</div>
+				<div class="author-principles">
+					{principles.map((principle, index) => (
+						<div class="author-principle">
+							<span>{String(index + 1).padStart(2, "0")}</span>
+							<strong>{principle.title}</strong>
+							<p>{principle.body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-related">
+			<div class="author-container">
+				<div class="author-related__grid">
+					<div>
+						<p class="author-eyebrow">RELATED PATHS</p>
+						<h2>相談前に、関連ページも確認できます。</h2>
+					</div>
+					<div class="author-related__links">
+						{relatedLinks.map((item) => (
+							<a href={item.href}>
+								{item.label}
+								<Icon name="material-symbols:arrow-forward-rounded" />
+							</a>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="author-final">
+			<div class="author-container author-final__panel">
+				<p class="author-eyebrow">CONSULTATION</p>
+				<h2>誰に相談するかまで含めて、AI導入は設計です。</h2>
+				<a href={consultationHref} class="author-button author-button--primary">無料相談する</a>
+			</div>
+		</section>
+	</div>
+
+	<style>
+		.author-page {
+			--author-bg: #fbf7f8;
+			--author-surface: #fffdfa;
+			--author-ink: #1c1b1c;
+			--author-muted: #6f655b;
+			--author-gold: #a77713;
+			--author-gold-soft: #f4ead6;
+			--author-green: #56755f;
+			--author-line: rgba(197, 178, 151, 0.62);
+			background:
+				linear-gradient(90deg, rgba(183, 140, 42, 0.045) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(183, 140, 42, 0.035) 1px, transparent 1px),
+				var(--author-bg);
+			background-size: 56px 56px;
+			color: var(--author-ink);
+			overflow: hidden;
+		}
+
+		.author-breadcrumbs {
+			padding-top: 96px;
+			padding-bottom: 14px;
+		}
+
+		.author-container {
+			width: min(1180px, calc(100% - 48px));
+			margin: 0 auto;
+		}
+
+		.author-hero {
+			padding: 48px 0 72px;
+		}
+
+		.author-hero__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+			gap: clamp(32px, 5vw, 72px);
+			align-items: center;
+		}
+
+		.author-eyebrow {
+			margin: 0 0 16px;
+			color: var(--author-gold);
+			font-size: 0.82rem;
+			font-weight: 950;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+		}
+
+		.author-hero h1,
+		.author-section h2,
+		.author-final h2 {
+			margin: 0;
+			color: var(--author-ink);
+			font-weight: 950;
+			letter-spacing: 0;
+		}
+
+		.author-hero h1 {
+			font-size: clamp(3.1rem, 5.4vw, 5.4rem);
+			line-height: 1.04;
+			max-width: 8.2em;
+		}
+
+		.author-hero h1 span {
+			display: inline-block;
+		}
+
+		.author-lead {
+			max-width: 780px;
+			margin: 28px 0 0;
+			font-size: clamp(1.35rem, 2.25vw, 2.1rem);
+			font-weight: 900;
+			line-height: 1.42;
+		}
+
+		.author-body,
+		.author-section__copy p,
+		.author-philosophy > div:first-child p {
+			max-width: 720px;
+			margin: 22px 0 0;
+			color: var(--author-muted);
+			font-size: 1.05rem;
+			font-weight: 650;
+			line-height: 1.95;
+		}
+
+		.author-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px;
+			margin-top: 32px;
+		}
+
+		.author-button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 54px;
+			border-radius: 999px;
+			padding: 0 28px;
+			font-size: 1rem;
+			font-weight: 950;
+			text-decoration: none;
+			transition: transform 0.18s ease, box-shadow 0.18s ease;
+		}
+
+		.author-button:hover {
+			transform: translateY(-2px);
+		}
+
+		.author-button--primary {
+			background: #b98c2b;
+			color: #fffdf7;
+			box-shadow: 0 16px 32px rgba(123, 88, 7, 0.18);
+		}
+
+		.author-button--ghost {
+			border: 1px solid rgba(167, 119, 19, 0.5);
+			background: rgba(255, 255, 255, 0.68);
+			color: var(--author-gold);
+		}
+
+		.author-profile-card {
+			position: relative;
+			overflow: hidden;
+			margin: 0;
+			border: 1px solid var(--author-line);
+			border-radius: 28px;
+			background: rgba(255, 255, 255, 0.7);
+			box-shadow: 0 28px 70px rgba(62, 47, 25, 0.1);
+		}
+
+		.author-profile-card::before {
+			position: absolute;
+			inset: 0;
+			content: "";
+			background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(183, 140, 42, 0.18));
+			pointer-events: none;
+		}
+
+		.author-profile-card img {
+			display: block;
+			width: 100%;
+			aspect-ratio: 4 / 3;
+			object-fit: cover;
+			object-position: center 42%;
+		}
+
+		.author-photo-tags {
+			position: absolute;
+			inset: 18px 18px auto auto;
+			display: grid;
+			gap: 8px;
+			justify-items: end;
+			max-width: min(72%, 310px);
+			pointer-events: none;
+		}
+
+		.author-photo-tags span {
+			border: 1px solid rgba(167, 119, 19, 0.28);
+			border-radius: 999px;
+			background: rgba(255, 253, 250, 0.74);
+			padding: 8px 12px;
+			color: #7b5509;
+			font-size: 0.7rem;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+			backdrop-filter: blur(10px);
+			box-shadow: 0 10px 24px rgba(62, 47, 25, 0.08);
+		}
+
+		.author-profile-card__body {
+			position: relative;
+			margin: -52px 22px 22px;
+			border: 1px solid rgba(197, 178, 151, 0.58);
+			border-radius: 20px;
+			background: rgba(255, 255, 255, 0.9);
+			padding: 20px;
+			backdrop-filter: blur(14px);
+		}
+
+		.author-profile-card__body span,
+		.author-service-card span,
+		.author-principle span {
+			color: var(--author-gold);
+			font-size: 0.76rem;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.author-profile-card__body strong {
+			display: block;
+			margin-top: 8px;
+			font-size: 1.35rem;
+			font-weight: 950;
+			line-height: 1.3;
+		}
+
+		.author-profile-card__body p {
+			margin: 10px 0 0;
+			color: var(--author-muted);
+			font-size: 0.95rem;
+			font-weight: 650;
+			line-height: 1.75;
+		}
+
+		.author-summary {
+			border-top: 1px solid var(--author-line);
+			border-bottom: 1px solid var(--author-line);
+			background: rgba(255, 255, 255, 0.44);
+			padding: 20px 0;
+		}
+
+		.author-summary__grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.author-summary-card {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 10px;
+			min-height: 74px;
+			border: 1px solid rgba(197, 178, 151, 0.64);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 14px;
+			color: var(--author-ink);
+			font-weight: 950;
+			text-align: center;
+		}
+
+		.author-summary-card svg {
+			width: 26px;
+			height: 26px;
+			color: var(--author-gold);
+			flex: 0 0 auto;
+		}
+
+		.author-section {
+			padding: 92px 0;
+		}
+
+		.author-section h2,
+		.author-final h2 {
+			font-size: clamp(2.2rem, 4vw, 4rem);
+			line-height: 1.12;
+		}
+
+		.author-origin {
+			background:
+				radial-gradient(circle at 82% 18%, rgba(86, 117, 95, 0.12), transparent 32%),
+				rgba(255, 255, 255, 0.36);
+		}
+
+		.author-origin__grid,
+		.author-dfb__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+			gap: clamp(28px, 5vw, 72px);
+			align-items: center;
+		}
+
+		.author-origin__copy p {
+			max-width: 720px;
+			margin: 20px 0 0;
+			color: var(--author-muted);
+			font-size: 1.05rem;
+			font-weight: 650;
+			line-height: 1.9;
+		}
+
+		.author-fact-panel {
+			overflow: hidden;
+			border: 1px solid var(--author-line);
+			border-radius: 28px;
+			background: rgba(255, 253, 250, 0.82);
+			box-shadow: 0 24px 64px rgba(62, 47, 25, 0.08);
+		}
+
+		.author-fact-panel__head {
+			border-bottom: 1px solid var(--author-line);
+			background:
+				linear-gradient(135deg, rgba(244, 234, 214, 0.92), rgba(255, 253, 250, 0.86)),
+				#fffdfa;
+			padding: clamp(22px, 3vw, 34px);
+		}
+
+		.author-fact-panel__head p {
+			margin: 0 0 10px;
+			color: var(--author-gold);
+			font-size: 0.78rem;
+			font-weight: 950;
+			letter-spacing: 0.14em;
+		}
+
+		.author-fact-panel__head strong {
+			display: block;
+			max-width: 620px;
+			color: var(--author-ink);
+			font-size: clamp(1.45rem, 2.6vw, 2.4rem);
+			font-weight: 950;
+			line-height: 1.28;
+		}
+
+		.author-profile-facts {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			margin: 0;
+		}
+
+		.author-profile-facts div {
+			min-height: 116px;
+			padding: 20px;
+			border-right: 1px solid rgba(197, 178, 151, 0.48);
+			border-bottom: 1px solid rgba(197, 178, 151, 0.48);
+		}
+
+		.author-profile-facts div:nth-child(even) {
+			border-right: 0;
+		}
+
+		.author-profile-facts div:nth-last-child(-n + 2) {
+			border-bottom: 0;
+		}
+
+		.author-profile-facts dt {
+			color: var(--author-gold);
+			font-size: 0.78rem;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.author-profile-facts dd {
+			margin: 10px 0 0;
+			color: var(--author-ink);
+			font-size: 1rem;
+			font-weight: 850;
+			line-height: 1.55;
+		}
+
+		.author-dfb {
+			border-top: 1px solid var(--author-line);
+			border-bottom: 1px solid var(--author-line);
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(244, 234, 214, 0.42)),
+				rgba(255, 255, 255, 0.48);
+		}
+
+		.author-evidence {
+			border-top: 1px solid var(--author-line);
+			background:
+				radial-gradient(circle at 12% 12%, rgba(167, 119, 19, 0.12), transparent 32%),
+				rgba(255, 255, 255, 0.42);
+		}
+
+		.author-evidence__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+			gap: clamp(28px, 5vw, 72px);
+			align-items: start;
+		}
+
+		.author-evidence__cards {
+			display: grid;
+			gap: 12px;
+		}
+
+		.author-evidence__cards a {
+			position: relative;
+			display: grid;
+			min-height: 128px;
+			border: 1px solid rgba(197, 178, 151, 0.64);
+			border-radius: 24px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(244, 234, 214, 0.42)),
+				#fffdfa;
+			padding: 22px 64px 22px 22px;
+			color: var(--author-ink);
+			text-decoration: none;
+			box-shadow: 0 18px 48px rgba(62, 47, 25, 0.07);
+		}
+
+		.author-evidence__cards span {
+			color: var(--author-gold);
+			font-size: 0.76rem;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.author-evidence__cards strong {
+			margin-top: 8px;
+			font-size: clamp(1.2rem, 2vw, 1.55rem);
+			font-weight: 950;
+			line-height: 1.28;
+		}
+
+		.author-evidence__cards p {
+			margin: 10px 0 0;
+			color: var(--author-muted);
+			font-size: 0.95rem;
+			font-weight: 700;
+			line-height: 1.72;
+		}
+
+		.author-evidence__cards svg {
+			position: absolute;
+			right: 22px;
+			top: 24px;
+			width: 28px;
+			height: 28px;
+			color: var(--author-gold);
+		}
+
+		.author-dfb__steps {
+			display: grid;
+			gap: 12px;
+		}
+
+		.author-dfb-card {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			gap: 10px 18px;
+			align-items: start;
+			border: 1px solid rgba(197, 178, 151, 0.64);
+			border-radius: 22px;
+			background: rgba(255, 253, 250, 0.82);
+			padding: 22px;
+		}
+
+		.author-dfb-card span {
+			grid-row: span 2;
+			display: inline-grid;
+			place-items: center;
+			width: 54px;
+			height: 54px;
+			border-radius: 16px;
+			background: #2f432f;
+			color: #fffdf7;
+			font-size: 1.05rem;
+			font-weight: 950;
+		}
+
+		.author-dfb-card strong {
+			font-size: 1.2rem;
+			font-weight: 950;
+			line-height: 1.35;
+		}
+
+		.author-dfb-card p {
+			margin: 0;
+			color: var(--author-muted);
+			font-size: 0.98rem;
+			font-weight: 700;
+			line-height: 1.65;
+		}
+
+		.author-proof {
+			display: grid;
+			grid-template-columns: minmax(0, 0.85fr) minmax(420px, 1.15fr);
+			gap: clamp(28px, 5vw, 72px);
+			align-items: center;
+		}
+
+		.author-proof__panel {
+			border: 1px solid var(--author-line);
+			border-radius: 28px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(252, 244, 230, 0.82)),
+				#fffdfa;
+			padding: clamp(22px, 3vw, 34px);
+			box-shadow: 0 24px 64px rgba(78, 55, 12, 0.1);
+		}
+
+		.author-proof__stats {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 10px;
+		}
+
+		.author-proof__stats div {
+			display: grid;
+			align-content: center;
+			justify-items: center;
+			min-height: 92px;
+			border: 1px solid rgba(167, 119, 19, 0.2);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.75);
+			padding: 12px;
+			text-align: center;
+		}
+
+		.author-proof__stats strong {
+			color: var(--author-gold);
+			font-size: clamp(1.35rem, 2vw, 2rem);
+			font-weight: 950;
+			line-height: 1;
+		}
+
+		.author-proof__stats span {
+			margin-top: 8px;
+			color: var(--author-muted);
+			font-size: 0.78rem;
+			font-weight: 850;
+			line-height: 1.3;
+		}
+
+		.author-proof__badges {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.author-proof__badges span {
+			border-radius: 999px;
+			background: #eef5ed;
+			color: var(--author-green);
+			padding: 9px 14px;
+			font-size: 0.88rem;
+			font-weight: 950;
+		}
+
+		.author-proof__panel a {
+			display: inline-flex;
+			margin-top: 24px;
+			color: var(--author-gold);
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.author-responsibility {
+			padding-top: 0;
+		}
+
+		.author-responsibility__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 0.75fr) minmax(420px, 1.25fr);
+			gap: clamp(26px, 5vw, 64px);
+			align-items: center;
+			border: 1px solid rgba(86, 117, 95, 0.28);
+			border-radius: 30px;
+			background:
+				radial-gradient(circle at 92% 12%, rgba(86, 117, 95, 0.16), transparent 36%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(239, 246, 238, 0.72)),
+				#fffdfa;
+			padding: clamp(26px, 5vw, 48px);
+			box-shadow: 0 24px 64px rgba(62, 47, 25, 0.08);
+		}
+
+		.author-responsibility__items {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.author-responsibility__items div {
+			min-height: 184px;
+			border: 1px solid rgba(86, 117, 95, 0.22);
+			border-radius: 22px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 20px;
+		}
+
+		.author-responsibility__items span {
+			display: inline-grid;
+			place-items: center;
+			width: 46px;
+			height: 46px;
+			border-radius: 15px;
+			background: #56755f;
+			color: #fffdf7;
+			font-weight: 950;
+		}
+
+		.author-responsibility__items strong {
+			display: block;
+			margin-top: 18px;
+			font-size: 1.18rem;
+			font-weight: 950;
+		}
+
+		.author-responsibility__items p {
+			margin: 10px 0 0;
+			color: var(--author-muted);
+			font-size: 0.94rem;
+			font-weight: 700;
+			line-height: 1.72;
+		}
+
+		.author-services {
+			border-top: 1px solid var(--author-line);
+			border-bottom: 1px solid var(--author-line);
+			background: rgba(255, 255, 255, 0.42);
+		}
+
+		.author-section__center {
+			max-width: 760px;
+			margin: 0 auto 34px;
+			text-align: center;
+		}
+
+		.author-service-grid {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 16px;
+		}
+
+		.author-service-card {
+			display: grid;
+			align-content: start;
+			min-height: 318px;
+			border: 1px solid var(--author-line);
+			border-radius: 24px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 26px;
+			color: inherit;
+			text-decoration: none;
+			transition: transform 0.18s ease, box-shadow 0.18s ease;
+		}
+
+		.author-service-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 20px 48px rgba(62, 47, 25, 0.1);
+		}
+
+		.author-service-card svg {
+			width: 42px;
+			height: 42px;
+			margin-bottom: 22px;
+			color: var(--author-gold);
+		}
+
+		.author-service-card strong {
+			margin-top: 8px;
+			font-size: clamp(1.32rem, 1.65vw, 1.7rem);
+			font-weight: 950;
+			letter-spacing: 0.02em;
+		}
+
+		.author-service-card p {
+			margin: 18px 0 0;
+			color: var(--author-muted);
+			font-size: 0.98rem;
+			font-weight: 650;
+			line-height: 1.78;
+		}
+
+		.author-philosophy {
+			display: grid;
+			grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+			gap: clamp(28px, 5vw, 72px);
+			align-items: start;
+		}
+
+		.author-principles {
+			display: grid;
+			gap: 12px;
+		}
+
+		.author-principle {
+			border: 1px solid var(--author-line);
+			border-radius: 22px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 22px;
+		}
+
+		.author-principle strong {
+			display: block;
+			margin-top: 8px;
+			font-size: 1.25rem;
+			font-weight: 950;
+		}
+
+		.author-principle p {
+			margin: 8px 0 0;
+			color: var(--author-muted);
+			font-size: 0.95rem;
+			font-weight: 650;
+			line-height: 1.75;
+		}
+
+		.author-related {
+			padding-top: 0;
+		}
+
+		.author-related__grid {
+			display: grid;
+			grid-template-columns: minmax(0, 0.75fr) minmax(420px, 1.25fr);
+			gap: clamp(24px, 5vw, 64px);
+			align-items: center;
+			border: 1px solid var(--author-line);
+			border-radius: 28px;
+			background: rgba(255, 255, 255, 0.7);
+			padding: clamp(24px, 4vw, 42px);
+		}
+
+		.author-related__links {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.author-related__links a {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			min-height: 64px;
+			border: 1px solid rgba(197, 178, 151, 0.64);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 0 18px;
+			color: var(--author-ink);
+			font-weight: 950;
+			text-decoration: none;
+		}
+
+		.author-related__links svg {
+			color: var(--author-gold);
+		}
+
+		.author-final {
+			padding: 0 0 96px;
+		}
+
+		.author-final__panel {
+			border: 1px solid rgba(167, 119, 19, 0.38);
+			border-radius: 30px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 234, 214, 0.86)),
+				#fffdfa;
+			padding: clamp(28px, 5vw, 56px);
+			text-align: center;
+			box-shadow: 0 28px 70px rgba(78, 55, 12, 0.12);
+		}
+
+		.author-final .author-button {
+			margin-top: 28px;
+		}
+
+		@media (max-width: 960px) {
+			.author-hero__grid,
+			.author-proof,
+			.author-origin__grid,
+			.author-evidence__grid,
+			.author-dfb__grid,
+			.author-philosophy,
+			.author-responsibility__panel,
+			.author-related__grid {
+				grid-template-columns: 1fr;
+			}
+
+			.author-summary__grid,
+			.author-proof__stats,
+			.author-profile-facts,
+			.author-responsibility__items,
+			.author-service-grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 640px) {
+			.author-container {
+				width: min(100% - 32px, 1180px);
+			}
+
+			.author-breadcrumbs {
+				padding-top: 88px;
+			}
+
+			.author-hero {
+				padding: 34px 0 54px;
+			}
+
+			.author-hero h1 {
+				font-size: clamp(2.7rem, 12vw, 3.6rem);
+				max-width: 7.5em;
+			}
+
+			.author-lead {
+				font-size: 1.35rem;
+			}
+
+			.author-body,
+			.author-section__copy p,
+			.author-philosophy > div:first-child p {
+				font-size: 0.98rem;
+				line-height: 1.85;
+			}
+
+			.author-actions,
+			.author-button {
+				width: 100%;
+			}
+
+			.author-summary__grid,
+			.author-proof__stats,
+			.author-profile-facts,
+			.author-responsibility__items,
+			.author-service-grid,
+			.author-related__links {
+				grid-template-columns: 1fr;
+			}
+
+			.author-summary-card {
+				justify-content: flex-start;
+				min-height: 60px;
+			}
+
+			.author-photo-tags {
+				inset: 14px 14px auto auto;
+				max-width: 82%;
+			}
+
+			.author-photo-tags span {
+				padding: 7px 10px;
+				font-size: 0.64rem;
+			}
+
+			.author-profile-facts div,
+			.author-profile-facts div:nth-child(even),
+			.author-profile-facts div:nth-last-child(-n + 2) {
+				min-height: auto;
+				border-right: 0;
+				border-bottom: 1px solid rgba(197, 178, 151, 0.48);
+			}
+
+			.author-profile-facts div:last-child {
+				border-bottom: 0;
+			}
+
+			.author-dfb-card {
+				grid-template-columns: 1fr;
+			}
+
+			.author-section {
+				padding: 64px 0;
+			}
+
+			.author-service-card {
+				min-height: auto;
+			}
+		}
+	</style>
+</LandingLayout>

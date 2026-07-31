@@ -1,1 +1,52 @@
-{}
+{
+	"redirects": [
+		{
+			"source": "/posts/:path*",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/posts/:path*",
+			"permanent": true
+		},
+		{
+			"source": "/about/:path*",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/author/",
+			"permanent": true
+		},
+		{
+			"source": "/structurepedia/:path*",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/structurepedia/",
+			"permanent": true
+		},
+		{
+			"source": "/dfb-complete-guide/:path*",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/dfb-complete-guide/",
+			"permanent": true
+		},
+		{
+			"source": "/rss.xml",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/rss.xml",
+			"permanent": true
+		},
+		{
+			"source": "/sitemap.xml",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/sitemap-index.xml",
+			"permanent": true
+		},
+		{
+			"source": "/sitemap-index.xml",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/sitemap-index.xml",
+			"permanent": true
+		},
+		{
+			"source": "/:path*",
+			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"destination": "https://effect.moe/blog/",
+			"permanent": true
+		}
+	]
+}

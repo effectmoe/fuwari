@@ -1,0 +1,337 @@
+---
+const benefits = [
+	{
+		num: "01",
+		title: "AIからの見え方を、まず診断する",
+		body: "ChatGPT、Claude、Perplexity などのAIが、自社サイトをどう読み、どこを根拠に回答しているかを確認します。感覚ではなく、AIに引用されるための欠落を見える状態にします。",
+		image: "/lp/generated/bright-ai-search-analysis.png",
+		alt: "AI検索での見え方を明るいオフィスで分析している様子",
+		keywords: ["LLMO診断", "AI Crawl", "構造確認", "FAQ・出典整備"],
+	},
+	{
+		num: "02",
+		title: "記憶を持つAIを、業務の中心に置く",
+		body: "社内資料、顧客履歴、FAQ、過去の判断をAIが参照できる形に整えます。毎回説明し直すAIではなく、会社の文脈を踏まえて動けるAIへ変えます。",
+		image: "/lp/generated/bright-workflow-knowledge-design.png",
+		alt: "日本人チームが業務フローとAIの記憶構造を整理している様子",
+		keywords: ["AIセントラル", "ナレッジ接続", "権限設計", "人の承認"],
+	},
+	{
+		num: "03",
+		title: "個人情報を守りながら、AIを使える形にする",
+		body: "個人情報や機密情報を扱う業務では、クラウドAIに貼り付けるだけの運用は限界があります。ローカル・閉域・監査ログを前提に、安心して使えるAI導線を設計します。",
+		image: "/lp/generated/bright-ai-security-governance.png",
+		alt: "日本人チームがAI活用時の権限管理と情報保護を確認している会議風景",
+		keywords: ["完全ローカル", "閉域運用", "監査ログ", "ガバナンス"],
+	},
+	{
+		num: "04",
+		title: "AI検索と業務AIを、継続改善で育てる",
+		body: "一度作って終わりではなく、AIからの見え方、記事、FAQ、相談導線、業務フローを月次で見直します。外側の集客と内側の業務改善を同時に伸ばします。",
+		image: "/lp/generated/bright-time-saving-ai-workflow.png",
+		alt: "AI活用で業務時間を削減しながら改善サイクルを回す様子",
+		keywords: ["月次分析", "コンテンツ改善", "CV導線", "業務フロー改善"],
+	},
+];
+---
+
+<section class="benefit-process" aria-labelledby="benefit-process-title">
+	<div class="benefit-process__inner">
+		<div class="benefit-process__intro">
+			<p class="benefit-process__eyebrow">HOW EFFECT.MOE WORKS</p>
+			<h2 id="benefit-process-title">導入で、何が変わるのか。</h2>
+			<p>
+				effect.moe は、AI検索で参照される外側の設計と、記憶を持ったAIを業務の中枢に据える内側の設計をつなげます。
+				見え方、仕組み、安全性、改善サイクルを一枚ずつ確認できるようにします。
+			</p>
+			<div class="benefit-process__cta">
+				<a href="/#contact">無料相談で確認する</a>
+				<a href="/#pricing">料金を見る</a>
+			</div>
+		</div>
+
+		<div class="benefit-process__cards">
+			{
+				benefits.map((item) => (
+					<article class="benefit-card">
+						<div class="benefit-card__copy">
+							<span class="benefit-card__num">{item.num}</span>
+							<h3>{item.title}</h3>
+							<p>{item.body}</p>
+							<ul aria-label={`${item.title}の対応領域`}>
+								{item.keywords.map((keyword) => (
+									<li>{keyword}</li>
+								))}
+							</ul>
+						</div>
+						<figure class="benefit-card__media">
+							<img src={item.image} alt={item.alt} loading="lazy" />
+						</figure>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.benefit-process {
+		--bp-bg: #fcf8f9;
+		--bp-ink: #050505;
+		--bp-muted: #58606b;
+		--bp-line: rgba(5, 5, 5, 0.16);
+		--bp-panel: rgba(255, 255, 255, 0.88);
+		--bp-accent: #b98a2e;
+		position: relative;
+		overflow: hidden;
+		background:
+			linear-gradient(90deg, rgba(5, 5, 5, 0.08) 1px, transparent 1px),
+			linear-gradient(180deg, rgba(5, 5, 5, 0.06) 1px, transparent 1px),
+			var(--bp-bg);
+		background-size: min(24vw, 280px) 100%, 100% 132px, auto;
+		color: var(--bp-ink);
+	}
+
+	.benefit-process__inner {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.84fr) minmax(0, 1.46fr);
+		gap: clamp(40px, 5vw, 88px);
+		margin: 0 auto;
+		max-width: 1440px;
+		padding: clamp(72px, 8vw, 128px) clamp(20px, 5vw, 72px);
+	}
+
+	.benefit-process__intro {
+		position: sticky;
+		top: 112px;
+		align-self: start;
+	}
+
+	.benefit-process__eyebrow {
+		display: inline-flex;
+		border-left: 4px solid #66717f;
+		background: rgba(255, 255, 255, 0.86);
+		padding: 10px 14px;
+		color: #20252b;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: clamp(0.9rem, 1vw, 1.05rem);
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		line-height: 1;
+	}
+
+	.benefit-process__intro h2 {
+		margin: 32px 0 0;
+		max-width: 560px;
+		color: var(--bp-ink);
+		font-size: clamp(3.2rem, 6.8vw, 6.9rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 0.98;
+	}
+
+	.benefit-process__intro > p {
+		margin: 32px 0 0;
+		max-width: 620px;
+		color: #111;
+		font-size: clamp(1.1rem, 1.55vw, 1.45rem);
+		font-weight: 650;
+		line-height: 1.85;
+	}
+
+	.benefit-process__cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		margin-top: 36px;
+	}
+
+	.benefit-process__cta a {
+		display: inline-flex;
+		min-height: 58px;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid #111;
+		border-radius: 6px;
+		padding: 16px 24px;
+		background: #111;
+		color: #fff;
+		font-size: 1.05rem;
+		font-weight: 850;
+		text-decoration: none;
+		transition:
+			transform 180ms ease,
+			background 180ms ease,
+			color 180ms ease;
+	}
+
+	.benefit-process__cta a:nth-child(2) {
+		background: rgba(255, 255, 255, 0.78);
+		color: #111;
+	}
+
+	.benefit-process__cta a:hover,
+	.benefit-process__cta a:focus-visible {
+		transform: translateY(-2px);
+	}
+
+	.benefit-process__cards {
+		display: grid;
+		gap: 32px;
+	}
+
+	.benefit-card {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.86fr);
+		min-height: 420px;
+		overflow: hidden;
+		border: 2px solid var(--bp-line);
+		background: var(--bp-panel);
+		box-shadow: 0 20px 50px rgba(30, 24, 18, 0.08);
+	}
+
+	.benefit-card__copy {
+		display: flex;
+		flex-direction: column;
+		padding: clamp(28px, 3.5vw, 52px);
+	}
+
+	.benefit-card__num {
+		color: #697381;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: clamp(1.9rem, 2.6vw, 2.55rem);
+		font-weight: 850;
+		line-height: 1;
+	}
+
+	.benefit-card h3 {
+		margin: 28px 0 0;
+		color: var(--bp-ink);
+		font-size: clamp(2rem, 3.2vw, 3.4rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.12;
+	}
+
+	.benefit-card p {
+		margin: 22px 0 0;
+		color: #38404a;
+		font-size: clamp(1.05rem, 1.28vw, 1.25rem);
+		font-weight: 620;
+		line-height: 1.86;
+	}
+
+	.benefit-card ul {
+		display: grid;
+		gap: 0;
+		margin: auto 0 0;
+		padding: 36px 0 0;
+		list-style: none;
+	}
+
+	.benefit-card li {
+		border-top: 2px dashed rgba(91, 101, 115, 0.48);
+		padding: 15px 0;
+		color: #596372;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: clamp(0.95rem, 1.05vw, 1.08rem);
+		font-weight: 850;
+		letter-spacing: 0.08em;
+	}
+
+	.benefit-card__media {
+		position: relative;
+		min-height: 100%;
+		overflow: hidden;
+		background: #f0edee;
+	}
+
+	.benefit-card__media::after {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.12));
+		content: "";
+		pointer-events: none;
+	}
+
+	.benefit-card__media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 420px;
+		object-fit: cover;
+		filter: saturate(0.9) contrast(1.02);
+	}
+
+	@media (max-width: 1180px) {
+		.benefit-process__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.benefit-process__intro {
+			position: relative;
+			top: auto;
+		}
+
+		.benefit-process__intro h2,
+		.benefit-process__intro > p {
+			max-width: 920px;
+		}
+	}
+
+	@media (max-width: 820px) {
+		.benefit-process {
+			background-size: 50vw 100%, 100% 116px, auto;
+		}
+
+		.benefit-process__inner {
+			padding: 64px 18px;
+		}
+
+		.benefit-process__intro h2 {
+			font-size: clamp(3rem, 15vw, 4.8rem);
+		}
+
+		.benefit-process__cta {
+			display: grid;
+		}
+
+		.benefit-process__cta a {
+			width: 100%;
+			min-height: 64px;
+			font-size: 1rem;
+		}
+
+		.benefit-card {
+			grid-template-columns: 1fr;
+			min-height: auto;
+		}
+
+		.benefit-card__media {
+			order: -1;
+			aspect-ratio: 16 / 10;
+		}
+
+		.benefit-card__media img {
+			min-height: 0;
+		}
+
+		.benefit-card__copy {
+			padding: 28px 22px 30px;
+		}
+
+		.benefit-card h3 {
+			margin-top: 20px;
+			font-size: clamp(1.9rem, 9vw, 2.7rem);
+		}
+
+		.benefit-card p {
+			font-size: 1.02rem;
+			line-height: 1.8;
+		}
+
+		.benefit-card ul {
+			padding-top: 28px;
+		}
+	}
+</style>

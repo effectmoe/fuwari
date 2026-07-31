@@ -1,533 +1,1414 @@
 ---
-import MainGridLayout from "../layouts/MainGridLayout.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
 import { Icon } from "astro-icon/components";
+import stats from "../data/storaca-stats.json";
+import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
 const curriculum = [
-  {
-    no: "01", tag: "SETUP",
-    title: "Claude Code を導入する／仕組みを知る",
-    learn: "インストール、認証、IDE 連携、基本設定、AIエージェントの動作原理",
-    skill: "環境構築、権限モード、CLAUDE.md による振る舞い制御",
-    practice: "自分の PC に Claude Code を導入し、最初の自動化タスクを動かす",
-  },
-  {
-    no: "02", tag: "BASICS",
-    title: '基本操作と"任せ方"の作法',
-    learn: "指示の出し方、TODO・サブエージェント、Git 連携、ファイル編集",
-    skill: "長い作業を分割する力、AI に投げる粒度、レビューと差し戻し",
-    practice: "自分の業務ファイルを編集させ、Git で安全に取り消す体験",
-  },
-  {
-    no: "03", tag: "ANALYZE",
-    title: '大量ファイルを"一気に"分析する',
-    learn: "Grep・Glob による高速検索、PDF／Excel／Word の読込、横断要約",
-    skill: "数百ファイルから必要情報を抽出する設計力",
-    practice: "自社の規程／契約書フォルダを読ませ、比較表を自動生成する",
-  },
-  {
-    no: "04", tag: "DOCUMENT",
-    title: "書類作成を完全自動化する",
-    learn: "python-docx／openpyxl／python-pptx でのテンプレ運用と量産",
-    skill: "Word・Excel・PowerPoint の自動生成、テーブル罫線・フォント制御",
-    practice: "自分の業務テンプレを1個渡し、複数ケースで一括生成する",
-  },
-  {
-    no: "05", tag: "INTEGRATE",
-    title: "GitHub・Webhook・API・MCP で外と繋ぐ",
-    learn: "GitHub Actions、Webhook、外部 API、MCP（Notion／freee／Slack 等）連携",
-    skill: "業務システム間を繋ぐ設計、Webhook によるイベント駆動自動化、MCP で複数 SaaS を横断操作",
-    practice: "Webhook → Slack 通知 or 外部 API → Notion 連携を自作する",
-  },
-  {
-    no: "06", tag: "DEPLOY",
-    title: "HP・LP を企画から公開まで",
-    learn: "HTML／CSS／Tailwind でのページ制作、Netlify・Xserver への公開",
-    skill: "デザインの指示、レスポンシブ対応、独自ドメイン運用",
-    practice: "自社サービス紹介 LP を一本作り、本番ドメインに公開する",
-  },
+	{
+		no: "01",
+		tag: "SETUP",
+		title: "Claude Code を導入する",
+		learn: "インストール、認証、IDE連携、基本設定",
+		skill: "権限モード、CLAUDE.md、AIエージェントの動作理解",
+		practice: "自分のPCで最初の自動化タスクを動かす",
+	},
+	{
+		no: "02",
+		tag: "BASICS",
+		title: "AIへの任せ方を身につける",
+		learn: "指示の粒度、TODO、レビュー、Git連携",
+		skill: "長い作業を分割し、安全に差し戻す力",
+		practice: "業務ファイルを編集させ、Gitで確認する",
+	},
+	{
+		no: "03",
+		tag: "ANALYZE",
+		title: "大量ファイルを横断分析する",
+		learn: "検索、PDF/Excel/Wordの読込、横断要約",
+		skill: "数百ファイルから必要情報を抽出する設計力",
+		practice: "規程・契約書・資料から比較表を作る",
+	},
+	{
+		no: "04",
+		tag: "DOCUMENT",
+		title: "書類作成を自動化する",
+		learn: "Word、Excel、PowerPointのテンプレ運用",
+		skill: "帳票・提案書・資料の自動生成",
+		practice: "自社テンプレを渡し、複数ケースで量産する",
+	},
+	{
+		no: "05",
+		tag: "INTEGRATE",
+		title: "外部ツールと連携する",
+		learn: "GitHub、Webhook、API、MCPの基礎",
+		skill: "複数SaaSをつないだ業務フロー設計",
+		practice: "通知、Notion連携、API連携の小さな仕組みを作る",
+	},
+	{
+		no: "06",
+		tag: "DEPLOY",
+		title: "LPを企画から公開まで進める",
+		learn: "ページ制作、レスポンシブ、公開、ドメイン",
+		skill: "AIで作ったものを本番へ出す運用力",
+		practice: "自社サービス紹介LPを作り、公開まで体験する",
+	},
 ];
 
-const features = [
-  {
-    no: "01",
-    title: 'Claude Code に "1 ツール集中" の濃度',
-    body: "複数ツールを浅く触る研修ではなく、Claude Code 一本を 12 時間かけて深掘り。表面の使い方ではなく、業務に組み込める「実戦運用力」まで到達します。",
-  },
-  {
-    no: "02",
-    title: "講師が自社業務で毎日使っている",
-    body: "講師は自社の AI 活用コンサル・システム構築業務で Claude Code を日常運用。業務自動化システム・LP ページ・AI カルテシステム等をすべて内製。「教科書ではなく実戦」のノウハウを直接お渡しします。",
-  },
-  {
-    no: "03",
-    title: "受講者の業務テーマで実装する",
-    body: "演習は架空の題材ではなく、受講者ご自身の業務ファイルで実施。研修終了時には、業務で実際に動く自動化が手元に残ります。",
-  },
-  {
-    no: "04",
-    title: '"作って終わり" ではなく、公開まで',
-    body: "ローカルで動かすだけで終わらせず、最終回では Netlify／Xserver への本番公開まで実施。AI で作ったものを、世の中に出すところまで体験できます。",
-  },
+const buildItems = [
+	{
+		title: "大量ファイル分析",
+		body: "社内資料・契約書・規程を横断し、必要な情報を抽出する。",
+		icon: "material-symbols:folder-open-outline-rounded",
+		meta: ["PDF", "Excel", "議事録"],
+		visual: "folder",
+	},
+	{
+		title: "Word/Excel/PPT自動生成",
+		body: "テンプレートから提案書、報告書、比較表を量産する。",
+		icon: "material-symbols:description-outline-rounded",
+		meta: ["提案書.docx", "集計.xlsx", "資料.pptx"],
+		visual: "files",
+	},
+	{
+		title: "Webhook通知",
+		body: "フォーム送信や更新をきっかけに、通知や次の処理を動かす。",
+		icon: "material-symbols:webhook-rounded",
+		meta: ["送信検知", "担当通知", "次アクション"],
+		visual: "notification",
+	},
+	{
+		title: "外部SaaS連携",
+		body: "Notion、Slack、freee、Google Driveなどを業務フローに接続する。",
+		icon: "material-symbols:hub-outline",
+		meta: ["Notion", "Slack", "Drive"],
+		visual: "nodes",
+	},
+	{
+		title: "LP公開",
+		body: "企画、構成、実装、公開までをAIと進める。",
+		icon: "material-symbols:open-in-browser-rounded",
+		meta: ["Draft", "Review", "Live"],
+		visual: "browser",
+	},
+	{
+		title: "自社専用エージェント",
+		body: "自分の業務ルールを理解する小さなAI担当者を作る。",
+		icon: "material-symbols:smart-toy-outline",
+		meta: ["CLAUDE.md", "権限", "手順書"],
+		visual: "agent",
+	},
+];
+
+const comparisonLanes = [
+	{
+		no: "01",
+		title: "検索・分析",
+		before: "毎回キーワードで探し、人間が資料を開いて読む",
+		after: "フォルダを横断し、AIが関連資料と根拠を拾う",
+	},
+	{
+		no: "02",
+		title: "作成・整形",
+		before: "回答をコピーして、WordやExcelへ手で移す",
+		after: "テンプレートに沿って、成果物ファイルまで生成する",
+	},
+	{
+		no: "03",
+		title: "連携・実行",
+		before: "通知、登録、公開、確認依頼を人がつなぐ",
+		after: "WebhookやAPIで、次の作業まで一続きにする",
+	},
 ];
 
 const faqs = [
-  {
-    q: "プログラミング経験がなくても受講できますか？",
-    a: "はい、可能です。Claude Code は自然言語で指示を出すツールのため、コードを書ける必要はありません。ただし AI ツール（ChatGPT・Claude 等）を日常的に使っている状態が前提となります。完全な AI 初学者の方は、まず入門編の検討をお勧めします。",
-  },
-  {
-    q: "準備するものはありますか？",
-    a: "PC（Windows／Mac いずれも可）、インターネット接続、Anthropic Claude のアカウントをご用意ください。Claude Code は Claude Pro／Max プラン（月額 20〜200 ドル）の利用を推奨します。詳細は申込後にご案内します。",
-  },
-  {
-    q: "助成金の申請代行はお願いできますか？",
-    a: "当社では助成金申請の代行は行っておりません。ご希望の場合は、申請に慣れた提携先の社労士事務所をご紹介いたします。",
-  },
-  {
-    q: "受講人数はどのくらいから対応できますか？",
-    a: "3名から社内貸切での実施が可能です。人数・スケジュールはお気軽にご相談ください。",
-  },
-  {
-    q: "欠席した回はどうなりますか？",
-    a: "全回録画し、アーカイブ視聴が可能です。進捗に合わせて補講の調整も承ります。",
-  },
+	{
+		q: "プログラミング経験がなくても受講できますか？",
+		a: "可能です。コードを暗記する講座ではなく、Claude Codeに業務を任せる設計と進め方を学ぶ講座です。ただし、ChatGPTやClaudeなどのAIツールを日常的に触っている状態を推奨します。",
+	},
+	{
+		q: "準備するものはありますか？",
+		a: "PC、インターネット接続、Claudeアカウントをご用意ください。Claude CodeはClaude ProまたはMaxプランの利用を推奨します。必要な設定は講座内で確認します。",
+	},
+	{
+		q: "助成金の申請代行はお願いできますか？",
+		a: "株式会社EFFECTでは助成金申請の代行は行っていません。必要に応じて、申請に詳しい提携社労士事務所をご紹介します。",
+	},
+	{
+		q: "何名から社内研修として実施できますか？",
+		a: "3名から社内貸切での実施が可能です。人数、日程、業務テーマに合わせてカリキュラムを調整します。",
+	},
+	{
+		q: "欠席した回はどうなりますか？",
+		a: "録画視聴と補足フォローで対応します。進行に支障が出ないよう、次回までに追いつける形でサポートします。",
+	},
 ];
 
-// mailto: の subject/body は RFC 6068 に従い UTF-8 を percent-encode する必要がある
-const mailtoSubject = encodeURIComponent("AIエージェント入門講座 お問い合わせ");
-const mailtoBody = encodeURIComponent(
-  "【お問い合わせ内容】\n受講希望人数：\n希望時期：\nご質問・ご要望：\n",
-);
-const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
-const contactEmail = "info@effect.moe";
-
-const tagColors: Record<string, string> = {
-  SETUP:     "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-  BASICS:    "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-  ANALYZE:   "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-  DOCUMENT:  "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-  INTEGRATE: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-  DEPLOY:    "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
-};
+const consultationHref = "/?inquiry=consultation&service=ai-course#contact";
+const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 ---
 
-<MainGridLayout
-  title="AIエージェント入門講座 ／ Claude Code 徹底活用｜株式会社EFFECT"
-  description="GitHub・Webhook・MCP・API を活用したAIエージェント研修。全6回×各2時間のオンライン実践研修。人材開発支援助成金（リスキリング）対応。講師：シュ コウメイ（株式会社EFFECT）"
+<LandingLayout
+	title="AIエージェント入門講座｜Claude Codeを業務で使える自律エージェントへ｜株式会社EFFECT"
+	description="Claude Code、GitHub、Webhook、API、MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を全6回で習得する実践研修です。"
 >
-  <div class="flex flex-col gap-5 w-full">
+	<section id="top" class="course-hero">
+		<div class="course-shell course-hero__grid">
+			<div class="course-hero__copy">
+				<p class="course-kicker">AI AGENT COURSE / CLAUDE CODE</p>
+				<h1>AIエージェント入門講座</h1>
+				<p class="course-lead">Claude Codeを、業務で使える自律エージェントへ。</p>
+				<p class="course-body">
+					GitHub・Webhook・API・MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を、全6回の実践研修で習得します。
+				</p>
+				<div class="course-actions">
+					<a href={consultationHref} class="course-button course-button--primary">
+						<Icon name="material-symbols:mail-outline-rounded" />
+						無料相談を申し込む
+					</a>
+					<a href="#price" class="course-button course-button--secondary">料金を見る</a>
+					<a href="#curriculum" class="course-button course-button--ghost">カリキュラムを見る</a>
+				</div>
+				<div class="course-metrics" aria-label="講座概要">
+					<span><strong>全6回</strong>実践研修</span>
+					<span><strong>各2時間</strong>合計12時間</span>
+					<span><strong>Zoom</strong>オンライン</span>
+					<span><strong>3名から</strong>社内研修可</span>
+				</div>
+			</div>
 
-    <!-- ===== Hero Banner Image ===== -->
-    <div class="card-base overflow-hidden p-0">
-      <img
-        src="/ai-agent-course/hero.jpg"
-        alt="AIエージェント入門講座 — ネイビーブルーのAIワークスペース"
-        class="w-full h-52 md:h-72 object-cover"
-      />
-      <div class="px-6 md:px-9 py-7">
-        <!-- バッジ行 -->
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="inline-flex items-center gap-1 text-xs font-bold text-[var(--primary)] bg-[var(--btn-plain-bg)] border border-[var(--primary)] rounded-full px-3 py-1">
-            <Icon name="material-symbols:fiber-new-rounded" class="text-sm" />
-            2026 年 新設プログラム
-          </span>
-          <span class="inline-flex items-center gap-1 text-xs font-bold text-75 bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1">
-            <Icon name="material-symbols:savings-outline-rounded" class="text-sm" />
-            リスキリング助成金 対応
-          </span>
-        </div>
-        <!-- タイトル -->
-        <h1 class="text-3xl md:text-4xl font-bold text-90 mb-3 leading-tight">
-          AIエージェント<span class="text-[var(--primary)]">入門講座</span><br />
-          <span class="text-2xl md:text-3xl">Claude Code を、徹底攻略する。</span>
-        </h1>
-        <p class="text-base md:text-lg text-75 leading-relaxed mb-6">
-          「使う」から、「任せる」へ。<br />
-          GitHub・Webhook・MCP・API を組み合わせた業務自動化を、実装ベースで習得する<br class="hidden md:block" />全 6 回の実践研修。
-        </p>
-<!-- CTAボタン -->
-        <div class="flex flex-wrap gap-3 mb-3">
-          <a
-            href={mailtoLink}
-            data-no-swup
-            class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-6 py-3 rounded-lg hover:opacity-90 transition text-base"
-          >
-            <Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
-            無料相談を申し込む
-          </a>
-          <a
-            href="#curriculum"
-            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-bold px-6 py-3 hover:bg-[var(--btn-plain-bg-hover)] transition text-base"
-          >
-            カリキュラムを見る
-          </a>
-        </div>
-        <!-- 概要バッジ -->
-        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm md:text-base text-75">
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:schedule-outline-rounded" class="text-[var(--primary)] text-lg" />
-            全 6 回 × 各 2 時間
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:videocam-outline-rounded" class="text-[var(--primary)] text-lg" />
-            Zoom オンライン
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:group-outline-rounded" class="text-[var(--primary)] text-lg" />
-            3 名から受講可
-          </span>
-          <span class="flex items-center gap-1.5">
-            <Icon name="material-symbols:savings-outline-rounded" class="text-[var(--primary)] text-lg" />
-            助成金で実質 約 1/4
-          </span>
-        </div>
-      </div>
-    </div>
+			<div class="agent-visual" aria-label="Claude CodeでAIエージェントが実行するイメージ">
+				<div class="agent-window agent-window--main">
+					<div class="agent-window__bar">
+						<span></span><span></span><span></span>
+						<small>Claude Code Workspace</small>
+					</div>
+					<div class="agent-board">
+						<div class="agent-board__queue">
+							<span>Task Queue</span>
+							<strong>週報生成と提案書ドラフト</strong>
+							<small>営業資料 / 議事録 / 顧客メモを横断中</small>
+						</div>
+						<div class="agent-board__grid">
+							<div>
+								<Icon name="material-symbols:folder-open-outline-rounded" />
+								<b>18 files</b>
+								<small>分析済み</small>
+							</div>
+							<div>
+								<Icon name="material-symbols:description-outline-rounded" />
+								<b>3 drafts</b>
+								<small>生成中</small>
+							</div>
+							<div>
+								<Icon name="material-symbols:notifications-active-outline-rounded" />
+								<b>Slack</b>
+								<small>確認依頼</small>
+							</div>
+						</div>
+						<div class="agent-progress">
+							<span><i style="--bar: 92%;"></i></span>
+							<p><b>output</b> / 週報.docx / 提案書.pptx / 比較表.xlsx</p>
+						</div>
+					</div>
+				</div>
+				<div class="agent-window agent-window--log">
+					<strong>実行ログ</strong>
+					<span><i></i> read: 顧客フォルダを横断</span>
+					<span><i></i> create: 提案書ドラフト生成</span>
+					<span><i></i> notify: 確認依頼を送信</span>
+				</div>
+				<div class="agent-tools">
+					<span>GitHub</span><span>Webhook</span><span>API</span><span>MCP</span><span>Notion</span>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== なぜエージェントか ===== -->
-    <div class="card-base overflow-hidden p-0">
-      <img
-        src="/ai-agent-course/img-why.jpg"
-        alt="AIが大量ファイルを処理するイメージ"
-        class="w-full h-40 md:h-56 object-cover"
-      />
-      <div class="px-6 md:px-9 py-7">
-        <div class="flex items-center gap-2 mb-3">
-          <Icon name="material-symbols:lightbulb-outline-rounded" class="text-2xl text-[var(--primary)]" />
-          <h2 class="text-2xl font-bold text-90">「ChatGPT に聞く」と「AI に任せる」は、別物です。</h2>
-        </div>
-        <p class="text-base text-75 mb-5 leading-relaxed">
-          Claude Code を使いこなせるようになると、こんなことが起こります。
-        </p>
-        <div class="grid sm:grid-cols-2 gap-3">
-          {[
-            { icon: "material-symbols:folder-open-outline-rounded", text: "数百ファイルを一気に読ませて、必要な情報だけ抽出できる" },
-            { icon: "material-symbols:description-outline-rounded", text: "Word・Excel・PowerPoint をテンプレから一気に量産できる" },
-            { icon: "material-symbols:code-rounded", text: "GitHub・Webhook・API を組み合わせて、業務システムが自分の手で作れる" },
-            { icon: "material-symbols:open-in-browser-rounded", text: "HP・LP を企画から公開まで一人で完結できる" },
-            { icon: "material-symbols:hub-outline", text: "Slack・Notion・freee など外部 SaaS と MCP で直接連携できる" },
-            { icon: "material-symbols:auto-mode-rounded", text: "定型メール・議事録・報告書の作成工数がゼロになる" },
-          ].map((item) => (
-            <div class="flex items-start gap-3 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-4 py-3.5 shadow-sm">
-              <Icon name={item.icon} class="text-[var(--primary)] text-xl mt-0.5 shrink-0" />
-              <span class="text-base text-75 leading-snug">{item.text}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+	<section id="agent-shift" class="course-section">
+		<div class="course-shell split-message">
+			<div>
+				<p class="course-kicker">FROM CHAT TO AGENT</p>
+				<h2>「ChatGPTに聞く」と「AIに任せる」は、別物です。</h2>
+			</div>
+			<div class="before-after">
+				{comparisonLanes.map((lane) => (
+					<article>
+						<div class="lane-index">{lane.no}</div>
+						<h3>{lane.title}</h3>
+						<div class="lane-compare">
+							<p><span>Before</span>{lane.before}</p>
+							<Icon name="material-symbols:arrow-forward-rounded" />
+							<p><span>After</span>{lane.after}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== 助成金・価格 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-3">
-        <Icon name="material-symbols:savings-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">助成金活用で、実質 約 1/4 の負担</h2>
-      </div>
-      <p class="text-base text-75 mb-5 leading-relaxed">
-        人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。
-        当社では申請代行は行わず、提携の社労士事務所をご紹介いたします。
-      </p>
-      <div class="rounded-2xl border border-[var(--line-divider)] overflow-hidden">
-        <div class="bg-[var(--btn-plain-bg)] px-6 py-4 flex justify-between items-center border-b border-[var(--line-divider)]">
-          <div>
-            <p class="text-sm text-50 mb-0.5">通常価格（1 名 / 全 6 回 / 計 12 時間）</p>
-            <p class="text-2xl font-bold text-90">¥385,000</p>
-          </div>
-          <Icon name="material-symbols:payments-outline-rounded" class="text-3xl text-50" />
-        </div>
-        <div class="px-6 py-4 flex flex-col gap-3 border-b border-[var(--line-divider)]">
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span class="text-base text-75">経費助成（研修費の 75% を補助）</span>
-            </div>
-            <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base">−¥288,750</span>
-          </div>
-          <div class="flex justify-between items-center">
-            <div class="flex items-center gap-2">
-              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span class="text-base text-75">賃金助成（¥1,000 × 12 時間）</span>
-            </div>
-            <span class="font-bold text-emerald-600 dark:text-emerald-400 text-base">−¥12,000</span>
-          </div>
-        </div>
-        <div class="px-6 py-5 flex justify-between items-center bg-[var(--primary)]/5">
-          <div>
-            <p class="text-sm text-75 mb-1">実質負担額（1 名あたり）</p>
-            <p class="text-4xl font-bold text-[var(--primary)]">¥84,250</p>
-          </div>
-          <div class="text-right">
-            <span class="inline-block bg-[var(--primary)] text-white text-sm font-bold px-3 py-1.5 rounded-lg">
-              約 1/4 の自己負担
-            </span>
-          </div>
-        </div>
-      </div>
-      <p class="text-sm text-50 mt-3 leading-relaxed">
-        ※人材開発支援助成金（事業展開等リスキリング支援コース）の活用例。申請は任意、支給には条件があります。<br />
-        ※当社では助成金申請の代行は行っておりません。ご希望の場合は提携の社労士事務所をご紹介いたします。
-      </p>
-    </div>
+	<section id="outputs" class="course-section course-section--surface">
+		<div class="course-shell">
+			<div class="section-heading">
+				<p class="course-kicker">BUILD OUTPUTS</p>
+				<h2>受講後に作れるもの。</h2>
+			</div>
+			<div class="build-grid">
+				{buildItems.map((item) => (
+					<article class="build-card">
+						<div class="build-card__head">
+							<Icon name={item.icon} />
+							<span>{item.visual}</span>
+						</div>
+						<div class="build-mini-ui">
+							{item.meta.map((label) => <span>{label}</span>)}
+						</div>
+						<h3>{item.title}</h3>
+						<p>{item.body}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== 研修フォーマット ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-4">
-        <Icon name="material-symbols:format-list-bulleted-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">研修フォーマット</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-        {[
-          { icon: "material-symbols:schedule-outline-rounded", label: "時間", value: "全 6 回 × 各 2 時間\n合計 12 時間" },
-          { icon: "material-symbols:videocam-outline-rounded", label: "実施方法", value: "Zoom でオンライン\n録画あり・欠席回はアーカイブ視聴可" },
-          { icon: "material-symbols:calendar-month-outline-rounded", label: "実施曜日", value: "平日実施\n業務に合わせて柔軟に調整" },
-          { icon: "material-symbols:group-outline-rounded", label: "人数", value: "3 名から受講可\n社内貸切も対応" },
-          { icon: "material-symbols:computer-outline-rounded", label: "必要なもの", value: "PC（Win / Mac 可）\nインターネット接続" },
-          { icon: "material-symbols:handshake-outline-rounded", label: "助成金サポート", value: "提携社労士事務所\nをご紹介" },
-        ].map((item) => (
-          <div class="flex flex-col gap-2 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-4 py-4 shadow-sm">
-            <div class="flex items-center gap-2">
-              <Icon name={item.icon} class="text-[var(--primary)] text-xl" />
-              <span class="text-sm text-50 font-medium">{item.label}</span>
-            </div>
-            <p class="text-base font-medium text-90 whitespace-pre-line leading-snug">{item.value}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+	<section id="curriculum" class="course-section">
+		<div class="course-shell">
+			<div class="section-heading">
+				<p class="course-kicker">CURRICULUM</p>
+				<h2>全6回で、導入から公開まで。</h2>
+			</div>
+			<div class="curriculum-list">
+				{curriculum.map((item) => (
+					<article class="curriculum-card">
+						<div class="curriculum-card__index">
+							<span>{item.no}</span>
+							<small>{item.tag}</small>
+						</div>
+						<div>
+							<h3>{item.title}</h3>
+							<div class="curriculum-card__cols">
+								<p><b>学ぶ内容</b>{item.learn}</p>
+								<p><b>身につくスキル</b>{item.skill}</p>
+								<p><b>実践内容</b>{item.practice}</p>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== カリキュラム ===== -->
-    <div id="curriculum" class="card-base overflow-hidden p-0">
-      <img
-        src="/ai-agent-course/img-curriculum.jpg"
-        alt="ターミナルと開発環境のフラットレイ写真"
-        class="w-full h-40 md:h-52 object-cover"
-      />
-      <div class="px-6 md:px-9 py-7">
-        <div class="flex items-center gap-2 mb-5">
-          <Icon name="material-symbols:menu-book-outline-rounded" class="text-2xl text-[var(--primary)]" />
-          <h2 class="text-2xl font-bold text-90">全 6 回 × 各 2 時間 ／ 導入から公開まで完全攻略</h2>
-        </div>
-        <div class="flex flex-col gap-4">
-          {curriculum.map((item) => (
-            <div class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 overflow-hidden shadow-sm">
-              <!-- カードヘッダー -->
-              <div class="px-5 py-3 border-b border-[var(--line-divider)] flex flex-wrap items-center gap-2">
-                <span class="text-sm font-bold text-white bg-[var(--primary)] rounded-md px-2.5 py-1">
-                  {item.no}
-                </span>
-                <span class={`text-xs font-bold rounded-md px-2.5 py-1 ${tagColors[item.tag]}`}>
-                  {item.tag}
-                </span>
-                <h3 class="font-bold text-90 text-base">{item.title}</h3>
-              </div>
-              <!-- カードボディ -->
-              <div class="px-5 py-4 grid sm:grid-cols-3 gap-3">
-                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
-                  <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">学ぶ内容</p>
-                  <p class="text-sm text-75 leading-relaxed">{item.learn}</p>
-                </div>
-                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
-                  <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">身につくスキル</p>
-                  <p class="text-sm text-75 leading-relaxed">{item.skill}</p>
-                </div>
-                <div class="rounded-lg bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-700 px-4 py-3">
-                  <p class="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-2">実践内容</p>
-                  <p class="text-sm text-75 leading-relaxed">{item.practice}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+	<section id="price" class="course-section course-section--navy">
+		<div class="course-shell price-grid">
+			<div>
+				<p class="course-kicker">GRANT / PRICE</p>
+				<h2>助成金活用で、実質負担を抑えて導入する。</h2>
+				<p>
+					人材開発支援助成金の活用例です。株式会社EFFECTでは申請代行は行わず、必要に応じて提携社労士事務所をご紹介します。
+				</p>
+			</div>
+			<div class="price-card">
+				<div>
+					<span>通常価格</span>
+					<strong>¥385,000</strong>
+					<small>1名 / 全6回 / 計12時間</small>
+				</div>
+				<div>
+					<span>助成金活用例</span>
+					<strong>¥84,250</strong>
+					<small>実質負担額の目安</small>
+				</div>
+				<p>支給には条件があります。制度利用の可否は、必ず社労士等に確認してください。</p>
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== 選ばれる理由 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-5">
-        <Icon name="material-symbols:star-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">なぜ、この研修が選ばれるのか</h2>
-      </div>
-      <div class="flex flex-col gap-4">
-        {features.map((item) => (
-          <div class="flex gap-5 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-6 py-5 shadow-sm">
-            <span class="text-4xl font-bold text-[var(--primary)] opacity-20 leading-none shrink-0 select-none">
-              {item.no}
-            </span>
-            <div>
-              <h3 class="font-bold text-90 text-lg mb-2">{item.title}</h3>
-              <p class="text-base text-75 leading-relaxed">{item.body}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+	<section id="instructor" class="course-section">
+		<div class="course-shell instructor-card">
+			<div class="instructor-profile">
+				<img class="instructor-profile__mark" src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" decoding="async" />
+				<div>
+					<span>Instructor</span>
+					<strong>シュ コウメイ</strong>
+					<small>ストアカPro講師</small>
+				</div>
+			</div>
+			<div class="instructor-copy">
+				<p class="course-kicker">INSTRUCTOR</p>
+				<h2>実務で使っている方法だけを、講座に落とし込みます。</h2>
+				<p>
+					Claude Code、AIエージェント、LLMO、構造化、業務AIの実装を日常的に扱うシュ コウメイが、現場で使える手順として整理して教えます。
+				</p>
+				<div class="instructor-proof-grid" aria-label="講師の公開実績">
+					<span><b>{stats.ratingValue}</b><small>講座レビュー評価</small></span>
+					<span><b>{stats.reviewCount}件</b><small>公開レビュー</small></span>
+					<span><b>Pro</b><small>ストアカ講師ランク</small></span>
+				</div>
+				<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="instructor-link">
+					ストアカの先生ページを見る
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== 講師 ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-5">
-        <Icon name="material-symbols:person-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">講師：シュ コウメイ</h2>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-6 rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 p-5 shadow-sm">
-        <div class="shrink-0">
-          <img
-            src="/ai-agent-course/tony-portrait.jpg"
-            alt="シュ コウメイ"
-            class="w-36 h-36 rounded-2xl object-cover object-center border-2 border-[var(--primary)] shadow-sm"
-          />
-        </div>
-        <div class="flex-1">
-          <p class="font-bold text-90 text-xl mb-0.5">シュ コウメイ</p>
-          <p class="text-base text-75 mb-3">株式会社EFFECT 代表 ／ AI活用コンサルタント</p>
-          <p class="text-base text-75 leading-relaxed mb-4">
-            自社業務・クライアント向け開発の双方で Claude Code を日常運用。業務自動化システム・LP
-            ページ・AI カルテシステム等をすべて Claude Code で内製化。ストアカ講師評価
-            4.94（5段階）、AI 活用・Claude Code 関連の講座を多数開講。LLMO 書籍著者。
-          </p>
-          <div class="flex flex-wrap gap-2 mb-4">
-            {["ストアカ評価 4.94", "LLMO 書籍著者", "Claude Code 日常運用", "業務自動化システム内製"].map(
-              (tag) => (
-                <span class="rounded-full bg-[var(--card-bg)] border border-[var(--line-divider)] px-3 py-1 text-sm font-medium text-75">
-                  {tag}
-                </span>
-              ),
-            )}
-          </div>
-          <a
-            href="/about/"
-            class="inline-flex items-center gap-2 rounded-lg border border-[var(--primary)] text-[var(--primary)] font-medium px-4 py-2 text-sm hover:bg-[var(--btn-plain-bg-hover)] transition"
-          >
-            <Icon name="material-symbols:person-outline-rounded" class="text-base" />
-            詳しいプロフィールを見る
-          </a>
-        </div>
-      </div>
-    </div>
+	<section id="faq" class="course-section course-section--surface">
+		<div class="course-shell faq-grid">
+			<div>
+				<p class="course-kicker">FAQ</p>
+				<h2>よくある質問</h2>
+			</div>
+			<div class="faq-list">
+				{faqs.map((item) => (
+					<details>
+						<summary>{item.q}<Icon name="material-symbols:expand-more-rounded" /></summary>
+						<p>{item.a}</p>
+					</details>
+				))}
+				<a href="/faq/" class="faq-hub-link">
+					<span>総合FAQページでさらに確認する</span>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== こんな方に ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-5">
-        <Icon name="material-symbols:person-check-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">こんな方に向いています</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-5">
-        <div class="rounded-xl border border-amber-200/70 dark:border-amber-700/40 bg-amber-50/60 dark:bg-amber-900/20 p-5">
-          <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
-            <Icon name="material-symbols:thumb-up-outline-rounded" class="text-[var(--primary)] text-xl" />
-            おすすめの方
-          </h3>
-          <ul class="flex flex-col gap-2.5">
-            {[
-              "ChatGPT・Claude を日常的に使っていて、もう一段深く活用したい",
-              "業務システムを社内で内製したい、もしくは外注費を減らしたい",
-              "大量の社内文書・データを AI に整理・分析させたい",
-              "HP・LP を社内で素早く作れる体制にしたい",
-              "GitHub・API・Webhook・MCP を実業務に組み込みたい",
-            ].map((item) => (
-              <li class="flex items-start gap-2 text-base text-75">
-                <Icon name="material-symbols:check-rounded" class="text-[var(--primary)] mt-0.5 shrink-0 text-lg" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 p-5">
-          <h3 class="font-bold text-90 text-lg mb-3 flex items-center gap-2">
-            <Icon name="material-symbols:thumb-down-outline-rounded" class="text-50 text-xl" />
-            向いていない方
-          </h3>
-          <ul class="flex flex-col gap-2.5">
-            {[
-              "AI ツールに触れたことがほぼ無い方（先に入門研修をお勧めします）",
-              "受講中に PC を使えない環境の方",
-              "1 回完結の「概要だけ」を求める方",
-            ].map((item) => (
-              <li class="flex items-start gap-2 text-base text-75">
-                <Icon name="material-symbols:close-rounded" class="text-50 mt-0.5 shrink-0 text-lg" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+	<section class="course-related">
+		<div class="course-shell course-related__panel">
+			<div>
+				<p class="course-kicker">RELATED SERVICES</p>
+				<h2>学んだ先で、社内AIとAI流入分析へつなげる。</h2>
+				<p>AIエージェントを扱う力を身につけたら、社内の記憶基盤づくりや、AIから読まれるサイト設計にも広げられます。</p>
+			</div>
+			<div class="course-related__links">
+				<a href="/">
+					<span>AIセントラル</span>
+					<strong>記憶を持ったAIを社内の中枢へ</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+				<a href="/aicrawl/">
+					<span>AIクロール</span>
+					<strong>AIからのサイト流入を分析する</strong>
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
+			</div>
+		</div>
+	</section>
 
-    <!-- ===== FAQ ===== -->
-    <div class="card-base px-6 md:px-9 py-7">
-      <div class="flex items-center gap-2 mb-5">
-        <Icon name="material-symbols:help-outline-rounded" class="text-2xl text-[var(--primary)]" />
-        <h2 class="text-2xl font-bold text-90">よくあるご質問</h2>
-      </div>
-      <div class="flex flex-col gap-3">
-        {faqs.map((item) => (
-          <details class="rounded-xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-900/20 px-5 py-4 shadow-sm group cursor-pointer">
-            <summary class="font-bold text-90 text-base flex items-center justify-between gap-3 list-none">
-              <span>{item.q}</span>
-              <Icon
-                name="material-symbols:expand-more-rounded"
-                class="text-[var(--primary)] text-xl shrink-0 transition-transform duration-200 group-open:rotate-180"
-              />
-            </summary>
-            <p class="text-base text-75 mt-3 leading-relaxed">{item.a}</p>
-          </details>
-        ))}
-      </div>
-    </div>
+	<section id="contact" class="course-final">
+		<div class="course-shell course-final__inner">
+			<p class="course-kicker">START WITH CONSULTATION</p>
+			<h2>AIに任せる、新しい働き方を。</h2>
+			<p>受講人数、助成金、業務テーマに合わせて、最初の進め方を整理します。</p>
+			<div class="course-actions">
+				<a href={consultationHref} class="course-button course-button--primary">無料相談を申し込む</a>
+				<a href="#price" class="course-button course-button--secondary">料金を見る</a>
+			</div>
+		</div>
+	</section>
+</LandingLayout>
 
-    <!-- ===== CTA ===== -->
-    <div class="card-base px-6 md:px-9 py-10 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-90 mb-3">まずは無料相談から</h2>
-      <p class="text-base text-75 mb-6 leading-relaxed">
-        受講人数・スケジュール・助成金の活用方法など、お気軽にご相談ください。<br />
-        ご質問への回答は通常 1〜2 営業日以内に行います。
-      </p>
-      <a
-        href={mailtoLink}
-        data-no-swup
-        class="inline-flex items-center gap-2 bg-[var(--primary)] text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition text-lg"
-      >
-        <Icon name="material-symbols:mail-outline-rounded" class="text-2xl" />
-        無料相談を申し込む
-      </a>
-      <p class="text-sm text-50 mt-5 leading-relaxed">
-        または直接：
-        <a href={mailtoLink} data-no-swup class="text-[var(--primary)] hover:underline font-medium">
-          info@effect.moe
-        </a>
-      </p>
-      <p class="text-sm text-50 mt-6 leading-relaxed">
-        株式会社EFFECT ／ 担当：シュ コウメイ
-      </p>
-    </div>
+<style>
+	:global(body) {
+		--course-navy: #0a192f;
+		--course-blue: #0056b3;
+		--course-cyan: #00c2ff;
+		--course-surface: #f8f9ff;
+		--course-card: #ffffff;
+		--course-line: rgba(116, 130, 154, 0.24);
+		--course-text: #0b1c30;
+		--course-muted: #4d5b70;
+	}
 
-  </div>
-</MainGridLayout>
+	.course-shell {
+		width: min(1180px, calc(100% - 40px));
+		margin: 0 auto;
+	}
 
-<script is:inline>
-  // 「コピー」ボタン: data-email 属性のアドレスをクリップボードへ
-  // Swup 遷移後にも再バインドするため、page:view と DOMContentLoaded の両方に登録
-  function initEmailCopyButtons() {
-    document.querySelectorAll('.copy-email-btn').forEach((btn) => {
-      if (btn.dataset.bound) return;
-      btn.dataset.bound = '1';
-      btn.addEventListener('click', async () => {
-        const email = btn.getAttribute('data-email') || '';
-        const original = btn.textContent;
-        try {
-          await navigator.clipboard.writeText(email);
-          btn.textContent = '✓ コピー済み';
-          setTimeout(() => { btn.textContent = original; }, 1800);
-        } catch (e) {
-          // フォールバック: 古いブラウザ向け
-          const tmp = document.createElement('textarea');
-          tmp.value = email; document.body.appendChild(tmp);
-          tmp.select(); document.execCommand('copy'); tmp.remove();
-          btn.textContent = '✓ コピー済み';
-          setTimeout(() => { btn.textContent = original; }, 1800);
-        }
-      });
-    });
-  }
-  initEmailCopyButtons();
-  document.addEventListener('astro:page-load', initEmailCopyButtons);
-</script>
+	.course-hero {
+		position: relative;
+		overflow: hidden;
+		padding: 148px 0 76px;
+		background:
+			linear-gradient(135deg, rgba(10, 25, 47, 0.96), rgba(18, 58, 88, 0.9)),
+			radial-gradient(circle at 74% 22%, rgba(0, 194, 255, 0.36), transparent 34%);
+		color: #fff;
+	}
+
+	.course-hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+		background-size: 42px 42px;
+		mask-image: linear-gradient(to bottom, black, transparent 90%);
+		pointer-events: none;
+	}
+
+	.course-hero__grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(440px, 1fr);
+		gap: clamp(36px, 5vw, 72px);
+		align-items: center;
+	}
+
+	.course-kicker {
+		margin: 0 0 14px;
+		color: var(--course-cyan);
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+	}
+
+	.course-hero h1,
+	.course-section h2,
+	.course-final h2 {
+		margin: 0;
+		color: inherit;
+		font-size: clamp(38px, 5vw, 72px);
+		font-weight: 950;
+		line-height: 1.05;
+		letter-spacing: 0;
+	}
+
+	.course-lead {
+		margin: 22px 0 0;
+		font-size: clamp(22px, 2.3vw, 32px);
+		font-weight: 850;
+		line-height: 1.35;
+	}
+
+	.course-body {
+		max-width: 620px;
+		margin: 18px 0 0;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 17px;
+		font-weight: 650;
+		line-height: 1.9;
+	}
+
+	.course-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 30px;
+	}
+
+	.course-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 52px;
+		border-radius: 0.45rem;
+		padding: 0 22px;
+		font-size: 15px;
+		font-weight: 900;
+		text-decoration: none;
+		transition: transform 0.18s ease, box-shadow 0.18s ease;
+	}
+
+	.course-button svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.course-button:hover {
+		transform: translateY(-2px);
+	}
+
+	.course-button--primary {
+		background: #ffffff;
+		color: var(--course-navy);
+		box-shadow: 0 18px 48px rgba(0, 194, 255, 0.18);
+	}
+
+	.course-button--secondary {
+		border: 1px solid rgba(255, 255, 255, 0.42);
+		background: rgba(255, 255, 255, 0.08);
+		color: inherit;
+	}
+
+	.course-button--ghost {
+		border: 1px solid rgba(0, 180, 216, 0.28);
+		background: rgba(255, 255, 255, 0.04);
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.course-metrics {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1px;
+		margin-top: 36px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: 0.8rem;
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.course-metrics span {
+		display: grid;
+		gap: 4px;
+		padding: 16px;
+		background: rgba(255, 255, 255, 0.06);
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 12px;
+		font-weight: 750;
+	}
+
+	.course-metrics strong {
+		color: #fff;
+		font-size: 20px;
+	}
+
+	.agent-visual {
+		position: relative;
+		min-height: 520px;
+	}
+
+	.agent-window {
+		border: 1px solid rgba(154, 211, 255, 0.22);
+		background: rgba(6, 18, 34, 0.86);
+		box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28), 0 0 34px rgba(0, 194, 255, 0.12);
+		backdrop-filter: blur(16px);
+	}
+
+	.agent-window--main {
+		position: absolute;
+		inset: 32px 22px auto auto;
+		width: min(100%, 520px);
+		min-height: 330px;
+		border-radius: 0.75rem;
+	}
+
+	.agent-window__bar {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border-bottom: 1px solid rgba(154, 211, 255, 0.16);
+		padding: 14px;
+	}
+
+	.agent-window__bar span {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background: var(--course-cyan);
+		opacity: 0.78;
+	}
+
+	.agent-window__bar small {
+		margin-left: 10px;
+		color: rgba(255, 255, 255, 0.58);
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 12px;
+	}
+
+	.agent-board {
+		display: grid;
+		gap: 18px;
+		padding: 26px;
+	}
+
+	.agent-board__queue {
+		display: grid;
+		gap: 8px;
+		margin: 0;
+		border: 1px solid rgba(0, 194, 255, 0.18);
+		background:
+			linear-gradient(135deg, rgba(0, 194, 255, 0.16), rgba(255, 255, 255, 0.045)),
+			rgba(255, 255, 255, 0.055);
+		padding: 18px;
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.agent-board__queue span,
+	.agent-window--log strong,
+	.build-card__head span {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	.agent-board__queue strong {
+		color: #fff;
+		font-size: 19px;
+		line-height: 1.35;
+	}
+
+	.agent-board__queue small {
+		color: rgba(255, 255, 255, 0.62);
+		font-weight: 750;
+	}
+
+	.agent-board__grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 10px;
+	}
+
+	.agent-board__grid div {
+		display: grid;
+		gap: 8px;
+		border: 1px solid rgba(154, 211, 255, 0.16);
+		background: rgba(255, 255, 255, 0.055);
+		padding: 14px;
+	}
+
+	.agent-board__grid svg {
+		width: 24px;
+		height: 24px;
+		color: var(--course-cyan);
+	}
+
+	.agent-board__grid b {
+		color: #fff;
+		font-size: 17px;
+	}
+
+	.agent-board__grid small {
+		color: rgba(255, 255, 255, 0.56);
+		font-size: 12px;
+		font-weight: 800;
+	}
+
+	.agent-progress {
+		display: grid;
+		gap: 10px;
+	}
+
+	.agent-progress span {
+		display: block;
+		height: 8px;
+		overflow: hidden;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.12);
+	}
+
+	.agent-progress i {
+		display: block;
+		width: var(--bar, 60%);
+		height: 100%;
+		border-radius: inherit;
+		background: linear-gradient(90deg, #10b981, var(--course-cyan));
+	}
+
+	.agent-progress p {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.76);
+		font-size: 14px;
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	}
+
+	.agent-progress b {
+		color: var(--course-cyan);
+	}
+
+	.agent-window--log {
+		position: absolute;
+		bottom: 48px;
+		left: 0;
+		display: grid;
+		width: 320px;
+		gap: 12px;
+		border-radius: 0.65rem;
+		padding: 20px;
+	}
+
+	.agent-window--log strong {
+		font-size: 13px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.agent-window--log span {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		color: rgba(255, 255, 255, 0.8);
+		font-size: 13px;
+	}
+
+	.agent-window--log i {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #10b981;
+		box-shadow: 0 0 18px rgba(16, 185, 129, 0.75);
+	}
+
+	.agent-tools {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+		max-width: 430px;
+		gap: 10px;
+	}
+
+	.agent-tools span {
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 9px 13px;
+		color: #fff;
+		font-size: 12px;
+		font-weight: 900;
+	}
+
+	.course-section,
+	.course-final {
+		background: var(--course-surface);
+		color: var(--course-text);
+	}
+
+	.course-section {
+		padding: clamp(72px, 9vw, 126px) 0;
+	}
+
+	.course-section--surface {
+		background: #fff;
+	}
+
+	.course-section--navy {
+		background: var(--course-navy);
+		color: #fff;
+	}
+
+	.course-section h2,
+	.course-final h2 {
+		font-size: clamp(34px, 4vw, 56px);
+	}
+
+	.course-section p {
+		color: var(--course-muted);
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.85;
+	}
+
+	.course-section--navy p {
+		color: rgba(255, 255, 255, 0.72);
+	}
+
+	.split-message {
+		display: grid;
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+		gap: clamp(30px, 5vw, 64px);
+		align-items: start;
+	}
+
+	.before-after {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.before-after article,
+	.build-card,
+	.curriculum-card,
+	.instructor-card,
+	.faq-list details {
+		border: 1px solid var(--course-line);
+		background: var(--course-card);
+		box-shadow: 0 18px 48px rgba(10, 25, 47, 0.06);
+	}
+
+	.before-after article {
+		min-height: 290px;
+		border-radius: 0.85rem;
+		padding: 26px;
+	}
+
+	.lane-index {
+		display: grid;
+		place-items: center;
+		width: 52px;
+		height: 52px;
+		border: 1px solid rgba(0, 86, 179, 0.2);
+		background: #f3f8ff;
+		color: var(--course-blue);
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 22px;
+		font-weight: 950;
+	}
+
+	.lane-compare {
+		display: grid;
+		gap: 12px;
+		margin-top: 18px;
+	}
+
+	.lane-compare > svg {
+		width: 22px;
+		height: 22px;
+		color: var(--course-blue);
+	}
+
+	.lane-compare p {
+		margin: 0;
+		border-left: 3px solid rgba(0, 86, 179, 0.24);
+		background: #f7faff;
+		padding: 14px;
+		font-size: 14px;
+		line-height: 1.65;
+	}
+
+	.lane-compare p:last-child {
+		border-left-color: #10b981;
+		background: #f3fbf8;
+	}
+
+	.lane-compare span,
+	.price-card span {
+		display: block;
+		margin-bottom: 6px;
+		color: var(--course-blue);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.before-after h3,
+	.build-card h3,
+	.curriculum-card h3 {
+		margin: 14px 0 8px;
+		font-size: 24px;
+		font-weight: 950;
+	}
+
+	.section-heading {
+		max-width: 760px;
+		margin-bottom: 32px;
+	}
+
+	.build-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.build-card {
+		display: grid;
+		gap: 18px;
+		border-radius: 0.85rem;
+		padding: 24px;
+	}
+
+	.build-card__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+	}
+
+	.build-card__head svg {
+		width: 34px;
+		height: 34px;
+		color: var(--course-blue);
+	}
+
+	.build-card__head span {
+		color: rgba(77, 91, 112, 0.7);
+	}
+
+	.build-mini-ui {
+		display: grid;
+		gap: 8px;
+		min-height: 112px;
+		border: 1px solid rgba(0, 86, 179, 0.12);
+		background:
+			linear-gradient(90deg, rgba(0, 86, 179, 0.04) 1px, transparent 1px),
+			linear-gradient(rgba(0, 86, 179, 0.04) 1px, transparent 1px),
+			#f8fbff;
+		background-size: 22px 22px;
+		padding: 14px;
+	}
+
+	.build-mini-ui span {
+		display: flex;
+		align-items: center;
+		min-height: 28px;
+		border: 1px solid rgba(0, 86, 179, 0.14);
+		background: rgba(255, 255, 255, 0.82);
+		padding: 0 10px;
+		color: var(--course-navy);
+		font-size: 12px;
+		font-weight: 900;
+	}
+
+	.curriculum-list {
+		display: grid;
+		gap: 16px;
+	}
+
+	.curriculum-card {
+		display: grid;
+		grid-template-columns: 136px 1fr;
+		gap: 22px;
+		border-radius: 0.9rem;
+		padding: 22px;
+	}
+
+	.curriculum-card__index {
+		display: grid;
+		align-content: start;
+		gap: 8px;
+	}
+
+	.curriculum-card__index span {
+		color: var(--course-blue);
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 44px;
+		font-weight: 950;
+		line-height: 1;
+	}
+
+	.curriculum-card__index small {
+		color: var(--course-muted);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.14em;
+	}
+
+	.curriculum-card__cols {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.curriculum-card__cols p {
+		margin: 0;
+		border-radius: 0.65rem;
+		background: #f5f8ff;
+		padding: 14px;
+		font-size: 14px;
+	}
+
+	.curriculum-card__cols b {
+		display: block;
+		margin-bottom: 6px;
+		color: var(--course-navy);
+		font-size: 12px;
+	}
+
+	.price-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.7fr);
+		gap: 42px;
+		align-items: center;
+	}
+
+	.price-card {
+		display: grid;
+		gap: 1px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.14);
+		box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+	}
+
+	.price-card div,
+	.price-card p {
+		margin: 0;
+		background: rgba(255, 255, 255, 0.08);
+		padding: 24px;
+	}
+
+	.price-card strong {
+		display: block;
+		margin-top: 8px;
+		color: #fff;
+		font-size: clamp(38px, 5vw, 58px);
+		line-height: 1;
+	}
+
+	.price-card small {
+		display: block;
+		margin-top: 8px;
+		color: rgba(255, 255, 255, 0.64);
+		font-weight: 800;
+	}
+
+	.instructor-card {
+		display: grid;
+		grid-template-columns: minmax(220px, 0.38fr) minmax(0, 1fr);
+		gap: clamp(22px, 4vw, 44px);
+		align-items: center;
+		position: relative;
+		overflow: hidden;
+		border-radius: 1rem;
+		background:
+			radial-gradient(circle at 0% 0%, rgba(0, 86, 179, 0.09), transparent 32%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 255, 0.92));
+		padding: clamp(24px, 4vw, 40px);
+		box-shadow: 0 24px 70px rgba(10, 25, 47, 0.08);
+	}
+
+	.instructor-profile {
+		display: grid;
+		grid-template-columns: 86px 1fr;
+		gap: 16px;
+		align-items: center;
+		border: 1px solid rgba(0, 86, 179, 0.14);
+		border-radius: 0.9rem;
+		background: rgba(255, 255, 255, 0.78);
+		padding: 16px;
+	}
+
+	.instructor-profile__mark {
+		width: 86px;
+		height: 86px;
+		border: 1px solid rgba(0, 86, 179, 0.2);
+		border-radius: 999px;
+		object-fit: cover;
+		object-position: center top;
+		box-shadow: 0 14px 34px rgba(10, 25, 47, 0.1);
+	}
+
+	.instructor-profile span {
+		color: var(--course-blue);
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.13em;
+		text-transform: uppercase;
+	}
+
+	.instructor-profile strong {
+		display: block;
+		margin-top: 6px;
+		color: var(--course-navy);
+		font-size: 20px;
+		font-weight: 950;
+		line-height: 1.2;
+	}
+
+	.instructor-profile small {
+		display: inline-flex;
+		margin-top: 8px;
+		border-radius: 999px;
+		background: var(--course-navy);
+		padding: 6px 10px;
+		color: #fff;
+		font-size: 12px;
+		font-weight: 900;
+	}
+
+	.instructor-copy h2 {
+		max-width: 820px;
+	}
+
+	.instructor-proof-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 10px;
+		margin-top: 22px;
+	}
+
+	.instructor-proof-grid span {
+		display: grid;
+		place-items: center;
+		min-height: 76px;
+		border: 1px solid rgba(0, 86, 179, 0.14);
+		border-radius: 0.75rem;
+		background: #fff;
+		text-align: center;
+	}
+
+	.instructor-proof-grid b {
+		color: var(--course-navy);
+		font-size: clamp(20px, 2.4vw, 28px);
+		font-weight: 950;
+		line-height: 1;
+	}
+
+	.instructor-proof-grid small {
+		margin-top: 7px;
+		color: var(--course-muted);
+		font-size: 12px;
+		font-weight: 850;
+	}
+
+	.instructor-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 20px;
+		border-radius: 999px;
+		background: var(--course-blue);
+		padding: 12px 18px;
+		color: #fff;
+		font-size: 14px;
+		font-weight: 950;
+		text-decoration: none;
+		box-shadow: 0 16px 34px rgba(0, 86, 179, 0.18);
+	}
+
+	.instructor-link svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+		gap: 40px;
+	}
+
+	.faq-list {
+		display: grid;
+		gap: 12px;
+	}
+
+	.faq-list details {
+		border-radius: 0.8rem;
+		padding: 20px;
+	}
+
+	.faq-list summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		color: var(--course-navy);
+		font-size: 17px;
+		font-weight: 950;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq-list summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-list summary svg {
+		width: 22px;
+		height: 22px;
+		color: var(--course-blue);
+	}
+
+	.faq-list p {
+		margin: 14px 0 0;
+	}
+
+	.faq-hub-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-top: 8px;
+		border: 1px solid rgba(0, 86, 179, 0.24);
+		border-radius: 999px;
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(235, 244, 255, 0.94));
+		padding: 14px 18px;
+		color: var(--course-blue);
+		font-size: 15px;
+		font-weight: 900;
+		box-shadow: 0 16px 34px rgba(10, 25, 47, 0.08);
+	}
+
+	.faq-hub-link svg {
+		flex-shrink: 0;
+		font-size: 20px;
+	}
+
+	.course-related {
+		padding: 28px 0 84px;
+		background: var(--course-surface);
+	}
+
+	.course-related__panel {
+		display: grid;
+		grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+		gap: 22px;
+		align-items: stretch;
+		border: 1px solid rgba(0, 194, 255, 0.18);
+		border-radius: 26px;
+		background:
+			radial-gradient(circle at 90% 16%, rgba(0, 194, 255, 0.14), transparent 34%),
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 247, 255, 0.9));
+		padding: clamp(22px, 3vw, 34px);
+		box-shadow: 0 22px 54px rgba(10, 25, 47, 0.08);
+	}
+
+	.course-related h2 {
+		margin: 0;
+		color: var(--course-navy);
+		font-size: clamp(24px, 3vw, 36px);
+		font-weight: 950;
+		line-height: 1.24;
+	}
+
+	.course-related p {
+		margin: 14px 0 0;
+		color: var(--course-muted);
+		font-size: 15px;
+		font-weight: 650;
+		line-height: 1.8;
+	}
+
+	.course-related__links {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 14px;
+	}
+
+	.course-related__links a {
+		position: relative;
+		display: grid;
+		min-height: 138px;
+		align-content: space-between;
+		border: 1px solid rgba(0, 86, 179, 0.18);
+		border-radius: 20px;
+		background: rgba(255, 255, 255, 0.9);
+		padding: 20px;
+		color: var(--course-navy);
+		box-shadow: 0 16px 34px rgba(10, 25, 47, 0.07);
+		transition: transform 0.2s ease, border-color 0.2s ease;
+	}
+
+	.course-related__links a:hover {
+		transform: translateY(-2px);
+		border-color: rgba(0, 86, 179, 0.42);
+	}
+
+	.course-related__links span {
+		color: var(--course-blue);
+		font-size: 13px;
+		font-weight: 950;
+	}
+
+	.course-related__links strong {
+		display: block;
+		padding-right: 30px;
+		font-size: clamp(17px, 1.7vw, 21px);
+		font-weight: 950;
+		line-height: 1.42;
+	}
+
+	.course-related__links svg {
+		position: absolute;
+		right: 18px;
+		bottom: 18px;
+		color: var(--course-blue);
+		font-size: 24px;
+	}
+
+	.course-final {
+		padding: 92px 0 110px;
+	}
+
+	.course-final__inner {
+		border-radius: 1.1rem;
+		background: var(--course-navy);
+		padding: clamp(34px, 6vw, 72px);
+		color: #fff;
+		text-align: center;
+	}
+
+	.course-final p {
+		max-width: 680px;
+		margin: 16px auto 0;
+		color: rgba(255, 255, 255, 0.72);
+		font-weight: 750;
+		line-height: 1.8;
+	}
+
+	.course-final .course-actions {
+		justify-content: center;
+	}
+
+	@media (max-width: 980px) {
+		.course-hero__grid,
+		.split-message,
+		.price-grid,
+		.instructor-card,
+		.faq-grid,
+		.course-related__panel {
+			grid-template-columns: 1fr;
+		}
+
+		.course-related__links {
+			grid-template-columns: 1fr;
+		}
+
+		.agent-visual {
+			display: grid;
+			gap: 14px;
+			width: min(100%, 720px);
+			min-height: auto;
+			margin: 8px auto 0;
+		}
+
+		.agent-window--main,
+		.agent-window--log,
+		.agent-tools {
+			position: relative;
+			inset: auto;
+			width: 100%;
+			max-width: none;
+			margin: 0;
+		}
+
+		.agent-tools {
+			justify-content: center;
+		}
+
+		.build-grid,
+		.curriculum-card__cols,
+		.before-after {
+			grid-template-columns: 1fr;
+		}
+
+		.course-metrics {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 680px) {
+		.course-shell {
+			width: min(100% - 28px, 1180px);
+		}
+
+		.course-hero {
+			padding-top: 112px;
+		}
+
+		.before-after,
+		.curriculum-card {
+			grid-template-columns: 1fr;
+		}
+
+		.instructor-profile {
+			grid-template-columns: 76px 1fr;
+		}
+
+		.instructor-profile__mark {
+			width: 76px;
+			height: 76px;
+		}
+
+		.instructor-proof-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.instructor-link {
+			width: 100%;
+			justify-content: center;
+		}
+
+		.course-metrics {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

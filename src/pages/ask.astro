@@ -1,0 +1,71 @@
+---
+import { Icon } from "astro-icon/components";
+import LandingLayout from "../layouts/LandingLayout.astro";
+
+const contactEmail = "info@effect.moe";
+const mailtoSubject = encodeURIComponent("【AI相談】問い合わせ");
+const mailtoBody = encodeURIComponent(
+	`株式会社EFFECT 御中
+
+AI活用・LLMO・AIセントラルについて相談を希望します。
+
+■ 会社名・屋号：
+■ サイトURL（任意）：
+■ ご担当者さまのお名前：
+■ 相談したい内容：
+
+※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
+);
+const mailtoLink = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+---
+
+<LandingLayout
+	title="AI相談｜effect.moe"
+	description="AI活用、LLMO、AIセントラル、AI Crawlについて、シュ コウメイ / 株式会社EFFECTへ相談できます。"
+>
+	<section class="mx-auto grid max-w-7xl gap-8 px-4 py-16 md:grid-cols-[0.9fr_1.1fr] md:px-8 md:py-24">
+		<div>
+			<p class="text-sm font-bold tracking-[0.14em] text-[var(--primary)]">AI ASK</p>
+			<h1 class="mt-3 text-4xl font-bold leading-tight text-90 md:text-5xl">
+				AI活用・LLMO・AI構築の相談窓口
+			</h1>
+			<p class="mt-5 text-base leading-relaxed text-75">
+				旧 effect.moe のAIチャットは、バックエンド棚卸しと回答品質チェック後に再結線します。現時点では、人が内容を確認して返信する相談窓口として運用します。
+			</p>
+			<div class="mt-8 flex flex-wrap gap-3">
+				<a href={mailtoLink} data-no-swup class="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--primary)] px-6 py-3 font-bold text-white transition hover:opacity-90 sm:w-auto">
+					<Icon name="material-symbols:mail-outline-rounded" class="text-xl" />
+					メールで相談する
+				</a>
+				<a href="/#contact" class="inline-flex w-full items-center justify-center gap-2 rounded-md border border-[var(--primary)] px-6 py-3 font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)] sm:w-auto">
+					<Icon name="material-symbols:forum-outline-rounded" class="text-xl" />
+					無料相談へ
+				</a>
+			</div>
+		</div>
+		<div class="rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-5 dark:border-white/10">
+			<div class="rounded-lg bg-[var(--page-bg)] p-5">
+				<div class="flex items-center gap-3 border-b border-black/10 pb-4 dark:border-white/10">
+					<span class="grid size-10 place-items-center rounded-full bg-[var(--primary)] text-sm font-bold text-white">AI</span>
+					<div>
+						<p class="font-bold text-90">相談できること</p>
+						<p class="text-xs text-50">AIチャット再結線まではメール受付</p>
+					</div>
+				</div>
+				<div class="mt-5 grid gap-3">
+					{[
+						["AIセントラル", "記憶を持ったAIを業務の中枢に置きたい"],
+						["AI Crawl", "AI検索でどう見られているか知りたい"],
+						["LLMO / 記事", "AIに参照されるサイト・記事にしたい"],
+						["講座", "まずAI活用を学びながら進めたい"],
+					].map(([title, body]) => (
+						<div class="rounded-md border border-black/10 p-4 dark:border-white/10">
+							<p class="text-sm font-bold text-90">{title}</p>
+							<p class="mt-1 text-sm leading-relaxed text-75">{body}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+</LandingLayout>

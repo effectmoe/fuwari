@@ -1,0 +1,369 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section id="top" class="stitch-top-hero" aria-labelledby="effect-hero-title">
+	<div class="stitch-top-hero__inner">
+		<div class="stitch-top-hero__copy">
+			<p class="stitch-top-hero__kicker">AI CENTRAL DESIGN / KNOWLEDGE SYSTEM</p>
+			<h1 id="effect-hero-title">記憶を持ったAIを社内の中枢へ組み込むAIシステム</h1>
+			<p class="stitch-top-hero__lead">
+				社内資料・顧客情報・対応履歴・FAQを、管理された環境でAIが参照できる社内基盤へ整えます。流動する情報を時系列で管理し、次のアクションプランまで作成。社員や部署ごとの文脈を持ったAIが、検索・整理・作成・確認・分析を先に進め、人間は意思決定に集中できる状態をつくります。
+			</p>
+			<div class="stitch-top-hero__actions">
+				<a href="#contact" class="stitch-top-hero__primary">社内AI化の相談をする</a>
+				<a href="/author/" class="stitch-top-hero__secondary">設計者を見る</a>
+			</div>
+			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
+		</div>
+
+		<div class="stitch-top-hero__visual">
+			<div class="stitch-top-hero__image">
+				<picture>
+					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-v2-20260730.png" />
+					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
+				</picture>
+			</div>
+			<div class="stitch-top-hero__orchestrator" aria-label="AIセントラルの役割">
+				<div class="stitch-top-hero__orchestrator-head">
+					<Icon name="material-symbols:memory-alt-outline" />
+					<span>AI CENTRAL</span>
+					<strong>情報の流れを時系列で管理し、次の対応へつなげる</strong>
+				</div>
+				<div class="stitch-top-hero__orchestrator-grid">
+					<span><small>01</small>情報収集</span>
+					<span><small>02</small>分析・整理</span>
+					<span><small>03</small>提案・戦略</span>
+					<span><small>04</small>実行・改善</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.stitch-top-hero {
+		--stitch-bg: #fcf8f9;
+		--stitch-surface: #ffffff;
+		--stitch-surface-low: #f6f3f4;
+		--stitch-ink: #1c1b1c;
+		--stitch-muted: #4e4538;
+		--stitch-primary: #7b5807;
+		--stitch-primary-container: #b68c3c;
+		--stitch-on-primary-container: #3c2800;
+		--stitch-line: #e5e1da;
+		background: var(--stitch-bg);
+		color: var(--stitch-ink);
+	}
+
+	.stitch-top-hero__inner {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(34px, 4vw, 52px);
+		align-items: start;
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: clamp(92px, 10vw, 132px) 24px clamp(76px, 9vw, 120px);
+	}
+
+	.stitch-top-hero__copy {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.stitch-top-hero__kicker {
+		margin: 0 0 16px;
+		color: var(--stitch-primary);
+		font-size: 14px;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.stitch-top-hero h1 {
+		max-width: 1040px;
+		margin: 0 0 24px;
+		color: var(--stitch-ink);
+		font-size: clamp(40px, 5.2vw, 72px);
+		font-weight: 900;
+		letter-spacing: 0;
+		line-height: 1.08;
+	}
+
+	.stitch-top-hero__lead {
+		max-width: 860px;
+		margin: 0 0 32px;
+		color: var(--stitch-muted);
+		font-size: clamp(16px, 1.45vw, 18px);
+		font-weight: 500;
+		letter-spacing: 0;
+		line-height: 1.8;
+	}
+
+	.stitch-top-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+		margin-bottom: 24px;
+	}
+
+	.stitch-top-hero__actions a {
+		display: inline-flex;
+		min-height: 56px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		padding: 16px 32px;
+		font-size: 16px;
+		font-weight: 800;
+		line-height: 1.2;
+		text-decoration: none;
+		transition:
+			opacity 0.18s ease,
+			background 0.18s ease,
+			transform 0.18s ease;
+	}
+
+	.stitch-top-hero__actions a:hover {
+		transform: translateY(-1px);
+		opacity: 0.9;
+	}
+
+	.stitch-top-hero__primary {
+		background: var(--stitch-primary-container);
+		color: #ffffff;
+	}
+
+	.stitch-top-hero__secondary {
+		border: 1.5px solid var(--stitch-primary-container);
+		background: transparent;
+		color: var(--stitch-primary-container);
+	}
+
+	.stitch-top-hero__secondary:hover {
+		background: var(--stitch-surface-low);
+	}
+
+	.stitch-top-hero__note {
+		margin: 0;
+		color: #807666;
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0;
+		line-height: 1.6;
+	}
+
+	.stitch-top-hero__visual {
+		position: relative;
+		width: min(100%, 1180px);
+		margin: 0 auto;
+	}
+
+	.stitch-top-hero__image {
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+		border: 1px solid var(--stitch-line);
+		border-radius: 3rem;
+		background: var(--stitch-surface);
+		box-shadow: 0 18px 58px rgba(55, 38, 12, 0.11);
+	}
+
+	.stitch-top-hero__image::before {
+		content: "";
+		display: none;
+	}
+
+	.stitch-top-hero__image picture,
+	.stitch-top-hero__image img {
+		display: block;
+		width: 100%;
+	}
+
+	.stitch-top-hero__image img {
+		aspect-ratio: 2.1 / 1;
+		object-fit: cover;
+		object-position: center;
+		transform: scale(1.01);
+		transform-origin: center;
+	}
+
+	.stitch-top-hero__orchestrator {
+		position: absolute;
+		right: clamp(22px, 4vw, 54px);
+		bottom: -34px;
+		left: clamp(22px, 4vw, 54px);
+		z-index: 2;
+		border: 1px solid var(--stitch-line);
+		border-radius: 1.6rem;
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: 0 16px 44px rgba(11, 11, 12, 0.1);
+		padding: 14px;
+		backdrop-filter: blur(12px);
+	}
+
+	.stitch-top-hero__orchestrator-head {
+		display: grid;
+		grid-template-columns: auto auto 1fr;
+		align-items: center;
+		gap: 8px;
+		color: var(--stitch-primary);
+	}
+
+	.stitch-top-hero__orchestrator-head :global(svg) {
+		font-size: 28px;
+	}
+
+	.stitch-top-hero__orchestrator-head span {
+		color: var(--stitch-muted);
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		line-height: 1.2;
+	}
+
+	.stitch-top-hero__orchestrator-head strong {
+		color: var(--stitch-ink);
+		font-size: 14px;
+		font-weight: 900;
+		line-height: 1.25;
+	}
+
+	.stitch-top-hero__orchestrator-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 8px;
+		margin-top: 12px;
+	}
+
+	.stitch-top-hero__orchestrator-grid span {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		border: 1px solid rgba(210, 197, 178, 0.75);
+		border-radius: 999px;
+		background: #f6f3f4;
+		color: var(--stitch-muted);
+		padding: 8px 10px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: 800;
+		line-height: 1.25;
+	}
+
+	.stitch-top-hero__orchestrator-grid small {
+		color: var(--stitch-primary);
+		font-size: 10px;
+		font-weight: 900;
+		letter-spacing: 0.02em;
+		line-height: 1;
+	}
+
+	@media (max-width: 1023px) {
+		.stitch-top-hero__inner {
+			padding-top: 96px;
+			padding-bottom: 34px;
+		}
+
+		.stitch-top-hero__copy {
+			order: 1;
+		}
+
+		.stitch-top-hero__visual {
+			order: 2;
+			margin-bottom: 34px;
+		}
+
+		.stitch-top-hero__orchestrator {
+			bottom: -48px;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.stitch-top-hero__inner {
+			padding-inline: 18px;
+		}
+
+		.stitch-top-hero__visual {
+			width: min(100%, 680px);
+			margin-inline: auto;
+			margin-bottom: 0;
+		}
+
+		.stitch-top-hero__image {
+			border-radius: 2rem;
+		}
+
+		.stitch-top-hero__image::before {
+			display: block;
+			width: 0;
+			background: none;
+		}
+
+		.stitch-top-hero__image img {
+			aspect-ratio: 9 / 13;
+			object-fit: cover;
+			object-position: center top;
+			transform: none;
+		}
+
+		.stitch-top-hero__orchestrator {
+			position: relative;
+			left: auto;
+			right: auto;
+			bottom: auto;
+			box-sizing: border-box;
+			width: calc(100% - 20px);
+			margin: -82px auto 0;
+			padding: 12px;
+		}
+
+		.stitch-top-hero__orchestrator-head {
+			grid-template-columns: auto 1fr;
+			gap: 10px;
+		}
+
+		.stitch-top-hero__orchestrator-head span {
+			display: none;
+		}
+
+		.stitch-top-hero__orchestrator-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 7px;
+		}
+
+		.stitch-top-hero__orchestrator-grid span {
+			justify-content: center;
+			min-height: 42px;
+			padding: 9px 12px;
+			text-align: center;
+			font-size: 12px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.stitch-top-hero__actions {
+			display: grid;
+		}
+
+		.stitch-top-hero__actions a {
+			width: 100%;
+		}
+
+		.stitch-top-hero__orchestrator-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.stitch-top-hero__orchestrator-grid span {
+			justify-content: flex-start;
+			padding: 9px 14px;
+			text-align: left;
+			font-size: 13px;
+		}
+	}
+</style>

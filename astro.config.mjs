@@ -27,7 +27,7 @@ import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-cop
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://tony.effect.moe/",
+	site: "https://effect.moe/",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -51,7 +51,11 @@ export default defineConfig({
 			// （@swup/astro は linkSelector を受け付けず ignore オプションで指定する。
 			//   デフォルトのままだと mailto も SPA 遷移として捕まえてしまい、
 			//   ブラウザがメーラを起動できない不具合になる）
+			// 固定LP・ブログ・百科ページの間で <main> だけを差し替えると、
+			// ページ固有のHTML/CSS/JS適用タイミングがずれてコード片のような表示が
+			// 一瞬見えることがあるため、内部リンクは通常遷移に戻す。
 			ignore: [
+				'a[href^="/"]',
 				'a[href^="mailto:"]',
 				'a[href^="tel:"]',
 				'a[href^="javascript:"]',
@@ -67,6 +71,7 @@ export default defineConfig({
 				"fa6-brands": ["*"],
 				"fa6-regular": ["*"],
 				"fa6-solid": ["*"],
+				"simple-icons": ["*"],
 			},
 		}),
 		expressiveCode({
@@ -114,7 +119,12 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		sitemap(),
+		sitemap({
+			filter: (page) => {
+				const pathname = new URL(page).pathname;
+				return !pathname.startsWith("/admin/") && !pathname.startsWith("/ai-traffic-report/");
+			},
+		}),
 	],
 	markdown: {
 		remarkPlugins: [

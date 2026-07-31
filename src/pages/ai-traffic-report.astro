@@ -1,0 +1,1227 @@
+---
+/*
+ * ai-traffic-report.astro — AIアクセス分析 / AI検索支援 LP
+ * コンテンツ正本: wiki/EFFECT/strategy-ai-traffic-report-lp-copy-20260718.md
+ * 商品設計: wiki/EFFECT/strategy-ai-traffic-report-product-20260718.md
+ */
+import { Icon } from "astro-icon/components";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import InlineConversion from "../components/landing/InlineConversion.astro";
+
+const contactEmail = "info@effect.moe";
+const mailtoSubject = encodeURIComponent("【AIアクセス分析】無料スナップショット診断の申し込み");
+const mailtoBody = encodeURIComponent(
+	`株式会社EFFECT 御中
+
+AIアクセス分析の無料スナップショット診断を希望します。
+
+■ サイトURL：
+■ 会社名・屋号：
+■ ご担当者さまのお名前：
+■ 現在気になっていること：
+
+※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
+);
+const mailtoLink = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+const consultationSubject = encodeURIComponent("【AIアクセス分析】相談の申し込み");
+const consultationBody = encodeURIComponent(
+	`株式会社EFFECT 御中
+
+AIアクセス分析について相談を希望します。
+
+■ サイトURL：
+■ 会社名・屋号：
+■ ご担当者さまのお名前：
+■ ご相談内容：
+
+※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
+);
+const consultationLink = `mailto:${contactEmail}?subject=${consultationSubject}&body=${consultationBody}`;
+const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+const heroImage = "/lp/generated/bright-ai-search-analysis.png";
+const searchDesignImage = "/lp/generated/bright-workflow-knowledge-design.png";
+
+const engines = ["ChatGPT", "Claude", "Perplexity", "Gemini", "AI Overviews"];
+
+const visibilityReasons = [
+	{
+		title: "検索結果の入口が増えた",
+		body: "お客様が比較・検討する場所は Google の検索結果だけではありません。AIが候補を要約し、引用し、推薦する画面そのものが新しい入口になっています。",
+		icon: "material-symbols:travel-explore",
+	},
+	{
+		title: "引用されなければ、比較に入れない",
+		body: "AIが回答を作るときに参照できないサイトは、候補として名前が出ません。良い商品・良い記事があっても、AIの回答内では存在しない扱いになります。",
+		icon: "material-symbols:format-quote-outline",
+	},
+	{
+		title: "AIが読む情報が、第一印象になる",
+		body: "会社概要、料金、FAQ、実績、専門性。AIはページ全体から意味を拾います。人間向けの見た目だけでなく、AIが理解できる構造が必要です。",
+		icon: "material-symbols:psychology-alt-outline",
+	},
+];
+
+const perceptionReasons = [
+	["読めているか", "AIクローラーが403やrobots設定で止まっていないか"],
+	["何を拾われているか", "商品名・価格・対象者・強みが正しく理解されているか"],
+	["どう引用されるか", "AI回答内で、自社がどの文脈に置かれているか"],
+	["次に直す場所", "構造化データ、FAQ、記事、内部リンクのどこを優先するか"],
+];
+
+const steps = [
+	{ label: "知る", body: "無料スナップショット診断／LLMO健康診断で、まず現状を数字にします。", icon: "material-symbols:search" },
+	{ label: "直す", body: "AIに読まれない原因（ブロック・構造化データ不足）を是正します。", icon: "material-symbols:build-outline" },
+	{ label: "続ける", body: "直した後の変化を毎月モニタリングし、改善を積み上げます。", icon: "material-symbols:autorenew" },
+];
+
+const auditMap = [
+	{
+		label: "到達",
+		title: "AIクローラーが読めるか",
+		body: "robots、403、JavaScript依存、noindexなど、そもそもAIに読まれない原因を確認します。",
+		icon: "material-symbols:radar",
+	},
+	{
+		label: "理解",
+		title: "何の会社として認識されるか",
+		body: "商品名・対象者・料金・強み・FAQが、AIに誤解なく伝わる構造になっているか見ます。",
+		icon: "material-symbols:psychology-alt-outline",
+	},
+	{
+		label: "引用",
+		title: "回答内で候補に入るか",
+		body: "AI検索で比較候補に出るか、どの文脈で引用・推薦されるかを確認します。",
+		icon: "material-symbols:format-quote-outline",
+	},
+	{
+		label: "改善",
+		title: "次にどこを直すか",
+		body: "構造化データ、会社概要、サービスページ、FAQ、内部リンクの優先順位を整理します。",
+		icon: "material-symbols:build-outline",
+	},
+];
+
+const plans = [
+	{
+		name: "Light",
+		price: "¥12,800",
+		forWho: "まず自分で把握したい個人・小規模",
+		features: ["AI検索5エンジン別 流入/引用計測", "自動レポート", "初期費用0円"],
+		highlight: false,
+	},
+	{
+		name: "Standard",
+		price: "¥29,800",
+		forWho: "しっかり改善したい主力プラン",
+		features: ["AI検索5エンジン別 流入/引用計測", "AIクローラー到達チェック", "人の所見", "毎月1〜2点の改善アドバイス"],
+		highlight: true,
+	},
+	{
+		name: "Pro",
+		price: "¥78,000",
+		forWho: "複数サイト・代理店",
+		features: ["AI検索5エンジン別 流入/引用計測", "AIクローラー到達チェック", "改善ロードマップ", "四半期ごとの定例ミーティング"],
+		highlight: false,
+	},
+];
+
+const oneShotItems = [
+	["無料スナップショット診断", "¥0", "AIクローラーのブロック有無＋主要AI検索での自社名の出方を簡易チェック"],
+	["LLMO健康診断", "¥39,800", "詳細診断と是正ポイントを報告。ご契約時は診断料を初月分に全額充当"],
+	["構造化データ実装", "¥55,000〜", "AIが正しく読めるようサイトを整備（JSON-LD／Schema）"],
+];
+
+const faqs = [
+	["GA4を見ているので十分では？", "GA4はAI検索からの流入を自然検索に混ぜてしまい、区別できません。本サービスはそこを分離して可視化します。"],
+	["月数百円のツールと何が違うの？", "ツールは数字を出すまで。本サービスは人がその数字を読み、次の一手を言葉でお伝えします。"],
+	["途中でやめられますか？", "はい。月単位でご利用いただけます（解約条件は契約時にご案内）。"],
+];
+---
+
+<LandingLayout
+	title="AIアクセス分析｜AI検索での見え方と引用を毎月レポート｜effect.moe"
+	description="ChatGPT、Claude、Perplexity、Gemini、Google AI Overviews から自社サイトがどう見られ、引用され、アクセスにつながっているかを分析し、改善まで支援します。"
+>
+	<div class="ai-access-page">
+	<section class="ai-access-hero relative isolate overflow-hidden">
+		<img
+			src={heroImage}
+			alt="AI検索と業務データ分析を象徴するワークスペース"
+			class="ai-access-hero__image absolute inset-0 -z-20 h-full w-full object-cover"
+			loading="eager"
+			decoding="async"
+		/>
+		<div class="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-10 px-4 py-16 md:grid-cols-[0.95fr_1.05fr] md:px-8 md:py-20">
+			<div>
+				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI ACCESS ANALYSIS</p>
+				<h1 class="mt-4 max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+					あなたのサイト、<br />
+					AI検索に<span class="md:hidden"><br /></span>「載って」いますか？
+				</h1>
+				<p class="mt-6 max-w-2xl text-lg leading-relaxed text-75">
+					検索の入口は、もう Google だけではありません。
+				</p>
+				<p class="mt-4 max-w-2xl text-xl font-bold leading-relaxed text-90">
+					流入と引用を、数字で把握。
+				</p>
+				<div class="access-hero-route mt-7">
+					{[
+						["AIが読む", "構造・FAQ・料金"],
+						["AIが答える", "候補・比較・引用"],
+						["人が訪れる", "相談・診断・指名検索"],
+					].map((item) => (
+						<div>
+							<span>{item[0]}</span>
+							<strong>{item[1]}</strong>
+						</div>
+					))}
+				</div>
+				<div class="access-hero-actions mt-8 flex flex-wrap gap-3">
+					<a href={mailtoLink} data-no-swup style="background-color:#020617;color:#fff;" class="rounded-md px-6 py-3 font-bold transition hover:opacity-90">
+						無料スナップショット診断を受ける
+					</a>
+					<a href="#pricing" class="rounded-md border border-[var(--primary)] px-6 py-3 font-bold text-[var(--primary)] transition hover:bg-[var(--btn-plain-bg-hover)]">
+						料金を見る
+					</a>
+				</div>
+			</div>
+				<div class="access-hero-showcase">
+					<div class="access-search-frame">
+						<img src={searchDesignImage} alt="AI検索に参照される情報構造を設計している様子" loading="eager" decoding="async" />
+						<div>
+							<span>AI SEARCH SNAPSHOT</span>
+							<strong>AI検索での見られ方を可視化する。</strong>
+						</div>
+					</div>
+					<div class="access-answer-card">
+						<p class="text-xs font-bold tracking-[0.16em] text-blue-200">AI ANSWER PREVIEW</p>
+						<div class="mt-4 rounded-md bg-white p-4 text-slate-950 shadow-xl">
+						<p class="text-xs font-bold text-slate-500">User question</p>
+						<p class="mt-1 text-base font-bold">「この会社は何に強い？」</p>
+						<div class="mt-4 border-l-4 border-[var(--primary)] pl-4">
+							<p class="text-sm font-bold leading-relaxed">AIが候補・強み・料金・FAQを読み、比較前の第一印象を作る。</p>
+						</div>
+					</div>
+				</div>
+				<div class="ai-access-monitor rounded-md border border-black/10 bg-white/88 p-5 shadow-2xl backdrop-blur-xl">
+					<div class="flex items-center justify-between border-b border-slate-200 pb-4">
+						<p class="font-bold text-slate-950">AI Visibility Monitor</p>
+						<span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">Preview</span>
+					</div>
+					<div class="mt-5 grid gap-3">
+						{engines.map((engine, index) => (
+							<div class="grid grid-cols-[1fr_1.2fr_auto] items-center gap-3">
+								<p class="text-sm font-bold text-slate-950">{engine}</p>
+								<div class="h-3 overflow-hidden rounded-full bg-slate-100">
+									<div class={`h-full rounded-full ${index % 2 === 0 ? "bg-blue-600" : "bg-teal-600"}`} style={`width:${82 - index * 11}%`}></div>
+								</div>
+								<span class={`text-xs font-bold ${index === 3 ? "text-amber-600" : "text-emerald-700"}`}>{index === 3 ? "要確認" : "到達"}</span>
+							</div>
+						))}
+					</div>
+					<div class="mt-5 grid grid-cols-3 gap-2">
+						{["引用", "誤認", "改善"].map((label) => (
+							<div class="rounded-md bg-slate-50 p-3 text-center text-xs font-bold text-slate-700">{label}</div>
+						))}
+					</div>
+					<div class="access-signal-grid">
+						{[
+							["robots", "OK"],
+							["Schema", "要改善"],
+							["FAQ", "不足"],
+						].map((item) => (
+							<div>
+								<span>{item[0]}</span>
+								<strong>{item[1]}</strong>
+							</div>
+						))}
+					</div>
+					<p class="mt-4 text-xs text-slate-500">※ 表示はイメージです。実データを装ったグラフではありません。</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="access-media-strip border-b border-black/10 bg-white dark:border-white/10">
+		<div class="mx-auto grid max-w-7xl gap-5 px-4 py-8 md:grid-cols-[0.9fr_1.25fr_0.85fr] md:px-8 md:py-10">
+			<div class="access-media-tile is-photo">
+				<img src={searchDesignImage} alt="AI検索分析のための情報整理と設計の様子" loading="lazy" decoding="async" />
+				<div>
+					<p>AI検索は、検索順位の外側にある新しい入口です。</p>
+				</div>
+			</div>
+			<div class="access-media-tile is-prompt">
+				<p class="text-xs font-bold tracking-[0.16em] text-[var(--primary)]">AI SEARCH MOMENT</p>
+				<div class="mt-4 grid gap-3">
+					<div class="access-chat-bubble is-user">「この会社は何に強い？」</div>
+					<div class="access-chat-bubble is-ai">
+						<span>AIがサイトを読み、候補・強み・料金・FAQを要約する</span>
+					</div>
+				</div>
+				<div class="mt-5 grid grid-cols-3 gap-2">
+					{["引用", "比較", "指名検索"].map((label) => (
+						<div class="rounded-md bg-white/74 p-3 text-center text-xs font-bold text-90 shadow-sm">{label}</div>
+					))}
+				</div>
+			</div>
+			<div class="access-media-tile is-score">
+				<p class="text-xs font-bold text-50">REPORT PARTS</p>
+				<div class="mt-4 grid gap-3">
+					{[
+						["Crawl", "到達"],
+						["Quote", "引用"],
+						["Fix", "改善"],
+					].map((row, index) => (
+						<div class="grid grid-cols-[auto_1fr_auto] items-center gap-3">
+							<span class="grid size-8 place-items-center rounded-md bg-[var(--primary)]/10 text-xs font-bold text-[var(--primary)]">0{index + 1}</span>
+							<strong class="text-sm text-90">{row[0]}</strong>
+							<span class="text-xs font-bold text-75">{row[1]}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-b border-black/10 bg-[var(--page-bg)] dark:border-white/10">
+		<div class="mx-auto grid max-w-7xl gap-8 px-4 py-14 md:grid-cols-[0.72fr_1.28fr] md:items-center md:px-8 md:py-20">
+			<div>
+				<p class="text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI VISIBILITY MAP</p>
+				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-4xl">
+					AIからの見え方は、4つに分けて見る。
+				</h2>
+				<p class="mt-5 text-sm leading-relaxed text-75">
+					「AI検索に出るか」は、ひとつの数字だけでは判断できません。読めているか、理解されているか、引用されるか、次にどこを直すか。AIアクセス分析では、この4つを分けて確認します。
+				</p>
+				<div class="mt-7">
+					<a
+						href={mailtoLink}
+						data-no-swup
+						style="background-color:#020617;color:#fff;"
+						class="inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition hover:opacity-90 sm:w-auto"
+					>
+						<Icon name="material-symbols:search-rounded" class="text-xl" />
+						無料相談で見え方を確認する
+					</a>
+				</div>
+			</div>
+			<div class="rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:p-5">
+				<div class="grid gap-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+					<div class="grid gap-3 md:grid-cols-2">
+						{auditMap.map((item, index) => (
+							<div class="rounded-lg bg-[var(--card-bg)] p-4 shadow-sm">
+								<div class="flex items-center justify-between gap-3">
+									<p class="text-xs font-bold text-[var(--primary)]">{item.label} 0{index + 1}</p>
+									<Icon name={item.icon} class="text-3xl text-[var(--primary)]" />
+								</div>
+								<h3 class="mt-3 text-base font-bold text-90">{item.title}</h3>
+								<p class="mt-2 text-xs leading-relaxed text-75">{item.body}</p>
+							</div>
+						))}
+					</div>
+					<div class="rounded-lg bg-slate-950 p-5 text-white">
+						<p class="text-xs font-bold tracking-[0.14em] text-blue-200">MONTHLY LOOP</p>
+						<div class="mt-5 grid gap-3">
+							{["AI検索で質問する", "サイトがどう読まれるか見る", "引用・誤認・未到達を分類する", "次の修正に落とす"].map((label, index) => (
+								<div class="grid grid-cols-[auto_1fr] gap-3 rounded-md bg-white/10 p-3">
+									<span class="grid size-8 place-items-center rounded-full bg-white text-xs font-bold text-slate-950">0{index + 1}</span>
+									<p class="self-center text-sm font-bold text-white/88">{label}</p>
+								</div>
+							))}
+						</div>
+						<p class="mt-4 text-xs leading-relaxed text-white/52">※ AI検索の画面そのものではなく、改善判断のための分析モデルです。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<main class="ai-access-main mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 md:px-8 md:py-14">
+		<section class="access-reference-canvas overflow-hidden rounded-md border border-black/10 bg-white/92 dark:border-white/10">
+			<div class="mb-6 grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-end">
+				<div class="px-6 pt-7 md:px-9 md:pt-9">
+					<p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">CORE 01</p>
+					<h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">
+						なぜAIに、<br />
+						参照される必要があるのか。
+					</h2>
+				</div>
+				<p class="px-6 text-base leading-relaxed text-75 md:px-9 md:pt-9">
+					AI検索では、ユーザーが複数サイトを順番にクリックする前に、AIが候補を要約します。そこで参照されない会社は、比較検討の入口に立てません。
+				</p>
+			</div>
+			<div class="access-reference-board mx-4 mb-4 grid gap-4 rounded-md p-4 md:mx-6 md:mb-6 md:p-5 lg:grid-cols-[0.72fr_1.28fr]">
+				<div class="access-reference-board__left rounded-md bg-white p-5">
+					<p class="text-sm font-bold text-50">AI時代の検討導線</p>
+					<h3 class="mt-2 text-xl font-bold text-90">検索結果の前に、AI回答が比較表を作る。</h3>
+					<p class="mt-4 text-sm leading-relaxed text-75">見込み客が「おすすめは？」「違いは？」「どこに頼むべき？」と聞いた瞬間、AIは候補を絞り込みます。この回答の材料に入れなければ、問い合わせ前の比較に参加できません。</p>
+					<div class="mt-5 grid gap-3">
+						{visibilityReasons.map((reason) => (
+							<div class="reference-reason">
+								<Icon name={reason.icon} class="text-2xl text-[var(--primary)]" />
+								<div>
+									<p class="text-sm font-bold text-90">{reason.title}</p>
+									<p class="mt-1 text-xs leading-relaxed text-75">{reason.body}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+				<div class="reference-flow-canvas rounded-md bg-[#101820] p-4 text-white md:p-5">
+					<div class="grid gap-3 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-center">
+						{[
+							["質問", "「地域名 + サービス」で相談", "material-symbols:person-search-outline"],
+							["参照", "AIが読める情報を抽出", "material-symbols:plagiarism-outline"],
+							["要約", "候補・強み・料金を整理", "material-symbols:summarize-outline"],
+							["送客", "指名検索・問い合わせへ", "material-symbols:outbound-rounded"],
+						].map((node, index) => (
+							<>
+								<div class={`reference-flow-node ${index === 1 ? "is-active" : ""}`}>
+									<Icon name={node[2]} class="text-3xl" />
+									<p class="mt-3 text-xs font-bold text-white/55">STEP 0{index + 1}</p>
+									<p class="mt-1 text-base font-bold">{node[0]}</p>
+									<p class="mt-2 text-xs leading-relaxed text-white/68">{node[1]}</p>
+								</div>
+								{index < 3 && <div class="reference-flow-arrow"><Icon name="material-symbols:arrow-forward-rounded" class="text-3xl" /></div>}
+							</>
+						))}
+					</div>
+					<div class="mt-5 grid gap-3 md:grid-cols-[1fr_1.1fr]">
+						<div class="rounded-md border border-white/12 bg-white/8 p-4">
+							<p class="text-xs font-bold text-white/45">NOT REFERENCED</p>
+							<div class="mt-3 flex items-center gap-3">
+								<Icon name="material-symbols:visibility-off-outline" class="text-4xl text-white/45" />
+								<p class="text-sm font-bold text-white/82">存在していても、AI回答内では候補外になる</p>
+							</div>
+						</div>
+						<div class="rounded-md bg-white p-4 text-slate-950">
+							<p class="text-xs font-bold text-blue-700">REFERENCED</p>
+							<div class="mt-3 grid grid-cols-5 gap-2">
+								{engines.map((engine) => (
+									<div class="rounded-md bg-slate-100 p-2 text-center text-[11px] font-bold text-slate-700">{engine}</div>
+								))}
+							</div>
+							<p class="mt-3 text-sm font-bold">複数AIの回答に、正しい文脈で出る状態を目指す。</p>
+						</div>
+					</div>
+					<div class="reference-proof-strip mt-5 grid gap-3 md:grid-cols-3">
+						{[
+							["Entity", "会社・人物・サービス名が一貫している"],
+							["Evidence", "実績・料金・FAQ・著者情報が読める"],
+							["Structure", "Schema / 内部リンク / 見出しが整理されている"],
+						].map((item) => (
+							<div>
+								<p class="text-[11px] font-bold text-white/42">{item[0]}</p>
+								<p class="mt-1 text-sm font-bold leading-relaxed text-white/86">{item[1]}</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<InlineConversion
+			consultationHref={consultationLink}
+			consultationLabel="無料相談"
+			title="AIに参照される入口があるか、無料相談で確認します。"
+			body="主要AI検索での出方、引用されやすさ、読まれない原因の有無を整理します。"
+		/>
+
+		<section class="access-perception-canvas overflow-hidden rounded-md border border-black/10 bg-white/92 dark:border-white/10">
+			<div class="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
+				<div class="access-perception-copy p-6 md:p-9">
+					<p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">CORE 02</p>
+					<h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">
+						なぜ自分のサイトが、<br />
+						AIからどう見られているかを<br />
+						把握する必要があるのか。
+					</h2>
+					<p class="mt-5 text-base leading-relaxed text-75">
+						AIにどう見られているかを知らないまま改善するのは、暗闇で看板を書き直すようなものです。まず「読めているか」「何を拾われているか」「どう引用されるか」を分けて見る必要があります。
+					</p>
+					<div class="mt-6 grid gap-3">
+						{perceptionReasons.map((row, index) => (
+							<div class="perception-check-row">
+								<span class="grid size-8 place-items-center rounded-full bg-white text-xs font-bold text-[var(--primary)]">0{index + 1}</span>
+								<div>
+									<p class="text-sm font-bold text-90">{row[0]}</p>
+									<p class="mt-1 text-xs leading-relaxed text-75">{row[1]}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+				<div class="p-6 md:p-9">
+					<div class="ai-view-console rounded-md border border-black/10 bg-white p-5 dark:border-white/10">
+						<div class="flex items-center justify-between border-b border-black/10 pb-4 dark:border-white/10">
+							<p class="font-bold text-90">AIからの見られ方 分析</p>
+							<span class="rounded-full bg-[var(--primary)]/10 px-3 py-1 text-xs font-bold text-[var(--primary)]">Monthly</span>
+						</div>
+						<div class="mt-5 grid gap-4">
+							<div class="ai-view-console__matrix">
+								{[
+									["Crawl", "到達できるか", "robots / 403 / JS依存", "material-symbols:radar"],
+									["Entity", "誰の何のサイトか", "会社・人物・商品", "material-symbols:account-tree-outline"],
+									["Proof", "信頼材料があるか", "実績・FAQ・著者情報", "material-symbols:verified-user-outline"],
+									["Quote", "どう引用されるか", "強み・料金・対象者", "material-symbols:format-quote-outline"],
+								].map((item, index) => (
+									<div class={`ai-view-console__cell ${index === 0 || index === 2 ? "is-warm" : ""}`}>
+										<Icon name={item[3]} class="text-2xl text-[var(--primary)]" />
+										<p class="mt-2 text-[11px] font-bold text-50">{item[0]}</p>
+										<p class="mt-1 text-sm font-bold text-90">{item[1]}</p>
+										<p class="mt-1 text-xs leading-relaxed text-75">{item[2]}</p>
+									</div>
+								))}
+							</div>
+							<div class="overflow-hidden rounded-lg border border-black/10 dark:border-white/10">
+								<div class="grid grid-cols-[0.8fr_1fr_1fr] bg-[var(--btn-plain-bg)] text-xs font-bold text-50">
+									<div class="p-3">見えること</div>
+									<div class="p-3">見ない場合</div>
+									<div class="p-3 text-[var(--primary)]">見る場合</div>
+								</div>
+								{[
+									["ブロック", "403に気づかない", "読めない原因を直せる"],
+									["引用文脈", "誤った強みで認識される", "伝えたい強みに寄せられる"],
+									["改善順", "記事を闇雲に増やす", "構造・FAQ・内部リンクから直す"],
+								].map((row) => (
+									<div class="grid grid-cols-[0.8fr_1fr_1fr] border-t border-black/5 text-sm dark:border-white/5">
+										<div class="p-3 font-bold text-90">{row[0]}</div>
+										<div class="p-3 text-75">{row[1]}</div>
+										<div class="bg-[var(--btn-plain-bg)] p-3 font-bold text-90">{row[2]}</div>
+									</div>
+								))}
+							</div>
+						</div>
+						<p class="mt-4 text-xs text-50">※ グラフ・ゲージは説明用イメージです。実データを装った表示ではありません。</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<InlineConversion
+			consultationHref={consultationLink}
+			consultationLabel="無料相談"
+			title="AIからの見られ方を、あなたのサイトで確認します。"
+			body="403ブロック、引用文脈、改善順を見て、何から直すべきかを整理します。"
+		/>
+
+		<section class="access-loop-canvas rounded-md border border-black/10 bg-white/92 px-6 py-7 dark:border-white/10 md:px-9">
+			<div class="grid gap-5 md:grid-cols-[0.78fr_1.22fr] md:items-end">
+				<div>
+					<p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">MONTHLY IMPROVEMENT</p>
+					<h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">AI検索での見え方を、毎月レポートで見える化。</h2>
+				</div>
+				<p class="text-base leading-relaxed text-75">一度見て終わりではなく、AIの回答・サイト構造・検索体験の変化を毎月追い、改善の順番を明確にします。</p>
+			</div>
+			<div class="access-loop-track mt-6 grid gap-4 md:grid-cols-3">
+				{steps.map((step, index) => (
+					<div class="access-loop-step">
+						<div class="flex items-center gap-3">
+							<span class="grid size-10 place-items-center rounded-md bg-white text-sm font-bold text-[var(--primary)]">0{index + 1}</span>
+							<Icon name={step.icon} class="text-3xl text-[var(--primary)]" />
+						</div>
+						<h3 class="mt-4 text-xl font-bold text-90">{step.label}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-75">{step.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<InlineConversion
+			consultationHref={consultationLink}
+			consultationLabel="無料相談"
+			title="知る・直す・続けるのどこから入るか決められます。"
+			body="無料相談から始め、必要な場合だけLLMO健康診断・構造化データ実装・月額レポートへ進めます。"
+		/>
+
+		<section class="access-pricing-canvas rounded-md border border-black/10 bg-white/92 px-6 py-7 dark:border-white/10 md:px-9" id="pricing">
+			<div class="grid gap-5 md:grid-cols-[0.7fr_1.3fr] md:items-end">
+				<div>
+					<p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">PRICE MAP</p>
+					<h2 class="text-2xl font-bold text-90 md:text-4xl">料金</h2>
+				</div>
+				<p class="text-base leading-relaxed text-75">料金を明示します。最初から分かる金額で、納得して始めていただくためです。</p>
+			</div>
+			<div class="access-entry-map mt-6 grid gap-3 rounded-md p-4 md:grid-cols-3">
+				{[
+					["まず知る", "無料スナップショット診断", "AI検索で名前が出るか、AIクローラーが読めるかを見る"],
+					["一度直す", "LLMO健康診断 / 構造化実装", "読めない・伝わらない原因をスポットで直す"],
+					["毎月見る", "AIアクセス分析", "AI検索の見え方と改善点を継続的に追う"],
+				].map((row, index) => (
+					<div class="access-entry-item">
+						<p class="text-xs font-bold text-[var(--primary)]">入口 0{index + 1}</p>
+						<p class="mt-2 text-base font-bold text-90">{row[0]}</p>
+						<p class="mt-1 text-sm font-bold text-75">{row[1]}</p>
+						<p class="mt-2 text-xs leading-relaxed text-50">{row[2]}</p>
+					</div>
+				))}
+			</div>
+			<div class="mt-6 grid gap-4 md:grid-cols-3">
+				{plans.map((plan) => (
+					<div class={`access-plan-card relative ${plan.highlight ? "is-highlight" : ""}`}>
+						{plan.highlight && <span class="plan-badge absolute -top-3 left-5 rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-bold text-white">おすすめ</span>}
+						<p class="text-lg font-bold text-90">{plan.name}</p>
+						<p class="mt-2 text-3xl font-bold text-[var(--primary)]">{plan.price}<span class="text-sm text-50"> / 月</span></p>
+						<p class="mt-3 text-sm font-bold text-75">{plan.forWho}</p>
+						<details class="mt-5 rounded-lg border border-black/10 bg-[var(--card-bg)] px-4 py-3 dark:border-white/10">
+							<summary class="cursor-pointer list-none text-sm font-bold text-90">含まれるものを見る</summary>
+							<ul class="mt-3 flex flex-col gap-2 text-sm leading-relaxed text-75">
+								{plan.features.map((feature) => (
+									<li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="mt-0.5 shrink-0 text-lg text-[var(--primary)]" />{feature}</li>
+								))}
+							</ul>
+						</details>
+					</div>
+				))}
+			</div>
+			<div class="access-one-shot-table mt-6 overflow-hidden rounded-md border border-black/10 dark:border-white/10">
+				{oneShotItems.map((item) => (
+					<div class="grid gap-2 border-b border-black/5 p-4 last:border-b-0 dark:border-white/5 md:grid-cols-[0.9fr_0.45fr_1.65fr]">
+						<p class="font-bold text-90">{item[0]}</p>
+						<p class="font-bold text-[var(--primary)]">{item[1]}</p>
+						<p class="text-sm leading-relaxed text-75">{item[2]}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<InlineConversion
+			consultationHref={consultationLink}
+			consultationLabel="無料相談"
+			title="料金を見る前でも、見た後でも、無料相談から始められます。"
+			body="Light / Standard / Pro の判断に迷う場合も、まず現状を見てから決められます。"
+		/>
+
+		<section class="access-final-cta rounded-md px-6 py-8 text-white md:px-9">
+			<h2 class="text-2xl font-bold md:text-3xl">まず、無料で現状を知ってください。</h2>
+			<p class="mt-4 max-w-3xl text-base leading-relaxed text-white/72">
+				「うちはAI検索でどう見えているんだろう？」その答えを、無料スナップショット診断で数字にします。契約前提ではありません。
+			</p>
+			<div class="mt-6 flex flex-wrap gap-3">
+				<a href={mailtoLink} data-no-swup class="rounded-md bg-white px-6 py-3 font-bold text-slate-950 transition hover:bg-white/90">
+					無料スナップショット診断を申し込む
+				</a>
+				<a href={storacaProfileUrl} target="_blank" rel="noopener" data-no-swup class="rounded-md border border-white/35 px-6 py-3 font-bold text-white transition hover:bg-white/10">
+					シュ コウメイの講座を見る
+				</a>
+			</div>
+			<p class="mt-5 text-sm text-white/52">シュ コウメイ / AI開発・LLMO対策・システム開発　運営: 株式会社EFFECT / {contactEmail}</p>
+		</section>
+
+		<section class="access-faq-canvas rounded-md border border-black/10 bg-white/92 px-6 py-7 dark:border-white/10 md:px-9">
+			<div class="grid gap-5 md:grid-cols-[0.62fr_1.38fr]">
+				<div>
+					<p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">FAQ</p>
+					<h2 class="text-2xl font-bold text-90 md:text-4xl">よくあるご質問</h2>
+				</div>
+				<div class="flex flex-col gap-3">
+				{faqs.map((faq) => (
+					<details class="access-faq-item">
+						<summary class="cursor-pointer list-none text-base font-bold text-90">Q. {faq[0]}</summary>
+						<p class="mt-3 text-sm leading-relaxed text-75">{faq[1]}</p>
+					</details>
+				))}
+				</div>
+			</div>
+		</section>
+	</main>
+	</div>
+
+	<style>
+		.ai-access-page {
+			--access-ink: #101820;
+			--access-blue: #285d92;
+			--access-green: #4f7661;
+			--access-gold: #b78c2a;
+			background: #f7f8f4;
+			color: var(--access-ink);
+		}
+
+		.ai-access-hero {
+			background:
+				radial-gradient(circle at 82% 18%, rgba(40, 93, 146, 0.14), transparent 28%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 245, 243, 0.86) 48%, rgba(250, 246, 237, 0.9));
+		}
+
+		.ai-access-hero__image {
+			position: absolute;
+			inset: 0;
+			z-index: -2;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			opacity: 0.18;
+			filter: saturate(1.05) contrast(1.02);
+		}
+
+		.ai-access-hero::before {
+			position: absolute;
+			inset: 10% 0 auto;
+			height: 22rem;
+			content: "";
+			background: linear-gradient(115deg, rgba(40, 93, 146, 0.08), transparent 45%), linear-gradient(245deg, rgba(183, 140, 42, 0.1), transparent 50%);
+			clip-path: polygon(0 24%, 100% 0, 100% 72%, 0 100%);
+			pointer-events: none;
+		}
+
+		.ai-access-hero > div {
+			position: relative;
+			z-index: 1;
+		}
+
+		.ai-access-hero > div {
+			min-height: min(780px, calc(100vh - 128px));
+		}
+
+		.ai-access-monitor {
+			position: relative;
+			overflow: hidden;
+			box-shadow: 0 34px 86px rgba(23, 32, 51, 0.14);
+		}
+
+		.ai-access-monitor::after {
+			position: absolute;
+			right: -5rem;
+			bottom: -7rem;
+			width: 18rem;
+			height: 18rem;
+			content: "";
+			border-radius: 999px;
+			background: conic-gradient(from 180deg, rgba(40, 93, 146, 0.14), rgba(79, 118, 97, 0.14), rgba(183, 140, 42, 0.16), rgba(40, 93, 146, 0.14));
+		}
+
+		.ai-access-monitor > :global(*) {
+			position: relative;
+			z-index: 1;
+		}
+
+		.access-hero-showcase {
+			position: relative;
+			display: grid;
+			gap: 1rem;
+			align-self: center;
+		}
+
+		.access-hero-route {
+			display: grid;
+			max-width: 42rem;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.75rem;
+		}
+
+		.access-hero-route div {
+			position: relative;
+			border: 1px solid rgba(16, 24, 32, 0.1);
+			border-radius: 0.375rem;
+			background: rgba(255, 255, 255, 0.72);
+			padding: 0.9rem;
+			box-shadow: 0 14px 34px rgba(23, 32, 51, 0.08);
+			backdrop-filter: blur(14px);
+		}
+
+		.access-hero-route div:not(:last-child)::after {
+			position: absolute;
+			top: 50%;
+			right: -0.78rem;
+			width: 0.8rem;
+			height: 2px;
+			content: "";
+			background: var(--primary);
+		}
+
+		.access-hero-route span,
+		.access-signal-grid span {
+			display: block;
+			color: rgba(16, 24, 32, 0.52);
+			font-size: 0.7rem;
+			font-weight: 900;
+			letter-spacing: 0.1em;
+		}
+
+		.access-hero-route strong,
+		.access-signal-grid strong {
+			display: block;
+			margin-top: 0.25rem;
+			color: #101820;
+			font-size: 0.86rem;
+			line-height: 1.35;
+		}
+
+		.access-hero-showcase::before {
+			position: absolute;
+			inset: 12% auto auto 8%;
+			width: 18rem;
+			height: 18rem;
+			content: "";
+			border: 1px solid rgba(40, 93, 146, 0.18);
+			transform: rotate(-9deg);
+		}
+
+		.access-search-frame {
+			position: relative;
+			min-height: 18rem;
+			overflow: hidden;
+			border: 1px solid rgba(16, 24, 32, 0.12);
+			border-radius: 0.375rem;
+			box-shadow: 0 34px 84px rgba(23, 32, 51, 0.16);
+		}
+
+		.access-search-frame img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transform: scale(1.04);
+		}
+
+		.access-search-frame::after {
+			position: absolute;
+			inset: 0;
+			content: "";
+			background:
+				linear-gradient(180deg, rgba(16, 24, 32, 0.04), rgba(16, 24, 32, 0.68)),
+				radial-gradient(circle at 70% 26%, rgba(40, 93, 146, 0.28), transparent 35%);
+		}
+
+		.access-search-frame div {
+			position: absolute;
+			z-index: 1;
+			right: 1rem;
+			bottom: 1rem;
+			left: 1rem;
+			border-radius: 0.375rem;
+			background: rgba(255, 255, 255, 0.14);
+			padding: 1rem;
+			color: #fff;
+			backdrop-filter: blur(14px);
+		}
+
+		.access-search-frame span {
+			display: block;
+			color: rgba(255, 255, 255, 0.66);
+			font-size: 0.72rem;
+			font-weight: 900;
+			letter-spacing: 0.16em;
+		}
+
+		.access-search-frame strong {
+			display: block;
+			margin-top: 0.3rem;
+			font-size: 1.05rem;
+			line-height: 1.35;
+		}
+
+		.access-answer-card {
+			position: relative;
+			z-index: 2;
+			margin-top: -2rem;
+			margin-right: 4rem;
+			margin-left: 1rem;
+			border: 1px solid rgba(255, 255, 255, 0.22);
+			border-radius: 0.375rem;
+			background: #101820;
+			padding: 1rem;
+			color: #fff;
+			box-shadow: 0 28px 68px rgba(23, 32, 51, 0.18);
+		}
+
+		.access-hero-showcase .ai-access-monitor {
+			position: relative;
+			z-index: 1;
+			margin-top: -1rem;
+			margin-left: 3rem;
+		}
+
+		.access-signal-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.5rem;
+			margin-top: 1rem;
+		}
+
+		.access-signal-grid div {
+			border-radius: 0.375rem;
+			background: rgba(248, 250, 252, 0.9);
+			padding: 0.75rem;
+			box-shadow: inset 0 0 0 1px rgba(16, 24, 32, 0.06);
+		}
+
+		.access-media-strip {
+			position: relative;
+			background:
+				linear-gradient(90deg, rgba(255, 255, 255, 0.92), rgba(238, 245, 243, 0.86)),
+				#fff;
+		}
+
+		.access-media-strip::before {
+			position: absolute;
+			inset: 0;
+			content: "";
+			background:
+				linear-gradient(90deg, rgba(40, 93, 146, 0.07) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(40, 93, 146, 0.05) 1px, transparent 1px);
+			background-size: 38px 38px;
+			pointer-events: none;
+		}
+
+		.access-media-strip > :global(*) {
+			position: relative;
+			z-index: 1;
+		}
+
+		.access-media-tile {
+			position: relative;
+			min-height: 13rem;
+			overflow: hidden;
+			border: 1px solid rgba(16, 24, 32, 0.1);
+			border-radius: 0.375rem;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(247, 248, 244, 0.72)),
+				#fff;
+			padding: 1.25rem;
+			box-shadow: 0 18px 48px rgba(23, 32, 51, 0.07);
+		}
+
+		.access-media-tile.is-photo {
+			display: flex;
+			align-items: flex-end;
+			padding: 0;
+			color: #fff;
+		}
+
+		.access-media-tile.is-photo img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.access-media-tile.is-photo::after {
+			position: absolute;
+			inset: 0;
+			content: "";
+			background: linear-gradient(180deg, transparent, rgba(16, 24, 32, 0.72));
+		}
+
+		.access-media-tile.is-photo div {
+			position: relative;
+			z-index: 1;
+			padding: 1.25rem;
+			font-weight: 800;
+			line-height: 1.55;
+		}
+
+		.access-media-tile.is-prompt {
+			background:
+				linear-gradient(135deg, rgba(40, 93, 146, 0.12), rgba(183, 140, 42, 0.08)),
+				#eef4f1;
+		}
+
+		.access-chat-bubble {
+			width: fit-content;
+			max-width: 86%;
+			border-radius: 0.375rem;
+			padding: 0.85rem 1rem;
+			font-size: 0.9rem;
+			font-weight: 800;
+			line-height: 1.55;
+		}
+
+		.access-chat-bubble.is-user {
+			margin-left: auto;
+			background: #101820;
+			color: #fff;
+		}
+
+		.access-chat-bubble.is-ai {
+			background: rgba(255, 255, 255, 0.86);
+			color: #101820;
+			box-shadow: 0 12px 28px rgba(23, 32, 51, 0.08);
+		}
+
+		.access-media-tile.is-score {
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(250, 246, 237, 0.8)),
+				#fff;
+		}
+
+		.ai-access-main :global(.card-base) {
+			border-radius: 0.375rem;
+			border-color: rgba(16, 24, 32, 0.1);
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 248, 244, 0.76)),
+				var(--card-bg);
+			box-shadow: 0 22px 58px rgba(23, 32, 51, 0.07);
+		}
+
+		.access-reference-canvas,
+		.access-perception-canvas,
+		.access-loop-canvas,
+		.access-pricing-canvas,
+		.access-faq-canvas {
+			position: relative;
+			box-shadow: 0 24px 64px rgba(23, 32, 51, 0.07);
+		}
+
+		.access-reference-canvas::before,
+		.access-perception-canvas::before,
+		.access-pricing-canvas::before {
+			position: absolute;
+			inset: 0;
+			content: "";
+			background:
+				linear-gradient(90deg, rgba(40, 93, 146, 0.08) 1px, transparent 1px),
+				linear-gradient(180deg, rgba(40, 93, 146, 0.06) 1px, transparent 1px);
+			background-size: 42px 42px;
+			mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 72%);
+			pointer-events: none;
+		}
+
+		.access-reference-canvas > :global(*),
+		.access-perception-canvas > :global(*),
+		.access-pricing-canvas > :global(*) {
+			position: relative;
+			z-index: 1;
+		}
+
+		.access-reference-board,
+		.access-entry-map,
+		.access-loop-track {
+			background:
+				linear-gradient(135deg, rgba(40, 93, 146, 0.09), rgba(79, 118, 97, 0.08)),
+				#eef4f1;
+		}
+
+		.access-reference-board__left {
+			box-shadow: 0 16px 38px rgba(23, 32, 51, 0.08);
+		}
+
+		.reference-reason,
+		.perception-check-row {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			gap: 0.75rem;
+			align-items: start;
+			border: 1px solid rgba(16, 24, 32, 0.08);
+			border-radius: 0.375rem;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 0.875rem;
+		}
+
+		.reference-flow-canvas {
+			box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+		}
+
+		.reference-flow-node {
+			min-height: 11rem;
+			border-radius: 0.375rem;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.08);
+			padding: 1rem;
+		}
+
+		.reference-flow-node.is-active {
+			background: #fff;
+			color: #101820;
+		}
+
+		.reference-flow-arrow {
+			display: grid;
+			place-items: center;
+			color: rgba(255, 255, 255, 0.45);
+		}
+
+		.reference-proof-strip {
+			border-top: 1px solid rgba(255, 255, 255, 0.12);
+			padding-top: 1rem;
+		}
+
+		.reference-proof-strip > :global(div) {
+			border-left: 2px solid rgba(255, 255, 255, 0.22);
+			padding-left: 0.875rem;
+		}
+
+		.access-perception-copy {
+			background:
+				linear-gradient(145deg, rgba(40, 93, 146, 0.12), rgba(183, 140, 42, 0.08)),
+				#f3f6f1;
+		}
+
+		.ai-view-console {
+			box-shadow: 0 18px 46px rgba(23, 32, 51, 0.09);
+		}
+
+		.ai-view-console__matrix {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.75rem;
+		}
+
+		.ai-view-console__cell {
+			min-height: 8.5rem;
+			border-radius: 0.375rem;
+			background: #f4f7f6;
+			padding: 1rem;
+		}
+
+		.ai-view-console__cell.is-warm {
+			background: #fbf6e8;
+		}
+
+		.access-loop-step,
+		.access-entry-item,
+		.access-plan-card {
+			border-radius: 0.375rem;
+			border: 1px solid rgba(16, 24, 32, 0.09);
+			background: rgba(255, 255, 255, 0.84);
+			padding: 1.25rem;
+			box-shadow: 0 14px 34px rgba(23, 32, 51, 0.06);
+		}
+
+		.access-loop-step {
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.72)),
+				transparent;
+		}
+
+		.access-plan-card.is-highlight {
+			border: 2px solid var(--primary);
+			background:
+				linear-gradient(160deg, rgba(40, 93, 146, 0.1), rgba(79, 118, 97, 0.06)),
+				#fff;
+			transform: translateY(-0.35rem);
+		}
+
+		.plan-badge {
+			box-shadow: 0 8px 18px rgba(23, 32, 51, 0.16);
+		}
+
+		.access-one-shot-table {
+			background: #fff;
+		}
+
+		.access-final-cta {
+			position: relative;
+			overflow: hidden;
+			background:
+				linear-gradient(120deg, rgba(40, 93, 146, 0.38), transparent 48%),
+				linear-gradient(280deg, rgba(183, 140, 42, 0.25), transparent 44%),
+				#101820;
+		}
+
+		.access-final-cta::after {
+			position: absolute;
+			inset: auto -6rem -8rem auto;
+			width: 22rem;
+			height: 22rem;
+			content: "";
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			transform: rotate(18deg);
+		}
+
+		.access-final-cta > :global(*) {
+			position: relative;
+			z-index: 1;
+		}
+
+		.access-faq-item {
+			border-radius: 0.375rem;
+			border: 1px solid rgba(16, 24, 32, 0.09);
+			background: rgba(255, 255, 255, 0.78);
+			padding: 1rem 1.25rem;
+		}
+
+		@media (max-width: 767px) {
+			.ai-access-hero > div {
+				min-height: auto;
+				max-width: 100vw;
+				overflow: hidden;
+			}
+
+			.ai-access-hero > div > * {
+				min-width: 0;
+			}
+
+			.ai-access-hero h1 {
+				font-size: 2.4rem;
+			}
+
+			.ai-access-hero p,
+			.access-search-frame strong,
+			.access-answer-card p {
+				overflow-wrap: anywhere;
+				word-break: break-word;
+				line-break: anywhere;
+			}
+
+			.access-hero-actions {
+				display: grid;
+				grid-template-columns: 1fr;
+			}
+
+			.access-hero-actions a {
+				width: 100%;
+				justify-content: center;
+				text-align: center;
+			}
+
+			.access-hero-showcase {
+				margin-top: 1rem;
+				min-width: 0;
+				max-width: calc(100vw - 2rem);
+			}
+
+			.access-hero-showcase::before {
+				display: none;
+			}
+
+			.access-hero-route,
+			.access-signal-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.access-hero-route div:not(:last-child)::after {
+				display: none;
+			}
+
+			.access-search-frame {
+				min-height: 15rem;
+			}
+
+			.access-answer-card {
+				margin-top: -2rem;
+				margin-right: 0;
+				margin-left: 0;
+			}
+
+			.access-hero-showcase .ai-access-monitor {
+				margin-top: -0.35rem;
+				margin-left: 0;
+			}
+
+			.reference-flow-node {
+				min-height: auto;
+			}
+
+			.reference-flow-arrow {
+				transform: rotate(90deg);
+			}
+
+			.ai-view-console__matrix {
+				grid-template-columns: 1fr;
+			}
+
+			.access-plan-card.is-highlight {
+				transform: none;
+				padding-top: 2.45rem;
+			}
+
+			.plan-badge {
+				top: 0.9rem;
+				left: 1rem;
+			}
+		}
+	</style>
+</LandingLayout>

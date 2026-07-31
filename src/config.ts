@@ -11,8 +11,8 @@ import { LinkPreset } from "./types/config";
 import storacaStats from "./data/storaca-stats.json";
 
 export const siteConfig: SiteConfig = {
-	title: "構造化脳ブログ",
-	subtitle: "AI開発・LLMO・知識管理を構造化で攻略",
+	title: "effect.moe",
+	subtitle: "AIに選ばれる会社へ。AIが働く現場へ。",
 	lang: "ja", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 220, // Deep navy / steel blue — AI軍師ブランドを象徴する落ち着いた色
@@ -39,31 +39,50 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
 	links: [
-		LinkPreset.Home,
-		LinkPreset.Archive,
-		LinkPreset.About,
 		{
-			name: "FAQ",
-			url: "/faq/",
-		},
-		{
-			name: "構造化",
-			url: "/dfb-complete-guide/",
-		},
-		{
-			name: "AI講座",
-			url: "/ai-agent-course/",
+			name: "ホーム",
+			url: "/",
 		},
 		{
 			name: "AIセントラル",
 			url: "/ai-central/",
 		},
 		{
-			name: "ストアカ",
-			url: "https://www.street-academy.com/steachers/271053",
-			external: true,
+			name: "AIクロール",
+			url: "/aicrawl/",
+		},
+		{
+			name: "ブログ",
+			url: "/blog/",
+		},
+		{
+			name: "AI講座",
+			url: "/ai-agent-course/",
+		},
+		{
+			name: "会社概要",
+			url: "/company/",
+		},
+		{
+			name: "チェンジログ",
+			url: "/changelog/",
 		},
 	],
+};
+
+export const analyticsConfig = {
+	// GTM is the primary delivery layer. GA4 is configured inside this container.
+	googleTagManagerId:
+		import.meta.env.PUBLIC_GOOGLE_TAG_MANAGER_ID || "GTM-T9L3VSK2",
+	googleAnalyticsMeasurementId:
+		import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || "G-571MN39B7X",
+	// effect.moe is verified in Search Console as a DNS-verified Domain property
+	// (covers all subdomains/protocols), so the HTML tag method is not needed here.
+	googleSearchConsoleVerification:
+		import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+	// Microsoft Clarity project "effect.moe" (created 2026-08-01, owner: info@effect.moe)
+	microsoftClarityProjectId:
+		import.meta.env.PUBLIC_MICROSOFT_CLARITY_PROJECT_ID || "xv67ecazgl",
 };
 
 /* Substack メールマガ購読フォーム埋込 URL（サイドバープロフィール下に常設）
@@ -149,9 +168,6 @@ export const seoConfig = {
 		"AI軍師",
 		"Claude Code",
 		"シュ コウメイ",
-		"シュコウメイ",
-		"朱 剛明",
-		"朱剛明",
 	],
 	// Person JSON-LD knowsAbout（ストアカ講座群＝専門証明）
 	knowsAbout: [
@@ -196,17 +212,8 @@ export const seoConfig = {
 	},
 	// 著者の肩書（Person.jobTitle）
 	jobTitle: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント",
-	// 表記揺れ吸収（検索クエリ・JSON-LD `Person.alternateName`）
-	// - カタカナ: スペース有/無 両方
-	// - 漢字（本名）: スペース有/無 両方
-	// - 通称: AI軍師
-	// ⚠️ ここは SEO 検索メタデータ専用。対外メール署名は「シュ コウメイ」固定（CLAUDE.md ルール）
-	alternateName: [
-		"シュコウメイ",
-		"朱 剛明",
-		"朱剛明",
-		"AI軍師",
-	],
+	// 表記はブランド規約に合わせて「シュ コウメイ」に統一する。
+	alternateName: [],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
 	// 数値は storaca-stats.json から直接 import（LaunchAgent が毎日 06:00 自動更新）
@@ -221,7 +228,7 @@ export const seoConfig = {
 		repeatRate: `${storacaStats.repeatRate}%`,
 		periodStart: "2024-08", // 実際の講師登録月（管理画面の2019はプラットフォーム起点で誤り）
 		activeSince: "2024年8月", // 表示用：登録2年弱でこの実績＝スピード訴求
-		badge: "ストアカ プラチナランク（2026年7月よりProランク昇格）",
+		badge: "ストアカ プロランク（最高レベル）",
 		profileUrl: "https://www.street-academy.com/steachers/271053",
 		reviewUrl: "https://www.street-academy.com/steachers/271053#review",
 		// 受講生レビュー（最新 13 件・公開ページ /steachers/271053#review から自動取得）
@@ -377,7 +384,7 @@ export const faqConfig = {
 			a: "はい。むしろ初心者の方こそ対象です。私の講座やこのブログでは、テクニックを教える前に「なぜそうなるのか」という仕組みから、専門用語をかみくだいて説明することを大切にしています。実際、受講生レビューでも「難しい言葉を使わないので、機械が苦手な私でも分かった」という声を多くいただいています。分からないところは、理解が追いつくまで根気よく一緒に進めますので、安心してください。",
 			links: [
 				{ label: "著者の教え方・実績を見る", href: "/author/" },
-				{ label: "受講生の声（評価4.94／210件）", href: "/about/" },
+				{ label: `受講生の声（評価${storacaStats.ratingValue}／${storacaStats.reviewCount}件）`, href: "/about/" },
 			],
 		},
 		{
@@ -406,7 +413,7 @@ export const faqConfig = {
 		},
 		{
 			q: "講座はどこで受けられますか？",
-			a: "スキルシェア最大手「ストアカ」で開講しています。2024年8月の登録から約2年で、累計受講435人・レビュー210件・評価4.94（5点満点）・プラチナランクの実績があります。各記事の最後に、その内容に関連する講座へのリンクを自動で置いているので、興味を持ったテーマからそのまま受講できます。",
+			a: `スキルシェア最大手「ストアカ」で開講しています。2024年8月の登録から約2年で、累計受講${storacaStats.studentsTaught}人・レビュー${storacaStats.reviewCount}件・評価${storacaStats.ratingValue}（5点満点）・プロランク（最高レベル）の実績があります。各記事の最後に、その内容に関連する講座へのリンクを自動で置いているので、興味を持ったテーマからそのまま受講できます。`,
 			links: [
 				{ label: "ストアカ講師ページ", href: "https://www.street-academy.com/steachers/271053" },
 				{ label: "著者の実績・経歴", href: "/author/" },

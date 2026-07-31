@@ -1,0 +1,17 @@
+{
+  "$schema": "hero-image-pipeline/manifest@1",
+  "images": [
+    {
+      "slot": "hero-a",
+      "model": "gpt_image_2",
+      "aspect": "16:9",
+      "client": "EFFECT",
+      "ref_upload_id": "",
+      "prompt_file": "./tools-generated/hero-prompts/effect-hero-a.md",
+      "remote_url": "https://d8j0ntlcm91z4.cloudfront.net/user_364HLwjlcbMf1wHzpKPemSEoWHC/hf_20260726_063858_e09d79a9-2388-49b2-ac29-6c45c61a751b.png",
+      "local_path": "./tools-generated/effect-hero-a.png",
+      "size_bytes": 5109896,
+      "generated_at": "2026-07-26T06:40:47Z"
+    }
+  ]
+}

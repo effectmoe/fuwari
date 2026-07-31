@@ -1,0 +1,480 @@
+---
+---
+<div id="ai-chat" class="flex flex-col">
+  <!-- Label -->
+  <div class="mb-4 flex items-center gap-3 lg:mb-6">
+    <span class="font-mono text-[11px] tracking-[0.22em] text-black/60 uppercase">Ask Effect AI</span>
+    <span id="ai-status" class="inline-block h-1.5 w-1.5 rounded-full bg-black/20"></span>
+  </div>
+
+  <!-- Spacer: grows to push messages toward the input (only active in expanded mode) -->
+  <div id="ai-spacer"></div>
+
+  <!-- Conversation -->
+  <div id="ai-messages" class="space-y-4 overflow-y-auto pr-1 lg:space-y-5" style="scrollbar-width: none;"></div>
+
+  <!-- Initial greeting (hidden once chat starts) -->
+  <div id="ai-greeting" class="mt-1">
+    <p class="font-mono text-xs leading-[1.8] text-black/65">
+      LLMO（AI検索対策）・AI・Notionついてご質問ください。
+    </p>
+  </div>
+
+  <!-- Suggestions -->
+  <div id="ai-suggestions" class="mt-3 flex flex-wrap gap-x-3 gap-y-1 lg:mt-4 lg:gap-x-4">
+    <button class="ai-suggestion font-mono text-[11px] tracking-widest text-black/45 uppercase transition-colors hover:text-black">LLMOとは？</button>
+    <button class="ai-suggestion font-mono text-[11px] tracking-widest text-black/45 uppercase transition-colors hover:text-black">EFFECTに依頼するには</button>
+    <button class="ai-suggestion font-mono text-[11px] tracking-widest text-black/45 uppercase transition-colors hover:text-black">AIコンテンツ戦略</button>
+  </div>
+
+  <!-- Input (single border line only) -->
+  <div class="mt-4 flex items-center gap-3 border-b border-black/20 pb-2 lg:mt-6">
+    <input
+      id="ai-input"
+      type="text"
+      placeholder="質問を入力..."
+      maxlength="200"
+      class="flex-1 bg-transparent font-mono text-xs text-black outline-none placeholder:text-black/25"
+    />
+    <button id="ai-send" aria-label="送信" class="font-mono text-xs text-black/30 transition-colors hover:text-black">→</button>
+  </div>
+
+  <!-- Action row: shown after first response -->
+  <div id="ai-email-trigger" class="mt-4 hidden">
+    <div class="flex flex-wrap items-center gap-4">
+      <button id="ai-email-open"
+        class="inline-flex items-center gap-1.5 border border-black/20 px-3 py-1.5 font-mono text-[10px] tracking-widest text-black/55 uppercase transition-all hover:border-black/40 hover:text-black/80">
+        ログをメールで受け取る <span class="text-black/30">→</span>
+      </button>
+      <button id="ai-clear-btn"
+        class="font-mono text-[10px] tracking-widest text-black/30 uppercase transition-colors hover:text-black">
+        × クリアする
+      </button>
+    </div>
+  </div>
+  <div id="ai-email-section" class="mt-3 hidden">
+    <div class="flex items-center gap-2 border-b border-black/20 pb-2">
+      <input
+        id="ai-email-input"
+        type="email"
+        placeholder="メールアドレスを入力..."
+        class="flex-1 bg-transparent font-mono text-xs text-black outline-none placeholder:text-black/30"
+      />
+      <button id="ai-email-send-btn" class="font-mono text-xs text-black/40 transition-colors hover:text-black">→</button>
+    </div>
+    <p id="ai-email-status" class="mt-1.5 hidden font-mono text-[10px] text-black/40"></p>
+  </div>
+</div>
+
+<style>
+  @media (min-width: 1024px) {
+    #ai-messages { max-height: 240px; }
+  }
+  @media (max-width: 1023px) {
+    #ai-messages { max-height: 72px; }
+    #ai-chat { padding-bottom: 1rem; margin-bottom: 1.25rem; }
+  }
+
+  /* スクロールバー非表示 */
+  #ai-messages::-webkit-scrollbar { display: none; }
+  #ai-input::placeholder { color: rgba(0,0,0,0.25); }
+  #ai-input.animating::placeholder { color: rgba(0,0,0,0.35); }
+</style>
+
+<!-- 動的生成要素のスタイルは is:global で定義 -->
+<style is:global>
+  .ai-msg[data-role="user"] { display:flex; justify-content:flex-end; }
+  .ai-msg[data-role="user"] p { color:rgba(0,0,0,.82); text-align:right; }
+
+  /* AI リッチテキスト */
+  .ai-msg[data-role="assistant"] p { color:rgba(0,0,0,.72); font-size:.75rem; line-height:1.8; margin:.45em 0; }
+  .ai-msg[data-role="assistant"] p:first-child { margin-top:0; }
+  .ai-msg[data-role="assistant"] strong { font-weight:700; color:#0a0a0a; }
+  .ai-msg[data-role="assistant"] em { font-style:italic; }
+  .ai-msg[data-role="assistant"] h2,
+  .ai-msg[data-role="assistant"] h3,
+  .ai-msg[data-role="assistant"] h4 {
+    font-family:var(--font-roboto-mono),monospace; font-size:.65rem; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase; color:#0a0a0a;
+    border-left:2px solid #c2410c; padding-left:.5em; margin:.9em 0 .3em; line-height:1.4;
+  }
+  .ai-msg[data-role="assistant"] ul,
+  .ai-msg[data-role="assistant"] ol { list-style:none; padding-left:0; margin:.4em 0; }
+  .ai-msg[data-role="assistant"] li {
+    position:relative; padding-left:1em; margin:.25em 0; font-size:.75rem; line-height:1.8; color:rgba(0,0,0,.72);
+  }
+  .ai-msg[data-role="assistant"] li::before { content:'—'; position:absolute; left:0; color:#c2410c; font-weight:700; }
+  .ai-msg[data-role="assistant"] code {
+    font-family:var(--font-roboto-mono),monospace; font-size:.8em; color:#c2410c;
+    background:rgba(194,65,12,.08); border:1px solid rgba(194,65,12,.2); padding:.1em .35em;
+  }
+  .ai-msg[data-role="assistant"] pre { background:#0a0a0a; border-left:2px solid #c2410c; padding:.7em .9em; overflow-x:auto; margin:.5em 0; }
+  .ai-msg[data-role="assistant"] pre code { color:#e5e5e5; background:none; border:none; font-size:.72rem; padding:0; }
+  .ai-msg[data-role="assistant"] a {
+    display:inline-flex; align-items:center; gap:.25em; color:#c2410c;
+    border:1px solid #c2410c; padding:.15em .6em;
+    font-family:var(--font-roboto-mono),monospace; font-size:.72em; font-weight:700;
+    letter-spacing:.06em; text-decoration:none; transition:background .15s,color .15s;
+  }
+  .ai-msg[data-role="assistant"] a::after { content:' →'; }
+  .ai-msg[data-role="assistant"] a:hover { background:#c2410c; color:#fff; }
+
+  /* ステップカード */
+  .ai-msg .md-step { display:flex; gap:.6rem; margin:.4rem 0; padding:.55rem .7rem; background:rgba(0,0,0,.03); border-left:2px solid #c2410c; }
+  .ai-msg .md-sn { font-family:var(--font-roboto-mono),monospace; font-size:.68rem; font-weight:700; color:#c2410c; min-width:1.1em; flex-shrink:0; padding-top:1px; }
+  .ai-msg .md-sb { flex:1; min-width:0; }
+  .ai-msg .md-st { font-size:.77rem; font-weight:700; color:#0a0a0a; line-height:1.45; }
+  .ai-msg .md-ss { font-size:.72rem; color:rgba(0,0,0,.55); line-height:1.7; padding-left:.5rem; border-left:1px solid rgba(0,0,0,.1); margin-top:2px; }
+
+  /* 考え中ドット */
+  .ai-thinking {
+    display: flex; align-items: center; gap: 5px; padding: 6px 0;
+  }
+  .ai-thinking span {
+    display: inline-block; width: 6px; height: 6px;
+    background: rgba(0,0,0,0.28); border-radius: 50%;
+    animation: ai-thinking-bounce 1.3s infinite ease-in-out;
+  }
+  .ai-thinking span:nth-child(2) { animation-delay: 0.18s; }
+  .ai-thinking span:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes ai-thinking-bounce {
+    0%, 70%, 100% { transform: translateY(0) scale(0.75); opacity: 0.35; }
+    35%           { transform: translateY(-6px) scale(1);  opacity: 1; }
+  }
+
+  .typing::after { content:'▋'; animation:ai-blink .8s step-end infinite; opacity:.4; }
+  @keyframes ai-blink { 0%,100%{opacity:.4} 50%{opacity:0} }
+</style>
+
+<script>
+  const messagesEl    = document.getElementById('ai-messages')!;
+  const inputEl       = document.getElementById('ai-input') as HTMLInputElement;
+  const sendBtn       = document.getElementById('ai-send')!;
+  const statusDot     = document.getElementById('ai-status')!;
+  const suggestEl     = document.getElementById('ai-suggestions')!;
+  const greetingEl    = document.getElementById('ai-greeting')!;
+  const emailTrigger   = document.getElementById('ai-email-trigger')!;
+  const emailOpenBtn   = document.getElementById('ai-email-open')!;
+  const clearBtn       = document.getElementById('ai-clear-btn')!;
+  const emailSection   = document.getElementById('ai-email-section')!;
+  const emailInput     = document.getElementById('ai-email-input') as HTMLInputElement;
+  const emailSendBtn   = document.getElementById('ai-email-send-btn')!;
+  const emailStatus    = document.getElementById('ai-email-status')!;
+
+  const history: { role: 'user'|'assistant'; content: string }[] = [];
+  let chatStarted = false;
+  let firstResponseReceived = false;
+  let thinkingEl: HTMLElement | null = null;
+
+  function showThinking() {
+    thinkingEl = document.createElement('div');
+    thinkingEl.className = 'ai-msg';
+    thinkingEl.dataset.role = 'assistant';
+    const dots = document.createElement('div');
+    dots.className = 'ai-thinking';
+    dots.innerHTML = '<span></span><span></span><span></span>';
+    thinkingEl.appendChild(dots);
+    messagesEl.appendChild(thinkingEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+  function hideThinking() {
+    thinkingEl?.remove();
+    thinkingEl = null;
+  }
+
+  // ── Typewriter placeholder ────────────────────────────────
+  const questions = [
+    'LLMOとは何ですか？',
+    'AIにコンテンツを引用させるには？',
+    'EFFECTのサービスを教えてください',
+    'SEOとLLMOの違いは？',
+    'コンテンツ戦略の始め方',
+    'AIがブランドを認識する仕組みは？',
+  ];
+  let qIdx = 0, charIdx = 0, deleting = false;
+  let animFrame: ReturnType<typeof setTimeout>;
+  let isUserFocused = false;
+
+  function typeStep() {
+    if (isUserFocused || inputEl.value) return;
+    const q = questions[qIdx];
+    if (!deleting) {
+      charIdx++;
+      inputEl.placeholder = q.slice(0, charIdx);
+      if (charIdx === q.length) { deleting = true; animFrame = setTimeout(typeStep, 2200); return; }
+      animFrame = setTimeout(typeStep, 65);
+    } else {
+      charIdx--;
+      inputEl.placeholder = q.slice(0, charIdx);
+      if (charIdx === 0) { deleting = false; qIdx = (qIdx + 1) % questions.length; animFrame = setTimeout(typeStep, 400); return; }
+      animFrame = setTimeout(typeStep, 28);
+    }
+  }
+  setTimeout(() => { inputEl.classList.add('animating'); typeStep(); }, 1200);
+
+  inputEl.addEventListener('focus', () => {
+    isUserFocused = true; clearTimeout(animFrame);
+    inputEl.placeholder = '質問を入力...'; inputEl.classList.remove('animating');
+  });
+  inputEl.addEventListener('blur', () => {
+    if (!inputEl.value) {
+      isUserFocused = false; charIdx = 0; deleting = false;
+      setTimeout(() => { inputEl.classList.add('animating'); typeStep(); }, 800);
+    }
+  });
+  // ─────────────────────────────────────────────────────────
+
+  // ── Markdown → HTML（XSSセーフ・ステップ対応）──────────────
+  function esc(s: string) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function parseMarkdown(raw: string): string {
+    if ((raw.match(/```/g) || []).length % 2 !== 0) raw += '\n```';
+    // ① コードブロックをプレースホルダーに退避
+    const preBlocks: string[] = [];
+    let s = raw.replace(/```[\w]*\n?([\s\S]*?)```/g, (_, c) => {
+      preBlocks.push(esc(c.trimEnd()));
+      return `\x01PRE${preBlocks.length - 1}\x01`;
+    });
+    s = esc(s);
+    // ② インラインコード → 連続行はコードブロックに昇格
+    s = s.replace(/`([^`\n]+)`/g, (_, c) => `<code>${c}</code>`);
+    s = s.replace(/((?:<code>[^\n]*<\/code>\n){2,}<code>[^\n]*<\/code>)/g, (m) => {
+      preBlocks.push(m.replace(/<code>|<\/code>/g, '').trimEnd());
+      return `\x01PRE${preBlocks.length - 1}\x01`;
+    });
+    // ③ 見出し・装飾・リンク
+    s = s.replace(/^#{4,} (.+)$/gm, (_, t) => `<h4>${t}</h4>`);
+    s = s.replace(/^### (.+)$/gm,   (_, t) => `<h4>${t}</h4>`);
+    s = s.replace(/^## (.+)$/gm,    (_, t) => `<h3>${t}</h3>`);
+    s = s.replace(/^# (.+)$/gm,     (_, t) => `<h2>${t}</h2>`);
+    s = s.replace(/\*\*\*(.+?)\*\*\*/g, (_, t) => `<strong><em>${t}</em></strong>`);
+    s = s.replace(/\*\*(.+?)\*\*/g, (_, t) => `<strong>${t}</strong>`);
+    s = s.replace(/\*(.+?)\*/g,     (_, t) => `<em>${t}</em>`);
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, u) => `<a href="${u}">${t}</a>`);
+    // ④ 行単位で構造化
+    const lines = s.split('\n');
+    const out: string[] = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i].trimEnd();
+      if (/^\x01PRE\d+\x01$/.test(line) || /^<(h[234]|ul|div)/.test(line)) {
+        out.push(line); i++; continue;
+      }
+      const step = line.match(/^(\d+)\. (.+)$/);
+      if (step) {
+        const subs: string[] = [];
+        i++;
+        while (i < lines.length) {
+          const nx = lines[i].trimEnd();
+          if (!nx.trim() || /^\x01PRE/.test(nx) || /^\d+\. /.test(nx) || /^[-*] /.test(nx) || /^<h/.test(nx)) break;
+          subs.push(nx.trim()); i++;
+        }
+        out.push(
+          `<div class="md-step"><span class="md-sn">${step[1]}</span>` +
+          `<div class="md-sb"><div class="md-st">${step[2]}</div>` +
+          subs.map(l => `<div class="md-ss">${l}</div>`).join('') +
+          `</div></div>`
+        );
+        continue;
+      }
+      const ul = line.match(/^[-*] (.+)$/);
+      if (ul) {
+        const items = [ul[1]]; i++;
+        while (i < lines.length && /^[-*] /.test(lines[i])) {
+          items.push(lines[i].replace(/^[-*] /, '').trim()); i++;
+        }
+        out.push(`<ul>${items.map(t => `<li>${t}</li>`).join('')}</ul>`);
+        continue;
+      }
+      if (!line.trim()) { i++; continue; }
+      const para = [line]; i++;
+      while (i < lines.length) {
+        const nx = lines[i].trimEnd();
+        if (!nx.trim() || /^\x01PRE/.test(nx) || /^\d+\. |^[-*] |^<(h[234])/.test(nx)) break;
+        para.push(nx); i++;
+      }
+      out.push(`<p>${para.join('<br>')}</p>`);
+    }
+    // ⑤ コードブロックを復元
+    return out.join('').replace(/\x01PRE(\d+)\x01/g, (_, idx) =>
+      `<pre><code>${preBlocks[+idx]}</code></pre>`
+    );
+  }
+  // ──────────────────────────────────────────────────────────
+
+  function addMsg(role: 'user'|'assistant', text = '') {
+    const div = document.createElement('div');
+    div.className = 'ai-msg'; div.dataset.role = role;
+    const p = document.createElement('p');
+    p.className = 'font-mono text-xs leading-[1.8]';
+    if (role === 'user') {
+      const label = document.createElement('span');
+      label.className = 'mb-1 block font-mono text-[10px] tracking-widest text-black/25 uppercase text-right';
+      label.textContent = 'YOU';
+      div.appendChild(label);
+    }
+    p.textContent = text;
+    div.appendChild(p);
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return p;
+  }
+
+  function setLoading(loading: boolean) {
+    statusDot.style.backgroundColor = loading ? '#000' : 'rgba(0,0,0,0.2)';
+    inputEl.disabled = loading;
+    sendBtn.toggleAttribute('disabled', loading);
+  }
+
+  async function send(text: string) {
+    if (!text.trim() || inputEl.disabled) return;
+
+    if (!chatStarted) {
+      chatStarted = true;
+      greetingEl.style.display = 'none';
+      suggestEl.style.display = 'none';
+      document.dispatchEvent(new CustomEvent('chat:started'));
+    }
+
+    addMsg('user', text);
+    history.push({ role: 'user', content: text });
+    inputEl.value = '';
+    setLoading(true);
+    showThinking();
+
+    let p: HTMLElement | null = null;
+    let full = '';
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-6) }),
+      });
+      if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
+
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        for (const line of dec.decode(value, { stream: true }).split('\n')) {
+          if (!line.startsWith('data: ')) continue;
+          const raw = line.slice(6).trim();
+          if (raw === '[DONE]') break;
+          try {
+            const d = JSON.parse(raw);
+            const token = d.response ?? d.choices?.[0]?.delta?.content ?? '';
+            if (!token) continue;
+            if (!p) {
+              hideThinking();
+              p = addMsg('assistant');
+              p.classList.add('typing');
+            }
+            full += token;
+            p.textContent = full;
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+          } catch {}
+        }
+      }
+
+      if (p) {
+        p.classList.remove('typing');
+        p.innerHTML = parseMarkdown(full);
+      }
+      history.push({ role: 'assistant', content: full });
+
+      if (!firstResponseReceived && full) {
+        firstResponseReceived = true;
+        emailTrigger.classList.remove('hidden');
+      }
+    } catch {
+      hideThinking();
+      if (!p) p = addMsg('assistant');
+      p.textContent = '接続エラー。しばらくしてから再試行してください。';
+    } finally {
+      hideThinking();
+      setLoading(false);
+      inputEl.focus();
+    }
+  }
+
+  // Email: open form on click
+  emailOpenBtn.addEventListener('click', () => {
+    emailTrigger.classList.add('hidden');
+    emailSection.classList.remove('hidden');
+    emailInput.focus();
+  });
+
+  // Email: send on Enter or explicit call
+  async function sendEmailLog() {
+    const email = emailInput.value.trim();
+    if (!email || !email.includes('@')) {
+      emailStatus.textContent = 'メールアドレスを確認してください。';
+      emailStatus.classList.remove('hidden');
+      return;
+    }
+    emailInput.disabled = true;
+    emailStatus.textContent = '送信中...';
+    emailStatus.classList.remove('hidden');
+
+    try {
+      const res = await fetch('/api/save-conversation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history, email }),
+      });
+      emailStatus.textContent = res.ok ? '送信しました。' : '送信に失敗しました。';
+      if (!res.ok) emailInput.disabled = false;
+    } catch {
+      emailStatus.textContent = '送信に失敗しました。';
+      emailInput.disabled = false;
+    }
+  }
+
+  // Clear button → restore globe, reset conversation
+  clearBtn.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('chat:reset'));
+  });
+
+  emailSendBtn.addEventListener('click', sendEmailLog);
+  emailInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); sendEmailLog(); }
+  });
+
+  // Main send handlers
+  sendBtn.addEventListener('click', () => send(inputEl.value));
+  let isComposing = false;
+  inputEl.addEventListener('compositionstart', () => { isComposing = true; });
+  inputEl.addEventListener('compositionend', () => { isComposing = false; });
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !isComposing) { e.preventDefault(); send(inputEl.value); }
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('.ai-suggestion').forEach((b) => {
+    b.addEventListener('click', () => send(b.textContent!.trim()));
+  });
+
+  // Reset conversation when "× クリア" is pressed
+  document.addEventListener('chat:clear', () => {
+    messagesEl.innerHTML = '';
+    history.length = 0;
+    chatStarted = false;
+    firstResponseReceived = false;
+
+    greetingEl.style.display  = '';
+    suggestEl.style.display   = '';
+    emailTrigger.classList.add('hidden');
+    emailSection.classList.add('hidden');
+    emailStatus.classList.add('hidden');
+    emailStatus.textContent   = '';
+    emailInput.value          = '';
+    emailInput.disabled       = false;
+
+    inputEl.value             = '';
+    inputEl.blur();
+    setLoading(false);
+  });
+</script>

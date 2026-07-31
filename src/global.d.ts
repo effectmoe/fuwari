@@ -10,6 +10,7 @@ declare global {
 					data: () => Promise<SearchResult>;
 				}>;
 			}>;
+			options?: (options: Record<string, unknown>) => Promise<void>;
 		};
 	}
 }

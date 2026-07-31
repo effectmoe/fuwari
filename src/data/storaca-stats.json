@@ -1,18 +1,34 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 226,
-  "studentsTaught": 502,
-  "repeatStudents": 287,
-  "repeatRate": 57.2,
-  "sessionsTaught": 486,
-  "salesTotal": 2228950,
+  "reviewCount": 231,
+  "studentsTaught": 523,
+  "repeatStudents": 296,
+  "repeatRate": 56.6,
+  "sessionsTaught": 503,
+  "salesTotal": 2398150,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年7月18日",
-  "updatedAt": "2026-07-17T21:00:26.740Z",
+  "periodEnd": "2026年7月31日",
+  "updatedAt": "2026-07-30T21:00:29.216Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "ClaudeとNotionを使い「第2の脳」構築メソッドを実演！",
+      "reviewer": "男性 30代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "初心者でも実務で活用できるレベルまで習得出来る講座",
+      "text": "ニーズに沿って、マンツーマンで課題解決へとつなげれる良い講座でした。受講しながらどんどんやりたいことが増えていくので90分はあっという間でした。"
+    },
+    {
+      "course": "Claude Codeで一歩先を行くAI経営チームを構築！実践講座",
+      "reviewer": "男性 40代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "ClaudeCodeの使い方を基礎から学べるマンツーマンレッスン",
+      "text": "Claude Codeの基礎から実践まで、受講生のPC画面を共有しながら学ぶことができます。受講生の状況に応じて臨機応変にご対応いただけるので、初心者からすでに利用している方まで幅広く受講できると思います。私はClaude Codeを少し触ったことがある程度でしたが、そのレベルに応じてやさしく教えていただけました。この度はありがとうございました！"
+    },
     {
       "course": "AI×知識管理で劇的時短！Obsidian＆Claude活用術",
       "reviewer": "男性",
@@ -20,6 +36,22 @@
       "rating": 5,
       "headline": "概念から教えてくれる非常に有意義な講座",
       "text": "60分である程度の形になってしまったのには驚きました。先生の説明がいつも分かりやすく、ただやり方を学ぶだけでなく、根底にある背景や概念まで学ぶことができます。"
+    },
+    {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "少しずつ出来上がっていく講座",
+      "text": "いつもありがとうございます"
+    },
+    {
+      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+      "reviewer": "女性 70代",
+      "date": "2026-07",
+      "rating": 5,
+      "headline": "プログラムを作り上げていく講座",
+      "text": "ワンポイントアドバイスありがとうございました"
     },
     {
       "course": "ローカルLLM（AI）を身近なシステムに組み込み、無料で使い倒す！",
@@ -84,39 +116,7 @@
       "rating": 5,
       "headline": "Claude Design 速習講座｜Canva＆パワポ連携可能！",
       "text": "自分のやりたいことをベースに展開していただけるので大変助かります。"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "laude Codeであなたの作りたいを講師が伴走し構築 シュ コウメイ先生",
-      "text": "初心者の私に丁寧に教えてくれました。朝 早速作業に使ってみました。ありがとうございます。"
-    },
-    {
-      "course": "ClaudeとNotionを使い「第2の脳」構築メソッドを実演！",
-      "reviewer": "男性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "自分のやりたいことが前に進む講座",
-      "text": "聞いて終わる講座ではなく、その場でコンサルをしながらシステムを構築して頂き成果物もついてきます。コストパフォーマンスがめちゃくちゃ高い講座だと思いました。"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "男性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "今回も楽しく学べました！",
-      "text": "いつもわかりやすいご説明で理解が進みます！今回は前回作ったものの不備を改善するお手伝いをしていただきました"
-    },
-    {
-      "course": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
-      "reviewer": "男性",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
-      "text": "イラストも描きながら説明をしていただけるのでとてもわかりやすかったです。難しい言葉も使わないので余計に入ってきました。初心者の方にお勧めの講師ではないでしょうか。"
     }
   ],
-  "testimonialsUpdatedAt": "2026-07-17T21:01:08.210Z"
+  "testimonialsUpdatedAt": "2026-07-30T21:01:08.316Z"
 }

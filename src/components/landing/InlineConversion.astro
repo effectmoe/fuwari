@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	title?: string;
+	body?: string;
+	consultationHref: string;
+	consultationLabel?: string;
+}
+
+const {
+	title = "この内容を、自社の状況に当てはめて確認できます。",
+	body = "無料相談で、具体的な業務・サイト状況と次の進め方を整理します。",
+	consultationHref,
+	consultationLabel = "無料相談",
+} = Astro.props;
+---
+
+<div class="inline-conversion">
+	<div class="inline-conversion__rail" aria-hidden="true"></div>
+	<div class="inline-conversion__inner grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+		<div class="min-w-0">
+			<p class="text-sm font-bold text-90">{title}</p>
+			<p class="mt-1 text-xs leading-relaxed text-50">{body}</p>
+		</div>
+		<div class="inline-conversion__actions flex flex-wrap gap-2">
+			<a
+				href={consultationHref}
+				data-no-swup
+				style="background-color:#020617;color:#fff;"
+				class="inline-flex w-full items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm font-bold transition hover:opacity-90 sm:w-auto"
+			>
+				<Icon name="material-symbols:mail-outline-rounded" class="text-lg" />
+				{consultationLabel}
+			</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.inline-conversion {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid rgba(16, 24, 32, 0.1);
+		border-radius: 0.375rem;
+		background:
+			linear-gradient(90deg, rgba(183, 140, 42, 0.08), transparent),
+			rgba(255, 255, 255, 0.86);
+		box-shadow: 0 16px 38px rgba(23, 32, 51, 0.05);
+	}
+
+	.inline-conversion__rail {
+		position: absolute;
+		inset: 0 auto 0 0;
+		width: 0.35rem;
+		background: var(--primary);
+	}
+
+	.inline-conversion__inner {
+		position: relative;
+		z-index: 1;
+		padding: 1rem 1.1rem 1rem 1.4rem;
+	}
+
+	.inline-conversion__actions :global(a) {
+		min-height: 2.55rem;
+		white-space: nowrap;
+	}
+
+	@media (max-width: 767px) {
+		.inline-conversion__inner {
+			padding: 1rem 1rem 1rem 1.25rem;
+		}
+
+		.inline-conversion__actions :global(a) {
+			white-space: normal;
+		}
+	}
+</style>
