@@ -8,6 +8,7 @@ const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
 const blogHref = "/blog/";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 
 const auditSignals = [
 	["流入", "どのAIから、どのページへ来ているか", "ChatGPT / Claude / Perplexity / Gemini"],
@@ -435,10 +436,16 @@ const faqs = [
 						<span>累計受講者</span>
 					</div>
 				</div>
-				<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="aicrawl-proof__link">
-					ストアカの先生ページを見る
-					<Icon name="material-symbols:arrow-outward-rounded" />
-				</a>
+				<div class="aicrawl-proof__links" aria-label="講師ページ">
+					<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="aicrawl-proof__link">
+						ストアカの先生ページを見る
+						<Icon name="material-symbols:arrow-outward-rounded" />
+					</a>
+					<a href={officeProfileUrl} target="_blank" rel="noopener noreferrer" class="aicrawl-proof__link aicrawl-proof__link--office">
+						オフィスクページを見る
+						<Icon name="material-symbols:arrow-outward-rounded" />
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -1792,7 +1799,7 @@ const faqs = [
 
 		.aicrawl-proof__summary {
 			display: grid;
-			grid-template-columns: minmax(260px, 0.95fr) minmax(360px, 1.25fr) auto;
+			grid-template-columns: minmax(260px, 0.95fr) minmax(360px, 1.25fr) minmax(220px, 0.72fr);
 			gap: 14px;
 			align-items: stretch;
 		}
@@ -1881,6 +1888,13 @@ const faqs = [
 			line-height: 1.4;
 		}
 
+		.aicrawl-proof__links {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 10px;
+			align-self: stretch;
+		}
+
 		.aicrawl-proof__link {
 			display: inline-flex;
 			align-items: center;
@@ -1897,6 +1911,13 @@ const faqs = [
 			text-decoration: none;
 			box-shadow: 0 18px 42px rgba(69, 111, 69, 0.18);
 			white-space: nowrap;
+		}
+
+		.aicrawl-proof__link--office {
+			border: 1px solid rgba(69, 111, 69, 0.28);
+			background: rgba(255, 255, 255, 0.86);
+			color: var(--crawl-green-dark);
+			box-shadow: 0 14px 32px rgba(50, 59, 42, 0.08);
 		}
 
 		.aicrawl-proof__link svg {
