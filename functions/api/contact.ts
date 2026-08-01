@@ -1,6 +1,7 @@
 interface Env {
   effect_moe_inquiries: D1Database;
   GAS_GMAIL_URL?: string;
+  GAS_GMAIL_TOKEN?: string;
   CONTACT_NOTIFY_TO?: string;
 }
 
@@ -148,6 +149,7 @@ async function sendGmail(env: Env, payload: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         action: "send_gmail",
+        token: env.GAS_GMAIL_TOKEN,
         ...payload,
       }),
     });
