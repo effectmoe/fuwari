@@ -719,7 +719,11 @@ const faqLd = {
 				if (!response.ok || !result?.ok) throw new Error(result?.error || "送信に失敗しました");
 
 				contactForm.reset();
-				if (status) status.textContent = "送信しました。内容を確認後、シュ コウメイよりご連絡します。";
+				if (status) {
+					status.textContent = result?.mail?.copy?.ok
+						? "送信しました。入力いただいたメールアドレスにも控えをお送りしました。内容を確認後、シュ コウメイよりご連絡します。"
+						: "送信しました。内容を確認後、シュ コウメイよりご連絡します。控えメールが届かない場合は迷惑メールフォルダもご確認ください。";
+				}
 				if (submitButton) submitButton.textContent = "送信済み";
 			} catch {
 				if (status) status.textContent = "送信に失敗しました。時間をおいて再度お試しください。お急ぎの場合は info@effect.moe までご連絡ください。";

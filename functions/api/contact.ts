@@ -1,6 +1,7 @@
 interface Env {
   effect_moe_inquiries: D1Database;
   GAS_GMAIL_URL?: string;
+  CONTACT_NOTIFY_TO?: string;
 }
 
 const MAX_LENGTHS = {
@@ -63,6 +64,107 @@ function buildDiagnosisDetails(body: Record<string, unknown>, inquiryType: strin
   };
 
   return clean(JSON.stringify(details), MAX_LENGTHS.diagnosisDetails);
+}
+
+function buildInquiryText(id: string, inquiry: {
+  inquiryType: string;
+  company: string;
+  department: string;
+  name: string;
+  email: string;
+  phone: string;
+  interest: string;
+  dataLocation: string;
+  message: string;
+  pagePath: string;
+  pageUrl: string;
+  source: string;
+}, diagnosisDetails: string) {
+  return [
+    "effect.moe のLPから問い合わせがありました。",
+    "",
+    `問い合わせID: ${id}`,
+    `種別: ${inquiry.inquiryType}`,
+    `会社名: ${inquiry.company}`,
+    `所属部署名: ${inquiry.department || "-"}`,
+    `お名前: ${inquiry.name}`,
+    `メールアドレス: ${inquiry.email}`,
+    `電話番号: ${inquiry.phone || "-"}`,
+    `ご検討内容: ${inquiry.interest}`,
+    `現在の情報の置き場所: ${inquiry.dataLocation}`,
+    `ページ: ${inquiry.pageUrl || inquiry.pagePath || "-"}`,
+    ...(diagnosisDetails ? ["", "無料診断カルテ:", diagnosisDetails] : []),
+    "",
+    "メッセージ:",
+    inquiry.message,
+  ].join("\n");
+}
+
+function buildCopyText(id: string, inquiry: {
+  company: string;
+  name: string;
+  email: string;
+  phone: string;
+  interest: string;
+  dataLocation: string;
+  message: string;
+}) {
+  return [
+    `${inquiry.name} 様`,
+    "",
+    "effect.moe へのお問い合わせありがとうございます。",
+    "以下の内容で無料相談のお申し込みを受け付けました。",
+    "内容を確認後、シュ コウメイよりご連絡します。",
+    "",
+    `受付番号: ${id}`,
+    `会社名: ${inquiry.company}`,
+    `お名前: ${inquiry.name}`,
+    `メールアドレス: ${inquiry.email}`,
+    `電話番号: ${inquiry.phone || "-"}`,
+    `ご検討内容: ${inquiry.interest}`,
+    `現在の情報の置き場所: ${inquiry.dataLocation}`,
+    "",
+    "メッセージ:",
+    inquiry.message,
+    "",
+    "株式会社EFFECT",
+    "effect.moe",
+  ].join("\n");
+}
+
+async function sendGmail(env: Env, payload: {
+  to: string;
+  subject: string;
+  body: string;
+  from_name: string;
+}) {
+  if (!env.GAS_GMAIL_URL) {
+    return { ok: false, error: "gas_gmail_url_not_configured" };
+  }
+
+  try {
+    const response = await fetch(env.GAS_GMAIL_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "send_gmail",
+        ...payload,
+      }),
+    });
+
+    if (!response.ok) {
+      return { ok: false, error: `gmail_webhook_http_${response.status}` };
+    }
+
+    const result = await response.json().catch(() => null) as { ok?: boolean; error?: string } | null;
+    if (result && result.ok === false) {
+      return { ok: false, error: result.error || "gmail_webhook_rejected" };
+    }
+
+    return { ok: true };
+  } catch (error: any) {
+    return { ok: false, error: error?.message || "gmail_webhook_failed" };
+  }
 }
 
 async function hashIp(value: string) {
@@ -143,41 +245,28 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       diagnosisDetails || null,
     ).run();
 
-    if (env.GAS_GMAIL_URL) {
-      const subject = `【effect.moe問い合わせ】${inquiry.interest} / ${inquiry.company}`;
-      const text = [
-        "effect.moe のLPから問い合わせがありました。",
-        "",
-        `問い合わせID: ${id}`,
-        `種別: ${inquiry.inquiryType}`,
-        `会社名: ${inquiry.company}`,
-        `所属部署名: ${inquiry.department || "-"}`,
-        `お名前: ${inquiry.name}`,
-        `メールアドレス: ${inquiry.email}`,
-        `電話番号: ${inquiry.phone || "-"}`,
-        `ご検討内容: ${inquiry.interest}`,
-        `現在の情報の置き場所: ${inquiry.dataLocation}`,
-        `ページ: ${inquiry.pageUrl || inquiry.pagePath || "-"}`,
-        ...(diagnosisDetails ? ["", "無料診断カルテ:", diagnosisDetails] : []),
-        "",
-        "メッセージ:",
-        inquiry.message,
-      ].join("\n");
+    const notifyTo = clean(env.CONTACT_NOTIFY_TO, 160) || "info@effect.moe";
+    const adminMail = await sendGmail(env, {
+      to: notifyTo,
+      subject: `【effect.moe問い合わせ】${inquiry.interest} / ${inquiry.company}`,
+      body: buildInquiryText(id, inquiry, diagnosisDetails),
+      from_name: "effect.moe LP",
+    });
+    const copyMail = await sendGmail(env, {
+      to: inquiry.email,
+      subject: "【effect.moe】お問い合わせを受け付けました",
+      body: buildCopyText(id, inquiry),
+      from_name: "株式会社EFFECT",
+    });
 
-      await fetch(env.GAS_GMAIL_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "send_gmail",
-          to: "info@effect.moe",
-          subject,
-          body: text,
-          from_name: "effect.moe LP",
-        }),
-      }).catch(() => null);
-    }
-
-    return json({ ok: true, id });
+    return json({
+      ok: true,
+      id,
+      mail: {
+        admin: adminMail,
+        copy: copyMail,
+      },
+    });
   } catch (error: any) {
     return json({ ok: false, error: error?.message ?? "unknown_error" }, { status: 500 });
   }
