@@ -11,6 +11,7 @@ const pageTitle = "アバウト｜シュ コウメイ";
 const pageDescription =
 	"AI CENTRAL、AI CRAWL、AI講座を設計・運用するシュ コウメイのプロフィール。構造化・AI実装・LLMO・Notion・システム開発を、講座と現場実装の両面から支援します。";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 const consultationHref = "/#contact";
 
 const profileLd = {
@@ -44,6 +45,7 @@ const summaryBadges = [
 	{ label: "AI＆DXコンサルタント", icon: "material-symbols:business-center-outline-rounded" },
 	{ label: "AIシステムエンジニア", icon: "material-symbols:account-tree-outline-rounded" },
 	{ label: "AI検索エキスパート", icon: "material-symbols:hub-outline" },
+	{ label: "オフィスク講師", icon: "material-symbols:school-outline-rounded" },
 ];
 
 const proofStats = [
@@ -316,7 +318,10 @@ const relatedLinks = [
 						<span>受講生レビュー</span>
 						<span>講座運用</span>
 					</div>
-					<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer">先生ページを見る →</a>
+					<div class="author-proof__links">
+						<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer">先生ページを見る →</a>
+						<a href={officeProfileUrl} target="_blank" rel="noopener noreferrer">オフィスクページを見る →</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -936,9 +941,15 @@ const relatedLinks = [
 			font-weight: 950;
 		}
 
+		.author-proof__links {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 14px 22px;
+			margin-top: 24px;
+		}
+
 		.author-proof__panel a {
 			display: inline-flex;
-			margin-top: 24px;
 			color: var(--author-gold);
 			font-weight: 950;
 			text-decoration: none;
