@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI System Implementation Record</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "primary": "#322214",
+                        "tertiary-fixed": "#d2eca2",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffe088",
+                        "surface-tint": "#705a49",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#d2c4bb",
+                        "surface-container-highest": "#eae0e1",
+                        "on-secondary-container": "#745c00",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#fff8f8",
+                        "outline": "#80756d",
+                        "secondary-fixed-dim": "#e9c349",
+                        "secondary": "#735c00",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#1a2a00",
+                        "on-surface-variant": "#4e453e",
+                        "text-main": "#2a1f17",
+                        "surface": "#fff8f8",
+                        "primary-fixed-dim": "#dec1ac",
+                        "on-tertiary-fixed": "#131f00",
+                        "inverse-primary": "#dec1ac",
+                        "inverse-on-surface": "#f8eeef",
+                        "surface-container-low": "#fbf1f2",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-fixed-variant": "#394d14",
+                        "on-tertiary-container": "#95ae6a",
+                        "tertiary-fixed-dim": "#b6d088",
+                        "surface-variant": "#eae0e1",
+                        "surface-bright": "#fff8f8",
+                        "secondary-container": "#fed65b",
+                        "on-secondary-fixed-variant": "#574500",
+                        "surface-dim": "#e1d8d9",
+                        "on-primary-fixed": "#28180b",
+                        "primary-container": "#4a3728",
+                        "on-primary-container": "#bba08c",
+                        "inverse-surface": "#342f30",
+                        "primary-fixed": "#fbddc7",
+                        "surface-container": "#f5eced",
+                        "tertiary-container": "#2d4108",
+                        "on-surface": "#1f1a1b",
+                        "surface-container-high": "#efe6e7",
+                        "on-background": "#1f1a1b",
+                        "on-primary": "#ffffff",
+                        "surface-white": "#ffffff",
+                        "on-primary-fixed-variant": "#574333",
+                        "text-muted": "#6b5a4e",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "4rem",
+                        "margin-mobile": "1rem",
+                        "stack-md": "1.5rem",
+                        "gutter": "2rem",
+                        "container-max": "1140px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-xl-mobile": ["\"Source Serif 4\""],
+                        "headline-xl": ["\"Source Serif 4\""],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "headline-lg": ["\"Source Serif 4\""],
+                        "caption": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["30px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "caption": ["14px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-glow-focus:focus {
+            box-shadow: 0 0 8px rgba(115, 92, 0, 0.4);
+            border-color: #735c00;
+        }
+        .ambient-shadow {
+            box-shadow: 0 4px 24px rgba(50, 34, 20, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg antialiased selection:bg-secondary-fixed selection:text-primary min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<nav class="bg-background dark:bg-surface border-b border-primary/5 dark:border-outline-variant docked full-width top-0 z-50 transition-all duration-250 ease-in-out">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-sm">
+<a class="font-headline-md text-headline-md font-semibold text-text-main dark:text-surface-bright tracking-tight" href="#">Shu Koumei / EFFECT inc.</a>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center space-x-6">
+<a class="font-body-md text-body-md text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors duration-250" href="#">Portfolio</a>
+<a class="font-body-md text-body-md text-primary dark:text-secondary-fixed border-b border-secondary-fixed pb-1" href="#">Implementation</a>
+<a class="font-body-md text-body-md text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors duration-250" href="#">About</a>
+<a class="font-body-md text-body-md text-text-muted dark:text-on-surface-variant hover:text-primary transition-colors duration-250" href="#">Contact</a>
+<a class="ml-4 font-body-md text-body-md bg-primary text-on-primary px-4 py-2 rounded hover:bg-primary-container transition-colors duration-250" href="#">Connect</a>
+</div>
+<!-- Mobile Nav Toggle -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-lg w-full">
+<!-- Header -->
+<header class="mb-stack-lg max-w-3xl">
+<span class="font-label-caps text-label-caps text-primary uppercase mb-2 block">Implementation Record</span>
+<h1 class="font-headline-xl-mobile md:font-headline-xl text-headline-xl-mobile md:text-headline-xl text-primary mb-6">AI SYSTEM IMPLEMENTATION RECORD<br/><span class="opacity-80">AIを組み込んだシステム実装の蓄積</span></h1>
+<p class="font-body-lg text-body-lg text-text-muted">講師・コンサルとして話すだけではなく、AIを業務・検索・記憶・運用に組み込むシステムを実際に設計、構築、運用してきました。</p>
+</header>
+<!-- Two Column Layout -->
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column: Core Pillars -->
+<div class="w-full lg:w-1/3 flex flex-col gap-6">
+<div class="bg-surface-white rounded-xl p-8 ambient-shadow border border-primary/5">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">smart_toy</span>
+<h2 class="font-headline-md text-headline-md text-primary">自律実行</h2>
+</div>
+<p class="font-body-md text-body-md text-text-muted">Task execution and agency logic. Systems designed to operate autonomously, executing complex workflows with AI agents.</p>
+</div>
+<div class="bg-surface-white rounded-xl p-8 ambient-shadow border border-primary/5">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">database</span>
+<h2 class="font-headline-md text-headline-md text-primary">記憶・検索</h2>
+</div>
+<p class="font-body-md text-body-md text-text-muted">Knowledge retrieval and RAG systems. Creating deep, contextual memory networks for instant access to vast data repositories.</p>
+</div>
+<div class="bg-surface-white rounded-xl p-8 ambient-shadow border border-primary/5">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl">settings_applications</span>
+<h2 class="font-headline-md text-headline-md text-primary">業務システム</h2>
+</div>
+<p class="font-body-md text-body-md text-text-muted">Integration into core business workflows. Seamlessly blending AI capabilities into daily operations and existing enterprise systems.</p>
+</div>
+</div>
+<!-- Right Column: Portfolio Grid -->
+<div class="w-full lg:w-2/3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Items -->
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">terminal</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">CommandC</h3>
+<p class="font-caption text-caption text-text-muted">社内コンテキスト自律実行型マルチエージェント基盤</p>
+</div>
+</div>
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">hub</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">NexusC</h3>
+<p class="font-caption text-caption text-text-muted">AI自律ディベート × 深層リサーチ統合基盤</p>
+</div>
+</div>
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">memory</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">FORGE</h3>
+<p class="font-caption text-caption text-text-muted">AI記憶網装置</p>
+</div>
+</div>
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">assignment_turned_in</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">国家試験自動添削</h3>
+<p class="font-caption text-caption text-text-muted">試験官AIエージェント</p>
+</div>
+</div>
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">shield_locked</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">完全セキュア型社労士事務所AIセントラルシステム</h3>
+<p class="font-caption text-caption text-text-muted">顧客管理基盤</p>
+</div>
+</div>
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">code</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">MarkDown-Web</h3>
+<p class="font-caption text-caption text-text-muted">MD→Web 完全自動化基盤</p>
+</div>
+</div>
+<!-- Additional items omitted for brevity but following the same pattern -->
+<div class="bg-surface-white rounded border border-primary/10 p-5 hover:border-secondary-fixed transition-colors duration-250 flex items-start gap-4 md:col-span-2 bg-gradient-to-r from-surface-white to-surface-container-low">
+<span class="material-symbols-outlined text-primary opacity-70 mt-1">add_circle</span>
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1">"他、多数"</h3>
+<p class="font-caption text-caption text-text-muted">継続的にAI組み込み型システムを設計・実装</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- CTA Strip -->
+<div class="mt-stack-lg pt-stack-md border-t border-primary/10 flex flex-col sm:flex-row justify-end items-center gap-4">
+<button class="w-full sm:w-auto font-body-md text-body-md bg-transparent text-secondary border border-secondary px-6 py-3 rounded hover:bg-surface-container transition-colors duration-250">
+                AI CENTRALを見る
+            </button>
+<button class="w-full sm:w-auto font-body-md text-body-md bg-primary text-on-primary px-6 py-3 rounded hover:bg-primary-container transition-colors duration-250">
+                AI実装について相談する
+            </button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-md bg-background dark:bg-surface border-t border-primary/10 dark:border-outline-variant mt-auto">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-label-caps text-label-caps text-primary">EFFECT INC.</span>
+<div class="flex gap-6">
+<a class="font-caption text-caption text-text-muted hover:text-secondary transition-colors duration-250" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-text-muted hover:text-secondary transition-colors duration-250" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-text-muted hover:text-secondary transition-colors duration-250" href="#">Imprint</a>
+</div>
+<span class="font-caption text-caption text-text-muted">© 2024 EFFECT inc. All Rights Reserved.</span>
+</div>
+</footer>
+</body></html>

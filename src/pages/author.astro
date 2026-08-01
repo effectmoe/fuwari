@@ -110,6 +110,44 @@ const services = [
 	},
 ];
 
+const systemPillars = [
+	{
+		title: "自律実行",
+		body: "AIエージェントが文脈を読み、複数工程をつないで処理を進める基盤。",
+		icon: "material-symbols:memory-alt-outline-rounded",
+	},
+	{
+		title: "記憶・検索",
+		body: "社内情報、履歴、ノウハウを参照可能な記憶網として扱う設計。",
+		icon: "material-symbols:hub-outline",
+	},
+	{
+		title: "業務システム",
+		body: "会計、契約、顧客管理、Web運用など、実務の中にAIを組み込む実装。",
+		icon: "material-symbols:account-tree-outline-rounded",
+	},
+];
+
+const aiSystemPortfolio = [
+	{ product: "CommandC", summary: "社内コンテキスト自律実行型マルチエージェント基盤" },
+	{ product: "NexusC", summary: "AI自律ディベート × 深層リサーチ統合基盤" },
+	{ product: "FORGE", summary: "AI記憶網装置" },
+	{ product: "国家試験自動添削", summary: "試験官AIエージェント" },
+	{ product: "完全セキュア型社労士事務所AIセントラルシステム", summary: "顧客管理基盤" },
+	{ product: "MarkDown-Web", summary: "MD→Web 完全自動化基盤" },
+	{ product: "AI会計システム", summary: "AI駆動型会計システム" },
+	{ product: "AI契約書システム", summary: "AI駆動型契約書システム" },
+	{ product: "CommandC-PWA", summary: "AI駆動型モバイルチャットコントローラ" },
+	{ product: "DeepMindマッチングアプリ", summary: "AI恋愛エージェントによるマッチングアプリ" },
+	{ product: "“グローカル”SNSメディア", summary: "日韓交流SNSメディア" },
+	{ product: "ポータルサイトAI運用システム", summary: "各種ポータルをAIで自律運用" },
+	{ product: "AIクローラー自動監視システム", summary: "各種AIのアクセスを常時監視" },
+	{ product: "Obsidian × Claude Code(Codex) 記憶システム", summary: "完全ローカル＆無料の記憶システム" },
+	{ product: "Notion × Claude Code(Codex) 管理システム", summary: "次世代のDXシステム" },
+	{ product: "全自動AI駆動WEBサイト", summary: "自律実行されるWEBサイト" },
+	{ product: "他、多数", summary: "継続的にAI組み込み型システムを設計・実装" },
+];
+
 const profileFacts = [
 	{ term: "所属", desc: "株式会社EFFECT" },
 	{ term: "役割", desc: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント" },
@@ -322,6 +360,57 @@ const relatedLinks = [
 					<div class="author-proof__links">
 						<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer">先生ページを見る →</a>
 						<a href={officeProfileUrl} target="_blank" rel="noopener noreferrer">オフィスクページを見る →</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-systems" id="ai-system-record">
+			<div class="author-container">
+				<div class="author-systems__head">
+					<p class="author-eyebrow">AI SYSTEM IMPLEMENTATION RECORD</p>
+					<h2>AIを組み込んだシステム実装の蓄積</h2>
+					<p>
+						講師・コンサルとして話すだけではなく、AIを業務・検索・記憶・運用に組み込むシステムを実際に設計、構築、運用してきました。
+					</p>
+				</div>
+
+				<div class="author-systems__panel">
+					<aside class="author-systems__summary" aria-label="AI組み込み実装の主な領域">
+						<span class="author-systems__kicker">IMPLEMENTATION DOMAINS</span>
+						{systemPillars.map((pillar) => (
+							<div class="author-systems__pillar">
+								<Icon name={pillar.icon} />
+								<div>
+									<strong>{pillar.title}</strong>
+									<p>{pillar.body}</p>
+								</div>
+							</div>
+						))}
+						<div class="author-systems__note">
+							<strong>{aiSystemPortfolio.length}</strong>
+							<span>AI組み込み型システム</span>
+						</div>
+					</aside>
+
+					<div class="author-systems__board">
+						{aiSystemPortfolio.map((item, index) => (
+							<div class="author-system-card">
+								<span>{String(index + 1).padStart(2, "0")}</span>
+								<div>
+									<strong>{item.product}</strong>
+									<p>{item.summary}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<div class="author-systems__cta">
+					<strong>AIを業務に組み込む設計から相談できます。</strong>
+					<div>
+						<a href={consultationHref} class="author-button author-button--primary">AI実装について相談する</a>
+						<a href="/" class="author-button author-button--ghost">AI CENTRALを見る</a>
 					</div>
 				</div>
 			</div>
@@ -956,6 +1045,191 @@ const relatedLinks = [
 			text-decoration: none;
 		}
 
+		.author-systems {
+			border-top: 1px solid var(--author-line);
+			border-bottom: 1px solid var(--author-line);
+			background:
+				radial-gradient(circle at 12% 10%, rgba(86, 117, 95, 0.12), transparent 30%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(244, 234, 214, 0.32)),
+				rgba(255, 255, 255, 0.36);
+		}
+
+		.author-systems__head {
+			max-width: 860px;
+			margin-bottom: 32px;
+		}
+
+		.author-systems__head p:last-child {
+			max-width: 760px;
+			margin: 20px 0 0;
+			color: var(--author-muted);
+			font-size: 1.05rem;
+			font-weight: 650;
+			line-height: 1.9;
+		}
+
+		.author-systems__panel {
+			display: grid;
+			grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+			gap: 18px;
+			align-items: stretch;
+		}
+
+		.author-systems__summary,
+		.author-systems__board,
+		.author-systems__cta {
+			border: 1px solid rgba(197, 178, 151, 0.62);
+			background: rgba(255, 253, 250, 0.84);
+			box-shadow: 0 24px 64px rgba(62, 47, 25, 0.08);
+		}
+
+		.author-systems__summary {
+			display: grid;
+			align-content: start;
+			gap: 14px;
+			border-radius: 28px;
+			padding: clamp(20px, 2.6vw, 30px);
+		}
+
+		.author-systems__kicker {
+			color: var(--author-gold);
+			font-size: 0.72rem;
+			font-weight: 950;
+			letter-spacing: 0.14em;
+		}
+
+		.author-systems__pillar {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			gap: 12px;
+			align-items: start;
+			border: 1px solid rgba(86, 117, 95, 0.18);
+			border-radius: 20px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(239, 246, 238, 0.48)),
+				#fffdfa;
+			padding: 16px;
+		}
+
+		.author-systems__pillar svg {
+			width: 30px;
+			height: 30px;
+			color: var(--author-green);
+		}
+
+		.author-systems__pillar strong {
+			display: block;
+			color: var(--author-ink);
+			font-size: 1.08rem;
+			font-weight: 950;
+			line-height: 1.3;
+		}
+
+		.author-systems__pillar p {
+			margin: 6px 0 0;
+			color: var(--author-muted);
+			font-size: 0.88rem;
+			font-weight: 700;
+			line-height: 1.65;
+		}
+
+		.author-systems__note {
+			display: grid;
+			border-radius: 22px;
+			background:
+				linear-gradient(135deg, rgba(74, 55, 40, 0.95), rgba(86, 67, 47, 0.92)),
+				#4a3728;
+			padding: 20px;
+			color: #fffdf7;
+		}
+
+		.author-systems__note strong {
+			font-size: clamp(2.3rem, 4vw, 3.4rem);
+			font-weight: 950;
+			line-height: 1;
+		}
+
+		.author-systems__note span {
+			margin-top: 8px;
+			color: rgba(255, 253, 247, 0.78);
+			font-size: 0.86rem;
+			font-weight: 850;
+		}
+
+		.author-systems__board {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 10px;
+			border-radius: 28px;
+			padding: clamp(16px, 2.2vw, 24px);
+		}
+
+		.author-system-card {
+			display: grid;
+			grid-template-columns: auto minmax(0, 1fr);
+			gap: 12px;
+			align-items: start;
+			min-height: 104px;
+			border: 1px solid rgba(197, 178, 151, 0.42);
+			border-radius: 18px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 250, 241, 0.72)),
+				#fffdfa;
+			padding: 16px;
+		}
+
+		.author-system-card span {
+			display: inline-grid;
+			place-items: center;
+			width: 34px;
+			height: 34px;
+			border-radius: 12px;
+			background: rgba(167, 119, 19, 0.12);
+			color: var(--author-gold);
+			font-size: 0.78rem;
+			font-weight: 950;
+		}
+
+		.author-system-card strong {
+			display: block;
+			color: var(--author-ink);
+			font-size: 1rem;
+			font-weight: 950;
+			line-height: 1.35;
+		}
+
+		.author-system-card p {
+			margin: 7px 0 0;
+			color: var(--author-muted);
+			font-size: 0.88rem;
+			font-weight: 700;
+			line-height: 1.55;
+		}
+
+		.author-systems__cta {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			margin-top: 18px;
+			border-radius: 28px;
+			padding: clamp(20px, 3vw, 30px);
+		}
+
+		.author-systems__cta strong {
+			color: var(--author-ink);
+			font-size: clamp(1.2rem, 2vw, 1.65rem);
+			font-weight: 950;
+			line-height: 1.35;
+		}
+
+		.author-systems__cta div {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			justify-content: flex-end;
+		}
+
 		.author-responsibility {
 			padding-top: 0;
 		}
@@ -1168,6 +1442,7 @@ const relatedLinks = [
 		@media (max-width: 960px) {
 			.author-hero__grid,
 			.author-proof,
+			.author-systems__panel,
 			.author-origin__grid,
 			.author-evidence__grid,
 			.author-dfb__grid,
@@ -1175,6 +1450,15 @@ const relatedLinks = [
 			.author-responsibility__panel,
 			.author-related__grid {
 				grid-template-columns: 1fr;
+			}
+
+			.author-systems__cta {
+				align-items: flex-start;
+				flex-direction: column;
+			}
+
+			.author-systems__cta div {
+				justify-content: flex-start;
 			}
 
 			.author-summary__grid,
@@ -1225,6 +1509,7 @@ const relatedLinks = [
 			.author-profile-facts,
 			.author-responsibility__items,
 			.author-service-grid,
+			.author-systems__board,
 			.author-related__links {
 				grid-template-columns: 1fr;
 			}
@@ -1262,6 +1547,14 @@ const relatedLinks = [
 
 			.author-section {
 				padding: 64px 0;
+			}
+
+			.author-systems__head {
+				margin-bottom: 24px;
+			}
+
+			.author-system-card {
+				min-height: auto;
 			}
 
 			.author-service-card {
