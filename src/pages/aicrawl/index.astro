@@ -44,6 +44,23 @@ const deliverables = [
 	["04", "AI受入戦略", "実績から現状を分析し、次にAIへ紹介されるための改善順を作ります。"],
 ];
 
+const sampleReports = [
+	{
+		label: "月額 ¥3,300 プラン",
+		title: "週次レポート",
+		body: "毎週月曜に届きます。AIクローラーの巡回、AI経由の訪問とCV、よく読まれたページ、改善ポイントの自動診断まで。",
+		href: "https://markdown-web.effect.moe/s/q1geeLJf0FHvxrUxhLRaNCiMayeaQ2Z2",
+		visual: "weekly",
+	},
+	{
+		label: "月額 ¥19,800 プラン以上",
+		title: "成長レポート",
+		body: "週ごとの推移を1枚で見渡せます。伸びた週・落ちた週の分岐点に寸評が付き、計測開始からの通算ランキングも確認できます。",
+		href: "https://markdown-web.effect.moe/s/sLgkdHjvoaBmIyn7D566mpF4Lv6YRcOf",
+		visual: "growth",
+	},
+];
+
 const pricingPlans = [
 	{
 		name: "AI CRAWL レポート",
@@ -423,6 +440,90 @@ const faqs = [
 					<Icon name="material-symbols:arrow-outward-rounded" />
 				</a>
 			</div>
+		</div>
+	</section>
+
+	<section id="samples" class="aicrawl-section aicrawl-samples">
+		<div class="aicrawl-container">
+			<div class="aicrawl-section-head aicrawl-samples__head">
+				<p class="aicrawl-eyebrow">SAMPLE REPORTS</p>
+				<h2>実際に届くレポートを、そのままご覧ください。</h2>
+				<p>
+					申し込む前に、どんなレポートが届くのかを確認できます。下記は架空の社労士事務所のデータで作成した見本です。
+				</p>
+				<div class="aicrawl-samples__labels" aria-label="対応業種">
+					<span>全業種対応</span>
+					<span>社労士事務所は見本データの一例です</span>
+				</div>
+			</div>
+
+			<div class="aicrawl-sample-grid">
+				{sampleReports.map((report) => (
+					<article class="aicrawl-price-card aicrawl-sample-card">
+						<div class={`aicrawl-sample-preview aicrawl-sample-preview--${report.visual}`}>
+							{report.visual === "weekly" ? (
+								<>
+									<div class="sample-preview-head">
+										<span>Weekly Summary</span>
+										<strong>毎週月曜</strong>
+									</div>
+									<div class="sample-preview-kpis">
+										<div>
+											<em>AI巡回</em>
+											<strong>1,204</strong>
+										</div>
+										<div>
+											<em>AI経由CV</em>
+											<strong>38</strong>
+										</div>
+									</div>
+									<div class="sample-preview-bars" aria-hidden="true">
+										<span style="--h: 42%"></span>
+										<span style="--h: 58%"></span>
+										<span style="--h: 46%"></span>
+										<span style="--h: 72%"></span>
+										<span style="--h: 64%"></span>
+										<span style="--h: 88%"></span>
+									</div>
+									<div class="sample-preview-chip">改善ポイントを自動診断</div>
+								</>
+							) : (
+								<>
+									<div class="sample-preview-head">
+										<span>Growth Trend</span>
+										<strong>推移と通算</strong>
+									</div>
+									<svg class="sample-preview-line" viewBox="0 0 360 132" aria-hidden="true">
+										<path d="M18 104 C74 96 86 48 132 56 C184 66 184 26 234 34 C286 42 292 16 342 22" />
+										<circle cx="132" cy="56" r="7" />
+										<circle cx="234" cy="34" r="7" />
+										<circle cx="342" cy="22" r="7" />
+									</svg>
+									<div class="sample-preview-ranking">
+										<div><span>会社概要</span><em style="--w: 86%"></em></div>
+										<div><span>料金ページ</span><em style="--w: 68%"></em></div>
+										<div><span>FAQ</span><em style="--w: 52%"></em></div>
+									</div>
+									<div class="sample-preview-chip">伸びた週・落ちた週に寸評</div>
+								</>
+							)}
+						</div>
+						<div class="aicrawl-price-card__top">
+							<span>{report.label}</span>
+							<h3>{report.title}</h3>
+							<p>{report.body}</p>
+						</div>
+						<a href={report.href} target="_blank" rel="noopener" class="aicrawl-price-card__cta">
+							見本を開く
+							<Icon name="material-symbols:arrow-outward-rounded" />
+						</a>
+					</article>
+				))}
+			</div>
+
+			<p class="aicrawl-samples__note">
+				※ 見本は架空の事務所のデータです。実在の企業・団体のものではありません。
+			</p>
 		</div>
 	</section>
 
@@ -1200,6 +1301,268 @@ const faqs = [
 			padding: 26px;
 		}
 
+		.aicrawl-samples {
+			border-top: 1px solid var(--crawl-line);
+			background:
+				radial-gradient(circle at 12% 10%, rgba(185, 138, 45, 0.12), transparent 28%),
+				radial-gradient(circle at 88% 16%, rgba(69, 111, 69, 0.1), transparent 30%),
+				var(--crawl-bg);
+		}
+
+		.aicrawl-samples__head p:not(.aicrawl-eyebrow) {
+			max-width: 780px;
+			margin: 18px 0 0;
+			color: var(--crawl-muted);
+			font-size: clamp(16px, 1.45vw, 19px);
+			font-weight: 700;
+			line-height: 1.85;
+		}
+
+		.aicrawl-samples__labels {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 18px;
+		}
+
+		.aicrawl-samples__labels span {
+			display: inline-flex;
+			align-items: center;
+			min-height: 38px;
+			border-radius: 999px;
+			padding: 0 15px;
+			font-size: 13px;
+			font-weight: 950;
+			line-height: 1;
+		}
+
+		.aicrawl-samples__labels span:first-child {
+			background: var(--crawl-green);
+			color: #fff;
+			box-shadow: 0 14px 30px rgba(69, 111, 69, 0.18);
+		}
+
+		.aicrawl-samples__labels span:last-child {
+			border: 1px solid rgba(185, 138, 45, 0.34);
+			background: rgba(255, 255, 255, 0.78);
+			color: #7a5811;
+		}
+
+		.aicrawl-sample-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 20px;
+			align-items: stretch;
+		}
+
+		.aicrawl-sample-card {
+			display: flex;
+			flex-direction: column;
+			gap: 22px;
+			min-height: 500px;
+		}
+
+		.aicrawl-sample-preview {
+			position: relative;
+			overflow: hidden;
+			min-height: 290px;
+			border: 1px solid rgba(192, 175, 151, 0.68);
+			border-radius: 28px;
+			background:
+				linear-gradient(rgba(185, 138, 45, 0.09) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(185, 138, 45, 0.09) 1px, transparent 1px),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 240, 234, 0.88));
+			background-size: 30px 30px, 30px 30px, auto;
+			padding: clamp(20px, 2.4vw, 28px);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.86);
+		}
+
+		.aicrawl-sample-preview::before {
+			content: "";
+			position: absolute;
+			inset: auto -12% -36% auto;
+			width: 240px;
+			height: 240px;
+			border-radius: 50%;
+			background: rgba(69, 111, 69, 0.11);
+		}
+
+		.aicrawl-sample-preview::after {
+			content: "";
+			position: absolute;
+			inset: -28% auto auto -12%;
+			width: 210px;
+			height: 210px;
+			border-radius: 50%;
+			background: rgba(185, 138, 45, 0.1);
+		}
+
+		.sample-preview-head,
+		.sample-preview-kpis,
+		.sample-preview-bars,
+		.sample-preview-line,
+		.sample-preview-ranking,
+		.sample-preview-chip {
+			position: relative;
+			z-index: 1;
+		}
+
+		.sample-preview-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			margin-bottom: 18px;
+		}
+
+		.sample-preview-head span,
+		.sample-preview-chip {
+			display: inline-flex;
+			align-items: center;
+			width: fit-content;
+			border: 1px solid rgba(69, 111, 69, 0.22);
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.9);
+			color: #33442d;
+			padding: 7px 11px;
+			font-size: 12px;
+			font-weight: 950;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			box-shadow: 0 10px 24px rgba(50, 59, 42, 0.08);
+		}
+
+		.sample-preview-head strong {
+			color: #7a5811;
+			font-size: 13px;
+			font-weight: 950;
+			line-height: 1.2;
+			text-align: right;
+		}
+
+		.sample-preview-kpis {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.sample-preview-kpis div,
+		.sample-preview-ranking {
+			border: 1px solid rgba(192, 175, 151, 0.62);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.82);
+			padding: 16px;
+		}
+
+		.sample-preview-kpis em {
+			display: block;
+			color: var(--crawl-muted);
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 900;
+		}
+
+		.sample-preview-kpis strong {
+			display: block;
+			margin-top: 6px;
+			color: var(--crawl-green);
+			font-size: clamp(30px, 4vw, 42px);
+			font-weight: 950;
+			line-height: 1;
+		}
+
+		.sample-preview-bars {
+			display: flex;
+			align-items: end;
+			gap: 8px;
+			height: 96px;
+			margin-top: 16px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.62);
+			padding: 14px;
+		}
+
+		.sample-preview-bars span {
+			flex: 1;
+			height: var(--h);
+			min-width: 12px;
+			border-radius: 999px 999px 4px 4px;
+			background: linear-gradient(180deg, #8aa168, var(--crawl-green));
+		}
+
+		.sample-preview-line {
+			display: block;
+			width: 100%;
+			height: 132px;
+			margin: 8px 0 12px;
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.66);
+		}
+
+		.sample-preview-line path {
+			fill: none;
+			stroke: var(--crawl-green);
+			stroke-linecap: round;
+			stroke-width: 8;
+		}
+
+		.sample-preview-line circle {
+			fill: #fff8f0;
+			stroke: #b98a2d;
+			stroke-width: 5;
+		}
+
+		.sample-preview-ranking {
+			display: grid;
+			gap: 10px;
+		}
+
+		.sample-preview-ranking div {
+			display: grid;
+			grid-template-columns: minmax(74px, 0.38fr) minmax(0, 1fr);
+			gap: 10px;
+			align-items: center;
+		}
+
+		.sample-preview-ranking span {
+			color: #3c372f;
+			font-size: 12px;
+			font-weight: 950;
+		}
+
+		.sample-preview-ranking em {
+			display: block;
+			width: var(--w);
+			height: 12px;
+			border-radius: 999px;
+			background: linear-gradient(90deg, #b98a2d, #456f45);
+			font-style: normal;
+		}
+
+		.sample-preview-chip {
+			margin-top: 16px;
+			color: #7a5811;
+			text-transform: none;
+		}
+
+		.aicrawl-sample-card .aicrawl-price-card__cta {
+			margin-top: auto;
+			gap: 8px;
+		}
+
+		.aicrawl-sample-card .aicrawl-price-card__cta svg {
+			width: 18px;
+			height: 18px;
+		}
+
+		.aicrawl-samples__note {
+			margin: 18px 0 0;
+			color: var(--crawl-muted);
+			font-size: 13px;
+			font-weight: 800;
+			line-height: 1.7;
+		}
+
 		.aicrawl-section--pricing {
 			border-block: 1px solid var(--crawl-line);
 			background:
@@ -1797,6 +2160,7 @@ const faqs = [
 
 			.crawl-check-grid,
 			.deliverable-grid,
+			.aicrawl-sample-grid,
 			.aicrawl-pricing-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 			}
@@ -1918,6 +2282,7 @@ const faqs = [
 
 			.crawl-check-grid,
 			.deliverable-grid,
+			.aicrawl-sample-grid,
 			.aicrawl-pricing-grid,
 			.aicrawl-proof__stats,
 			.signal-board {
