@@ -146,6 +146,7 @@ const faqs = [
 
 const consultationHref = "/?inquiry=consultation&service=ai-course#contact";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
+const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 ---
 
 <LandingLayout
@@ -344,10 +345,16 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 					<span><b>{stats.reviewCount}件</b><small>公開レビュー</small></span>
 					<span><b>Pro</b><small>ストアカ講師ランク</small></span>
 				</div>
-				<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="instructor-link">
-					ストアカの先生ページを見る
-					<Icon name="material-symbols:arrow-forward-rounded" />
-				</a>
+				<div class="instructor-links">
+					<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="instructor-link">
+						ストアカの先生ページを見る
+						<Icon name="material-symbols:arrow-forward-rounded" />
+					</a>
+					<a href={officeProfileUrl} target="_blank" rel="noopener noreferrer" class="instructor-link instructor-link--office">
+						オフィスクページを見る
+						<Icon name="material-symbols:arrow-forward-rounded" />
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -1139,11 +1146,19 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		font-weight: 850;
 	}
 
-	.instructor-link {
+	.instructor-links {
 		display: inline-flex;
 		align-items: center;
 		gap: 8px;
 		margin-top: 20px;
+		flex-wrap: wrap;
+	}
+
+	.instructor-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
 		border-radius: 999px;
 		background: var(--course-blue);
 		padding: 12px 18px;
@@ -1152,6 +1167,13 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		font-weight: 950;
 		text-decoration: none;
 		box-shadow: 0 16px 34px rgba(0, 86, 179, 0.18);
+	}
+
+	.instructor-link--office {
+		border: 1px solid rgba(0, 86, 179, 0.24);
+		background: #fff;
+		color: var(--course-blue);
+		box-shadow: 0 14px 30px rgba(10, 25, 47, 0.08);
 	}
 
 	.instructor-link svg {
@@ -1399,6 +1421,11 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 		}
 
 		.instructor-proof-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.instructor-links {
+			display: grid;
 			grid-template-columns: 1fr;
 		}
 
