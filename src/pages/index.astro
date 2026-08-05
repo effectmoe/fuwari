@@ -235,7 +235,7 @@ const aiCentralPricing = [
 		label: "まず記憶を作る",
 		price: "¥330,000",
 		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整えます。",
-		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
+		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "個人情報マスキング", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
 		cta: "この構成で相談する",
 		icon: "material-symbols:memory-alt-outline",
 		popular: true,
@@ -245,7 +245,7 @@ const aiCentralPricing = [
 		label: "業務ツールとつなぐ",
 		price: "¥550,000",
 		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
-		features: ["AI セントラルの機能すべて", "外部ツール連携", "期限・予定と接続", "類似案件検索"],
+		features: ["AI セントラルの機能すべて", "AI セントラルの安全設計すべて", "外部ツール連携", "連携時の参照範囲整理", "期限・予定と接続", "類似案件検索"],
 		cta: "連携範囲を相談する",
 		icon: "material-symbols:hub-outline",
 		recommended: true,
@@ -255,7 +255,7 @@ const aiCentralPricing = [
 		label: "ローカルLLMで守る",
 		price: "¥1,320,000",
 		description: "顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
-		features: ["AI セントラル PLUS の機能すべて", "完全ローカル構成", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
+		features: ["AI セントラル PLUS の機能すべて", "完全ローカル構成", "個人情報マスキング・権限設計", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
 		cta: "セキュリティ前提で相談する",
 		icon: "material-symbols:shield-lock-outline",
 		secure: true,
@@ -285,7 +285,7 @@ const topFaqs = [
 	},
 	{
 		q: "顧客情報や個人情報をAIに扱わせても大丈夫ですか？",
-		a: "扱う情報の性質に合わせて設計します。外部クラウドに出せない情報がある場合は、ローカルLLMや管理下AIの構成を検討し、権限、ログ、承認フローを前提に整理します。",
+		a: "すべてのプランで、顧客名、個人名、住所、電話番号、メールアドレスなど、AIにそのまま渡す必要のない情報を伏せる個人情報マスキングを前提に設計します。外部クラウドに出せない情報がある場合は、パーフェクトセキュアでローカルLLMや管理下AIの構成を検討します。",
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
@@ -301,7 +301,7 @@ const topFaqs = [
 	},
 	{
 		q: "パーフェクトセキュアは何が違いますか？",
-		a: "1台のPCを預かり、完全オリジナル仕様に構築します。社内PCや社内ネットワーク内でAIを動かす前提で、機密情報を外部クラウドへ出しにくい構成を作ります。",
+		a: "通常プランの個人情報マスキング、参照範囲設計、権限管理に加えて、1台のPCを預かり完全オリジナル仕様に構築します。社内PCや社内ネットワーク内でAIを動かす前提で、機密情報を外部クラウドへ出しにくい構成を作ります。",
 	},
 	{
 		q: "最初は何から始めるべきですか？",
@@ -490,6 +490,22 @@ const faqLd = {
 						</div>
 						<p>初期導入費用とは別に、隔週90分の伴走コンサル、基本保守、チャット対応を半年間提供します。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
 					</div>
+				</div>
+
+				<div class="pricing-security-note" aria-label="全プラン共通のセキュリティ設計">
+					<div class="pricing-security-note__icon">
+						<Icon name="material-symbols:shield-person-outline" />
+					</div>
+					<div class="pricing-security-note__copy">
+						<span>全プラン共通の安全設計</span>
+						<strong>AIにそのまま渡さない情報を、先に伏せる。</strong>
+						<p>顧客名、個人名、住所、連絡先、契約内容など、AIが判断に使う必要のない情報は、伏せ字化やサンプル化を前提に整理します。パーフェクトセキュアは、その上で社内PC・社内ネットワーク内に閉じる上位構成です。</p>
+					</div>
+					<ul>
+						<li><Icon name="material-symbols:visibility-off-outline" />個人情報マスキング</li>
+						<li><Icon name="material-symbols:rule-folder-outline" />参照範囲設計</li>
+						<li><Icon name="material-symbols:verified-user-outline" />人間確認前提</li>
+					</ul>
 				</div>
 
 				<div class="pricing-cards" aria-label="AIセントラルの料金プラン">
@@ -972,6 +988,93 @@ const faqLd = {
 		font-size: clamp(15px, 1.22vw, 17px);
 		font-weight: 650;
 		line-height: 1.7;
+	}
+
+	.pricing-security-note {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		gap: 18px;
+		align-items: center;
+		margin: 0 0 28px;
+		border: 1px solid rgba(182, 140, 60, 0.28);
+		border-radius: 1.35rem;
+		background:
+			linear-gradient(135deg, rgba(255, 250, 239, 0.96), rgba(239, 247, 237, 0.82)),
+			radial-gradient(circle at 0% 100%, rgba(109, 137, 91, 0.16), transparent 34%),
+			#fffaf1;
+		padding: clamp(18px, 2.4vw, 28px);
+		box-shadow: 0 18px 42px rgba(55, 38, 12, 0.06);
+	}
+
+	.pricing-security-note__icon {
+		display: grid;
+		place-items: center;
+		width: 60px;
+		aspect-ratio: 1;
+		border: 1px solid rgba(182, 140, 60, 0.22);
+		border-radius: 1.1rem;
+		background: rgba(255, 255, 255, 0.76);
+		color: #8b6609;
+		font-size: 32px;
+	}
+
+	.pricing-security-note__copy span {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border: 1px solid rgba(109, 137, 91, 0.26);
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.12);
+		padding: 0.28rem 0.62rem;
+		color: #52683f;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.pricing-security-note__copy strong {
+		display: block;
+		margin-top: 8px;
+		color: var(--effect-ink);
+		font-size: clamp(20px, 2.1vw, 30px);
+		font-weight: 950;
+		line-height: 1.25;
+	}
+
+	.pricing-security-note__copy p {
+		margin: 7px 0 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(14px, 1.12vw, 16px);
+		font-weight: 650;
+		line-height: 1.75;
+	}
+
+	.pricing-security-note ul {
+		display: grid;
+		gap: 8px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.pricing-security-note li {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border: 1px solid rgba(182, 140, 60, 0.24);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.72);
+		padding: 0.54rem 0.78rem;
+		color: #594116;
+		font-size: 13px;
+		font-weight: 900;
+		white-space: nowrap;
+	}
+
+	.pricing-security-note li :global(svg) {
+		flex: 0 0 auto;
+		color: #6d895b;
+		font-size: 18px;
 	}
 
 	.pricing-cards {
@@ -4750,6 +4853,15 @@ const faqLd = {
 			grid-column: 1 / -1;
 		}
 
+		.pricing-security-note {
+			grid-template-columns: 1fr;
+			align-items: stretch;
+		}
+
+		.pricing-security-note ul {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
 		.pricing-flow {
 			grid-template-columns: 1fr;
 		}
@@ -4787,6 +4899,24 @@ const faqLd = {
 		.pricing-support {
 			grid-template-columns: 1fr;
 			border-radius: 1.1rem;
+		}
+
+		.pricing-security-note {
+			border-radius: 1.1rem;
+		}
+
+		.pricing-security-note__icon {
+			width: 52px;
+		}
+
+		.pricing-security-note ul {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-security-note li {
+			justify-content: center;
+			white-space: normal;
+			text-align: center;
 		}
 
 		.diagnosis-questionnaire__grid,
