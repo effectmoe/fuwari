@@ -45,27 +45,27 @@ export const navBarConfig: NavBarConfig = {
 		},
 		{
 			name: "AIセントラル",
-			url: "/ai-central/",
+			url: "/",
 		},
 		{
 			name: "AIクロール",
 			url: "/aicrawl/",
 		},
 		{
-			name: "ブログ",
-			url: "/blog/",
-		},
-		{
 			name: "AI講座",
 			url: "/ai-agent-course/",
 		},
 		{
-			name: "会社概要",
-			url: "/company/",
+			name: "ブログ",
+			url: "/blog/",
 		},
 		{
-			name: "チェンジログ",
-			url: "/changelog/",
+			name: "FAQ",
+			url: "/faq/",
+		},
+		{
+			name: "アバウト",
+			url: "/author/",
 		},
 	],
 };

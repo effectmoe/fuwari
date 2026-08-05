@@ -122,7 +122,11 @@ export default defineConfig({
 		sitemap({
 			filter: (page) => {
 				const pathname = new URL(page).pathname;
-				return !pathname.startsWith("/admin/") && !pathname.startsWith("/ai-traffic-report/");
+				return !pathname.startsWith("/admin/") &&
+					!pathname.startsWith("/ai-traffic-report/") &&
+					pathname !== "/ai-central/" &&
+					pathname !== "/diagnosis/" &&
+					pathname !== "/about/";
 			},
 		}),
 	],

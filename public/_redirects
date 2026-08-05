@@ -10,3 +10,13 @@
 #   ただし AI クローラや SEO ツールの多くは慣習的に /sitemap.xml を直接叩くため、
 #   404 を返すより正規URLへ 301 で寄せたほうが取りこぼしがない。
 /sitemap.xml  /sitemap-index.xml  301
+
+# 旧LP・旧導線を正規ページへ集約する。
+# /ai-central/ は旧単独LP、現在の正規 AI CENTRAL はルート。
+/ai-central/  /  301
+
+# 無料診断は廃止し、無料相談へ統一。
+/diagnosis/  /#contact  301
+
+# 著者/アバウトは /author/ を正規URLにする。
+/about/  /author/  301
