@@ -17,6 +17,11 @@ const { Content } = await render(aboutPost);
 
 const rv = seoConfig.reviews;
 const siteUrl = Astro.site ? Astro.site.toString() : "/";
+const monthlyConsultingUrl = "https://www.street-academy.com/subscription/services/4690";
+const featuredConsultingTestimonial = rv.testimonials.find((t) =>
+	t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+);
+const regularTestimonials = rv.testimonials.filter((t) => t !== featuredConsultingTestimonial);
 
 // 受講生レビューの構造化データ
 // Google リッチリザルト「レビュースニペット」の対象タイプは LocalBusiness/Product/Course/Service 等。
@@ -122,9 +127,33 @@ const reviewLd = {
                 </div>
             </div>
 
+            {featuredConsultingTestimonial && (
+                <div class="mb-6 rounded-2xl border border-black/10 dark:border-white/10 bg-[var(--btn-plain-bg)] p-5 md:p-6">
+                    <div class="flex flex-row items-center justify-between gap-3 flex-wrap mb-3">
+                        <span class="rounded-full bg-[var(--primary)] text-white px-3 py-1 text-xs font-bold">固定表示レビュー</span>
+                        <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-90 mb-2">個別コンサル月額サービスの受講生レビュー</h3>
+                    <p class="text-sm text-75 leading-relaxed mb-3">{featuredConsultingTestimonial.text}</p>
+                    <p class="text-xs text-50 mb-4">
+                        {featuredConsultingTestimonial.reviewer}・{featuredConsultingTestimonial.date.replace("-", "年")}月 受講 ／ {featuredConsultingTestimonial.course}
+                    </p>
+                    <div class="flex flex-row flex-wrap gap-3">
+                        <a href={monthlyConsultingUrl} target="_blank" rel="noopener noreferrer"
+                           class="btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center">
+                            個別コンサル月額サービスを見る
+                        </a>
+                        <a href={rv.reviewUrl} target="_blank" rel="noopener noreferrer"
+                           class="btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center">
+                            ストアカのレビューを見る
+                        </a>
+                    </div>
+                </div>
+            )}
+
             <!-- 個別レビュー（最初5件を表示・残りは もっと見る で展開） -->
             <div class="flex flex-col gap-4">
-                {rv.testimonials.slice(0, 5).map((t) => (
+                {regularTestimonials.slice(0, 5).map((t) => (
                     <div class="rounded-xl border border-black/5 dark:border-white/10 p-4 transition">
                         <div class="flex flex-row items-center justify-between gap-2 mb-2 flex-wrap">
                             <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>
@@ -136,13 +165,13 @@ const reviewLd = {
                     </div>
                 ))}
 
-                {rv.testimonials.length > 5 && (
+                {regularTestimonials.length > 5 && (
                     <details class="mlc-reviews-more">
                         <summary class="cursor-pointer select-none btn-regular rounded-lg px-4 h-10 font-bold active:scale-95 flex items-center justify-center list-none">
-                            もっと見る（残り {rv.testimonials.length - 5} 件）
+                            もっと見る（残り {regularTestimonials.length - 5} 件）
                         </summary>
                         <div class="flex flex-col gap-4 mt-4">
-                            {rv.testimonials.slice(5).map((t) => (
+                            {regularTestimonials.slice(5).map((t) => (
                                 <div class="rounded-xl border border-black/5 dark:border-white/10 p-4 transition">
                                     <div class="flex flex-row items-center justify-between gap-2 mb-2 flex-wrap">
                                         <span class="text-[var(--primary)] text-sm tracking-tight">★★★★★</span>

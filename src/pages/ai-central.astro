@@ -299,7 +299,15 @@ const cases = [
   },
 ];
 
-const testimonials = (stats.testimonials ?? []).filter((t) => t.text && t.text.length > 40).slice(0, 2);
+const featuredConsultingTestimonial = (stats.testimonials ?? []).find((t) =>
+  t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+);
+const testimonials = [
+  ...(featuredConsultingTestimonial ? [featuredConsultingTestimonial] : []),
+  ...(stats.testimonials ?? []).filter((t) =>
+    t.text && t.text.length > 40 && t !== featuredConsultingTestimonial
+  ),
+].slice(0, 2);
 const heroImage = "/lp/generated/bright-japanese-ai-consulting-hero.png";
 const workflowImage = "/lp/generated/bright-workflow-knowledge-design.png";
 

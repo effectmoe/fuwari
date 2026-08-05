@@ -12,7 +12,11 @@ const pageDescription =
 	"AI CENTRAL、AI CRAWL、AI講座を設計・運用するシュ コウメイのプロフィール。構造化・AI実装・LLMO・Notion・システム開発を、講座と現場実装の両面から支援します。";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
+const monthlyConsultingUrl = "https://www.street-academy.com/subscription/services/4690";
 const consultationHref = "/#contact";
+const featuredConsultingTestimonial = (stats.testimonials ?? []).find((t) =>
+	t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+);
 
 const profileLd = {
 	"@context": "https://schema.org",
@@ -364,6 +368,39 @@ const relatedLinks = [
 				</div>
 			</div>
 		</section>
+
+		{featuredConsultingTestimonial && (
+			<section class="author-section author-consulting-proof">
+				<div class="author-container author-consulting-proof__panel">
+					<div class="author-consulting-proof__copy">
+						<p class="author-eyebrow">MONTHLY CONSULTING / REVIEW</p>
+						<h2>個別コンサルは、AIが苦手な人ほど伸びる。</h2>
+						<p>
+							8月に届いたストアカ公開レビューです。単発講座ではなく、月額の個別伴走サービスを受けた方の声として、相談前の不安、継続支援、チャット相談、ナレッジ化の価値まで伝わる内容です。
+						</p>
+						<div class="author-consulting-proof__actions">
+							<a href={monthlyConsultingUrl} target="_blank" rel="noopener noreferrer" class="author-button author-button--primary">
+								個別コンサル月額サービスを見る
+							</a>
+							<a href={storacaProfileUrl} target="_blank" rel="noopener noreferrer" class="author-button author-button--ghost">
+								ストアカのレビューを見る
+							</a>
+						</div>
+					</div>
+					<figure class="author-consulting-review">
+						<div class="author-consulting-review__meta">
+							<span>固定表示レビュー</span>
+							<strong>★★★★★</strong>
+						</div>
+						<blockquote>{featuredConsultingTestimonial.text}</blockquote>
+						<figcaption>
+							<span>{featuredConsultingTestimonial.reviewer}・{featuredConsultingTestimonial.date.replace("-", "年")}月 受講</span>
+							<strong>{featuredConsultingTestimonial.course}</strong>
+						</figcaption>
+					</figure>
+				</div>
+			</section>
+		)}
 
 		<section class="author-section author-systems" id="ai-system-record">
 			<div class="author-container">
@@ -1045,6 +1082,140 @@ const relatedLinks = [
 			text-decoration: none;
 		}
 
+		.author-consulting-proof {
+			padding-top: 0;
+		}
+
+		.author-consulting-proof__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+			gap: clamp(26px, 5vw, 64px);
+			align-items: stretch;
+			border: 1px solid rgba(86, 117, 95, 0.3);
+			border-radius: 30px;
+			background:
+				radial-gradient(circle at 88% 12%, rgba(86, 117, 95, 0.16), transparent 34%),
+				linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(244, 234, 214, 0.74)),
+				#fffdfa;
+			padding: clamp(24px, 4vw, 44px);
+			box-shadow: 0 28px 70px rgba(62, 47, 25, 0.1);
+		}
+
+		.author-consulting-proof__copy {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.author-consulting-proof__copy h2 {
+			margin: 0;
+			color: var(--author-ink);
+			font-size: clamp(2rem, 3.6vw, 3.6rem);
+			font-weight: 950;
+			line-height: 1.14;
+			letter-spacing: 0;
+		}
+
+		.author-consulting-proof__copy p {
+			margin: 22px 0 0;
+			color: var(--author-muted);
+			font-size: 1.02rem;
+			font-weight: 700;
+			line-height: 1.9;
+		}
+
+		.author-consulting-proof__actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 28px;
+		}
+
+		.author-consulting-review {
+			position: relative;
+			margin: 0;
+			overflow: hidden;
+			border: 1px solid rgba(167, 119, 19, 0.32);
+			border-radius: 28px;
+			background:
+				linear-gradient(145deg, rgba(73, 55, 38, 0.98), rgba(55, 72, 54, 0.95)),
+				#3f3328;
+			padding: clamp(22px, 3vw, 34px);
+			color: #fffdf7;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		}
+
+		.author-consulting-review::after {
+			position: absolute;
+			right: -58px;
+			bottom: -64px;
+			width: 180px;
+			height: 180px;
+			border: 1px solid rgba(255, 233, 184, 0.28);
+			border-radius: 999px;
+			background: rgba(255, 233, 184, 0.08);
+			content: "";
+		}
+
+		.author-consulting-review__meta {
+			position: relative;
+			z-index: 1;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			margin-bottom: 20px;
+		}
+
+		.author-consulting-review__meta span {
+			border-radius: 999px;
+			background: rgba(255, 253, 247, 0.12);
+			padding: 8px 12px;
+			color: #f4d38a;
+			font-size: 0.78rem;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.author-consulting-review__meta strong {
+			color: #f4d38a;
+			font-size: 1rem;
+			letter-spacing: 0.08em;
+		}
+
+		.author-consulting-review blockquote {
+			position: relative;
+			z-index: 1;
+			margin: 0;
+			color: rgba(255, 253, 247, 0.92);
+			font-size: clamp(1rem, 1.35vw, 1.18rem);
+			font-weight: 750;
+			line-height: 1.9;
+		}
+
+		.author-consulting-review figcaption {
+			position: relative;
+			z-index: 1;
+			display: grid;
+			gap: 8px;
+			margin-top: 24px;
+			border-top: 1px solid rgba(255, 253, 247, 0.18);
+			padding-top: 18px;
+		}
+
+		.author-consulting-review figcaption span {
+			color: rgba(255, 253, 247, 0.62);
+			font-size: 0.82rem;
+			font-weight: 850;
+		}
+
+		.author-consulting-review figcaption strong {
+			color: #fffdf7;
+			font-size: 1rem;
+			font-weight: 950;
+			line-height: 1.4;
+		}
+
 		.author-systems {
 			border-top: 1px solid var(--author-line);
 			border-bottom: 1px solid var(--author-line);
@@ -1442,6 +1613,7 @@ const relatedLinks = [
 		@media (max-width: 960px) {
 			.author-hero__grid,
 			.author-proof,
+			.author-consulting-proof__panel,
 			.author-systems__panel,
 			.author-origin__grid,
 			.author-evidence__grid,
