@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>シュ コウメイ - Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#eff4ff",
+                        "on-primary-container": "#76849f",
+                        "intelligence-teal": "#00C2FF",
+                        "data-surface": "#F8FAFC",
+                        "trust-blue": "#0056B3",
+                        "on-secondary-fixed-variant": "#004493",
+                        "inverse-surface": "#213145",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "background": "#f8f9ff",
+                        "tertiary-fixed": "#b7eaff",
+                        "tertiary": "#000000",
+                        "primary-container": "#0d1c32",
+                        "on-tertiary-container": "#0090b0",
+                        "on-secondary-container": "#fefcff",
+                        "surface-container-high": "#dce9ff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#515f78",
+                        "on-surface": "#0b1c30",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d6e3ff",
+                        "deep-navy": "#0A192F",
+                        "surface-container": "#e5eeff",
+                        "inverse-primary": "#b9c7e4",
+                        "tertiary-fixed-dim": "#4cd6ff",
+                        "secondary": "#0058bc",
+                        "secondary-container": "#0070eb",
+                        "on-primary-fixed-variant": "#39475f",
+                        "on-tertiary-fixed": "#001f28",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#001f28",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "on-primary-fixed": "#0d1c32",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#000000",
+                        "on-background": "#0b1c30",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "on-surface-variant": "#44474d",
+                        "surface-variant": "#d3e4fe",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "secure-success": "#10B981",
+                        "outline": "#75777e",
+                        "outline-variant": "#c5c6cd",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-secondary-fixed": "#001a41"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "component-gap": "32px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "80px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["16px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["20px", { "lineHeight": "32px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-intelligence-teal selection:text-deep-navy">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-deep-navy w-full top-0 sticky border-b border-outline-variant dark:border-on-primary-container z-50 transition-all duration-200 ease-in-out">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<a class="font-headline-md text-headline-md font-bold text-deep-navy dark:text-intelligence-teal" href="#">
+                シュ コウメイ
+            </a>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-intelligence-teal transition-colors" href="#">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-intelligence-teal transition-colors" href="#">AI Central</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-intelligence-teal transition-colors" href="#">AI Access Analysis</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-primary-container hover:text-secondary dark:hover:text-intelligence-teal transition-colors" href="#">Blog</a>
+<a class="font-body-md text-body-md text-secondary dark:text-intelligence-teal border-b-2 border-secondary dark:border-intelligence-teal pb-1 hover:text-secondary dark:hover:text-intelligence-teal transition-colors" href="#">Company</a>
+</div>
+<a class="hidden md:inline-flex bg-deep-navy text-on-primary font-button text-button px-6 py-3 rounded hover:opacity-90 transition-opacity items-center gap-2" href="#">
+                Contact Us
+            </a>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</nav>
+<!-- Breadcrumb -->
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-6">
+<nav aria-label="Breadcrumb" class="flex text-on-surface-variant font-label-mono text-label-mono uppercase">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="hover:text-secondary transition-colors" href="#">ホーム</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface">設計者プロフィール</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-component-gap items-center">
+<div class="lg:col-span-6 space-y-8">
+<div class="space-y-4">
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-deep-navy font-bold leading-tight">
+                        シュ コウメイ
+                    </h1>
+<p class="font-headline-md text-headline-md text-intelligence-teal font-semibold">
+                        構造化・AI実装・LLMO・Notionを、<br/>講座と実装の両面から扱う設計者。
+                    </p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    effect.moe, AI CENTRALなど、企業のAI導入や社内ナレッジの構造化を支援。実務に基づくメソッドを提供します。
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4">
+<a class="inline-flex justify-center items-center bg-deep-navy text-on-primary font-button text-button px-8 py-4 rounded hover:bg-opacity-90 transition-all" href="#">
+                        無料相談する
+                    </a>
+<a class="inline-flex justify-center items-center border border-deep-navy text-deep-navy font-button text-button px-8 py-4 rounded hover:bg-surface-container transition-all" href="#">
+                        ストアカ先生ページを見る
+                    </a>
+</div>
+</div>
+<div class="lg:col-span-6 relative">
+<div class="relative rounded-xl overflow-hidden border border-outline-variant shadow-sm bg-data-surface aspect-[4/5] md:aspect-square group">
+<img alt="Portrait of Shu Komei" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKW9dy-ZzvFbVtLM51iMIMNmGko7pPS2MPpV7qmgr2PZ0bimK3KZ0kzlCKpR5_jtP4uR-8XOnUW-1lYmffsl-Hz_hyXp_Jl5RCZpNzDdxz2QGFyhGD2x2Er5H41z-0qzTutPaZnpthEkte9Rc9-ICnt9FC4wSqiaxPNrjXUu6hJGo3og8N3mNrbl9IBzWlumCUKFtByPkVGJXm4YAMwgiS6sdlfqum_uWpH6viDrIV9KZOYtpe27bDwyw1-faQSqLLpWZJ9kpIzvCG"/>
+<div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 space-y-3 w-full">
+<div class="flex flex-wrap gap-2">
+<span class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-label-mono text-label-mono px-3 py-1 rounded">STRUCTURED THINKING</span>
+<span class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-label-mono text-label-mono px-3 py-1 rounded">AI IMPLEMENTATION</span>
+<span class="bg-white/10 backdrop-blur-md border border-white/20 text-white font-label-mono text-label-mono px-3 py-1 rounded">LLMO / NOTION</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Strip -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-data-surface border border-outline-variant rounded-lg p-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-trust-blue">military_tech</span>
+<span class="font-body-md text-body-md font-semibold text-deep-navy">ストアカProランク講師</span>
+</div>
+<div class="bg-data-surface border border-outline-variant rounded-lg p-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-trust-blue">domain</span>
+<span class="font-body-md text-body-md font-semibold text-deep-navy">株式会社EFFECT</span>
+</div>
+<div class="bg-data-surface border border-outline-variant rounded-lg p-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-trust-blue">account_tree</span>
+<span class="font-body-md text-body-md font-semibold text-deep-navy">構造化思考 / DFB</span>
+</div>
+<div class="bg-data-surface border border-outline-variant rounded-lg p-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-trust-blue">smart_toy</span>
+<span class="font-body-md text-body-md font-semibold text-deep-navy">AI実装 / LLMO</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-data-surface dark:bg-primary-container w-full py-12 border-t border-outline-variant dark:border-on-primary-container mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="font-headline-md text-headline-md text-deep-navy">
+                © 2024 シュ コウメイ. All rights reserved.
+            </div>
+<div class="flex gap-6">
+<a class="font-label-mono text-label-mono text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-on-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-on-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant dark:text-on-primary-container hover:text-primary dark:hover:text-on-primary opacity-80 hover:opacity-100 transition-opacity" href="#">Security Disclosure</a>
+</div>
+</div>
+</footer>
+</body></html>

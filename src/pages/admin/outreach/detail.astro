@@ -1,0 +1,418 @@
+---
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>リード詳細 | effect.moe</title>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <a class="back-link" href="/admin/outreach/">← 一覧に戻る</a>
+      <p class="status" data-status>読み込み中...</p>
+      <div class="detail-card" data-detail-card></div>
+    </main>
+
+    <script>
+      // このページ自体がCloudflare Access（Googleログイン・許可アカウント限定）で保護されているため、
+      // ここに直接埋め込んでも安全（ページに辿り着ける時点で本人確認済み）。
+      // ローテーション等でキーを変更した場合はこの値も更新すること。
+      const DEFAULT_TOKEN = "dbb4bb5dccc4088d16d10ddb854615708a6ae35b53a278354b0b8b836db8fe83";
+      const getToken = () => localStorage.getItem("effect_moe_outreach_token") || DEFAULT_TOKEN;
+
+      const statusText = document.querySelector("[data-status]");
+      const card = document.querySelector("[data-detail-card]");
+      const STATUS_OPTIONS = ["候補", "下書き", "承認済み", "送信済み", "スキップ", "失敗"];
+      const STATUS_CLASS = {
+        "候補": "st-candidate",
+        "下書き": "st-draft",
+        "承認済み": "st-approved",
+        "送信済み": "st-sent",
+        "スキップ": "st-skipped",
+        "失敗": "st-failed",
+      };
+
+      const params = new URLSearchParams(location.search);
+      const leadId = params.get("id");
+
+      const setStatus = (message) => {
+        if (statusText) statusText.textContent = message;
+      };
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      const formatDate = (value) => {
+        if (!value) return "-";
+        return new Intl.DateTimeFormat("ja-JP", {
+          timeZone: "Asia/Tokyo",
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(new Date(value));
+      };
+
+      const parseMetadata = (value) => {
+        if (!value) return null;
+        try {
+          return JSON.parse(value);
+        } catch {
+          return null;
+        }
+      };
+
+      function renderDetail(lead) {
+        const metadata = parseMetadata(lead.metadata_json);
+        card.innerHTML = `
+          <div class="detail-head">
+            <div>
+              <span class="pill">${escapeHtml(lead.campaign)}</span>
+              <h1>${escapeHtml(lead.company_name)}</h1>
+              <p class="sub">${escapeHtml(lead.industry || "-")} ${escapeHtml(lead.prefecture || "")}${escapeHtml(lead.city || "")}${lead.rep_name ? " / 代表: " + escapeHtml(lead.rep_name) : ""}</p>
+            </div>
+            <span class="status-pill ${STATUS_CLASS[lead.status] || ""}">${escapeHtml(lead.status)}</span>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <span>アプローチ</span>
+              <b>${escapeHtml(lead.approach_channel || "-")}</b>
+            </div>
+            <div class="field">
+              <span>会社URL</span>
+              <b>${lead.site_url ? `<a href="${escapeHtml(lead.site_url)}" target="_blank" rel="noreferrer">${escapeHtml(lead.site_url)}</a>` : "-"}</b>
+            </div>
+            <div class="field">
+              <span>フォームURL</span>
+              <b>${lead.form_url ? `<a href="${escapeHtml(lead.form_url)}" target="_blank" rel="noreferrer">${escapeHtml(lead.form_url)}</a>` : "-"}</b>
+            </div>
+            <div class="field">
+              <span>メールアドレス</span>
+              <b>${lead.email_address ? `<a href="mailto:${escapeHtml(lead.email_address)}">${escapeHtml(lead.email_address)}</a>` : "-"}</b>
+            </div>
+            <div class="field">
+              <span>法人番号</span>
+              <b>${escapeHtml(lead.corporate_number || "-")}</b>
+            </div>
+            <div class="field">
+              <span>更新日時</span>
+              <b>${escapeHtml(formatDate(lead.updated_at))}</b>
+            </div>
+          </div>
+
+          ${lead.skip_reason ? `
+            <div class="block skip-block">
+              <strong>スキップ / 失敗理由</strong>
+              <p>${escapeHtml(lead.skip_reason)}</p>
+            </div>
+          ` : ""}
+
+          <div class="block message-block">
+            <strong>送信文面</strong>
+            <p>${lead.message ? escapeHtml(lead.message) : "(未生成)"}</p>
+          </div>
+
+          ${metadata ? `
+            <div class="block metadata-block">
+              <strong>付随情報</strong>
+              <pre>${escapeHtml(JSON.stringify(metadata, null, 2))}</pre>
+            </div>
+          ` : ""}
+
+          <div class="actions-block">
+            <label>
+              <span>ステータスを変更</span>
+              <select data-status-select>
+                ${STATUS_OPTIONS.map((value) => `
+                  <option value="${value}" ${lead.status === value ? "selected" : ""}>${value}</option>
+                `).join("")}
+              </select>
+            </label>
+            ${lead.status === "下書き" ? `
+              <button type="button" class="approve" data-approve>承認</button>
+              <button type="button" class="skip" data-skip>スキップ</button>
+            ` : ""}
+          </div>
+        `;
+
+        card.querySelector("[data-status-select]")?.addEventListener("change", (event) => {
+          updateLead({ status: event.target.value });
+        });
+        card.querySelector("[data-approve]")?.addEventListener("click", () => {
+          updateLead({ status: "承認済み" });
+        });
+        card.querySelector("[data-skip]")?.addEventListener("click", () => {
+          const reason = prompt("スキップ理由（任意）", "") || "詳細ページから手動スキップ";
+          updateLead({ status: "スキップ", skip_reason: reason });
+        });
+      }
+
+      async function fetchDetail() {
+        if (!leadId) {
+          setStatus("リードIDが指定されていません。");
+          return;
+        }
+        const response = await fetch(`/api/outreach?id=${encodeURIComponent(leadId)}`, {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        });
+        const data = await response.json().catch(() => null);
+        const lead = data?.results?.[0];
+        if (!response.ok || !data?.success || !lead) {
+          setStatus("リードが見つかりませんでした。");
+          return;
+        }
+        setStatus("");
+        renderDetail(lead);
+      }
+
+      async function updateLead(fields) {
+        if (!leadId) return;
+        const response = await fetch(`/api/outreach?id=${encodeURIComponent(leadId)}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+          body: JSON.stringify(fields),
+        });
+        const data = await response.json().catch(() => null);
+        setStatus(response.ok && data?.success ? "更新しました。" : "更新に失敗しました。");
+        fetchDetail();
+      }
+
+      fetchDetail();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  :root {
+    color: #222020;
+    background: #fcf8f9;
+    font-family: "Noto Sans JP", system-ui, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    background:
+      linear-gradient(90deg, rgba(125, 92, 29, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(125, 92, 29, 0.05) 1px, transparent 1px),
+      #fcf8f9;
+    background-size: 56px 56px;
+  }
+
+  .admin-shell {
+    width: min(880px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 44px 0 80px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #52683f;
+    font-weight: 850;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .status {
+    margin: 0 0 18px;
+    color: #7d5c1d;
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  .detail-card {
+    border: 1px solid rgba(210, 197, 178, 0.76);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 24px 72px rgba(55, 38, 12, 0.08);
+    padding: clamp(24px, 4vw, 40px);
+  }
+
+  .detail-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    border-bottom: 1px solid rgba(210, 197, 178, 0.7);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+
+  .pill {
+    display: inline-block;
+    border-radius: 6px;
+    background: #52683f;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 950;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.2;
+  }
+
+  .sub {
+    margin: 0;
+    color: #625b52;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .status-pill {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 950;
+    white-space: nowrap;
+  }
+
+  .st-candidate { background: #f0d998; color: #6b4e00; }
+  .st-draft { background: #cdd6f7; color: #2c3a80; }
+  .st-approved { background: #cfe4c2; color: #2f4a20; }
+  .st-sent { background: #a9dcc0; color: #1c5a3a; }
+  .st-skipped { background: #dcdcdc; color: #4a4a4a; }
+  .st-failed { background: #f0c4bd; color: #7a2418; }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .field {
+    display: grid;
+    gap: 4px;
+    border-radius: 14px;
+    background: rgba(252, 248, 249, 0.9);
+    padding: 12px 14px;
+  }
+
+  .field span {
+    color: #8a6600;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .field b {
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  a {
+    color: #2f5aa8;
+    font-weight: 750;
+    text-decoration: underline;
+  }
+
+  .block {
+    border-radius: 16px;
+    background: rgba(252, 248, 249, 0.9);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .block strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .block p {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+  }
+
+  .skip-block {
+    background: rgba(163, 69, 58, 0.08);
+  }
+
+  .skip-block p {
+    color: #7a2418;
+  }
+
+  .message-block {
+    background: #fff;
+    border: 1px solid rgba(210, 197, 178, 0.6);
+  }
+
+  .metadata-block pre {
+    margin: 0;
+    font-size: 12px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .actions-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .actions-block label {
+    display: grid;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 950;
+  }
+
+  input,
+  select,
+  button {
+    min-height: 44px;
+    border: 1px solid rgba(210, 197, 178, 0.82);
+    border-radius: 12px;
+    background: #fff;
+    color: #222020;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 850;
+    padding: 0 14px;
+  }
+
+  button {
+    cursor: pointer;
+    border-color: #6d895b;
+    background: #6d895b;
+    color: #fff;
+  }
+
+  button.skip {
+    border-color: #a3453a;
+    background: #a3453a;
+  }
+
+  @media (max-width: 640px) {
+    .field-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Crawl | AI CENTRAL by effect.moe</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Work+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eae8e7",
+                        "secondary-fixed": "#e4e2dd",
+                        "on-primary-fixed": "#002203",
+                        "inverse-surface": "#303030",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e4e2e1",
+                        "surface": "#fbf9f8",
+                        "tertiary": "#4c4843",
+                        "on-tertiary-container": "#e1dbd3",
+                        "secondary-container": "#e1dfdb",
+                        "secondary": "#5f5e5b",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed": "#bcf0b2",
+                        "secondary-fixed-dim": "#c8c6c2",
+                        "inverse-primary": "#a1d398",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1e1b17",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf9f8",
+                        "tertiary-container": "#64605a",
+                        "surface-bright": "#fbf9f8",
+                        "primary-fixed-dim": "#a1d398",
+                        "on-surface-variant": "#42493f",
+                        "on-primary-fixed-variant": "#245022",
+                        "surface-container-low": "#f6f3f2",
+                        "outline": "#72796e",
+                        "on-primary-container": "#b6eaac",
+                        "primary": "#265224",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#63635f",
+                        "on-background": "#1b1c1c",
+                        "outline-variant": "#c2c9bc",
+                        "surface-container": "#f0eded",
+                        "on-error": "#ffffff",
+                        "primary-container": "#3e6b3a",
+                        "on-secondary-fixed-variant": "#474744",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ccc6be",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#4a4641",
+                        "on-secondary-fixed": "#1b1c19",
+                        "tertiary-fixed": "#e8e1da",
+                        "surface-tint": "#3c6938",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-lg": ["Work Sans"],
+                        "body-sm": ["Work Sans"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Work Sans"],
+                        "label-md": ["Work Sans"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ambient-shadow {
+            box-shadow: 0 4px 20px rgba(62, 107, 58, 0.08);
+        }
+        .float-shadow {
+            box-shadow: 0 12px 40px rgba(62, 107, 58, 0.12);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #265224, #3e6b3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface sticky top-0 z-50 border-b border-outline-variant w-full">
+<div class="flex justify-between items-center px-margin-desktop h-20 w-full max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">neurology</span>
+                AI CENTRAL by effect.moe
+            </div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-secondary font-body-md text-body-md hover:text-primary-container transition-colors duration-200" href="#">AIセントラル</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 opacity-80 transition-all" href="#">AI Crawl</a>
+<a class="text-secondary font-body-md text-body-md hover:text-primary-container transition-colors duration-200" href="#">料金</a>
+<a class="text-secondary font-body-md text-body-md hover:text-primary-container transition-colors duration-200" href="#">ブログ</a>
+<a class="text-secondary font-body-md text-body-md hover:text-primary-container transition-colors duration-200" href="#">FAQ</a>
+<a class="text-secondary font-body-md text-body-md hover:text-primary-container transition-colors duration-200" href="#">お問い合わせ</a>
+</nav>
+<div class="hidden md:block">
+<a class="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2" href="#">
+                    無料診断
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-32 overflow-hidden">
+<div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(62, 107, 58, 0.05) 0%, transparent 50%);"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid md:grid-cols-2 gap-12 items-center">
+<div class="flex flex-col gap-6 z-10">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">AI CRAWL / SEARCH VISIBILITY</span>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-background leading-tight">
+                        AIがあなたのサイトを読めるか、まず入口から確認する。
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        AI検索で見つかるには、ページの文章だけでなく、AIクローラーが到達できること、会社情報やサービス情報を誤解なく読めることが前提になります。
+                    </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<a class="bg-primary-container text-on-primary px-8 py-3.5 rounded-full font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2 shadow-lg shadow-primary/20" href="#diagnostic">
+                            無料診断で確認する
+                        </a>
+<a class="bg-transparent text-primary border border-primary px-8 py-3.5 rounded-full font-label-md text-label-md hover:bg-surface-container-low transition-colors" href="#">
+                            AIセントラルを見る
+                        </a>
+</div>
+</div>
+<div class="relative z-10 perspective-1000">
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow border border-outline-variant/30 p-6 flex flex-col gap-4 transform rotate-y-[-5deg] rotate-x-[2deg] hover:rotate-0 transition-transform duration-500">
+<!-- Mockup Header -->
+<div class="flex justify-between items-center border-b border-surface-variant pb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<span class="font-label-md text-label-md text-on-background">DIAGNOSTIC REPORT</span>
+</div>
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-data-mono">STATUS: LIVE</span>
+</div>
+<!-- Main Metric -->
+<div class="bg-surface p-4 rounded-lg flex items-center justify-between border border-outline-variant/50">
+<div>
+<p class="text-secondary font-label-md text-label-md">Crawl Success Rate</p>
+<p class="font-data-mono text-display-lg text-primary mt-1">98<span class="text-headline-md">%</span></p>
+</div>
+<div class="h-16 w-16 rounded-full border-4 border-primary border-t-outline-variant/30 flex items-center justify-center transform rotate-45">
+<span class="material-symbols-outlined text-primary -rotate-45">done</span>
+</div>
+</div>
+<!-- Check Status Grid -->
+<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="bg-surface p-4 rounded-lg border border-outline-variant/50">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary mb-2">schema</span>
+<span class="h-2 w-2 rounded-full bg-primary-container"></span>
+</div>
+<p class="text-secondary font-label-md text-label-md">Structured Info</p>
+<p class="font-body-md text-body-md text-on-background font-semibold mt-1">Validated</p>
+</div>
+<div class="bg-error/5 p-4 rounded-lg border border-error/20">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-error mb-2">warning</span>
+<span class="h-2 w-2 rounded-full bg-error"></span>
+</div>
+<p class="text-secondary font-label-md text-label-md">Missing Source</p>
+<p class="font-body-md text-body-md text-error font-semibold mt-1">FAQ Points Alert</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="py-24 bg-surface-container-low border-y border-outline-variant/30">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">
+                        AIに読まれないサイトは、存在していないのと同じになる。
+                    </h2>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl ambient-shadow flex flex-col gap-4 border border-outline-variant/20 hover:-translate-y-1 transition-transform duration-300">
+<div class="h-12 w-12 rounded-lg bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">block</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">AIクローラーが到達できない</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            robots.txtやJavaScript依存により、AIがサイト内を巡回できず、情報が届かない。
+                        </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl ambient-shadow flex flex-col gap-4 border border-outline-variant/20 hover:-translate-y-1 transition-transform duration-300">
+<div class="h-12 w-12 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rule_folder</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">会社情報・料金・FAQが整理されていない</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            AIが「誰が提供しているか」「いくらか」を正しく把握できず、誤った情報を回答する原因に。
+                        </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl ambient-shadow flex flex-col gap-4 border border-outline-variant/20 hover:-translate-y-1 transition-transform duration-300">
+<div class="h-12 w-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">link_off</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background">AIに引用される根拠が不足している</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                            出典としての信頼性が不足し、AI検索の回答ソースから除外されてしまう。
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- What AI Crawl Checks (Bento Grid) -->
+<section class="py-24">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-12">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">
+                        AI Crawlで確認する4つの視点。
+                    </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[minmax(200px,auto)]">
+<!-- 到達 (Reach) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl p-8 ambient-shadow border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">route</span>
+<h3 class="font-headline-md text-headline-md text-on-background">到達</h3>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-surface-container-low text-secondary font-label-md text-[10px] rounded border border-outline-variant/50">robots.txt</span>
+<span class="px-3 py-1 bg-surface-container-low text-secondary font-label-md text-[10px] rounded border border-outline-variant/50">noindex</span>
+<span class="px-3 py-1 bg-surface-container-low text-secondary font-label-md text-[10px] rounded border border-outline-variant/50">403エラー</span>
+<span class="px-3 py-1 bg-surface-container-low text-secondary font-label-md text-[10px] rounded border border-outline-variant/50">JavaScript依存の有無</span>
+</div>
+</div>
+<div class="w-full h-24 bg-surface rounded-lg border border-outline-variant/30 overflow-hidden relative">
+<!-- Minimal code visual -->
+<div class="absolute inset-0 p-4 font-data-mono text-[10px] text-outline opacity-50 flex flex-col gap-1">
+<div>User-agent: Googlebot</div>
+<div>Allow: /</div>
+<div class="text-error">Disallow: /api/</div>
+</div>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 bg-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">search_check</span>
+</div>
+</div>
+</div>
+<!-- 改善順 (Prioritization) -->
+<div class="md:col-span-4 bg-primary text-on-primary rounded-xl p-8 ambient-shadow flex flex-col">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined">low_priority</span>
+<h3 class="font-headline-md text-headline-md">改善順</h3>
+</div>
+<ul class="space-y-3 flex-grow font-body-sm">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] mt-0.5 opacity-80">check_circle</span>
+                                修正優先度判定
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] mt-0.5 opacity-80">check_circle</span>
+                                対象ページリスト
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] mt-0.5 opacity-80">check_circle</span>
+                                不足しているFAQの提案
+                            </li>
+</ul>
+</div>
+<!-- 理解 (Understanding) -->
+<div class="md:col-span-6 bg-surface-container-lowest rounded-xl p-8 ambient-shadow border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<h3 class="font-headline-md text-headline-md text-on-background">理解</h3>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-surface rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">business</span>
+<span class="font-label-md text-[11px] text-on-surface">会社情報</span>
+</div>
+<div class="p-3 bg-surface rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">design_services</span>
+<span class="font-label-md text-[11px] text-on-surface">サービス詳細</span>
+</div>
+<div class="p-3 bg-surface rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">payments</span>
+<span class="font-label-md text-[11px] text-on-surface">価格体系</span>
+</div>
+<div class="p-3 bg-surface rounded border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">quiz</span>
+<span class="font-label-md text-[11px] text-on-surface">FAQ</span>
+</div>
+</div>
+</div>
+<!-- 引用 (Citation) -->
+<div class="md:col-span-6 bg-surface-container-lowest rounded-xl p-8 ambient-shadow border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">format_quote</span>
+<h3 class="font-headline-md text-headline-md text-on-background">引用</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-2 border-b border-surface-variant">
+<span class="font-body-sm text-on-surface">出典リンクの適切さ</span>
+<div class="h-2 w-16 bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[80%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center pb-2 border-b border-surface-variant">
+<span class="font-body-sm text-on-surface">構造化データの有無</span>
+<div class="h-2 w-16 bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[100%]"></div>
+</div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-on-surface">根拠となる専用ページ</span>
+<div class="h-2 w-16 bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Inside vs Outside (Comparison) -->
+<section class="py-24 bg-inverse-surface text-inverse-on-surface overflow-hidden relative">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">「外側の入口」と「内側の記憶」。</h2>
+<p class="font-body-md max-w-2xl mx-auto text-surface-dim">
+                        外側の見え方と、内側の記憶設計を分けて整えることで、AIに選ばれ、AIが働く会社へ近づく。
+                    </p>
+</div>
+<div class="grid md:grid-cols-2 gap-8 items-stretch">
+<!-- Left: AI Crawl -->
+<div class="bg-tertiary-container/30 border border-outline/30 rounded-2xl p-8 backdrop-blur-sm flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<span class="font-label-md tracking-widest text-primary-fixed-dim uppercase">Outside</span>
+<span class="material-symbols-outlined text-primary-fixed text-[32px]">sensor_door</span>
+</div>
+<h3 class="font-display-lg text-[32px] text-on-primary font-bold mb-4">AI Crawl</h3>
+<p class="font-body-md text-surface-dim flex-grow">
+                            AI検索・AIクローラーから見た「外側の入口」を整える。外部からのアクセス性と情報構造の最適化を担う。
+                        </p>
+<div class="mt-8 pt-6 border-t border-outline/20">
+<img class="w-full h-48 object-cover rounded-lg opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500" data-alt="A professional Japanese office environment where a diverse team is working on laptops and reviewing documents. Subtle, clean digital overlays represent 'AI memory nodes' and 'workflow labels' connecting their tasks. The style is bright, modern, and grounded in reality, avoiding abstract 3D shapes or generic stock photo tropes. High-quality corporate photography style." src="https://lh3.googleusercontent.com/aida/AP1WRLvdYXeRxTf6_9uhH_AT12e1erSNEQuLhIoTts-IcKkDOLc7PjQyCihsx622BnWJIQoXrP2XZZf1V8mBBWcsg_VF6BhhG06V_SLi_iygudKQOII7t4fjGTnk7DAPRfzri2tn90mSBYPEBEGJlghDtCsKM7xAhXHG30NzbKBJFUcpF6g2TW5GxNC5_zPMs_e2N18VMSPDWuWKw6o5LqrodUgR9nbFhH84zbWp1wkYeVANG_nREp1FxjcZ-Z8"/>
+</div>
+</div>
+<!-- Right: AI CENTRAL -->
+<div class="bg-surface-container-lowest text-on-surface border border-outline-variant/30 rounded-2xl p-8 flex flex-col relative overflow-hidden">
+<!-- Decorative glow -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="flex items-center justify-between mb-8 relative z-10">
+<span class="font-label-md tracking-widest text-primary uppercase">Inside</span>
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">neurology</span>
+</div>
+<h3 class="font-display-lg text-[32px] text-on-background font-bold mb-4 relative z-10">AI CENTRAL</h3>
+<p class="font-body-md text-on-surface-variant flex-grow relative z-10">
+                            社内情報・顧客情報・対応履歴をAIの参照先にする「内側の中枢」を構築する。独自の知識ベースとして機能。
+                        </p>
+<div class="mt-8 p-4 bg-surface rounded-lg border border-outline-variant/30 flex items-center justify-between relative z-10">
+<span class="font-label-md text-secondary">INTEGRATION READY</span>
+<span class="material-symbols-outlined text-primary">cable</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Workflow Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row gap-16">
+<div class="md:w-1/3 sticky top-32 self-start">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">
+                            Workflow
+                        </h2>
+<p class="font-body-md text-on-surface-variant">
+                            診断から改善までのプロセス。
+                        </p>
+</div>
+<div class="md:w-2/3 space-y-8 relative before:absolute before:inset-0 before:ml-[1.4rem] md:before:ml-[1.7rem] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/20 before:to-transparent">
+<!-- Step 1 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-primary-container text-on-primary shadow shadow-primary/20 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="font-label-md">1</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 ambient-shadow">
+<h3 class="font-headline-md text-[18px] text-on-background mb-2">URLを送る</h3>
+<p class="font-body-sm text-on-surface-variant">診断対象のサイトURLをフォームから送信</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-surface-container-high text-secondary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="font-label-md">2</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 ambient-shadow">
+<h3 class="font-headline-md text-[18px] text-on-background mb-2">AIからの見え方を確認</h3>
+<p class="font-body-sm text-on-surface-variant">クローラビリティや情報構造の診断レポート受領</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-surface-container-high text-secondary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="font-label-md">3</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 ambient-shadow">
+<h3 class="font-headline-md text-[18px] text-on-background mb-2">改善の順番を決める</h3>
+<p class="font-body-sm text-on-surface-variant">優先度の高い項目から具体的な修正案を提示</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-surface bg-surface-container-high text-secondary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+<span class="font-label-md">4</span>
+</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 ambient-shadow">
+<h3 class="font-headline-md text-[18px] text-on-background mb-2">次のステップへ</h3>
+<p class="font-body-sm text-on-surface-variant">必要に応じてAI CENTRALの導入や、構造化データの詳細実装へ進む</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-32 bg-primary-container text-on-primary relative overflow-hidden" id="diagnostic">
+<!-- Simple pattern -->
+<div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+<div class="max-w-3xl mx-auto px-margin-mobile text-center relative z-10">
+<h2 class="font-headline-lg text-[32px] md:text-[40px] font-bold mb-6 leading-tight">
+                    まずは、AIが読める入口に<br class="hidden md:block"/>なっているか確認しましょう。
+                </h2>
+<p class="font-body-lg text-primary-fixed-dim mb-10 max-w-xl mx-auto">
+                    本格的な改善に入る前に、AI検索・AIクローラー・情報構造の現状を無料診断で確認できます。
+                </p>
+<form class="max-w-md mx-auto bg-surface-container-lowest p-2 rounded-full flex shadow-lg shadow-black/20 focus-within:ring-2 ring-primary-fixed transition-all">
+<input class="flex-grow bg-transparent border-none focus:ring-0 text-on-surface px-4 font-body-md placeholder:text-outline-variant" placeholder="https://your-website.com" required="" type="url"/>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-full font-label-md text-label-md hover:bg-surface-tint transition-colors whitespace-nowrap" type="submit">
+                        無料診断を申し込む
+                    </button>
+</form>
+<p class="font-label-md text-[10px] text-primary-fixed-dim mt-4">
+                    ※診断結果は通常1〜2営業日でお届けします。
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+<div class="col-span-2 md:col-span-4 mb-8">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">neurology</span>
+                    AI CENTRAL by effect.moe
+                </div>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">AIセントラル</a>
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">AI Crawl</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">無料診断</a>
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">お問い合わせ</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">シュ コウメイ</a>
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">会社概要</a>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">ブログ</a>
+<a class="text-secondary font-body-sm text-body-sm hover:text-primary transition-colors" href="#">FAQ</a>
+</div>
+<div class="col-span-2 md:col-span-4 mt-8 pt-8 border-t border-outline-variant/30 text-secondary font-body-sm text-body-sm">
+                © 2024 AI CENTRAL by effect.moe
+            </div>
+</div>
+</footer>
+</body></html>
