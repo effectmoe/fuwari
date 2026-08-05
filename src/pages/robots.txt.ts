@@ -1,98 +1,32 @@
 import type { APIRoute } from "astro";
 
-// /_astro/ を Disallow すると Googlebot が JS/CSS を読めず、
-// ページが正しくレンダリングできずリッチリザルト判定が壊れる。
-// Google ガイドラインに従い JS/CSS は許可する。
+// 🔴 2026-08-05 全面簡素化（86行 → 8行）
 //
-// 末尾に AI クローラ・LLM 学習ボットの「明示許可ブロック」を追加。
-// ClaudeBot / anthropic-ai 等は opt-in 型クローラで、`User-agent: *`
-// の包括許可だけでは来訪しない設計のため、UA を 1 つずつ明示する。
-// 出典: Anthropic Trust Center / Google Search Central / Perplexity Help
+// 【何が問題だったか】
+// AIクローラ17種を個別に列挙し、それぞれに `Allow: /` を書いていた。
+// コメントには「opt-in型クローラは `User-agent: *` の包括許可だけでは来訪しない」
+// と書かれていたが、**これは誤り**。robots.txt の仕様上、
+//
+//   クローラは「自分の名前が書かれたグループ」だけを読み、`User-agent: *` を完全に無視する。
+//   グループはマージされない。
+//
+// つまり UA を列挙して `Allow: /` を書いても**許可は1ミリも増えない**（元々許可されている）。
+// 増えるのは管理コストだけで、さらに各グループに `Disallow: /admin/` を書き忘れると
+// そのクローラだけ管理画面に入れてしまう。**純粋な劣化**だった。
+//
+// 【実測での裏付け】
+// 自社AIクローラログ5サイト・76,015ヒットを横断調査した結果、
+// llms.txt の取得はわずか7件（0.009%）。一方 robots.txt は1サイトだけで1,993回取得されている。
+// AIクローラは robots.txt と sitemap は必ず読むが、「許可の明示」は必要としていない。
+//
+// 【ルール】CLAUDE.md「robots.txt は間口を最大限広く取る」＋ BONITO案件（71行→13行）と同じ判断。
+// 制限は「クロールされると実害があるもの」（管理画面）だけに絞る。
+//
+// /_astro/ を Disallow すると Googlebot が JS/CSS を読めずリッチリザルト判定が壊れるため、
+// JS/CSS は許可したまま（Google ガイドライン準拠）。
 const robotsTxt = `
 User-agent: *
 Disallow: /admin/
-Allow: /
-
-# === AI クローラ・LLM 学習ボット 明示許可 ===
-# (LLMO 観点で AI 検索エコシステム全体に露出させるため)
-
-# Anthropic (Claude / Claude.ai 引用元)
-User-agent: ClaudeBot
-Disallow: /admin/
-Allow: /
-
-User-agent: anthropic-ai
-Disallow: /admin/
-Allow: /
-
-User-agent: Claude-Web
-Disallow: /admin/
-Allow: /
-
-# OpenAI (ChatGPT 学習・ライブ検索)
-User-agent: GPTBot
-Disallow: /admin/
-Allow: /
-
-User-agent: ChatGPT-User
-Disallow: /admin/
-Allow: /
-
-User-agent: OAI-SearchBot
-Disallow: /admin/
-Allow: /
-
-# Google (Gemini / AI Overviews 学習)
-User-agent: Google-Extended
-Disallow: /admin/
-Allow: /
-
-# Perplexity (検索引用)
-User-agent: PerplexityBot
-Disallow: /admin/
-Allow: /
-
-User-agent: Perplexity-User
-Disallow: /admin/
-Allow: /
-
-# Microsoft (Bing / Copilot)
-User-agent: Bingbot
-Disallow: /admin/
-Allow: /
-
-# Apple (Siri / Apple Intelligence)
-User-agent: Applebot
-Disallow: /admin/
-Allow: /
-
-User-agent: Applebot-Extended
-Disallow: /admin/
-Allow: /
-
-# Common Crawl (大多数の LLM 学習基盤)
-User-agent: CCBot
-Disallow: /admin/
-Allow: /
-
-# Meta (Llama 学習)
-User-agent: Meta-ExternalAgent
-Disallow: /admin/
-Allow: /
-
-User-agent: FacebookBot
-Disallow: /admin/
-Allow: /
-
-# Mistral
-User-agent: MistralAI-User
-Disallow: /admin/
-Allow: /
-
-# You.com
-User-agent: YouBot
-Disallow: /admin/
-Allow: /
 
 Sitemap: ${new URL("sitemap-index.xml", import.meta.env.SITE).href}
 Host: ${new URL(import.meta.env.SITE).host}

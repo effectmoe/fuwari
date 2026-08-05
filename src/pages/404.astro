@@ -1,0 +1,33 @@
+---
+// 🔴 2026-08-05 新設: soft 404 の解消
+//
+// 【何が問題だったか】
+// 404.astro が存在しなかったため、存在しないURLへのアクセスに対して
+// ホスト側がトップページのHTMLを **HTTP 200** で返していた（soft 404）。
+// 実測: /this-page-does-not-exist-12345 → 200 + トップページの内容
+//       /sitemap.xml（実体は sitemap-index.xml）→ 200 + トップページの内容
+//
+// 【なぜ有害か】
+// - 検索エンジン／AIクローラは「存在しないページ」を判別できず、
+//   同一内容の重複ページが無限に存在するとみなす（クロールバジェットの浪費）
+// - AIが誤ったURLを引用した場合、200が返るため「実在するページ」と誤認され続ける
+// - Search Console で「重複」「代替ページ」判定を受ける原因になる
+//
+// 【対処】本ファイルを置くことで、静的ビルド時に 404.html が生成され、
+// ホスト（Cloudflare Pages）が正しく 404 ステータスを返すようになる。
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+---
+
+<MainGridLayout title="ページが見つかりません">
+    <div class="card-base z-10 px-9 py-6 relative w-full mb-4">
+        <h1 class="text-3xl font-bold mb-4">404 — ページが見つかりません</h1>
+        <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+            お探しのページは移動または削除された可能性があります。
+        </p>
+        <ul class="list-disc pl-5 space-y-2">
+            <li><a href="/" class="link-underline">トップページ</a></li>
+            <li><a href="/archive/" class="link-underline">記事一覧</a></li>
+            <li><a href="/about/" class="link-underline">EFFECT について</a></li>
+        </ul>
+    </div>
+</MainGridLayout>
