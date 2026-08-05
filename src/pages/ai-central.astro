@@ -139,7 +139,7 @@ const proCases = [
     field: "社会保険労務士",
     icon: "material-symbols:diversity-3-rounded",
     scene: "「C 社の副業規定、どういう経緯でこの条文になったか」→ 改定時の議論・顧問先の意向・見送った代替案まで AI が提示。",
-    effect: "「経緯を知る人がいない」問題の解消。規程改定の提案スピードが上がります。※本システムの原型は、顧問先約100社の情報散在に悩む社労士法人向けに構築され、実際に稼働しているシステムです。",
+    effect: "「経緯を知る人がいない」問題の解消。規程改定の提案スピードが上がります。※本システムの原型は、顧問先約100社の情報散在に悩む士業向けに構築され、実際に稼働しているシステムです。",
   },
   {
     field: "行政書士",
@@ -247,6 +247,14 @@ const faqs = [
     a: "はい。プラン1・2はいまお使いの Windows パソコンで導入できます。パーフェクトセキュアで設置する Mac は「事務所に置く AI 専用機」であり、皆さまの既存パソコンは一切変更不要。普段のパソコンのブラウザから利用できます。",
   },
   {
+    q: "ローカルLLMや社内完結型AIは、通常のクラウドAIと何が違いますか？",
+    a: "通常のクラウドAIは、入力した情報を外部サービスへ送って処理します。一方、パーフェクトセキュアでは事務所内にAI専用環境を置き、顧客情報・相談履歴・社内資料を外へ出さずに参照できる構成を目指します。個人情報や守秘義務が前提になる士業・専門サービス業ほど、この違いが大きな判断材料になります。",
+  },
+  {
+    q: "AIエージェントのセキュリティ対策は、どのように考えていますか？",
+    a: "AIにすべてを自由に触らせる設計にはしません。AIが参照してよい情報、人間の確認が必要な情報、扱わせない情報を分け、必要に応じてマスキング・権限管理・操作ログ・承認フローを組み合わせます。AIエージェントは便利な実行役ですが、最終判断と重要操作は人間が握る設計にします。",
+  },
+  {
     q: "月額34,800円には何が含まれますか？",
     a: "週1回×90分のオンライン伴走コンサル、メール相談、システムの基本保守（アップデート適用・軽微な調整）が含まれます。導入して終わりではなく、毎週一緒に AI の活用範囲を広げていくための必須セットです。大規模な改修や障害復旧作業は都度お見積りとなります。",
   },
@@ -263,6 +271,10 @@ const faqs = [
     a: "しません。パーフェクトセキュアの AI エージェントは「承認キュー」という仕組みで動き、下書き・整理などの作業は行いますが、送信・確定は必ず先生の承認を経由します。どの業務を任せてどこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
   },
   {
+    q: "士業以外の会社でも、個人情報を扱う業務に導入できますか？",
+    a: "可能です。税理士・社労士・行政書士などの士業だけでなく、顧客カルテ、契約情報、面談履歴、社内ナレッジなどを扱う企業にも応用できます。重要なのは業種名ではなく、外部AIにそのまま渡せない情報を、どの範囲でAIに参照させるかを設計することです。",
+  },
+  {
     q: "遠方の事務所でも対応できますか？",
     a: "ヒアリング・構築・研修・毎週の伴走はすべてオンライン（Zoom）で対応可能です。機器の設置もオンラインでご案内しながら進められます。",
   },
@@ -271,7 +283,7 @@ const faqs = [
 // ===== 匿名事例 =====
 const cases = [
   {
-    label: "社労士法人 S 様",
+    label: "士業法人 S 様",
     field: "社会保険労務士",
     body: "複数の自社メディアの AI 検索対応（LLMO）・コンテンツ改善を継続支援。AI 時代の情報発信基盤を整備。",
   },
@@ -322,6 +334,8 @@ const jsonLd = {
   serviceType: "士業向けAI・DXシステム構築およびコンサルティング",
   description:
     "士業事務所にAI記憶ベース（顧問先カルテ・案件ログ）を構築し、守秘義務に配慮した構成で業務の中心にAIを据えるDXシステム。全プランに週1回の伴走コンサル付き。",
+  keywords:
+    "AIセントラル, ローカルLLM, 社内完結型AI, AIエージェント セキュリティ, 士業 AI, 個人情報 AI, 守秘義務 AI, パーフェクトセキュア, 社内AIシステム",
   provider: {
     "@type": "Organization",
     name: "株式会社EFFECT",
@@ -337,6 +351,19 @@ const jsonLd = {
     { "@type": "Offer", name: "AIセントラル パーフェクトセキュア", price: "1320000", priceCurrency: "JPY" },
   ],
 };
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
 ---
 
 <LandingLayout
@@ -344,6 +371,7 @@ const jsonLd = {
   description="記憶を持ったAIをシステムの中枢に据え、顧客対応・資料整理・ナレッジ共有・判断前の下処理を加速するAI-DX。士業事務所をはじめ、個人情報・機密情報を扱う企業向けに構築から伴走まで支援します。構築33万円〜+全プラン週1伴走コンサル月額34,800円。"
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
 
   <div class="ai-central-page w-full">
 
@@ -953,6 +981,13 @@ const jsonLd = {
             <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />外出先・スマホからは本人認証を通った人だけ（VPN 不要）</li>
             <li class="flex gap-2"><Icon name="material-symbols:check-circle-outline" class="text-lg text-[var(--primary)] shrink-0 mt-0.5" />スタッフは既存の Windows PC のブラウザから利用</li>
           </ul>
+          <div class="mt-5 rounded-lg border border-[var(--primary)]/30 bg-[var(--card-bg)] p-4">
+            <p class="mb-2 text-xs font-bold tracking-[0.14em] text-[var(--primary)]">SECURE KARTE DESIGN</p>
+            <p class="text-sm font-bold leading-relaxed text-90">個人情報を扱う士業向けカルテ構成でも採用できる、守秘義務前提のAI設計。</p>
+            <p class="mt-2 text-xs leading-relaxed text-75">
+              AIに何でも渡すのではなく、AIが参照してよい情報、人間だけが扱うべき機微情報、承認が必要な操作を分けて設計します。必要に応じてマスキング・権限管理・操作ログを組み合わせ、外部AIへ丸投げしない業務AIを構築します。
+            </p>
+          </div>
         </div>
       </div>
     </div>
