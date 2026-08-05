@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
   "reviewCount": 231,
-  "studentsTaught": 525,
-  "repeatStudents": 297,
-  "repeatRate": 56.6,
-  "sessionsTaught": 505,
-  "salesTotal": 2436950,
+  "studentsTaught": 526,
+  "repeatStudents": 298,
+  "repeatRate": 56.7,
+  "sessionsTaught": 506,
+  "salesTotal": 2442950,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月5日",
-  "updatedAt": "2026-08-04T21:00:28.519Z",
+  "periodEnd": "2026年8月6日",
+  "updatedAt": "2026-08-05T21:00:30.453Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -118,5 +118,5 @@
       "text": "いつも大変お世話になっています！次回は自分に合うタスク管理について先生にオリジナル仕様に構築してもらうことになりました!!よろしくお願いいたします！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-04T21:01:08.674Z"
+  "testimonialsUpdatedAt": "2026-08-05T21:01:11.905Z"
 }
