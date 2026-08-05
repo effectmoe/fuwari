@@ -359,7 +359,7 @@ const courseLd = {
 		</div>
 	</section>
 
-	<section id="agent-shift" class="course-section">
+	<section id="agent-shift" class="course-section course-section--compact">
 		<div class="course-shell split-message">
 			<div>
 				<p class="course-kicker">FROM CHAT TO AGENT</p>
@@ -368,8 +368,10 @@ const courseLd = {
 			<div class="before-after">
 				{comparisonLanes.map((lane) => (
 					<article>
-						<div class="lane-index">{lane.no}</div>
-						<h3>{lane.title}</h3>
+						<div class="lane-title">
+							<div class="lane-index">{lane.no}</div>
+							<h3>{lane.title}</h3>
+						</div>
 						<div class="lane-compare">
 							<p><span>Before</span>{lane.before}</p>
 							<Icon name="material-symbols:arrow-forward-rounded" />
@@ -381,7 +383,7 @@ const courseLd = {
 		</div>
 	</section>
 
-	<section id="corporate" class="course-section course-section--surface">
+	<section id="corporate" class="course-section course-section--surface course-section--compact">
 		<div class="course-shell corporate-teaser">
 			<div>
 				<p class="course-kicker">CORPORATE TRAINING</p>
@@ -394,7 +396,7 @@ const courseLd = {
 		</div>
 	</section>
 
-	<section id="outputs" class="course-section course-section--surface">
+	<section id="outputs" class="course-section course-section--surface course-section--compact">
 		<div class="course-shell">
 			<div class="section-heading">
 				<p class="course-kicker">BUILD OUTPUTS</p>
@@ -407,11 +409,11 @@ const courseLd = {
 							<Icon name={item.icon} />
 							<span>{item.visual}</span>
 						</div>
+						<h3>{item.title}</h3>
+						<p>{item.body}</p>
 						<div class="build-mini-ui">
 							{item.meta.map((label) => <span>{label}</span>)}
 						</div>
-						<h3>{item.title}</h3>
-						<p>{item.body}</p>
 					</article>
 				))}
 			</div>
@@ -861,7 +863,7 @@ const courseLd = {
 		width: var(--bar, 60%);
 		height: 100%;
 		border-radius: inherit;
-		background: linear-gradient(90deg, #10b981, var(--course-cyan));
+		background: linear-gradient(90deg, var(--course-blue), var(--course-cyan));
 	}
 
 	.agent-progress p {
@@ -904,8 +906,8 @@ const courseLd = {
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background: #10b981;
-		box-shadow: 0 0 18px rgba(16, 185, 129, 0.75);
+		background: var(--course-cyan);
+		box-shadow: 0 0 18px rgba(0, 194, 255, 0.68);
 	}
 
 	.agent-tools {
@@ -939,6 +941,10 @@ const courseLd = {
 		padding: clamp(72px, 9vw, 126px) 0;
 	}
 
+	.course-section--compact {
+		padding: clamp(46px, 6vw, 84px) 0;
+	}
+
 	.course-section--surface {
 		background: #fff;
 	}
@@ -966,34 +972,39 @@ const courseLd = {
 
 	.split-message {
 		display: grid;
-		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-		gap: clamp(30px, 5vw, 64px);
+		grid-template-columns: minmax(260px, 0.58fr) minmax(0, 1.42fr);
+		gap: clamp(26px, 4vw, 52px);
 		align-items: start;
+	}
+
+	.split-message h2 {
+		max-width: 520px;
 	}
 
 	.corporate-teaser {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) auto;
-		gap: 28px;
+		gap: clamp(20px, 3vw, 36px);
 		align-items: center;
 		border: 1px solid rgba(0, 86, 179, 0.18);
 		border-radius: 1rem;
 		background:
 			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(235, 248, 255, 0.82)),
 			radial-gradient(circle at 86% 16%, rgba(0, 194, 255, 0.18), transparent 32%);
-		padding: clamp(28px, 4vw, 48px);
-		box-shadow: 0 22px 70px rgba(10, 25, 47, 0.08);
+		padding: clamp(24px, 3vw, 36px);
+		box-shadow: 0 18px 52px rgba(10, 25, 47, 0.07);
 	}
 
 	.corporate-teaser h2 {
 		margin: 0;
 		color: var(--course-text);
-		font-size: clamp(28px, 4vw, 48px);
-		line-height: 1.12;
+		font-size: clamp(26px, 3vw, 40px);
+		line-height: 1.18;
 	}
 
 	.corporate-teaser p:not(.course-kicker) {
-		margin: 18px 0 0;
+		margin: 12px 0 0;
+		max-width: 760px;
 	}
 
 	.corporate-teaser .course-button--primary {
@@ -1004,8 +1015,7 @@ const courseLd = {
 
 	.before-after {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 14px;
+		gap: 12px;
 	}
 
 	.before-after article,
@@ -1019,48 +1029,64 @@ const courseLd = {
 	}
 
 	.before-after article {
-		min-height: 290px;
+		display: grid;
+		grid-template-columns: 150px minmax(0, 1fr);
+		gap: 18px;
+		align-items: stretch;
+		min-height: 0;
 		border-radius: 0.85rem;
-		padding: 26px;
+		padding: 18px;
+	}
+
+	.lane-title {
+		display: grid;
+		align-content: center;
+		gap: 10px;
+		border-right: 1px solid rgba(0, 86, 179, 0.14);
+		padding-right: 18px;
 	}
 
 	.lane-index {
 		display: grid;
 		place-items: center;
-		width: 52px;
-		height: 52px;
+		width: 44px;
+		height: 44px;
 		border: 1px solid rgba(0, 86, 179, 0.2);
 		background: #f3f8ff;
 		color: var(--course-blue);
 		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-		font-size: 22px;
+		font-size: 19px;
 		font-weight: 950;
 	}
 
 	.lane-compare {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
 		gap: 12px;
-		margin-top: 18px;
+		align-items: center;
+		margin-top: 0;
 	}
 
 	.lane-compare > svg {
-		width: 22px;
-		height: 22px;
+		width: 24px;
+		height: 24px;
 		color: var(--course-blue);
+		justify-self: center;
 	}
 
 	.lane-compare p {
 		margin: 0;
 		border-left: 3px solid rgba(0, 86, 179, 0.24);
 		background: #f7faff;
-		padding: 14px;
+		min-height: 100%;
+		padding: 13px 14px;
 		font-size: 14px;
-		line-height: 1.65;
+		line-height: 1.55;
 	}
 
 	.lane-compare p:last-child {
-		border-left-color: #10b981;
-		background: #f3fbf8;
+		border-left-color: var(--course-cyan);
+		background: #eefbff;
 	}
 
 	.lane-compare span,
@@ -1077,69 +1103,88 @@ const courseLd = {
 	.before-after h3,
 	.build-card h3,
 	.curriculum-card h3 {
-		margin: 14px 0 8px;
+		margin: 0;
 		font-size: 24px;
 		font-weight: 950;
 	}
 
 	.section-heading {
 		max-width: 760px;
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.build-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 18px;
+		gap: 14px;
 	}
 
 	.build-card {
 		display: grid;
-		gap: 18px;
+		grid-template-columns: 44px minmax(0, 1fr);
+		gap: 10px 14px;
+		align-items: start;
 		border-radius: 0.85rem;
-		padding: 24px;
+		padding: 18px;
 	}
 
 	.build-card__head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 14px;
+		display: contents;
 	}
 
 	.build-card__head svg {
+		grid-row: span 2;
 		width: 34px;
 		height: 34px;
 		color: var(--course-blue);
 	}
 
 	.build-card__head span {
+		justify-self: end;
 		color: rgba(77, 91, 112, 0.7);
+		font-size: 10px;
+		font-weight: 950;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
 	}
 
 	.build-mini-ui {
-		display: grid;
-		gap: 8px;
-		min-height: 112px;
-		border: 1px solid rgba(0, 86, 179, 0.12);
-		background:
-			linear-gradient(90deg, rgba(0, 86, 179, 0.04) 1px, transparent 1px),
-			linear-gradient(rgba(0, 86, 179, 0.04) 1px, transparent 1px),
-			#f8fbff;
-		background-size: 22px 22px;
-		padding: 14px;
+		grid-column: 2;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		min-height: 0;
+		border: 0;
+		background: transparent;
+		padding: 0;
 	}
 
 	.build-mini-ui span {
 		display: flex;
 		align-items: center;
-		min-height: 28px;
+		min-height: 24px;
 		border: 1px solid rgba(0, 86, 179, 0.14);
 		background: rgba(255, 255, 255, 0.82);
-		padding: 0 10px;
+		padding: 0 8px;
 		color: var(--course-navy);
-		font-size: 12px;
+		font-size: 11px;
 		font-weight: 900;
+	}
+
+	.build-card h3,
+	.build-card p {
+		grid-column: 2;
+	}
+
+	.build-card h3 {
+		font-size: 20px;
+		line-height: 1.25;
+	}
+
+	.build-card p {
+		margin: 0;
+		font-size: 14px;
+		line-height: 1.6;
 	}
 
 	.curriculum-list {
@@ -1576,10 +1621,13 @@ const courseLd = {
 			justify-content: center;
 		}
 
-		.build-grid,
 		.curriculum-card__cols,
 		.before-after {
 			grid-template-columns: 1fr;
+		}
+
+		.build-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 
 		.course-metrics {
@@ -1598,6 +1646,33 @@ const courseLd = {
 
 		.before-after,
 		.curriculum-card {
+			grid-template-columns: 1fr;
+		}
+
+		.before-after article {
+			grid-template-columns: 1fr;
+			gap: 12px;
+			padding: 16px;
+		}
+
+		.lane-title {
+			display: flex;
+			align-items: center;
+			border-right: 0;
+			border-bottom: 1px solid rgba(0, 86, 179, 0.14);
+			padding-right: 0;
+			padding-bottom: 12px;
+		}
+
+		.lane-compare {
+			grid-template-columns: 1fr;
+		}
+
+		.lane-compare > svg {
+			transform: rotate(90deg);
+		}
+
+		.build-grid {
 			grid-template-columns: 1fr;
 		}
 

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Agent Course</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-container-highest": "#e2e2e2",
+                  "on-error": "#ffffff",
+                  "error": "#ba1a1a",
+                  "on-error-container": "#93000a",
+                  "surface-container-high": "#e8e8e8",
+                  "tertiary-fixed": "#e2e2e2",
+                  "surface-container-low": "#f3f3f4",
+                  "outline-variant": "#cfc4c5",
+                  "tertiary": "#000000",
+                  "surface-tint": "#5e5e5e",
+                  "tertiary-container": "#1b1b1b",
+                  "primary-fixed": "#e2e2e2",
+                  "on-surface-variant": "#4c4546",
+                  "tertiary-fixed-dim": "#c6c6c6",
+                  "secondary-fixed-dim": "#ffb86f",
+                  "secondary-fixed": "#ffdcbd",
+                  "on-tertiary-container": "#848484",
+                  "inverse-primary": "#c6c6c6",
+                  "primary-container": "#1b1b1b",
+                  "on-primary-fixed-variant": "#474747",
+                  "on-primary": "#ffffff",
+                  "secondary-container": "#fe9800",
+                  "primary-fixed-dim": "#c6c6c6",
+                  "on-secondary": "#ffffff",
+                  "highlight-yellow": "#FFFF00",
+                  "on-tertiary-fixed": "#1b1b1b",
+                  "on-secondary-container": "#643900",
+                  "surface-dim": "#dadada",
+                  "primary": "#000000",
+                  "on-primary-container": "#848484",
+                  "secondary": "#8a5100",
+                  "surface-bright": "#f9f9f9",
+                  "surface-variant": "#e2e2e2",
+                  "on-tertiary-fixed-variant": "#474747",
+                  "surface-container-lowest": "#ffffff",
+                  "outline": "#7e7576",
+                  "surface": "#f9f9f9",
+                  "background": "#f9f9f9",
+                  "on-background": "#1a1c1c",
+                  "gray-dark": "#333333",
+                  "surface-container": "#eeeeee",
+                  "on-tertiary": "#ffffff",
+                  "gray-muted": "#F5F5F5",
+                  "on-secondary-fixed-variant": "#693c00",
+                  "error-container": "#ffdad6",
+                  "on-primary-fixed": "#1b1b1b",
+                  "on-surface": "#1a1c1c",
+                  "inverse-on-surface": "#f0f1f1",
+                  "on-secondary-fixed": "#2c1600",
+                  "inverse-surface": "#2f3131"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "stack-md": "1.5rem",
+                  "stack-sm": "0.75rem",
+                  "margin-mobile": "1.25rem",
+                  "stack-lg": "3rem",
+                  "section-gap": "5rem",
+                  "gutter": "1.5rem",
+                  "container-max": "1200px"
+          },
+          "fontFamily": {
+                  "headline-lg-mobile": [
+                          "Inter"
+                  ],
+                  "headline-lg": [
+                          "Inter"
+                  ],
+                  "body-md": [
+                          "Inter"
+                  ],
+                  "body-lg": [
+                          "Inter"
+                  ],
+                  "display-lg": [
+                          "Inter"
+                  ],
+                  "caption": [
+                          "Inter"
+                  ],
+                  "label-bold": [
+                          "Inter"
+                  ],
+                  "headline-md": [
+                          "Inter"
+                  ]
+          },
+          "fontSize": {
+                  "headline-lg-mobile": [
+                          "32px",
+                          {
+                                  "lineHeight": "1.2",
+                                  "fontWeight": "700"
+                          }
+                  ],
+                  "headline-lg": [
+                          "40px",
+                          {
+                                  "lineHeight": "1.2",
+                                  "letterSpacing": "-0.01em",
+                                  "fontWeight": "700"
+                          }
+                  ],
+                  "body-md": [
+                          "16px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "body-lg": [
+                          "18px",
+                          {
+                                  "lineHeight": "1.6",
+                                  "fontWeight": "400"
+                          }
+                  ],
+                  "display-lg": [
+                          "56px",
+                          {
+                                  "lineHeight": "1.1",
+                                  "letterSpacing": "-0.02em",
+                                  "fontWeight": "800"
+                          }
+                  ],
+                  "caption": [
+                          "12px",
+                          {
+                                  "lineHeight": "1.4",
+                                  "fontWeight": "500"
+                          }
+                  ],
+                  "label-bold": [
+                          "14px",
+                          {
+                                  "lineHeight": "1.0",
+                                  "letterSpacing": "0.05em",
+                                  "fontWeight": "700"
+                          }
+                  ],
+                  "headline-md": [
+                          "24px",
+                          {
+                                  "lineHeight": "1.3",
+                                  "fontWeight": "700"
+                          }
+                  ]
+          }
+  },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased">
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-section-gap flex flex-col gap-section-gap">
+<!-- 1. Compact Shift Section -->
+<section class="flex flex-col md:flex-row gap-stack-lg items-start border-b border-surface-container-highest pb-stack-lg">
+<div class="w-full md:w-1/3 flex flex-col gap-stack-sm">
+<span class="font-label-bold text-label-bold text-secondary tracking-widest uppercase">From Chat to Agent</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary">
+          「ChatGPTに聞く」と「AIに任せる」は、別物です。
+        </h2>
+</div>
+<div class="w-full md:w-2/3 flex flex-col border-t border-l border-r border-surface-container-highest bg-surface-container-lowest">
+<!-- Row 01 -->
+<div class="flex flex-col md:flex-row items-center border-b border-surface-container-highest py-stack-sm px-stack-md hover:bg-surface-container transition-colors group">
+<div class="w-full md:w-1/4 flex items-center gap-stack-sm mb-2 md:mb-0">
+<span class="font-label-bold text-label-bold text-outline">01</span>
+<span class="font-label-bold text-label-bold text-primary">検索・分析</span>
+</div>
+<div class="w-full md:w-3/4 flex flex-col md:flex-row items-start md:items-center justify-between gap-stack-sm">
+<p class="font-caption text-caption text-on-surface-variant flex-1">毎回キーワードで探し、人間が資料を開いて読む</p>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 hidden md:block" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 md:hidden" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+<p class="font-caption text-caption text-primary font-medium flex-1 md:text-right">フォルダを横断し、AIが関連資料と根拠を拾う</p>
+</div>
+</div>
+<!-- Row 02 -->
+<div class="flex flex-col md:flex-row items-center border-b border-surface-container-highest py-stack-sm px-stack-md hover:bg-surface-container transition-colors group">
+<div class="w-full md:w-1/4 flex items-center gap-stack-sm mb-2 md:mb-0">
+<span class="font-label-bold text-label-bold text-outline">02</span>
+<span class="font-label-bold text-label-bold text-primary">作成・整形</span>
+</div>
+<div class="w-full md:w-3/4 flex flex-col md:flex-row items-start md:items-center justify-between gap-stack-sm">
+<p class="font-caption text-caption text-on-surface-variant flex-1">回答をコピーして、WordやExcelへ手で移す</p>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 hidden md:block" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 md:hidden" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+<p class="font-caption text-caption text-primary font-medium flex-1 md:text-right">テンプレートに沿って、成果物ファイルまで生成する</p>
+</div>
+</div>
+<!-- Row 03 -->
+<div class="flex flex-col md:flex-row items-center border-b border-surface-container-highest py-stack-sm px-stack-md hover:bg-surface-container transition-colors group">
+<div class="w-full md:w-1/4 flex items-center gap-stack-sm mb-2 md:mb-0">
+<span class="font-label-bold text-label-bold text-outline">03</span>
+<span class="font-label-bold text-label-bold text-primary">連携・実行</span>
+</div>
+<div class="w-full md:w-3/4 flex flex-col md:flex-row items-start md:items-center justify-between gap-stack-sm">
+<p class="font-caption text-caption text-on-surface-variant flex-1">通知、登録、公開、確認依頼を人がつなぐ</p>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 hidden md:block" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors shrink-0 md:hidden" style="font-variation-settings: 'FILL' 1;">arrow_downward</span>
+<p class="font-caption text-caption text-primary font-medium flex-1 md:text-right">WebhookやAPIで、次の作業まで一続きにする</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Corporate Training CTA -->
+<section class="bg-surface-variant w-full flex flex-col md:flex-row items-start md:items-center justify-between p-stack-md border-l-4 border-secondary gap-stack-md">
+<div class="flex flex-col gap-stack-sm flex-1">
+<span class="font-label-bold text-label-bold text-on-surface-variant tracking-wider uppercase">Corporate Training</span>
+<h3 class="font-headline-md text-headline-md text-primary">法人向けClaude Code社内研修にも対応します。</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          3名から社内貸切で実施可能。部署・人数・業務テーマに合わせて、社内資料の横断分析、書類作成、SaaS連携、LP公開まで演習を組み替えます。
+        </p>
+</div>
+<button class="bg-secondary text-primary font-label-bold text-label-bold py-3 px-6 rounded-full hover:px-8 transition-all duration-300 whitespace-nowrap shrink-0 flex items-center justify-center gap-2">
+        法人研修ページを見る
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+</section>
+<!-- 3. Build Outputs Section -->
+<section class="flex flex-col gap-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary text-center">
+        受講後に作れるもの。
+      </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">大量ファイル分析</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">社内ドキュメントを一括で読み込みインサイト抽出。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Analysis</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">Word/Excel/PPT自動生成</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">AIの回答を直接オフィスファイルとして出力。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Creation</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">Webhook通知</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">処理完了時にSlackやTeamsへ自動でメッセージ送信。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Integration</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cloud_sync</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">外部SaaS連携</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">API経由でCRMやタスク管理ツールとデータを同期。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Integration</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">LP公開</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">生成したコンテンツからランディングページを構築しデプロイ。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Deployment</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest p-stack-md hover:border-primary transition-colors flex gap-stack-md items-start group">
+<div class="bg-surface-container p-2 rounded-full shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-bold text-label-bold text-primary">自社専用エージェント</h4>
+<p class="font-caption text-caption text-on-surface-variant line-clamp-1">特定の業務フローに特化したカスタムAIアシスタントの開発。</p>
+<div class="flex gap-2 mt-1">
+<span class="bg-primary text-on-primary font-caption text-[10px] px-2 py-0.5 rounded-sm">Agent</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
