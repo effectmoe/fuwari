@@ -1,79 +1,91 @@
 {
-	"$schema": "https://openapi.vercel.sh/vercel.json",
-
-	"//": [
-		"🔴 2026-08-05 追記: ignoreCommand の導入について",
-		"",
-		"【この Vercel プロジェクトの役割】",
-		"effect.moe 本体は Cloudflare Pages (brain-effect-moe) が配信している。",
-		"Vercel が担っているのは **旧ドメイン tony.effect.moe のリダイレクトのみ**。",
-		"（tony.effect.moe は CNAME で vercel-dns を向いており、下記 redirects が実働中）",
-		"実測: tony.effect.moe/ → 301 → effect.moe/blog/ 等がすべて生きている。",
-		"→ したがって Vercel 連携を切ると旧URLが全滅する。切ってはならない。",
-		"",
-		"【何が無駄だったか】",
-		"このリポジトリは毎朝 6:01 に自動コミット (chore(storaca): 日次統計値 sync) が入る。",
-		"その都度 Vercel が Astro サイト全体をフルビルドしていたが、",
-		"Vercel が実際に使うのは下の redirects 定義だけで、ビルド成果物は誰も見ていない。",
-		"",
-		"【対処】redirects を変えた時だけビルドする。",
-		"ignoreCommand は終了コード 0 でビルドをスキップ、0以外で実行する仕様。",
-		"git diff --quiet は差分なしで 0（=スキップ）、差分ありで 1（=ビルド）を返すため、",
-		"『vercel.json が変わった時だけビルド』が1行で表現できる。",
-		"ビルドがスキップされても直前の本番デプロイがエイリアスに残るため、リダイレクトは無停止。",
-		"",
-		"【より根本的な案（未実施・要DNS変更）】",
-		"tony.effect.moe の DNS を Cloudflare に寄せ、CF の Redirect Rules で同じ転送を実現すれば",
-		"Vercel 自体が不要になる。ただし DNS 切替を伴うため、実施はトニーの判断を待つこと。"
-	],
-	"ignoreCommand": "git diff --quiet HEAD^ HEAD -- vercel.json",
-
+	"ignoreCommand": "echo \"$VERCEL_GIT_COMMIT_MESSAGE\" | grep -q '^chore(storaca)'",
 	"redirects": [
 		{
 			"source": "/posts/:path*",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/posts/:path*",
 			"permanent": true
 		},
 		{
 			"source": "/about/:path*",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/author/",
 			"permanent": true
 		},
 		{
 			"source": "/structurepedia/:path*",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/structurepedia/",
 			"permanent": true
 		},
 		{
 			"source": "/dfb-complete-guide/:path*",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/dfb-complete-guide/",
 			"permanent": true
 		},
 		{
 			"source": "/rss.xml",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/rss.xml",
 			"permanent": true
 		},
 		{
 			"source": "/sitemap.xml",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/sitemap-index.xml",
 			"permanent": true
 		},
 		{
 			"source": "/sitemap-index.xml",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/sitemap-index.xml",
 			"permanent": true
 		},
 		{
 			"source": "/:path*",
-			"has": [{ "type": "host", "value": "(?:www\\.)?tony\\.effect\\.moe" }],
+			"has": [
+				{
+					"type": "host",
+					"value": "(?:www\\.)?tony\\.effect\\.moe"
+				}
+			],
 			"destination": "https://effect.moe/blog/",
 			"permanent": true
 		}
