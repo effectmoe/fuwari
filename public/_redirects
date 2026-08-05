@@ -1,0 +1,12 @@
+# Cloudflare Pages リダイレクト定義
+#
+# 🔴 ここに書くルールは全リクエストに先行して評価される。
+#    catch-all（/* など）は絶対に書かないこと。サイト全体が壊れる。
+#    現状は「慣習的に叩かれる別名パス」だけを正規URLへ寄せる用途に限定している。
+#
+# /sitemap.xml:
+#   Astro の @astrojs/sitemap は sitemap-index.xml を正規の入口として出力するため、
+#   /sitemap.xml は実在しない（2026-08-05 の soft 404 修正で 200 → 404 になった）。
+#   ただし AI クローラや SEO ツールの多くは慣習的に /sitemap.xml を直接叩くため、
+#   404 を返すより正規URLへ 301 で寄せたほうが取りこぼしがない。
+/sitemap.xml  /sitemap-index.xml  301
