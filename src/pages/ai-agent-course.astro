@@ -4,6 +4,12 @@ import { Icon } from "astro-icon/components";
 import stats from "../data/storaca-stats.json";
 import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const pagePath = "ai-agent-course/";
+const pageUrl = `${siteUrl}${pagePath}`;
+const lastUpdated = "2026-08-05";
+const coursePrice = 385000;
+
 const curriculum = [
 	{
 		no: "01",
@@ -124,35 +130,160 @@ const comparisonLanes = [
 const faqs = [
 	{
 		q: "プログラミング経験がなくても受講できますか？",
-		a: "可能です。コードを暗記する講座ではなく、Claude Codeに業務を任せる設計と進め方を学ぶ講座です。ただし、ChatGPTやClaudeなどのAIツールを日常的に触っている状態を推奨します。",
+		a: "可能です。コードを暗記する講座ではなく、Claude Codeに業務を任せる設計と進め方を学ぶ講座です。ただし、ChatGPTやClaudeなどのAIツールを日常的に触っている状態を推奨します。初回は導入、認証、IDE連携、基本設定から扱い、実際に自分のPCで小さな自動化タスクを動かすところまで進めます。",
 	},
 	{
 		q: "準備するものはありますか？",
-		a: "PC、インターネット接続、Claudeアカウントをご用意ください。Claude CodeはClaude ProまたはMaxプランの利用を推奨します。必要な設定は講座内で確認します。",
+		a: "PC、インターネット接続、Claudeアカウントをご用意ください。Claude CodeはClaude ProまたはMaxプランの利用を推奨します。講座ではインストール、認証、IDE連携、権限モード、CLAUDE.mdなどを確認するため、受講前に完璧な開発環境を整えておく必要はありません。",
 	},
 	{
 		q: "助成金の申請代行はお願いできますか？",
-		a: "株式会社EFFECTでは助成金申請の代行は行っていません。必要に応じて、申請に詳しい提携社労士事務所をご紹介します。",
+		a: "株式会社EFFECTでは助成金申請の代行は行っていません。ページ内の金額は人材開発支援助成金の活用例であり、支給には条件があります。制度利用の可否や申請手続きは、必ず社労士等に確認してください。必要に応じて、申請に詳しい提携社労士事務所をご紹介します。",
 	},
 	{
 		q: "何名から社内研修として実施できますか？",
-		a: "3名から社内貸切での実施が可能です。人数、日程、業務テーマに合わせてカリキュラムを調整します。",
+		a: "3名から社内貸切での実施が可能です。人数、日程、業務テーマに合わせてカリキュラムを調整します。個人向け講座の内容をそのまま流すのではなく、社内資料の分析、帳票作成、Webhook通知、SaaS連携など、企業側が実際に使いたい場面に寄せて進めます。",
 	},
 	{
 		q: "欠席した回はどうなりますか？",
-		a: "録画視聴と補足フォローで対応します。進行に支障が出ないよう、次回までに追いつける形でサポートします。",
+		a: "録画視聴と補足フォローで対応します。全6回の講座は、導入、任せ方、横断分析、書類作成、外部連携、LP公開という流れで進むため、前回内容が抜けると次の演習に影響します。欠席時は次回までに追いつける形でサポートします。",
+	},
+	{
+		q: "Claude Codeを法人向けに研修してもらえますか？",
+		a: "はい、法人向けの社内研修として実施できます。対象は、ChatGPTやClaudeを日常的に使っているが、Claude Codeで業務自動化や社内文書の横断分析まで進めたい企業です。3名以上で社内貸切にでき、部署や業務テーマに合わせて、扱う資料や演習内容を調整します。",
+	},
+	{
+		q: "オンラインですか、対面ですか？地方の会社でも受けられますか？",
+		a: "ページ上ではZoomオンラインでの実施を明示しています。地方の会社でも、オンライン形式であれば地域を問わず受講しやすい形にできます。対面実施の可否や条件は、人数、地域、日程、研修内容によって変わるため、無料相談の段階で確認してください。",
+	},
+	{
+		q: "自社の業務に合わせてカリキュラムを変更できますか？",
+		a: "社内研修では、人数、日程、業務テーマに合わせてカリキュラムを調整します。たとえば、規程・契約書・資料の横断要約、WordやExcelテンプレートからの書類生成、NotionやSlackなどの外部SaaS連携、Webhook通知など、既存業務に近い題材へ寄せて設計できます。",
+	},
+	{
+		q: "請求書払い・見積書の発行はできますか？",
+		a: "支払い条件や必要書類は、法人研修の内容、人数、実施形式によって確認が必要です。無料相談では、受講人数、希望時期、助成金活用の有無、社内決裁に必要な書類を整理します。断定できない条件はその場で創作せず、実施前に確認できる形で進めます。",
+	},
+	{
+		q: "受講後に社内で展開するための資料はもらえますか？",
+		a: "講座では、Claude Codeに業務を任せるための考え方、CLAUDE.md、権限モード、Gitでの確認、ファイル操作、WebhookやAPI連携などを扱います。社内展開用の資料や手順書が必要な場合は、研修目的に合わせてどこまで用意するかを事前に相談してください。",
+	},
+	{
+		q: "講座ではなく個別にClaude Codeの相談をしたいのですが可能ですか？",
+		a: "可能です。講座として体系的に学ぶ形だけでなく、自社の業務ファイル、社内ツール、運用課題に合わせて個別相談する形も選べます。Claude Codeの導入で詰まっている、MCPやWebhookの設計を見てほしい、社内展開前に方針を整理したい場合は、無料相談から状況を共有してください。",
+	},
+	{
+		q: "1回だけのスポット相談はできますか？",
+		a: "1回だけ相談したい場合も、まず無料相談で内容を整理してください。単発で解決できるテーマなのか、全6回の講座や継続伴走の方がよいテーマなのかを切り分けます。インストールや権限設定の確認、業務への適用方針、既存プロジェクトの見直しなどは、事前情報があるほど具体的に進められます。",
+	},
+	{
+		q: "継続的な伴走支援はありますか？期間や頻度は？",
+		a: "Claude Codeは一度学んで終わりではなく、業務ファイル、社内ルール、ツール連携に合わせて育てていくほど効果が出ます。継続的な伴走が必要な場合は、無料相談で目的、頻度、期間、社内で実装したい範囲を確認します。講座・個別コンサル・AIセントラル構築のどれが合うかを整理します。",
+	},
+	{
+		q: "Udemyや公式ドキュメントで独学するのと何が違いますか？",
+		a: "独学は機能やコマンドを知るには有効ですが、業務に入れる段階では、権限、Gitでの確認、ファイル操作、社内資料の扱い、WebhookやAPI連携などで詰まりやすくなります。この講座では、Claude Codeを単なる学習対象ではなく、業務で動くAIエージェントとして扱うための進め方を実践します。",
+	},
+	{
+		q: "他社のClaude Code講座と比べた違いは何ですか？",
+		a: "この講座は、単にClaude Codeの使い方を説明するだけではなく、社内資料の横断分析、Word・Excel・PowerPointの自動生成、Webhook通知、外部SaaS連携、LP公開までを扱います。AIに聞く段階から、AIに調査・整理・作成・連携を任せる段階へ進むための実務寄りの講座です。",
+	},
+	{
+		q: "ChatGPTやClaudeを使っているだけでは足りないのですか？",
+		a: "ChatGPTやClaudeへの質問は、単発の相談や文章作成には便利です。一方、Claude Codeはローカルのファイル、プロジェクト、Git、API、MCPなどとつなげて、実際の作業を進めるための道具です。この講座では「AIに聞く」から「AIに任せる」へ移るための設計と確認方法を学びます。",
+	},
+	{
+		q: "社内資料や契約書などを扱う場合、セキュリティは大丈夫ですか？",
+		a: "講座では、権限モード、Gitでの差分確認、扱うファイル範囲の設計など、安全に進めるための基本を扱います。ただし、機密情報や個人情報を含む本番データをそのまま教材にするかどうかは慎重に判断してください。高度なセキュリティが必要な場合は、AIセントラルのローカルLLM構成も検討対象になります。",
+	},
+	{
+		q: "どんな業務をClaude Codeに任せられるようになりますか？",
+		a: "大量ファイル分析、規程・契約書・資料の横断要約、Word・Excel・PowerPointの自動生成、Webhook通知、NotionやSlackなどの外部SaaS連携、LPの企画から公開までを扱います。すべてを丸投げするのではなく、人間が確認しながら安全に前へ進める形を学びます。",
+	},
+	{
+		q: "講座のゴールは何ですか？",
+		a: "ゴールは、Claude Codeを業務で使える自律エージェントとして扱えるようになることです。全6回で、導入、任せ方、大量ファイル分析、書類作成、外部ツール連携、LP公開までを体験します。受講後は、AIに調査・整理・作成・連携を任せるための基本設計を自分で組める状態を目指します。",
+	},
+	{
+		q: "AIエージェント講座とAIセントラルは何が違いますか？",
+		a: "AIエージェント講座は、Claude Codeを自分や社内で扱えるようにする研修です。AIセントラルは、記憶を持ったAIを社内の中枢に組み込み、検索・整理・作成・確認・分析を先に進める業務基盤です。まず人材育成をしたい場合は講座、仕組みとして導入したい場合はAIセントラルが近い選択肢です。",
+	},
+	{
+		q: "AIエージェント講座とAIクロールは関係ありますか？",
+		a: "AIクロールは、自社サイトへのAI流入を読み解き、AIが立ち寄るサイトへ変えるための分析サービスです。AIエージェント講座でClaude Codeや自動化の基礎を学ぶと、AIクロールで得た改善方針を、サイト更新やレポート整理、施策管理に落とし込みやすくなります。",
+	},
+	{
+		q: "申し込み前に何を相談すればいいですか？",
+		a: "受講人数、現在のClaude Code利用状況、実施希望時期、扱いたい業務テーマ、助成金活用の有無を教えてください。法人研修の場合は、社内で何を自動化したいか、どの部署が受けるか、受講後にどのように社内展開したいかが分かると、カリキュラムを具体化しやすくなります。",
 	},
 ];
 
 const consultationHref = "/?inquiry=consultation&service=ai-course#contact";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"@id": `${pageUrl}#faqpage`,
+	mainEntity: faqs.map((item) => ({
+		"@type": "Question",
+		name: item.q,
+		acceptedAnswer: { "@type": "Answer", text: item.a },
+	})),
+};
+
+const serviceLd = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"@id": `${pageUrl}#service`,
+	name: "Claude Code 導入研修・伴走コンサルティング",
+	serviceType: "AIエージェント導入支援",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: { "@type": "Country", name: "Japan" },
+	audience: { "@type": "BusinessAudience" },
+	url: pageUrl,
+	inLanguage: "ja",
+	dateModified: lastUpdated,
+	description:
+		"Claude Code、GitHub、Webhook、API、MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を全6回で習得する法人対応の実践研修です。",
+};
+
+const courseLd = {
+	"@context": "https://schema.org",
+	"@type": "Course",
+	"@id": `${pageUrl}#course`,
+	name: "AIエージェント入門講座",
+	description:
+		"Claude Codeを業務で使える自律エージェントとして扱うために、導入、任せ方、横断分析、書類作成、外部ツール連携、LP公開までを全6回で学ぶ実践講座です。",
+	provider: { "@id": `${siteUrl}#organization` },
+	inLanguage: "ja",
+	url: pageUrl,
+	dateModified: lastUpdated,
+	teaches: curriculum.map((item) => item.title),
+	hasCourseInstance: {
+		"@type": "CourseInstance",
+		courseMode: "Online",
+		instructor: { "@id": `${siteUrl}#person` },
+		courseWorkload: "PT12H",
+	},
+	offers: {
+		"@type": "Offer",
+		price: coursePrice,
+		priceCurrency: "JPY",
+		url: `${pageUrl}#price`,
+		availability: "https://schema.org/InStock",
+	},
+};
 ---
 
 <LandingLayout
 	title="AIエージェント入門講座｜Claude Codeを業務で使える自律エージェントへ｜株式会社EFFECT"
 	description="Claude Code、GitHub、Webhook、API、MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を全6回で習得する実践研修です。"
 >
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} is:inline />
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(courseLd)} is:inline />
 	<section id="top" class="course-hero">
 		<div class="course-shell course-hero__grid">
 			<div class="course-hero__copy">
@@ -162,11 +293,13 @@ const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 				<p class="course-body">
 					GitHub・Webhook・API・MCPを組み合わせ、AIに調査・整理・作成・連携を任せる力を、全6回の実践研修で習得します。
 				</p>
+				<p class="course-updated">最終更新: {lastUpdated}</p>
 				<div class="course-actions">
 					<a href={consultationHref} class="course-button course-button--primary">
 						<Icon name="material-symbols:mail-outline-rounded" />
 						無料相談を申し込む
 					</a>
+					<a href="/ai-agent-course-corporate/" class="course-button course-button--secondary">法人研修を見る</a>
 					<a href="#price" class="course-button course-button--secondary">料金を見る</a>
 					<a href="#curriculum" class="course-button course-button--ghost">カリキュラムを見る</a>
 				</div>
@@ -245,6 +378,19 @@ const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 					</article>
 				))}
 			</div>
+		</div>
+	</section>
+
+	<section id="corporate" class="course-section course-section--surface">
+		<div class="course-shell corporate-teaser">
+			<div>
+				<p class="course-kicker">CORPORATE TRAINING</p>
+				<h2>法人向けClaude Code社内研修にも対応します。</h2>
+				<p>
+					3名から社内貸切で実施可能です。部署、人数、業務テーマに合わせて、社内資料の横断分析、書類作成、SaaS連携、LP公開などの演習を組み替えます。
+				</p>
+			</div>
+			<a href="/ai-agent-course-corporate/" class="course-button course-button--primary">法人研修ページを見る</a>
 		</div>
 	</section>
 
@@ -496,6 +642,18 @@ const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 		font-size: 17px;
 		font-weight: 650;
 		line-height: 1.9;
+	}
+
+	.course-updated {
+		display: inline-flex;
+		align-items: center;
+		margin: 18px 0 0;
+		border: 1px solid rgba(255, 255, 255, 0.24);
+		border-radius: 999px;
+		padding: 8px 13px;
+		color: rgba(255, 255, 255, 0.74);
+		font-size: 12px;
+		font-weight: 850;
 	}
 
 	.course-actions {
@@ -811,6 +969,37 @@ const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
 		gap: clamp(30px, 5vw, 64px);
 		align-items: start;
+	}
+
+	.corporate-teaser {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 28px;
+		align-items: center;
+		border: 1px solid rgba(0, 86, 179, 0.18);
+		border-radius: 1rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(235, 248, 255, 0.82)),
+			radial-gradient(circle at 86% 16%, rgba(0, 194, 255, 0.18), transparent 32%);
+		padding: clamp(28px, 4vw, 48px);
+		box-shadow: 0 22px 70px rgba(10, 25, 47, 0.08);
+	}
+
+	.corporate-teaser h2 {
+		margin: 0;
+		color: var(--course-text);
+		font-size: clamp(28px, 4vw, 48px);
+		line-height: 1.12;
+	}
+
+	.corporate-teaser p:not(.course-kicker) {
+		margin: 18px 0 0;
+	}
+
+	.corporate-teaser .course-button--primary {
+		background: var(--course-navy);
+		color: #fff;
+		white-space: nowrap;
 	}
 
 	.before-after {
@@ -1356,7 +1545,8 @@ const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 		.price-grid,
 		.instructor-card,
 		.faq-grid,
-		.course-related__panel {
+		.course-related__panel,
+		.corporate-teaser {
 			grid-template-columns: 1fr;
 		}
 

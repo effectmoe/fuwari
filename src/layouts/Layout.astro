@@ -100,7 +100,7 @@ const metaDescription = description || pageTitle;
 
 // --- 構造化データ JSON-LD: Organization + WebSite + Person（全ページ共通・LLMO の核） ---
 const organizationLd = {
-	"@type": "Organization",
+	"@type": ["Organization", "EducationalOrganization"],
 	"@id": `${siteUrl}#organization`,
 	name: seoConfig.organization.name,
 	legalName: "株式会社EFFECT",

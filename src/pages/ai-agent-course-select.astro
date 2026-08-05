@@ -1,12 +1,27 @@
 ---
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const lastUpdated = "2026-08-05";
+const pageUrl = `${siteUrl}ai-agent-course-select/`;
+const webPageLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: "AIエージェント講座 コース選択",
+  description: "AIエージェント講座の初級編と上級編を比較し、自分の経験と目標に合うコースを選ぶためのページです。",
+  inLanguage: "ja",
+  dateModified: lastUpdated,
+};
 ---
 
 <MainGridLayout
   title="AIエージェント講座 ─ コース選択｜株式会社EFFECT"
   description="AIエージェント講座には初級編と上級編があります。あなたの経験・目標に合ったコースをお選びください。人材開発支援助成金（リスキリング）対応。"
 >
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(webPageLd)}></script>
   <div class="flex flex-col gap-5 w-full">
 
     <!-- ===== ヘッダー ===== -->
@@ -23,6 +38,7 @@ import { Icon } from "astro-icon/components";
         Claude Code 未経験〜基礎から学ぶ方は <strong>初級編</strong>、<br />
         Claude Code を既に使っていて設計・構築力を高めたい方は <strong>上級編</strong>。
       </p>
+      <p class="text-xs text-50 mt-4 font-bold">最終更新: {lastUpdated}</p>
     </div>
 
     <!-- ===== 2カード ===== -->

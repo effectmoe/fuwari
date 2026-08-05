@@ -1,0 +1,540 @@
+---
+import LandingLayout from "../layouts/LandingLayout.astro";
+import { Icon } from "astro-icon/components";
+
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const pagePath = "ai-agent-course-corporate/";
+const pageUrl = `${siteUrl}${pagePath}`;
+const lastUpdated = "2026-08-05";
+const consultationHref = "/?inquiry=consultation&service=ai-course-corporate#contact";
+
+const curriculum = [
+	["01", "導入準備", "Claude Codeのインストール、認証、IDE連携、権限モード、CLAUDE.mdの役割を確認します。"],
+	["02", "任せ方の設計", "AIへの指示粒度、TODO分解、Gitでの差分確認、差し戻しの考え方を実務の流れで扱います。"],
+	["03", "社内資料の横断分析", "PDF、Excel、Word、議事録、規程、契約書などから必要情報を探し、根拠を整理します。"],
+	["04", "書類作成の自動化", "Word、Excel、PowerPointのテンプレートを使い、提案書、報告書、比較表の作成を体験します。"],
+	["05", "外部ツール連携", "Webhook、API、GitHub、Notion、Slack、Google Driveなどとの接続方針を学びます。"],
+	["06", "公開・運用設計", "LPや社内ツールをAIと作り、公開、確認、更新、社内展開までの流れを整理します。"],
+];
+
+const faqs = [
+	{
+		q: "Claude Codeを法人向けに社内研修してもらえますか？",
+		a: "はい、法人向けの社内研修として実施できます。個人向け講座の内容をそのまま流すのではなく、部署、人数、業務テーマ、既存ツールに合わせて、Claude Codeをどの業務に入れるかを整理したうえで進めます。3名以上で社内貸切にでき、AI活用を個人技で終わらせず、社内で再現できる形にすることを重視します。",
+	},
+	{
+		q: "最低何名から法人研修として実施できますか？",
+		a: "3名から社内貸切での実施が可能です。少人数であれば、参加者の実務に近いファイルや課題を扱いやすく、部署横断で受ける場合は、社内全体で共通化すべきAI利用ルールや確認フローまで整理しやすくなります。人数が多い場合は、進め方や演習の粒度を事前に調整します。",
+	},
+	{
+		q: "オンラインですか、対面ですか？地方の会社でも受講できますか？",
+		a: "基本的にはZoomオンラインで実施しやすい内容です。地方の会社でも、オンラインであれば地域を問わず参加できます。対面実施の可否は、地域、人数、日程、研修内容によって変わるため、無料相談で確認してください。遠隔でも実務演習が成立するよう、PC環境と教材の準備を重視します。",
+	},
+	{
+		q: "自社の業務に合わせてカリキュラムを変更できますか？",
+		a: "可能です。Claude Codeの基本操作だけでなく、社内資料の横断分析、契約書や規程の比較、Word・Excel・PowerPointの自動生成、NotionやSlackなどの外部SaaS連携、LP公開まで、会社側の目的に合わせて内容を寄せます。研修前に、何を自動化したいか、どこで人の確認が必要かを整理します。",
+	},
+	{
+		q: "非エンジニアの社員でも受講できますか？",
+		a: "受講できます。ただし、ChatGPTやClaudeなどのAIツールを日常的に触っている状態を推奨します。Claude Codeは開発者向けの側面もありますが、この研修ではコード暗記ではなく、AIに安全に作業を任せる設計、ファイル確認、差分確認、指示の出し方を中心に扱います。",
+	},
+	{
+		q: "研修ではどのような成果物を作りますか？",
+		a: "例として、社内資料からの要約、比較表、提案書ドラフト、Word・Excel・PowerPointのテンプレート生成、Webhook通知、外部SaaS連携の小さな仕組み、LPの公開フローなどを扱います。最終的な成果物は、研修の目的と参加者の業務に合わせて調整します。",
+	},
+	{
+		q: "費用はいくらですか？",
+		a: "個人向け講座では、通常価格として1名・全6回・計12時間で385,000円を掲載しています。法人研修は、人数、実施形式、カリキュラム調整、助成金活用の有無によって変わるため、個別に確認します。金額を先に固定するより、研修で達成したい業務成果から逆算して見積もる形が現実的です。",
+	},
+	{
+		q: "助成金は使えますか？",
+		a: "人材開発支援助成金の活用例をページ内で紹介しています。ただし、株式会社EFFECTでは助成金申請の代行は行っていません。制度利用の可否や申請手続きは、必ず社労士等に確認してください。必要に応じて、申請に詳しい提携社労士事務所をご紹介します。",
+	},
+	{
+		q: "見積書や請求書は発行できますか？",
+		a: "法人研修では、社内決裁や助成金確認のために必要な書類が発生することがあります。見積書、請求書、支払い条件などは、実施内容、人数、日程、契約条件に応じて確認してください。無料相談では、社内稟議に必要な情報を先に整理します。",
+	},
+	{
+		q: "受講後に社内展開するための資料はもらえますか？",
+		a: "社内展開用の資料や手順書が必要な場合は、研修目的に合わせてどこまで用意するかを事前に相談してください。Claude Codeの使い方そのものだけでなく、社内で守るべき確認手順、権限、Gitでのレビュー、扱ってよいファイル範囲などを言語化することが重要です。",
+	},
+	{
+		q: "Udemyや公式ドキュメントで独学するのと何が違いますか？",
+		a: "独学は機能を知るには有効ですが、社内導入では、誰がどのファイルを扱うか、出力結果をどう確認するか、どの業務から始めるかで止まりがちです。この研修では、Claude Codeの機能説明ではなく、社内業務に合わせてAIに調査・整理・作成・連携を任せるための設計を扱います。",
+	},
+	{
+		q: "他社のClaude Code講座と比べた違いは何ですか？",
+		a: "この研修は、Claude Codeの操作説明だけではなく、GitHub、Webhook、API、MCP、Notion、Slack、Google Driveなど、実際の業務フローにつながる要素まで扱います。さらに、AIセントラルやAIクロールなど、実際にAIを業務システムへ組み込む経験をもとに、現場で使える手順へ落とし込みます。",
+	},
+	{
+		q: "社内資料や個人情報を扱う場合、どう注意すればよいですか？",
+		a: "本番データや個人情報をそのまま教材にするかどうかは慎重に判断してください。研修では、権限モード、扱うファイル範囲、Gitでの差分確認、人間が判断する境界などを扱います。より厳格なセキュリティが必要な場合は、AIセントラルのローカルLLM構成やPerfect Secure Planも検討対象になります。",
+	},
+	{
+		q: "研修後も継続的に相談できますか？",
+		a: "継続的な伴走が必要な場合は、無料相談で目的、頻度、期間、実装したい範囲を確認します。研修で学んだ内容を社内に定着させるには、実際の業務ファイルや運用ルールに合わせて改善を続ける必要があります。単発講座、個別コンサル、AIセントラル構築のどれが合うかを整理します。",
+	},
+	{
+		q: "導入までの流れを教えてください。",
+		a: "まず無料相談で、受講人数、現在のAI利用状況、実施希望時期、扱いたい業務テーマ、助成金活用の有無を確認します。その後、カリキュラム案と実施条件を整理し、必要に応じて見積や社内決裁資料を準備します。実施後は、社内展開や継続支援の必要性を確認します。",
+	},
+];
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"@id": `${pageUrl}#faqpage`,
+	mainEntity: faqs.map((item) => ({
+		"@type": "Question",
+		name: item.q,
+		acceptedAnswer: { "@type": "Answer", text: item.a },
+	})),
+};
+
+const serviceLd = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"@id": `${pageUrl}#service`,
+	name: "法人向けClaude Code社内研修",
+	serviceType: "Claude Code 法人研修・AIエージェント導入支援",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: { "@type": "Country", name: "Japan" },
+	audience: { "@type": "BusinessAudience" },
+	url: pageUrl,
+	inLanguage: "ja",
+	dateModified: lastUpdated,
+	description:
+		"法人向けにClaude Codeを社内導入するための研修です。3名から社内貸切に対応し、社内資料の横断分析、書類作成、Webhook・API・MCP連携まで実務に合わせて扱います。",
+};
+
+const courseLd = {
+	"@context": "https://schema.org",
+	"@type": "Course",
+	"@id": `${pageUrl}#course`,
+	name: "法人向けClaude Code社内研修",
+	description:
+		"Claude Codeの導入、任せ方、社内資料の横断分析、書類作成、外部ツール連携、公開・運用設計までを法人向けに学ぶ社内研修です。",
+	provider: { "@id": `${siteUrl}#organization` },
+	inLanguage: "ja",
+	url: pageUrl,
+	dateModified: lastUpdated,
+	teaches: curriculum.map((item) => item[1]),
+	hasCourseInstance: {
+		"@type": "CourseInstance",
+		courseMode: "Online",
+		instructor: { "@id": `${siteUrl}#person` },
+		courseWorkload: "PT12H",
+	},
+};
+---
+
+<LandingLayout
+	title="法人向けClaude Code社内研修｜AIエージェント導入支援｜株式会社EFFECT"
+	description="Claude Codeを法人向けに社内導入するための実践研修。3名から社内貸切に対応し、AIに調査・整理・作成・連携を任せる業務設計を学びます。"
+>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(serviceLd)} is:inline />
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(courseLd)} is:inline />
+
+	<section class="corp-hero">
+		<div class="corp-shell corp-hero__grid">
+			<div>
+				<p class="corp-kicker">CORPORATE CLAUDE CODE TRAINING</p>
+				<h1>法人向けClaude Code社内研修</h1>
+				<p class="corp-lead">AIに聞く社員を増やすのではなく、AIに業務を任せられる組織へ。</p>
+				<p class="corp-body">
+					Claude Codeを、社内資料の横断分析、書類作成、Webhook・API・MCP連携、LP公開まで使える実務研修として設計します。3名から社内貸切に対応します。
+				</p>
+				<div class="corp-actions">
+					<a href={consultationHref} class="corp-button corp-button--primary">法人研修を相談する</a>
+					<a href="#faq" class="corp-button corp-button--ghost">FAQを見る</a>
+				</div>
+				<p class="corp-updated">最終更新: {lastUpdated}</p>
+			</div>
+			<div class="corp-hero-card" aria-label="法人研修の概要">
+				<span>対象</span>
+				<strong>3名からの社内貸切研修</strong>
+				<ul>
+					<li>Zoomオンライン対応</li>
+					<li>全6回・計12時間を基本に設計</li>
+					<li>業務テーマに合わせて演習を調整</li>
+					<li>助成金活用は社労士等へ確認</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="corp-section">
+		<div class="corp-shell corp-split">
+			<div>
+				<p class="corp-kicker">WHY CORPORATE</p>
+				<h2>Claude Codeは、個人の便利ツールで終わらせると定着しません。</h2>
+			</div>
+			<div class="corp-copy">
+				<p>
+					法人導入で大切なのは、社員がClaude Codeを触れることだけではありません。どの業務に使うのか、どのファイルを扱ってよいのか、出力を誰が確認するのか、失敗したときにどう戻すのか。ここを決めないまま導入すると、AI活用は個人技で止まります。
+				</p>
+				<p>
+					この研修では、Claude Codeを業務の中に入れる前提で、権限、Gitでの確認、CLAUDE.md、ファイル横断、テンプレート生成、外部連携までを扱います。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="corp-section corp-section--surface">
+		<div class="corp-shell">
+			<div class="corp-heading">
+				<p class="corp-kicker">CURRICULUM</p>
+				<h2>全6回を基本に、社内業務へ寄せて設計します。</h2>
+			</div>
+			<div class="corp-curriculum">
+				{curriculum.map(([no, title, body]) => (
+					<article>
+						<span>{no}</span>
+						<h3>{title}</h3>
+						<p>{body}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="corp-section">
+		<div class="corp-shell corp-flow">
+			<div>
+				<p class="corp-kicker">PROCESS</p>
+				<h2>問い合わせから実施までの流れ。</h2>
+			</div>
+			<ol>
+				<li><b>無料相談</b><span>人数、部署、現在のAI利用状況、扱いたい業務を確認します。</span></li>
+				<li><b>研修設計</b><span>全6回を基本に、カリキュラム、演習、実施形式を調整します。</span></li>
+				<li><b>条件確認</b><span>費用、日程、助成金確認、必要書類を整理します。</span></li>
+				<li><b>研修実施</b><span>Claude Codeを実務で使うための演習を進めます。</span></li>
+				<li><b>社内展開</b><span>必要に応じて、継続相談やAIセントラル構築へつなげます。</span></li>
+			</ol>
+		</div>
+	</section>
+
+	<section id="faq" class="corp-section corp-section--surface">
+		<div class="corp-shell">
+			<div class="corp-heading">
+				<p class="corp-kicker">FAQ</p>
+				<h2>法人向けClaude Code研修のよくある質問</h2>
+			</div>
+			<div class="corp-faq">
+				{faqs.map((item) => (
+					<details>
+						<summary>{item.q}<Icon name="material-symbols:expand-more-rounded" /></summary>
+						<p>{item.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="contact" class="corp-final">
+		<div class="corp-shell corp-final__panel">
+			<p class="corp-kicker">START WITH CONSULTATION</p>
+			<h2>Claude Codeを、社内で使える研修にします。</h2>
+			<p>人数、業務テーマ、実施時期、助成金活用の有無を共有してください。最初に研修の組み方を整理します。</p>
+			<a href={consultationHref} class="corp-button corp-button--primary">法人研修を相談する</a>
+		</div>
+	</section>
+</LandingLayout>
+
+<style>
+	:global(body) {
+		--corp-navy: #081827;
+		--corp-blue: #0056b3;
+		--corp-cyan: #00c2ff;
+		--corp-surface: #f5f9ff;
+		--corp-line: rgba(8, 24, 39, 0.12);
+		--corp-muted: #526172;
+	}
+
+	.corp-shell {
+		width: min(1120px, calc(100% - 40px));
+		margin: 0 auto;
+	}
+
+	.corp-hero {
+		padding: 150px 0 82px;
+		background:
+			linear-gradient(135deg, rgba(8, 24, 39, 0.97), rgba(13, 58, 84, 0.92)),
+			radial-gradient(circle at 72% 18%, rgba(0, 194, 255, 0.36), transparent 32%);
+		color: #fff;
+	}
+
+	.corp-hero__grid,
+	.corp-split,
+	.corp-flow {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
+		gap: clamp(32px, 6vw, 76px);
+		align-items: start;
+	}
+
+	.corp-kicker {
+		margin: 0 0 14px;
+		color: var(--corp-cyan);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+	}
+
+	.corp-hero h1,
+	.corp-section h2,
+	.corp-final h2 {
+		margin: 0;
+		font-size: clamp(38px, 5vw, 72px);
+		font-weight: 950;
+		line-height: 1.06;
+		letter-spacing: 0;
+	}
+
+	.corp-lead {
+		margin: 22px 0 0;
+		font-size: clamp(22px, 2.4vw, 32px);
+		font-weight: 850;
+		line-height: 1.35;
+	}
+
+	.corp-body,
+	.corp-copy p,
+	.corp-final p {
+		font-size: 16px;
+		font-weight: 650;
+		line-height: 1.9;
+	}
+
+	.corp-body {
+		max-width: 640px;
+		color: rgba(255, 255, 255, 0.78);
+	}
+
+	.corp-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 30px;
+	}
+
+	.corp-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 52px;
+		border-radius: 0.45rem;
+		padding: 0 22px;
+		font-size: 15px;
+		font-weight: 950;
+		text-decoration: none;
+	}
+
+	.corp-button--primary {
+		background: #fff;
+		color: var(--corp-navy);
+	}
+
+	.corp-button--ghost {
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		color: #fff;
+	}
+
+	.corp-updated {
+		display: inline-flex;
+		margin-top: 18px;
+		border: 1px solid rgba(255, 255, 255, 0.24);
+		border-radius: 999px;
+		padding: 8px 13px;
+		color: rgba(255, 255, 255, 0.76);
+		font-size: 12px;
+		font-weight: 850;
+	}
+
+	.corp-hero-card,
+	.corp-faq details,
+	.corp-curriculum article,
+	.corp-flow li,
+	.corp-final__panel {
+		border: 1px solid var(--corp-line);
+		background: #fff;
+		box-shadow: 0 22px 64px rgba(8, 24, 39, 0.08);
+	}
+
+	.corp-hero-card {
+		border-color: rgba(255, 255, 255, 0.18);
+		background: rgba(255, 255, 255, 0.08);
+		padding: 30px;
+		color: #fff;
+		backdrop-filter: blur(16px);
+	}
+
+	.corp-hero-card span,
+	.corp-curriculum span {
+		color: var(--corp-cyan);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.corp-hero-card strong {
+		display: block;
+		margin-top: 8px;
+		font-size: 26px;
+		line-height: 1.25;
+	}
+
+	.corp-hero-card ul {
+		display: grid;
+		gap: 12px;
+		margin: 24px 0 0;
+		padding: 0;
+		list-style: none;
+		color: rgba(255, 255, 255, 0.78);
+		font-weight: 750;
+	}
+
+	.corp-section {
+		padding: 88px 0;
+	}
+
+	.corp-section--surface {
+		background: var(--corp-surface);
+	}
+
+	.corp-copy p {
+		margin: 0 0 18px;
+		color: var(--corp-muted);
+	}
+
+	.corp-heading {
+		max-width: 760px;
+		margin-bottom: 34px;
+	}
+
+	.corp-curriculum {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.corp-curriculum article,
+	.corp-flow li {
+		border-radius: 0.9rem;
+		padding: 24px;
+	}
+
+	.corp-curriculum h3 {
+		margin: 12px 0 10px;
+		font-size: 22px;
+	}
+
+	.corp-curriculum p,
+	.corp-flow span,
+	.corp-faq p {
+		margin: 0;
+		color: var(--corp-muted);
+		font-size: 15px;
+		font-weight: 650;
+		line-height: 1.8;
+	}
+
+	.corp-flow ol {
+		display: grid;
+		gap: 12px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.corp-flow b {
+		display: block;
+		margin-bottom: 6px;
+		font-size: 18px;
+	}
+
+	.corp-faq {
+		display: grid;
+		gap: 12px;
+	}
+
+	.corp-faq details {
+		border-radius: 0.8rem;
+		padding: 20px;
+	}
+
+	.corp-faq summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		color: var(--corp-navy);
+		font-size: 17px;
+		font-weight: 950;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.corp-faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.corp-faq p {
+		margin-top: 14px;
+	}
+
+	.corp-final {
+		padding: 0 0 96px;
+		background: var(--corp-surface);
+	}
+
+	.corp-final__panel {
+		border-radius: 1rem;
+		padding: clamp(34px, 5vw, 64px);
+		text-align: center;
+	}
+
+	.corp-final .corp-button--primary {
+		margin-top: 18px;
+		background: var(--corp-navy);
+		color: #fff;
+	}
+
+	@media (max-width: 980px) {
+		.corp-hero__grid,
+		.corp-split,
+		.corp-flow {
+			grid-template-columns: 1fr;
+		}
+
+		.corp-curriculum {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.corp-shell {
+			width: min(100% - 28px, 1120px);
+		}
+
+		.corp-hero {
+			padding: 112px 0 54px;
+		}
+
+		.corp-hero h1,
+		.corp-section h2,
+		.corp-final h2 {
+			font-size: clamp(34px, 12vw, 48px);
+		}
+
+		.corp-curriculum {
+			grid-template-columns: 1fr;
+		}
+
+		.corp-button {
+			width: 100%;
+		}
+	}
+</style>
