@@ -410,7 +410,7 @@ export const courseConfig = {
 		{
 			id: "ai-consulting",
 			title: "AI×LLM 経営伴走コンサルティング（月額）",
-			url: "https://www.street-academy.com/subscription/services/4690",
+			url: "https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service",
 			topics: ["AIコンサルティング", "AIシステム構築", "AIアプリ開発", "DX", "経営"],
 			pitch: "AIシステム構築・LLMO・業務自動化を、月額で継続伴走。事業をAIで構造化して加速します。",
 		},
