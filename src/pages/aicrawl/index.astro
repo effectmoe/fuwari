@@ -89,7 +89,7 @@ const sampleReports = [
 		visual: "growth",
 	},
 	{
-		label: "サンプル｜架空企業での計測例",
+		label: "匿名企業での計測例",
 		title: "AI回答露出レポート",
 		body: "7本の質問をChatGPT・Geminiで各10回ずつ測り、露出・引用・競合との差分・改善ロードマップまで1つのレポートに整理します。",
 		href: "#citation-report",
@@ -99,11 +99,11 @@ const sampleReports = [
 ];
 
 const citationMetrics = [
-	[
-		"計測対象",
-		"A社（サンプル）",
-		"実企業名、実クエリ、実ドメインは出さず、架空企業での計測例として表示します。",
-	],
+		[
+			"計測対象",
+			"A社（サンプル）",
+			"実企業名、実クエリ、実ドメインは出さず、匿名企業での計測例として表示します。",
+		],
 	[
 		"総試行回数",
 		"140回",
@@ -220,8 +220,8 @@ const citationRoadmap = [
 ];
 
 const citationReportNotes = [
-	"※ 本レポートは架空企業を対象としたサンプルです。",
-	"※ 数値は実際の計測手法で得られた実データの構造を反映していますが、計測対象は架空企業に置き換えています。",
+	"※ 本レポートは匿名企業を対象としたサンプル表示です。",
+	"※ 数値は実際の計測手法で得られた実データの構造を反映していますが、企業名・質問文・ドメイン名は匿名化しています。",
 	"※ AIの回答は同一の質問でも変動します。本サービスは特定の順位・掲載を保証するものではありません。",
 	"※ 改善提案は競合ページとの差分から導いた推定であり、施策の効果は実施後の再計測で確認します。",
 ];
@@ -496,7 +496,7 @@ const faqs = [
 				</div>
 			</div>
 
-			<div class="crawl-visual" aria-label="AI Crawl diagnostic preview">
+			<div class="crawl-visual" aria-label="AI CRAWL diagnostic preview">
 				<div class="crawl-browser">
 					<div class="crawl-browser__bar">
 						<span></span><span></span><span></span>
@@ -579,6 +579,41 @@ const faqs = [
 		</div>
 	</section>
 
+	<section class="aicrawl-section aicrawl-terms" aria-labelledby="aicrawl-terms-title">
+		<div class="aicrawl-container">
+			<div class="aicrawl-section-head aicrawl-terms__head">
+				<p class="aicrawl-eyebrow">FIRST GUIDE / 用語の前提</p>
+				<h2 id="aicrawl-terms-title">AIに読まれることと、AIに紹介されることは違います。</h2>
+				<p>
+					このページでは、AI CRAWLとAI CITATIONを分けて扱います。料金表に出てくる「クエリ」は、AIに投げる質問文のことです。まず、この3つを押さえるとサービス内容が読みやすくなります。
+				</p>
+			</div>
+			<div class="aicrawl-term-grid">
+				<article>
+					<span>01</span>
+					<h3>AI CRAWL</h3>
+					<p>
+						AIクローラーやAI経由の流入ログを見て、AIが自社サイトを読みに来ているか、どのページに来ているかを確認します。サイト側に残る記録を見るサービスです。
+					</p>
+				</article>
+				<article>
+					<span>02</span>
+					<h3>AI CITATION<br /><small>エーアイ・サイテーション</small></h3>
+					<p>
+						ChatGPTやGeminiに実際に質問し、AI回答の中に自社名・ページ・サービスが登場するかを測ります。ユーザー側から見える「紹介されるか」を見る診断です。
+					</p>
+				</article>
+				<article>
+					<span>03</span>
+					<h3>クエリ</h3>
+					<p>
+						クエリとは、AIに投げる質問文のことです。たとえば「○○に強い会社は？」「○○の相談先は？」のような1つの質問文を、ChatGPTとGeminiで複数回測ります。
+					</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
 	<section id="overview" class="aicrawl-section aicrawl-intro">
 		<div class="aicrawl-container aicrawl-intro__grid">
 			<div>
@@ -640,25 +675,26 @@ const faqs = [
 			<div class="aicrawl-container aicrawl-bridge">
 				<div>
 					<p class="aicrawl-eyebrow">OUTSIDE / INSIDE</p>
-					<h2>外側はAI Crawl。内側はAI CENTRAL。</h2>
+					<h2>外側はAI CRAWL。内側はAI CENTRAL。</h2>
 				<p>
 					AI CRAWLは、AIからの流入を分析し、外側の集客戦略を整えます。AI CENTRALは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
 				</p>
 			</div>
-			<div class="bridge-cards">
-				<a href="/aicrawl/" class="bridge-card">
-					<span>Outside</span>
-					<h3>AI Crawl</h3>
-					<p>AI流入、読まれたページ、推定動機を見て、紹介されるための戦略へ接続。</p>
-				</a>
-				<a href={centralHref} class="bridge-card bridge-card--light">
-					<span>Inside</span>
-					<h3>AI CENTRAL</h3>
-					<p>社内資料、顧客情報、対応履歴を記憶として業務AIへ接続。</p>
-				</a>
+				<div class="bridge-cards">
+					<article class="bridge-card">
+						<span>Outside</span>
+						<h3>AI CRAWL</h3>
+						<p>AI流入、読まれたページ、推定動機を見て、紹介されるための戦略へ接続。</p>
+					</article>
+					<a href={centralHref} class="bridge-card bridge-card--light">
+						<span>Inside</span>
+						<h3>AI CENTRAL</h3>
+						<p>社内資料、顧客情報、対応履歴を記憶として業務AIへ接続。</p>
+						<small>AI CENTRALを見る →</small>
+					</a>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
 		<section id="citation" class="aicrawl-section aicrawl-section--citation">
 			<div class="aicrawl-container citation-comparison">
@@ -666,7 +702,7 @@ const faqs = [
 					<p class="aicrawl-eyebrow">AI CITATION / ANSWER VISIBILITY</p>
 					<h2>読まれているかと、紹介されるかは別です。</h2>
 					<p>
-						AI CRAWLは、AIがサイトを読みに来たかをサイト側の巡回ログで見ます。AI CITATIONは、実際にAIへ質問し、回答に自社が載るかをユーザー側の見え方で測ります。
+						AI CRAWLは、AIがサイトを読みに来たかをサイト側の巡回ログで見ます。AI CITATION（エーアイ・サイテーション）は、実際にAIへ質問し、回答に自社が載るかをユーザー側の見え方で測ります。
 					</p>
 				</div>
 
@@ -701,14 +737,14 @@ const faqs = [
 					</p>
 				</div>
 
-				<div class="citation-evidence">
-					<div class="citation-evidence__lead">
-						<span>サンプル｜架空企業での計測例</span>
-						<strong>読まれているかではなく、AIの回答に載るかを測る。</strong>
-						<p>
-							クローラーの巡回ログだけでは、ユーザーがAIに質問したときに紹介されるかまでは分かりません。AI CITATIONでは、質問文ごとに露出と引用を分け、どこまで取れて、どこから落ちるかを確認します。
-						</p>
-					</div>
+					<div class="citation-evidence">
+						<div class="citation-evidence__lead">
+							<span>匿名企業での計測例</span>
+							<strong>読まれているかではなく、AIの回答に載るかを測る。</strong>
+							<p>
+								AI CITATIONは、AI回答の中で自社名・ページ・サービスがどれだけ登場し、引用元として扱われるかを測る診断です。スコアが高いほど、ユーザーがAIに相談したときに候補として見つけられやすい状態を示します。
+							</p>
+						</div>
 					<div class="citation-metrics">
 						{citationMetrics.map(([label, value, body]) => (
 							<div>
@@ -727,7 +763,7 @@ const faqs = [
 							<h3>AI CITATION 診断レポート</h3>
 							<p>対象：A社（サンプル） / 計測日：2026-08 / 対象AI：ChatGPT・Gemini</p>
 						</div>
-						<span>サンプル｜架空企業での計測例</span>
+							<span>匿名企業での計測例</span>
 					</div>
 
 					<div class="citation-report__score">
@@ -735,10 +771,10 @@ const faqs = [
 							<span>総合スコア</span>
 							<strong>29 / 140</strong>
 							<em>20.7%</em>
-						</div>
-						<p>
-							名指しされれば100%。探されている時は0%。構造化データは競合より厚くても、主力領域では0/20になることがあります。
-						</p>
+							</div>
+							<p>
+								名指しされれば100%。探されている時は0%。診断スコアは、指定した質問群の中でAI回答にどれだけ登場したかを示す数値です。構造化データは競合より厚くても、主力領域では0/20になることがあります。
+							</p>
 					</div>
 
 					<div class="citation-report__grid">
@@ -775,12 +811,15 @@ const faqs = [
 						</section>
 					</div>
 
-					<section class="citation-panel citation-panel--table" aria-labelledby="citation-diff-title">
-						<div class="citation-panel__head">
-							<span>Machine Diagnosis</span>
-							<h4 id="citation-diff-title">自社ページと引用された競合ページの差分</h4>
-						</div>
-						<div class="citation-table-wrap">
+						<section class="citation-panel citation-panel--table" aria-labelledby="citation-diff-title">
+							<div class="citation-panel__head">
+								<span>Machine Diagnosis / 機械診断</span>
+								<h4 id="citation-diff-title">AIが選んだページと、自社ページの差分を見る。</h4>
+							</div>
+							<p class="citation-panel__body">
+								AI回答に引用された競合ページと自社ページを、構造化データ・FAQ・見出し・本文量・事例・料金・更新日の同じ物差しで比較します。どの項目が足りないのかを、人の感覚ではなく数字で切り分けます。
+							</p>
+							<div class="citation-table-wrap">
 							<table>
 								<thead>
 									<tr>
@@ -803,18 +842,21 @@ const faqs = [
 								</tbody>
 							</table>
 						</div>
-						<p class="citation-report__finding">
-							検出された明確な差分：事例・お客様の声の言及が 自社4回 / 競合は最大47回
-						</p>
-					</section>
+							<p class="citation-report__finding">
+								この例で検出された明確な差分：事例・お客様の声の言及が 自社4回 / 競合は最大47回
+							</p>
+						</section>
 
 					<div class="citation-report__bottom">
 						<section class="citation-panel">
-							<div class="citation-panel__head">
-								<span>Roadmap</span>
-								<h4>改善ロードマップ</h4>
-							</div>
-							<div class="citation-roadmap">
+								<div class="citation-panel__head">
+									<span>Roadmap / 改善順</span>
+									<h4>どこから直すべきかを、優先順位に落とす。</h4>
+								</div>
+								<p class="citation-panel__body">
+									差分診断で見えた不足を、最初に手をつける順番へ整理します。全部を一度に直すための作業リストではなく、AI回答に選ばれる可能性を高めるための改善順です。
+								</p>
+								<div class="citation-roadmap">
 								{citationRoadmap.map(([priority, body]) => (
 									<div>
 										<span>{priority}</span>
@@ -824,13 +866,13 @@ const faqs = [
 							</div>
 						</section>
 						<section class="citation-panel">
-							<div class="citation-panel__head">
-								<span>Next Action</span>
-								<h4>改善後、同じ質問で再計測する。</h4>
-							</div>
-							<p class="citation-panel__body">
-								改善実施から2週間後に同一クエリで再計測します。改修直後の再計測ではなく、AIが再クロールした後の変化を数字で確認します。
-							</p>
+								<div class="citation-panel__head">
+									<span>Next Action / 再計測</span>
+									<h4>改善後、同じ質問で再計測する。</h4>
+								</div>
+								<p class="citation-panel__body">
+									改善実施から2週間後に、同じ質問文・同じ回数で再計測します。条件を揃えて前後比較することで、実施した改善がAI回答への露出にどう影響したかを確認します。
+								</p>
 						</section>
 					</div>
 
@@ -839,14 +881,31 @@ const faqs = [
 					</div>
 				</article>
 
-				<div class="citation-capabilities">
-					<div>
-						<p class="aicrawl-eyebrow">WHAT WE MEASURE</p>
-						<h3>載る・載らないを、質問文単位で確認する。</h3>
-						<p>
-							AIに必ず紹介されることを保証するサービスではありません。まず、どの質問で載り、どの質問で載らず、代わりに誰が載っているのかを測ることから始めます。
-						</p>
-					</div>
+					<div class="citation-capabilities">
+						<div>
+							<p class="aicrawl-eyebrow">WHAT WE MEASURE / 源流</p>
+							<h3>AIに聞かれた時、自社は候補に出てくるのか。</h3>
+							<p>
+								AI CITATIONは、ユーザーがChatGPTやGeminiに相談した場面を再現し、自社が回答に登場するかを測る診断です。サイトが読まれているだけでは足りません。AIの回答に出るか、引用されるか、代わりに誰が選ばれているかを確認します。
+							</p>
+							<div class="citation-origin-flow" aria-label="AI CITATIONで分かること">
+								<div>
+									<span>01</span>
+									<strong>質問する</strong>
+									<p>想定顧客が聞きそうな質問文で、ChatGPTとGeminiに複数回たずねます。</p>
+								</div>
+								<div>
+									<span>02</span>
+									<strong>数える</strong>
+									<p>自社が何回登場し、引用元として扱われたかを露出と引用に分けて数えます。</p>
+								</div>
+								<div>
+									<span>03</span>
+									<strong>直す</strong>
+									<p>選ばれた競合との差分から、どのページをどう改善するかを決めます。</p>
+								</div>
+							</div>
+						</div>
 					<div class="citation-capability-grid">
 						{citationCapabilities.map(([no, title, body]) => (
 							<article>
@@ -862,10 +921,13 @@ const faqs = [
 
 		<section id="output" class="aicrawl-section">
 			<div class="aicrawl-container">
-				<div class="aicrawl-section-head">
-					<p class="aicrawl-eyebrow">OUTPUT</p>
-				<h2>レポート後は、AIに紹介されるための順番まで落とし込む。</h2>
-			</div>
+					<div class="aicrawl-section-head">
+						<p class="aicrawl-eyebrow">OUTPUT</p>
+					<h2>レポート後は、AIに紹介されるための順番まで落とし込む。</h2>
+					<p>
+						AI CRAWLのレポートは、単なるアクセス数の一覧ではありません。どのAIが、どのページを、どんな文脈で読みに来た可能性があるのかを整理し、次に直すべきページと導線まで判断できる材料にします。
+					</p>
+				</div>
 			<div class="deliverable-grid">
 				{deliverables.map(([no, title, body]) => (
 					<article>
@@ -879,11 +941,14 @@ const faqs = [
 	</section>
 
 	<section id="case" class="aicrawl-section aicrawl-section--soft">
-		<div class="aicrawl-container aicrawl-case__grid">
-			<div>
-				<p class="aicrawl-eyebrow">BEFORE / AFTER</p>
-				<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
-			</div>
+			<div class="aicrawl-container aicrawl-case__grid">
+				<div>
+					<p class="aicrawl-eyebrow">BEFORE / AFTER</p>
+					<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
+					<p>
+						AIに読まれない原因は、情報がないことだけではありません。料金、対象者、実績、FAQ、相談導線が別々の場所に散らばると、AIはそのページの役割を説明しづらくなります。AI CRAWLでは、そうした詰まりを見つけて、AIにも人にも伝わる構造へ組み替えます。
+					</p>
+				</div>
 			<div class="case-list">
 				{cases.map((item) => (
 					<article>
@@ -962,12 +1027,12 @@ const faqs = [
 				<div class="aicrawl-sample-grid">
 					{sampleReports.map((report) => (
 						<article class="aicrawl-price-card aicrawl-sample-card">
-							<div class={`aicrawl-sample-preview aicrawl-sample-preview--${report.visual}`}>
-								{report.visual === "citation" ? (
-									<>
+								<div class={`aicrawl-sample-preview aicrawl-sample-preview--${report.visual}`}>
+									{report.visual === "citation" ? (
+										<>
 										<div class="sample-preview-head">
-											<span>AI Citation</span>
-											<strong>架空企業での計測例</strong>
+											<span>AI CITATION</span>
+											<strong>匿名企業での計測例</strong>
 										</div>
 										<div class="citation-preview-query">
 											<em>対象</em>
@@ -1082,6 +1147,7 @@ const faqs = [
 					</div>
 					<p>
 						AI別の流入、ページ別の頻度、推定されるユーザー動機、改善戦略をどこまで継続的に扱うかで選べます。
+						AI CITATION列の「3クエリ / 5クエリ / 10クエリ」は、計測する質問文の本数です。1クエリごとにChatGPT 10回 + Gemini 10回、合計20回試行します。
 					</p>
 				</div>
 
@@ -1339,12 +1405,82 @@ const faqs = [
 			line-height: 1.9;
 		}
 
-		.aicrawl-copy p:not(.aicrawl-eyebrow) {
-			margin-top: 24px;
-		}
+			.aicrawl-copy p:not(.aicrawl-eyebrow) {
+				margin-top: 24px;
+			}
 
-		.aicrawl-actions {
-			display: flex;
+			.aicrawl-terms {
+				border-bottom: 1px solid var(--crawl-line);
+				background:
+					radial-gradient(circle at 14% 8%, rgba(185, 138, 45, 0.1), transparent 24%),
+					radial-gradient(circle at 86% 0%, rgba(69, 111, 69, 0.1), transparent 28%),
+					rgba(247, 244, 238, 0.64);
+			}
+
+			.aicrawl-terms__head {
+				max-width: 1040px;
+				margin-bottom: 26px;
+			}
+
+			.aicrawl-terms__head p:not(.aicrawl-eyebrow) {
+				max-width: 900px;
+				margin: 18px 0 0;
+				color: var(--crawl-muted);
+				font-size: clamp(16px, 1.35vw, 18px);
+				font-weight: 720;
+				line-height: 1.85;
+			}
+
+			.aicrawl-term-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 16px;
+			}
+
+			.aicrawl-term-grid article {
+				border: 1px solid var(--crawl-line);
+				border-radius: 24px;
+				background: rgba(255, 255, 255, 0.82);
+				padding: clamp(20px, 2vw, 28px);
+				box-shadow: 0 20px 48px rgba(50, 59, 42, 0.07);
+			}
+
+			.aicrawl-term-grid span {
+				display: inline-grid;
+				place-items: center;
+				width: 42px;
+				height: 42px;
+				border-radius: 999px;
+				background: rgba(185, 138, 45, 0.12);
+				color: #8a650f;
+				font-size: 13px;
+				font-weight: 950;
+			}
+
+			.aicrawl-term-grid h3 {
+				margin: 18px 0 0;
+				color: var(--crawl-ink);
+				font-size: clamp(24px, 2.1vw, 32px);
+				font-weight: 950;
+				line-height: 1.16;
+			}
+
+			.aicrawl-term-grid h3 small {
+				color: var(--crawl-green);
+				font-size: 15px;
+				font-weight: 950;
+			}
+
+			.aicrawl-term-grid p {
+				margin: 14px 0 0;
+				color: var(--crawl-muted);
+				font-size: 15px;
+				font-weight: 720;
+				line-height: 1.75;
+			}
+
+			.aicrawl-actions {
+				display: flex;
 			flex-wrap: wrap;
 			gap: 14px;
 			margin-top: 34px;
@@ -1883,6 +2019,14 @@ const faqs = [
 		.bridge-card h3,
 		.bridge-card p {
 			color: #fff;
+		}
+
+		.bridge-card small {
+			display: inline-flex;
+			margin-top: 18px;
+			color: rgba(255, 255, 255, 0.92);
+			font-size: 14px;
+			font-weight: 950;
 		}
 
 			.bridge-card--light {
@@ -2427,18 +2571,62 @@ const faqs = [
 				padding: clamp(24px, 3vw, 34px);
 			}
 
-			.citation-capabilities h3 {
-				margin: 16px 0 0;
-				color: var(--crawl-ink);
-				font-size: clamp(28px, 3.2vw, 44px);
-				font-weight: 950;
-				line-height: 1.16;
-			}
+				.citation-capabilities h3 {
+					margin: 16px 0 0;
+					color: var(--crawl-ink);
+					font-size: clamp(28px, 3.2vw, 44px);
+					font-weight: 950;
+					line-height: 1.16;
+				}
 
-			.citation-capability-grid {
-				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 12px;
+				.citation-origin-flow {
+					display: grid;
+					gap: 10px;
+					margin-top: 24px;
+				}
+
+				.citation-origin-flow div {
+					display: grid;
+					grid-template-columns: auto minmax(0, 1fr);
+					gap: 4px 12px;
+					align-items: start;
+					border: 1px solid rgba(69, 111, 69, 0.16);
+					border-radius: 18px;
+					background: rgba(247, 244, 238, 0.72);
+					padding: 14px;
+				}
+
+				.citation-origin-flow span {
+					display: inline-grid;
+					place-items: center;
+					grid-row: span 2;
+					width: 34px;
+					height: 34px;
+					border-radius: 999px;
+					background: rgba(69, 111, 69, 0.12);
+					color: var(--crawl-green);
+					font-size: 12px;
+					font-weight: 950;
+				}
+
+				.citation-origin-flow strong {
+					color: var(--crawl-ink);
+					font-size: 15px;
+					font-weight: 950;
+				}
+
+				.citation-origin-flow p {
+					margin: 0;
+					color: var(--crawl-muted);
+					font-size: 13px;
+					font-weight: 760;
+					line-height: 1.55;
+				}
+
+				.citation-capability-grid {
+					display: grid;
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+					gap: 12px;
 				border: 0;
 				background: transparent;
 				box-shadow: none;
@@ -3586,6 +3774,7 @@ const faqs = [
 					.aicrawl-intro__grid,
 					.aicrawl-signal__grid,
 					.aicrawl-bridge,
+					.aicrawl-term-grid,
 					.citation-evidence,
 					.citation-capabilities,
 					.citation-report__score,
@@ -3611,6 +3800,7 @@ const faqs = [
 				.crawl-check-grid,
 				.deliverable-grid,
 				.aicrawl-sample-grid,
+				.aicrawl-term-grid,
 				.citation-lanes,
 				.citation-metrics,
 				.citation-capability-grid,
@@ -3660,10 +3850,11 @@ const faqs = [
 				.citation-report__grid,
 				.citation-report__bottom,
 				.citation-panel,
-				.citation-capability-grid,
-				.citation-quadrants,
-				.citation-live-evidence,
-				.aicrawl-pricing-matrix,
+					.citation-capability-grid,
+					.citation-quadrants,
+					.citation-live-evidence,
+					.aicrawl-term-grid,
+					.aicrawl-pricing-matrix,
 				.aicrawl-pricing-matrix__header,
 				.aicrawl-pricing-row,
 				.aicrawl-pricing-row__tier,
