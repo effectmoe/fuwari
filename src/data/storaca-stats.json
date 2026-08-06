@@ -1,18 +1,26 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 231,
-  "studentsTaught": 526,
-  "repeatStudents": 298,
+  "reviewCount": 232,
+  "studentsTaught": 527,
+  "repeatStudents": 299,
   "repeatRate": 56.7,
-  "sessionsTaught": 506,
-  "salesTotal": 2442950,
+  "sessionsTaught": 507,
+  "salesTotal": 2448450,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月6日",
-  "updatedAt": "2026-08-05T21:00:30.453Z",
+  "periodEnd": "2026年8月7日",
+  "updatedAt": "2026-08-06T21:00:21.751Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "最強AIツール！Claude Code バイブコーディング講座",
+      "reviewer": "男性",
+      "date": "2026-08",
+      "rating": 5,
+      "headline": "こちらのレベルに合わせて対応いただける講座",
+      "text": "いつもありがとうございます！こちらのレベルに合わせていただき今回もわかりやすく、前進できました！また近日中に利用させていただきます。今後とも宜しくお願いいたします。"
+    },
     {
       "course": "AIを中枢に会社を構造化再設計する経営伴走コンサル",
       "reviewer": "女性",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "為になる",
       "text": "いつもありがおうございます"
-    },
-    {
-      "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "reviewer": "女性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-      "text": "いつも大変お世話になっています！次回は自分に合うタスク管理について先生にオリジナル仕様に構築してもらうことになりました!!よろしくお願いいたします！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-05T21:01:11.905Z"
+  "testimonialsUpdatedAt": "2026-08-06T21:00:59.654Z"
 }
