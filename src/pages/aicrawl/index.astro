@@ -720,7 +720,7 @@ const faqs = [
 			<div class="aicrawl-container aicrawl-bridge">
 				<div>
 					<p class="aicrawl-eyebrow">OUTSIDE / INSIDE</p>
-					<h2>外側はAI CRAWL。<br />内側は<span class="aicrawl-nowrap">AI CENTRAL</span>。</h2>
+					<h2>外側はAI CRAWL。<br /><span class="aicrawl-nowrap">内側はAI CENTRAL。</span></h2>
 				<p>
 					AI CRAWLは、AIからの流入を分析し、外側の集客戦略を整えます。AI CENTRALは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
 				</p>
@@ -793,140 +793,6 @@ const faqs = [
 						))}
 					</div>
 				</div>
-
-				<article id="citation-report" class="citation-report">
-					<div class="citation-report__mast">
-						<div>
-							<p class="aicrawl-eyebrow">AI CITATION SAMPLE REPORT</p>
-							<h3>AI CITATION 診断レポート</h3>
-							<p>対象：A社（サンプル） / 計測日：2026-08 / 対象AI：ChatGPT・Gemini</p>
-						</div>
-							<span>匿名企業での計測例</span>
-					</div>
-					<p class="citation-report__context">
-						この見本は、A社について「会社名で聞く」「独自メソッド名で聞く」「主力サービス領域で探す」など7種類の質問テーマをAIに確認した診断レポートです。露出はAI回答の中にA社が登場した回数、引用は根拠元としてA社ページが扱われた回数を示します。
-					</p>
-
-					<div class="citation-report__score">
-						<div>
-							<span>総合スコア</span>
-							<strong>29 / 140</strong>
-							<em>20.7%</em>
-							</div>
-							<p>
-								名指しされれば100%。探されている時は0%。診断スコアは、指定した質問群の中でAI回答にどれだけ登場したかを示す数値です。構造化データは競合より厚くても、主力領域では0/20になることがあります。
-							</p>
-					</div>
-
-					<div class="citation-report__grid">
-						<section class="citation-panel citation-panel--wide" aria-labelledby="citation-query-title">
-							<div class="citation-panel__head">
-								<span>7 Queries / 140 Tests</span>
-								<h4 id="citation-query-title">クエリ別スコア</h4>
-							</div>
-							<p class="citation-panel__body">
-								「どんな聞かれ方ならA社が出るのか」を質問テーマごとに分けて見ます。20/20なら、そのテーマでは毎回A社が登場した状態です。引用は、回答の根拠としてA社ページが扱われた回数です。
-							</p>
-							<div class="citation-query-list">
-								{citationQueryScores.map(([query, exposure, citations], index) => (
-									<div class="citation-query-row">
-										<span>{String(index + 1).padStart(2, "0")}</span>
-										<strong>{query}</strong>
-										<em>露出 {exposure}</em>
-										<small>{citations}</small>
-									</div>
-								))}
-							</div>
-						</section>
-
-						<section class="citation-panel" aria-labelledby="citation-alt-title">
-							<div class="citation-panel__head">
-								<span>Alternative Sources</span>
-								<h4 id="citation-alt-title">A社が出なかった時に表示された候補</h4>
-							</div>
-							<p class="citation-panel__body">
-								A社が回答に出なかった質問テーマでは、AIが別の参照元や候補を表示します。ここでは、その時に代わりに選ばれていた候補をカテゴリ名で整理しています。
-							</p>
-							<div class="citation-domain-list">
-								{citationAlternativeDomains.map(([label, body]) => (
-									<div>
-										<strong>{label}</strong>
-										<p>{body}</p>
-									</div>
-								))}
-							</div>
-						</section>
-					</div>
-
-						<section class="citation-panel citation-panel--table" aria-labelledby="citation-diff-title">
-							<div class="citation-panel__head">
-								<span>Machine Diagnosis / 機械診断</span>
-								<h4 id="citation-diff-title">AIが選んだページと、自社ページの差分を見る。</h4>
-							</div>
-							<p class="citation-panel__body">
-								AI回答に引用された競合ページと自社ページを、構造化データ・FAQ・見出し・本文量・事例・料金・更新日の同じ物差しで比較します。どの項目が足りないのかを、人の感覚ではなく数字で切り分けます。
-							</p>
-							<div class="citation-table-wrap">
-							<table>
-								<thead>
-									<tr>
-										<th>ページ</th>
-										<th>構造化データ</th>
-										<th>FAQ</th>
-										<th>見出し</th>
-										<th>本文</th>
-										<th>事例語</th>
-										<th>料金語</th>
-										<th>更新日</th>
-									</tr>
-								</thead>
-								<tbody>
-									{citationDiffRows.map((row) => (
-										<tr>
-											{row.map((cell) => <td>{cell}</td>)}
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-							<p class="citation-report__finding">
-								この例で検出された明確な差分：事例・お客様の声の言及が A社4回 / 競合は最大47回
-							</p>
-						</section>
-
-					<div class="citation-report__bottom">
-						<section class="citation-panel">
-								<div class="citation-panel__head">
-									<span>Roadmap / 改善順</span>
-									<h4>どこから直すべきかを、優先順位に落とす。</h4>
-								</div>
-								<p class="citation-panel__body">
-									差分診断で見えた不足を、最初に手をつける順番へ整理します。全部を一度に直すための作業リストではなく、AI回答に選ばれる可能性を高めるための改善順です。
-								</p>
-								<div class="citation-roadmap">
-								{citationRoadmap.map(([priority, body]) => (
-									<div>
-										<span>{priority}</span>
-										<p>{body}</p>
-									</div>
-								))}
-							</div>
-						</section>
-						<section class="citation-panel">
-								<div class="citation-panel__head">
-									<span>Next Action / 再計測</span>
-									<h4>改善後、同じ質問で再計測する。</h4>
-								</div>
-								<p class="citation-panel__body">
-									改善実施から2週間後に、同じ質問文・同じ回数で再計測します。条件を揃えて前後比較することで、実施した改善がAI回答への露出にどう影響したかを確認します。
-								</p>
-						</section>
-					</div>
-
-					<div class="citation-report__notes">
-						{citationReportNotes.map((note) => <p>{note}</p>)}
-					</div>
-				</article>
 
 					<div class="citation-capabilities">
 						<div>
