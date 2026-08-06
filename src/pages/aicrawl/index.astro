@@ -279,8 +279,10 @@ const pricingPlans = [
 		cta: "このプランを申し込む",
 		featured: false,
 		tier: "ライト",
+		tierBody: "まずAIから読まれているかを継続的に見る入口プラン。",
 		measurementLimit: "3クエリ",
 		citation: {
+			name: "AI CRAWL + AI CITATION ライト",
 			price: "¥9,900",
 			label: "紹介されたかまで見る",
 			body: "月1回の露出計測と、載らなかった場合に代わりに表示された競合ドメインを整理します。まず、自社がどの状態にいるかを確認したい方向けです。",
@@ -310,8 +312,10 @@ const pricingPlans = [
 		cta: "伴走内容を相談する",
 		featured: true,
 		tier: "スタンダード",
+		tierBody: "数字を見ながら相談し、次の打ち手まで一緒に整理する標準プラン。",
 		measurementLimit: "5クエリ",
 		citation: {
+			name: "AI CRAWL + AI CITATION スタンダード",
 			price: "¥30,800",
 			label: "結果を読み解く",
 			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問テーマで弱いか、どの候補と比較されているかを見ながら次の打ち手を整理します。",
@@ -338,8 +342,10 @@ const pricingPlans = [
 		cta: "成長運用を相談する",
 		featured: false,
 		tier: "プロ",
+		tierBody: "改善ロードマップと再計測まで含めて、AI検索対策を継続運用する上位プラン。",
 		measurementLimit: "10クエリ",
 		citation: {
+			name: "AI CRAWL + AI CITATION プロ",
 			price: "¥55,000",
 			label: "改善後に再計測する",
 			body: "露出計測、差分診断、改善ロードマップ、施策後の同一クエリ再計測まで扱います。AI回答に載るかを継続的に検証したい方向けです。",
@@ -383,7 +389,7 @@ const citationQuadrants = [
 
 const citationSingleShot = {
 	price: "¥55,000/回",
-	body: "契約不要。プロ相当のAI CITATION診断を1回だけ実施します。",
+	body: "月額契約が前提ではない法人向けのスポット調査です。基本は継続プランで、必要な場合のみ個別にご相談ください。",
 };
 
 const citationExtraQueries = [
@@ -1040,23 +1046,24 @@ const faqs = [
 
 				<div class="aicrawl-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
 					<div class="aicrawl-pricing-matrix__header">
-						<span>プラン</span>
 						<div>
-							<strong>AI CRAWL</strong>
+							<strong>AI CRAWLのみ</strong>
 							<em>読まれたかを見る</em>
 						</div>
 						<div class="is-citation">
 							<strong>AI CRAWL + AI CITATION</strong>
-							<em>紹介されたかまで見る</em>
+							<em>AI CRAWL込みで、紹介されたかまで見る</em>
 						</div>
 					</div>
 
 					{pricingPlans.map((plan) => (
 						<div class={`aicrawl-pricing-row ${plan.featured ? "is-featured" : ""}`}>
 							<div class="aicrawl-pricing-row__tier">
-								<span>{plan.tier}</span>
-								<strong>{plan.measurementLimit}</strong>
-								<em>1クエリ = 主要AIで所定回数を確認</em>
+								<div>
+									<span>{plan.tier}プラン</span>
+									<strong>{plan.measurementLimit}</strong>
+								</div>
+								<p>{plan.tierBody}</p>
 							</div>
 							<article class="aicrawl-price-card">
 								<div class="aicrawl-price-card__top">
@@ -1082,7 +1089,7 @@ const faqs = [
 							<article class="aicrawl-price-card is-citation">
 								<div class="aicrawl-price-card__top">
 									<span>{plan.citation.label}</span>
-									<h3>{plan.tier} CITATION</h3>
+									<h3>{plan.citation.name}</h3>
 									<p>{plan.citation.body}</p>
 								</div>
 								<div class="aicrawl-price-card__price">
@@ -1105,7 +1112,7 @@ const faqs = [
 
 				<div class="aicrawl-pricing-footnotes">
 					<div>
-						<strong>単発診断 {citationSingleShot.price}</strong>
+						<strong>スポット診断 {citationSingleShot.price}</strong>
 						<p>{citationSingleShot.body}</p>
 					</div>
 					<div>
@@ -3028,7 +3035,7 @@ const faqs = [
 			.aicrawl-pricing-matrix__header,
 			.aicrawl-pricing-row {
 				display: grid;
-				grid-template-columns: minmax(120px, 0.36fr) repeat(2, minmax(0, 1fr));
+				grid-template-columns: repeat(2, minmax(0, 1fr));
 				gap: 14px;
 				align-items: stretch;
 			}
@@ -3037,22 +3044,11 @@ const faqs = [
 				align-items: end;
 			}
 
-			.aicrawl-pricing-matrix__header > span,
 			.aicrawl-pricing-matrix__header > div {
 				border: 1px solid rgba(192, 175, 151, 0.6);
 				border-radius: 22px;
 				background: rgba(255, 255, 255, 0.78);
 				padding: 18px;
-			}
-
-			.aicrawl-pricing-matrix__header > span {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: #7d5b10;
-				font-size: 13px;
-				font-weight: 950;
-				letter-spacing: 0.08em;
 			}
 
 			.aicrawl-pricing-matrix__header strong {
@@ -3081,12 +3077,16 @@ const faqs = [
 
 			.aicrawl-pricing-row__tier {
 				display: flex;
-				flex-direction: column;
-				justify-content: center;
+				grid-column: 1 / -1;
+				align-items: center;
+				justify-content: space-between;
+				gap: 18px;
 				border: 1px solid rgba(192, 175, 151, 0.6);
-				border-radius: 24px;
-				background: rgba(255, 255, 255, 0.76);
-				padding: 18px;
+				border-radius: 22px;
+				background:
+					radial-gradient(circle at 96% 20%, rgba(185, 138, 45, 0.12), transparent 28%),
+					rgba(255, 255, 255, 0.8);
+				padding: 18px 20px;
 			}
 
 			.aicrawl-pricing-row__tier span {
@@ -3098,21 +3098,20 @@ const faqs = [
 
 			.aicrawl-pricing-row__tier strong {
 				display: block;
-				margin-top: 12px;
+				margin-top: 6px;
 				color: var(--crawl-green-dark);
 				font-size: clamp(22px, 2.4vw, 34px);
 				font-weight: 950;
 				line-height: 1.05;
 			}
 
-			.aicrawl-pricing-row__tier em {
-				display: block;
-				margin-top: 10px;
+			.aicrawl-pricing-row__tier p {
+				max-width: 680px;
+				margin: 0;
 				color: var(--crawl-muted);
-				font-size: 12px;
-				font-style: normal;
-				font-weight: 780;
-				line-height: 1.5;
+				font-size: 14px;
+				font-weight: 820;
+				line-height: 1.65;
 			}
 
 			.aicrawl-pricing-matrix .aicrawl-price-card {
