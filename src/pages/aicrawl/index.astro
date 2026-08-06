@@ -6,7 +6,7 @@ import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg
 
 const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
-const blogHref = "/blog/";
+const blogHref = "/posts/ai-crawl-citation-strategy/";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 
@@ -43,8 +43,8 @@ const crawlChecks = [
 		icon: "material-symbols:account-tree-outline",
 	},
 	{
-		title: "AI受入戦略",
-		body: "現状の流入実績から、AIに紹介されやすくなるための改善順を立てます。",
+		title: "改善優先度の整理",
+		body: "現状のAI流入実績から、次に直すページ・FAQ・導線の順番を立てます。",
 		items: ["根拠ページ", "FAQ追加", "導線改善", "次の施策"],
 		icon: "material-symbols:fact-check-outline",
 	},
@@ -53,13 +53,13 @@ const crawlChecks = [
 const deliverables = [
 	[
 		"01",
-		"AI別の流入",
-		"ChatGPT、Claude、Perplexityなど、どのAIから来ているかを整理します。",
+		"AI別の接点",
+		"主要AIごとの接点を整理し、どこから関心が生まれているかを見ます。",
 	],
 	[
 		"02",
-		"ページ別の頻度",
-		"どのページに、どれくらいの頻度で、何回流入しているかを見ます。",
+		"ページ別の読まれ方",
+		"どのページがAIに見られやすい状態かを分けて確認します。",
 	],
 	[
 		"03",
@@ -68,8 +68,8 @@ const deliverables = [
 	],
 	[
 		"04",
-		"AI受入戦略",
-		"実績から現状を分析し、次にAIへ紹介されるための改善順を作ります。",
+		"改善の優先順位",
+		"実績から現状を分析し、次に直すページと導線の順番を作ります。",
 	],
 ];
 
@@ -77,7 +77,7 @@ const sampleReports = [
 	{
 		label: "月額 ¥3,300 プラン",
 		title: "週次レポート",
-		body: "毎週月曜に届きます。AIクローラーの巡回、AI経由の訪問とCV、よく読まれたページ、改善ポイントの自動診断まで。",
+		body: "毎週月曜に届きます。AI由来のアクセス状況、AI経由の訪問とCV、よく読まれたページ、改善ポイントの自動診断まで。",
 		href: "https://markdown-web.effect.moe/s/q1geeLJf0FHvxrUxhLRaNCiMayeaQ2Z2",
 		visual: "weekly",
 	},
@@ -91,7 +91,7 @@ const sampleReports = [
 	{
 		label: "匿名企業での計測例",
 		title: "AI回答露出レポート",
-		body: "7本の質問をChatGPT・Geminiで各10回ずつ測り、露出・引用・競合との差分・改善ロードマップまで1つのレポートに整理します。",
+		body: "AI CRAWLで読まれ方を確認した後に、AI回答へどれだけ登場するかを見ます。質問テーマごとの露出、引用、比較候補、改善ロードマップまで1つのレポートに整理します。",
 		href: "https://markdown-web.effect.moe/s/JctO0Q87NY8rTKt6_biO1eysTNBruuM5",
 		visual: "citation",
 		cta: "サンプルを見る",
@@ -107,7 +107,7 @@ const citationMetrics = [
 	[
 		"総試行回数",
 		"140回",
-		"7本のクエリをChatGPT・Geminiで各10回、1クエリあたり計20回測ります。",
+		"7本のクエリを対象に、主要AIでの回答露出を所定回数で確認します。",
 	],
 	[
 		"総合スコア",
@@ -122,11 +122,11 @@ const citationMetrics = [
 	[
 		"主力領域",
 		"0/20",
-		"自社が狙いたい言葉で出ているかを、質問文単位で確認します。",
+		"A社が狙いたい言葉で出ているかを、質問テーマ単位で確認します。",
 	],
 	[
 		"差分",
-		"自社4回 / 競合最大47回",
+		"A社4回 / 競合最大47回",
 		"事例・お客様の声の言及量に明確な差分が出ました。",
 	],
 	[
@@ -137,9 +137,9 @@ const citationMetrics = [
 ];
 
 const citationQueryScores = [
-	["自社ドメイン名で尋ねる", "20/20", "引用10"],
-	["自社名で尋ねる", "20/20", "引用5"],
-	["自社が提唱する独自メソッド名で尋ねる", "16/20", "引用1"],
+	["A社ドメイン名で尋ねる", "20/20", "引用10"],
+	["A社名で尋ねる", "20/20", "引用5"],
+	["A社が提唱する独自メソッド名で尋ねる", "16/20", "引用1"],
 	["特定プラットフォーム上の講師を探す", "2/20", "引用0"],
 	["ニッチな技術領域の指導者を探す", "0/20", "引用0"],
 	["一般的なサービスカテゴリで探す", "0/20", "引用0"],
@@ -157,7 +157,7 @@ const citationAlternativeDomains = [
 
 const citationDiffRows = [
 	[
-		"自社 トップ",
+		"A社 トップ",
 		"複数実装",
 		"11問",
 		"h2:9/h3:18",
@@ -167,7 +167,7 @@ const citationDiffRows = [
 		"なし",
 	],
 	[
-		"自社 サービスA",
+		"A社 サービスA",
 		"複数実装",
 		"22問",
 		"h2:9/h3:15",
@@ -176,7 +176,7 @@ const citationDiffRows = [
 		"12",
 		"なし",
 	],
-	["自社 FAQ", "複数実装", "30問", "h2:10/h3:0", "6,430", "4", "41", "なし"],
+	["A社 FAQ", "複数実装", "30問", "h2:10/h3:0", "6,430", "4", "41", "なし"],
 	[
 		"競合1 12回引用",
 		"Organization/Service",
@@ -230,12 +230,12 @@ const citationCapabilities = [
 	[
 		"01",
 		"任意クエリでの露出計測",
-		"ChatGPTとGeminiで各10回ずつ測り、何回中何回登場したかを出します。",
+		"指定した質問テーマごとに、AI回答上での登場状況を数値化します。",
 	],
 	[
 		"02",
 		"競合の実名特定",
-		"載らなかった場合、代わりに誰が載っているかをドメイン単位で列挙します。",
+		"自社が出ない場面で、比較対象になっている候補を整理します。",
 	],
 	[
 		"03",
@@ -304,7 +304,7 @@ const pricingPlans = [
 			"📈 成長レポート（週ごとの推移グラフ・変化点の寸評）",
 			"2週間に1回の90分相談",
 			"Chatworkでの随時相談",
-			"AI受入戦略の整理",
+			"改善優先度の整理",
 		],
 		note: "成長レポートは数週間分の記録が集まってから閲覧いただけます。",
 		cta: "伴走内容を相談する",
@@ -314,7 +314,7 @@ const pricingPlans = [
 		citation: {
 			price: "¥30,800",
 			label: "結果を読み解く",
-			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問で落ちているか、誰が代わりに載っているかを見ながら次の打ち手を整理します。",
+			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問テーマで弱いか、どの候補と比較されているかを見ながら次の打ち手を整理します。",
 			features: [
 				"AI CRAWL スタンダードの内容すべて",
 				"5クエリの露出計測",
@@ -356,25 +356,25 @@ const pricingPlans = [
 
 const citationQuadrants = [
 	[
-		"クローラーが来る",
+		"AI接点あり",
 		"AIの回答に載る",
 		"正常",
 		"読まれ、回答にも採用されている状態。",
 	],
 	[
-		"クローラーが来る",
+		"AI接点あり",
 		"AIの回答に載らない",
 		"読まれても選ばれない",
 		"中身や引用されやすさを見直す領域。",
 	],
 	[
-		"来ていない",
+		"AI接点が弱い",
 		"AIの回答に載る",
 		"他所経由で載る",
 		"外部ページに依存して紹介されている可能性。",
 	],
 	[
-		"来ていない",
+		"AI接点が弱い",
 		"AIの回答に載らない",
 		"認知されていない",
 		"技術・導線・インデックスの確認が必要。",
@@ -417,7 +417,7 @@ const faqs = [
 	],
 	[
 		"どのAIから来たかまで分かりますか？",
-		"AI経由のアクセス元やクローラー情報、流入先ページ、読まれた頻度をもとに、どのAIからの流入が多いかを確認します。取得できる範囲はアクセスログや計測環境に依存します。",
+		"AI由来の接点、流入先ページ、読まれ方の傾向をもとに、どのAIからの流入が多いかを確認します。取得できる範囲は計測環境に依存します。",
 	],
 	[
 		"ユーザーの動機まで分かりますか？",
@@ -425,7 +425,7 @@ const faqs = [
 	],
 	[
 		"レポートでは何が分かりますか？",
-		"AI別の流入、ページ別の流入、週次・月次の推移、読まれているが相談や購入につながりにくいページ、次に改善すべき導線やFAQの候補を整理します。",
+		"AI別の接点、ページ別の読まれ方、週次・月次の推移、読まれているが相談や購入につながりにくいページ、次に改善すべき導線やFAQの候補を整理します。",
 	],
 	[
 		"3,300円プランとコンサルプランの違いは何ですか？",
@@ -445,7 +445,7 @@ const faqs = [
 	],
 	[
 		"1つの質問につき20回も測るのは、なぜですか？",
-		"AIの回答は、まったく同じ質問でも毎回変わるためです。実際に、3回の計測で「0/3＝載らない」と判定した対象を10回で計測し直したところ、「1/10」として検出されました。3回では「載らないのか、たまたま出なかったのか」を区別できません。ChatGPT・Geminiそれぞれ10回、合計20回で判定しています。",
+		"AIの回答は、まったく同じ質問でも毎回変わるためです。実際に、少ない回数では「載らない」と見えた対象が、十分な試行数では一部検出された例があります。少ない回数では「載らないのか、たまたま出なかったのか」を区別できません。",
 	],
 	[
 		"「AIに載っていない」と分かったあと、何をすればいいのですか？",
@@ -457,11 +457,11 @@ const faqs = [
 	],
 	[
 		"改善したら、すぐに結果は変わりますか？",
-		"いいえ。AIが改修後のページを読むには、クローラーの再訪問が必要です。実測では、あるクローラーの巡回間隔が1か月半だった例もあります。再計測は改修から2週間以上おいてからをおすすめしています。なお、AIの回答は変動するため、特定の掲載や順位をお約束するものではありません。",
+		"いいえ。AI側が改修後のページを認識するまでには時間差があります。再計測は改修から2週間以上おいてからをおすすめしています。なお、AIの回答は変動するため、特定の掲載や順位をお約束するものではありません。",
 	],
 	[
 		"測る質問は何本まで、誰が決めますか？",
-		"月あたりライト3本／スタンダード5本／プロ10本です（1本＝ChatGPT10回＋Gemini10回＝20回試行）。質問はご相談のうえ決定します。前回と同じ質問で測り直せることが重要なため、一度決めた質問は固定して継続計測します。",
+		"月あたりライト3本／スタンダード5本／プロ10本です。質問はご相談のうえ決定します。前回と同じ質問で測り直せることが重要なため、一度決めた質問は固定して継続計測します。",
 	],
 	[
 		"まだサービスが固まっていない段階でも相談できますか？",
@@ -514,7 +514,7 @@ const faqs = [
 
 						<div class="report-kpis">
 							<div>
-								<span>AIクローラー巡回</span>
+								<span>AI由来の接点</span>
 								<strong>15,239</strong>
 								<p>受け入れ率 100%</p>
 							</div>
@@ -533,7 +533,7 @@ const faqs = [
 						<div class="report-chart">
 							<div class="report-chart__head">
 								<span>日次のクロール数</span>
-								<strong>AIクローラーの巡回推移</strong>
+								<strong>AI由来アクセスの推移</strong>
 							</div>
 							<div class="report-bars" aria-hidden="true">
 								<span style="--h: 28%"></span>
@@ -591,23 +591,23 @@ const faqs = [
 			<div class="aicrawl-term-grid">
 				<article>
 					<span>01</span>
-					<h3>AI CRAWL</h3>
+					<h3>AI CRAWL<br /><small>エーアイ・クロール</small></h3>
 					<p>
-						AIクローラーやAI経由の流入ログを見て、AIが自社サイトを読みに来ているか、どのページに来ているかを確認します。サイト側に残る記録を見るサービスです。
+						AI由来のアクセス状況を見て、AIが自社サイトを読みに来ているか、どのページに来ているかを確認します。外側から見えるAI流入の実績を整理するサービスです。
 					</p>
 				</article>
 				<article>
 					<span>02</span>
 					<h3>AI CITATION<br /><small>エーアイ・サイテーション</small></h3>
 					<p>
-						ChatGPTやGeminiに実際に質問し、AI回答の中に自社名・ページ・サービスが登場するかを測ります。ユーザー側から見える「紹介されるか」を見る診断です。
+						主要AIの回答上で、自社名・ページ・サービスが登場するかを測ります。ユーザー側から見える「紹介されるか」を見る診断です。
 					</p>
 				</article>
 				<article>
 					<span>03</span>
 					<h3>クエリ</h3>
 					<p>
-						クエリとは、AIに投げる質問文のことです。たとえば「○○に強い会社は？」「○○の相談先は？」のような1つの質問文を、ChatGPTとGeminiで複数回測ります。
+						クエリとは、AIに投げる質問文のことです。たとえば「○○に強い会社は？」「○○の相談先は？」のような1つの質問文を、主要AIで確認します。
 					</p>
 				</article>
 			</div>
@@ -671,11 +671,56 @@ const faqs = [
 		</div>
 	</section>
 
+	<section id="output" class="aicrawl-section">
+		<div class="aicrawl-container">
+			<div class="aicrawl-section-head">
+				<p class="aicrawl-eyebrow">AI CRAWL OUTPUT</p>
+				<h2>AI流入の実績を、次に直すページと導線へ落とし込む。</h2>
+				<p>
+					AI CRAWLのレポートは、単なるアクセス数の一覧ではありません。主要AIとの接点、読まれやすいページ、推定される関心を整理し、サイトのどこから直すべきかを判断できる材料にします。
+				</p>
+			</div>
+			<div class="deliverable-grid">
+				{deliverables.map(([no, title, body]) => (
+					<article>
+						<span>{no}</span>
+						<h3>{title}</h3>
+						<p>{body}</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section id="case" class="aicrawl-section aicrawl-section--soft">
+		<div class="aicrawl-container aicrawl-case__grid">
+			<div>
+				<p class="aicrawl-eyebrow">AI CRAWL BEFORE / AFTER</p>
+				<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
+				<p>
+					AIに読まれない原因は、情報がないことだけではありません。料金、対象者、実績、FAQ、相談導線が別々の場所に散らばると、AIはそのページの役割を説明しづらくなります。AI CRAWLでは、そうした詰まりを見つけて、AIにも人にも伝わる構造へ組み替えます。
+				</p>
+			</div>
+			<div class="case-list">
+				{cases.map((item) => (
+					<article>
+						<h3>{item.title}</h3>
+						<div>
+							<p><span>Before</span>{item.before}</p>
+							<Icon name="material-symbols:arrow-forward-rounded" />
+							<p><span>After</span>{item.after}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
 		<section id="central-bridge" class="aicrawl-section aicrawl-section--green">
 			<div class="aicrawl-container aicrawl-bridge">
 				<div>
 					<p class="aicrawl-eyebrow">OUTSIDE / INSIDE</p>
-					<h2>外側はAI CRAWL。内側はAI CENTRAL。</h2>
+					<h2>外側はAI CRAWL。<br />内側は<span class="aicrawl-nowrap">AI CENTRAL</span>。</h2>
 				<p>
 					AI CRAWLは、AIからの流入を分析し、外側の集客戦略を整えます。AI CENTRALは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
 				</p>
@@ -700,9 +745,9 @@ const faqs = [
 			<div class="aicrawl-container citation-comparison">
 				<div class="citation-comparison__head">
 					<p class="aicrawl-eyebrow">AI CITATION / ANSWER VISIBILITY</p>
-					<h2>読まれているかと、紹介されるかは別です。</h2>
+					<h2>読まれているか。<br />紹介されるか。</h2>
 					<p>
-						AI CRAWLは、AIがサイトを読みに来たかをサイト側の巡回ログで見ます。AI CITATION（エーアイ・サイテーション）は、実際にAIへ質問し、回答に自社が載るかをユーザー側の見え方で測ります。
+						AI CRAWLは、AIがサイトを読みに来たかを当社側で観測できるシグナルから見ます。AI CITATIONは、実際にAIへ質問し、回答に自社が載るかをユーザー側の見え方で測ります。
 					</p>
 				</div>
 
@@ -710,12 +755,12 @@ const faqs = [
 					<article class="citation-lane">
 						<span>CRAWL</span>
 						<h3>AIがサイトを読みに来たか</h3>
-						<p>クローラーの巡回ログ、流入ページ、頻度を見て、サイト側に残る記録を整理します。</p>
+						<p>当社独自の確認方法で、AIから見たサイト接点と読まれ方の傾向を整理します。</p>
 					</article>
 					<article class="citation-lane citation-lane--strong">
 						<span>CITATION</span>
 						<h3>AIの回答に自社が載るか</h3>
-						<p>ChatGPTとGeminiに同じ質問を複数回投げ、何回中何回登場したか、誰が代わりに載ったかを測ります。</p>
+						<p>実際のAI回答上で、自社がどの程度登場し、どの候補と比較されているかを測ります。</p>
 					</article>
 				</div>
 
@@ -728,13 +773,6 @@ const faqs = [
 							<p>{body}</p>
 						</article>
 					))}
-				</div>
-
-				<div class="citation-live-evidence">
-					<span>自社計測の事実</span>
-					<p>
-						2026-08-05の1日で ClaudeBot 22回、Bingbot 10回、OAI-SearchBot 5回、GPTBot 2回を確認。それでもChatGPT・Geminiに各5回質問した結果、回答への登場は0/10回でした。別の3つの質問文でも0/10回です。
-					</p>
 				</div>
 
 					<div class="citation-evidence">
@@ -765,6 +803,9 @@ const faqs = [
 						</div>
 							<span>匿名企業での計測例</span>
 					</div>
+					<p class="citation-report__context">
+						この見本は、A社について「会社名で聞く」「独自メソッド名で聞く」「主力サービス領域で探す」など7種類の質問テーマをAIに確認した診断レポートです。露出はAI回答の中にA社が登場した回数、引用は根拠元としてA社ページが扱われた回数を示します。
+					</p>
 
 					<div class="citation-report__score">
 						<div>
@@ -783,6 +824,9 @@ const faqs = [
 								<span>7 Queries / 140 Tests</span>
 								<h4 id="citation-query-title">クエリ別スコア</h4>
 							</div>
+							<p class="citation-panel__body">
+								「どんな聞かれ方ならA社が出るのか」を質問テーマごとに分けて見ます。20/20なら、そのテーマでは毎回A社が登場した状態です。引用は、回答の根拠としてA社ページが扱われた回数です。
+							</p>
 							<div class="citation-query-list">
 								{citationQueryScores.map(([query, exposure, citations], index) => (
 									<div class="citation-query-row">
@@ -798,8 +842,11 @@ const faqs = [
 						<section class="citation-panel" aria-labelledby="citation-alt-title">
 							<div class="citation-panel__head">
 								<span>Alternative Sources</span>
-								<h4 id="citation-alt-title">代わりに表示された参照元</h4>
+								<h4 id="citation-alt-title">A社が出なかった時に表示された候補</h4>
 							</div>
+							<p class="citation-panel__body">
+								A社が回答に出なかった質問テーマでは、AIが別の参照元や候補を表示します。ここでは、その時に代わりに選ばれていた候補をカテゴリ名で整理しています。
+							</p>
 							<div class="citation-domain-list">
 								{citationAlternativeDomains.map(([label, body]) => (
 									<div>
@@ -843,7 +890,7 @@ const faqs = [
 							</table>
 						</div>
 							<p class="citation-report__finding">
-								この例で検出された明確な差分：事例・お客様の声の言及が 自社4回 / 競合は最大47回
+								この例で検出された明確な差分：事例・お客様の声の言及が A社4回 / 競合は最大47回
 							</p>
 						</section>
 
@@ -886,18 +933,18 @@ const faqs = [
 							<p class="aicrawl-eyebrow">WHAT WE MEASURE / 源流</p>
 							<h3>AIに聞かれた時、自社は候補に出てくるのか。</h3>
 							<p>
-								AI CITATIONは、ユーザーがChatGPTやGeminiに相談した場面を再現し、自社が回答に登場するかを測る診断です。サイトが読まれているだけでは足りません。AIの回答に出るか、引用されるか、代わりに誰が選ばれているかを確認します。
+								AI CITATIONは、ユーザーがAIに相談した場面を想定し、自社が回答に登場するかを測る診断です。サイトが読まれているだけでは足りません。AIの回答に出るか、引用されるか、どの候補と比較されているかを確認します。
 							</p>
 							<div class="citation-origin-flow" aria-label="AI CITATIONで分かること">
 								<div>
 									<span>01</span>
 									<strong>質問する</strong>
-									<p>想定顧客が聞きそうな質問文で、ChatGPTとGeminiに複数回たずねます。</p>
+									<p>想定顧客が聞きそうな質問テーマをもとに、主要AIでの回答傾向を確認します。</p>
 								</div>
 								<div>
 									<span>02</span>
 									<strong>数える</strong>
-									<p>自社が何回登場し、引用元として扱われたかを露出と引用に分けて数えます。</p>
+									<p>自社の登場状況と引用の扱われ方を、露出と引用に分けて整理します。</p>
 								</div>
 								<div>
 									<span>03</span>
@@ -918,51 +965,6 @@ const faqs = [
 				</div>
 			</div>
 		</section>
-
-		<section id="output" class="aicrawl-section">
-			<div class="aicrawl-container">
-					<div class="aicrawl-section-head">
-						<p class="aicrawl-eyebrow">OUTPUT</p>
-					<h2>レポート後は、AIに紹介されるための順番まで落とし込む。</h2>
-					<p>
-						AI CRAWLのレポートは、単なるアクセス数の一覧ではありません。どのAIが、どのページを、どんな文脈で読みに来た可能性があるのかを整理し、次に直すべきページと導線まで判断できる材料にします。
-					</p>
-				</div>
-			<div class="deliverable-grid">
-				{deliverables.map(([no, title, body]) => (
-					<article>
-						<span>{no}</span>
-						<h3>{title}</h3>
-						<p>{body}</p>
-					</article>
-				))}
-			</div>
-		</div>
-	</section>
-
-	<section id="case" class="aicrawl-section aicrawl-section--soft">
-			<div class="aicrawl-container aicrawl-case__grid">
-				<div>
-					<p class="aicrawl-eyebrow">BEFORE / AFTER</p>
-					<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
-					<p>
-						AIに読まれない原因は、情報がないことだけではありません。料金、対象者、実績、FAQ、相談導線が別々の場所に散らばると、AIはそのページの役割を説明しづらくなります。AI CRAWLでは、そうした詰まりを見つけて、AIにも人にも伝わる構造へ組み替えます。
-					</p>
-				</div>
-			<div class="case-list">
-				{cases.map((item) => (
-					<article>
-						<h3>{item.title}</h3>
-						<div>
-							<p><span>Before</span>{item.before}</p>
-							<Icon name="material-symbols:arrow-forward-rounded" />
-							<p><span>After</span>{item.after}</p>
-						</div>
-					</article>
-				))}
-			</div>
-		</div>
-	</section>
 
 	<section id="operator" class="aicrawl-section aicrawl-proof">
 		<div class="aicrawl-container aicrawl-proof__panel">
@@ -1026,7 +1028,7 @@ const faqs = [
 
 				<div class="aicrawl-sample-grid">
 					{sampleReports.map((report) => (
-						<article class="aicrawl-price-card aicrawl-sample-card">
+						<article class={`aicrawl-price-card aicrawl-sample-card ${report.visual === "citation" ? "aicrawl-sample-card--citation" : ""}`}>
 								<div class={`aicrawl-sample-preview aicrawl-sample-preview--${report.visual}`}>
 									{report.visual === "citation" ? (
 										<>
@@ -1034,32 +1036,51 @@ const faqs = [
 											<span>AI CITATION</span>
 											<strong>匿名企業での計測例</strong>
 										</div>
+										<div class="citation-preview-lead">
+											<em>AI CRAWLの次に見るレポート</em>
+											<strong>読まれた後、AIの回答に載るか。</strong>
+											<p>質問テーマごとに、A社が回答に登場したか、根拠として扱われたか、代わりにどの候補が出たかを整理します。</p>
+										</div>
 										<div class="citation-preview-query">
 											<em>対象</em>
-											<p>A社（サンプル） / 7クエリ / ChatGPT・Gemini 各10回</p>
+											<p>A社（サンプル） / 7つの質問テーマ / 主要AIで確認</p>
 										</div>
 										<div class="citation-preview-score">
 											<div>
-												<em>総合</em>
+												<em>全体の登場</em>
 												<strong>29/140</strong>
 											</div>
 											<div>
-												<em>独自名</em>
+												<em>独自名では</em>
 												<strong>16/20</strong>
 											</div>
 											<div>
-												<em>主力領域</em>
+												<em>探される言葉では</em>
 												<strong>0/20</strong>
 											</div>
 										</div>
+										<div class="citation-preview-steps" aria-label="AI CITATIONレポートで分かる流れ">
+											<div>
+												<span>01</span>
+												<strong>聞かれ方を見る</strong>
+											</div>
+											<div>
+												<span>02</span>
+												<strong>登場と引用を分ける</strong>
+											</div>
+											<div>
+												<span>03</span>
+												<strong>改善順に落とす</strong>
+											</div>
+										</div>
 										<div class="citation-preview-domains">
-											<span>代替表示</span>
+											<span>A社が出なかった時の候補</span>
 											<strong>専業A社12回</strong>
 											<strong>大手オンライン学習PF10回</strong>
 											<strong>技術記事PF</strong>
 										</div>
 										<div class="citation-preview-actions">
-											<span>次の改善候補</span>
+											<span>レポートから出す改善候補</span>
 											<ul>
 												<li>専用FAQを追加</li>
 												<li>比較・料金を明文化</li>
@@ -1146,8 +1167,8 @@ const faqs = [
 						<h2>AI CRAWLの料金</h2>
 					</div>
 					<p>
-						AI別の流入、ページ別の頻度、推定されるユーザー動機、改善戦略をどこまで継続的に扱うかで選べます。
-						AI CITATION列の「3クエリ / 5クエリ / 10クエリ」は、計測する質問文の本数です。1クエリごとにChatGPT 10回 + Gemini 10回、合計20回試行します。
+						AI別の接点、ページ別の読まれ方、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選べます。
+						AI CITATION列の「3クエリ / 5クエリ / 10クエリ」は、計測する質問文の本数です。1クエリごとに主要AIで所定回数を確認します。
 					</p>
 				</div>
 
@@ -1169,7 +1190,7 @@ const faqs = [
 							<div class="aicrawl-pricing-row__tier">
 								<span>{plan.tier}</span>
 								<strong>{plan.measurementLimit}</strong>
-								<em>1クエリ = ChatGPT 10回 + Gemini 10回</em>
+								<em>1クエリ = 主要AIで所定回数を確認</em>
 							</div>
 							<article class="aicrawl-price-card">
 								<div class="aicrawl-price-card__top">
@@ -1350,6 +1371,10 @@ const faqs = [
 			font-weight: 950;
 			letter-spacing: 0.14em;
 			text-transform: uppercase;
+		}
+
+		.aicrawl-nowrap {
+			white-space: nowrap;
 		}
 
 		.aicrawl-hero-label {
@@ -2178,40 +2203,6 @@ const faqs = [
 				line-height: 1.24;
 			}
 
-			.citation-live-evidence {
-				display: grid;
-				grid-template-columns: minmax(180px, auto) minmax(0, 1fr);
-				gap: 16px;
-				align-items: center;
-				border: 1px solid rgba(69, 111, 69, 0.24);
-				border-radius: 24px;
-				background:
-					linear-gradient(135deg, rgba(239, 247, 237, 0.94), rgba(255, 255, 255, 0.78));
-				padding: clamp(18px, 2.4vw, 24px);
-			}
-
-			.citation-live-evidence span {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				min-height: 38px;
-				border-radius: 999px;
-				background: var(--crawl-green);
-				color: #fff;
-				padding: 0 14px;
-				font-size: 13px;
-				font-weight: 950;
-				white-space: nowrap;
-			}
-
-			.citation-live-evidence p {
-				margin: 0;
-				color: var(--crawl-ink);
-				font-size: clamp(15px, 1.35vw, 17px);
-				font-weight: 840;
-				line-height: 1.75;
-			}
-
 			.citation-evidence {
 				display: grid;
 				grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
@@ -2324,6 +2315,18 @@ const faqs = [
 				font-size: 12px;
 				font-weight: 950;
 				letter-spacing: 0.04em;
+			}
+
+			.citation-report__context {
+				margin: 18px 0 0;
+				border: 1px solid rgba(192, 175, 151, 0.5);
+				border-radius: 20px;
+				background: rgba(245, 241, 235, 0.74);
+				color: var(--crawl-ink);
+				padding: clamp(16px, 2.2vw, 22px);
+				font-size: clamp(15px, 1.35vw, 17px);
+				font-weight: 820;
+				line-height: 1.8;
 			}
 
 			.citation-report__score {
@@ -2718,6 +2721,23 @@ const faqs = [
 			min-height: 500px;
 		}
 
+		.aicrawl-sample-card--citation {
+			grid-column: 1 / -1;
+			display: grid;
+			grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.68fr);
+			gap: clamp(22px, 3vw, 34px);
+			align-items: stretch;
+		}
+
+		.aicrawl-sample-card--citation .aicrawl-sample-preview {
+			min-height: 420px;
+		}
+
+		.aicrawl-sample-card--citation .aicrawl-price-card__top,
+		.aicrawl-sample-card--citation .aicrawl-price-card__cta {
+			align-self: center;
+		}
+
 		.aicrawl-sample-preview {
 			position: relative;
 			overflow: hidden;
@@ -2758,8 +2778,10 @@ const faqs = [
 			.sample-preview-bars,
 			.sample-preview-line,
 			.sample-preview-ranking,
+			.citation-preview-lead,
 			.citation-preview-query,
 			.citation-preview-score,
+			.citation-preview-steps,
 			.citation-preview-domains,
 			.citation-preview-actions,
 			.sample-preview-chip {
@@ -2930,6 +2952,44 @@ const faqs = [
 				box-shadow: 0 14px 30px rgba(50, 59, 42, 0.07);
 			}
 
+			.citation-preview-lead {
+				margin-bottom: 12px;
+				border-radius: 22px;
+				background: linear-gradient(135deg, rgba(32, 57, 33, 0.94), rgba(81, 74, 49, 0.92));
+				color: #fff;
+				padding: clamp(18px, 2.2vw, 24px);
+				box-shadow: 0 18px 38px rgba(32, 57, 33, 0.16);
+			}
+
+			.citation-preview-lead em {
+				display: inline-flex;
+				width: fit-content;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.14);
+				color: #f6e6b6;
+				padding: 6px 10px;
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 950;
+				letter-spacing: 0.08em;
+			}
+
+			.citation-preview-lead strong {
+				display: block;
+				margin-top: 12px;
+				font-size: clamp(24px, 3vw, 38px);
+				font-weight: 950;
+				line-height: 1.22;
+			}
+
+			.citation-preview-lead p {
+				margin: 10px 0 0;
+				color: rgba(255, 255, 255, 0.86);
+				font-size: 14px;
+				font-weight: 850;
+				line-height: 1.75;
+			}
+
 			.citation-preview-query em,
 			.citation-preview-score em,
 			.citation-preview-domains span,
@@ -2971,6 +3031,41 @@ const faqs = [
 				font-size: clamp(22px, 2.6vw, 34px);
 				font-weight: 950;
 				line-height: 1;
+			}
+
+			.citation-preview-steps {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 9px;
+				margin-top: 12px;
+			}
+
+			.citation-preview-steps div {
+				border-radius: 16px;
+				background: rgba(69, 111, 69, 0.09);
+				padding: 12px;
+			}
+
+			.citation-preview-steps span {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 28px;
+				height: 28px;
+				border-radius: 999px;
+				background: #456f45;
+				color: #fff;
+				font-size: 11px;
+				font-weight: 950;
+			}
+
+			.citation-preview-steps strong {
+				display: block;
+				margin-top: 9px;
+				color: #243b24;
+				font-size: 13px;
+				font-weight: 950;
+				line-height: 1.35;
 			}
 
 			.citation-preview-domains {
@@ -3784,6 +3879,7 @@ const faqs = [
 					.aicrawl-pricing-row,
 					.aicrawl-pricing-footnotes,
 					.aicrawl-case__grid,
+					.aicrawl-sample-card--citation,
 					.aicrawl-related__panel {
 						grid-template-columns: 1fr;
 					}
@@ -3852,7 +3948,6 @@ const faqs = [
 				.citation-panel,
 					.citation-capability-grid,
 					.citation-quadrants,
-					.citation-live-evidence,
 					.aicrawl-term-grid,
 					.aicrawl-pricing-matrix,
 				.aicrawl-pricing-matrix__header,
@@ -3976,7 +4071,6 @@ const faqs = [
 				.citation-metrics,
 				.citation-capability-grid,
 				.citation-quadrants,
-				.citation-live-evidence,
 				.aicrawl-pricing-matrix__header,
 				.aicrawl-pricing-row,
 				.aicrawl-pricing-footnotes,
@@ -4021,6 +4115,8 @@ const faqs = [
 			.deliverable-grid,
 			.aicrawl-sample-grid,
 			.aicrawl-proof__stats,
+			.citation-preview-score,
+			.citation-preview-steps,
 			.signal-board {
 				grid-template-columns: 1fr;
 			}

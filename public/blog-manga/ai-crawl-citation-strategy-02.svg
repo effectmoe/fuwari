@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">AI回答に載らない状態を示す漫画パネル</title>
+  <desc id="desc">AIがページを読んでいても、回答候補には別サイトが出てしまう状態を示す4コマ漫画の2枚目。</desc>
+  <rect width="960" height="720" fill="#f8f4ee"/>
+  <rect x="56" y="56" width="848" height="608" rx="34" fill="#fffdf8" stroke="#d8cbb8" stroke-width="6"/>
+  <text x="96" y="118" font-family="sans-serif" font-size="36" font-weight="800" fill="#916f12">02 でも回答には出ない</text>
+  <rect x="96" y="175" width="330" height="330" rx="28" fill="#eef3ed" stroke="#54704f" stroke-width="5"/>
+  <text x="136" y="238" font-family="sans-serif" font-size="28" font-weight="800" fill="#263225">自社ページ</text>
+  <text x="136" y="298" font-family="sans-serif" font-size="25" fill="#4d594a">読まれている</text>
+  <text x="136" y="348" font-family="sans-serif" font-size="25" fill="#4d594a">でも、回答には</text>
+  <text x="136" y="398" font-family="sans-serif" font-size="25" fill="#4d594a">出てこない</text>
+  <path d="M445 330 H565" stroke="#916f12" stroke-width="10" stroke-linecap="round"/>
+  <path d="M535 300 L570 330 L535 360" fill="none" stroke="#916f12" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="590" y="175" width="274" height="330" rx="28" fill="#fff7e6" stroke="#d7a030" stroke-width="5"/>
+  <text x="630" y="238" font-family="sans-serif" font-size="28" font-weight="800" fill="#3a2b12">AI回答</text>
+  <text x="630" y="298" font-family="sans-serif" font-size="25" fill="#4d4333">競合A</text>
+  <text x="630" y="348" font-family="sans-serif" font-size="25" fill="#4d4333">比較メディア</text>
+  <text x="630" y="398" font-family="sans-serif" font-size="25" fill="#4d4333">公式ドキュメント</text>
+  <rect x="108" y="540" width="744" height="72" rx="22" fill="#3f2f20"/>
+  <text x="140" y="588" font-family="sans-serif" font-size="27" font-weight="800" fill="#fff">読まれることと、紹介されることは別です。</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">AIに質問して露出と引用を測る漫画パネル</title>
+  <desc id="desc">質問文を固定し、ChatGPTとGeminiに複数回聞いて、露出と引用を別々に数える様子を示す4コマ漫画の3枚目。</desc>
+  <rect width="960" height="720" fill="#f8f4ee"/>
+  <rect x="56" y="56" width="848" height="608" rx="34" fill="#fffdf8" stroke="#d8cbb8" stroke-width="6"/>
+  <text x="96" y="118" font-family="sans-serif" font-size="36" font-weight="800" fill="#916f12">03 質問して測る</text>
+  <rect x="100" y="180" width="760" height="86" rx="22" fill="#f2eee6" stroke="#d8cbb8" stroke-width="4"/>
+  <text x="138" y="235" font-family="sans-serif" font-size="28" font-weight="800" fill="#222">「〇〇に強い相談先は？」</text>
+  <rect x="120" y="320" width="300" height="160" rx="26" fill="#eef3ed" stroke="#54704f" stroke-width="5"/>
+  <text x="160" y="380" font-family="sans-serif" font-size="30" font-weight="800" fill="#263225">露出</text>
+  <text x="160" y="435" font-family="sans-serif" font-size="34" font-weight="900" fill="#916f12">16 / 20</text>
+  <rect x="540" y="320" width="300" height="160" rx="26" fill="#fff7e6" stroke="#d7a030" stroke-width="5"/>
+  <text x="580" y="380" font-family="sans-serif" font-size="30" font-weight="800" fill="#3a2b12">引用</text>
+  <text x="580" y="435" font-family="sans-serif" font-size="34" font-weight="900" fill="#916f12">1 / 20</text>
+  <path d="M425 400 H530" stroke="#916f12" stroke-width="10" stroke-linecap="round" stroke-dasharray="16 12"/>
+  <rect x="108" y="540" width="744" height="72" rx="22" fill="#3f6f44"/>
+  <text x="140" y="588" font-family="sans-serif" font-size="27" font-weight="800" fill="#fff">名前が出ることと、根拠にされることも別です。</text>
+</svg>
