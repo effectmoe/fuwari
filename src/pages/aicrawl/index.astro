@@ -278,6 +278,19 @@ const pricingPlans = [
 		note: "同種のAI流入計測サービスは月1万円台〜が中心です。",
 		cta: "このプランを申し込む",
 		featured: false,
+		tier: "ライト",
+		measurementLimit: "3クエリ",
+		citation: {
+			price: "¥9,900",
+			label: "紹介されたかまで見る",
+			body: "月1回の露出計測と、載らなかった場合に代わりに表示された競合ドメインを整理します。まず、自社がどの状態にいるかを確認したい方向けです。",
+			features: [
+				"AI CRAWL ライトの内容すべて",
+				"3クエリの露出計測",
+				"競合ドメイン特定",
+			],
+			cta: "CITATION付きで相談する",
+		},
 	},
 	{
 		name: "AI CRAWL コンサル",
@@ -296,6 +309,19 @@ const pricingPlans = [
 		note: "成長レポートは数週間分の記録が集まってから閲覧いただけます。",
 		cta: "伴走内容を相談する",
 		featured: true,
+		tier: "スタンダード",
+		measurementLimit: "5クエリ",
+		citation: {
+			price: "¥30,800",
+			label: "結果を読み解く",
+			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問で落ちているか、誰が代わりに載っているかを見ながら次の打ち手を整理します。",
+			features: [
+				"AI CRAWL スタンダードの内容すべて",
+				"5クエリの露出計測",
+				"相談で結果を読み解く",
+			],
+			cta: "スタンダードを相談する",
+		},
 	},
 	{
 		name: "AI CRAWL グロース",
@@ -311,27 +337,59 @@ const pricingPlans = [
 		],
 		cta: "成長運用を相談する",
 		featured: false,
+		tier: "プロ",
+		measurementLimit: "10クエリ",
+		citation: {
+			price: "¥55,000",
+			label: "改善後に再計測する",
+			body: "露出計測、差分診断、改善ロードマップ、施策後の同一クエリ再計測まで扱います。AI回答に載るかを継続的に検証したい方向けです。",
+			features: [
+				"AI CRAWL プロの内容すべて",
+				"10クエリの露出計測",
+				"差分診断・改善ロードマップ",
+				"再計測での効果判定",
+			],
+			cta: "プロを相談する",
+		},
 	},
-	{
-		name: "AI CITATION",
-		label: "AI回答露出 計測",
-		// 金額はトニーの決定待ち。勝手に金額を入れない。
-		price: "（要確認）",
-		body: "AIがサイトを読みに来たかではなく、実際のAI回答に自社が載るかを測る上位サービスです。質問文ごとに、載る・載らない・誰が代わりに載るのかを数字で確認します。",
-		features: [
-			"AI CRAWL グロースの内容すべて",
-			"任意クエリでの露出計測（ChatGPT・Gemini 各10回）",
-			"競合の実名特定とドメイン列挙",
-			"引用されている競合ページとの差分の機械診断",
-			"効いた可能性がある段落の推定",
-			"施策後の同一質問文での再計測",
-			"Googleインデックス診断",
-		],
-		note: "金額は現在確認中です。成果保証ではなく、AI回答に載るかどうかを実測するためのプランです。",
-		cta: "AI CITATIONを相談する",
-		featured: false,
-		citation: true,
-	},
+];
+
+const citationQuadrants = [
+	[
+		"クローラーが来る",
+		"AIの回答に載る",
+		"正常",
+		"読まれ、回答にも採用されている状態。",
+	],
+	[
+		"クローラーが来る",
+		"AIの回答に載らない",
+		"読まれても選ばれない",
+		"中身や引用されやすさを見直す領域。",
+	],
+	[
+		"来ていない",
+		"AIの回答に載る",
+		"他所経由で載る",
+		"外部ページに依存して紹介されている可能性。",
+	],
+	[
+		"来ていない",
+		"AIの回答に載らない",
+		"認知されていない",
+		"技術・導線・インデックスの確認が必要。",
+	],
+];
+
+const citationSingleShot = {
+	price: "¥55,000/回",
+	body: "契約不要。プロ相当のAI CITATION診断を1回だけ実施します。",
+};
+
+const citationExtraQueries = [
+	["ライト", "¥3,300"],
+	["スタンダード", "¥2,750"],
+	["プロ", "¥2,200"],
 ];
 
 const cases = [
@@ -623,6 +681,24 @@ const faqs = [
 						<h3>AIの回答に自社が載るか</h3>
 						<p>ChatGPTとGeminiに同じ質問を複数回投げ、何回中何回登場したか、誰が代わりに載ったかを測ります。</p>
 					</article>
+				</div>
+
+				<div class="citation-quadrants" aria-label="AI CRAWLとAI CITATIONで見える4つの状態">
+					{citationQuadrants.map(([crawl, answer, title, body], index) => (
+						<article class={index === 1 || index === 3 ? "is-alert" : ""}>
+							<span>{crawl}</span>
+							<em>{answer}</em>
+							<strong>{title}</strong>
+							<p>{body}</p>
+						</article>
+					))}
+				</div>
+
+				<div class="citation-live-evidence">
+					<span>自社計測の事実</span>
+					<p>
+						2026-08-05の1日で ClaudeBot 22回、Bingbot 10回、OAI-SearchBot 5回、GPTBot 2回を確認。それでもChatGPT・Geminiに各5回質問した結果、回答への登場は0/10回でした。別の3つの質問文でも0/10回です。
+					</p>
 				</div>
 
 				<div class="citation-evidence">
@@ -1009,35 +1085,85 @@ const faqs = [
 					</p>
 				</div>
 
-				<div class="aicrawl-pricing-grid">
-					{pricingPlans.map((plan) => (
-						<article class={`aicrawl-price-card ${plan.featured ? "is-featured" : ""} ${plan.citation ? "is-citation" : ""}`}>
-							<div class="aicrawl-price-card__top">
-								<span>{plan.label}</span>
-								<h3>{plan.name}</h3>
-								<p>{plan.body}</p>
-							</div>
-							<div class="aicrawl-price-card__price">
-								<strong>{plan.price}</strong>
-								{!plan.citation && <span>/ 月</span>}
-							</div>
-						<ul>
-							{plan.features.map((feature) => (
-								<li>
-									<Icon name="material-symbols:check-circle-outline-rounded" />
-									{feature}
-								</li>
-							))}
-						</ul>
-						{plan.note && <p class="aicrawl-price-card__note">{plan.note}</p>}
-						<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
-					</article>
-				))}
-			</div>
+				<div class="aicrawl-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
+					<div class="aicrawl-pricing-matrix__header">
+						<span>プラン</span>
+						<div>
+							<strong>AI CRAWL</strong>
+							<em>読まれたかを見る</em>
+						</div>
+						<div class="is-citation">
+							<strong>AI CRAWL + AI CITATION</strong>
+							<em>紹介されたかまで見る</em>
+						</div>
+					</div>
 
-			<p class="aicrawl-pricing-note">
-				お支払いはクレジットカード払いです。¥3,300プランは、AIの巡回と流入を継続的に記録してお届けするレポートです。数値の読み解きや改善方針のご相談は、コンサル以上のプランで承ります。
-			</p>
+					{pricingPlans.map((plan) => (
+						<div class={`aicrawl-pricing-row ${plan.featured ? "is-featured" : ""}`}>
+							<div class="aicrawl-pricing-row__tier">
+								<span>{plan.tier}</span>
+								<strong>{plan.measurementLimit}</strong>
+								<em>1クエリ = ChatGPT 10回 + Gemini 10回</em>
+							</div>
+							<article class="aicrawl-price-card">
+								<div class="aicrawl-price-card__top">
+									<span>{plan.label}</span>
+									<h3>{plan.name}</h3>
+									<p>{plan.body}</p>
+								</div>
+								<div class="aicrawl-price-card__price">
+									<strong>{plan.price}</strong>
+									<span>/ 月</span>
+								</div>
+								<ul>
+									{plan.features.map((feature) => (
+										<li>
+											<Icon name="material-symbols:check-circle-outline-rounded" />
+											{feature}
+										</li>
+									))}
+								</ul>
+								{plan.note && <p class="aicrawl-price-card__note">{plan.note}</p>}
+								<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
+							</article>
+							<article class="aicrawl-price-card is-citation">
+								<div class="aicrawl-price-card__top">
+									<span>{plan.citation.label}</span>
+									<h3>{plan.tier} CITATION</h3>
+									<p>{plan.citation.body}</p>
+								</div>
+								<div class="aicrawl-price-card__price">
+									<strong>{plan.citation.price}</strong>
+									<span>/ 月</span>
+								</div>
+								<ul>
+									{plan.citation.features.map((feature) => (
+										<li>
+											<Icon name="material-symbols:check-circle-outline-rounded" />
+											{feature}
+										</li>
+									))}
+								</ul>
+								<a href={consultationHref} class="aicrawl-price-card__cta">{plan.citation.cta}</a>
+							</article>
+						</div>
+					))}
+				</div>
+
+				<div class="aicrawl-pricing-footnotes">
+					<div>
+						<strong>単発診断 {citationSingleShot.price}</strong>
+						<p>{citationSingleShot.body}</p>
+					</div>
+					<div>
+						<strong>追加クエリ</strong>
+						<p>{citationExtraQueries.map(([label, price]) => `${label} ${price}`).join(" / ")}</p>
+					</div>
+					<div>
+						<strong>お支払い</strong>
+						<p>お支払いはクレジットカード払いです。AI CITATIONは成果保証ではなく、AI回答に載るかどうかを実測するためのサービスです。</p>
+					</div>
+				</div>
 		</div>
 	</section>
 
@@ -1852,6 +1978,7 @@ const faqs = [
 			}
 
 			.citation-lane p,
+			.citation-quadrants p,
 			.citation-evidence__lead p,
 			.citation-capabilities > div > p,
 			.citation-capability-grid p {
@@ -1860,6 +1987,85 @@ const faqs = [
 				font-size: 15px;
 				font-weight: 720;
 				line-height: 1.8;
+			}
+
+			.citation-quadrants {
+				display: grid;
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				gap: 12px;
+			}
+
+			.citation-quadrants article {
+				border: 1px solid rgba(192, 175, 151, 0.56);
+				border-radius: 24px;
+				background: rgba(255, 255, 255, 0.82);
+				padding: 18px;
+				box-shadow: 0 18px 48px rgba(50, 59, 42, 0.08);
+			}
+
+			.citation-quadrants article.is-alert {
+				border-color: rgba(185, 138, 45, 0.44);
+				background:
+					radial-gradient(circle at 88% 14%, rgba(185, 138, 45, 0.16), transparent 32%),
+					rgba(255, 255, 255, 0.88);
+			}
+
+			.citation-quadrants span,
+			.citation-quadrants em {
+				display: block;
+				color: #7d5b10;
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 950;
+				letter-spacing: 0.06em;
+			}
+
+			.citation-quadrants em {
+				margin-top: 6px;
+				color: var(--crawl-green-dark);
+			}
+
+			.citation-quadrants strong {
+				display: block;
+				margin-top: 14px;
+				color: var(--crawl-ink);
+				font-size: clamp(18px, 1.9vw, 24px);
+				font-weight: 950;
+				line-height: 1.24;
+			}
+
+			.citation-live-evidence {
+				display: grid;
+				grid-template-columns: minmax(180px, auto) minmax(0, 1fr);
+				gap: 16px;
+				align-items: center;
+				border: 1px solid rgba(69, 111, 69, 0.24);
+				border-radius: 24px;
+				background:
+					linear-gradient(135deg, rgba(239, 247, 237, 0.94), rgba(255, 255, 255, 0.78));
+				padding: clamp(18px, 2.4vw, 24px);
+			}
+
+			.citation-live-evidence span {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 38px;
+				border-radius: 999px;
+				background: var(--crawl-green);
+				color: #fff;
+				padding: 0 14px;
+				font-size: 13px;
+				font-weight: 950;
+				white-space: nowrap;
+			}
+
+			.citation-live-evidence p {
+				margin: 0;
+				color: var(--crawl-ink);
+				font-size: clamp(15px, 1.35vw, 17px);
+				font-weight: 840;
+				line-height: 1.75;
 			}
 
 			.citation-evidence {
@@ -2665,11 +2871,105 @@ const faqs = [
 			line-height: 1.85;
 		}
 
-			.aicrawl-pricing-grid {
+			.aicrawl-pricing-matrix {
 				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 20px;
+				gap: 14px;
+			}
+
+			.aicrawl-pricing-matrix__header,
+			.aicrawl-pricing-row {
+				display: grid;
+				grid-template-columns: minmax(120px, 0.36fr) repeat(2, minmax(0, 1fr));
+				gap: 14px;
 				align-items: stretch;
+			}
+
+			.aicrawl-pricing-matrix__header {
+				align-items: end;
+			}
+
+			.aicrawl-pricing-matrix__header > span,
+			.aicrawl-pricing-matrix__header > div {
+				border: 1px solid rgba(192, 175, 151, 0.6);
+				border-radius: 22px;
+				background: rgba(255, 255, 255, 0.78);
+				padding: 18px;
+			}
+
+			.aicrawl-pricing-matrix__header > span {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #7d5b10;
+				font-size: 13px;
+				font-weight: 950;
+				letter-spacing: 0.08em;
+			}
+
+			.aicrawl-pricing-matrix__header strong {
+				display: block;
+				color: var(--crawl-ink);
+				font-size: clamp(20px, 2.2vw, 30px);
+				font-weight: 950;
+				line-height: 1.12;
+			}
+
+			.aicrawl-pricing-matrix__header em {
+				display: block;
+				margin-top: 7px;
+				color: var(--crawl-muted);
+				font-size: 13px;
+				font-style: normal;
+				font-weight: 860;
+			}
+
+			.aicrawl-pricing-matrix__header .is-citation {
+				border-color: rgba(32, 57, 33, 0.38);
+				background:
+					radial-gradient(circle at 88% 14%, rgba(185, 138, 45, 0.16), transparent 30%),
+					linear-gradient(145deg, rgba(239, 247, 237, 0.98), rgba(255, 255, 255, 0.86));
+			}
+
+			.aicrawl-pricing-row__tier {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				border: 1px solid rgba(192, 175, 151, 0.6);
+				border-radius: 24px;
+				background: rgba(255, 255, 255, 0.76);
+				padding: 18px;
+			}
+
+			.aicrawl-pricing-row__tier span {
+				color: #7d5b10;
+				font-size: 13px;
+				font-weight: 950;
+				letter-spacing: 0.08em;
+			}
+
+			.aicrawl-pricing-row__tier strong {
+				display: block;
+				margin-top: 12px;
+				color: var(--crawl-green-dark);
+				font-size: clamp(22px, 2.4vw, 34px);
+				font-weight: 950;
+				line-height: 1.05;
+			}
+
+			.aicrawl-pricing-row__tier em {
+				display: block;
+				margin-top: 10px;
+				color: var(--crawl-muted);
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 780;
+				line-height: 1.5;
+			}
+
+			.aicrawl-pricing-matrix .aicrawl-price-card {
+				min-height: 0;
+				border-radius: 24px;
+				padding: clamp(20px, 2.4vw, 28px);
 			}
 
 		.aicrawl-price-card {
@@ -2847,6 +3147,35 @@ const faqs = [
 				background: #203921;
 				color: #fff;
 				box-shadow: 0 18px 38px rgba(32, 57, 33, 0.18);
+			}
+
+			.aicrawl-pricing-footnotes {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 14px;
+				margin-top: 20px;
+			}
+
+			.aicrawl-pricing-footnotes div {
+				border: 1px solid rgba(192, 175, 151, 0.6);
+				border-radius: 22px;
+				background: rgba(255, 255, 255, 0.78);
+				padding: 18px;
+			}
+
+			.aicrawl-pricing-footnotes strong {
+				display: block;
+				color: var(--crawl-ink);
+				font-size: 16px;
+				font-weight: 950;
+			}
+
+			.aicrawl-pricing-footnotes p {
+				margin: 8px 0 0;
+				color: var(--crawl-muted);
+				font-size: 13px;
+				font-weight: 790;
+				line-height: 1.65;
 			}
 
 		.aicrawl-pricing-note {
@@ -3262,6 +3591,9 @@ const faqs = [
 					.citation-report__score,
 					.citation-report__grid,
 					.citation-report__bottom,
+					.aicrawl-pricing-matrix__header,
+					.aicrawl-pricing-row,
+					.aicrawl-pricing-footnotes,
 					.aicrawl-case__grid,
 					.aicrawl-related__panel {
 						grid-template-columns: 1fr;
@@ -3282,7 +3614,7 @@ const faqs = [
 				.citation-lanes,
 				.citation-metrics,
 				.citation-capability-grid,
-				.aicrawl-pricing-grid {
+				.citation-quadrants {
 					grid-template-columns: repeat(2, minmax(0, 1fr));
 				}
 
@@ -3329,6 +3661,13 @@ const faqs = [
 				.citation-report__bottom,
 				.citation-panel,
 				.citation-capability-grid,
+				.citation-quadrants,
+				.citation-live-evidence,
+				.aicrawl-pricing-matrix,
+				.aicrawl-pricing-matrix__header,
+				.aicrawl-pricing-row,
+				.aicrawl-pricing-row__tier,
+				.aicrawl-pricing-footnotes,
 				.report-title,
 				.report-kpis,
 				.report-kpis div,
@@ -3445,7 +3784,11 @@ const faqs = [
 				.citation-lanes,
 				.citation-metrics,
 				.citation-capability-grid,
-				.aicrawl-pricing-grid,
+				.citation-quadrants,
+				.citation-live-evidence,
+				.aicrawl-pricing-matrix__header,
+				.aicrawl-pricing-row,
+				.aicrawl-pricing-footnotes,
 				.case-list article > div,
 				.aicrawl-cta__panel {
 					grid-template-columns: 1fr;
@@ -3486,7 +3829,6 @@ const faqs = [
 			.crawl-check-grid,
 			.deliverable-grid,
 			.aicrawl-sample-grid,
-			.aicrawl-pricing-grid,
 			.aicrawl-proof__stats,
 			.signal-board {
 				grid-template-columns: 1fr;
