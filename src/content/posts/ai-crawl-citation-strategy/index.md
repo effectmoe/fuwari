@@ -10,8 +10,8 @@ category: "AI"
 service: "aicrawl"
 badge: "AI流入"
 manga_tldr:
-  - src: "/blog-manga/ai-crawl-citation-strategy-comic.svg"
-    caption: "AIに読まれることと、AIに紹介されることは別。AI CRAWLとAI CITATIONの違いを4コマで整理します。"
+  - src: "/blog-manga/ai-crawl-citation-strategy-kagami-comic.png"
+    caption: "アンドロイド・カガミが、AIに読まれることとAIに紹介されることの違いを4コマで整理します。"
 relatedLinks:
   - label: "AI CRAWL サービスページ"
     href: "/aicrawl/"
