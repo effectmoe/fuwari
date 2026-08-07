@@ -3,7 +3,7 @@ title: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
 published: 2026-08-07
 description: "Web担当者、海外SEO情報ブログ、Moz系のAI検索・SEO論点を読み解きながら、検索順位やCTAだけでは説明できない問い合わせ減少の原因を整理します。"
 image: "./cover.jpg"
-thumbnail: "./cover.jpg"
+thumbnail: "/blog-thumbs/ai-crawl-citation-strategy.jpg"
 imageAlt: "AI流入の実績とAI回答への引用計測を見比べ、次の改善ロードマップへつなげる図解風アイキャッチ"
 tags: ["AI検索", "LLMO", "SEO", "コンバージョン改善", "AI流入分析"]
 category: "AI"

@@ -7,6 +7,7 @@ import RelatedLinks from "@components/widget/RelatedLinks.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import MangaSwiper from "@components/MangaSwiper.astro";
 import ShareBar from "@components/widget/ShareBar.astro";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { getImage } from "astro:assets";
@@ -33,7 +34,8 @@ const postUrl = new URL(`/posts/${entry.slug}/`, Astro.site).toString();
 const inLang = entry.data.lang
 	? entry.data.lang.replace("_", "-")
 	: siteConfig.lang.replace("_", "-");
-const coverSource = entry.data.thumbnail || entry.data.image;
+const coverSource = entry.data.image || entry.data.thumbnail;
+const heroImageSrc = entry.data.image || entry.data.thumbnail || "";
 const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
 const mangaPanels =
 	entry.data.manga_tldr?.length
@@ -142,9 +144,14 @@ const breadcrumbLd = {
 						))}
 					</div>
 				</div>
-				<div id="post-cover" class="commercial-post-hero__image">
-					<img src={blogThumbSrc} alt={entry.data.imageAlt || `${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`} loading="eager" decoding="async" />
-				</div>
+				<ImageWrapper
+					id="post-cover"
+					src={heroImageSrc || blogThumbSrc}
+					basePath={path.join("content/posts/", getDir(entry.id))}
+					alt={entry.data.imageAlt || `${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`}
+					loading="eager"
+					class="commercial-post-hero__image"
+				/>
 			</div>
 		</header>
 
