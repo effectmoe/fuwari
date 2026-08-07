@@ -2,29 +2,33 @@
 const metricCards = [
 	{
 		tag: "Microsoft 365 Copilot",
-		value: "平均 1日14分削減",
-		title: "会議要約 43分 → 11分\n情報検索 24分 → 18分",
+		value: "会議・情報探し: 1日平均14分削減",
+		title: "会議要約や情報探しなど、毎日の小さな作業が短くなる",
+		detail: "AI CENTRALも同じく、回答そのものより前にある「探す」「要約する」「説明し直す」を減らす設計です。",
 		sourceLabel: "Microsoft WorkLab",
 		href: "https://www.microsoft.com/en-us/worklab/work-trend-index/copilots-earliest-users-teach-us-about-generative-ai-at-work",
 	},
 	{
 		tag: "NBER",
-		value: "全体 +14% / 新人層 +34%",
-		title: "生成AI支援でカスタマーサポート生産性向上",
+		value: "顧客対応: 生産性 +14% / 新人層 +34%",
+		title: "顧客対応では、過去の文脈を使えるほど生産性が上がりやすい",
+		detail: "問い合わせ対応や相談業務では、過去履歴・FAQ・判断基準をAIが参照できる状態が効きます。",
 		sourceLabel: "NBER Working Paper",
 		href: "https://www.nber.org/papers/w31161",
 	},
 	{
 		tag: "MIT / Science",
-		value: "作業時間 40%減 / 品質 18%向上",
-		title: "文章業務におけるパフォーマンス変化",
+		value: "文章作成: 時間40%減 / 品質18%向上",
+		title: "文章作成は、下書きと整理をAIに渡すことで短縮しやすい",
+		detail: "提案文、返信文、FAQ、社内メモなどをゼロから書く時間を減らす根拠として見ています。",
 		sourceLabel: "Science / PubMed",
 		href: "https://pubmed.ncbi.nlm.nih.gov/37440646/",
 	},
 	{
 		tag: "HBS / BCG",
-		value: "25.1%速く完了 / 品質40%超向上",
-		title: "コンサルティング業務におけるAI活用",
+		value: "分析・提案: 25.1%速く / 品質40%超向上",
+		title: "複雑な判断業務でも、材料整理をAIが担うと速度と品質が変わる",
+		detail: "人が判断する前に、資料・履歴・論点を揃えることがAI CENTRALの役割です。",
 		sourceLabel: "HBS AI Institute",
 		href: "https://aiinstitute.hbs.edu/navigating-the-jagged-technological-frontier/",
 	},
@@ -74,21 +78,21 @@ const securitySources = [
 					<h3>外部データで見える「探す時間」と、現場で膨らむ「説明し直す時間」。</h3>
 					<a class="time-saving-board__source-callout" href="https://www.apqc.org/blog/km-makes-knowledge-workers-more-productive-and-less-stressed-out" target="_blank" rel="noopener noreferrer" aria-label="APQCの時間削減データを確認する">
 						<span>外部公開データ</span>
-						<strong>APQC: 社内情報探索時間</strong>
+						<strong>APQC: 社内で情報を探す時間</strong>
 						<b>2.8h/週 → 0.7h/週</b>
 						<small>出典を確認する ↗</small>
 					</a>
-					<div class="bar-chart" aria-label="通常の情報探索とエンタープライズ検索ありの比較">
+					<div class="bar-chart" aria-label="社内資料を人が探す場合とAI CENTRALで候補を返せる場合の比較">
 						<div class="bar-chart__row">
 							<div class="bar-chart__label">
-								<span>通常の情報探索</span>
+								<span>人が資料を探す状態</span>
 								<strong>2.8時間 / 週</strong>
 							</div>
 							<div class="bar-chart__rail"><span style="width: 100%"></span></div>
 						</div>
 						<div class="bar-chart__row">
 							<div class="bar-chart__label">
-								<span>エンタープライズ検索あり</span>
+								<span>AI CENTRALで候補を返す状態</span>
 								<strong>0.7時間 / 週</strong>
 							</div>
 							<div class="bar-chart__rail bar-chart__rail--saving"><span style="width: 25%"></span><em>削減余地 2.1時間 / 週</em></div>
@@ -97,32 +101,32 @@ const securitySources = [
 				</div>
 				<div class="time-saving-board__numbers" aria-label="時間削減の主要数値">
 					<div class="time-saving-board__hero-number">
-						<span>情報検索だけの外部データ換算</span>
+						<span>探す時間だけの外部データ換算</span>
 						<strong>約109時間</strong>
 						<small>2.1h × 52週</small>
 					</div>
 					<div class="time-saving-board__hero-number time-saving-board__hero-number--primary">
-						<span>AIセントラル導入前ヒアリング用モデル</span>
+						<span>初回相談で確認する年間ロスの目安</span>
 						<strong>約190時間</strong>
-						<small>探す・説明し直す・転記・確認まで含めた試算例</small>
+						<small>問い合わせ・案件対応で発生する手戻り時間の試算例</small>
 					</div>
 				</div>
 			</div>
 			<div class="time-saving-board__formula" aria-label="時間削減の計算式">
 				<div>
-					<span>1日</span>
-					<strong>5件</strong>
-					<small>探す・思い出す・説明し直す場面</small>
+					<span>問い合わせ・案件対応</span>
+					<strong>1日5件</strong>
+					<small>資料を探す、前提を思い出す、説明し直す場面</small>
 				</div>
 				<b>×</b>
 				<div>
-					<span>1件</span>
+					<span>1件あたりの手戻り</span>
 					<strong>10分</strong>
-					<small>資料確認・文脈説明・転記</small>
+					<small>資料確認、文脈説明、転記、確認に使われる時間</small>
 				</div>
 				<b>×</b>
 				<div>
-					<span>年間</span>
+					<span>年間の稼働日</span>
 					<strong>230日</strong>
 					<small>稼働日の目安</small>
 				</div>
@@ -148,9 +152,9 @@ const securitySources = [
 			</div>
 			<div class="time-saving-board__model-note">
 				<strong>約190時間は保証値ではありません。</strong>
-				<span>EFFECT試算: 1日5件 × 10分 × 230日。初回相談では、実際の件数・分数・対象業務に置き換えて試算します。</span>
+				<span>EFFECT試算: 問い合わせ・案件対応で発生する手戻りを 1日5件 × 10分 × 230日 で置いた例です。初回相談では、実際の件数・分数・対象業務に置き換えて試算します。</span>
 			</div>
-			<p class="evidence-note">出典明示: 約109時間はAPQC公開データの差分 2.1h × 52週。約190時間はEFFECTの導入前ヒアリング用モデル 1日5件 × 10分 × 230日 = 約191.6時間。</p>
+			<p class="evidence-note">出典明示: 約109時間はAPQC公開データの差分 2.1h × 52週。約190時間はEFFECTの導入前ヒアリング用モデル「問い合わせ・案件対応の手戻り 1日5件 × 10分 × 230日」= 約191.6時間。</p>
 		</div>
 
 		<div class="evidence-card evidence-card--large evidence-card--flow">
@@ -175,12 +179,19 @@ const securitySources = [
 			</div>
 		</div>
 
+		<div class="metric-context">
+			<span class="evidence-tag">出典付きの補足</span>
+			<h3>AIで効率化できるのは、文章生成だけではありません。</h3>
+			<p>下の出典は、AIが「会議要約」「情報探し」「顧客対応」「文章作成」「判断材料の整理」に効いていることを示す参考例です。AI CENTRALでは、この効果を社内資料・顧客情報・対応履歴に接続して、日常業務の手戻り削減に使います。</p>
+		</div>
+
 		<div class="metric-grid">
 			{metricCards.map((item) => (
 				<div class="metric-card">
 					<span class="evidence-tag">{item.tag}</span>
 					<strong>{item.value}</strong>
 					<h3>{item.title}</h3>
+					<p>{item.detail}</p>
 					<a href={item.href} target="_blank" rel="noopener noreferrer">出典: {item.sourceLabel}</a>
 				</div>
 			))}
@@ -895,6 +906,32 @@ const securitySources = [
 		margin-bottom: 24px;
 	}
 
+	.metric-context {
+		margin: 0 0 22px;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 2rem;
+		background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 236, 0.72));
+		padding: clamp(24px, 3vw, 36px);
+	}
+
+	.metric-context h3 {
+		margin: 0 0 12px;
+		color: #1c1b1c;
+		font-size: clamp(24px, 2.6vw, 36px);
+		font-weight: 900;
+		line-height: 1.28;
+		letter-spacing: 0;
+	}
+
+	.metric-context p {
+		max-width: 920px;
+		margin: 0;
+		color: #4e4538;
+		font-size: clamp(16px, 1.25vw, 18px);
+		font-weight: 700;
+		line-height: 1.85;
+	}
+
 	.metric-card,
 	.safety-card {
 		display: flex;
@@ -919,6 +956,14 @@ const securitySources = [
 		margin-top: 0;
 		font-size: clamp(19px, 1.85vw, 27px);
 		line-height: 1.42;
+	}
+
+	.metric-card p {
+		margin: 0 0 18px;
+		color: #4e4538;
+		font-size: clamp(15px, 1.15vw, 16px);
+		font-weight: 700;
+		line-height: 1.75;
 	}
 
 	.metric-card a {

@@ -478,20 +478,24 @@ const faqLd = {
 
 				<div class="pricing-clarity-grid" aria-label="料金表示の前提">
 					<div>
-						<span>必須 01</span>
+						<span>初期構築に含むもの</span>
 						<strong>記憶基盤・連携・ローカル構成の構築費</strong>
+						<small>社内資料や顧客情報をAIが参照できる土台を作る費用です。</small>
 					</div>
 					<div>
-						<span>必須 02</span>
+						<span>導入後に含むもの</span>
 						<strong>6ヶ月伴走・基本保守・チャット対応</strong>
+						<small>導入して終わりではなく、現場で使える状態まで伴走します。</small>
 					</div>
 					<div>
-						<span>導入範囲</span>
+						<span>始め方</span>
 						<strong>一部署・一業務から小さく開始可能</strong>
+						<small>全社導入の前に、効果が見えやすい業務から始められます。</small>
 					</div>
 					<div>
-						<span>設計支援</span>
+						<span>事前整理に含むもの</span>
 						<strong>棚卸し・ボトルネック抽出・参照範囲設計を含む</strong>
+						<small>どの情報をAIに見せ、どこを人が判断するかを先に整理します。</small>
 					</div>
 				</div>
 
@@ -941,6 +945,15 @@ const faqLd = {
 		font-size: clamp(15px, 1.2vw, 17px);
 		font-weight: 900;
 		line-height: 1.48;
+	}
+
+	.pricing-clarity-grid small {
+		display: block;
+		margin-top: 8px;
+		color: var(--on-surface-variant);
+		font-size: 13px;
+		font-weight: 700;
+		line-height: 1.62;
 	}
 
 	.pricing-payment-row {
@@ -5185,11 +5198,31 @@ const faqLd = {
 		}
 
 		.pricing-security-note {
+			display: grid;
+			grid-template-columns: 1fr !important;
+			gap: 16px;
 			border-radius: 1.1rem;
+			text-align: left;
 		}
 
 		.pricing-security-note__icon {
 			width: 52px;
+		}
+
+		.pricing-security-note__copy,
+		.pricing-security-note ul {
+			min-width: 0;
+		}
+
+		.pricing-security-note__copy strong {
+			font-size: clamp(24px, 8vw, 32px);
+			line-height: 1.24;
+			text-wrap: balance;
+		}
+
+		.pricing-security-note__copy p {
+			font-size: 15px;
+			line-height: 1.8;
 		}
 
 		.pricing-security-note ul {

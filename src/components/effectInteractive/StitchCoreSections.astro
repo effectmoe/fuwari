@@ -12,19 +12,19 @@ const problems = [
 
 const aiCentralClarityCards = [
 	{
-		label: "WHAT IS MEMORY",
+		label: "記憶の役割",
 		title: "AIの記憶は、勝手に覚え込ませることではありません。",
 		body: "社内資料・顧客情報・対応履歴・FAQ・判断基準を、AIが参照できる形に整理する設計です。どの情報を見てよいか、どの範囲で使うかを明確にします。",
 		icon: "material-symbols:memory-alt-outline",
 	},
 	{
-		label: "SMALL START",
+		label: "小さく始める",
 		title: "いきなり全社導入ではなく、小さく始められます。",
 		body: "まずは一部署、一業務、一つの資料フォルダから始め、検索・整理・下書き・確認が実務で使えるかを確かめながら広げます。",
 		icon: "material-symbols:stairs-outline",
 	},
 	{
-		label: "DATA HANDLING",
+		label: "情報の扱い",
 		title: "情報の置き場所と承認範囲を、構築前に決めます。",
 		body: "個人情報や顧客情報を扱う場合は、権限・ログ・承認フロー・ローカルLLMの必要性を整理し、人が承認できる運用にします。",
 		icon: "material-symbols:shield-lock-outline",
@@ -303,7 +303,7 @@ const operationPanels = [
 <section id="boundary" class="stitch-core ai-central-clarity" aria-labelledby="ai-central-clarity-title">
 	<div class="stitch-core__inner ai-central-clarity__inner">
 		<div class="ai-central-clarity__heading">
-			<span>BEFORE IMPLEMENTATION</span>
+			<span>導入前に決めること</span>
 			<h2 id="ai-central-clarity-title">AIセントラルは、AIに丸投げする仕組みではありません。</h2>
 			<p>社内システムを棚卸したうえで、参照させる情報、AIに任せる範囲、人間が判断する境界を設計します。</p>
 		</div>
@@ -333,11 +333,11 @@ const operationPanels = [
 					<h3>クラウド型とローカル型を、情報の扱いで選び分ける。</h3>
 					<p>通常のAIセントラル / AIセントラル PLUSはクラウドAI型です。AIに不要な個人情報は伏せ、参照させる情報と人が承認する範囲を設計します。パーフェクトセキュアでは、その安全設計に加えて、外部クラウドに出せない情報を社内PC・社内ネットワーク内で扱える構成にします。</p>
 					<ul>
-						<li>全プラン: 個人情報マスキング</li>
-						<li>AIセントラル / PLUS: クラウドAI型</li>
-						<li>AIに不要な個人情報を伏せる運用を設計</li>
-						<li>参照範囲・権限・ログ・承認フローを整理</li>
-						<li>パーフェクトセキュア: ローカル構成</li>
+						<li><span>全プラン共通</span><strong>個人情報を伏せる前提で設計</strong></li>
+						<li><span>通常 / PLUS</span><strong>クラウドAI型で小さく開始</strong></li>
+						<li><span>事前整理</span><strong>AIに見せる情報と見せない情報を分ける</strong></li>
+						<li><span>運用管理</span><strong>参照範囲・権限・ログ・承認を残す</strong></li>
+						<li><span>上位構成</span><strong>外部に出せない情報はローカル構成を検討</strong></li>
 					</ul>
 					<p class="safe-ai-feature-card__note">※ 社内PC・社内ネットワーク内でAIを動かすローカル構成は、パーフェクトセキュアの場合です。</p>
 				</div>
@@ -901,10 +901,28 @@ const operationPanels = [
 		border-top: 2px dashed rgba(78, 69, 56, 0.28);
 		padding: 14px 0;
 		color: #4e4538;
-		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 		font-size: clamp(14px, 1.35vw, 18px);
 		font-weight: 850;
 		letter-spacing: 0.02em;
+	}
+
+	.safe-ai-feature-card li span,
+	.safe-ai-feature-card li strong {
+		display: block;
+	}
+
+	.safe-ai-feature-card li span {
+		color: #8b6609;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.safe-ai-feature-card li strong {
+		margin-top: 4px;
+		color: #2c2a26;
+		font-size: clamp(15px, 1.45vw, 18px);
+		line-height: 1.5;
 	}
 
 	.safe-ai-feature-card__media {
@@ -2833,8 +2851,8 @@ const operationPanels = [
 		}
 
 		.problem-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 14px;
+			grid-template-columns: 1fr;
+			gap: 12px;
 		}
 
 		.problem-card {
@@ -2842,8 +2860,8 @@ const operationPanels = [
 			grid-template-columns: auto 1fr;
 			align-items: center;
 			column-gap: 14px;
-			min-height: 104px;
-			padding: 18px;
+			min-height: auto;
+			padding: 16px 18px;
 		}
 
 		.problem-card span {
@@ -2893,7 +2911,7 @@ const operationPanels = [
 
 		.safe-ai-feature-card__media {
 			min-height: 360px;
-			order: -1;
+			order: 2;
 		}
 
 		.safe-ai-feature-card__media img {
@@ -3018,11 +3036,59 @@ const operationPanels = [
 		}
 
 		.safe-ai-feature-card__copy {
-			padding: 24px;
+			min-width: 0;
+			padding: 24px 20px;
+		}
+
+		.safe-ai-feature-card__label {
+			margin-bottom: 16px;
+			padding: 8px 11px;
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			line-height: 1.2;
+		}
+
+		.safe-ai-feature-card h3 {
+			font-size: clamp(25px, 8.5vw, 34px);
+			line-height: 1.22;
+			text-wrap: balance;
+		}
+
+		.safe-ai-feature-card__copy p {
+			margin-top: 16px;
+			font-size: 15px;
+			line-height: 1.78;
 		}
 
 		.safe-ai-feature-card__media {
-			min-height: 300px;
+			display: none;
+		}
+
+		.safe-ai-feature-card ul {
+			gap: 10px;
+			padding-top: 20px;
+		}
+
+		.safe-ai-feature-card li {
+			border: 1px solid rgba(210, 197, 178, 0.68);
+			border-radius: 1rem;
+			background: rgba(255, 255, 255, 0.78);
+			padding: 12px 14px;
+			font-family: inherit;
+			font-size: 13px;
+			line-height: 1.45;
+			letter-spacing: 0;
+		}
+
+		.safe-ai-feature-card li span {
+			font-size: 11px;
+			letter-spacing: 0.06em;
+		}
+
+		.safe-ai-feature-card li strong {
+			margin-top: 5px;
+			font-size: 14px;
+			line-height: 1.5;
 		}
 
 		.safe-ai-feature-card__media figcaption {
