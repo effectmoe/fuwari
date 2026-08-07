@@ -336,18 +336,21 @@ const serviceGuide = [
 		label: "社内AIを作りたい",
 		title: "AIセントラル",
 		body: "社内資料・顧客情報・対応履歴を、AIが参照できる記憶基盤へ整えます。",
+		cta: "AIセントラルを見る",
 		href: "/",
 	},
 	{
 		label: "AI流入を見たい",
 		title: "AIクロール",
 		body: "どのAIから、どのページへ、どんな動機で来ているかをレポート化します。",
+		cta: "AIクロールを見る",
 		href: "/aicrawl/",
 	},
 	{
 		label: "自分で使えるようになりたい",
 		title: "AI講座",
 		body: "AIエージェントや業務プロンプトを、自分の仕事に接続する力を育てます。",
+		cta: "AI講座を見る",
 		href: "/ai-agent-course/",
 	},
 ];
@@ -424,6 +427,10 @@ const faqLd = {
 						<span>{item.label}</span>
 						<strong>{item.title}</strong>
 						<p>{item.body}</p>
+						<em>
+							{item.cta}
+							<Icon name="material-symbols:arrow-forward-rounded" />
+						</em>
 					</a>
 				))}
 			</div>
@@ -676,6 +683,9 @@ const faqLd = {
 		}
 
 		.faq-guide__services a {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
 			min-height: 168px;
 			border-radius: 22px;
 			padding: 20px;
@@ -704,6 +714,29 @@ const faqLd = {
 			font-size: 14px;
 			font-weight: 750;
 			line-height: 1.72;
+		}
+
+		.faq-guide__services em {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 7px;
+			min-height: 40px;
+			margin-top: auto;
+			padding: 0 15px;
+			border: 1px solid rgba(64, 103, 55, 0.28);
+			border-radius: 999px;
+			background: rgba(64, 103, 55, 0.11);
+			color: var(--faq-green);
+			font-size: 13px;
+			font-style: normal;
+			font-weight: 950;
+			letter-spacing: 0;
+		}
+
+		.faq-guide__services em :global(svg) {
+			width: 18px;
+			height: 18px;
 		}
 
 		.faq-guide__trust {

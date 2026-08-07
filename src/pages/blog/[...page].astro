@@ -73,7 +73,10 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 			{featured && (
 				<a href={getPostUrlBySlug(featured.slug)} class="blog-featured">
 					<div class="blog-featured__meta">
-						<span>FEATURED</span>
+						<div class="blog-featured__labels" aria-label="記事種別">
+							<span>最新記事</span>
+							<span>ブログ</span>
+						</div>
 						<span>{formatDateToYYYYMMDD(featured.data.published)}</span>
 					</div>
 					{(featured.data.thumbnail || featured.data.image) && (
@@ -106,6 +109,7 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 								<img src={getBlogThumbSrc(post)} alt={post.data.imageAlt || post.data.title} loading="eager" decoding="async" />
 							)}
 							<span class="blog-card-badge">0{index + 1}</span>
+							<span class="blog-card-type">ブログ</span>
 						</div>
 						<div>
 							<p>{post.data.category ?? "Knowledge"}</p>
@@ -144,6 +148,7 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 								{(post.data.thumbnail || post.data.image) && (
 									<img src={getBlogThumbSrc(post)} alt={post.data.imageAlt || post.data.title} loading="eager" decoding="async" />
 								)}
+								<span class="blog-card-type">ブログ</span>
 							</a>
 							<div class="blog-article-card__top">
 								<a href={getCategoryUrl(post.data.category ?? null)}>{post.data.category ?? "Uncategorized"}</a>
@@ -465,6 +470,23 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 		gap: 14px;
 	}
 
+	.blog-featured__labels {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.blog-featured__labels span {
+		display: inline-flex;
+		align-items: center;
+		min-height: 32px;
+		padding: 0 14px;
+		border: 1px solid rgba(47, 99, 121, 0.2);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.72);
+	}
+
 	.blog-article-card__top {
 		margin-top: 2px;
 	}
@@ -578,6 +600,24 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 		color: var(--blog-accent-deep);
 		font-size: 16px;
 		font-weight: 950;
+		box-shadow: 0 10px 24px rgba(23, 32, 42, 0.1);
+	}
+
+	.blog-card-type {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		display: inline-flex;
+		align-items: center;
+		min-height: 34px;
+		padding: 0 13px;
+		border: 1px solid rgba(47, 99, 121, 0.22);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.92);
+		color: var(--blog-accent-deep);
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
 		box-shadow: 0 10px 24px rgba(23, 32, 42, 0.1);
 	}
 
