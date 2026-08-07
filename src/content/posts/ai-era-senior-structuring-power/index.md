@@ -4,12 +4,24 @@ published: 2026-06-10
 description: ある方のFacebook投稿『AI時代は50代60代が有利』を起点に、『経験』の正体を『構造化能力』として読み解く。シニアの経験が資産化するか飲み込まれるかの分水嶺を提示する。
 image: ./cover.jpg
 thumbnail: ./thumb.jpg
+imageAlt: "AI時代にシニアの経験を構造化能力として資産化する考え方を示すブログアイキャッチ"
 tags:
   - AI活用
   - シニア
   - 構造化思考
   - DFB
 category: AI
+service: "ai-central"
+relatedLinks:
+  - label: "DFBとは — シュ コウメイが提唱するAI時代の構造化メソッド"
+    href: "/posts/dfb-method-introduction/"
+  - label: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
+    href: "/posts/ai-crawl-citation-strategy/"
+faq:
+  - q: "AI時代にシニアの経験は本当に有利になりますか？"
+    a: "経験そのものではなく、経験をAIに渡せる形へ分解・整理できる場合に強みになります。記事ではこの力を構造化能力として説明しています。"
+  - q: "DFBとこの記事の関係は何ですか？"
+    a: "DFBは経験を分解し、枠を入れ替え、AIに渡せる形へ組み立てるための方法です。シニアの経験をAI時代の資産に変える技術として位置づけています。"
 draft: false
 ---
 

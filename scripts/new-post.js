@@ -43,15 +43,41 @@ if (!fs.existsSync(dirPath)) {
 }
 
 const content = `---
-title: ${args[0]}
+title: "${args[0]}"
 published: ${getDate()}
-description: ''
-image: ''
-tags: []
-category: ''
-draft: false 
-lang: ''
+description: ""
+image: "./cover.jpg"
+thumbnail: "./thumb.jpg"
+imageAlt: ""
+tags: ["AI", "LLMO", "SEO"]
+category: "AI"
+service: ""
+course: ""
+relatedLinks:
+  - label: ""
+    href: "/posts/"
+  - label: ""
+    href: "/posts/"
+faq:
+  - q: ""
+    a: ""
+  - q: ""
+    a: ""
+draft: false
 ---
+
+> **この記事の要点**
+>
+> -
+
+<!--
+SEO/LLMO guardrails:
+- image と thumbnail は別アスペクト比で作成し、imageAlt を具体的に書く。
+- 外部出典リンクを1件以上、内部リンクを2件以上入れる。
+- FAQは2問以上。記事末の ArticleFAQ が FAQPage JSON-LD になります。
+- 自社商品は記事の結論後に自然な導線として置き、本文全体を商品紹介だけにしない。
+- 公開前に pnpm run audit:posts と pnpm build を通す。
+-->
 `
 
 fs.writeFileSync(path.join(targetDir, fileName), content)

@@ -3,8 +3,20 @@ title: "Astro が選ばれる4つの理由：コンテンツ駆動サイト最�
 published: 2026-06-10
 description: "Next.jsやNuxtがある中でAstroが圧倒的支持を集める理由を、ゼロJS設計・マルチフレームワーク対応・Content Collections・低い学習コストの4軸で解説。実装視点でわかる選定の決め手。"
 image: "./cover.jpg"
+thumbnail: "./cover.jpg"
+imageAlt: "Astroがコンテンツ駆動サイトで選ばれる理由を4本柱で整理したブログアイキャッチ"
 tags: ["Astro", "フロントエンド", "SSG", "JavaScript", "Web開発"]
 category: "Tech"
+relatedLinks:
+  - label: "Astro × Fuwari で作る一気通貫ブログ運用"
+    href: "/posts/astro-fuwari-workflow-vs-wordpress/"
+  - label: "Astro でチームブログを運用するための4つの選択肢"
+    href: "/posts/astro-team-blog-collaboration-tiers/"
+faq:
+  - q: "Astroはどんなサイトに向いていますか？"
+    a: "ブログ、メディア、ドキュメント、コーポレートサイトのように、文章やページ構造が中心になるサイトに向いています。"
+  - q: "AstroがSEOに強いと言われる理由は何ですか？"
+    a: "初期表示に余計なJavaScriptを載せにくく、静的HTMLとして配信しやすいからです。構造化データやサイトマップとの相性も良いです。"
 draft: false
 ---
 

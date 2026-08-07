@@ -185,6 +185,7 @@ const plans = [
       { text: "ChatGPT メモ・Notion・Excel の取り込み", on: true },
       { text: "既存フォルダはそのまま（動かさずに索引連携）", on: true },
       { text: "士業テンプレート + 機微情報の運用ルール", on: true },
+      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
       { text: "導入研修 1回 + 顧問先3社分の初期カルテ化を伴走", on: true },
       { text: "Notion 双方向連携・カレンダー同期・類似案件検索", on: false },
       { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
@@ -203,6 +204,7 @@ const plans = [
       { text: "Notion 連携（いまの Notion をそのまま使い続けるだけで AI の記憶に）", on: true },
       { text: "Google カレンダー連携（期限・予定が記憶とつながる）", on: true },
       { text: "類似案件検索（「前にも似た件がなかったか」を AI がたどる）", on: true },
+      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
       { text: "導入研修 2回（Notion 運用特化回を含む）", on: true },
       { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
     ],
@@ -221,6 +223,7 @@ const plans = [
       { text: "外出先・スマホから本人認証経由で利用（VPN 機器不要）", on: true },
       { text: "メール自動取込（放っておいても対応履歴が蓄積）", on: true },
       { text: "申告・手続き期限のリマインド", on: true },
+      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
       { text: "AI エージェント（指示すれば実作業。送信・確定は必ず先生の承認経由）", on: true },
       { text: "導入研修 4回（自動化の線引き設計回を含む）", on: true },
     ],
@@ -268,7 +271,7 @@ const faqs = [
   },
   {
     q: "AI が勝手にメールを送ったりしませんか？",
-    a: "しません。パーフェクトセキュアの AI エージェントは「承認キュー」という仕組みで動き、下書き・整理などの作業は行いますが、送信・確定は必ず先生の承認を経由します。どの業務を任せてどこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
+    a: "しません。AIセントラルは、どのプランでも「承認トレイ」を前提に設計します。AI は下書き・整理・確認材料づくりを進めますが、顧問先へ出る送信や確定操作は、先生が内容を確認して承認するまで実行されません。どの業務を任せ、どこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
   },
   {
     q: "士業以外の会社でも、個人情報を扱う業務に導入できますか？",
@@ -331,6 +334,50 @@ const centralMap = [
     title: "承認",
     body: "送信・判断・確定は人が行う。AIは中枢に置くが、決裁者にはしない。",
     icon: "material-symbols:verified-user-outline",
+  },
+];
+
+const approvalSteps = [
+  {
+    no: "01",
+    title: "AIが作る",
+    body: "返信メールの下書き、予定の登録案、資料のまとめをAIが先に用意します。",
+    icon: "material-symbols:edit-note-outline",
+  },
+  {
+    no: "02",
+    title: "先生のトレイに並ぶ",
+    body: "宛先、本文、判断材料、根拠を確認できる状態で、承認待ちとして並びます。",
+    icon: "material-symbols:inventory-2-outline",
+  },
+  {
+    no: "03",
+    title: "押して初めて出ていく",
+    body: "先生が内容を見て「送信する」「確定する」を押すまで、外部への送信や確定は起きません。",
+    icon: "material-symbols:verified-user-outline",
+  },
+];
+
+const approvalSafeguards = [
+  {
+    title: "文面・宛先が見える",
+    body: "要約だけではなく、実際に送られる本文、宛先、CCまで確認してから承認できます。",
+    icon: "material-symbols:article-outline",
+  },
+  {
+    title: "判断材料が残る",
+    body: "AIがなぜそう提案したのかを、元のメールや資料と一緒に確認できます。",
+    icon: "material-symbols:fact-check-outline",
+  },
+  {
+    title: "承認の記録が残る",
+    body: "いつ、誰の指示で、何をして、誰がOKを出したかを後から追えるようにします。",
+    icon: "material-symbols:history-edu-outline",
+  },
+  {
+    title: "古い下書きは止まる",
+    body: "確認待ちの間に新しい返信が来た場合、古い前提の下書きはそのまま使わない設計にします。",
+    icon: "material-symbols:rule-folder-outline",
   },
 ];
 
@@ -1004,6 +1051,81 @@ const faqLd = {
       consultationHref={mailtoLink}
       title="クラウド型で足りるか、ローカル型が必要かを切り分けます。"
       body="扱う情報の機密度に応じて、プラン1・2かパーフェクトセキュアかを整理します。"
+    />
+
+    <!-- ===== 5.5 承認トレイ ===== -->
+    <div class="central-approval-canvas card-base px-6 md:px-9 py-7" id="approval-tray">
+      <div class="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+        <div>
+          <p class="mb-3 text-sm font-bold tracking-[0.16em] text-[var(--primary)]">APPROVAL TRAY</p>
+          <h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">「気をつけます」ではなく、送れない作りにする。</h2>
+          <p class="mt-4 text-base leading-relaxed text-75">
+            士業のAI化でいちばん怖いのは、AIが間違った文面を顧問先へ勝手に送ってしまうことです。
+            AIセントラルでは、<strong class="text-90">どのプランでも、AIが勝手に送信・確定しない承認トレイ</strong>を前提に設計します。
+          </p>
+          <div class="mt-5 rounded-xl border border-[var(--primary)]/25 bg-[var(--card-bg)] p-5">
+            <p class="text-sm font-bold text-90">止めるのは、AIの仕事ではありません。</p>
+            <p class="mt-2 text-sm leading-relaxed text-75">
+              AIは下書き・整理・確認材料づくりを進めます。止めるのは、メール送信や確定など<strong class="text-90">外に出る瞬間</strong>だけです。
+              だから、作業の初速は落とさず、人が最後の責任を握れます。
+            </p>
+          </div>
+        </div>
+
+        <div class="approval-tray-visual">
+          {approvalSteps.map((step, index) => (
+            <div class="approval-tray-step">
+              <div class="approval-tray-step__head">
+                <span>{step.no}</span>
+                <Icon name={step.icon} />
+              </div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              {index < approvalSteps.length - 1 && (
+                <Icon name="material-symbols:arrow-forward-rounded" class="approval-tray-step__arrow" />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-4">
+        {approvalSafeguards.map((item) => (
+          <div class="approval-safeguard-card">
+            <Icon name={item.icon} />
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="approval-policy-grid mt-6">
+        <div>
+          <p class="approval-policy-grid__label">任せられる領域</p>
+          <h3>慣れてきた定型作業は、自動化の線を一緒に決める。</h3>
+          <p>
+            事務所内で完結する期限リマインドや整理作業などは、導入研修の中で「ここまでは任せてよい」という線引きを決められます。
+            ただし、顧問先へ出ていくメール・チャット・資料公開は、何度使っても必ず1件ずつ確認する設計にします。
+          </p>
+        </div>
+        <div>
+          <p class="approval-policy-grid__label">触らせない領域</p>
+          <h3>承認しても、AIに実行させない業務を残す。</h3>
+          <p>
+            電子申請やe-Tax提出のような領域は、承認を経てもAIに実行させる対象に入れません。
+            「承認すれば任せてよい操作」と「そもそもAIには触らせない操作」を分けること自体が、士業向けAI設計の信頼材料です。
+          </p>
+        </div>
+      </div>
+      <p class="mt-4 text-xs leading-relaxed text-50">
+        ※ 画面は機能イメージです。承認トレイは、受注後に業務内容と扱う情報の範囲を確認したうえで構築します。実績数値や誤送信防止件数を保証するものではありません。
+      </p>
+    </div>
+
+    <InlineConversion
+      consultationHref={mailtoLink}
+      title="AIに任せる範囲と、人が承認する範囲を先に決めます。"
+      body="顧問先へ出るもの、事務所内で完結するもの、AIに触らせないものを分けて設計します。"
     />
 
     <!-- ===== 6. 必要性 ===== -->
@@ -1992,6 +2114,164 @@ const faqLd = {
       align-items: stretch;
     }
 
+    .central-approval-canvas {
+      background:
+        radial-gradient(circle at 78% 14%, rgba(79, 118, 97, 0.13), transparent 28%),
+        linear-gradient(135deg, rgba(247, 248, 244, 0.94), rgba(255, 255, 255, 0.97));
+    }
+
+    .approval-tray-visual {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .approval-tray-step {
+      position: relative;
+      min-height: 16rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(238, 245, 243, 0.58)),
+        rgba(255, 255, 255, 0.82);
+      padding: 1.25rem;
+      box-shadow: 0 18px 46px rgba(23, 32, 51, 0.07);
+    }
+
+    .approval-tray-step:nth-child(2) {
+      transform: translateY(1rem);
+    }
+
+    .approval-tray-step:nth-child(3) {
+      transform: translateY(2rem);
+      border-color: rgba(79, 118, 97, 0.35);
+      background:
+        linear-gradient(145deg, rgba(238, 245, 243, 0.95), rgba(255, 255, 255, 0.86)),
+        #fff;
+    }
+
+    .approval-tray-step__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .approval-tray-step__head span {
+      display: grid;
+      width: 2.8rem;
+      height: 2.8rem;
+      place-items: center;
+      border-radius: 999px;
+      background: #fff8ea;
+      color: #8a620b;
+      font-size: 0.86rem;
+      font-weight: 900;
+      box-shadow: inset 0 0 0 1px rgba(183, 140, 42, 0.16);
+    }
+
+    .approval-tray-step__head svg {
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .approval-tray-step h3 {
+      margin: 0;
+      color: var(--text-90);
+      font-size: 1.2rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .approval-tray-step p {
+      margin-top: 0.85rem;
+      color: var(--text-75);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.8;
+    }
+
+    .approval-tray-step__arrow {
+      position: absolute;
+      right: -1.35rem;
+      top: 50%;
+      z-index: 2;
+      color: var(--primary);
+      font-size: 1.9rem;
+      transform: translateY(-50%);
+    }
+
+    .approval-safeguard-card {
+      min-height: 13rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(16, 24, 32, 0.1);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 1.2rem;
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.05);
+    }
+
+    .approval-safeguard-card svg {
+      margin-bottom: 1rem;
+      color: var(--primary);
+      font-size: 2rem;
+    }
+
+    .approval-safeguard-card h3 {
+      margin: 0;
+      color: var(--text-90);
+      font-size: 1rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .approval-safeguard-card p {
+      margin-top: 0.65rem;
+      color: var(--text-75);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.75;
+    }
+
+    .approval-policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .approval-policy-grid > div {
+      border-radius: 0.75rem;
+      border: 1px solid rgba(79, 118, 97, 0.2);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 246, 237, 0.68)),
+        rgba(255, 255, 255, 0.84);
+      padding: 1.35rem;
+    }
+
+    .approval-policy-grid__label {
+      margin: 0 0 0.75rem;
+      color: var(--primary);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+    }
+
+    .approval-policy-grid h3 {
+      margin: 0;
+      color: var(--text-90);
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.55;
+    }
+
+    .approval-policy-grid p:not(.approval-policy-grid__label) {
+      margin-top: 0.75rem;
+      color: var(--text-75);
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.85;
+    }
+
     .central-reasons-canvas {
       background:
         radial-gradient(circle at 80% 18%, rgba(79, 118, 97, 0.11), transparent 26%),
@@ -2374,6 +2654,8 @@ const faqLd = {
 
       .proof-source-board,
       .pricing-choice-map,
+      .approval-tray-visual,
+      .approval-policy-grid,
       .central-related-services {
         grid-template-columns: 1fr;
       }
@@ -2388,9 +2670,19 @@ const faqLd = {
 
       .proof-source-board__flow span:nth-child(2),
       .proof-source-board__flow span:nth-child(4),
+      .approval-tray-step:nth-child(2),
+      .approval-tray-step:nth-child(3),
       .pricing-choice-map div:nth-child(2),
       .pricing-choice-map div:nth-child(3) {
         transform: none;
+      }
+
+      .approval-tray-step {
+        min-height: auto;
+      }
+
+      .approval-tray-step__arrow {
+        display: none;
       }
 
       .pricing-choice-map::before {

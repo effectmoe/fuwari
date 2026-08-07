@@ -7,9 +7,10 @@ interface Props {
 	title?: string;
 	description?: string;
 	ogImage?: string;
+	ogImageAlt?: string;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, ogImageAlt } = Astro.props;
 const currentPath = Astro.url.pathname;
 const brandRoutes = [
 	{ match: (path: string) => path.startsWith("/aicrawl"), label: "AI CRAWL", href: "/aicrawl/" },
@@ -87,7 +88,7 @@ const navItems = [
 ];
 ---
 
-<Layout title={title} description={description} ogImage={ogImage}>
+<Layout title={title} description={description} ogImage={ogImage} ogImageAlt={ogImageAlt}>
 	<Fragment slot="head">
 		<slot name="head" />
 	</Fragment>

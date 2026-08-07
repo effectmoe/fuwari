@@ -4,8 +4,20 @@ published: 2026-06-22
 description: "日経クロストレンドの 2026 マーケトレンドマップを読み解く。「SEO」が消えて「LLMO/GEO/AEO/AIO」が左上に浮上した事実から、2026 下半期にマーケターが取るべき 4 つの行動を導き出す。"
 image: "./cover.jpg"
 thumbnail: "./thumb.jpg"
+imageAlt: "2026年マーケティングトレンドマップをDFBで読み解き、SEOからLLMOへ論点が移る様子を示す分析アイキャッチ"
 tags: ["DFB", "構造化分析", "日経クロストレンド", "トレンドマップ", "2026予測", "LLMO", "GEO", "AEO", "AIO", "クラスター連載"]
 category: "DFB分析"
+service: "aicrawl"
+relatedLinks:
+  - label: "タイトルに検索キーワードを入れるSEO改善術"
+    href: "/posts/keyword-in-title-seo/"
+  - label: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
+    href: "/posts/ai-crawl-citation-strategy/"
+faq:
+  - q: "LLMO、GEO、AEO、AIO は何が違いますか？"
+    a: "いずれもAI検索や回答エンジンで見つけられやすくする考え方です。細かな定義よりも、検索順位だけでなくAI回答にどう扱われるかを見る必要がある点が重要です。"
+  - q: "トレンドマップを読むときにDFBはどう役立ちますか？"
+    a: "散らばったキーワードを分解し、意味の近いまとまりに枠取りし直し、次に取るべき行動へ組み立てるために使えます。"
 draft: false
 ---
 
@@ -359,5 +371,4 @@ DFB を 1 周回すと、必ず**「あれ？まだスッキリしない」**と
     document.addEventListener("swup:content:replace", init);
   })();
 </script>
-
 

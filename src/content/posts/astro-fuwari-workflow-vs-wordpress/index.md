@@ -4,6 +4,7 @@ published: 2026-06-10
 description: Astro Fuwari + Obsidian + Vercel + AI 自動化で構築した一気通貫ブログ運用パイプラインを設計記録として解説。WordPress と 14 観点で比較し、なぜ AI 時代のコンテンツ運用に Astro が選ばれているのかを実装視点で整理する。
 image: ./cover.jpg
 thumbnail: ./thumb.jpg
+imageAlt: "Astro FuwariとWordPressのブログ運用を比較し、MarkdownとAI自動化の流れを整理する図解アイキャッチ"
 tags:
   - Astro
   - Fuwari
@@ -13,6 +14,16 @@ tags:
   - AI 自動化
   - ブログ運用
 category: Tech
+relatedLinks:
+  - label: "Astro が選ばれる4つの理由"
+    href: "/posts/why-astro-content-framework/"
+  - label: "なぜ Notion を CMS にすると面倒くさいのか"
+    href: "/posts/why-notion-cms-is-painful-for-astro/"
+faq:
+  - q: "Astro Fuwari と WordPress の大きな違いは何ですか？"
+    a: "Astro Fuwari はMarkdownを中心に静的HTMLへ変換する運用で、AIやGitと接続しやすい点が特徴です。WordPressは管理画面中心で、非技術者でも扱いやすい反面、変換や運用の自由度に制約が出ることがあります。"
+  - q: "AI時代のブログ運用でMarkdownが有利な理由は何ですか？"
+    a: "Markdownはテキストとして扱いやすく、AIが読み書きしやすい形式です。記事、図解、メタ情報、構造化データの更新を自動化しやすくなります。"
 draft: false
 ---
 

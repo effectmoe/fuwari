@@ -3,8 +3,20 @@ title: "Astro でチームブログを運用するための 4 つの選択肢：
 published: 2026-06-10
 description: "Astro + Obsidian の弱点は「チームでの共同編集」と言われる。しかし Astro/Markdown の根幹を変えずに、Web エディタ・ヘッドレス CMS・自前管理画面の 4 階層を段階導入することで、個人ブログからチーム運用まで途切れなくスケールできる。"
 image: "./cover.jpg"
+thumbnail: "./cover.jpg"
+imageAlt: "AstroとMarkdownのチームブログ運用を4階層で整理し、共同編集と承認フローを示す図解アイキャッチ"
 tags: ["Astro", "ヘッドレス CMS", "チーム運用", "Keystatic", "Cloudflare Access"]
 category: "Tech"
+relatedLinks:
+  - label: "Astro × Fuwari で作る一気通貫ブログ運用"
+    href: "/posts/astro-fuwari-workflow-vs-wordpress/"
+  - label: "なぜ Notion を CMS にすると面倒くさいのか"
+    href: "/posts/why-notion-cms-is-painful-for-astro/"
+faq:
+  - q: "Astroでチームブログは運用できますか？"
+    a: "可能です。Astro本体ではなく、執筆UI、レビュー、権限管理のレイヤーをどう足すかが論点になります。"
+  - q: "個人ブログからチーム運用へ移るとき、最初に見るべき点は何ですか？"
+    a: "MarkdownとGitの根幹を保ったまま、Webエディタやgit-backed CMSを段階的に足せるかを見るのが安全です。"
 draft: false
 ---
 

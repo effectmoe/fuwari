@@ -4,8 +4,20 @@ published: 2026-06-15
 description: "DFB（分解 → 枠の入れ替え → 組み立て）は、シュ コウメイが提唱するAI時代に必要な構造化メソッド。経験をAIに渡せる形に翻訳する3ステップ。"
 image: "./cover.jpg"
 thumbnail: "./thumb.jpg"
+imageAlt: "DFB構造化メソッドの分解・枠の入れ替え・組み立てをAI時代の思考法として示すアイキャッチ"
 tags: ["DFB", "構造化思考", "AI活用"]
 category: "AI"
+service: "ai-central"
+relatedLinks:
+  - label: "構造化ペディア"
+    href: "/structurepedia/"
+  - label: "AI時代に『シニア有利』の本質は構造化能力にある"
+    href: "/posts/ai-era-senior-structuring-power/"
+faq:
+  - q: "DFBとは何ですか？"
+    a: "Decompose、Frame、Buildの頭文字で、経験や課題を分解し、枠を入れ替え、AIに渡せる形へ組み立てる構造化メソッドです。"
+  - q: "DFBはプロンプト術と何が違いますか？"
+    a: "単発の書き方ではなく、経験や判断材料をAIが扱える構造に変換する考え方です。プロンプトを書く前の整理に近い位置づけです。"
 manga_tldr:
   - src: "/dfb/cover.jpg"
     caption: "DFB構造化メソッドを4コマで象徴する漫画。推論はAIに、構造化は人間に、という核心を視覚化しています。"

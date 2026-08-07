@@ -3,8 +3,20 @@ title: "Obsidian でブログ運用するときのモバイル問題：Obsidian 
 published: 2026-06-10
 description: "Obsidian + Astro でブログ運用すると「モバイル編集が弱い」問題に直面する。Notion 移行を考える前に、月 10 ドルの Obsidian Sync が何を解決するのか、なぜパイプラインの入口を広げる設計が美しいのかを解説する。"
 image: "./cover.jpg"
+thumbnail: "./cover.jpg"
+imageAlt: "Obsidian SyncでモバイルからAstroブログ運用へつなげるワークフローを示す図解アイキャッチ"
 tags: ["Obsidian", "Obsidian Sync", "Astro", "モバイル運用", "ワークフロー"]
 category: "Tech"
+relatedLinks:
+  - label: "Obsidian × Claude でメモをアイデア源に変える3つの方法"
+    href: "/posts/obsidian-claude-idea-source/"
+  - label: "Astro × Fuwari で作る一気通貫ブログ運用"
+    href: "/posts/astro-fuwari-workflow-vs-wordpress/"
+faq:
+  - q: "Obsidian Sync はブログ運用に必須ですか？"
+    a: "必須ではありません。ただし、スマホからメモや下書きを追加できるため、Markdown中心のブログ運用を日常の思いつきまで広げやすくなります。"
+  - q: "Notionに移行するよりObsidian Syncを選ぶ理由は何ですか？"
+    a: "既存のMarkdown、Astro、Gitの流れを壊さず、入口だけをモバイルへ広げられるためです。変換ロスやCMS移行の負担を避けられます。"
 draft: false
 ---
 

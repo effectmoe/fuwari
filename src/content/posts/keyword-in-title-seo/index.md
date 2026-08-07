@@ -4,8 +4,10 @@ published: 2026-06-25
 description: "検索結果のタイトルに、検索された言葉は入っていますか？すでに上位の一歩手前にいるページは、タイトルを直すだけで順位とクリックを伸ばせます。Search Consoleだけでできる見つけ方を、やさしく解説します。"
 image: "./cover.jpg"
 thumbnail: "./thumb.jpg"
+imageAlt: "検索キーワードをタイトルに入れることでSEOとLLMOの両方を改善する考え方を示すブログアイキャッチ"
 tags: ["SEO", "LLMO", "タイトルタグ", "検索順位", "Search Console"]
 category: "Tech"
+service: "aicrawl"
 draft: false
 relatedLinks:
   - label: "SEO が消えて LLMO が左上に来た日（2026 マーケトレンドマップ）"

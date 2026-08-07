@@ -3,8 +3,20 @@ title: "なぜ Notion を CMS にすると面倒くさいのか：Astro Content 
 published: 2026-06-10
 description: "Notion を Astro ブログの CMS にしたくなる気持ちはわかる。けれど Astro Content Layer の仕組みを理解すると、Notion 経由が技術負債を増やす理由が見えてくる。Markdown ネイティブ運用の本質的な強さを技術視点で解説する。"
 image: "./cover.jpg"
+thumbnail: "./cover.jpg"
+imageAlt: "NotionをAstroブログのCMSにした場合の変換ロスとMarkdownネイティブ運用の違いを示す図解アイキャッチ"
 tags: ["Astro", "Notion", "CMS", "Markdown", "Content Collections"]
 category: "Tech"
+relatedLinks:
+  - label: "Astro × Fuwari で作る一気通貫ブログ運用"
+    href: "/posts/astro-fuwari-workflow-vs-wordpress/"
+  - label: "Astro でチームブログを運用するための4つの選択肢"
+    href: "/posts/astro-team-blog-collaboration-tiers/"
+faq:
+  - q: "NotionをCMSにすると必ず悪いのですか？"
+    a: "必ず悪いわけではありません。ただしAstroのContent LayerはMarkdownを直接扱う設計なので、Notionを挟むと変換ロスや運用の二重管理が起きやすくなります。"
+  - q: "Markdownネイティブ運用の利点は何ですか？"
+    a: "記事本文、frontmatter、Git、ビルド処理が同じテキスト形式でつながるため、AIによる編集や自動化、差分管理がしやすくなります。"
 draft: false
 ---
 

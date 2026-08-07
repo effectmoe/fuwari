@@ -35,9 +35,10 @@ interface Props {
 	lang?: string;
 	setOGTypeArticle?: boolean;
 	ogImage?: string; // 絶対URL（記事=カバー画像 / その他=未指定でデフォルト）
+	ogImageAlt?: string;
 }
 
-let { title, banner, description, lang, setOGTypeArticle, ogImage } =
+let { title, banner, description, lang, setOGTypeArticle, ogImage, ogImageAlt } =
 	Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
@@ -97,6 +98,7 @@ const canonicalURL = Astro.site
 // OG画像: 記事はカバー画像（ogImage prop）、それ以外はサイトデフォルト
 const ogImageURL = ogImage || `${siteUrl}og-image.jpg`;
 const metaDescription = description || pageTitle;
+const ogImageAltText = ogImageAlt || pageTitle;
 
 // --- 構造化データ JSON-LD: Organization + WebSite + Person（全ページ共通・LLMO の核） ---
 const organizationLd = {
@@ -292,7 +294,7 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={metaDescription}>
 		<meta property="og:image" content={ogImageURL}>
-		<meta property="og:image:alt" content={pageTitle}>
+		<meta property="og:image:alt" content={ogImageAltText}>
 		<meta property="og:locale" content="ja_JP">
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
@@ -306,6 +308,7 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={metaDescription}>
 		<meta name="twitter:image" content={ogImageURL}>
+		<meta name="twitter:image:alt" content={ogImageAltText}>
 
 		<meta name="theme-color" content={`oklch(0.70 0.14 ${siteConfig.themeColor.hue})`}>
 
