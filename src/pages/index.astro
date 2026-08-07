@@ -235,7 +235,7 @@ const aiCentralPricing = [
 		label: "まず記憶を作る",
 		price: "¥330,000",
 		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整えます。",
-		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "個人情報マスキング", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
+		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "個人情報マスキング", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
 		cta: "この構成で相談する",
 		icon: "material-symbols:memory-alt-outline",
 		popular: true,
@@ -245,7 +245,7 @@ const aiCentralPricing = [
 		label: "業務ツールとつなぐ",
 		price: "¥550,000",
 		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
-		features: ["AI セントラルの機能すべて", "AI セントラルの安全設計すべて", "外部ツール連携", "連携時の参照範囲整理", "期限・予定と接続", "類似案件検索"],
+		features: ["AI セントラルの機能すべて", "AI セントラルの安全設計すべて", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "外部ツール連携", "連携時の参照範囲整理", "期限・予定と接続", "類似案件検索"],
 		cta: "連携範囲を相談する",
 		icon: "material-symbols:hub-outline",
 		recommended: true,
@@ -255,11 +255,39 @@ const aiCentralPricing = [
 		label: "ローカルLLMで守る",
 		price: "¥1,320,000",
 		description: "顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
-		features: ["AI セントラル PLUS の機能すべて", "完全ローカル構成", "個人情報マスキング・権限設計", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
+		features: ["AI セントラル PLUS の機能すべて", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "完全ローカル構成", "個人情報マスキング・権限設計", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
 		cta: "セキュリティ前提で相談する",
 		icon: "material-symbols:shield-lock-outline",
 		secure: true,
 	},
+];
+
+const approvalSteps = [
+	{
+		step: "01",
+		title: "AIが下書きと整理を進める",
+		body: "必要な資料、過去の履歴、説明文のたたき台を、確認しやすい形にまとめます。",
+		icon: "material-symbols:edit-document-outline",
+	},
+	{
+		step: "02",
+		title: "承認トレイに止める",
+		body: "顧客へ出る文章や確定操作は、先生・担当者が確認する場所で止めます。",
+		icon: "material-symbols:rule-folder-outline",
+	},
+	{
+		step: "03",
+		title: "人が確認して決める",
+		body: "送信、確定、責任を伴う判断は、人間の承認後に進める運用へ分けます。",
+		icon: "material-symbols:verified-user-outline",
+	},
+];
+
+const approvalSafeguards = [
+	"AIが直接送らない",
+	"判断根拠を確認する",
+	"扱う情報を分ける",
+	"操作ログを残す",
 ];
 
 const topFaqs = [
@@ -289,7 +317,7 @@ const topFaqs = [
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
-		a: "いいえ。検索、整理、下書き、確認、分析はAIが先に進めますが、最終判断、送信、承認、責任を伴う判断は人間が担う設計にします。",
+		a: "いいえ。AIセントラルは、どのプランでも承認トレイを前提に設計します。検索、整理、下書き、確認材料づくりはAIが先に進めますが、顧客へ出る送信、確定操作、責任を伴う判断は、人間が確認して承認するまで進めない設計にします。",
 	},
 	{
 		q: "月額22,000円には何が含まれますか？",
@@ -547,6 +575,50 @@ const faqLd = {
 						<a class="pricing-note__secondary" href="#pricing">詳しい料金を見る</a>
 					</div>
 				</div>
+			</div>
+		</section>
+
+		<section class="approval-tray-section" id="approval-tray">
+			<div class="approval-tray-section__inner">
+				<div class="approval-tray-heading">
+					<span>APPROVAL TRAY</span>
+					<h2>「気をつけます」ではなく、送れない作りにする。</h2>
+					<p>
+						AIセントラルでは、どのプランでも、AIが勝手に送信・確定しない承認トレイを前提に設計します。
+						AIは下書き・整理・確認材料づくりを先に進めますが、顧客へ出る操作や責任を伴う判断は、人間が確認する場所で止めます。
+					</p>
+				</div>
+
+				<div class="approval-tray-flow" aria-label="承認トレイの流れ">
+					{approvalSteps.map((item, index) => (
+						<article class="approval-tray-step">
+							<div class="approval-tray-step__head">
+								<span>{item.step}</span>
+								<Icon name={item.icon} />
+							</div>
+							<h3>{item.title}</h3>
+							<p>{item.body}</p>
+							{index < approvalSteps.length - 1 && <Icon class="approval-tray-step__arrow" name="material-symbols:arrow-forward-rounded" />}
+						</article>
+					))}
+				</div>
+
+				<div class="approval-tray-policy">
+					<div>
+						<span>全プラン共通</span>
+						<strong>AIに任せる範囲と、人が承認する範囲を先に分ける。</strong>
+						<p>メール文、説明文、要約、確認リストなどはAIで準備できます。一方で、送信・確定・対外提出などは、業務ごとに人間確認の線を引いてから構築します。</p>
+					</div>
+					<ul>
+						{approvalSafeguards.map((item) => (
+							<li><Icon name="material-symbols:check-circle-outline" />{item}</li>
+						))}
+					</ul>
+				</div>
+
+				<p class="approval-tray-note">
+					※ 承認トレイは機能イメージです。受注後に業務内容と扱う情報の範囲を確認したうえで構築します。実績数値や事故防止件数を保証するものではありません。
+				</p>
 			</div>
 		</section>
 
@@ -1379,6 +1451,217 @@ const faqLd = {
 	.pricing-note__secondary {
 		border: 1px solid rgba(123, 88, 7, 0.34);
 		color: var(--primary);
+	}
+
+	.approval-tray-section {
+		border-top: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 78% 14%, rgba(109, 137, 91, 0.12), transparent 30%),
+			linear-gradient(180deg, #fbf8f4 0%, #ffffff 100%);
+		padding: clamp(66px, 8vw, 112px) 24px;
+	}
+
+	.approval-tray-section__inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.approval-tray-heading {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: clamp(28px, 5vw, 72px);
+		align-items: end;
+		margin-bottom: clamp(30px, 4vw, 52px);
+	}
+
+	.approval-tray-heading span {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		border: 1px solid rgba(109, 137, 91, 0.26);
+		border-radius: 999px;
+		background: rgba(109, 137, 91, 0.1);
+		padding: 8px 14px;
+		color: #52683f;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.approval-tray-heading h2 {
+		margin: 14px 0 0;
+		color: var(--effect-ink);
+		font-size: clamp(34px, 5vw, 72px);
+		font-weight: 950;
+		letter-spacing: -0.035em;
+		line-height: 1.05;
+	}
+
+	.approval-tray-heading p {
+		margin: 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(16px, 1.35vw, 19px);
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.approval-tray-flow {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+		align-items: stretch;
+	}
+
+	.approval-tray-step {
+		position: relative;
+		overflow: hidden;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 1.35rem;
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(239, 247, 237, 0.7)),
+			#ffffff;
+		padding: clamp(22px, 2.6vw, 32px);
+		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.06);
+	}
+
+	.approval-tray-step:nth-child(2) {
+		transform: translateY(14px);
+	}
+
+	.approval-tray-step:nth-child(3) {
+		transform: translateY(28px);
+		border-color: rgba(109, 137, 91, 0.45);
+	}
+
+	.approval-tray-step__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		margin-bottom: 28px;
+	}
+
+	.approval-tray-step__head span {
+		display: grid;
+		width: 48px;
+		aspect-ratio: 1;
+		place-items: center;
+		border-radius: 999px;
+		background: #fff4db;
+		color: #8b6609;
+		font-size: 14px;
+		font-weight: 950;
+	}
+
+	.approval-tray-step__head :global(svg) {
+		color: #6d895b;
+		font-size: 30px;
+	}
+
+	.approval-tray-step h3 {
+		margin: 0;
+		color: var(--effect-ink);
+		font-size: clamp(20px, 1.85vw, 28px);
+		font-weight: 950;
+		line-height: 1.28;
+	}
+
+	.approval-tray-step p {
+		margin: 12px 0 0;
+		color: var(--on-surface-variant);
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 1.75;
+	}
+
+	.approval-tray-step__arrow {
+		position: absolute;
+		top: 50%;
+		right: -18px;
+		z-index: 2;
+		color: var(--primary);
+		font-size: 32px;
+		transform: translateY(-50%);
+	}
+
+	.approval-tray-policy {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+		gap: 18px;
+		align-items: stretch;
+		margin-top: clamp(42px, 5vw, 72px);
+		border: 1px solid rgba(109, 137, 91, 0.24);
+		border-radius: 1.35rem;
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 247, 237, 0.78)),
+			#ffffff;
+		padding: clamp(22px, 3vw, 34px);
+		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.055);
+	}
+
+	.approval-tray-policy span {
+		display: inline-flex;
+		width: fit-content;
+		border-radius: 999px;
+		background: #6d895b;
+		padding: 8px 14px;
+		color: #ffffff;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+	}
+
+	.approval-tray-policy strong {
+		display: block;
+		margin-top: 14px;
+		color: var(--effect-ink);
+		font-size: clamp(23px, 2.5vw, 36px);
+		font-weight: 950;
+		line-height: 1.22;
+	}
+
+	.approval-tray-policy p {
+		margin: 12px 0 0;
+		color: var(--on-surface-variant);
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 1.82;
+	}
+
+	.approval-tray-policy ul {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.approval-tray-policy li {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.76);
+		padding: 12px 14px;
+		color: var(--effect-ink);
+		font-size: 14px;
+		font-weight: 900;
+	}
+
+	.approval-tray-policy li :global(svg) {
+		flex: 0 0 auto;
+		color: #6d895b;
+		font-size: 19px;
+	}
+
+	.approval-tray-note {
+		margin: 18px 0 0;
+		color: var(--on-surface-variant);
+		font-size: 13px;
+		font-weight: 650;
+		line-height: 1.65;
 	}
 
 	.lp-faq-section {
@@ -4975,6 +5258,44 @@ const faqLd = {
 
 		.pricing-note a {
 			width: 100%;
+		}
+
+		.approval-tray-section {
+			padding-inline: 18px;
+		}
+
+		.approval-tray-heading,
+		.approval-tray-flow,
+		.approval-tray-policy {
+			grid-template-columns: 1fr;
+		}
+
+		.approval-tray-heading {
+			align-items: start;
+			gap: 18px;
+		}
+
+		.approval-tray-heading h2 {
+			letter-spacing: -0.025em;
+		}
+
+		.approval-tray-step:nth-child(2),
+		.approval-tray-step:nth-child(3) {
+			transform: none;
+		}
+
+		.approval-tray-step__arrow {
+			display: none;
+		}
+
+		.approval-tray-policy ul {
+			grid-template-columns: 1fr;
+		}
+
+		.approval-tray-policy li {
+			justify-content: center;
+			border-radius: 1rem;
+			text-align: center;
 		}
 
 		.lp-faq-section,
