@@ -168,24 +168,6 @@ const breadcrumbLd = {
 					<Content />
 				</Markdown>
 
-				<section class="commercial-post-trust commercial-post-module" aria-label="この記事の制作方針">
-					<div class="commercial-post-trust__icon">
-						<Icon name="material-symbols:verified-user-outline-rounded" />
-					</div>
-					<div>
-						<span>EDITORIAL TRUST</span>
-						<h2>この記事の制作・確認について</h2>
-						<p>
-							この記事は {profileConfig.name} が編集・確認しています。AIを下書きや整理に使う場合でも、公開前の判断、表現、リンク、更新日は人間が確認します。
-						</p>
-						<nav aria-label="この記事の信頼性に関するリンク">
-							<a href="/author/">著者プロフィール</a>
-							<a href="/trust/">制作方針</a>
-							<a href="/changelog/">変更履歴</a>
-						</nav>
-					</div>
-				</section>
-
 				<ServiceCTA
 					tags={entry.data.tags}
 					category={entry.data.category}
@@ -526,78 +508,6 @@ const breadcrumbLd = {
 		padding: 26px 8px;
 	}
 
-	.commercial-post-trust {
-		display: grid;
-		grid-template-columns: auto minmax(0, 1fr);
-		gap: 18px;
-		border: 1px solid rgba(63, 111, 159, 0.28);
-		border-radius: 24px;
-		background:
-			radial-gradient(circle at 100% 0%, rgba(142, 125, 98, 0.16), transparent 34%),
-			linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(239, 246, 249, 0.88));
-		padding: clamp(20px, 3vw, 30px);
-	}
-
-	.commercial-post-trust__icon {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 56px;
-		height: 56px;
-		border-radius: 18px;
-		background: rgba(63, 111, 159, 0.12);
-		color: var(--post-accent-deep);
-	}
-
-	.commercial-post-trust__icon svg {
-		width: 30px;
-		height: 30px;
-	}
-
-	.commercial-post-trust span {
-		color: var(--post-accent);
-		font-size: 12px;
-		font-weight: 950;
-		letter-spacing: 0.12em;
-	}
-
-	.commercial-post-trust h2 {
-		margin: 8px 0 0;
-		color: var(--post-ink);
-		font-size: clamp(22px, 2.3vw, 30px);
-		font-weight: 950;
-		line-height: 1.28;
-	}
-
-	.commercial-post-trust p {
-		margin: 12px 0 0;
-		color: var(--post-muted);
-		font-size: 15px;
-		font-weight: 700;
-		line-height: 1.82;
-	}
-
-	.commercial-post-trust nav {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-top: 16px;
-	}
-
-	.commercial-post-trust a {
-		display: inline-flex;
-		align-items: center;
-		min-height: 36px;
-		border: 1px solid rgba(63, 111, 159, 0.28);
-		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.74);
-		padding: 0 12px;
-		color: var(--post-accent-deep);
-		font-size: 13px;
-		font-weight: 950;
-		text-decoration: none;
-	}
-
 	.commercial-post-ai-cta {
 		display: flex;
 		align-items: center;
@@ -731,10 +641,6 @@ const breadcrumbLd = {
 		.commercial-post-card {
 			border-radius: 20px;
 			padding: 22px 18px;
-		}
-
-		.commercial-post-trust {
-			grid-template-columns: 1fr;
 		}
 
 		.commercial-post-ai-cta {

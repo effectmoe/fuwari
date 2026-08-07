@@ -7,7 +7,6 @@ import swup from "@swup/astro";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeExternalLinks from "rehype-external-links"; /* External links → target="_blank" */
 import rehypeKatex from "rehype-katex";
@@ -160,29 +159,6 @@ export default defineConfig({
 						important: (x, y) => AdmonitionComponent(x, y, "important"),
 						caution: (x, y) => AdmonitionComponent(x, y, "caution"),
 						warning: (x, y) => AdmonitionComponent(x, y, "warning"),
-					},
-				},
-			],
-			[
-				rehypeAutolinkHeadings,
-				{
-					behavior: "append",
-					properties: {
-						className: ["anchor"],
-					},
-					content: {
-						type: "element",
-						tagName: "span",
-						properties: {
-							className: ["anchor-icon"],
-							"data-pagefind-ignore": true,
-						},
-						children: [
-							{
-								type: "text",
-								value: "#",
-							},
-						],
 					},
 				},
 			],
