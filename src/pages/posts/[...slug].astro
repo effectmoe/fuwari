@@ -40,18 +40,15 @@ const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
 const postImageAlt = entry.data.imageAlt || `${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`;
 const authorShortTitle = "AI・LLMO実装者";
 const authorProfileLinks = seoConfig.sameAs
-	.filter((href: string) => /street-academy|note\.com|linkedin/i.test(href))
+	.filter((href: string) => /street-academy/i.test(href))
 	.slice(0, 3)
-	.map((href: string) => ({
-		href,
-		label: href.includes("office.street-academy")
+	.map((href: string) => {
+		const label = href.includes("office.street-academy")
 			? "オフィスク"
-			: href.includes("street-academy")
-			? "ストアカ"
-			: href.includes("note.com")
-				? "note"
-				: "プロフィール",
-	}));
+			: "ストアカ";
+
+		return { href, label };
+	});
 const mangaPanels =
 	entry.data.manga_tldr?.length
 		? entry.data.manga_tldr
@@ -256,6 +253,25 @@ const breadcrumbLd = {
 
 				<RelatedLinks links={entry.data.relatedLinks} class="commercial-post-module" />
 				<ArticleFAQ faq={entry.data.faq} class="commercial-post-module" />
+
+				{entry.data.sourceLinks.length > 0 && (
+					<section class="commercial-post-sources commercial-post-module" aria-labelledby="source-links-title">
+						<div>
+							<span>BOOKMARK SOURCES</span>
+							<h2 id="source-links-title">参照した記事・ブックマーク</h2>
+							<p>
+								この記事を書くうえで参照した外部記事です。関連リンクと用語補足を確認したあとに、元になった論点もたどれるようにしています。
+							</p>
+						</div>
+						<ul>
+							{entry.data.sourceLinks.map((link) => (
+								<li>
+									<a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				)}
 
 				<div class="commercial-post-share commercial-post-share--bottom">
 					<ShareBar url={postUrl} title={entry.data.title} label="この記事をシェア" />
@@ -583,6 +599,86 @@ const breadcrumbLd = {
 		gap: 16px;
 	}
 
+	.commercial-post-sources {
+		border: 1px solid rgba(21, 55, 86, 0.18);
+		border-radius: 28px;
+		background: rgba(255, 255, 255, 0.82);
+		padding: 24px;
+		box-shadow: 0 18px 42px rgba(21, 55, 86, 0.08);
+	}
+
+	.commercial-post-sources > div {
+		margin-bottom: 16px;
+	}
+
+	.commercial-post-sources span {
+		display: block;
+		margin-bottom: 6px;
+		color: var(--post-accent);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.14em;
+	}
+
+	.commercial-post-sources h2 {
+		margin: 0;
+		color: var(--post-ink);
+		font-size: clamp(22px, 3vw, 32px);
+		font-weight: 950;
+		line-height: 1.25;
+	}
+
+	.commercial-post-sources p {
+		margin: 12px 0 0;
+		color: var(--post-muted);
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 1.8;
+	}
+
+	.commercial-post-sources ul {
+		display: grid;
+		gap: 10px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.commercial-post-sources li {
+		margin: 0;
+	}
+
+	.commercial-post-sources a {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		border: 1px solid rgba(21, 55, 86, 0.12);
+		border-radius: 16px;
+		background: rgba(237, 242, 247, 0.78);
+		padding: 12px 14px;
+		color: #173b63;
+		font-size: 15px;
+		font-weight: 850;
+		line-height: 1.55;
+		text-decoration: none;
+		transition:
+			transform 0.2s ease,
+			border-color 0.2s ease,
+			background 0.2s ease;
+	}
+
+	.commercial-post-sources a::after {
+		content: "↗";
+		flex: 0 0 auto;
+		margin-left: auto;
+	}
+
+	.commercial-post-sources a:hover {
+		border-color: rgba(46, 111, 115, 0.36);
+		background: rgba(255, 255, 255, 0.96);
+		transform: translateY(-1px);
+	}
+
 	.commercial-post-resource {
 		display: flex;
 		flex-direction: column;
@@ -788,6 +884,17 @@ const breadcrumbLd = {
 		.commercial-post-card {
 			border-radius: 20px;
 			padding: 22px 18px;
+		}
+
+		.commercial-post-sources {
+			border-radius: 22px;
+			padding: 18px;
+		}
+
+		.commercial-post-sources a {
+			align-items: flex-start;
+			font-size: 14px;
+			padding: 12px;
 		}
 
 		.commercial-post-ai-cta {

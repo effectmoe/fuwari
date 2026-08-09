@@ -42,6 +42,13 @@ const postsCollection = defineCollection({
 			href: z.string(),
 		})).optional().default([]),
 
+		/* 参照した外部記事・ブックマーク。
+		   記事末で、関連リンク・FAQ の後に表示する。 */
+		sourceLinks: z.array(z.object({
+			label: z.string(),
+			href: z.string(),
+		})).optional().default([]),
+
 		/* 一覧サムネ隅のアイキャッチ文字バッジ（A案）。
 		   未指定なら tags[0] から自動。"none" で非表示。2026-06-14 */
 		badge: z.string().optional().default(""),

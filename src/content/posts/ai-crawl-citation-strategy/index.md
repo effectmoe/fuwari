@@ -17,6 +17,17 @@ relatedLinks:
     href: "/posts/ai-era-senior-structuring-power/"
   - label: "DFB構造化メソッドとは何か"
     href: "/posts/dfb-method-introduction/"
+sourceLinks:
+  - label: "SEOは「キーワード検索」から「意思決定エンジン」へ、AI検索がもたらす10の変化（前編）"
+    href: "https://webtan.impress.co.jp/e/2026/07/06/52884"
+  - label: "ChatGPTで「Google離れ」は進んだ？利用データから見えたAI検索の実態【SEO Weekly Update】"
+    href: "https://www.suzukikenichi.com/blog/seo-weekly-update-july-2026-week-4/"
+  - label: "AI検索に効く「デジタルPR」とは。リンクではなくブランドメンションを増やす5つの方法"
+    href: "https://webtan.impress.co.jp/e/2026/07/27/53012"
+  - label: "「AI SEO」「GEO」「AEO」「LLMO」で今やること・判断の尺度を専門家2者が教えてくれた【SEOまとめ】"
+    href: "https://webtan.impress.co.jp/e/2026/07/17/52973"
+  - label: "AIでクリックは減った？いま狙うべき「質の高いコンテンツ」とは？10個のQ&Aで理解するAI＋SEO【2026年版】"
+    href: "https://webtan.impress.co.jp/e/2026/05/11/52589"
 faq:
   - q: "AI検索でSEOは不要になりますか？"
     a: "不要にはなりません。ただし、検索順位だけを見ていればよい状態ではなくなります。AIが候補を要約し、比較し、推薦する前段階を見る必要があります。"
@@ -301,11 +312,3 @@ EFFECTでは、この問題を扱うために、AI流入とAI回答への登場�
 この順番で進めるためのサービスです。
 
 詳しい内容は [AI CRAWL / AI CITATION のページ](/aicrawl/) にまとめています。
-
-## 参照した記事・ブックマーク
-
-- [SEOは「キーワード検索」から「意思決定エンジン」へ、AI検索がもたらす10の変化（前編）](https://webtan.impress.co.jp/e/2026/07/06/52884)
-- [ChatGPTで「Google離れ」は進んだ？利用データから見えたAI検索の実態【SEO Weekly Update】](https://www.suzukikenichi.com/blog/seo-weekly-update-july-2026-week-4/)
-- [AI検索に効く「デジタルPR」とは。リンクではなくブランドメンションを増やす5つの方法](https://webtan.impress.co.jp/e/2026/07/27/53012)
-- [「AI SEO」「GEO」「AEO」「LLMO」で今やること・判断の尺度を専門家2者が教えてくれた【SEOまとめ】](https://webtan.impress.co.jp/e/2026/07/17/52973)
-- [AIでクリックは減った？ いま狙うべき「質の高いコンテンツ」とは？ 今すぐ学ぶべき事柄は？ 10個のQ&Aで理解するAI＋SEO【2026年版】](https://webtan.impress.co.jp/e/2026/05/11/52589)
