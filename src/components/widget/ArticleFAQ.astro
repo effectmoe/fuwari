@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import { url } from "../../utils/url-utils";
 
 interface Props {
 	faq?: { q: string; a: string }[];
@@ -48,10 +47,6 @@ const faqLd =
             ))}
         </div>
 
-        <a href={url('/faq/')} class="inline-flex items-center gap-1 mt-4 text-sm text-[var(--primary)] font-medium hover:underline">
-            もっと詳しい用語集・よくある質問を見る
-            <Icon name="material-symbols:arrow-forward-rounded" class="text-[1rem]" />
-        </a>
     </div>
 )}
 
