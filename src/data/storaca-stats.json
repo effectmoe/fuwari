@@ -1,18 +1,26 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 232,
-  "studentsTaught": 527,
-  "repeatStudents": 299,
-  "repeatRate": 56.7,
-  "sessionsTaught": 507,
-  "salesTotal": 2448450,
+  "reviewCount": 233,
+  "studentsTaught": 531,
+  "repeatStudents": 302,
+  "repeatRate": 56.9,
+  "sessionsTaught": 510,
+  "salesTotal": 2470550,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月9日",
-  "updatedAt": "2026-08-08T21:00:21.393Z",
+  "periodEnd": "2026年8月10日",
+  "updatedAt": "2026-08-09T21:00:20.364Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "ChatGPT Codex速習講座｜独自機能とClaude連携が◎",
+      "reviewer": "女性 40代",
+      "date": "2026-08",
+      "rating": 5,
+      "headline": "Codexの基礎を学べる講座",
+      "text": "最近Codexに興味を持ちYouTubeや書籍を見てみましたが、自分の中に落とし込めず受講しました。先生のナビゲーションでCodexを実際に触りながら基礎的なこと、どんなことができるのか体感させていただきました。ご指導がとてもわかりやすくAIの可能性を知ることができたので、ここからさらに学んで自分の活動にも取り入れていきたいと思いました。"
+    },
     {
       "course": "最強AIツール！Claude Code バイブコーディング講座",
       "reviewer": "男性",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": null,
       "text": "パソコンの雑多な書類やメモや画像をaiが整理整頓してくれるかも、ぐらいの考えでしたが、授業を受けていくと、自分の思考の分解掃除なんだなと。aiへの伝達には、エンジニア脳が必要とも気づきました。シュ先生のわかりやすく優しい授業とみんなと学べることが最大の魅力です。aiの勉強仲間がいるっていいですよ🎶"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性 70代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "為になる",
-      "text": "いつもありがおうございます"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-08T21:01:00.844Z"
+  "testimonialsUpdatedAt": "2026-08-09T21:01:00.370Z"
 }
