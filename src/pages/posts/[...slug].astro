@@ -197,6 +197,28 @@ const breadcrumbLd = {
 					<Content />
 				</Markdown>
 
+				<RelatedLinks links={entry.data.relatedLinks} class="commercial-post-module" />
+				<ArticleFAQ faq={entry.data.faq} class="commercial-post-module" />
+
+				{entry.data.sourceLinks.length > 0 && (
+					<section class="commercial-post-sources commercial-post-module" aria-labelledby="source-links-title">
+						<div>
+							<span>BOOKMARK SOURCES</span>
+							<h2 id="source-links-title">参照した記事・ブックマーク</h2>
+							<p>
+								この記事を書くうえで参照した外部記事です。関連リンクと用語補足を確認したあとに、元になった論点もたどれるようにしています。
+							</p>
+						</div>
+						<ul>
+							{entry.data.sourceLinks.map((link) => (
+								<li>
+									<a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+								</li>
+							))}
+						</ul>
+					</section>
+				)}
+
 				<section class="commercial-post-author-box commercial-post-module" aria-label="著者プロフィール">
 					<img src="/ai-agent-course/tony-portrait.jpg" alt={`${profileConfig.name}のプロフィール写真`} loading="lazy" />
 					<div>
@@ -250,28 +272,6 @@ const breadcrumbLd = {
 						<a href="/#contact">無料相談する</a>
 					</div>
 				</div>
-
-				<RelatedLinks links={entry.data.relatedLinks} class="commercial-post-module" />
-				<ArticleFAQ faq={entry.data.faq} class="commercial-post-module" />
-
-				{entry.data.sourceLinks.length > 0 && (
-					<section class="commercial-post-sources commercial-post-module" aria-labelledby="source-links-title">
-						<div>
-							<span>BOOKMARK SOURCES</span>
-							<h2 id="source-links-title">参照した記事・ブックマーク</h2>
-							<p>
-								この記事を書くうえで参照した外部記事です。関連リンクと用語補足を確認したあとに、元になった論点もたどれるようにしています。
-							</p>
-						</div>
-						<ul>
-							{entry.data.sourceLinks.map((link) => (
-								<li>
-									<a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
-								</li>
-							))}
-						</ul>
-					</section>
-				)}
 
 				<div class="commercial-post-share commercial-post-share--bottom">
 					<ShareBar url={postUrl} title={entry.data.title} label="この記事をシェア" />
