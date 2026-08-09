@@ -58,6 +58,9 @@ relatedLinks:
     href: "/posts/"
   - label: ""
     href: "/posts/"
+sourceLinks:
+  - label: ""
+    href: "https://"
 faq:
   - q: ""
     a: ""
@@ -75,6 +78,7 @@ SEO/LLMO guardrails:
 - image と thumbnail は別アスペクト比で作成し、imageAlt を具体的に書く。
 - 外部出典リンクを1件以上、内部リンクを2件以上入れる。
 - FAQは2問以上。記事末の ArticleFAQ が FAQPage JSON-LD になります。
+- 記事FAQの下に総合FAQへの「もっと詳しい用語集・よくある質問を見る」のような導線を置かない。総合FAQに記事固有FAQがない場合は誤誘導になります。
 - 自社商品は記事の結論後に自然な導線として置き、本文全体を商品紹介だけにしない。
 - 公開前に pnpm run audit:posts と pnpm build を通す。
 -->
