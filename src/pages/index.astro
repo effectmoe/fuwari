@@ -78,7 +78,7 @@ const caseCards = [
 	{
 		kicker: "CASE 03",
 		title: "人が承認するAI運用へ",
-		before: "AIに任せる範囲が曖昧で、現場が使いにくい",
+		before: "AIがどこまで進めてよいか曖昧で、現場が使いにくい",
 		after: "下書き・整理・検索はAI、判断と送信は人に分ける",
 		href: "#contact",
 		icon: "material-symbols:verified-user-outline",
@@ -114,7 +114,7 @@ const systemMap = [
 	{
 		step: "02",
 		title: "AI化のボトルネックを抽出する",
-		body: "どの情報をAIに参照させ、どこに人の承認を残すべきかを切り分けます。",
+		body: "AIに見せる情報と、人が確認してから進める操作を切り分けます。",
 		icon: "material-symbols:account-tree-outline",
 		tone: "teal",
 	},
@@ -144,7 +144,7 @@ const decisionRows = [
 		issue: "社内情報をAIに覚えさせたい",
 		first: "無料相談",
 		next: "AIセントラル",
-		reason: "扱う情報の機密度と、人が承認する範囲を設計してから構築する。",
+		reason: "扱う情報の機密度と、送信・確定前に人が確認する流れを設計してから構築する。",
 	},
 	{
 		issue: "顧客情報・個人情報を扱う業務を速くしたい",
@@ -234,7 +234,7 @@ const aiCentralPricing = [
 		name: "AI セントラル",
 		label: "まず記憶を作る",
 		price: "¥330,000",
-		description: "社内資料・顧客情報・対応履歴・FAQを、AIが参照できる記憶基盤として整えます。",
+		description: "社内資料・顧客情報・対応履歴・FAQ・メッセージ履歴を、AIが参照できる記憶基盤として整えます。",
 		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "個人情報マスキング", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
 		cta: "この構成で相談する",
 		icon: "material-symbols:memory-alt-outline",
@@ -284,10 +284,10 @@ const approvalSteps = [
 ];
 
 const approvalSafeguards = [
-	"AIが直接送らない",
-	"判断根拠を確認する",
-	"扱う情報を分ける",
-	"操作ログを残す",
+	"送信前に人が確認",
+	"根拠を見て判断",
+	"見せる情報を選ぶ",
+	"操作の記録を残す",
 ];
 
 const topFaqs = [
@@ -305,7 +305,7 @@ const topFaqs = [
 	},
 	{
 		q: "AIの記憶とは、何を覚えさせることですか？",
-		a: "社内資料、顧客情報、対応履歴、FAQ、判断基準などを、AIが参照できる形に整理することです。AIに勝手に記憶させるのではなく、どの情報を見てよいか、どの範囲で使うかを設計します。",
+		a: "社内資料、顧客情報、対応履歴、FAQ、判断基準に加えて、メールやチャットなどのメッセージのやり取りを時系列で整理し、AIが参照できる形にすることです。AIに勝手に記憶させるのではなく、どの情報を見てよいか、どの範囲で使うかを設計します。",
 	},
 	{
 		q: "類似検索では何ができますか？",
@@ -353,7 +353,7 @@ const faqLd = {
 
 <LandingLayout
 	title="effect.moe｜記憶を持ったAIを社内の中枢へ組み込むAIシステム"
-	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQを、管理された環境でAIが参照できる社内基盤へ整えます。"
+	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、管理された環境でAIが参照できる社内基盤へ整えます。"
 	ogImage="/lp/generated/bright-japanese-ai-consulting-hero.png"
 >
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
@@ -398,7 +398,7 @@ const faqLd = {
 				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI CENTRAL AFTER INSTALLATION</p>
 				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">AIが参照する記憶と、人が判断する境界を設計する。</h2>
 				<p class="mt-5 max-w-3xl text-base leading-relaxed text-75">
-					社内資料・顧客情報・対応履歴・FAQを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが必要な情報を探し、整理し、判断材料を用意することで、人間は判断・承認・方針決定・最終確認に集中します。
+					社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが必要な情報を探し、整理し、判断材料を用意することで、人間は判断・承認・方針決定・最終確認に集中します。
 				</p>
 			</div>
 			<div class="decision-map" aria-label="AIセントラル設計でAIが担う業務と人間が担う意思決定">
@@ -473,7 +473,7 @@ const faqLd = {
 				<div class="pricing-section__header">
 					<p>AI CENTRAL PRICING</p>
 					<h2>AIセントラルは、記憶の深さと安全性で価格が変わります。</h2>
-					<span>料金は、初期導入費用と月額コンサル費用の両方がかかります。カード内の金額は初期導入費用、月額 ¥22,000 は導入後6ヶ月の伴走・基本保守・チャット対応です。</span>
+					<span>まず、3つのプランから初期導入費用を選びます。システムが出来上がった後は、現場で使える状態に定着させるための伴走費用として、月額 ¥22,000 が6ヶ月間だけ発生します。</span>
 				</div>
 
 				<div class="pricing-clarity-grid" aria-label="料金表示の前提">
@@ -483,9 +483,9 @@ const faqLd = {
 						<small>社内資料や顧客情報をAIが参照できる土台を作る費用です。</small>
 					</div>
 					<div>
-						<span>導入後に含むもの</span>
-						<strong>6ヶ月伴走・基本保守・チャット対応</strong>
-						<small>導入して終わりではなく、現場で使える状態まで伴走します。</small>
+						<span>導入後6ヶ月だけ発生するもの</span>
+						<strong>月額 ¥22,000 の伴走・基本保守・チャット対応</strong>
+						<small>システム完成後、現場で使える状態まで半年間伴走します。</small>
 					</div>
 					<div>
 						<span>始め方</span>
@@ -505,7 +505,7 @@ const faqLd = {
 						<strong>銀行振込</strong>
 					</div>
 					<div>
-						<span>月額費用</span>
+						<span>導入後6ヶ月の伴走費用</span>
 						<strong>クレジットカード払い</strong>
 					</div>
 				</div>
@@ -515,12 +515,12 @@ const faqLd = {
 						<Icon name="material-symbols:support-agent" />
 					</div>
 					<div>
-						<span>全プラン共通で必要な月額コンサル費用</span>
+						<span>システム完成後に6ヶ月限定で必要な伴走費用</span>
 						<div class="pricing-support__price-row">
 							<strong>月額 ¥22,000</strong>
-							<em>6ヶ月伴走</em>
+							<em>6ヶ月限定</em>
 						</div>
-						<p>初期導入費用とは別に、隔週90分の伴走コンサル、基本保守、チャット対応を半年間提供します。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
+						<p>初期導入費用とは別に、システムが出来上がった後の伴走費用として、隔週90分の伴走コンサル、基本保守、チャット対応を6ヶ月間提供します。作って終わりではなく、業務に定着するまで一緒に育てます。</p>
 					</div>
 				</div>
 
@@ -573,7 +573,7 @@ const faqLd = {
 				</div>
 
 				<div class="pricing-note">
-					<p>表示は税込・初期導入費用の目安です。導入時は、各プランの初期導入費用と、全プラン共通の月額コンサル費用 ¥22,000（6ヶ月）の両方がかかります。初回費用は銀行振込、月額費用はクレジットカード払いです。</p>
+					<p>表示は税込・初期導入費用の目安です。導入時は、各プランの初期導入費用がかかります。その後、システム完成後の伴走費用として、全プラン共通で月額 ¥22,000 が6ヶ月間だけ発生します。初回費用は銀行振込、伴走費用はクレジットカード払いです。</p>
 					<div>
 						<a class="pricing-note__primary" href={consultationHref}>無料相談で見積もる</a>
 						<a class="pricing-note__secondary" href="#pricing">詳しい料金を見る</a>
@@ -610,8 +610,8 @@ const faqLd = {
 				<div class="approval-tray-policy">
 					<div>
 						<span>全プラン共通</span>
-						<strong>AIに任せる範囲と、人が承認する範囲を先に分ける。</strong>
-						<p>メール文、説明文、要約、確認リストなどはAIで準備できます。一方で、送信・確定・対外提出などは、業務ごとに人間確認の線を引いてから構築します。</p>
+						<strong>AIが下書きし、人が確認してから外へ出す。</strong>
+						<p>メール文、説明文、要約、確認リストなどはAIが準備できます。ただし、送信・確定・対外提出は人が確認してから進めます。AIを便利に使いながら、勝手に外へ出ない運用にします。</p>
 					</div>
 					<ul>
 						{approvalSafeguards.map((item) => (
@@ -874,6 +874,8 @@ const faqLd = {
 	}
 
 	.pricing-section__inner {
+		display: flex;
+		flex-direction: column;
 		max-width: 1280px;
 		margin: 0 auto;
 	}
@@ -5184,17 +5186,24 @@ const faqLd = {
 			padding-inline: 18px;
 		}
 
+		.pricing-section__header {
+			order: 1;
+		}
+
 		.pricing-clarity-grid {
 			grid-template-columns: 1fr;
+			order: 4;
 		}
 
 		.pricing-payment-row {
 			grid-template-columns: 1fr;
+			order: 5;
 		}
 
 		.pricing-support {
 			grid-template-columns: 1fr;
 			border-radius: 1.1rem;
+			order: 3;
 		}
 
 		.pricing-security-note {
@@ -5202,6 +5211,7 @@ const faqLd = {
 			grid-template-columns: 1fr !important;
 			gap: 16px;
 			border-radius: 1.1rem;
+			order: 6;
 			text-align: left;
 		}
 
@@ -5253,6 +5263,7 @@ const faqLd = {
 
 		.pricing-cards {
 			grid-template-columns: 1fr;
+			order: 2;
 		}
 
 		.pricing-card {
@@ -5271,6 +5282,7 @@ const faqLd = {
 
 		.pricing-flow {
 			grid-template-columns: 1fr;
+			order: 7;
 		}
 
 		.pricing-flow > :global(svg) {
@@ -5282,6 +5294,7 @@ const faqLd = {
 			align-items: stretch;
 			border-radius: 1.4rem;
 			flex-direction: column;
+			order: 8;
 			padding: 20px;
 		}
 

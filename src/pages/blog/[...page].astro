@@ -24,6 +24,30 @@ const topTags = Array.from(new Set(posts.flatMap((post) => post.data.tags ?? [])
 
 const blogDescription =
 	"シュ コウメイによるAI開発・LLMO対策・知識管理・構造化の実装ノート。effect.moe の商用サイト内ブログです。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const blogUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
+const blogLd = {
+	"@context": "https://schema.org",
+	"@type": "Blog",
+	"@id": `${blogUrl}#blog`,
+	name: "effect.moe Blog",
+	description: blogDescription,
+	url: blogUrl,
+	inLanguage: "ja-JP",
+	publisher: { "@id": `${siteUrl}#organization` },
+	author: { "@id": `${siteUrl}#person` },
+	blogPost: posts.map((post) => ({
+		"@type": "BlogPosting",
+		"@id": new URL(getPostUrlBySlug(post.slug), siteUrl).toString() + "#article",
+		headline: post.data.title,
+		description: post.data.description,
+		url: new URL(getPostUrlBySlug(post.slug), siteUrl).toString(),
+		datePublished: formatDateToYYYYMMDD(post.data.published),
+		dateModified: formatDateToYYYYMMDD(post.data.updated || post.data.published),
+		author: { "@id": `${siteUrl}#person` },
+		publisher: { "@id": `${siteUrl}#organization` },
+	})),
+};
 
 const thumbnailPositions: Record<string, string> = {
 	"obsidian-claude-idea-source": "center 88%",
@@ -38,7 +62,8 @@ const getThumbnailPosition = (post: { id: string; slug: string }) =>
 const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id).replace(/\/$/, "")}.jpg`;
 ---
 
-<LandingLayout title="effect.moe Blog" description={blogDescription}>
+<LandingLayout title="effect.moe Blog" description={blogDescription} ogType="blog">
+	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(blogLd)}></script>
 	<section class="blog-hero">
 		<div class="blog-shell blog-hero__grid">
 			<div class="blog-hero__copy">
@@ -77,14 +102,14 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 							<span>最新記事</span>
 							<span>ブログ</span>
 						</div>
-						<span>{formatDateToYYYYMMDD(featured.data.published)}</span>
+						<time datetime={featured.data.published.toISOString()}>{formatDateToYYYYMMDD(featured.data.published)}</time>
 					</div>
 					{(featured.data.thumbnail || featured.data.image) && (
 						<div class="blog-featured__image" style={`--thumb-position: ${getThumbnailPosition(featured)}; --thumb-url: url(${getBlogThumbSrc(featured)});`}>
 							<img src={getBlogThumbSrc(featured)} alt={featured.data.imageAlt || featured.data.title} loading="eager" decoding="async" />
 						</div>
 					)}
-					<h2>{featured.data.title}</h2>
+					<h3>{featured.data.title}</h3>
 					<p>{featured.data.description}</p>
 					<div class="blog-featured__footer">
 						<span>{featured.data.category ?? "AI NOTE"}</span>
@@ -113,6 +138,7 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 						</div>
 						<div>
 							<p>{post.data.category ?? "Knowledge"}</p>
+							<time datetime={post.data.published.toISOString()}>{formatDateToYYYYMMDD(post.data.published)}</time>
 							<h3>{post.data.title}</h3>
 						</div>
 					</a>
@@ -492,6 +518,7 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 	}
 
 	.blog-featured__meta span,
+	.blog-featured__meta time,
 	.blog-featured__footer span,
 	.blog-article-card__top a,
 	.blog-article-card__top time {
@@ -503,7 +530,7 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 		text-decoration: none;
 	}
 
-	.blog-featured h2 {
+	.blog-featured h3 {
 		margin: 0 0 16px;
 		color: var(--blog-ink);
 		font-size: clamp(28px, 3.2vw, 44px);
@@ -628,6 +655,15 @@ const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id
 		font-weight: 900;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
+	}
+
+	.blog-pickup-card time {
+		display: inline-flex;
+		margin-bottom: 12px;
+		color: var(--blog-muted);
+		font-size: 12px;
+		font-weight: 850;
+		letter-spacing: 0.08em;
 	}
 
 	.blog-pickup-card h3,

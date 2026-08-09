@@ -38,6 +38,20 @@ const coverSource = entry.data.image || entry.data.thumbnail;
 const heroImageSrc = entry.data.image || entry.data.thumbnail || "";
 const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
 const postImageAlt = entry.data.imageAlt || `${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`;
+const authorShortTitle = "AI・LLMO実装者";
+const authorProfileLinks = seoConfig.sameAs
+	.filter((href: string) => /street-academy|note\.com|linkedin/i.test(href))
+	.slice(0, 3)
+	.map((href: string) => ({
+		href,
+		label: href.includes("office.street-academy")
+			? "オフィスク"
+			: href.includes("street-academy")
+			? "ストアカ"
+			: href.includes("note.com")
+				? "note"
+				: "プロフィール",
+	}));
 const mangaPanels =
 	entry.data.manga_tldr?.length
 		? entry.data.manga_tldr
@@ -90,15 +104,7 @@ const blogPostingLd = {
 	wordCount: remarkPluginFrontmatter.words,
 	url: postUrl,
 	isPartOf: { "@id": `${siteUrl}#website` },
-	author: {
-		"@type": "Person",
-		"@id": `${siteUrl}#person`,
-		name: profileConfig.name,
-		url: siteUrl,
-		jobTitle: seoConfig.jobTitle,
-		knowsAbout: seoConfig.knowsAbout,
-		sameAs: seoConfig.sameAs,
-	},
+	author: { "@id": `${siteUrl}#person` },
 	reviewedBy: { "@id": `${siteUrl}#person` },
 	publisher: { "@id": `${siteUrl}#organization` },
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
@@ -120,6 +126,7 @@ const breadcrumbLd = {
 <LandingLayout
 	title={entry.data.title}
 	description={entry.data.description || entry.data.title}
+	setOGTypeArticle
 	ogImage={ogImageUrl}
 	ogImageAlt={postImageAlt}
 >
@@ -144,9 +151,17 @@ const breadcrumbLd = {
 					<div class="commercial-post-meta">
 						<span>{entry.data.category || "Knowledge"}</span>
 						<time datetime={entry.data.published.toISOString()}>{formatDateToYYYYMMDD(entry.data.published)}</time>
+						{entry.data.updated && (
+							<time datetime={entry.data.updated.toISOString()}>更新日: {formatDateToYYYYMMDD(entry.data.updated)}</time>
+						)}
 						<span>{remarkPluginFrontmatter.minutes}分で読める</span>
 					</div>
 					<h1 data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title">{entry.data.title}</h1>
+					<div class="commercial-post-authorline">
+						<span>著者</span>
+						<a href="/author/" rel="author">{profileConfig.name}</a>
+						<small>{authorShortTitle}</small>
+					</div>
 					{entry.data.description && <p>{entry.data.description}</p>}
 					<div class="commercial-post-tags">
 						{(entry.data.tags || []).slice(0, 5).map((tag: string) => (
@@ -184,6 +199,21 @@ const breadcrumbLd = {
 				<Markdown class="commercial-post-markdown">
 					<Content />
 				</Markdown>
+
+				<section class="commercial-post-author-box commercial-post-module" aria-label="著者プロフィール">
+					<img src="/ai-agent-course/tony-portrait.jpg" alt={`${profileConfig.name}のプロフィール写真`} loading="lazy" />
+					<div>
+						<span>AUTHOR / EDITOR</span>
+						<h2>{profileConfig.name}</h2>
+						<p>{profileConfig.bio}</p>
+						<div>
+							<a href="/author/" rel="author">著者プロフィール</a>
+							{authorProfileLinks.map((link) => (
+								<a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+							))}
+						</div>
+					</div>
+				</section>
 
 				<ServiceCTA
 					tags={entry.data.tags}
@@ -328,6 +358,36 @@ const breadcrumbLd = {
 		letter-spacing: 0.04em;
 	}
 
+	.commercial-post-authorline {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px 10px;
+		margin-top: 18px;
+		color: var(--post-muted);
+		font-size: 14px;
+		font-weight: 800;
+	}
+
+	.commercial-post-authorline span {
+		color: var(--post-accent);
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.1em;
+	}
+
+	.commercial-post-authorline a {
+		color: var(--post-accent-deep);
+		font-weight: 950;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 4px;
+	}
+
+	.commercial-post-authorline small {
+		font-size: 13px;
+		font-weight: 850;
+	}
+
 	.commercial-post-hero h1 {
 		margin: 20px 0 0;
 		color: var(--post-ink);
@@ -445,6 +505,76 @@ const breadcrumbLd = {
 
 	.commercial-post-module {
 		margin-top: 34px;
+	}
+
+	.commercial-post-author-box {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: 18px;
+		align-items: start;
+		border: 1px solid rgba(46, 111, 115, 0.28);
+		border-radius: 22px;
+		background:
+			radial-gradient(circle at 95% 0%, rgba(63, 111, 159, 0.12), transparent 34%),
+			rgba(255, 255, 255, 0.86);
+		padding: 20px;
+		box-shadow: 0 16px 42px rgba(23, 32, 42, 0.06);
+	}
+
+	.commercial-post-author-box img {
+		width: 76px;
+		height: 76px;
+		border: 1px solid rgba(46, 111, 115, 0.22);
+		border-radius: 999px;
+		object-fit: cover;
+		object-position: center;
+		box-shadow: 0 12px 24px rgba(23, 32, 42, 0.08);
+	}
+
+	.commercial-post-author-box span {
+		display: block;
+		color: var(--post-accent);
+		font-size: 11px;
+		font-weight: 950;
+		letter-spacing: 0.13em;
+	}
+
+	.commercial-post-author-box h2 {
+		margin: 6px 0 0;
+		color: var(--post-ink);
+		font-size: clamp(22px, 2.1vw, 28px);
+		font-weight: 950;
+		line-height: 1.25;
+	}
+
+	.commercial-post-author-box p {
+		margin: 10px 0 0;
+		color: var(--post-muted);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1.75;
+	}
+
+	.commercial-post-author-box div div {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 14px;
+	}
+
+	.commercial-post-author-box a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 36px;
+		border: 1px solid rgba(46, 111, 115, 0.28);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.76);
+		padding: 0 12px;
+		color: var(--post-accent-deep);
+		font-size: 12px;
+		font-weight: 950;
+		text-decoration: none;
 	}
 
 	.commercial-post-resources {
@@ -668,6 +798,15 @@ const breadcrumbLd = {
 		.commercial-post-ai-cta div,
 		.commercial-post-ai-cta a {
 			width: 100%;
+		}
+
+		.commercial-post-author-box {
+			grid-template-columns: 1fr;
+		}
+
+		.commercial-post-author-box img {
+			width: 64px;
+			height: 64px;
 		}
 	}
 </style>

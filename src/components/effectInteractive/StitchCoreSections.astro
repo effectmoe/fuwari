@@ -14,7 +14,7 @@ const aiCentralClarityCards = [
 	{
 		label: "記憶の役割",
 		title: "AIの記憶は、勝手に覚え込ませることではありません。",
-		body: "社内資料・顧客情報・対応履歴・FAQ・判断基準を、AIが参照できる形に整理する設計です。どの情報を見てよいか、どの範囲で使うかを明確にします。",
+		body: "社内資料・顧客情報・対応履歴・FAQ・判断基準・メッセージ履歴を、AIが参照できる形に整理する設計です。どの情報を見てよいか、どの範囲で使うかを明確にします。",
 		icon: "material-symbols:memory-alt-outline",
 	},
 	{
@@ -305,7 +305,7 @@ const operationPanels = [
 		<div class="ai-central-clarity__heading">
 			<span>導入前に決めること</span>
 			<h2 id="ai-central-clarity-title">AIセントラルは、AIに丸投げする仕組みではありません。</h2>
-			<p>社内システムを棚卸したうえで、参照させる情報、AIに任せる範囲、人間が判断する境界を設計します。</p>
+			<p>社内システムを棚卸したうえで、AIに見せる情報、AIが下準備する作業、送信・確定前に人が確認する流れを設計します。</p>
 		</div>
 		<div class="ai-central-clarity__cards">
 			{aiCentralClarityCards.map((item) => (
@@ -331,7 +331,7 @@ const operationPanels = [
 				<div class="safe-ai-feature-card__copy">
 					<span class="safe-ai-feature-card__label">プラン差を明示</span>
 					<h3>クラウド型とローカル型を、情報の扱いで選び分ける。</h3>
-					<p>通常のAIセントラル / AIセントラル PLUSはクラウドAI型です。AIに不要な個人情報は伏せ、参照させる情報と人が承認する範囲を設計します。パーフェクトセキュアでは、その安全設計に加えて、外部クラウドに出せない情報を社内PC・社内ネットワーク内で扱える構成にします。</p>
+					<p>通常のAIセントラル / AIセントラル PLUSはクラウドAI型です。AIに不要な個人情報は伏せ、AIに見せる情報と人が確認してから進める操作を設計します。パーフェクトセキュアでは、その安全設計に加えて、外部クラウドに出せない情報を社内PC・社内ネットワーク内で扱える構成にします。</p>
 					<ul>
 						<li><span>全プラン共通</span><strong>個人情報を伏せる前提で設計</strong></li>
 						<li><span>通常 / PLUS</span><strong>クラウドAI型で小さく開始</strong></li>

@@ -19,3 +19,15 @@ Before submitting code, please run the appropriate commands to check for errors 
 pnpm check
 pnpm format
 ```
+
+## Blog Publishing Guardrail
+
+When creating or updating an effect.moe blog article, follow `docs/blog-llmo-template.md`.
+Every published blog post should include a clear external source or observation, author-visible context, internal links, related links, FAQ, distinct header/thumbnail images, and manga TL;DR when the article uses the commercial blog format.
+
+Before publishing blog changes, run:
+
+```bash
+pnpm audit:posts
+pnpm build
+```

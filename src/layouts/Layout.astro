@@ -26,6 +26,7 @@ import {
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
+import tonyAvatar from "../assets/images/tony-avatar.jpg";
 import "katex/dist/katex.css";
 
 interface Props {
@@ -34,11 +35,12 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	ogType?: string;
 	ogImage?: string; // 絶対URL（記事=カバー画像 / その他=未指定でデフォルト）
 	ogImageAlt?: string;
 }
 
-let { title, banner, description, lang, setOGTypeArticle, ogImage, ogImageAlt } =
+let { title, banner, description, lang, setOGTypeArticle, ogType, ogImage, ogImageAlt } =
 	Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
@@ -99,6 +101,8 @@ const canonicalURL = Astro.site
 const ogImageURL = ogImage || `${siteUrl}og-image.jpg`;
 const metaDescription = description || pageTitle;
 const ogImageAltText = ogImageAlt || pageTitle;
+const resolvedOgType = setOGTypeArticle ? "article" : ogType || "website";
+const personImageUrl = Astro.site ? new URL(tonyAvatar.src, Astro.site).toString() : tonyAvatar.src;
 
 // --- 構造化データ JSON-LD: Organization + WebSite + Person（全ページ共通・LLMO の核） ---
 const organizationLd = {
@@ -133,7 +137,7 @@ const personLd = {
 	alternateName: seoConfig.alternateName,
 	url: `${siteUrl}author/`,
 	mainEntityOfPage: `${siteUrl}author/`,
-	image: `${siteUrl}og-image.jpg`,
+	image: personImageUrl,
 	jobTitle: seoConfig.jobTitle,
 	description: profileConfig.bio,
 	worksFor: { "@id": `${siteUrl}#organization` },
@@ -296,11 +300,7 @@ baseGraphLd["@graph"].push(breadcrumbLd);
 		<meta property="og:image" content={ogImageURL}>
 		<meta property="og:image:alt" content={ogImageAltText}>
 		<meta property="og:locale" content="ja_JP">
-		{setOGTypeArticle ? (
-        <meta property="og:type" content="article" />
-        ) : (
-        <meta property="og:type" content="website" />
-        )}
+		<meta property="og:type" content={resolvedOgType}>
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image">

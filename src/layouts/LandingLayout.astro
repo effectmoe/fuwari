@@ -6,11 +6,13 @@ import Search from "../components/Search.svelte";
 interface Props {
 	title?: string;
 	description?: string;
+	ogType?: string;
+	setOGTypeArticle?: boolean;
 	ogImage?: string;
 	ogImageAlt?: string;
 }
 
-const { title, description, ogImage, ogImageAlt } = Astro.props;
+const { title, description, ogType, setOGTypeArticle, ogImage, ogImageAlt } = Astro.props;
 const currentPath = Astro.url.pathname;
 const brandRoutes = [
 	{ match: (path: string) => path.startsWith("/aicrawl"), label: "AI CRAWL", href: "/aicrawl/" },
@@ -88,7 +90,7 @@ const navItems = [
 ];
 ---
 
-<Layout title={title} description={description} ogImage={ogImage} ogImageAlt={ogImageAlt}>
+<Layout title={title} description={description} ogType={ogType} setOGTypeArticle={setOGTypeArticle} ogImage={ogImage} ogImageAlt={ogImageAlt}>
 	<Fragment slot="head">
 		<slot name="head" />
 	</Fragment>

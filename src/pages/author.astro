@@ -15,6 +15,7 @@ const storacaReviewUrl = "https://www.street-academy.com/steachers/271053#review
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 const monthlyConsultingUrl = "https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service";
 const notionSystemCourseUrl = "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584";
+const amazonLlmBookUrl = "https://www.amazon.co.jp/-/en/%E6%9C%B1-%E5%89%9B%E6%98%8E-ebook/dp/B0F7QQF392";
 const consultationHref = "/#contact";
 const featuredConsultingTestimonial = (stats.testimonials ?? []).find((t) =>
 	t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
@@ -43,6 +44,17 @@ const profileLd = {
 		},
 		knowsAbout: seoConfig.knowsAbout,
 		sameAs: seoConfig.sameAs,
+		subjectOf: [
+			{
+				"@type": "Book",
+				name: "グッバイSEO、ハローLLMO！〜AI検索時代のWebマーケティング",
+				url: amazonLlmBookUrl,
+				inLanguage: "ja",
+				author: {
+					"@id": `${siteUrl}#person`,
+				},
+			},
+		],
 	},
 };
 
@@ -303,6 +315,28 @@ const relatedLinks = [
 							</div>
 						))}
 					</dl>
+				</div>
+			</div>
+		</section>
+
+		<section class="author-section author-book" id="llm-book">
+			<div class="author-container author-book__panel">
+				<div class="author-book__copy">
+					<p class="author-eyebrow">BOOK / LLM PUBLICATION</p>
+					<h2>LLMの知見を、書籍としても公開しています。</h2>
+					<p>
+						AIやLLMを一過性のツールとしてではなく、Webマーケティングや情報設計へどう組み込むか。Amazonで販売中の「グッバイSEO、ハローLLMO！〜AI検索時代のWebマーケティング」では、AI検索時代にサイトがどう見つけられ、どう選ばれるかという視点をまとめています。
+					</p>
+				</div>
+				<div class="author-book__card">
+					<span>Amazon Kindle</span>
+					<strong>グッバイSEO、ハローLLMO！〜AI検索時代のWebマーケティング</strong>
+					<p>
+						プロフィール、講座実績、AIシステム実装に加えて、外部ストアで確認できる出版物として掲載します。
+					</p>
+					<a href={amazonLlmBookUrl} target="_blank" rel="noopener noreferrer" class="author-button author-button--primary">
+						Amazonで書籍を見る
+					</a>
 				</div>
 			</div>
 		</section>
@@ -918,6 +952,86 @@ const relatedLinks = [
 			background:
 				linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(244, 234, 214, 0.42)),
 				rgba(255, 255, 255, 0.48);
+		}
+
+		.author-book {
+			padding-top: 0;
+			background:
+				radial-gradient(circle at 10% 22%, rgba(86, 117, 95, 0.1), transparent 30%),
+				rgba(255, 255, 255, 0.34);
+		}
+
+		.author-book__panel {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
+			gap: clamp(22px, 4vw, 48px);
+			align-items: stretch;
+			border: 1px solid rgba(197, 178, 151, 0.62);
+			border-radius: 30px;
+			background:
+				linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(244, 234, 214, 0.54)),
+				#fffdfa;
+			padding: clamp(26px, 4vw, 48px);
+			box-shadow: 0 24px 64px rgba(62, 47, 25, 0.08);
+		}
+
+		.author-book__copy {
+			align-self: center;
+		}
+
+		.author-book__copy h2 {
+			margin: 0;
+			font-size: clamp(2rem, 3.4vw, 3.35rem);
+			line-height: 1.16;
+		}
+
+		.author-book__copy p:not(.author-eyebrow) {
+			max-width: 820px;
+			margin: 18px 0 0;
+			color: var(--author-muted);
+			font-size: 1.02rem;
+			font-weight: 650;
+			line-height: 1.85;
+		}
+
+		.author-book__card {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			border: 1px solid rgba(86, 117, 95, 0.26);
+			border-radius: 24px;
+			background:
+				linear-gradient(145deg, rgba(238, 246, 237, 0.86), rgba(255, 253, 250, 0.94)),
+				#fffdfa;
+			padding: clamp(22px, 3vw, 32px);
+		}
+
+		.author-book__card span {
+			width: fit-content;
+			border-radius: 999px;
+			background: rgba(86, 117, 95, 0.12);
+			padding: 8px 12px;
+			color: var(--author-green);
+			font-size: 0.75rem;
+			font-weight: 950;
+			letter-spacing: 0.12em;
+		}
+
+		.author-book__card strong {
+			display: block;
+			margin-top: 18px;
+			color: var(--author-ink);
+			font-size: clamp(1.45rem, 2.2vw, 2rem);
+			font-weight: 950;
+			line-height: 1.28;
+		}
+
+		.author-book__card p {
+			margin: 14px 0 24px;
+			color: var(--author-muted);
+			font-size: 0.98rem;
+			font-weight: 700;
+			line-height: 1.75;
 		}
 
 		.author-notion {
@@ -1681,6 +1795,7 @@ const relatedLinks = [
 			.author-origin__grid,
 			.author-evidence__grid,
 			.author-dfb__grid,
+			.author-book__panel,
 			.author-notion__panel,
 			.author-philosophy,
 			.author-responsibility__panel,
