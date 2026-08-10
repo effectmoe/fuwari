@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
   "reviewCount": 233,
-  "studentsTaught": 531,
-  "repeatStudents": 302,
-  "repeatRate": 56.9,
+  "studentsTaught": 532,
+  "repeatStudents": 303,
+  "repeatRate": 57,
   "sessionsTaught": 510,
-  "salesTotal": 2470550,
+  "salesTotal": 2476050,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月10日",
-  "updatedAt": "2026-08-09T21:00:20.364Z",
+  "periodEnd": "2026年8月11日",
+  "updatedAt": "2026-08-10T21:00:21.085Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -118,5 +118,5 @@
       "text": "パソコンの雑多な書類やメモや画像をaiが整理整頓してくれるかも、ぐらいの考えでしたが、授業を受けていくと、自分の思考の分解掃除なんだなと。aiへの伝達には、エンジニア脳が必要とも気づきました。シュ先生のわかりやすく優しい授業とみんなと学べることが最大の魅力です。aiの勉強仲間がいるっていいですよ🎶"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-09T21:01:00.370Z"
+  "testimonialsUpdatedAt": "2026-08-10T21:01:03.138Z"
 }
