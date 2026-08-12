@@ -1,18 +1,26 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 233,
-  "studentsTaught": 532,
-  "repeatStudents": 303,
+  "reviewCount": 234,
+  "studentsTaught": 535,
+  "repeatStudents": 305,
   "repeatRate": 57,
-  "sessionsTaught": 510,
-  "salesTotal": 2476050,
+  "sessionsTaught": 512,
+  "salesTotal": 2520850,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月12日",
-  "updatedAt": "2026-08-11T21:00:21.544Z",
+  "periodEnd": "2026年8月13日",
+  "updatedAt": "2026-08-12T21:00:35.531Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "ChatGPT Codex速習講座｜独自機能とClaude連携が◎",
+      "reviewer": "男性 60代",
+      "date": "2026-08",
+      "rating": 5,
+      "headline": "大変タメになる講座",
+      "text": "「ChatGPT Codex速習講座｜独自機能とClaude連携が◎」を受講しました。Codexを使い始めて3週間ほど、自己流で試行錯誤しながら使っていました。そのため、必要以上にクレジットと時間を使ってしまい、「なぜこんなに消費するのか」「どうすれば効率よく使えるのか」を知りたくて今回受講しました。講座では、さまざまな設定方法や使い方の工夫を教えていただき、やり方次第でクレジットの消費をかなり抑えながら、効率よく前に進められることがわかりました。自己流で遠回りしていた部分も整理され、とても参考になった有益な講座でした。これからCodexを使い始める方はもちろん、すでに使っているけれど時間やクレジットを使いすぎている方、CodexやAIの力を最大限に活用したい方にも、ぜひおすすめしたい先生・講座です。本日はありがとうございました。"
+    },
     {
       "course": "ChatGPT Codex速習講座｜独自機能とClaude連携が◎",
       "reviewer": "女性 40代",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "あなた専用Notionツールを講師がその場で作る超実践90分講座",
       "text": "今回は自分オリジナルのタスク・スケジュール管理についてのテンプレートを作成してもらいました！使っていますがとても使いやすいです！"
-    },
-    {
-      "course": "AIと共に生きる40代以上のスタディコミュニティ",
-      "reviewer": "その他 30代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": null,
-      "text": "パソコンの雑多な書類やメモや画像をaiが整理整頓してくれるかも、ぐらいの考えでしたが、授業を受けていくと、自分の思考の分解掃除なんだなと。aiへの伝達には、エンジニア脳が必要とも気づきました。シュ先生のわかりやすく優しい授業とみんなと学べることが最大の魅力です。aiの勉強仲間がいるっていいですよ🎶"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-11T21:01:01.994Z"
+  "testimonialsUpdatedAt": "2026-08-12T21:01:16.023Z"
 }
