@@ -1,0 +1,145 @@
+---
+// トップページから記事への導線。
+// 🔴 設置理由（2026-08-13）: 記事11本が Google に一度もクロールされていなかった。
+// 技術的欠陥はゼロ（noindex なし・sitemap 登録済み・Googlebot も 200）だったが、
+// 最も評価の高いトップページから記事へのリンクが1本も無く、クロール優先度が上がらなかった。
+// index.astro 側に latestPosts の定義だけが残り、描画されていない状態だった。
+import { getSortedPosts } from "../../utils/content-utils";
+
+const posts = (await getSortedPosts()).slice(0, 6);
+
+const fmt = (d: unknown) => {
+	const dt = d instanceof Date ? d : new Date(String(d));
+	return Number.isNaN(dt.getTime())
+		? ""
+		: `${dt.getFullYear()}.${String(dt.getMonth() + 1).padStart(2, "0")}.${String(dt.getDate()).padStart(2, "0")}`;
+};
+---
+
+{posts.length > 0 && (
+<section class="lp-posts-section" id="articles">
+	<div class="lp-posts-section__inner">
+		<div class="lp-posts-section__header">
+			<span>ARTICLES</span>
+			<h2>構造化とAI実装の記録。</h2>
+			<p>AIセントラルの設計思想、LLMO、構造化メソッド（DFB）について書いた記事です。</p>
+		</div>
+
+		<ul class="lp-posts-list">
+			{posts.map((post) => (
+				<li class="lp-posts-item">
+					<a href={`/posts/${post.slug}/`}>
+						<div class="lp-posts-item__meta">
+							<time datetime={String(post.data.published)}>{fmt(post.data.published)}</time>
+							{post.data.category && <span class="lp-posts-item__cat">{post.data.category}</span>}
+						</div>
+						<h3>{post.data.title}</h3>
+						{post.data.description && <p>{post.data.description}</p>}
+					</a>
+				</li>
+			))}
+		</ul>
+
+		<div class="lp-posts-cta">
+			<a href="/blog/">すべての記事を見る</a>
+		</div>
+	</div>
+</section>
+)}
+
+<style>
+	.lp-posts-section {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		background: var(--page-bg);
+		padding: clamp(3rem, 6vw, 5rem) 1.25rem;
+	}
+	.lp-posts-section__inner {
+		max-width: 68rem;
+		margin: 0 auto;
+	}
+	.lp-posts-section__header span {
+		display: block;
+		font-size: 0.75rem;
+		letter-spacing: 0.18em;
+		opacity: 0.55;
+		margin-bottom: 0.6rem;
+	}
+	.lp-posts-section__header h2 {
+		font-size: clamp(1.35rem, 3vw, 1.9rem);
+		font-weight: 500;
+		margin: 0 0 0.6rem;
+	}
+	.lp-posts-section__header p {
+		opacity: 0.7;
+		margin: 0 0 2rem;
+		line-height: 1.8;
+	}
+	.lp-posts-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+	}
+	.lp-posts-item a {
+		display: block;
+		height: 100%;
+		padding: 1.25rem 1.4rem;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 12px;
+		text-decoration: none;
+		color: inherit;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+	.lp-posts-item a:hover {
+		border-color: rgba(0, 0, 0, 0.28);
+		transform: translateY(-2px);
+	}
+	.lp-posts-item__meta {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		font-size: 0.75rem;
+		opacity: 0.6;
+		margin-bottom: 0.5rem;
+	}
+	.lp-posts-item__cat {
+		padding: 0.1rem 0.55rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+	}
+	.lp-posts-item h3 {
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.6;
+		margin: 0 0 0.5rem;
+	}
+	.lp-posts-item p {
+		font-size: 0.85rem;
+		line-height: 1.75;
+		opacity: 0.65;
+		margin: 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	.lp-posts-cta {
+		margin-top: 2rem;
+		text-align: center;
+	}
+	.lp-posts-cta a {
+		display: inline-block;
+		padding: 0.7rem 1.8rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		text-decoration: none;
+		color: inherit;
+		font-size: 0.9rem;
+		transition: opacity 0.2s ease;
+	}
+	.lp-posts-cta a:hover {
+		opacity: 0.65;
+	}
+</style>
