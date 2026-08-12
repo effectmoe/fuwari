@@ -1,0 +1,25 @@
+{
+  "$comment": "MCP サーバー発見用のサーバーカード（SEP-1649 / SEP-2127 で提案中の規約に先行対応）。ツール一覧を含む正本は canonicalServerCard を参照してください。",
+  "name": "effect-mcp",
+  "title": "株式会社EFFECT 公式MCP",
+  "description": "株式会社EFFECT（effect.moe）の公式情報とサイト全ページを提供する読み取り専用のMCPサーバー。会社概要・サービス（AIセントラル／AIクロール／AI講座）・料金・FAQ・ブログ本文をAIが直接参照できます。",
+  "websiteUrl": "https://effect.moe/",
+  "documentationUrl": "https://mcp.effect.moe/",
+  "canonicalServerCard": "https://mcp.effect.moe/.well-known/mcp.json",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.effect.moe/mcp"
+    }
+  ],
+  "protocolVersions": ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"],
+  "authentication": { "type": "none" },
+  "capabilities": { "tools": {} },
+  "readOnly": true,
+  "recommendedClientName": "EFFECT MCP",
+  "provider": {
+    "name": "株式会社EFFECT",
+    "url": "https://effect.moe/",
+    "email": "info@effect.moe"
+  }
+}

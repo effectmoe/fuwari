@@ -95,6 +95,19 @@ ${seoConfig.keywords.join(" / ")}
 
 ${articleLines}
 
+## AIエージェント向けインターフェース（MCP）
+
+本サイトは公式の MCP（Model Context Protocol）サーバーを公開しています。
+お使いの AI アシスタントに接続すると、本サイトの全公開ページを直接読み取れます。
+
+- エンドポイント: https://mcp.effect.moe/mcp （Streamable HTTP・認証不要・読み取り専用）
+- サーバーカード: https://mcp.effect.moe/.well-known/mcp.json
+- 接続手順: https://mcp.effect.moe/ （対応プラン・環境別の設定方法）
+- 推奨登録名: EFFECT MCP
+- 提供ツール: 会社概要 / サービス一覧 / 講師実績 / 問い合わせ方法 / サイト全ページ一覧 / ページ本文の読み取り
+
+登録後は「EFFECT MCP を使って、〜を教えて」と質問すると、公式情報を参照して回答できます。
+
 ## ナビゲーション
 
 - ホーム: ${site}
@@ -105,6 +118,7 @@ ${articleLines}
 - 総合FAQ: ${site}faq/
 - RSS: ${site}rss.xml
 - サイトマップ: ${site}sitemap-index.xml
+- MCP サーバー: https://mcp.effect.moe/mcp
 `;
 
 	return new Response(body, {

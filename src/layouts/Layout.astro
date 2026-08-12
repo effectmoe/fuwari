@@ -223,12 +223,39 @@ const aiCentralServiceLd = {
 		],
 	},
 };
+// AIエージェント向けの公式インターフェース（MCP サーバー）。
+// schema.org/WebAPI として宣言し、AI・クローラーが「このサイトには直接接続できる口がある」と
+// 機械的に認識できるようにする。実体・接続手順は https://mcp.effect.moe/
+const mcpServerLd = {
+	"@type": "WebAPI",
+	"@id": `${siteUrl}#mcp-server`,
+	name: "EFFECT MCP",
+	alternateName: "株式会社EFFECT 公式MCPサーバー",
+	description:
+		"effect.moe の公式 MCP（Model Context Protocol）サーバー。AIアシスタントに接続すると、会社概要・サービス（AIセントラル／AI CRAWL／AI講座）・料金・FAQ・ブログ本文など、サイトの全公開ページをAIが直接読み取れる。読み取り専用・認証不要。",
+	url: "https://mcp.effect.moe/mcp",
+	documentation: "https://mcp.effect.moe/",
+	provider: { "@id": `${siteUrl}#organization` },
+	isAccessibleForFree: true,
+	inLanguage: "ja",
+	potentialAction: {
+		"@type": "ConsumeAction",
+		target: {
+			"@type": "EntryPoint",
+			urlTemplate: "https://mcp.effect.moe/mcp",
+			contentType: "application/json",
+			httpMethod: "POST",
+			description:
+				"MCP Streamable HTTP エンドポイント。対応クライアントに『EFFECT MCP』の名前で登録して利用する。",
+		},
+	},
+};
 const baseGraphLd: {
 	"@context": string;
 	"@graph": Record<string, unknown>[];
 } = {
 	"@context": "https://schema.org",
-	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd],
+	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, mcpServerLd],
 };
 
 const breadcrumbLabelMap: Record<string, string> = {
