@@ -86,7 +86,7 @@ ${seoConfig.keywords.join(" / ")}
 ## 主要リファレンスページ（Pillar / Wiki）
 
 - [AIセントラル](${site}): 記憶を持ったAIを社内の中枢へ組み込むサービス。
-- [AI CRAWL](${new URL("/aicrawl/", site).toString()}): 自社サイトへのAI流入を読み解き、AIが立ち寄るサイトへ変える分析サービス。
+- [AI CRAWL](${new URL("/aicrawl/", site).toString()}): AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変えるサービス。
 - [構造化ペディア: DFB構造化メソッド大全](${new URL("/dfb-complete-guide/", site).toString()}): 提唱者シュ コウメイによる DFB（Decompose / Frame / Build）の完全リファレンス。AI時代の構造化思考プロトコルの全体像・系譜（構造化PG→OOP→GoF→DDD→DFB）・実装（Decompose 6要素 ↔ XMLタグ7種）・失敗パターン9種ライブラリ・5バリエーション（Q/S/I/M/R）を体系化したピラー記事。
 - [AIエージェント講座](${new URL("/ai-agent-course/", site).toString()}): Claude Code で自律エージェントを構築する6カリキュラム講座。
 - [総合FAQ](${new URL("/faq/", site).toString()}): AIセントラル、AIクロール、AI講座、料金、支払い、セキュリティ、運営者に関するFAQ。

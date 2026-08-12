@@ -38,7 +38,7 @@ const crawlChecks = [
 	},
 	{
 		title: "流入意図の推定",
-		body: "ユーザーがどのAIから、どんな動機でサイトへ来た可能性が高いかを読み解きます。",
+		body: "ユーザーがどのAIから、どんな動機でサイトへ来たのかを分解し、紹介された理由を特定します。",
 		items: ["比較検討", "料金確認", "課題解決", "専門性確認"],
 		icon: "material-symbols:account-tree-outline",
 	},
@@ -419,7 +419,7 @@ const cases = [
 const faqs = [
 	[
 		"AI CRAWLは何をするサービスですか？",
-		"ChatGPT、Claude、Perplexity、GeminiなどのAIから、どのページへ、どれくらいの頻度で流入しているかを見える化します。コンサル以上では、AIに紹介されやすくなるための改善戦略まで整理します。",
+		"ChatGPT、Claude、Perplexity、GeminiなどのAIから、どのページへ、どれくらいの頻度で来ているかを実測し、なぜ紹介されたのかを分解します。コンサル以上では、その紹介が一度きりで終わらず再現するよう、直すページと順番まで組み立てます。",
 	],
 	[
 		"どのAIから来たかまで分かりますか？",
@@ -435,7 +435,7 @@ const faqs = [
 	],
 	[
 		"3,300円プランとコンサルプランの違いは何ですか？",
-		"3,300円プランは週次＆月次の見える化レポートです。AI経由ユーザーの動機分析、改善方針の相談、AIに紹介されるための戦略整理はコンサル以上で対応します。",
+		"3,300円プランは週次＆月次で「来ているか」を実測するところまでです。なぜ紹介されたのかの分解、紹介が再現するための改善方針、その相談はコンサル以上で対応します。",
 	],
 	[
 		"AI CRAWL グロースはどのような方向けですか？",
@@ -478,7 +478,7 @@ const faqs = [
 
 <LandingLayout
 	title="AI CRAWL｜AI流入を分析し、改善戦略へ｜effect.moe"
-	description="AI CRAWLは、どのAIから、どのページへ、どれくらい流入しているかを分析し、ユーザー動機の推定とAIに紹介されるための改善戦略づくりへつなげるレポートサービスです。"
+	description="AI CRAWLは、AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変えるサービスです。どのAIから、どのページへ、どれくらい来ているかを整理し、なぜ紹介されたのかを分解して、次に直すページと順番まで示します。"
 >
 	<section class="aicrawl-hero">
 		<div class="aicrawl-container aicrawl-hero__grid">
@@ -488,9 +488,9 @@ const faqs = [
 					<Icon name="material-symbols:analytics-outline-rounded" />
 					<span>AI流入総合分析</span>
 				</div>
-				<h1>自社サイトへの<strong>AI流入を読み解き、<wbr />AIが立ち寄るサイトへ近づける。</strong></h1>
+				<h1>AIに紹介されるのを、<strong>偶然から<wbr />再現性に変える。</strong></h1>
 				<p>
-					AI CRAWLは、どのAIから、どのページへ、どれくらい流入しているかを整理し、ユーザーの動機を推定するレポートサービスです。レポートでは流入実績を可視化し、コンサル以上ではAIに受け入れられやすくするための改善戦略まで落とし込みます。
+					AI CRAWLは、AIが自社をどう扱っているかを実測し、紹介されるのを偶然から再現性に変えるサービスです。どのAIから、どのページへ、どれくらい来ているかを整理し、なぜ紹介されたのかを分解して、次に直すページと順番まで示します。レポートは納品物であり、目的は紹介され続ける状態をつくることです。
 				</p>
 				<div class="aicrawl-actions">
 					<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
@@ -639,7 +639,7 @@ const faqs = [
 		<div class="aicrawl-container">
 			<div class="aicrawl-section-head">
 				<p class="aicrawl-eyebrow">CHECK POINTS</p>
-				<h2>AI CRAWLで見るのは、AI流入の実績と、その先の改善戦略です。</h2>
+				<h2>AI CRAWLがつくるのは、紹介され続ける状態です。</h2>
 			</div>
 			<div class="crawl-check-grid">
 				{crawlChecks.map((check) => (
@@ -662,7 +662,7 @@ const faqs = [
 				<p class="aicrawl-eyebrow">DIAGNOSTIC MAP</p>
 				<h2>AI別、ページ別、頻度、動機。分けて見ると、伸ばすべき場所が見える。</h2>
 				<p>
-					「AI検索に出るか」だけでは、次の施策がぼやけます。AI CRAWLでは、AIからの流入実績を分解し、どのページを補強すれば未来のパフォーマンスを最大化できるかを見える化します。
+					「AI検索に出るか」だけでは、次の施策がぼやけます。AI CRAWLでは、AIからの流入実績を分解して紹介された理由を特定し、どのページを補強すれば同じ紹介が繰り返し起きるかを組み立てます。
 				</p>
 			</div>
 			<div class="signal-board">
@@ -844,7 +844,7 @@ const faqs = [
 				<p class="aicrawl-eyebrow">E-E-A-T / OPERATOR</p>
 				<h2>ストアカPro講師が、責任を持って運用します。</h2>
 				<p>
-					AI CRAWLは、単に数値を並べるレポートではありません。AI由来の接点がどこに生まれ、どのページへ人が流入し、次に何を直すべきかを、AI実装・LLMO対策・サイト改善の実務視点で読み解きます。
+					AI CRAWLは、単に数値を並べるレポートではありません。AI由来の接点がどこに生まれ、どのページへ人が流入したのかを分解し、その紹介が次も起きるように、次に直すべきページと順番を、AI実装・LLMO対策・サイト改善の実務視点で組み立てます。
 				</p>
 			</div>
 			<div class="aicrawl-proof__summary">

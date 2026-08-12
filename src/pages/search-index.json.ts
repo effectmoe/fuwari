@@ -23,7 +23,7 @@ const staticPages = [
 	{
 		url: "/aicrawl/",
 		title: "AI CRAWL",
-		excerpt: "自社サイトへのAI流入を読み解き、AIが立ち寄るサイトへ変えるAI流入総合分析。",
+		excerpt: "AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
 		section: "Service",
 	},
 	{
