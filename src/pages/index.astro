@@ -138,7 +138,7 @@ const decisionRows = [
 		issue: "AIに何を任せてよいか分からない",
 		first: "無料相談",
 		next: "AIセントラル",
-		reason: "検索・整理・作成・確認・分析のうち、AIが先に進める範囲を切り分ける。",
+		reason: "検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行のうち、AIが先に進める範囲を切り分ける。",
 	},
 	{
 		issue: "社内情報をAIに覚えさせたい",
@@ -292,6 +292,26 @@ const approvalSafeguards = [
 
 const topFaqs = [
 	{
+		q: "ChatGPTをそのまま使うのと、何が違いますか？",
+		a: "通常のChatGPTは、会話を始めるたびに前提を説明する必要があり、過去のやり取りや案件の経緯を知りません。AIセントラルは、社内資料・顧客情報・対応履歴・過去のメッセージをAIが参照できる記憶として整えます。「A社の件はどうなっている？」と聞くと、経緯、現在の状況、次に確認すべきことを整理します。単発作業のためのAIではなく、業務の文脈を踏まえて次の一手を提案するための社内基盤です。",
+	},
+	{
+		q: "過去の経緯を踏まえて、次に何をすべきかまで提案してくれますか？",
+		a: "はい。案件ごとに、何が起きてきたか、今どこで止まっているか、次に確認すべきことや想定されるリスクを整理して提示することが、AIセントラルの中心的な役割です。ただし、最終的な判断と承認は人間が行います。",
+	},
+	{
+		q: "担当者が変わっても、案件の文脈は引き継がれますか？",
+		a: "はい。メッセージのやり取り、対応履歴、判断の背景を記憶として整理するため、後任の担当者も案件名を尋ねることで経緯を確認できます。引き継ぎ資料の作成や、前任者へ都度確認する負担を減らせます。",
+	},
+	{
+		q: "AIはどこまで先回りしてくれますか？",
+		a: "検索、整理、経緯の復元、次の一手の提案、メールや説明文の下書き、根拠や抜け漏れの確認までを先に進められます。一方で、顧客への送信、契約、金額の確定、対外的な提出は人間の承認後に進めます。先回りはしますが、勝手には出しません。",
+	},
+	{
+		q: "導入すると、具体的にどんな場面で効きますか？",
+		a: "長期間止まっていた顧客対応を再開するとき、似た案件の提案や対応を探すとき、案件がどこで止まり次に誰が何をするかを整理するとき、担当交代で過去の経緯を引き継ぐときに役立ちます。記憶をたどる・資料を探す・背景を説明し直す作業を、次の判断へ進むための材料づくりに変えます。",
+	},
+	{
 		q: "どのような業種に向いていますか？",
 		a: "士業事務所、コンサルティング、医療・福祉、教育、営業組織、顧客対応部門など、社内資料・顧客情報・対応履歴を扱う業種に向いています。特に、個人情報や顧客情報を扱いながら、社内ナレッジをAIで活用したい企業と相性が良いです。",
 	},
@@ -317,7 +337,7 @@ const topFaqs = [
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
-		a: "いいえ。AIセントラルは、どのプランでも承認トレイを前提に設計します。検索、整理、下書き、確認材料づくりはAIが先に進めますが、顧客へ出る送信、確定操作、責任を伴う判断は、人間が確認して承認するまで進めない設計にします。",
+		a: "いいえ。AIセントラルは、どのプランでも承認トレイを前提に設計します。検索、整理、経緯の復元、次の一手の提案、下書き、確認材料づくりはAIが先に進めますが、顧客へ出る送信、確定操作、責任を伴う判断は、人間が確認して承認するまで進めない設計にします。",
 	},
 	{
 		q: "月額22,000円には何が含まれますか？",
@@ -353,7 +373,7 @@ const faqLd = {
 
 <LandingLayout
 	title="effect.moe｜記憶を持ったAIを社内の中枢へ組み込むAIシステム"
-	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、管理された環境でAIが参照できる社内基盤へ整えます。"
+	description="シュ コウメイが設計・構築するAIセントラル設計。社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを記憶として整え、案件の経緯を時系列で復元し、次に打つべき手とリスクを提示する社内AI基盤です。"
 	ogImage="/lp/generated/bright-japanese-ai-consulting-hero.png"
 >
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
@@ -398,8 +418,12 @@ const faqLd = {
 				<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">AI CENTRAL AFTER INSTALLATION</p>
 				<h2 class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">AIが参照する記憶と、人が判断する境界を設計する。</h2>
 				<p class="mt-5 max-w-3xl text-base leading-relaxed text-75">
-					社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが必要な情報を探し、整理し、判断材料を用意することで、人間は判断・承認・方針決定・最終確認に集中します。
+					社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、AIが参照できる社内基盤として整理します。中央のAIセントラルに社員ごとの文脈や判断基準を接続し、AIが案件の経緯を時系列で復元したうえで、現在の停滞点、次に打つべき手、想定されるリスクを提示します。人間は判断・承認・方針決定・最終確認に集中します。
 				</p>
+				<aside class="mt-6 max-w-4xl rounded-2xl border border-[var(--line)] bg-[var(--card-bg)] p-5 text-sm leading-relaxed text-75 md:text-base">
+					<strong class="block text-90">「A社の件、いまどうなっている？」と聞くだけで。</strong>
+					<span class="mt-2 block">半年分のメール・議事録・見積のやり取りから経緯を時系列で復元し、現在の停滞点、次に打つべき手、想定されるリスクまでを提示します。担当者が記憶をたどる必要も、資料を探し直す必要もありません。</span>
+				</aside>
 			</div>
 			<div class="decision-map" aria-label="AIセントラル設計でAIが担う業務と人間が担う意思決定">
 				<div class="decision-map__flow-rail" aria-label="AIセントラル導入後の業務フロー">
@@ -443,16 +467,17 @@ const faqLd = {
 						<strong>記憶を持ったAI</strong>
 						<small>社員ごとの文脈を束ね、業務を取り仕切る</small>
 					</div>
-					<p class="decision-map__flow-note"><Icon name="material-symbols:automation" />人に聞く前に、AIが必要な情報を探し、整理し、下書きする。</p>
+					<p class="decision-map__flow-note"><Icon name="material-symbols:automation" />人に聞く前に、AIが経緯を復元し、次の一手とリスクを整理して提示する。</p>
 				</div>
 				<div class="decision-map__column decision-map__column--work">
 					<p><Icon name="material-symbols:task-alt" /><b>AIが担う業務</b><small>人の前段にある作業をAIが先に進める。</small></p>
 					<span class="decision-map__similar-search"><Icon name="material-symbols:travel-explore" /><em>AIプラスプラン以上限定</em><b>類似検索</b><small>キーワードではなく、似た案件・相談・過去対応を呼び出す</small></span>
 					<span><Icon name="material-symbols:manage-search" /><b>検索</b><small>必要資料と過去履歴を探す</small></span>
 					<span><Icon name="material-symbols:sort" /><b>整理</b><small>案件ごとに情報をまとめる</small></span>
+					<span><Icon name="material-symbols:history-edu-outline" /><b>時系列の復元</b><small>過去のやり取りと判断を案件ごとにつなぐ</small></span>
+					<span><Icon name="material-symbols:alt-route" /><b>次の一手の提案</b><small>停滞点・対応案・想定リスクを整理して提示する</small></span>
 					<span><Icon name="material-symbols:edit-document-outline" /><b>作成</b><small>メール・説明文を下書きする</small></span>
 					<span><Icon name="material-symbols:fact-check-outline" /><b>確認</b><small>根拠と抜け漏れを照合する</small></span>
-					<span><Icon name="material-symbols:monitoring" /><b>分析</b><small>傾向・リスク・次の打ち手を見る</small></span>
 					<span><Icon name="material-symbols:automation" /><b>自動実行</b><small>個別に設定した自動実行をオーガナイズ</small></span>
 				</div>
 				<div class="decision-map__decision">

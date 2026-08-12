@@ -152,7 +152,8 @@ const websiteLd = {
 	name: siteConfig.title,
 	alternateName: siteConfig.subtitle,
 	url: siteUrl,
-	description: profileConfig.bio,
+	description:
+		"株式会社EFFECTは、AIセントラル、AI CRAWL、AI講座を通じて、AI導入・AI検索可視化・実務研修を提供します。AIセントラルでは、社内の経緯を時系列で復元し、次に打つべき手とリスクを提示する記憶を持ったAI軍師を構築します。",
 	inLanguage: siteConfig.lang.replace("_", "-"),
 	keywords: seoConfig.keywords.join(", "),
 	publisher: { "@id": `${siteUrl}#organization` },
@@ -163,9 +164,9 @@ const websiteLd = {
 const serviceLd = {
 	"@type": "ProfessionalService",
 	"@id": `${siteUrl}#service`,
-	name: `${profileConfig.name} - AI・LLMO・知識管理コンサルティング`,
+	name: "株式会社EFFECT - AIセントラル・AI CRAWL・AI講座",
 	description:
-		`AI実装・LLMO対策・Notion知識管理・システム開発を扱う個人事業のコンサルティングサービス。ストアカで★評価${seoConfig.reviews.ratingValue}/5。`,
+		`株式会社EFFECTが提供する、AIセントラル・AI CRAWL・AI講座を通じたAI導入、AI検索可視化、実務研修のサービスです。ストアカで★評価${seoConfig.reviews.ratingValue}/5。`,
 	url: siteUrl,
 	image: `${siteUrl}og-image.jpg`,
 	provider: { "@id": `${siteUrl}#organization` },
@@ -177,12 +178,57 @@ const serviceLd = {
 		bestRating: seoConfig.reviews.bestRating,
 	},
 };
+const aiCentralServiceLd = {
+	"@type": "Service",
+	"@id": `${siteUrl}#service-ai-central`,
+	name: "AIセントラル",
+	alternateName: ["AI Central", "記憶を持ったAI軍師"],
+	serviceType: "社内AI基盤構築・AI導入コンサルティング",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: "JP",
+	description:
+		"社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りをAIが参照できる記憶として整え、案件ごとの経緯を時系列で復元したうえで、次に取るべき打ち手とリスクを提示する社内AI基盤。検索や整理にとどまらず、過去の文脈を踏まえた提案までをAIが担い、人間は判断・承認・方針決定に集中できる状態をつくる。個人情報マスキング・参照範囲・権限・ログ・承認フローを事前に設計する。",
+	hasOfferCatalog: {
+		"@type": "OfferCatalog",
+		name: "AIセントラル プラン",
+		itemListElement: [
+			{
+				"@type": "Offer",
+				name: "AIセントラル",
+				price: "330000",
+				priceCurrency: "JPY",
+				description: "社内資料・顧客情報・対応履歴をAIの記憶基盤として整える標準構成",
+			},
+			{
+				"@type": "Offer",
+				name: "AIセントラル PLUS",
+				price: "550000",
+				priceCurrency: "JPY",
+				description: "既存ツール連携と類似検索基盤を追加した上位構成",
+			},
+			{
+				"@type": "Offer",
+				name: "パーフェクトセキュア",
+				price: "1320000",
+				priceCurrency: "JPY",
+				description: "社内PC・社内ネットワーク内でAIを動かすローカル構成",
+			},
+			{
+				"@type": "Offer",
+				name: "AIセントラル 導入後の伴走",
+				price: "22000",
+				priceCurrency: "JPY",
+				description: "導入後6ヶ月間の隔週90分の伴走コンサル、基本保守、チャット対応",
+			},
+		],
+	},
+};
 const baseGraphLd: {
 	"@context": string;
 	"@graph": Record<string, unknown>[];
 } = {
 	"@context": "https://schema.org",
-	"@graph": [organizationLd, websiteLd, personLd, serviceLd],
+	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd],
 };
 
 const breadcrumbLabelMap: Record<string, string> = {
