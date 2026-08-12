@@ -1,0 +1,74 @@
+name: Deploy to Cloudflare Pages
+
+# 🔴 このワークフローを追加した理由（2026-08-13）
+# effect.moe を配信している Cloudflare Pages プロジェクト brain-effect-moe は
+# Git 連携が無効（Git Provider = No）で、`wrangler pages deploy` による手動アップロード方式だった。
+# そのため push しても本番に反映されず、デプロイ忘れに気づけない状態が続いていた。
+#
+# さらに、この手動ステップが後続の自動化を全部止めていた:
+#   記事を書く → push →【手動デプロイ】→ サイトマップ更新 → IndexNow が差分検知 → Bing へ通知
+# デプロイを忘れるとサイトマップが古いままになり、IndexNow は「変化なし」と判断して何も送らない。
+#
+# このワークフローで push → 公開までを自動化し、その連鎖を成立させる。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 手動再実行用（デプロイだけやり直したい時）
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true # 連続 push 時は最新だけデプロイする
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Build and deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # package.json の packageManager (pnpm@9.14.4) に追随させる
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      # 🔴 公開前の自己検証。ビルド成果物に必須ファイルが無ければここで落とす。
+      # 「デプロイは成功したのに中身が欠けている」状態を本番に出さないための関門。
+      - name: Verify build output
+        run: |
+          set -e
+          test -f dist/index.html            || { echo "::error::dist/index.html がありません"; exit 1; }
+          test -f dist/sitemap-index.xml     || { echo "::error::sitemap-index.xml がありません"; exit 1; }
+          test -f dist/llms.txt              || { echo "::error::llms.txt がありません"; exit 1; }
+          test -f dist/.well-known/mcp.json  || { echo "::error::.well-known/mcp.json がありません"; exit 1; }
+          # IndexNow のキーファイル（消えると Bing への通知が本人確認で弾かれる）
+          ls dist/*.txt | grep -qE '/[0-9a-f]{32}\.txt$' \
+            || { echo "::error::IndexNow キーファイルがありません"; exit 1; }
+          echo "✅ ビルド成果物の検証を通過"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy dist
+            --project-name=brain-effect-moe
+            --branch=main
+            --commit-hash=${{ github.sha }}
