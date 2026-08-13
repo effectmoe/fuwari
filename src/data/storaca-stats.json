@@ -1,18 +1,26 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 234,
-  "studentsTaught": 535,
-  "repeatStudents": 305,
-  "repeatRate": 57,
-  "sessionsTaught": 512,
-  "salesTotal": 2520850,
+  "reviewCount": 235,
+  "studentsTaught": 538,
+  "repeatStudents": 306,
+  "repeatRate": 56.9,
+  "sessionsTaught": 515,
+  "salesTotal": 2533650,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月13日",
-  "updatedAt": "2026-08-12T21:00:35.531Z",
+  "periodEnd": "2026年8月14日",
+  "updatedAt": "2026-08-13T21:00:24.356Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
+    {
+      "course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
+      "reviewer": "その他 60代",
+      "date": "2026-08",
+      "rating": 5,
+      "headline": "とてもわかりやすく勉強になりました",
+      "text": "丁寧なご説明でとてもわかりやすく勉強になりました。内容が盛りだくさんだったので思い出しながら復讐したいです。ありがとうございました。"
+    },
     {
       "course": "ChatGPT Codex速習講座｜独自機能とClaude連携が◎",
       "reviewer": "男性 60代",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": "為になる",
       "text": "いつもありがとうございます"
-    },
-    {
-      "course": "あなた専用Notionツールを講師がその場で作る超実践90分講座",
-      "reviewer": "女性 40代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "あなた専用Notionツールを講師がその場で作る超実践90分講座",
-      "text": "今回は自分オリジナルのタスク・スケジュール管理についてのテンプレートを作成してもらいました！使っていますがとても使いやすいです！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-12T21:01:16.023Z"
+  "testimonialsUpdatedAt": "2026-08-13T21:01:03.670Z"
 }
