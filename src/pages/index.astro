@@ -832,6 +832,20 @@ const faqLd = {
 				const result = await response.json().catch(() => null);
 				if (!response.ok || !result?.ok) throw new Error(result?.error || "送信に失敗しました");
 
+				// 送信成功を GA4 のキーイベントとして計測する。
+				// このフォームは preventDefault() で送るため GA4 拡張計測の form_submit は発火しない。
+				// GA4 は GTM 経由配信のため dataLayer に push し、GTM 側の
+				// カスタムイベントトリガー「generate_lead」で GA4 イベントへ転送する。
+				// 🔴 個人情報（氏名・メール・電話）は絶対に載せないこと。
+				const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+				dataLayer.push({
+					event: "generate_lead",
+					inquiry_type: payload.inquiryType,
+					interest: payload.interest,
+					data_location: payload.dataLocation,
+					page_path: payload.pagePath,
+				});
+
 				contactForm.reset();
 				if (status) {
 					status.textContent = result?.mail?.copy?.ok
