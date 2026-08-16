@@ -1,0 +1,746 @@
+---
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>フォーム営業管理 | effect.moe</title>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="hero">
+        <div>
+          <span class="eyebrow">effect.moe admin</span>
+          <h1>フォーム営業管理</h1>
+          <p>周年営業・士業営業などのリードを確認し、下書きを承認・スキップします。承認済みは「form_outreach.py --send」で実送信されます。</p>
+          <button type="button" class="help-button" data-open-status-help>ⓘ ステータスの意味を見る</button>
+        </div>
+      </section>
+
+      <dialog data-status-help-dialog class="status-help-dialog">
+        <div class="dialog-head">
+          <h2>ステータスの意味</h2>
+          <button type="button" class="close-button" data-close-status-help>✕</button>
+        </div>
+        <table class="status-help-table">
+          <thead>
+            <tr>
+              <th>ステータス</th>
+              <th>意味</th>
+              <th>次に何が起きるか</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="status-pill st-candidate">候補</span></td>
+              <td>AIが見つけた会社。まだ公式サイトを調べていない段階</td>
+              <td>AIが自動でサイト調査・文面作成を行い「下書き」になる</td>
+            </tr>
+            <tr>
+              <td><span class="status-pill st-draft">下書き</span></td>
+              <td>サイト調査・文面作成が終わり、<b>人間の確認待ち</b>の状態</td>
+              <td>内容を確認し「承認済み」か「スキップ」に変更する</td>
+            </tr>
+            <tr>
+              <td><span class="status-pill st-approved">承認済み</span></td>
+              <td>内容を見て「これは送っていい」と判断した状態</td>
+              <td>「form_outreach.py --send」を実行すると実際に送信される</td>
+            </tr>
+            <tr>
+              <td><span class="status-pill st-sent">送信済み</span></td>
+              <td>実際にフォーム送信・メール送信が完了した状態</td>
+              <td>完了。以降は履歴として残るだけ</td>
+            </tr>
+            <tr>
+              <td><span class="status-pill st-skipped">スキップ</span></td>
+              <td>送らないと判断した状態（サイトが見つからない・連絡先が無い等）</td>
+              <td>何もしない。処理対象から除外される</td>
+            </tr>
+            <tr>
+              <td><span class="status-pill st-failed">失敗</span></td>
+              <td>送信を試みたが、エラーで失敗した状態</td>
+              <td>内容を確認し、必要なら手動で対応</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="flow-note">基本の流れ：候補 → 下書き（あなたが確認） → 承認済み → 送信済み</p>
+      </dialog>
+
+      <section class="toolbar">
+        <label>
+          <span>キャンペーン</span>
+          <select data-campaign-filter>
+            <option value="">すべて</option>
+            <option value="周年営業">周年営業</option>
+            <option value="士業AI-DX">士業AI-DX</option>
+          </select>
+        </label>
+        <label>
+          <span>ステータス</span>
+          <select data-status-filter>
+            <option value="" selected>すべて</option>
+            <option value="候補">候補（サイト調査前）</option>
+            <option value="下書き">下書き（レビュー待ち）</option>
+            <option value="承認済み">承認済み（送信待ち）</option>
+            <option value="送信済み">送信済み</option>
+            <option value="スキップ">スキップ</option>
+            <option value="失敗">失敗</option>
+          </select>
+        </label>
+        <button data-refresh type="button">再読み込み</button>
+      </section>
+
+      <p class="status" data-status>読み込み中...</p>
+      <div class="table-wrap">
+        <table class="lead-table">
+          <colgroup>
+            <col style="width: 17%" />
+            <col style="width: 9%" />
+            <col style="width: 8%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 15%" />
+            <col style="width: 9%" />
+            <col style="width: 12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th data-sort="company_name">会社名<span class="sort-arrow"></span></th>
+              <th data-sort="status">ステータス<span class="sort-arrow"></span></th>
+              <th data-sort="approach_channel">アプローチ<span class="sort-arrow"></span></th>
+              <th data-sort="site_url">会社URL<span class="sort-arrow"></span></th>
+              <th data-sort="form_url">フォームURL<span class="sort-arrow"></span></th>
+              <th data-sort="email_address">メールアドレス<span class="sort-arrow"></span></th>
+              <th data-sort="updated_at">更新日時<span class="sort-arrow"></span></th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody data-lead-list aria-live="polite"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      const refreshButton = document.querySelector("[data-refresh]");
+      const campaignFilter = document.querySelector("[data-campaign-filter]");
+      const statusFilter = document.querySelector("[data-status-filter]");
+      const statusText = document.querySelector("[data-status]");
+      const list = document.querySelector("[data-lead-list]");
+      const sortHeaders = document.querySelectorAll("[data-sort]");
+
+      const STATUS_OPTIONS = ["候補", "下書き", "承認済み", "送信済み", "スキップ", "失敗"];
+
+      let currentLeads = [];
+      let sortState = { key: "updated_at", dir: "desc" };
+
+      const formatDate = (value) => {
+        if (!value) return "-";
+        const date = new Date(value);
+        return new Intl.DateTimeFormat("ja-JP", {
+          timeZone: "Asia/Tokyo",
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(date);
+      };
+
+      const parseMetadata = (value) => {
+        if (!value) return null;
+        try {
+          return JSON.parse(value);
+        } catch {
+          return null;
+        }
+      };
+
+      // このページ自体がCloudflare Access（Googleログイン・許可アカウント限定）で保護されているため、
+      // ここに直接埋め込んでも安全（ページに辿り着ける時点で本人確認済み）。
+      // ローテーション等でキーを変更した場合はこの値も更新すること。
+      const DEFAULT_TOKEN = "dbb4bb5dccc4088d16d10ddb854615708a6ae35b53a278354b0b8b836db8fe83";
+      const getToken = () => localStorage.getItem("effect_moe_outreach_token") || DEFAULT_TOKEN;
+
+      const setStatus = (message) => {
+        if (statusText) statusText.textContent = message;
+      };
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      const STATUS_CLASS = {
+        "候補": "st-candidate",
+        "下書き": "st-draft",
+        "承認済み": "st-approved",
+        "送信済み": "st-sent",
+        "スキップ": "st-skipped",
+        "失敗": "st-failed",
+      };
+
+      const applySort = (leads) => {
+        const { key, dir } = sortState;
+        const sorted = [...leads].sort((a, b) => {
+          const av = (a[key] ?? "").toString().toLowerCase();
+          const bv = (b[key] ?? "").toString().toLowerCase();
+          if (av < bv) return dir === "asc" ? -1 : 1;
+          if (av > bv) return dir === "asc" ? 1 : -1;
+          return 0;
+        });
+        return sorted;
+      };
+
+      const updateSortIndicators = () => {
+        sortHeaders.forEach((th) => {
+          const arrow = th.querySelector(".sort-arrow");
+          if (!arrow) return;
+          if (th.dataset.sort === sortState.key) {
+            arrow.textContent = sortState.dir === "asc" ? " ▲" : " ▼";
+          } else {
+            arrow.textContent = "";
+          }
+        });
+      };
+
+      const renderList = (leads) => {
+        if (!list) return;
+        if (!leads.length) {
+          list.innerHTML = '<tr><td colspan="8" class="empty">該当するリードはありません。</td></tr>';
+          return;
+        }
+
+        const sorted = applySort(leads);
+
+        list.innerHTML = sorted.map((lead) => {
+          const locationText = `${lead.industry || "-"} ${lead.prefecture || ""}${lead.city || ""}`.trim();
+
+          return `
+            <tr data-id="${escapeHtml(lead.id)}" class="clickable-row">
+              <td>
+                <span class="pill">${escapeHtml(lead.campaign)}</span>
+                <div class="company-name" title="${escapeHtml(lead.company_name)}">${escapeHtml(lead.company_name)}</div>
+                <div class="sub" title="${escapeHtml(locationText)}">${escapeHtml(locationText)}</div>
+              </td>
+              <td>
+                <span class="status-pill ${STATUS_CLASS[lead.status] || ""}">${escapeHtml(lead.status)}</span>
+                ${lead.skip_reason ? `<div class="skip-reason" title="${escapeHtml(lead.skip_reason)}">${escapeHtml(lead.skip_reason)}</div>` : ""}
+              </td>
+              <td class="truncate">${escapeHtml(lead.approach_channel || "-")}</td>
+              <td class="url-cell">${lead.site_url ? `<a href="${escapeHtml(lead.site_url)}" target="_blank" rel="noreferrer" title="${escapeHtml(lead.site_url)}">${escapeHtml(lead.site_url)}</a>` : "<span class=\"muted\">-</span>"}</td>
+              <td class="url-cell">${lead.form_url ? `<a href="${escapeHtml(lead.form_url)}" target="_blank" rel="noreferrer" title="${escapeHtml(lead.form_url)}">${escapeHtml(lead.form_url)}</a>` : "<span class=\"muted\">-</span>"}</td>
+              <td class="url-cell">${lead.email_address ? `<a href="mailto:${escapeHtml(lead.email_address)}" title="${escapeHtml(lead.email_address)}">${escapeHtml(lead.email_address)}</a>` : "<span class=\"muted\">-</span>"}</td>
+              <td class="nowrap">${escapeHtml(formatDate(lead.updated_at))}</td>
+              <td class="actions-cell" data-no-nav>
+                <select data-status-select>
+                  ${STATUS_OPTIONS.map((value) => `
+                    <option value="${value}" ${lead.status === value ? "selected" : ""}>${value}</option>
+                  `).join("")}
+                </select>
+                ${lead.status === "下書き" ? `
+                  <button type="button" class="approve" data-approve>承認</button>
+                  <button type="button" class="skip" data-skip>スキップ</button>
+                ` : ""}
+              </td>
+            </tr>
+          `;
+        }).join("");
+
+        list.querySelectorAll("[data-status-select]").forEach((select) => {
+          select.addEventListener("change", async (event) => {
+            const row = event.currentTarget.closest("[data-id]");
+            await updateLead(row?.dataset.id, { status: event.currentTarget.value });
+          });
+        });
+        list.querySelectorAll("[data-approve]").forEach((button) => {
+          button.addEventListener("click", async (event) => {
+            const row = event.currentTarget.closest("[data-id]");
+            await updateLead(row?.dataset.id, { status: "承認済み" });
+          });
+        });
+        list.querySelectorAll("[data-skip]").forEach((button) => {
+          button.addEventListener("click", async (event) => {
+            const row = event.currentTarget.closest("[data-id]");
+            const reason = prompt("スキップ理由（任意）", "") || "ダッシュボードから手動スキップ";
+            await updateLead(row?.dataset.id, { status: "スキップ", skip_reason: reason });
+          });
+        });
+        list.querySelectorAll(".clickable-row").forEach((row) => {
+          row.addEventListener("click", (event) => {
+            if (event.target.closest("a") || event.target.closest("[data-no-nav]")) return;
+            location.href = `/admin/outreach/detail/?id=${encodeURIComponent(row.dataset.id)}`;
+          });
+        });
+      };
+
+      async function fetchLeads() {
+        const token = getToken();
+        if (!token) {
+          setStatus("読み込みに失敗しました。ページを再読み込みしてください。");
+          return;
+        }
+
+        const params = new URLSearchParams();
+        if (campaignFilter?.value) params.set("campaign", campaignFilter.value);
+        if (statusFilter?.value) params.set("status", statusFilter.value);
+        params.set("limit", "100");
+        setStatus("読み込み中...");
+
+        const response = await fetch(`/api/outreach?${params.toString()}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !data?.success) {
+          setStatus(data?.error === "unauthorized" ? "認証に失敗しました。APIキーを確認してください。" : "取得に失敗しました。");
+          renderList([]);
+          return;
+        }
+
+        currentLeads = data.results || [];
+        renderList(currentLeads);
+        updateSortIndicators();
+        setStatus(`${currentLeads.length}件を表示しています。`);
+      }
+
+      async function updateLead(id, fields) {
+        if (!id) return;
+        const response = await fetch(`/api/outreach?id=${encodeURIComponent(id)}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+          body: JSON.stringify(fields),
+        });
+        const data = await response.json().catch(() => null);
+        setStatus(response.ok && data?.success ? "更新しました。" : "更新に失敗しました。");
+        fetchLeads();
+      }
+
+      sortHeaders.forEach((th) => {
+        th.addEventListener("click", () => {
+          const key = th.dataset.sort;
+          if (sortState.key === key) {
+            sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+          } else {
+            sortState = { key, dir: "asc" };
+          }
+          renderList(currentLeads);
+          updateSortIndicators();
+        });
+      });
+
+      refreshButton?.addEventListener("click", fetchLeads);
+      campaignFilter?.addEventListener("change", fetchLeads);
+      statusFilter?.addEventListener("change", fetchLeads);
+      fetchLeads();
+
+      const statusHelpDialog = document.querySelector("[data-status-help-dialog]");
+      document.querySelector("[data-open-status-help]")?.addEventListener("click", () => {
+        statusHelpDialog?.showModal();
+      });
+      document.querySelector("[data-close-status-help]")?.addEventListener("click", () => {
+        statusHelpDialog?.close();
+      });
+      statusHelpDialog?.addEventListener("click", (event) => {
+        if (event.target === statusHelpDialog) statusHelpDialog.close();
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  :root {
+    color: #222020;
+    background: #fcf8f9;
+    font-family: "Noto Sans JP", system-ui, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    background:
+      linear-gradient(90deg, rgba(125, 92, 29, 0.06) 1px, transparent 1px),
+      linear-gradient(rgba(125, 92, 29, 0.05) 1px, transparent 1px),
+      #fcf8f9;
+    background-size: 56px 56px;
+  }
+
+  .admin-shell {
+    width: min(1720px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 44px 0 80px;
+  }
+
+  .hero,
+  .toolbar,
+  .table-wrap {
+    border: 1px solid rgba(210, 197, 178, 0.76);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 24px 72px rgba(55, 38, 12, 0.08);
+  }
+
+  .hero {
+    padding: clamp(24px, 4vw, 46px);
+  }
+
+  .eyebrow {
+    color: #8a6600;
+    font-size: 12px;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 12px 0 12px;
+    font-size: clamp(32px, 5vw, 60px);
+    line-height: 1.05;
+  }
+
+  p {
+    margin: 0;
+    color: #625b52;
+    font-weight: 700;
+    line-height: 1.75;
+  }
+
+  .help-button {
+    margin-top: 14px;
+    min-height: 36px;
+    border-color: rgba(138, 102, 0, 0.4);
+    background: rgba(138, 102, 0, 0.08);
+    color: #8a6600;
+    font-size: 12px;
+    padding: 0 14px;
+  }
+
+  .status-help-dialog {
+    border: 1px solid rgba(210, 197, 178, 0.76);
+    border-radius: 20px;
+    box-shadow: 0 24px 72px rgba(55, 38, 12, 0.18);
+    padding: clamp(20px, 3vw, 32px);
+    width: min(720px, calc(100% - 48px));
+    background: #fcf8f9;
+    color: #222020;
+  }
+
+  .status-help-dialog::backdrop {
+    background: rgba(34, 32, 32, 0.45);
+  }
+
+  .dialog-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .dialog-head h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .close-button {
+    min-height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-color: rgba(210, 197, 178, 0.7);
+    background: #fff;
+    color: #625b52;
+  }
+
+  .status-help-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .status-help-table th {
+    text-align: left;
+    color: #8a6600;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(210, 197, 178, 0.7);
+  }
+
+  .status-help-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid rgba(210, 197, 178, 0.4);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .status-help-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .flow-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #52683f;
+    font-weight: 850;
+  }
+
+  .toolbar {
+    display: grid;
+    gap: 12px;
+  }
+
+  .toolbar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 22px 0;
+    padding: 18px;
+  }
+
+  label {
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 950;
+  }
+
+  input,
+  select,
+  button {
+    min-height: 48px;
+    border: 1px solid rgba(210, 197, 178, 0.82);
+    border-radius: 14px;
+    background: #fff;
+    color: #222020;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 850;
+    padding: 0 14px;
+  }
+
+  button {
+    cursor: pointer;
+    border-color: #6d895b;
+    background: #6d895b;
+    color: #fff;
+  }
+
+  button.skip {
+    border-color: #a3453a;
+    background: #a3453a;
+  }
+
+  .status {
+    margin: 18px 0;
+    color: #7d5c1d;
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .lead-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .lead-table th {
+    position: sticky;
+    top: 0;
+    background: rgba(252, 248, 249, 0.97);
+    color: #8a6600;
+    font-size: 11px;
+    font-weight: 950;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(210, 197, 178, 0.7);
+    white-space: nowrap;
+  }
+
+  .lead-table th[data-sort] {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .lead-table th[data-sort]:hover {
+    color: #5a4400;
+  }
+
+  .sort-arrow {
+    font-size: 10px;
+  }
+
+  .lead-table td {
+    vertical-align: top;
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(210, 197, 178, 0.4);
+  }
+
+  .lead-table tbody tr:nth-child(even) {
+    background: rgba(138, 102, 0, 0.035);
+  }
+
+  .lead-table tbody tr:hover {
+    background: rgba(109, 137, 91, 0.07);
+  }
+
+  .clickable-row {
+    cursor: pointer;
+  }
+
+  .lead-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .lead-table td.empty {
+    text-align: center;
+    padding: 32px;
+    color: #625b52;
+  }
+
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .muted {
+    color: #b7ab9d;
+  }
+
+  .pill {
+    display: inline-block;
+    border-radius: 6px;
+    background: #52683f;
+    color: #fff;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 950;
+    margin-bottom: 5px;
+    white-space: nowrap;
+  }
+
+  .company-name {
+    font-size: 14px;
+    font-weight: 900;
+    color: #222020;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sub {
+    color: #625b52;
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .status-pill {
+    display: inline-block;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 950;
+    white-space: nowrap;
+  }
+
+  .st-candidate { background: #f0d998; color: #6b4e00; }
+  .st-draft { background: #cdd6f7; color: #2c3a80; }
+  .st-approved { background: #cfe4c2; color: #2f4a20; }
+  .st-sent { background: #a9dcc0; color: #1c5a3a; }
+  .st-skipped { background: #dcdcdc; color: #4a4a4a; }
+  .st-failed { background: #f0c4bd; color: #7a2418; }
+
+  .skip-reason {
+    margin-top: 5px;
+    font-size: 11px;
+    color: #8a352b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .message-cell summary {
+    cursor: pointer;
+    color: #52683f;
+    font-weight: 850;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+
+  .full-message {
+    margin: 10px 0 0;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: inherit;
+    background: rgba(252, 248, 249, 0.9);
+    border-radius: 12px;
+    padding: 12px;
+    max-width: 480px;
+  }
+
+  .url-cell {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  a {
+    color: #2f5aa8;
+    font-weight: 750;
+    text-decoration: underline;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+    color: #625b52;
+    font-size: 12px;
+  }
+
+  .actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actions-cell select,
+  .actions-cell button {
+    min-height: 34px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    .toolbar {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
