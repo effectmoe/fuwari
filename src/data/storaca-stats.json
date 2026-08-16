@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
-  "reviewCount": 235,
-  "studentsTaught": 539,
+  "reviewCount": 236,
+  "studentsTaught": 540,
   "repeatStudents": 307,
-  "repeatRate": 57,
-  "sessionsTaught": 515,
-  "salesTotal": 2539150,
+  "repeatRate": 56.9,
+  "sessionsTaught": 516,
+  "salesTotal": 2543150,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月16日",
-  "updatedAt": "2026-08-15T21:00:21.403Z",
+  "periodEnd": "2026年8月17日",
+  "updatedAt": "2026-08-16T21:00:26.128Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -28,6 +28,14 @@
       "rating": 5,
       "headline": "大変タメになる講座",
       "text": "「ChatGPT Codex速習講座｜独自機能とClaude連携が◎」を受講しました。Codexを使い始めて3週間ほど、自己流で試行錯誤しながら使っていました。そのため、必要以上にクレジットと時間を使ってしまい、「なぜこんなに消費するのか」「どうすれば効率よく使えるのか」を知りたくて今回受講しました。講座では、さまざまな設定方法や使い方の工夫を教えていただき、やり方次第でクレジットの消費をかなり抑えながら、効率よく前に進められることがわかりました。自己流で遠回りしていた部分も整理され、とても参考になった有益な講座でした。これからCodexを使い始める方はもちろん、すでに使っているけれど時間やクレジットを使いすぎている方、CodexやAIの力を最大限に活用したい方にも、ぜひおすすめしたい先生・講座です。本日はありがとうございました。"
+    },
+    {
+      "course": "AI×知識管理で劇的時短！Obsidian＆Claude活用術",
+      "reviewer": "女性 50代",
+      "date": "2026-08",
+      "rating": 5,
+      "headline": "初心者でもわかりやすい講座",
+      "text": "ObsidianとClaudeについて、深く学ぶことができました。丁寧に教えていただけたので、点と点が線になりました。これから仕事でたくさん活用していこうと思います。"
     },
     {
       "course": "ChatGPT Codex速習講座｜独自機能とClaude連携が◎",
@@ -108,15 +116,7 @@
       "rating": 5,
       "headline": null,
       "text": "とても参考になります。グループでの学びもたのしくさんかさせてもらってます！"
-    },
-    {
-      "course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-      "reviewer": "女性 70代",
-      "date": "2026-06",
-      "rating": 5,
-      "headline": "為になる",
-      "text": "いつもありがとうございます"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-15T21:01:00.139Z"
+  "testimonialsUpdatedAt": "2026-08-16T21:01:03.599Z"
 }
