@@ -13,6 +13,8 @@ relatedLinks:
     href: "/posts/keyword-in-title-seo/"
   - label: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
     href: "/posts/ai-crawl-citation-strategy/"
+  - label: "AI検索は「サイトの出来」ではなく「名前を知っているか」で決まっていた"
+    href: "/posts/ai-search-brand-recognition/"
 faq:
   - q: "LLMO、GEO、AEO、AIO は何が違いますか？"
     a: "いずれもAI検索や回答エンジンで見つけられやすくする考え方です。細かな定義よりも、検索順位だけでなくAI回答にどう扱われるかを見る必要がある点が重要です。"
@@ -371,4 +373,3 @@ DFB を 1 周回すと、必ず**「あれ？まだスッキリしない」**と
     document.addEventListener("swup:content:replace", init);
   })();
 </script>
-

@@ -17,6 +17,8 @@ relatedLinks:
     href: "/posts/ai-era-senior-structuring-power/"
   - label: "DFB構造化メソッドとは何か"
     href: "/posts/dfb-method-introduction/"
+  - label: "AI検索は「サイトの出来」ではなく「名前を知っているか」で決まっていた"
+    href: "/posts/ai-search-brand-recognition/"
 sourceLinks:
   - label: "SEOは「キーワード検索」から「意思決定エンジン」へ、AI検索がもたらす10の変化（前編）"
     href: "https://webtan.impress.co.jp/e/2026/07/06/52884"
