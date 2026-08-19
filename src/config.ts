@@ -212,8 +212,19 @@ export const seoConfig = {
 	},
 	// 著者の肩書（Person.jobTitle）
 	jobTitle: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント",
-	// 表記はブランド規約に合わせて「シュ コウメイ」に統一する。
-	alternateName: [],
+	// 🔴 alternateName は「表示に使う名前」ではなく「AIが同一人物と結びつけるための別名」。
+	//   対外署名は「シュ コウメイ」に統一するブランド規約（memory: reference_effect_official_name）
+	//   を維持したうえで、**検索・AI回答で辿り着くための表記ゆれ**をここに集約する。
+	//   2026-08-20 実測: 漢字「朱 剛明」で検索しても構造化データに一切含まれず、
+	//   AIが同一人物と判定できない状態だった。一方 sameAs の LinkedIn URL は
+	//   既に漢字「剛明-朱」で公開済みで、漢字表記は事実上すでに対外露出している。
+	//   → 署名では使わない。しかし「知られるため」の別名としては載せる。
+	alternateName: [
+		"朱 剛明",      // 漢字表記（LinkedIn で公開済み）
+		"朱剛明",       // 空白なし表記
+		"Shu Koumei",  // ラテン文字
+		"Tony Chu",    // 英語圏での呼称
+	],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
 	// 数値は storaca-stats.json から直接 import（LaunchAgent が毎日 06:00 自動更新）

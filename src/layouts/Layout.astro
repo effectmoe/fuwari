@@ -110,6 +110,12 @@ const organizationLd = {
 	"@id": `${siteUrl}#organization`,
 	name: seoConfig.organization.name,
 	legalName: "株式会社EFFECT",
+	// 🔴 2026-08-20 追加: 実測で description・alternateName が未設定だった。
+	//   AIは「EFFECT とは何の会社か」を1文で答えられない状態。
+	//   社名の表記ゆれ（カナ・英字）も辿れないため、同一組織と判定されない。
+	alternateName: ["EFFECT", "エフェクト", "effect.moe"],
+	description:
+		"AI検索に選ばれる状態をつくる福岡の会社。社内資料や顧客対応の履歴をAIが参照できる記憶として整える「AIセントラル」、AIクローラーの巡回と回答への露出を計測する「AI CRAWL / AI CITATION」、実務者向けのAI講座を提供する。",
 	url: siteUrl,
 	email: "info@effect.moe",
 	address: {
@@ -177,6 +183,31 @@ const serviceLd = {
 		reviewCount: seoConfig.reviews.reviewCount,
 		bestRating: seoConfig.reviews.bestRating,
 	},
+};
+// 🔴 2026-08-20 追加: AI CRAWL / AI CITATION は現行の月額商品なのに
+//   Service ノードが存在せず、説明文に名前が出るだけだった。
+//   商品名で質問された時にAIが「その商品は存在する」と判定できない状態。
+const aiCrawlServiceLd = {
+	"@type": "Service",
+	"@id": `${siteUrl}#service-ai-crawl`,
+	name: "AI CRAWL",
+	alternateName: ["AIクロール", "AI流入計測"],
+	serviceType: "AIクローラー巡回計測・AI検索流入分析",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: "JP",
+	description:
+		"ChatGPT・Claude・Gemini などのAIクローラーが自社サイトを実際に巡回しているかをサーバーログから計測し、月次で可視化するサービス。どのAIが・どのページを・何回読みに来たかを示す。",
+};
+const aiCitationServiceLd = {
+	"@type": "Service",
+	"@id": `${siteUrl}#service-ai-citation`,
+	name: "AI CITATION",
+	alternateName: ["AIサイテーション", "AI回答露出計測"],
+	serviceType: "生成AI回答への露出計測・LLMO診断",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: "JP",
+	description:
+		"実際に ChatGPT と Gemini へ質問を投げ、その回答に自社が登場するかを複数回試行して計測するサービス。「AIに読まれたか」ではなく「AIの回答に載ったか」を測る。競合として挙がるドメインの特定、露出率の推移、改善後の再計測による効果判定までを行う。",
 };
 const aiCentralServiceLd = {
 	"@type": "Service",
@@ -255,7 +286,7 @@ const baseGraphLd: {
 	"@graph": Record<string, unknown>[];
 } = {
 	"@context": "https://schema.org",
-	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, mcpServerLd],
+	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, aiCrawlServiceLd, aiCitationServiceLd, mcpServerLd],
 };
 
 const breadcrumbLabelMap: Record<string, string> = {
