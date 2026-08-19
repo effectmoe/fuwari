@@ -133,20 +133,27 @@ const navItems = [
 								<Icon name="material-symbols:chevron-right-rounded" />
 							</a>
 							{serviceNavGroups.map((group) => (
-								<details class="effect-landing-header__panel-group">
-									<summary class="effect-landing-header__panel-heading">
-										{group.label}
-										<Icon name="material-symbols:keyboard-arrow-down-rounded" />
-									</summary>
-									<div>
-										{group.items.map((item) => (
-											<a href={item.href}>
-												{item.label}
-												<Icon name="material-symbols:chevron-right-rounded" />
-											</a>
-										))}
+								<div class="effect-landing-header__panel-group">
+									<div class="effect-landing-header__panel-group-top">
+										<a href={group.href} class="effect-landing-header__panel-heading">
+											{group.label}
+											<Icon name="material-symbols:chevron-right-rounded" />
+										</a>
+										<details class="effect-landing-header__panel-disclosure">
+											<summary aria-label={`${group.label}のメニューを開く`}>
+												<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+											</summary>
+											<div>
+												{group.items.map((item) => (
+													<a href={item.href}>
+														{item.label}
+														<Icon name="material-symbols:chevron-right-rounded" />
+													</a>
+												))}
+											</div>
+										</details>
 									</div>
-								</details>
+								</div>
 							))}
 							{navItems.map((item) => (
 								<a href={item.href}>
@@ -495,38 +502,73 @@ const navItems = [
 			overflow: hidden;
 		}
 
+		.effect-landing-header__panel-group-top {
+			display: flex;
+			align-items: stretch;
+		}
+
 		.effect-landing-header__panel-heading {
+			flex: 1 1 auto;
 			background: rgba(251, 247, 239, 0.9);
 			color: #7b5807;
 			font-size: 14px;
 			font-weight: 950;
+		}
+
+		.effect-landing-header__panel-heading svg {
+			width: 20px;
+			height: 20px;
+			flex: 0 0 auto;
+		}
+
+		.effect-landing-header__panel-disclosure {
+			position: relative;
+			flex: 0 0 auto;
+		}
+
+		.effect-landing-header__panel-disclosure > summary {
+			display: grid;
+			width: 52px;
+			min-height: 42px;
+			place-items: center;
+			border-left: 1px solid rgba(210, 197, 178, 0.66);
+			color: #7b5807;
 			cursor: pointer;
 			list-style: none;
 		}
 
-		.effect-landing-header__panel-heading::-webkit-details-marker {
+		.effect-landing-header__panel-disclosure > summary::-webkit-details-marker {
 			display: none;
 		}
 
-		.effect-landing-header__panel-heading svg {
+		.effect-landing-header__panel-disclosure > summary svg {
 			width: 22px;
 			height: 22px;
 			flex: 0 0 auto;
 			transition: transform 0.18s ease;
 		}
 
-		.effect-landing-header__panel-group[open] .effect-landing-header__panel-heading svg {
+		.effect-landing-header__panel-disclosure[open] > summary svg {
 			transform: rotate(180deg);
 		}
 
-		.effect-landing-header__panel-group div {
+		.effect-landing-header__panel-disclosure > div {
+			position: absolute;
+			top: calc(100% + 6px);
+			right: 0;
+			z-index: 2;
 			display: grid;
 			grid-template-columns: repeat(2, minmax(0, 1fr));
+			width: min(400px, calc(100vw - 72px));
 			gap: 4px;
+			border: 1px solid rgba(210, 197, 178, 0.86);
+			border-radius: 0.95rem;
+			background: rgba(255, 255, 255, 0.98);
 			padding: 6px;
+			box-shadow: 0 16px 38px rgba(55, 38, 12, 0.14);
 		}
 
-		.effect-landing-header__panel-group div a {
+		.effect-landing-header__panel-disclosure > div a {
 			min-height: 40px;
 			background: rgba(255, 255, 255, 0.78);
 			font-size: 13px;
