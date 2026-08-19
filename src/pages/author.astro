@@ -251,6 +251,15 @@ const relatedLinks = [
 				<div class="author-hero__copy">
 					<p class="author-eyebrow">AUTHOR / TRUST PROFILE</p>
 					<h1><span>シュ コウメイ</span></h1>
+					{/* 🔴 2026-08-20 追加: 別表記を本文に明記する。
+					    構造化データ(Person.alternateName)に入れただけでは、AIは「そう名乗っている」
+					    という裏付けを本文から取れない。実測で漢字「朱 剛明」がトップ・about・author の
+					    どのページ本文にも存在せず、漢字で検索しても本人に辿り着けない状態だった。
+					    表示上のブランド表記は「シュ コウメイ」のまま。ここは名乗りではなく
+					    「同一人物であることの明示」として置く。 */}
+					<p class="author-aka">
+						漢字表記：<span lang="ja">朱 剛明</span>（しゅ こうめい）／ラテン文字表記：Shu Koumei
+					</p>
 					<p class="author-lead">AIを「使える仕組み」に変える、構造化と実装の設計者。</p>
 					<p class="author-body">
 						effect.moe の AI CENTRAL、AI CRAWL、AI講座は、株式会社EFFECTのもとでシュ コウメイが設計・運用を担当します。AI時代の必須スキル「構造化」を、現場に定着するAI活用として、講座・設計・実装・改善まで一貫して扱います。
@@ -668,6 +677,16 @@ const relatedLinks = [
 
 		.author-hero h1 span {
 			display: inline-block;
+		}
+
+		/* 別表記（漢字・ラテン文字）。ブランド表記は h1 の「シュ コウメイ」が主役なので、
+		   ここは補足として控えめに置く。検索・AIの同定に効かせるのが目的。 */
+		.author-aka {
+			margin: 10px 0 0;
+			font-size: 0.95rem;
+			line-height: 1.7;
+			opacity: 0.72;
+			letter-spacing: 0.01em;
 		}
 
 		.author-lead {

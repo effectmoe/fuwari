@@ -11,6 +11,7 @@ AI 時代の必須スキル『構造化』を、AI 開発・LLMO 対策・Notion
 | 項目 | 内容 |
 |---|---|
 | **氏名** | シュ コウメイ |
+| **別表記** | 朱 剛明（しゅ こうめい）／ Shu Koumei ／ Tony Chu |
 | **所属** | [株式会社EFFECT](https://effect.moe) |
 | **役割** | AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント |
 | **専門領域** | LLM活用設計・構造化思考・Cloudflare Zero Trust・SEO/LLMO・マルチエージェント基盤 |
