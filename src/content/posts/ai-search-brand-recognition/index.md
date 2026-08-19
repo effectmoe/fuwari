@@ -4,7 +4,7 @@ published: 2026-08-20
 description: "AI検索とLLMOでは、サイトの作り込みだけでなくブランド名をAIが知っているかが重要です。実測値から露出と引用の見方を整理します。"
 image: "./cover.jpg"
 thumbnail: "/blog-thumbs/ai-search-brand-recognition.jpg"
-imageAlt: "霧の中で複数の名前札と機械が読める札が一つの灯台に集まり、AI検索でブランド名が認識される条件を象徴するアイキャッチ"
+imageAlt: "霧の港町でキャラクターが検索結果の光るパネルを掲げ、揃った印章がAI検索に認識される流れを示している"
 tags: ["LLMO", "AI検索", "構造化データ", "E-E-A-T"]
 category: "AI"
 service: "aicrawl"
@@ -22,8 +22,6 @@ relatedLinks:
 sourceLinks:
   - label: "How To Make Your Brand Discoverable in AI Search"
     href: "https://moz.com/blog/make-your-brand-discoverable-ai-search"
-  - label: "Qwen 派生モデルのダウンロード数に関する記事"
-    href: "https://finance.biggo.jp/news/f1d17015-9554-4d5b-9d3b-0ee47fa07b49"
 faq:
   - q: "AI検索で名前が出ないとき、まず何を見ればいいですか？"
     a: "まず、AIがサイトを読みに来ているかと、AIの回答に名前が出ているかを分けて見ます。読まれているのに出ない場合は、ブランド名、商品名、プロフィール、根拠ページのつながりを点検します。"
@@ -238,10 +236,6 @@ AIにとっても人にとっても、「誰が話しているのか」が分か
 英語圏は、学習データの厚みが違います。
 
 ただ、「AIはアメリカ製だから英語だけでいい」とは、私はもう思っていません。
-
-[Qwen 派生モデルのダウンロード数に関する記事](https://finance.biggo.jp/news/f1d17015-9554-4d5b-9d3b-0ee47fa07b49)では、中国発のオープンソースモデルのダウンロード数が、Google製の約2倍、Meta製の5倍以上という報告もあります。
-
-勢力図は動いています。
 
 そして日本語圏を外せない理由は、もっと単純です。
 
