@@ -385,8 +385,8 @@ export const courseConfig = {
 		},
 		{
 			id: "eeat",
-			title: "E-E-A-T 講座｜権威性で検索とAIに信頼される",
-			url: "https://www.street-academy.com/myclass/216408?sessiondetailid=22239230",
+			title: "AI検索×SEO×LLMO E-E-A-T実践講座",
+			url: "https://www.street-academy.com/myclass/216408",
 			topics: ["E-E-A-T", "権威性", "SEO", "信頼性", "監修"],
 			pitch: "経験・専門性・権威性・信頼性をサイトにどう実装するかを具体的に学べます。",
 		},

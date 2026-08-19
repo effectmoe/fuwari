@@ -6,7 +6,16 @@ import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg
 
 const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
-const blogHref = "/posts/ai-crawl-citation-strategy/";
+const blogLinks = [
+	{
+		href: "/posts/ai-crawl-citation-strategy/",
+		label: "AIに読まれることと、AIに紹介されることの違い",
+	},
+	{
+		href: "/posts/ai-search-brand-recognition/",
+		label: "AI検索で名前を知ってもらうための考え方",
+	},
+];
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
 
@@ -630,7 +639,14 @@ const faqs = [
 				<p>
 					ユーザーが検索結果を一つずつ読む前に、AIが候補を要約し、比較し、推薦する場面が増えています。だからこそ、AI由来の接点がどのページに生まれているのか、どんな文脈で人を連れてきているのかを把握し、次に紹介されるためのページ設計へつなげる必要があります。
 				</p>
-				<a href={blogHref}>関連ノートを読む <Icon name="material-symbols:arrow-forward-rounded" /></a>
+				<div class="aicrawl-intro__links" aria-label="関連ノート">
+					{blogLinks.map((link) => (
+						<a href={link.href}>
+							{link.label}
+							<Icon name="material-symbols:arrow-forward-rounded" />
+						</a>
+					))}
+				</div>
 			</div>
 		</div>
 	</section>
@@ -1742,11 +1758,18 @@ const faqs = [
 			align-items: start;
 		}
 
+		.aicrawl-intro__links {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 10px;
+			margin-top: 20px;
+		}
+
 		.aicrawl-intro__body a {
 			display: inline-flex;
 			align-items: center;
 			gap: 6px;
-			margin-top: 20px;
 			color: var(--crawl-green);
 			font-weight: 950;
 			text-decoration: none;

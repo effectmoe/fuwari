@@ -8,7 +8,7 @@ imageAlt: "霧の港町でキャラクターが検索結果の光るパネルを
 tags: ["LLMO", "AI検索", "構造化データ", "E-E-A-T"]
 category: "AI"
 service: "aicrawl"
-course: "none"
+course: "eeat"
 badge: "AI検索"
 relatedLinks:
   - label: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
@@ -268,5 +268,3 @@ AI検索でも、人が読む記事でも、「誰が、どんな経験にもと
 派手さはありません。
 
 ただ、ここが割れていると、その先の努力が全部割り算になります。
-
-自分でAI検索、SEO、LLMO、E-E-A-Tの基礎を整理したい方は、ストアカの[AI検索×SEO×LLMO E-E-A-T実践講座](https://www.street-academy.com/myclass/216408)で扱っています。
