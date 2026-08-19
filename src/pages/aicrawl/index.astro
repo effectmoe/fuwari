@@ -698,6 +698,36 @@ const faqs = [
 		</div>
 	</section>
 
+	<section id="question-to-action" class="aicrawl-section aicrawl-visual-break" aria-labelledby="crawl-visual-break-title">
+		<div class="aicrawl-container aicrawl-visual-break__grid">
+			<div class="aicrawl-visual-break__copy">
+				<p class="aicrawl-eyebrow">AI CRAWL / QUESTION TO ACTION</p>
+				<h2 id="crawl-visual-break-title">AIに聞かれた時、あなたの会社は紹介されるか。</h2>
+				<p>
+					ユーザーがAIに投げる質問ごとに、どの候補が示され、どのページを直すべきかを確かめます。見つかり方を感覚で追わず、次に整えるページと導線を決める材料にします。
+				</p>
+				<ol aria-label="AI CRAWLで確認する流れ">
+					<li><b>01</b><span>質問の場面を決める</span></li>
+					<li><b>02</b><span>候補としての見え方を確かめる</span></li>
+					<li><b>03</b><span>改善するページを決める</span></li>
+				</ol>
+			</div>
+			<figure class="aicrawl-visual-break__image">
+				<picture>
+					<source media="(max-width: 700px)" srcset="/images/lp/ai-crawl-question-action-mobile.png" />
+					<img
+						src="/images/lp/ai-crawl-question-action-desktop.png"
+						alt="ユーザーの質問から候補ページを比較し、改善するページを決める様子"
+						loading="lazy"
+              width="1672"
+              height="941"
+					/>
+				</picture>
+				<figcaption>質問の場面から、次に改善するページを決める。</figcaption>
+			</figure>
+		</div>
+	</section>
+
 	<section id="case" class="aicrawl-section aicrawl-section--soft">
 		<div class="aicrawl-container aicrawl-case__grid">
 			<div>
@@ -1723,10 +1753,104 @@ const faqs = [
 			height: 20px;
 		}
 
-		.aicrawl-section-head {
-			max-width: 880px;
-			margin-bottom: 34px;
-		}
+	.aicrawl-section-head {
+		max-width: 880px;
+		margin-bottom: 34px;
+	}
+
+	.aicrawl-visual-break {
+		border-block: 1px solid var(--crawl-line);
+		background:
+			linear-gradient(135deg, rgba(238, 246, 235, 0.8), rgba(255, 250, 243, 0.94)),
+			var(--crawl-bg);
+	}
+
+	.aicrawl-visual-break__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+		gap: clamp(32px, 5vw, 74px);
+		align-items: center;
+	}
+
+	.aicrawl-visual-break__copy h2 {
+		max-width: 12em;
+		text-wrap: balance;
+	}
+
+	.aicrawl-visual-break__copy > p:not(.aicrawl-eyebrow) {
+		max-width: 36em;
+	}
+
+	.aicrawl-visual-break__copy ol {
+		display: grid;
+		gap: 10px;
+		margin: 26px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.aicrawl-visual-break__copy li {
+		display: grid;
+		grid-template-columns: 34px minmax(0, 1fr);
+		gap: 12px;
+		align-items: center;
+		border: 1px solid rgba(69, 111, 69, 0.24);
+		border-radius: 14px;
+		background: rgba(255, 255, 255, 0.7);
+		padding: 11px 14px;
+	}
+
+	.aicrawl-visual-break__copy li b {
+		display: grid;
+		width: 34px;
+		height: 34px;
+		place-items: center;
+		border-radius: 999px;
+		background: var(--crawl-green);
+		color: #fff;
+		font-size: 12px;
+		font-weight: 950;
+	}
+
+	.aicrawl-visual-break__copy li span {
+		color: var(--crawl-ink);
+		font-size: 15px;
+		font-weight: 850;
+	}
+
+	.aicrawl-visual-break__image {
+		position: relative;
+		margin: 0;
+		overflow: hidden;
+		border: 1px solid rgba(192, 175, 151, 0.82);
+		border-radius: 26px;
+		background: #f8f4ed;
+		box-shadow: 0 28px 70px rgba(50, 59, 42, 0.16);
+	}
+
+	.aicrawl-visual-break__image picture,
+	.aicrawl-visual-break__image img {
+		display: block;
+		width: 100%;
+	}
+
+	.aicrawl-visual-break__image img {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.aicrawl-visual-break__image figcaption {
+		position: absolute;
+		inset: auto 18px 18px 18px;
+		border: 1px solid rgba(255, 255, 255, 0.72);
+		border-radius: 12px;
+		background: rgba(23, 58, 32, 0.9);
+		color: #fff;
+		padding: 12px 16px;
+		font-size: clamp(15px, 1.6vw, 19px);
+		font-weight: 900;
+		line-height: 1.45;
+	}
 
 		.crawl-check-grid {
 			display: grid;
@@ -3745,6 +3869,7 @@ const faqs = [
 					.aicrawl-pricing-footnotes,
 					.aicrawl-case__grid,
 					.aicrawl-sample-card--citation,
+					.aicrawl-visual-break__grid,
 					.aicrawl-related__panel {
 						grid-template-columns: 1fr;
 					}
@@ -3880,6 +4005,38 @@ const faqs = [
 				font-size: 12px;
 				letter-spacing: 0.12em;
 				line-height: 1.5;
+			}
+
+			.aicrawl-visual-break {
+				padding-block: 64px;
+			}
+
+			.aicrawl-visual-break__copy h2 {
+				max-width: none;
+				font-size: clamp(30px, 8vw, 36px);
+				line-height: 1.2;
+			}
+
+			.aicrawl-visual-break__copy ol {
+				gap: 8px;
+			}
+
+			.aicrawl-visual-break__copy li {
+				padding: 10px 12px;
+			}
+
+			.aicrawl-visual-break__image {
+				border-radius: 22px;
+			}
+
+			.aicrawl-visual-break__image img {
+				aspect-ratio: 4 / 5;
+			}
+
+			.aicrawl-visual-break__image figcaption {
+				inset: auto 12px 12px;
+				padding: 10px 12px;
+				font-size: 15px;
 			}
 
 			.aicrawl-hero-label {

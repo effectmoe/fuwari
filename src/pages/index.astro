@@ -486,6 +486,36 @@ const faqLd = {
 		</div>
 	</section>
 
+	<section id="memory-context-action" class="lp-memory-visual" aria-labelledby="memory-visual-title">
+		<div class="lp-memory-visual__inner">
+			<div class="lp-memory-visual__copy">
+				<p>AI CENTRAL / CONTEXT TO ACTION</p>
+				<h2 id="memory-visual-title">メッセージの経緯を、次の対応へつなぐ。</h2>
+				<p>
+					資料・顧客情報・過去の対応・メッセージのやり取りを、案件ごとの文脈として整えます。AIが経緯と判断材料を先にまとめ、人が次の対応を決められる状態をつくります。
+				</p>
+				<ul aria-label="AIセントラルが整える流れ">
+					<li>経緯を見渡す</li>
+					<li>判断材料をそろえる</li>
+					<li>人が次の対応を決める</li>
+				</ul>
+			</div>
+			<figure class="lp-memory-visual__image">
+				<picture>
+					<source media="(max-width: 767px)" srcset="/images/lp/ai-central-memory-action-mobile.png" />
+					<img
+						src="/images/lp/ai-central-memory-action-desktop.png"
+						alt="資料と対応履歴を時系列で整理し、人が次の対応を承認する様子"
+						loading="lazy"
+              width="1672"
+              height="941"
+					/>
+				</picture>
+				<figcaption>経緯をまとめて、人が次の対応を決める。</figcaption>
+			</figure>
+		</div>
+	</section>
+
 		<StitchCoreSections />
 
 		<EvidenceDataSection />
@@ -1575,12 +1605,7 @@ const faqLd = {
 		box-shadow: 0 18px 44px rgba(55, 38, 12, 0.06);
 	}
 
-	.approval-tray-step:nth-child(2) {
-		transform: translateY(14px);
-	}
-
 	.approval-tray-step:nth-child(3) {
-		transform: translateY(28px);
 		border-color: rgba(109, 137, 91, 0.45);
 	}
 
@@ -2918,6 +2943,108 @@ const faqLd = {
 	.home-decision-panel .section-copy {
 		max-width: 1000px;
 		margin-bottom: clamp(2rem, 4vw, 3rem);
+	}
+
+	.lp-memory-visual {
+		border-bottom: 1px solid var(--outline-variant);
+		background:
+			linear-gradient(135deg, rgba(239, 247, 237, 0.82), rgba(255, 250, 243, 0.94)),
+			var(--page-bg);
+		padding: clamp(3.75rem, 8vw, 7rem) 1rem;
+	}
+
+	.lp-memory-visual__inner {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		align-items: center;
+		width: min(1240px, 100%);
+		margin-inline: auto;
+	}
+
+	.lp-memory-visual__copy {
+		z-index: 1;
+		grid-column: 1 / span 5;
+		grid-row: 1;
+		margin-left: clamp(1.25rem, 3vw, 3.5rem);
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+		border: 1px solid rgba(255, 255, 255, 0.7);
+		border-radius: 1.25rem;
+		background: rgba(255, 253, 248, 0.88);
+		box-shadow: 0 18px 48px rgba(48, 42, 30, 0.1);
+		backdrop-filter: blur(8px);
+	}
+
+	.lp-memory-visual__copy > p:first-child {
+		margin: 0;
+		color: var(--primary);
+		font-size: 0.78rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+	}
+
+	.lp-memory-visual__copy h2 {
+		max-width: 13em;
+		margin: 1rem 0 0;
+		color: var(--effect-ink);
+		font-size: clamp(2rem, 3.8vw, 3.6rem);
+		font-weight: 950;
+		line-height: 1.15;
+		text-wrap: balance;
+	}
+
+	.lp-memory-visual__copy > p:not(:first-child) {
+		margin: 1.35rem 0 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(1rem, 1.3vw, 1.13rem);
+		font-weight: 650;
+		line-height: 1.85;
+	}
+
+	.lp-memory-visual__copy ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		margin: 1.5rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.lp-memory-visual__copy li {
+		border: 1px solid rgba(109, 137, 91, 0.3);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.74);
+		color: #355a35;
+		padding: 0.55rem 0.85rem;
+		font-size: 0.84rem;
+		font-weight: 850;
+	}
+
+	.lp-memory-visual__image {
+		position: relative;
+		grid-column: 1 / -1;
+		grid-row: 1;
+		margin: 0;
+		overflow: hidden;
+		border: 1px solid rgba(210, 197, 178, 0.85);
+		border-radius: 1.5rem;
+		background: #f8f4ed;
+		box-shadow: 0 28px 68px rgba(50, 44, 31, 0.14);
+	}
+
+	.lp-memory-visual__image picture,
+	.lp-memory-visual__image img {
+		display: block;
+		width: 100%;
+	}
+
+	.lp-memory-visual__image img {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+
+	.lp-memory-visual__image figcaption {
+		display: none;
 	}
 
 	.decision-map {
@@ -5218,6 +5345,73 @@ const faqLd = {
 	}
 
 	@media (max-width: 767px) {
+		.lp-memory-visual {
+			padding: 3.5rem 18px;
+		}
+
+		.lp-memory-visual__inner {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.lp-memory-visual__copy,
+		.lp-memory-visual__image {
+			grid-column: auto;
+			grid-row: auto;
+		}
+
+		.lp-memory-visual__copy {
+			margin-left: 0;
+			padding: 0;
+			border: 0;
+			border-radius: 0;
+			background: transparent;
+			box-shadow: none;
+			backdrop-filter: none;
+		}
+
+		.lp-memory-visual__copy h2 {
+			max-width: none;
+			font-size: clamp(2rem, 9vw, 2.7rem);
+		}
+
+		.lp-memory-visual__copy > p:not(:first-child) {
+			font-size: 1rem;
+			line-height: 1.8;
+		}
+
+		.lp-memory-visual__copy ul {
+			display: grid;
+			grid-template-columns: 1fr;
+		}
+
+		.lp-memory-visual__copy li {
+			text-align: center;
+		}
+
+		.lp-memory-visual__image {
+			border-radius: 1.25rem;
+		}
+
+		.lp-memory-visual__image img {
+			aspect-ratio: 4 / 5;
+		}
+
+		.lp-memory-visual__image figcaption {
+			display: block;
+			position: absolute;
+			inset: auto 12px 12px;
+			border: 1px solid rgba(255, 255, 255, 0.76);
+			border-radius: 12px;
+			background: rgba(23, 58, 32, 0.9);
+			color: #fff;
+			padding: 10px 12px;
+			font-size: 15px;
+			font-weight: 900;
+			line-height: 1.45;
+			text-align: center;
+		}
+
 		.pricing-section {
 			padding-inline: 18px;
 		}
@@ -5359,11 +5553,6 @@ const faqLd = {
 
 		.approval-tray-heading h2 {
 			letter-spacing: -0.025em;
-		}
-
-		.approval-tray-step:nth-child(2),
-		.approval-tray-step:nth-child(3) {
-			transform: none;
 		}
 
 		.approval-tray-step__arrow {
