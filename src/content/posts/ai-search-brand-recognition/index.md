@@ -4,7 +4,7 @@ published: 2026-08-20
 description: "AI検索とLLMOでは、サイトの作り込みだけでなくブランド名をAIが知っているかが重要です。実測値から露出と引用の見方を整理します。"
 image: "./cover.jpg"
 thumbnail: "/blog-thumbs/ai-search-brand-recognition.jpg"
-imageAlt: "整えたウェブサイト、統一されたプロフィール情報、AI検索の回答画面が矢印でつながり、名前が認識される流れを示している"
+imageAlt: "AI検索は名前を知っているかで決まるという見出しと、サイトを整える、名前をそろえる、AIに認識される流れを3つのカードで示した図解"
 tags: ["LLMO", "AI検索", "構造化データ", "E-E-A-T"]
 category: "AI"
 service: "aicrawl"
