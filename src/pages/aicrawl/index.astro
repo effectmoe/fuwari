@@ -714,16 +714,19 @@ const faqs = [
 			</div>
 			<figure class="aicrawl-visual-break__image">
 				<picture>
-					<source media="(max-width: 700px)" srcset="/images/lp/ai-crawl-question-action-mobile.png" />
+					<source media="(max-width: 700px)" srcset="/images/lp/ai-crawl-site-route-mobile.png" />
 					<img
-						src="/images/lp/ai-crawl-question-action-desktop.png"
-						alt="ユーザーの質問から候補ページを比較し、改善するページを決める様子"
+						src="/images/lp/ai-crawl-site-route-desktop.png"
+						alt="AIが質問から候補ページを横断し、改善するページを見つける様子"
 						loading="lazy"
-              width="1672"
-              height="941"
+						width="1672"
+						height="941"
 					/>
 				</picture>
-				<figcaption>質問の場面から、次に改善するページを決める。</figcaption>
+				<figcaption>
+					<span>AI CRAWL の判断材料</span>
+					<strong>質問ごとに、次に整えるページを見つける。</strong>
+				</figcaption>
 			</figure>
 		</div>
 	</section>
@@ -1842,14 +1845,27 @@ const faqs = [
 	.aicrawl-visual-break__image figcaption {
 		position: absolute;
 		inset: auto 18px 18px 18px;
+		display: grid;
+		gap: 4px;
 		border: 1px solid rgba(255, 255, 255, 0.72);
-		border-radius: 12px;
-		background: rgba(23, 58, 32, 0.9);
+		border-radius: 14px;
+		background: linear-gradient(100deg, rgba(19, 56, 31, 0.96), rgba(45, 92, 53, 0.92));
+		box-shadow: 0 10px 24px rgba(24, 51, 31, 0.2);
 		color: #fff;
-		padding: 12px 16px;
-		font-size: clamp(15px, 1.6vw, 19px);
+		padding: 13px 17px 14px;
+	}
+
+	.aicrawl-visual-break__image figcaption span {
+		color: #dce8c4;
+		font-size: clamp(10px, 0.85vw, 12px);
 		font-weight: 900;
-		line-height: 1.45;
+		letter-spacing: 0.1em;
+	}
+
+	.aicrawl-visual-break__image figcaption strong {
+		font-size: clamp(16px, 1.7vw, 21px);
+		font-weight: 900;
+		line-height: 1.35;
 	}
 
 		.crawl-check-grid {
@@ -4033,11 +4049,15 @@ const faqs = [
 				aspect-ratio: 4 / 5;
 			}
 
-			.aicrawl-visual-break__image figcaption {
-				inset: auto 12px 12px;
-				padding: 10px 12px;
-				font-size: 15px;
-			}
+		.aicrawl-visual-break__image figcaption {
+			inset: auto 12px 12px;
+			gap: 3px;
+			padding: 10px 12px 11px;
+		}
+
+		.aicrawl-visual-break__image figcaption strong {
+			font-size: 15px;
+		}
 
 			.aicrawl-hero-label {
 				max-width: 100%;

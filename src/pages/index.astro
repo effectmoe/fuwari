@@ -678,6 +678,58 @@ const faqLd = {
 			</div>
 		</section>
 
+		<section class="lp-security-visual" aria-labelledby="security-visual-title">
+			<div class="lp-security-visual__inner">
+				<figure class="lp-security-visual__image">
+					<picture>
+						<source media="(max-width: 767px)" srcset="/images/lp/ai-central-security-approval-mobile.png" />
+						<img
+							src="/images/lp/ai-central-security-approval-desktop.png"
+							alt="資料を確認する担当者と、情報を伏せて扱うための盾とプライバシーパネル"
+							width="1814"
+							height="867"
+							loading="lazy"
+							decoding="async"
+						/>
+					</picture>
+					<div class="lp-security-visual__diagram" aria-label="安全設計の3段階">
+						<div class="lp-security-visual__diagram-title">
+							<span>AI CENTRAL / 安全設計</span>
+							<strong>情報をそのまま渡さない。</strong>
+						</div>
+						<ol>
+							<li>
+								<span>01</span>
+								<Icon name="material-symbols:visibility-off-outline" />
+								<strong>伏せる</strong>
+							</li>
+							<li>
+								<span>02</span>
+								<Icon name="material-symbols:account-tree-outline" />
+								<strong>分ける</strong>
+							</li>
+							<li>
+								<span>03</span>
+								<Icon name="material-symbols:verified-user-outline" />
+								<strong>人が確定する</strong>
+							</li>
+						</ol>
+					</div>
+				</figure>
+
+				<div class="lp-security-visual__copy">
+					<p>AI CENTRAL / 安全設計</p>
+					<h2 id="security-visual-title">AIに渡す前に、情報の扱いを決める。</h2>
+					<p>便利に使うことと、何でもAIへ渡すことは同じではありません。扱う情報と使う場面を先に分け、必要に応じて伏せたうえで、確認が必要な操作は人の手前で止めます。</p>
+					<ul>
+						<li><Icon name="material-symbols:visibility-off-outline" />必要に応じて個人情報を伏せる</li>
+						<li><Icon name="material-symbols:account-tree-outline" />業務ごとに参照範囲を分ける</li>
+						<li><Icon name="material-symbols:verified-user-outline" />送信・確定は人が確認する</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
 		<section class="lp-faq-section" id="faq">
 			<div class="lp-faq-section__inner">
 				<div class="lp-faq-section__header">
@@ -1738,6 +1790,164 @@ const faqLd = {
 		font-size: 13px;
 		font-weight: 650;
 		line-height: 1.65;
+	}
+
+	.lp-security-visual {
+		border-top: 1px solid rgba(210, 197, 178, 0.62);
+		background:
+			radial-gradient(circle at 80% 18%, rgba(182, 140, 60, 0.12), transparent 28%),
+			linear-gradient(180deg, #f7f9f4 0%, #fffdfa 100%);
+		padding: clamp(66px, 8vw, 112px) 24px;
+	}
+
+	.lp-security-visual__inner {
+		display: grid;
+		grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+		gap: clamp(28px, 5vw, 78px);
+		align-items: center;
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.lp-security-visual__image {
+		position: relative;
+		overflow: hidden;
+		margin: 0;
+		border: 1px solid rgba(109, 137, 91, 0.3);
+		border-radius: 1.35rem;
+		background: #e9e4d9;
+		box-shadow: 0 24px 56px rgba(46, 61, 37, 0.13);
+	}
+
+	.lp-security-visual__image picture,
+	.lp-security-visual__image img {
+		display: block;
+		width: 100%;
+	}
+
+	.lp-security-visual__image img {
+		aspect-ratio: 1814 / 867;
+		object-fit: cover;
+	}
+
+	.lp-security-visual__diagram {
+		position: absolute;
+		top: clamp(18px, 3vw, 40px);
+		left: clamp(22px, 4vw, 62px);
+		width: min(48%, 500px);
+		border: 1px solid rgba(255, 255, 255, 0.72);
+		border-radius: 1.05rem;
+		background: rgba(25, 48, 31, 0.9);
+		box-shadow: 0 14px 34px rgba(22, 39, 25, 0.2);
+		color: #fffdf7;
+		padding: clamp(14px, 1.6vw, 20px);
+	}
+
+	.lp-security-visual__diagram-title span {
+		display: block;
+		color: #e5c871;
+		font-size: clamp(10px, 0.9vw, 12px);
+		font-weight: 950;
+		letter-spacing: 0.12em;
+	}
+
+	.lp-security-visual__diagram-title strong {
+		display: block;
+		margin-top: 5px;
+		font-size: clamp(19px, 1.85vw, 29px);
+		font-weight: 950;
+		letter-spacing: -0.035em;
+		line-height: 1.15;
+	}
+
+	.lp-security-visual__diagram ol {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 6px;
+		margin: 13px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.lp-security-visual__diagram li {
+		display: grid;
+		grid-template-columns: 18px 20px minmax(0, 1fr);
+		align-items: center;
+		gap: 5px;
+		border: 1px solid rgba(255, 255, 255, 0.18);
+		border-radius: 0.62rem;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 8px 7px;
+	}
+
+	.lp-security-visual__diagram li > span {
+		color: #e7ca77;
+		font-size: 9px;
+		font-weight: 950;
+	}
+
+	.lp-security-visual__diagram li :global(svg) {
+		color: #dce9d4;
+		font-size: 18px;
+	}
+
+	.lp-security-visual__diagram li strong {
+		font-size: clamp(11px, 0.95vw, 14px);
+		font-weight: 950;
+		line-height: 1.15;
+	}
+
+	.lp-security-visual__copy > p:first-child {
+		margin: 0;
+		color: #88640d;
+		font-size: 12px;
+		font-weight: 950;
+		letter-spacing: 0.14em;
+	}
+
+	.lp-security-visual__copy h2 {
+		scroll-margin-top: 96px;
+		margin: 14px 0 0;
+		color: var(--effect-ink);
+		font-size: clamp(34px, 4.6vw, 64px);
+		font-weight: 950;
+		letter-spacing: -0.035em;
+		line-height: 1.08;
+	}
+
+	.lp-security-visual__copy > p:not(:first-child) {
+		margin: 20px 0 0;
+		color: var(--on-surface-variant);
+		font-size: clamp(15px, 1.3vw, 18px);
+		font-weight: 700;
+		line-height: 1.9;
+	}
+
+	.lp-security-visual__copy ul {
+		display: grid;
+		gap: 10px;
+		margin: 24px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.lp-security-visual__copy li {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		border: 1px solid rgba(210, 197, 178, 0.72);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.75);
+		padding: 12px 15px;
+		color: var(--effect-ink);
+		font-size: 14px;
+		font-weight: 900;
+	}
+
+	.lp-security-visual__copy li :global(svg) {
+		flex: 0 0 auto;
+		color: #6d895b;
+		font-size: 20px;
 	}
 
 	.lp-faq-section {
@@ -5567,6 +5777,66 @@ const faqLd = {
 			justify-content: center;
 			border-radius: 1rem;
 			text-align: center;
+		}
+
+		.lp-security-visual {
+			padding-inline: 18px;
+		}
+
+		.lp-security-visual__inner {
+			grid-template-columns: 1fr;
+			gap: 28px;
+		}
+
+		.lp-security-visual__copy {
+			order: -1;
+		}
+
+		.lp-security-visual__copy h2 {
+			font-size: clamp(32px, 9.2vw, 48px);
+			letter-spacing: -0.03em;
+		}
+
+		.lp-security-visual__copy > p:not(:first-child) {
+			font-size: 15px;
+			line-height: 1.82;
+		}
+
+		.lp-security-visual__copy li {
+			justify-content: flex-start;
+			border-radius: 1rem;
+			font-size: 14px;
+		}
+
+		.lp-security-visual__image img {
+			aspect-ratio: 864 / 1821;
+			object-position: center;
+		}
+
+		.lp-security-visual__diagram {
+			top: auto;
+			bottom: 18px;
+			left: 14px;
+			right: 14px;
+			width: auto;
+			border-radius: 1rem;
+			padding: 15px;
+		}
+
+		.lp-security-visual__diagram-title strong {
+			font-size: 21px;
+		}
+
+		.lp-security-visual__diagram ol {
+			grid-template-columns: 1fr;
+			gap: 5px;
+			margin-top: 10px;
+		}
+
+		.lp-security-visual__diagram li {
+			grid-template-columns: 20px 20px minmax(0, 1fr);
+			gap: 6px;
+			padding: 7px 8px;
 		}
 
 		.lp-faq-section,
