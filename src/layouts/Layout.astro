@@ -209,6 +209,21 @@ const aiCitationServiceLd = {
 	description:
 		"実際に ChatGPT と Gemini へ質問を投げ、その回答に自社が登場するかを複数回試行して計測するサービス。「AIに読まれたか」ではなく「AIの回答に載ったか」を測る。競合として挙がるドメインの特定、露出率の推移、改善後の再計測による効果判定までを行う。",
 };
+// 🔴 記事で扱う商品・サービスは、必ずここに Service ノードとして置く（2026-08-20 追加）。
+// ページ本文に書いてあっても @graph に無ければ、AI から見れば「知らないサービス」になる。
+// 検査: python3 ~/.claude/skills/astro-blog/tools/post-publish-audit.py <slug>
+const structuredDataServiceLd = {
+	"@type": "Service",
+	"@id": `${siteUrl}#service-structured-data`,
+	name: "構造化データ設計",
+	alternateName: ["構造化データ実装", "JSON-LD設計", "Schema.org実装", "スキーマ設計"],
+	serviceType: "構造化データ（JSON-LD / Schema.org）の設計・実装",
+	provider: { "@id": `${siteUrl}#organization` },
+	areaServed: "JP",
+	description:
+		"サイトの商品名・サービス名・著者情報を、検索エンジンと生成AIが機械的に読み取れる構造化データ（JSON-LD / Schema.org）として設計・実装するサービス。ページ本文に書いてあっても機械可読になっていなければAIの候補に入らないため、名称の統一と @graph への登録までを行う。",
+};
+
 const aiCentralServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-ai-central`,
@@ -286,7 +301,8 @@ const baseGraphLd: {
 	"@graph": Record<string, unknown>[];
 } = {
 	"@context": "https://schema.org",
-	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, aiCrawlServiceLd, aiCitationServiceLd, mcpServerLd],
+	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, aiCrawlServiceLd, aiCitationServiceLd,
+		structuredDataServiceLd, mcpServerLd],
 };
 
 const breadcrumbLabelMap: Record<string, string> = {

@@ -109,15 +109,11 @@ const blogPostingLd = {
 	inLanguage: inLang,
 };
 
-const breadcrumbLd = {
-	"@context": "https://schema.org",
-	"@type": "BreadcrumbList",
-	itemListElement: [
-		{ "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
-		{ "@type": "ListItem", position: 2, name: "ブログ", item: `${siteUrl}blog/` },
-		{ "@type": "ListItem", position: 3, name: entry.data.title, item: postUrl },
-	],
-};
+// 🔴 BreadcrumbList はここで出さない（2026-08-20 削除）。
+// Layout.astro が全ページ共通の @graph 内に @id 付きで出力しており、
+// ここでも出すと **同一ページに BreadcrumbList が2つ**並ぶ。
+// 中身が同一の重複は、どちらが採用されるか不定になる。
+// パンくずの階層を変えたい場合は Layout.astro の breadcrumbItems を直すこと。
 ---
 
 <LandingLayout
@@ -128,7 +124,6 @@ const breadcrumbLd = {
 	ogImageAlt={postImageAlt}
 >
 	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(blogPostingLd)}></script>
-	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)}></script>
 	<meta slot="head" property="article:published_time" content={formatDateToYYYYMMDD(entry.data.published)} />
 	<meta slot="head" property="article:modified_time" content={formatDateToYYYYMMDD(entry.data.updated || entry.data.published)} />
 	<meta slot="head" property="article:author" content={profileConfig.name} />
