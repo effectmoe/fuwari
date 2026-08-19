@@ -29,8 +29,14 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
     compact ? "inline-flex" : "card-base px-5 py-4",
     className,
 ]}>
+    {!compact && (
+        <div class="share-bar__label">
+            <span>{label}</span>
+            <small>読み返したい人に渡す</small>
+        </div>
+    )}
     <div class:list={[
-        "flex flex-row items-center flex-wrap",
+        "share-bar__actions flex flex-row items-center flex-wrap",
         compact ? "gap-1.5" : "gap-2",
     ]}>
         <!-- URL コピー -->
@@ -40,12 +46,12 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             aria-label="URLをコピー"
             title="URLをコピー"
             class:list={[
-                "share-btn flex items-center justify-center rounded-full transition active:scale-95 hover:scale-110",
-                compact ? "w-7 h-7" : "w-9 h-9",
+                "share-btn share-btn--copy flex items-center justify-center transition active:scale-95",
+                compact ? "w-8 h-8" : "",
             ]}
-            style="background: var(--btn-plain-bg); color: var(--btn-content);"
         >
             <Icon name="material-symbols:content-copy-rounded" class:list={[compact ? "text-[0.85rem]" : "text-[1.1rem]"]} />
+            {!compact && <span>URL</span>}
         </button>
 
         <!-- Facebook -->
@@ -56,10 +62,9 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             aria-label="Facebookで共有"
             title="Facebookで共有"
             class:list={[
-                "share-btn flex items-center justify-center rounded-full transition active:scale-95 hover:scale-110",
-                compact ? "w-7 h-7" : "w-9 h-9",
+                "share-btn flex items-center justify-center transition active:scale-95",
+                compact ? "w-8 h-8" : "",
             ]}
-            style="background: var(--btn-plain-bg); color: var(--btn-content);"
         >
             <Icon name="fa6-brands:facebook-f" class:list={[compact ? "text-[0.75rem]" : "text-[1rem]"]} />
         </a>
@@ -72,10 +77,9 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             aria-label="Xで共有"
             title="Xで共有"
             class:list={[
-                "share-btn flex items-center justify-center rounded-full transition active:scale-95 hover:scale-110",
-                compact ? "w-7 h-7" : "w-9 h-9",
+                "share-btn flex items-center justify-center transition active:scale-95",
+                compact ? "w-8 h-8" : "",
             ]}
-            style="background: var(--btn-plain-bg); color: var(--btn-content);"
         >
             <Icon name="fa6-brands:x-twitter" class:list={[compact ? "text-[0.75rem]" : "text-[1rem]"]} />
         </a>
@@ -88,10 +92,9 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
             aria-label="LinkedInで共有"
             title="LinkedInで共有"
             class:list={[
-                "share-btn flex items-center justify-center rounded-full transition active:scale-95 hover:scale-110",
-                compact ? "w-7 h-7" : "w-9 h-9",
+                "share-btn flex items-center justify-center transition active:scale-95",
+                compact ? "w-8 h-8" : "",
             ]}
-            style="background: var(--btn-plain-bg); color: var(--btn-content);"
         >
             <Icon name="fa6-brands:linkedin-in" class:list={[compact ? "text-[0.75rem]" : "text-[1rem]"]} />
         </a>
@@ -155,8 +158,76 @@ const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encod
 </script>
 
 <style>
+.share-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.share-bar.inline-flex {
+    display: inline-flex;
+}
+
+.share-bar__label {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.share-bar__label span {
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0;
+}
+
+.share-bar__label small {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.72rem;
+    line-height: 1.4;
+}
+
+:global(.dark) .share-bar__label small {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.share-bar__actions {
+    justify-content: flex-end;
+}
+
+.share-btn {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--primary) 7%, transparent);
+    color: var(--btn-content);
+}
+
+.share-btn--copy {
+    gap: 0.35rem;
+    min-width: 4.5rem;
+    padding-inline: 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
 .share-btn:hover {
-    background: var(--btn-plain-bg-hover) !important;
-    color: var(--primary) !important;
+    border-color: color-mix(in srgb, var(--primary) 36%, transparent);
+    background: color-mix(in srgb, var(--primary) 13%, transparent);
+    color: var(--primary);
+}
+
+@media (max-width: 640px) {
+    .share-bar:not(.inline-flex) {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .share-bar__actions {
+        justify-content: flex-start;
+    }
 }
 </style>
