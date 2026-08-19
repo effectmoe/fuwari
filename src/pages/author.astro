@@ -259,6 +259,7 @@ const relatedLinks = [
 					    「同一人物であることの明示」として置く。 */}
 					<p class="author-aka">
 						漢字表記：<span lang="ja">朱 剛明</span>（しゅ こうめい）／ラテン文字表記：Shu Koumei
+						<a class="author-aka__note" href="/posts/ai-search-brand-recognition/">なぜ表記を一つに揃えているか →</a>
 					</p>
 					<p class="author-lead">AIを「使える仕組み」に変える、構造化と実装の設計者。</p>
 					<p class="author-body">
@@ -687,6 +688,18 @@ const relatedLinks = [
 			line-height: 1.7;
 			opacity: 0.72;
 			letter-spacing: 0.01em;
+		}
+
+		.author-aka__note {
+			display: inline-block;
+			margin-left: 0.6em;
+			text-decoration: underline;
+			text-underline-offset: 0.2em;
+			white-space: nowrap;
+		}
+
+		.author-aka__note:hover {
+			opacity: 1;
 		}
 
 		.author-lead {
