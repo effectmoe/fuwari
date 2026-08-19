@@ -55,7 +55,7 @@ echo "   配信対象: $REF ($SHA) — $(git log -1 --format='%s' "$REF" | cut -
 # 未コミットの変更があるなら警告する。配信されるのは HEAD であって作業ツリーではない、
 # という食い違いを黙って通すと「直したはずなのに反映されない」事故になる。
 if ! git diff --quiet HEAD -- src public functions astro.config.mjs 2>/dev/null; then
-	echo "   ⚠️  未コミットの変更があります。**これらは配信されません**（配信されるのは $SHA）"
+	echo "   ⚠️  未コミットの変更があります。**これらは配信されません**（配信されるのは ${SHA}）"
 	git --no-pager diff --stat HEAD -- src public functions astro.config.mjs | sed 's/^/      /'
 fi
 
