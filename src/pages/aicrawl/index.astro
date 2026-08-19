@@ -502,20 +502,86 @@ const faqs = [
 				</div>
 			</div>
 
-			<figure class="aicrawl-hero-visual">
-				<picture>
-					<source media="(max-width: 700px)" srcset="/images/lp/ai-crawl-hero-patrol-mobile.png" />
-					<img
-						src="/images/lp/ai-crawl-hero-patrol-desktop.png"
-						alt="AIが企業サイトとサーバー環境を巡回し、質問から問い合わせまでの導線を見つける様子"
-						width="1672"
-						height="941"
-						loading="eager"
-						decoding="async"
-						fetchpriority="high"
-					/>
-				</picture>
-			</figure>
+			<div class="crawl-visual" aria-label="AI CRAWL 週次レポートの見本">
+				<div class="crawl-browser">
+					<div class="crawl-browser__bar">
+						<span></span><span></span><span></span>
+						<strong>AI CRAWL 週次レポート</strong>
+					</div>
+					<div class="crawl-browser__body">
+						<div class="report-title">
+							<div>
+								<span>REPORT</span>
+								<strong>AI流入週次レポート</strong>
+								<p>2026-04-12〜2026-07-28</p>
+							</div>
+							<em>自動集計</em>
+						</div>
+
+						<div class="report-kpis">
+							<div>
+								<span>AI由来の接点</span>
+								<strong>15,239</strong>
+								<p>受け入れ率 100%</p>
+							</div>
+							<div>
+								<span>AI経由の訪問</span>
+								<strong>29</strong>
+								<p>CV 0件</p>
+							</div>
+							<div>
+								<span>主要対話型AI</span>
+								<strong>9,248</strong>
+								<p>ChatGPT・Claude 等</p>
+							</div>
+						</div>
+
+						<div class="report-chart">
+							<div class="report-chart__head">
+								<span>日次のクロール数</span>
+								<strong>AI由来アクセスの推移</strong>
+							</div>
+							<div class="report-bars" aria-hidden="true">
+								<span style="--h: 28%"></span>
+								<span style="--h: 38%"></span>
+								<span style="--h: 31%"></span>
+								<span style="--h: 47%"></span>
+								<span style="--h: 26%"></span>
+								<span style="--h: 40%"></span>
+								<span style="--h: 84%"></span>
+								<span style="--h: 69%"></span>
+								<span style="--h: 47%"></span>
+								<span style="--h: 55%"></span>
+								<span style="--h: 43%"></span>
+								<span style="--h: 33%"></span>
+							</div>
+						</div>
+
+						<div class="report-insights">
+							<div>
+								<span>AI由来の接点が多いページ</span>
+								<strong>トップ / 会社概要 / サービスページ</strong>
+							</div>
+							<div>
+								<span>推定された流入動機</span>
+								<strong>料金確認・サービス比較・専門性確認</strong>
+							</div>
+							<div class="report-insights__highlight">
+								<span>今週の改善ポイント</span>
+								<strong>AI由来の接点があるページから、相談につながる導線を優先改善</strong>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="crawl-floating crawl-floating--left">
+					<Icon name="material-symbols:assignment" />
+					<span>診断レポート</span>
+				</div>
+				<div class="crawl-floating crawl-floating--right">
+					<Icon name="material-symbols:priority-high-rounded" />
+					<span>改善優先度つき</span>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -635,97 +701,34 @@ const faqs = [
 	<section id="question-to-action" class="aicrawl-section aicrawl-visual-break" aria-labelledby="crawl-visual-break-title">
 		<div class="aicrawl-container aicrawl-visual-break__grid">
 			<div class="aicrawl-visual-break__copy">
-				<p class="aicrawl-eyebrow">AI CRAWL / REPORT PREVIEW</p>
-				<h2 id="crawl-visual-break-title">AIが見つけた接点を、次の改善へつなげる。</h2>
-				<p>
-					AI CRAWLでは、AIと接点が生まれたページや、そこから訪問につながった状況をレポートに整理します。数字を見ることが目的ではなく、次にどのページと導線を整えるかを判断するための材料です。
-				</p>
-				<ol aria-label="AI CRAWLで確認する流れ">
-					<li><b>01</b><span>AIとの接点を確かめる</span></li>
-					<li><b>02</b><span>見られているページを整理する</span></li>
-					<li><b>03</b><span>次に直す導線を決める</span></li>
-				</ol>
-			</div>
-			<div class="crawl-visual" aria-label="AI CRAWL 週次レポートの見本">
-				<div class="crawl-browser">
-					<div class="crawl-browser__bar">
-						<span></span><span></span><span></span>
-						<strong>AI CRAWL 週次レポート</strong>
-					</div>
-					<div class="crawl-browser__body">
-						<div class="report-title">
-							<div>
-								<span>REPORT</span>
-								<strong>AI流入週次レポート</strong>
-								<p>2026-04-12〜2026-07-28</p>
-							</div>
-							<em>自動集計</em>
-						</div>
-
-						<div class="report-kpis">
-							<div>
-								<span>AI由来の接点</span>
-								<strong>15,239</strong>
-								<p>受け入れ率 100%</p>
-							</div>
-							<div>
-								<span>AI経由の訪問</span>
-								<strong>29</strong>
-								<p>CV 0件</p>
-							</div>
-							<div>
-								<span>主要対話型AI</span>
-								<strong>9,248</strong>
-								<p>ChatGPT・Claude 等</p>
-							</div>
-						</div>
-
-						<div class="report-chart">
-							<div class="report-chart__head">
-								<span>日次のクロール数</span>
-								<strong>AI由来アクセスの推移</strong>
-							</div>
-							<div class="report-bars" aria-hidden="true">
-								<span style="--h: 28%"></span>
-								<span style="--h: 38%"></span>
-								<span style="--h: 31%"></span>
-								<span style="--h: 47%"></span>
-								<span style="--h: 26%"></span>
-								<span style="--h: 40%"></span>
-								<span style="--h: 84%"></span>
-								<span style="--h: 69%"></span>
-								<span style="--h: 47%"></span>
-								<span style="--h: 55%"></span>
-								<span style="--h: 43%"></span>
-								<span style="--h: 33%"></span>
-							</div>
-						</div>
-
-						<div class="report-insights">
-							<div>
-								<span>AI由来の接点が多いページ</span>
-								<strong>トップ / 会社概要 / サービスページ</strong>
-							</div>
-							<div>
-								<span>推定された流入動機</span>
-								<strong>料金確認・サービス比較・専門性確認</strong>
-							</div>
-							<div class="report-insights__highlight">
-								<span>今週の改善ポイント</span>
-								<strong>AI由来の接点があるページから、相談につながる導線を優先改善</strong>
-							</div>
-						</div>
-					</div>
+					<p class="aicrawl-eyebrow">AI CRAWL / AUTONOMOUS PATROL</p>
+					<h2 id="crawl-visual-break-title">AIがサイトを巡回し、改善の入口を見つける。</h2>
+					<p>
+						AI CRAWLでは、AIによるサイト上の接点を、ページ・導線・流入の状態ごとに整理します。目的は、存在を確認することではありません。AIに見つけてもらった後に、どこを整えれば次の行動につながるかを見極めることです。
+					</p>
+					<ol aria-label="AI CRAWLで確認する流れ">
+						<li><b>01</b><span>AIが接点を見つける</span></li>
+						<li><b>02</b><span>流入につながるページを整理する</span></li>
+						<li><b>03</b><span>次に整える導線を決める</span></li>
+					</ol>
 				</div>
-				<div class="crawl-floating crawl-floating--left">
-					<Icon name="material-symbols:assignment" />
-					<span>診断レポート</span>
-				</div>
-				<div class="crawl-floating crawl-floating--right">
-					<Icon name="material-symbols:priority-high-rounded" />
-					<span>改善優先度つき</span>
-				</div>
-			</div>
+				<figure class="aicrawl-visual-break__image">
+					<picture>
+						<source media="(max-width: 700px)" srcset="/images/lp/ai-crawl-agent-patrol-mobile.png" />
+						<img
+							src="/images/lp/ai-crawl-agent-patrol-desktop.png"
+							alt="自律AIが企業サイトとサーバーを巡回し、改善対象のページを見つける様子"
+							width="1672"
+							height="941"
+							loading="lazy"
+							decoding="async"
+						/>
+					</picture>
+					<figcaption>
+						<span>AI CRAWL / AUTONOMOUS PATROL</span>
+						<strong>AIがサイトを巡回し、次に整える場所を見つける。</strong>
+					</figcaption>
+				</figure>
 		</div>
 	</section>
 
@@ -1266,26 +1269,6 @@ const faqs = [
 			grid-template-columns: minmax(0, 0.92fr) minmax(440px, 1.08fr);
 			gap: clamp(34px, 5vw, 74px);
 			align-items: center;
-		}
-
-		.aicrawl-hero-visual {
-			margin: 0;
-			overflow: hidden;
-			border: 1px solid rgba(192, 175, 151, 0.82);
-			border-radius: 28px;
-			background: #0f251a;
-			box-shadow: 0 32px 88px rgba(31, 54, 35, 0.24);
-		}
-
-		.aicrawl-hero-visual picture,
-		.aicrawl-hero-visual img {
-			display: block;
-			width: 100%;
-		}
-
-		.aicrawl-hero-visual img {
-			aspect-ratio: 1672 / 941;
-			object-fit: cover;
 		}
 
 		.aicrawl-eyebrow {
@@ -4064,26 +4047,23 @@ const faqs = [
 			}
 
 			.aicrawl-visual-break__image img {
-				aspect-ratio: 4 / 5;
+				aspect-ratio: 971 / 1619;
+				object-fit: contain;
+				background: #f6f3ea;
 			}
 
-			.aicrawl-hero-visual {
-				border-radius: 22px;
+			.aicrawl-visual-break__image figcaption {
+				position: static;
+				gap: 3px;
+				border-top: 1px solid rgba(196, 176, 145, 0.56);
+				border-radius: 0;
+				background: #183e2e;
+				padding: 11px 13px 12px;
 			}
 
-			.aicrawl-hero-visual img {
-				aspect-ratio: 1122 / 1402;
+			.aicrawl-visual-break__image figcaption strong {
+				font-size: 15px;
 			}
-
-		.aicrawl-visual-break__image figcaption {
-			inset: auto 12px 12px;
-			gap: 3px;
-			padding: 10px 12px 11px;
-		}
-
-		.aicrawl-visual-break__image figcaption strong {
-			font-size: 15px;
-		}
 
 			.aicrawl-hero-label {
 				max-width: 100%;
