@@ -1,16 +1,16 @@
 {
   "ratingValue": 4.95,
   "reviewCount": 236,
-  "studentsTaught": 541,
-  "repeatStudents": 308,
-  "repeatRate": 56.9,
-  "sessionsTaught": 517,
-  "salesTotal": 2551150,
+  "studentsTaught": 542,
+  "repeatStudents": 309,
+  "repeatRate": 57,
+  "sessionsTaught": 518,
+  "salesTotal": 2554150,
   "badge": "プラチナ",
   "badgeDetail": null,
   "periodStart": "2019年1月1日",
-  "periodEnd": "2026年8月20日",
-  "updatedAt": "2026-08-19T21:00:26.326Z",
+  "periodEnd": "2026年8月21日",
+  "updatedAt": "2026-08-20T21:00:24.502Z",
   "source": "https://www.street-academy.com/dashboard/steachers",
   "testimonials": [
     {
@@ -118,5 +118,5 @@
       "text": "とても参考になります。グループでの学びもたのしくさんかさせてもらってます！"
     }
   ],
-  "testimonialsUpdatedAt": "2026-08-19T21:01:04.546Z"
+  "testimonialsUpdatedAt": "2026-08-20T21:01:27.869Z"
 }
