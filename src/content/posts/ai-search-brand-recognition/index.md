@@ -19,6 +19,8 @@ relatedLinks:
     href: "/aicrawl/"
   - label: "著者プロフィール"
     href: "/author/"
+  - label: "タイトルに検索キーワードを入れるSEO改善術"
+    href: "/posts/keyword-in-title-seo/"
 sourceLinks:
   - label: "How To Make Your Brand Discoverable in AI Search"
     href: "https://moz.com/blog/make-your-brand-discoverable-ai-search"

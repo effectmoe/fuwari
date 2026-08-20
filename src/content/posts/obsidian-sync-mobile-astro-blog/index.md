@@ -12,6 +12,10 @@ relatedLinks:
     href: "/posts/obsidian-claude-idea-source/"
   - label: "Astro × Fuwari で作る一気通貫ブログ運用"
     href: "/posts/astro-fuwari-workflow-vs-wordpress/"
+  - label: "Astro が選ばれる4つの理由：コンテンツ駆動サイト最強の本命"
+    href: "/posts/why-astro-content-framework/"
+  - label: "Astro でチームブログを運用するための 4 つの選択肢：個人から段階的に…"
+    href: "/posts/astro-team-blog-collaboration-tiers/"
 faq:
   - q: "Obsidian Sync はブログ運用に必須ですか？"
     a: "必須ではありません。ただし、スマホからメモや下書きを追加できるため、Markdown中心のブログ運用を日常の思いつきまで広げやすくなります。"

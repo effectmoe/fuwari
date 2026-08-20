@@ -12,6 +12,10 @@ relatedLinks:
     href: "/posts/astro-fuwari-workflow-vs-wordpress/"
   - label: "なぜ Notion を CMS にすると面倒くさいのか"
     href: "/posts/why-notion-cms-is-painful-for-astro/"
+  - label: "Astro が選ばれる4つの理由：コンテンツ駆動サイト最強の本命"
+    href: "/posts/why-astro-content-framework/"
+  - label: "Obsidian でブログ運用するときのモバイル問題：Obsidian Sy…"
+    href: "/posts/obsidian-sync-mobile-astro-blog/"
 faq:
   - q: "Astroでチームブログは運用できますか？"
     a: "可能です。Astro本体ではなく、執筆UI、レビュー、権限管理のレイヤーをどう足すかが論点になります。"

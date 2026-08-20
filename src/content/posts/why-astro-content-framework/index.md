@@ -12,6 +12,8 @@ relatedLinks:
     href: "/posts/astro-fuwari-workflow-vs-wordpress/"
   - label: "Astro でチームブログを運用するための4つの選択肢"
     href: "/posts/astro-team-blog-collaboration-tiers/"
+  - label: "Obsidian でブログ運用するときのモバイル問題：Obsidian Sy…"
+    href: "/posts/obsidian-sync-mobile-astro-blog/"
 faq:
   - q: "Astroはどんなサイトに向いていますか？"
     a: "ブログ、メディア、ドキュメント、コーポレートサイトのように、文章やページ構造が中心になるサイトに向いています。"

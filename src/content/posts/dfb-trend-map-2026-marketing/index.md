@@ -15,6 +15,8 @@ relatedLinks:
     href: "/posts/ai-crawl-citation-strategy/"
   - label: "AI検索は「サイトの出来」ではなく「名前を知っているか」で決まっていた"
     href: "/posts/ai-search-brand-recognition/"
+  - label: "Astro が選ばれる4つの理由：コンテンツ駆動サイト最強の本命"
+    href: "/posts/why-astro-content-framework/"
 faq:
   - q: "LLMO、GEO、AEO、AIO は何が違いますか？"
     a: "いずれもAI検索や回答エンジンで見つけられやすくする考え方です。細かな定義よりも、検索順位だけでなくAI回答にどう扱われるかを見る必要がある点が重要です。"

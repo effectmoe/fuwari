@@ -14,6 +14,8 @@ relatedLinks:
     href: "/posts/dfb-trend-map-2026-marketing/"
   - label: "Google 検索セントラル：タイトルリンクの作り方（公式）"
     href: "https://developers.google.com/search/docs/appearance/title-link?hl=ja"
+  - label: "AI検索は「サイトの出来」ではなく「名前を知っているか」で決まっていた"
+    href: "/posts/ai-search-brand-recognition/"
 faq:
   - q: "LLMO って何ですか？"
     a: "ChatGPT や Claude などの AI に、自分のページを引用・参照してもらいやすくする工夫のことです。AI も「探している言葉がタイトルに入っているページ」を信頼しやすいので、タイトル最適化は LLMO にも効きます。"

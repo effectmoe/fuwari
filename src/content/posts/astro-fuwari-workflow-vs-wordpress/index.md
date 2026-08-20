@@ -19,6 +19,10 @@ relatedLinks:
     href: "/posts/why-astro-content-framework/"
   - label: "なぜ Notion を CMS にすると面倒くさいのか"
     href: "/posts/why-notion-cms-is-painful-for-astro/"
+  - label: "Obsidian でブログ運用するときのモバイル問題：Obsidian Sy…"
+    href: "/posts/obsidian-sync-mobile-astro-blog/"
+  - label: "Obsidian × Claude でメモを「アイデア源」に変える3つの方法"
+    href: "/posts/obsidian-claude-idea-source/"
 faq:
   - q: "Astro Fuwari と WordPress の大きな違いは何ですか？"
     a: "Astro Fuwari はMarkdownを中心に静的HTMLへ変換する運用で、AIやGitと接続しやすい点が特徴です。WordPressは管理画面中心で、非技術者でも扱いやすい反面、変換や運用の自由度に制約が出ることがあります。"
