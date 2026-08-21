@@ -1,0 +1,148 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	term: string;
+	description: string;
+}
+
+const { term, description } = Astro.props;
+const termSlug = term
+	.toLowerCase()
+	.replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff]/g, "");
+const hintId = `term-hint-${termSlug}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class="term-hint">
+	<span class="term-hint__term">{term}</span>
+	<button
+		type="button"
+		class="term-hint__button"
+		aria-label={`${term}の説明を開く`}
+		aria-expanded="false"
+		aria-controls={hintId}
+		data-term-hint-button
+	>
+		<Icon name="material-symbols:help-outline-rounded" aria-hidden="true" />
+	</button>
+	<span id={hintId} class="term-hint__panel" role="note" hidden data-term-hint-panel>{description}</span>
+</span>
+
+<style>
+	.term-hint {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.16em;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	.term-hint__term {
+		font-weight: 700;
+	}
+
+	.term-hint__button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.15em;
+		height: 1.15em;
+		padding: 0;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--primary, #3f6d42);
+		cursor: pointer;
+		vertical-align: middle;
+	}
+
+	.term-hint__button :global(svg) {
+		width: 0.82em;
+		height: 0.82em;
+	}
+
+	.term-hint__button:focus-visible {
+		outline: 2px solid var(--primary, #3f6d42);
+		outline-offset: 2px;
+	}
+
+	.term-hint__panel {
+		position: absolute;
+		z-index: 30;
+		bottom: calc(100% + 0.65rem);
+		left: 50%;
+		width: min(19rem, calc(100vw - 3rem));
+		padding: 0.72rem 0.82rem;
+		border: 1px solid color-mix(in srgb, var(--primary, #3f6d42) 32%, transparent);
+		border-radius: 0.55rem;
+		background: var(--card-bg, #fff);
+		box-shadow: 0 14px 30px rgb(17 24 39 / 18%);
+		color: var(--text-color, #1f2937);
+		font-size: 0.83rem;
+		font-weight: 500;
+		line-height: 1.6;
+		letter-spacing: 0;
+		text-align: left;
+		transform: translateX(-50%);
+	}
+
+	.term-hint__panel[hidden] {
+		display: none;
+	}
+
+	@media (max-width: 640px) {
+		.term-hint__panel {
+			left: auto;
+			right: 0;
+			transform: none;
+		}
+	}
+</style>
+
+<script>
+	const closeAllHints = (except?: HTMLElement) => {
+		document.querySelectorAll<HTMLElement>("[data-term-hint-panel]").forEach((panel) => {
+			if (panel === except) return;
+			panel.hidden = true;
+			const button = document.querySelector<HTMLButtonElement>(`[aria-controls="${panel.id}"]`);
+			button?.setAttribute("aria-expanded", "false");
+		});
+	};
+
+	const wireTermHints = () => {
+		document.querySelectorAll<HTMLButtonElement>("[data-term-hint-button]").forEach((button) => {
+			if (button.dataset.termHintReady) return;
+			button.dataset.termHintReady = "true";
+			const panelId = button.getAttribute("aria-controls");
+			const panel = panelId ? document.getElementById(panelId) : null;
+			if (!panel) return;
+
+			button.addEventListener("click", (event) => {
+				event.stopPropagation();
+				const willOpen = panel.hidden;
+				closeAllHints(panel);
+				panel.hidden = !willOpen;
+				button.setAttribute("aria-expanded", String(willOpen));
+			});
+		});
+	};
+
+	if (!document.documentElement.dataset.termHintGlobalReady) {
+		document.documentElement.dataset.termHintGlobalReady = "true";
+		document.addEventListener("click", (event) => {
+			if ((event.target as Element).closest(".term-hint")) return;
+			closeAllHints();
+		});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") closeAllHints();
+		});
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", wireTermHints, { once: true });
+	} else {
+		wireTermHints();
+	}
+	document.addEventListener("swup:contentReplaced", wireTermHints);
+	document.addEventListener("swup:content:replace", wireTermHints);
+</script>
