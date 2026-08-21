@@ -932,7 +932,7 @@ const faqLd = {
 			const reportLine = /^[a-f0-9]{12}$/.test(reportId) ? `\n診断レポート: https://report.effect.moe/${reportId}` : "";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
 			if (messageField && !messageField.value) {
-				messageField.value = `無料LLMO診断のレポートを見て、対策方法について相談したいです。${reportLine}`;
+				messageField.value = `無料LLMO診断のレポートを見て、LLMO対策を依頼したいと考えています。${reportLine}`;
 			}
 		}
 
