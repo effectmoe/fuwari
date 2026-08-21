@@ -1,4 +1,9 @@
 import sitemap from "@astrojs/sitemap";
+import { execFileSync } from "node:child_process";
+import { existsSync, readdirSync, statSync } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
@@ -23,6 +28,80 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
+
+const projectRoot = fileURLToPath(new URL(".", import.meta.url));
+const sitemapDateCache = new Map();
+
+/**
+ * 生成時に、URLに対応する公開ソースの最終Git更新日を返す。
+ * Git情報のない環境ではファイル更新日時にフォールバックするため、
+ * sitemap.xml の lastmod が空のままにならない。
+ */
+function getSourceModifiedDate(sourcePath) {
+	if (!sourcePath || sitemapDateCache.has(sourcePath)) {
+		return sitemapDateCache.get(sourcePath);
+	}
+
+	const absolutePath = path.join(projectRoot, sourcePath);
+	if (!existsSync(absolutePath)) {
+		sitemapDateCache.set(sourcePath, undefined);
+		return undefined;
+	}
+
+	let date;
+	let dateOnly;
+	try {
+		const output = execFileSync("git", ["log", "-1", "--format=%cI", "--", sourcePath], {
+			cwd: projectRoot,
+			encoding: "utf8",
+			stdio: ["ignore", "pipe", "ignore"],
+		}).trim();
+		if (output) {
+			date = new Date(output);
+			dateOnly = output.slice(0, 10);
+		}
+	} catch {
+		// Cloudflareのビルド環境など、Git履歴がないケースは下記にフォールバックする。
+	}
+
+	if (!date || Number.isNaN(date.getTime())) {
+		date = statSync(absolutePath).mtime;
+		dateOnly = date.toISOString().slice(0, 10);
+	}
+
+	const result = { date, dateOnly };
+	sitemapDateCache.set(sourcePath, result);
+	return result;
+}
+
+function newestDate(sourcePaths) {
+	const dates = sourcePaths.map(getSourceModifiedDate).filter(Boolean);
+	return dates.length ? dates.reduce((latest, current) => current.date > latest.date ? current : latest) : undefined;
+}
+
+function getSitemapLastmod(url) {
+	const pathname = decodeURIComponent(new URL(url).pathname);
+
+	if (pathname.startsWith("/posts/")) {
+		const slug = pathname.replace(/^\/posts\//, "").replace(/\/$/, "");
+		return getSourceModifiedDate(`src/content/posts/${slug}/index.md`) ??
+			getSourceModifiedDate(`src/content/posts/${slug}.md`);
+	}
+
+	// ブログ・アーカイブは、一覧で見える最新記事の更新日に合わせる。
+	if (pathname === "/blog/" || /^\/blog\/\d+\/$/.test(pathname) || pathname === "/archive/") {
+		return newestDate([
+			pathname === "/archive/" ? "src/pages/archive.astro" : "src/pages/blog/[...page].astro",
+			"src/content/posts",
+		]);
+	}
+
+	const route = pathname === "/" ? "index" : pathname.replace(/^\//, "").replace(/\/$/, "");
+	return getSourceModifiedDate(`src/pages/${route}.astro`) ??
+		getSourceModifiedDate(`src/pages/${route}/index.astro`);
+}
+
+const sitemapIndexLastmod = newestDate(["src/pages", "src/content/posts"]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -119,6 +198,8 @@ export default defineConfig({
 		}),
         svelte(),
 		sitemap({
+			// sitemap-index.xml 側にも、配下のURL群を最後に更新した日を明示する。
+			lastmod: sitemapIndexLastmod?.date,
 			filter: (page) => {
 				const pathname = new URL(page).pathname;
 				return !pathname.startsWith("/admin/") &&
@@ -127,7 +208,29 @@ export default defineConfig({
 					pathname !== "/diagnosis/" &&
 					pathname !== "/about/";
 			},
+			serialize: (item) => {
+				const lastmod = getSitemapLastmod(item.url);
+				return lastmod ? { ...item, lastmod: lastmod.dateOnly } : item;
+			},
 		}),
+		{
+			name: "effect-sitemap-lastmod-date-only",
+			hooks: {
+				"astro:build:done": async ({ dir }) => {
+					const outputDir = fileURLToPath(dir);
+					const sitemapFiles = readdirSync(outputDir).filter((file) => /^sitemap(?:-index|-\d+)?\.xml$/.test(file));
+					await Promise.all(sitemapFiles.map(async (file) => {
+						const filePath = path.join(outputDir, file);
+						const xml = await readFile(filePath, "utf8");
+						let dateOnlyXml = xml.replace(/<lastmod>(\d{4}-\d{2}-\d{2})T[^<]+<\/lastmod>/g, "<lastmod>$1</lastmod>");
+						if (file === "sitemap-index.xml" && sitemapIndexLastmod?.dateOnly) {
+							dateOnlyXml = dateOnlyXml.replace(/<lastmod>[^<]+<\/lastmod>/, `<lastmod>${sitemapIndexLastmod.dateOnly}</lastmod>`);
+						}
+						if (dateOnlyXml !== xml) await writeFile(filePath, dateOnlyXml);
+					}));
+				},
+			},
+		},
 	],
 	markdown: {
 		remarkPlugins: [
