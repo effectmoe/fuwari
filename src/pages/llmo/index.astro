@@ -141,34 +141,25 @@ const faqLd = {
 	<section class="llmo-section llmo-section--proof" id="operator">
 		<div class="llmo-container">
 			<div class="llmo-public-proof">
-				<div class="llmo-public-proof__heading">
+				<div class="llmo-public-proof__content">
 					<p class="llmo-eyebrow">E-E-A-T / PUBLIC PROOF</p>
-					<h2>公開された受講実績を、説明の根拠にする。</h2>
+					<h2>公開されたレビューを、運用の根拠にする。</h2>
 					<p>ストアカで継続してAI活用を教え、公開レビューを受けている実践者が、LLMOの考え方だけで終わらせず、サービス・根拠・FAQをどの順で確かめるかまで整理します。ストアカの講座実績は販売の主役ではなく、運用者の第三者評価を確認できる公開情報です。</p>
-				</div>
-				<div class="llmo-public-proof__identity">
-					<img src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" />
-					<div><span>AI CRAWL 運用・LLMOガイド執筆</span><strong>シュ コウメイ</strong><em>ストアカ {stats.badge}ランク講師</em></div>
-				</div>
-				<div class="llmo-public-proof__source">ストアカ掲載情報・公開レビュー　/　{stats.periodEnd}時点</div>
-				<div class="llmo-public-proof__stats" aria-label="ストアカ公開実績">
-					<div><strong>★{stats.ratingValue}</strong><span>講座レビュー評価</span></div>
-					<div><strong>{stats.reviewCount}件</strong><span>公開レビュー</span></div>
-					<div><strong>{stats.studentsTaught}人</strong><span>累計受講者</span></div>
-					<div><strong>{stats.sessionsTaught}回</strong><span>講座開催</span></div>
-					<div><strong>{stats.badge}</strong><span>講師ランク</span></div>
-				</div>
-				<div class="llmo-proof-chain" aria-label="公開レビューがLLMOガイドとAI CRAWLの運用根拠につながる流れ">
-					<span>ストアカの<br />公開レビュー</span><Icon name="material-symbols:arrow-forward-rounded" /><span>LLMOガイドの<br />実務知見</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>AI CRAWLの<br />分析・監視</strong>
-				</div>
-				{proofReviews.length > 0 && <div class="llmo-public-proof__reviews" aria-label="ストアカの公開レビュー">
-					{proofReviews.map((review) => <article><p>ストアカの公開レビュー（他AI講座を含む）</p><h3>{review.headline}</h3><blockquote>「{review.text}」</blockquote><span>{review.course}　/　{review.reviewer}　/　{review.date}</span></article>)}
-				</div>}
-				<div class="llmo-public-proof__actions">
+					<div class="llmo-proof-chain" aria-label="公開レビューがLLMOガイドとAI CRAWLの運用根拠につながる流れ">
+						<span>公開レビュー</span><Icon name="material-symbols:arrow-forward-rounded" /><span>LLMOガイド</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>AI CRAWLの分析・監視</strong>
+					</div>
+					<div class="llmo-public-proof__actions">
 					<a class="llmo-action-button llmo-action-button--secondary" href={storacaProfileUrl} target="_blank" rel="noopener noreferrer">ストアカの公開実績を見る <Icon name="material-symbols:open-in-new-rounded" /></a>
 					<a class="llmo-action-button llmo-action-button--primary" href="/aicrawl/">AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 				</div>
-				<p class="llmo-public-proof__note">レビューと評価はストアカの公開ページで確認できます。第三者サイト上の評価を、このページの構造化データへ転載・再集計することはしていません。</p>
+					<p class="llmo-public-proof__note">レビューと評価はストアカの公開ページで確認できます。第三者サイト上の評価を、このページの構造化データへ転載・再集計することはしていません。</p>
+				</div>
+				<aside class="llmo-review-showcase" aria-label="ストアカの公開レビューによる第三者評価">
+					<div class="llmo-review-showcase__ribbon"><span>STREET ACADEMY</span><strong>公開レビューを確認できる</strong><small>{stats.periodEnd}時点</small></div>
+					<div class="llmo-review-showcase__rating"><span aria-label="5段階評価の星">★★★★★</span><strong>{stats.ratingValue}<small> / 5</small></strong><em>公開レビュー {stats.reviewCount}件</em></div>
+					<div class="llmo-review-showcase__operator"><img src={storacaTeacherAvatar.src} alt="シュ コウメイ" loading="lazy" /><div><span>AI CRAWL 運用・LLMOガイド執筆</span><strong>シュ コウメイ</strong><em>{stats.badge}ランク講師</em></div></div>
+					{proofReviews[0] && <article class="llmo-review-showcase__quote"><p>ストアカの公開レビュー（他AI講座を含む）</p><Icon name="material-symbols:format-quote-outline" /><blockquote>「自己流で遠回りしていた部分も整理され、とても参考になった有益な講座でした。」</blockquote><span>{proofReviews[0].course}　/　{proofReviews[0].reviewer}　/　{proofReviews[0].date}</span></article>}
+				</aside>
 			</div>
 
 			<aside class="llmo-next-step" aria-label="LLMO対策の次の行動を選ぶ">
@@ -511,6 +502,41 @@ const faqLd = {
 		.llmo-action-button--secondary:hover { background: #1c1b1b; color: #fff; }
 		.llmo-public-proof__note { grid-column: 1 / -1; margin: 0; border-top: 1px solid rgba(28, 27, 27, .15); padding: 0 clamp(24px, 4vw, 34px) 28px; color: #756140; font-size: 12px; font-weight: 600; line-height: 1.65; }
 
+		/* Stitchのレビュー主役案：数値表ではなく、出典・人物・レビュー本文を一つの証拠面として見せる */
+		.llmo-public-proof { grid-template-columns: minmax(0, 1fr) minmax(400px, .92fr); align-items: stretch; background: #fffdf9; }
+		.llmo-public-proof__content { display: grid; align-content: center; padding: clamp(34px, 5vw, 64px); }
+		.llmo-public-proof__content h2 { max-width: 600px; margin: 12px 0 20px; color: var(--llmo-ink); font-size: clamp(30px, 3.2vw, 45px); letter-spacing: -.055em; line-height: 1.2; }
+		.llmo-public-proof__content > p:not(.llmo-eyebrow):not(.llmo-public-proof__note) { max-width: 600px; margin: 0; color: var(--llmo-muted); font-size: 16px; font-weight: 600; line-height: 1.9; }
+		.llmo-public-proof__content .llmo-proof-chain { display: flex; grid-column: auto; justify-content: flex-start; gap: 10px; margin: 34px 0; border: 0; background: transparent; padding: 0; text-align: left; }
+		.llmo-public-proof__content .llmo-proof-chain span, .llmo-public-proof__content .llmo-proof-chain strong { min-height: 0; border: 0; background: transparent; padding: 0; color: var(--llmo-ink); font-size: 12px; font-weight: 900; line-height: 1.35; }
+		.llmo-public-proof__content .llmo-proof-chain strong { color: #7b5807; }
+		.llmo-public-proof__content .llmo-proof-chain svg { width: 18px; height: 18px; color: #b68c3c; }
+		.llmo-public-proof__content .llmo-public-proof__actions { grid-column: auto; border: 0; padding: 0; }
+		.llmo-public-proof__content .llmo-public-proof__note { grid-column: auto; margin-top: 17px; border: 0; padding: 0; }
+		.llmo-review-showcase { position: relative; display: grid; align-content: start; gap: 18px; overflow: hidden; background: linear-gradient(145deg, #28392e, #16291f); padding: clamp(28px, 4vw, 46px); color: #fff; }
+		.llmo-review-showcase::before { position: absolute; top: -90px; right: -80px; width: 290px; height: 290px; border: 1px solid rgba(229, 199, 125, .42); border-radius: 50%; content: ""; }
+		.llmo-review-showcase::after { position: absolute; right: 28px; bottom: 24px; width: 92px; height: 92px; border-radius: 50%; background: rgba(229, 199, 125, .13); content: ""; }
+		.llmo-review-showcase__ribbon, .llmo-review-showcase__rating, .llmo-review-showcase__operator, .llmo-review-showcase__quote { position: relative; z-index: 1; }
+		.llmo-review-showcase__ribbon { display: flex; flex-wrap: wrap; align-items: center; gap: 9px 12px; }
+		.llmo-review-showcase__ribbon span { border: 1px solid rgba(229, 199, 125, .68); padding: 6px 9px; color: #f6d98e; font-size: 10px; font-weight: 900; letter-spacing: .11em; }
+		.llmo-review-showcase__ribbon strong { color: rgba(255, 255, 255, .84); font-size: 12px; font-weight: 800; }
+		.llmo-review-showcase__ribbon small { color: rgba(255, 255, 255, .58); font-size: 10px; font-weight: 700; }
+		.llmo-review-showcase__rating { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: end; border-bottom: 1px solid rgba(255, 255, 255, .2); padding: 5px 0 20px; }
+		.llmo-review-showcase__rating > span { grid-column: 1 / -1; color: #f1c65f; font-size: 18px; letter-spacing: .15em; }
+		.llmo-review-showcase__rating strong { color: #fff; font-size: clamp(42px, 4vw, 58px); font-weight: 950; letter-spacing: -.07em; line-height: .92; }
+		.llmo-review-showcase__rating small { color: rgba(255, 255, 255, .68); font-size: 16px; letter-spacing: 0; }
+		.llmo-review-showcase__rating em { margin-bottom: 3px; color: #f6d98e; font-size: 13px; font-style: normal; font-weight: 900; }
+		.llmo-review-showcase__operator { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 12px; align-items: center; }
+		.llmo-review-showcase__operator img { width: 58px; height: 58px; border: 2px solid rgba(255, 255, 255, .92); border-radius: 50%; object-fit: cover; }
+		.llmo-review-showcase__operator span { display: block; color: #f6d98e; font-size: 10px; font-weight: 900; letter-spacing: .06em; line-height: 1.35; }
+		.llmo-review-showcase__operator strong { display: inline-block; margin-top: 2px; color: #fff; font-size: 21px; line-height: 1.2; }
+		.llmo-review-showcase__operator em { display: inline-block; margin-left: 7px; color: rgba(255, 255, 255, .74); font-size: 10px; font-style: normal; font-weight: 800; }
+		.llmo-review-showcase__quote { min-height: 225px; background: #fffdf9; padding: 22px 22px 20px; color: var(--llmo-ink); box-shadow: 12px 12px 0 rgba(182, 140, 60, .38); transform: rotate(-1.2deg); }
+		.llmo-review-showcase__quote p { margin: 0; color: #7b5807; font-size: 10px; font-weight: 900; letter-spacing: .05em; line-height: 1.45; }
+		.llmo-review-showcase__quote > svg { width: 31px; height: 31px; margin: 12px 0 2px; color: #b68c3c; }
+		.llmo-review-showcase__quote blockquote { margin: 0; color: #1c1b1b; font-size: clamp(16px, 1.65vw, 21px); font-weight: 800; letter-spacing: -.025em; line-height: 1.7; }
+		.llmo-review-showcase__quote > span { display: block; margin-top: 13px; color: #756140; font-size: 9px; font-weight: 700; line-height: 1.5; }
+
 		.llmo-section--proof .llmo-next-step { margin-top: clamp(40px, 6vw, 74px); border: 1px solid rgba(28, 27, 27, .16); border-radius: 0; background: #fff; }
 		.llmo-section--proof .llmo-next-step__intro { border-bottom: 1px solid rgba(28, 27, 27, .16); background: #fff; }
 		.llmo-section--proof .llmo-next-step__actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -524,8 +550,8 @@ const faqLd = {
 		.llmo-related-grid b { width: fit-content; border: 1px solid rgba(28, 27, 27, .38); padding: 10px 12px; color: #1c1b1b; font-weight: 850; }
 		.llmo-related-grid a:hover b { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
 
-		@media (max-width: 900px) { .llmo-hero__visual.llmo-audit-visual { min-height: 400px; } .llmo-public-proof { grid-template-columns: 1fr; } .llmo-public-proof__heading, .llmo-public-proof__identity { grid-column: 1; border-right: 0; } .llmo-public-proof__identity { border-top: 1px solid rgba(28, 27, 27, .15); } .llmo-public-proof__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .llmo-public-proof__stats div:nth-child(4) { border-left: 0; border-top: 1px solid rgba(28, 27, 27, .15); } .llmo-public-proof__stats div:nth-child(5) { border-top: 1px solid rgba(28, 27, 27, .15); } .llmo-section--proof .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-section--proof .llmo-next-step__action, .llmo-section--proof .llmo-next-step__action:first-child { min-height: 178px; border-top: 1px solid rgba(28, 27, 27, .16); border-left: 0; } }
-		@media (max-width: 640px) { .llmo-hero__visual.llmo-audit-visual { min-height: 315px; } .llmo-audit-visual > img { object-position: 62% center; } .llmo-audit-visual figcaption { width: min(90%, 335px); padding: 17px 18px 19px; } .llmo-audit-visual figcaption strong { font-size: 17px; } .llmo-audit-visual__legend { top: 12px; right: 12px; gap: 4px; } .llmo-audit-visual__legend span { padding: 5px 7px; font-size: 9px; } .llmo-public-proof__heading, .llmo-public-proof__identity { padding: 28px 20px; } .llmo-public-proof__identity { grid-template-columns: 68px minmax(0, 1fr); gap: 13px; } .llmo-public-proof__identity img { width: 68px; height: 68px; } .llmo-public-proof__identity strong { font-size: 22px; } .llmo-public-proof__source { padding-inline: 20px; font-size: 10px; } .llmo-public-proof__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .llmo-public-proof__stats div { min-height: 103px; border-top: 1px solid rgba(28, 27, 27, .15); } .llmo-public-proof__stats div:nth-child(odd) { border-left: 0; } .llmo-public-proof__stats div:first-child, .llmo-public-proof__stats div:nth-child(2) { border-top: 0; } .llmo-public-proof__stats div:last-child { grid-column: 1 / -1; } .llmo-proof-chain { flex-direction: column; padding: 20px; } .llmo-proof-chain svg { transform: rotate(90deg); } .llmo-proof-chain span, .llmo-proof-chain strong { width: min(100%, 270px); } .llmo-public-proof__reviews { grid-template-columns: 1fr; } .llmo-public-proof__reviews article, .llmo-public-proof__reviews article:first-child { border-top: 1px solid rgba(28, 27, 27, .15); border-left: 0; } .llmo-public-proof__reviews article:first-child { border-top: 0; } .llmo-public-proof__actions { display: grid; grid-template-columns: 1fr; padding: 20px; } .llmo-action-button { width: 100%; } .llmo-section--proof .llmo-next-step__action { min-height: 166px; padding: 24px 20px; } }
+		@media (max-width: 900px) { .llmo-hero__visual.llmo-audit-visual { min-height: 400px; } .llmo-public-proof { grid-template-columns: 1fr; } .llmo-public-proof__content { order: 2; } .llmo-review-showcase { order: 1; min-height: 550px; } .llmo-section--proof .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-section--proof .llmo-next-step__action, .llmo-section--proof .llmo-next-step__action:first-child { min-height: 178px; border-top: 1px solid rgba(28, 27, 27, .16); border-left: 0; } }
+		@media (max-width: 640px) { .llmo-hero__visual.llmo-audit-visual { min-height: 315px; } .llmo-audit-visual > img { object-position: 62% center; } .llmo-audit-visual figcaption { width: min(90%, 335px); padding: 17px 18px 19px; } .llmo-audit-visual figcaption strong { font-size: 17px; } .llmo-audit-visual__legend { top: 12px; right: 12px; gap: 4px; } .llmo-audit-visual__legend span { padding: 5px 7px; font-size: 9px; } .llmo-public-proof__content { padding: 34px 20px; } .llmo-public-proof__content .llmo-proof-chain { align-items: flex-start; flex-direction: column; } .llmo-public-proof__content .llmo-proof-chain svg { transform: rotate(90deg); } .llmo-public-proof__content .llmo-public-proof__actions { display: grid; grid-template-columns: 1fr; } .llmo-review-showcase { min-height: 0; padding: 28px 20px 34px; } .llmo-review-showcase__quote { min-height: 0; padding: 19px; } .llmo-action-button { width: 100%; } .llmo-section--proof .llmo-next-step__action { min-height: 166px; padding: 24px 20px; } }
 		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 100%; margin: 0; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
 		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero h1 .llmo-hero__title { font-size: 38px; white-space: nowrap; } .llmo-hero h1 .llmo-hero__subtitle { margin-top: 14px; font-size: 22px; } .llmo-hero__note { font-size: 11px; } .llmo-diagram { margin-block: 28px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: rgba(182, 140, 60, .62) transparent; } .llmo-diagram img { width: 620px; max-width: none; } .llmo-source-scope .llmo-diagram img { width: 620px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-misconceptions article { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 14px; padding: 22px 0; } .llmo-misconceptions h3, .llmo-misconceptions p { grid-column: 2; } .llmo-misconceptions h3 { font-size: 16px; } .llmo-misconceptions p { font-size: 14px; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
 		/* 後方にある旧モバイル規則を上書きし、写真コラージュの意味を保持する */
