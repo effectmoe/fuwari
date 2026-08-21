@@ -1198,6 +1198,10 @@ const faqs = [
 					<span>総合FAQページでさらに確認する</span>
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>
+				<a href="/llmo/" class="faq-knowledge-link">
+					LLMO対策ガイドで、改善の考え方を確認する
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
 			</div>
 		</div>
 	</section>
@@ -3790,6 +3794,25 @@ const faqs = [
 		.faq-hub-link svg {
 			flex-shrink: 0;
 			font-size: 20px;
+		}
+
+		.faq-knowledge-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			margin: 14px 2px 0;
+			color: var(--crawl-green);
+			font-size: 14px;
+			font-weight: 900;
+			line-height: 1.55;
+			text-decoration: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 4px;
+		}
+
+		.faq-knowledge-link svg {
+			width: 18px;
+			height: 18px;
 		}
 
 		.aicrawl-related {

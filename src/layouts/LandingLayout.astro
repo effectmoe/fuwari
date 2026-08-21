@@ -55,7 +55,6 @@ const serviceNavGroups = [
 		href: "/aicrawl/",
 		items: [
 			{ href: "/aicrawl/", label: "トップ" },
-			{ href: "/llmo/", label: "LLMO対策ガイド" },
 			{ href: "/aicrawl/#overview", label: "AI流入分析" },
 			{ href: "/aicrawl/#checks", label: "診断内容" },
 			{ href: "/aicrawl/#signals", label: "流入の判別" },
@@ -84,10 +83,17 @@ const serviceNavGroups = [
 			{ href: "/?inquiry=consultation&service=ai-course#contact", label: "無料相談" },
 		],
 	},
+	{
+		label: "ナレッジ",
+		href: "/blog/",
+		items: [
+			{ href: "/blog/", label: "ブログ" },
+			{ href: "/llmo/", label: "LLMO対策ガイド" },
+		],
+	},
 ];
 
 const navItems = [
-	{ href: "/blog/", label: "ブログ" },
 	{ href: "/faq/", label: "FAQ" },
 	{ href: "/author/", label: "アバウト" },
 ];
@@ -230,10 +236,13 @@ const navItems = [
 						<a href="https://www.street-academy.com/myclass/212265?sessiondetailid=22073584" target="_blank" rel="noopener noreferrer">Notionでシステム構築</a>
 						<a href="/?inquiry=consultation&service=ai-course#contact">無料相談</a>
 					</nav>
+					<nav aria-label="Footer knowledge links">
+						<strong>ナレッジ</strong>
+						<a href="/blog/">ブログ</a>
+						<a href="/llmo/">LLMO対策ガイド</a>
+					</nav>
 					<nav aria-label="Footer company links">
 						<strong>サイト情報</strong>
-						<a href="/llmo/">LLMO対策ガイド</a>
-						<a href="/blog/">ブログ</a>
 						<a href="/faq/">総合FAQ</a>
 						<a href="/trust/">信頼性・制作方針</a>
 						<a href="/changelog/">変更履歴</a>
@@ -626,7 +635,7 @@ const navItems = [
 
 		.effect-landing-footer__grid {
 			display: grid;
-			grid-template-columns: minmax(0, 1.3fr) repeat(4, minmax(132px, 0.45fr));
+			grid-template-columns: minmax(0, 1.3fr) repeat(5, minmax(132px, 0.45fr));
 			gap: clamp(28px, 4vw, 56px);
 		}
 
@@ -700,6 +709,14 @@ const navItems = [
 				right: 14px;
 				left: auto;
 				width: min(360px, calc(100vw - 28px));
+			}
+
+			.effect-landing-footer__grid {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+
+			.effect-landing-footer__grid > div {
+				grid-column: 1 / -1;
 			}
 		}
 

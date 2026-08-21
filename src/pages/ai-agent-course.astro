@@ -524,6 +524,10 @@ const courseLd = {
 					<span>総合FAQページでさらに確認する</span>
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>
+				<a href="/blog/" class="faq-knowledge-link">
+					ナレッジで、AI活用と構造化の解説を読む
+					<Icon name="material-symbols:arrow-forward-rounded" />
+				</a>
 			</div>
 		</div>
 	</section>
@@ -1476,6 +1480,25 @@ const courseLd = {
 	.faq-hub-link svg {
 		flex-shrink: 0;
 		font-size: 20px;
+	}
+
+	.faq-knowledge-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		margin: 14px 2px 0;
+		color: var(--course-blue);
+		font-size: 14px;
+		font-weight: 900;
+		line-height: 1.55;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 4px;
+	}
+
+	.faq-knowledge-link svg {
+		width: 18px;
+		height: 18px;
 	}
 
 	.course-related {

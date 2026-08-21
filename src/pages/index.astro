@@ -757,6 +757,7 @@ const faqLd = {
 					<div>
 						<a class="lp-faq-cta__primary" href={consultationHref}>無料相談する</a>
 						<a class="lp-faq-cta__hub" href="/faq/">総合FAQを見る</a>
+						<a class="lp-faq-cta__knowledge" href="/blog/">ナレッジを見る</a>
 						<a class="lp-faq-cta__secondary" href="#pricing">料金を見る</a>
 					</div>
 				</div>
@@ -2112,7 +2113,9 @@ const faqLd = {
 	.lp-faq-cta div {
 		display: flex;
 		flex: 0 0 auto;
+		flex-wrap: wrap;
 		gap: 10px;
+		justify-content: flex-end;
 	}
 
 	.lp-faq-cta a,
@@ -2140,6 +2143,12 @@ const faqLd = {
 	.lp-faq-cta__hub {
 		border: 1px solid rgba(109, 137, 91, 0.36);
 		background: rgba(237, 245, 234, 0.82);
+		color: #425f32;
+	}
+
+	.lp-faq-cta__knowledge {
+		border: 1px solid rgba(82, 104, 63, 0.3);
+		background: #ffffff;
 		color: #425f32;
 	}
 
