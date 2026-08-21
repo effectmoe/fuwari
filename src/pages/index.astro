@@ -60,16 +60,26 @@ const issueCards = [
 const caseCards = [
 	{
 		kicker: "CASE 01 / 匿名",
-		title: "士業法人の社内AI基盤",
-		field: "顧客情報を扱う専門業務",
-		body: "個人情報の扱い、参照範囲、権限管理、人の承認を前提に、社内で扱う情報を業務AIにつなぐ基盤を構築・運用しています。扱う情報に応じて、社内完結型の構成も検討します。",
+		title: "個人情報を扱う専門事務所",
+		field: "顧客情報・対応履歴を扱う日常業務",
+		situation:
+			"顧客情報、対応履歴、判断基準が担当者やツールごとに分かれ、確認や引き継ぎのたびに前提を探し直す状態でした。",
+		design:
+			"個人情報の扱い、参照範囲、権限、承認の流れを先に設計し、必要な資料と対応履歴を案件ごとに参照できる形へ整理しました。",
+		operation:
+			"AIが経緯と判断材料の下準備を行い、人が送信・確定・最終判断を行う運用として、構築後も伴走しています。",
 		icon: "material-symbols:shield-lock-outline",
 	},
 	{
 		kicker: "CASE 02 / 匿名",
-		title: "知識基盤プロジェクトの継続運用",
+		title: "調査・制作の知識基盤プロジェクト",
 		field: "調査・実務ナレッジの運用",
-		body: "日々の調査、メモ、メッセージのやり取り、作業記録をローカル中心で蓄積し、検索・整理・下書き・次のアクションの提案につなげる知識基盤を継続運用しています。",
+		situation:
+			"情報源やメモ、検討の経緯が日々増え、過去の調査を再利用しながら次の作業へつなぐ仕組みが必要でした。",
+		design:
+			"調査、メモ、メッセージのやり取り、作業記録をローカル中心で整理し、検索できる記憶と案件ごとの文脈をつなぐ基盤を設計しました。",
+		operation:
+			"過去の根拠を探す、状況を整理する、下書きを作る、次のアクションを提案するところまでを、日々の運用で継続しています。",
 		icon: "material-symbols:psychology-alt-outline",
 	},
 ];
@@ -762,7 +772,7 @@ const faqLd = {
 				<div class="max-w-3xl">
 					<p class="eyebrow text-sm font-bold tracking-[0.16em] text-[var(--primary)]">CASE STUDIES / 匿名導入事例</p>
 					<h2 id="cases-title" class="mt-3 text-3xl font-bold leading-tight text-90 md:text-5xl">扱う情報に合わせて、AIの置き方を設計する。</h2>
-					<p class="mt-5 text-base leading-relaxed text-75 md:text-lg">以下は、公開可能な範囲で匿名化した実運用の概要です。扱う情報や実施範囲は、組織・プロジェクトごとに異なります。</p>
+					<p class="mt-5 text-base leading-relaxed text-75 md:text-lg">以下は、公開可能な範囲で匿名化した実運用の事例です。扱う情報や実施範囲は組織・プロジェクトごとに異なり、実績数値や効果を保証するものではありません。</p>
 				</div>
 				<div class="mt-8 grid gap-5 md:grid-cols-2">
 					{caseCards.map((item) => (
@@ -773,7 +783,20 @@ const faqLd = {
 							</div>
 							<h3 class="mt-5 text-2xl font-bold text-90">{item.title}</h3>
 							<p class="mt-2 text-sm font-semibold text-[var(--primary)]">{item.field}</p>
-							<p class="mt-4 leading-relaxed text-75">{item.body}</p>
+							<dl class="mt-5 grid gap-3">
+								<div class="rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+									<dt class="text-xs font-bold text-[var(--primary)]">抱えていた状況</dt>
+									<dd class="mt-1 text-sm leading-relaxed text-75">{item.situation}</dd>
+								</div>
+								<div class="rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+									<dt class="text-xs font-bold text-[var(--primary)]">最初に設計したこと</dt>
+									<dd class="mt-1 text-sm leading-relaxed text-75">{item.design}</dd>
+								</div>
+								<div class="rounded-xl bg-[var(--btn-plain-bg)] px-4 py-3">
+									<dt class="text-xs font-bold text-[var(--primary)]">運用でできるようにしたこと</dt>
+									<dd class="mt-1 text-sm leading-relaxed text-75">{item.operation}</dd>
+								</div>
+							</dl>
 						</article>
 					))}
 				</div>
