@@ -68,10 +68,6 @@ const profileLd = {
 
 const summaryBadges = [
 	{
-		label: "ストアカProランク講師",
-		icon: "material-symbols:workspace-premium-outline-rounded",
-	},
-	{
 		label: "AI＆DXコンサルタント",
 		icon: "material-symbols:business-center-outline-rounded",
 	},
@@ -79,9 +75,17 @@ const summaryBadges = [
 		label: "AIシステムエンジニア",
 		icon: "material-symbols:account-tree-outline-rounded",
 	},
+	{
+		label: "AIセキュリティエンジニア",
+		icon: "material-symbols:security-rounded",
+	},
 	{ label: "AI検索エキスパート", icon: "material-symbols:hub-outline" },
-	{ label: "オフィスク講師", icon: "material-symbols:school-outline-rounded" },
 	{ label: "Notionエキスパート", icon: "simple-icons:notion" },
+	{
+		label: "ストアカProランク講師",
+		icon: "material-symbols:workspace-premium-outline-rounded",
+	},
+	{ label: "オフィスク講師", icon: "material-symbols:school-outline-rounded" },
 ];
 
 const proofStats = [
@@ -862,11 +866,12 @@ const relatedLinks = [
 
 		.author-summary__grid {
 			display: grid;
-			grid-template-columns: repeat(4, minmax(0, 1fr));
+			grid-template-columns: repeat(8, minmax(0, 1fr));
 			gap: 12px;
 		}
 
 		.author-summary-card {
+			grid-column: span 2;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -879,6 +884,10 @@ const relatedLinks = [
 			color: var(--author-ink);
 			font-weight: 950;
 			text-align: center;
+		}
+
+		.author-summary-card:nth-child(5) {
+			grid-column: 2 / span 2;
 		}
 
 		.author-summary-card svg {
@@ -1862,6 +1871,11 @@ const relatedLinks = [
 			.author-responsibility__items,
 			.author-service-grid {
 				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.author-summary-card,
+			.author-summary-card:nth-child(5) {
+				grid-column: auto;
 			}
 		}
 
