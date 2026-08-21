@@ -5,14 +5,14 @@
  * （ハンバーガーボタンと同じ window.dfbToggleToc を呼ぶ）
  */
 interface TocItem {
-  id: string;
-  text: string;
-  level: 2 | 3;
+	id: string;
+	text: string;
+	level: 2 | 3;
 }
 
 interface Props {
-  items: TocItem[];
-  class?: string;
+	items: TocItem[];
+	class?: string;
 }
 
 const { items, class: className } = Astro.props;
@@ -21,13 +21,13 @@ const { items, class: className } = Astro.props;
 let h2Counter = 0;
 let h3Counter = 0;
 const numbered = items.map((item) => {
-  if (item.level === 2) {
-    h2Counter++;
-    h3Counter = 0;
-    return { ...item, number: `${h2Counter}` };
-  }
-  h3Counter++;
-  return { ...item, number: `${h2Counter}.${h3Counter}` };
+	if (item.level === 2) {
+		h2Counter++;
+		h3Counter = 0;
+		return { ...item, number: `${h2Counter}` };
+	}
+	h3Counter++;
+	return { ...item, number: `${h2Counter}.${h3Counter}` };
 });
 ---
 

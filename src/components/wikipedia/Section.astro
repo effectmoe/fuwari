@@ -4,11 +4,11 @@
  * 番号付き見出し + 下線 + 内部に自由なコンテンツ
  */
 interface Props {
-  id: string;
-  number?: string | number;
-  title: string;
-  level?: 2 | 3;
-  class?: string;
+	id: string;
+	number?: string | number;
+	title: string;
+	level?: 2 | 3;
+	class?: string;
 }
 
 const { id, number, title, level = 2, class: className } = Astro.props;

@@ -3,13 +3,13 @@
  * ExternalLinks.astro — Wikipedia 風 外部リンクセクション
  */
 interface ExternalLink {
-  href: string;
-  text: string;
-  description?: string;
+	href: string;
+	text: string;
+	description?: string;
 }
 interface Props {
-  items: ExternalLink[];
-  class?: string;
+	items: ExternalLink[];
+	class?: string;
 }
 const { items, class: className } = Astro.props;
 ---

@@ -21,12 +21,16 @@ function pickCourse() {
 		const found = courseConfig.courses.find((c) => c.id === courseId);
 		if (found) return found;
 	}
-	const haystack = [...tags, category].filter(Boolean).map((t) => String(t).toLowerCase());
+	const haystack = [...tags, category]
+		.filter(Boolean)
+		.map((t) => String(t).toLowerCase());
 	let best = null as (typeof courseConfig.courses)[number] | null;
 	let bestScore = 0;
 	for (const c of courseConfig.courses) {
 		if (c.id === courseConfig.fallbackId) continue; // fallbackは自動マッチ対象外
-		const score = c.topics.filter((t) => haystack.includes(t.toLowerCase())).length;
+		const score = c.topics.filter((t) =>
+			haystack.includes(t.toLowerCase()),
+		).length;
 		if (score > bestScore) {
 			bestScore = score;
 			best = c;
@@ -34,7 +38,9 @@ function pickCourse() {
 	}
 	if (best && bestScore > 0) return best;
 	// 一致なし → fallback（AIコンサル）
-	return courseConfig.courses.find((c) => c.id === courseConfig.fallbackId) || null;
+	return (
+		courseConfig.courses.find((c) => c.id === courseConfig.fallbackId) || null
+	);
 }
 
 const course = pickCourse();

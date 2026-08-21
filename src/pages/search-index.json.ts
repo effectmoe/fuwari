@@ -5,25 +5,29 @@ const staticPages = [
 	{
 		url: "/",
 		title: "AIセントラル",
-		excerpt: "記憶を持ったAIを社内の中枢へ組み込むAIシステム。ローカルLLM、社内完結型AI、AIエージェントのセキュリティ設計にも対応。",
+		excerpt:
+			"記憶を持ったAIを社内の中枢へ組み込むAIシステム。ローカルLLM、社内完結型AI、AIエージェントのセキュリティ設計にも対応。",
 		section: "Service",
 	},
 	{
 		url: "/#secure",
 		title: "AIセントラル パーフェクトセキュア",
-		excerpt: "顧客情報・個人情報・守秘義務が前提の業務向けに、社内PCや社内ネットワーク内でAIを扱う構成を検討できます。",
+		excerpt:
+			"顧客情報・個人情報・守秘義務が前提の業務向けに、社内PCや社内ネットワーク内でAIを扱う構成を検討できます。",
 		section: "Security",
 	},
 	{
 		url: "/faq/#security",
 		title: "ローカルLLM・社内完結型AIのFAQ",
-		excerpt: "クラウドAIとの違い、AIエージェントのセキュリティ対策、マスキング、権限管理、承認フローについて。",
+		excerpt:
+			"クラウドAIとの違い、AIエージェントのセキュリティ対策、マスキング、権限管理、承認フローについて。",
 		section: "FAQ",
 	},
 	{
 		url: "/aicrawl/",
 		title: "AI CRAWL",
-		excerpt: "AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
+		excerpt:
+			"AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
 		section: "Service",
 	},
 	{

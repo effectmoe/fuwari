@@ -31,10 +31,12 @@ interface Group {
 
 // 利用可能な全タグ・全カテゴリを集計
 const availableTags: string[] = Array.from(
-	new Set(sortedPosts.flatMap((p) => p.data.tags || []))
+	new Set(sortedPosts.flatMap((p) => p.data.tags || [])),
 ).sort();
 const availableCategories: string[] = Array.from(
-	new Set(sortedPosts.map((p) => p.data.category).filter((c): c is string => !!c))
+	new Set(
+		sortedPosts.map((p) => p.data.category).filter((c): c is string => !!c),
+	),
 ).sort();
 
 // 選択状態（リアクティブ）
@@ -80,8 +82,7 @@ $: filteredPosts = (() => {
 	if (selectedCategories.length > 0) {
 		result = result.filter(
 			(post) =>
-				post.data.category &&
-				selectedCategories.includes(post.data.category),
+				post.data.category && selectedCategories.includes(post.data.category),
 		);
 	}
 	// ソート
@@ -107,7 +108,9 @@ $: groups = (() => {
 		year: Number.parseInt(yearStr, 10),
 		posts: grouped[Number.parseInt(yearStr, 10)],
 	}));
-	arr.sort((a, b) => (sortOrder === "newest" ? b.year - a.year : a.year - b.year));
+	arr.sort((a, b) =>
+		sortOrder === "newest" ? b.year - a.year : a.year - b.year,
+	);
 	return arr;
 })();
 </script>

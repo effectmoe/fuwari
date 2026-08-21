@@ -1,8 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
-import LandingLayout from "../../layouts/LandingLayout.astro";
-import stats from "../../data/storaca-stats.json";
 import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg";
+import stats from "../../data/storaca-stats.json";
+import LandingLayout from "../../layouts/LandingLayout.astro";
 
 const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 const centralHref = "/#ai-central";
@@ -108,11 +108,11 @@ const sampleReports = [
 ];
 
 const citationMetrics = [
-		[
-			"計測対象",
-			"A社（サンプル）",
-			"実企業名、実クエリ、実ドメインは出さず、匿名企業での計測例として表示します。",
-		],
+	[
+		"計測対象",
+		"A社（サンプル）",
+		"実企業名、実クエリ、実ドメインは出さず、匿名企業での計測例として表示します。",
+	],
 	[
 		"総試行回数",
 		"140回",
@@ -165,16 +165,7 @@ const citationAlternativeDomains = [
 ];
 
 const citationDiffRows = [
-	[
-		"A社 トップ",
-		"複数実装",
-		"11問",
-		"h2:9/h3:18",
-		"10,404",
-		"2",
-		"40",
-		"なし",
-	],
+	["A社 トップ", "複数実装", "11問", "h2:9/h3:18", "10,404", "2", "40", "なし"],
 	[
 		"A社 サービスA",
 		"複数実装",
@@ -351,7 +342,8 @@ const pricingPlans = [
 		cta: "成長運用を相談する",
 		featured: false,
 		tier: "プロ",
-		tierBody: "改善ロードマップと再計測まで含めて、AI検索対策を継続運用する上位プラン。",
+		tierBody:
+			"改善ロードマップと再計測まで含めて、AI検索対策を継続運用する上位プラン。",
 		measurementLimit: "10クエリ",
 		citation: {
 			name: "AI CRAWL + AI CITATION プロ",

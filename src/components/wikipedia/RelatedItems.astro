@@ -3,13 +3,13 @@
  * RelatedItems.astro — Wikipedia 風 関連項目セクション
  */
 interface RelatedItem {
-  href: string;
-  text: string;
-  description?: string;
+	href: string;
+	text: string;
+	description?: string;
 }
 interface Props {
-  items: RelatedItem[];
-  class?: string;
+	items: RelatedItem[];
+	class?: string;
 }
 const { items, class: className } = Astro.props;
 ---

@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
-import LandingLayout from "../layouts/LandingLayout.astro";
 import { importantChangelogEvents } from "../data/changelog-events";
+import LandingLayout from "../layouts/LandingLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
 import { getPostUrlBySlug } from "../utils/url-utils";
 
@@ -18,7 +18,8 @@ const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
 	day: "2-digit",
 });
 
-const formatDate = (value: string | Date) => dateFormatter.format(new Date(value)).replaceAll("/", ".");
+const formatDate = (value: string | Date) =>
+	dateFormatter.format(new Date(value)).replaceAll("/", ".");
 const blogPosts = await getSortedPosts();
 
 const importantReleases = importantChangelogEvents.map((event) => ({
@@ -36,16 +37,19 @@ const blogReleases = blogPosts.map((post) => ({
 	title: `記事を公開：${post.data.title}`,
 	items: [
 		post.data.description ?? "新しい記事を公開しました。",
-		...(post.data.tags?.length ? [`関連テーマ：${post.data.tags.slice(0, 3).join(" / ")}`] : []),
+		...(post.data.tags?.length
+			? [`関連テーマ：${post.data.tags.slice(0, 3).join(" / ")}`]
+			: []),
 	],
 	href: getPostUrlBySlug(post.slug),
 	type: "blog",
 }));
 
 const releases = [...importantReleases, ...blogReleases]
-	.sort((a, b) => new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime())
+	.sort(
+		(a, b) => new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime(),
+	)
 	.slice(0, 14);
-
 ---
 
 <LandingLayout

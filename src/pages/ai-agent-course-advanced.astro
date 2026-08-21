@@ -1,115 +1,145 @@
 ---
-import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const curriculum = [
-  {
-    no: "01", tag: "DESIGN",
-    title: "エージェント設計と CLAUDE.md エンジニアリング",
-    learn: "CLAUDE.md の設計原則、hooks による自動化トリガー、slash commands の実装、権限モデルの最適設計",
-    skill: "プロダクショングレードの CLAUDE.md 設計、再利用可能なフック群の構築、複数プロジェクト間のルール統合",
-    practice: "自社業務に特化した CLAUDE.md・hooks セットを設計し、既存ワークフローに組み込む",
-  },
-  {
-    no: "02", tag: "MULTI-AGENT",
-    title: "マルチエージェント・ハーネス設計",
-    learn: "サブエージェント委譲の制御構造、並列処理・パイプライン・DAG の設計、TodoWrite を使ったタスク分解",
-    skill: "複数エージェントを束ねた自律業務パイプラインの設計・実装、エラーハンドリングと再試行設計",
-    practice: "「データ収集 → AI 分析 → 書類生成 → Slack 通知」を完全自動化したパイプラインを構築する",
-  },
-  {
-    no: "03", tag: "DATABASE",
-    title: "データ基盤とログ管理の設計",
-    learn: "ローカルDBによるスキーマ設計、業務データ永続化、エージェントの操作ログ・監査ログの自動記録と分析",
-    skill: "AIエージェントの行動履歴を蓄積・横断検索するデータ基盤の設計力、自社ナレッジDB構築",
-    practice: "エージェントの全操作ログをローカルDBに記録し、週次サマリーを自動生成する基盤を構築する",
-  },
-  {
-    no: "04", tag: "MCP",
-    title: "カスタム MCP サーバーの構築",
-    learn: "MCP プロトコルの設計思想、Node.js / Python での MCP サーバー実装、ツール定義・スキーマ設計と認証",
-    skill: "既存 API・社内システムを Claude Code から自然言語で操作できる MCP サーバーの設計・実装力",
-    practice: "自社の業務 API を MCP 化し、Claude Code から「○○して」と一言で操作できる環境を構築する",
-  },
-  {
-    no: "05", tag: "CICD",
-    title: "CI/CD・本番運用・監視設計",
-    learn: "GitHub Actions によるエージェント CI、Cloudflare Workers へのデプロイ、ヘルスチェック・アラート・自動リトライ設計",
-    skill: "AIエージェントシステムを本番環境で安定稼働させる運用設計力、障害検知と自動復旧の仕組み",
-    practice: "エージェントのヘルスチェック・失敗時 Slack アラート・自動リトライ機構を実装する",
-  },
-  {
-    no: "06", tag: "SCALE",
-    title: "チーム展開と継続的改善の仕組み",
-    learn: "組織への AI 展開戦略、スキルライブラリの設計と共有、CLAUDE.md のバージョン管理と横展開",
-    skill: "個人の自動化をチーム・組織レベルに拡張する設計・マネジメント力、AI 活用を定着させる仕組み",
-    practice: "チーム共有のスキルライブラリを設計し、非エンジニアでも使いこなせる運用体制を構築する",
-  },
+	{
+		no: "01",
+		tag: "DESIGN",
+		title: "エージェント設計と CLAUDE.md エンジニアリング",
+		learn:
+			"CLAUDE.md の設計原則、hooks による自動化トリガー、slash commands の実装、権限モデルの最適設計",
+		skill:
+			"プロダクショングレードの CLAUDE.md 設計、再利用可能なフック群の構築、複数プロジェクト間のルール統合",
+		practice:
+			"自社業務に特化した CLAUDE.md・hooks セットを設計し、既存ワークフローに組み込む",
+	},
+	{
+		no: "02",
+		tag: "MULTI-AGENT",
+		title: "マルチエージェント・ハーネス設計",
+		learn:
+			"サブエージェント委譲の制御構造、並列処理・パイプライン・DAG の設計、TodoWrite を使ったタスク分解",
+		skill:
+			"複数エージェントを束ねた自律業務パイプラインの設計・実装、エラーハンドリングと再試行設計",
+		practice:
+			"「データ収集 → AI 分析 → 書類生成 → Slack 通知」を完全自動化したパイプラインを構築する",
+	},
+	{
+		no: "03",
+		tag: "DATABASE",
+		title: "データ基盤とログ管理の設計",
+		learn:
+			"ローカルDBによるスキーマ設計、業務データ永続化、エージェントの操作ログ・監査ログの自動記録と分析",
+		skill:
+			"AIエージェントの行動履歴を蓄積・横断検索するデータ基盤の設計力、自社ナレッジDB構築",
+		practice:
+			"エージェントの全操作ログをローカルDBに記録し、週次サマリーを自動生成する基盤を構築する",
+	},
+	{
+		no: "04",
+		tag: "MCP",
+		title: "カスタム MCP サーバーの構築",
+		learn:
+			"MCP プロトコルの設計思想、Node.js / Python での MCP サーバー実装、ツール定義・スキーマ設計と認証",
+		skill:
+			"既存 API・社内システムを Claude Code から自然言語で操作できる MCP サーバーの設計・実装力",
+		practice:
+			"自社の業務 API を MCP 化し、Claude Code から「○○して」と一言で操作できる環境を構築する",
+	},
+	{
+		no: "05",
+		tag: "CICD",
+		title: "CI/CD・本番運用・監視設計",
+		learn:
+			"GitHub Actions によるエージェント CI、Cloudflare Workers へのデプロイ、ヘルスチェック・アラート・自動リトライ設計",
+		skill:
+			"AIエージェントシステムを本番環境で安定稼働させる運用設計力、障害検知と自動復旧の仕組み",
+		practice:
+			"エージェントのヘルスチェック・失敗時 Slack アラート・自動リトライ機構を実装する",
+	},
+	{
+		no: "06",
+		tag: "SCALE",
+		title: "チーム展開と継続的改善の仕組み",
+		learn:
+			"組織への AI 展開戦略、スキルライブラリの設計と共有、CLAUDE.md のバージョン管理と横展開",
+		skill:
+			"個人の自動化をチーム・組織レベルに拡張する設計・マネジメント力、AI 活用を定着させる仕組み",
+		practice:
+			"チーム共有のスキルライブラリを設計し、非エンジニアでも使いこなせる運用体制を構築する",
+	},
 ];
 
 const features = [
-  {
-    no: "01",
-    title: "「動かす」から「設計する」へ — 実務水準の実装力",
-    body: "入門編を終えた方が次に直面する壁は「作れるが設計できない」です。本講座は CLAUDE.md エンジニアリング・マルチエージェント設計・MCP 構築まで、実際に自社で稼働するシステムを設計する力を習得します。",
-  },
-  {
-    no: "02",
-    title: "エンジニアに頼らず、AI インフラを内製できる",
-    body: "カスタム MCP サーバー・軽量データベースによるデータ基盤・Cloudflare Workers へのデプロイまでを講師自身が自社で日常運用する形で解説。「外注費ゼロで自社インフラを持つ」が現実になります。",
-  },
-  {
-    no: "03",
-    title: "受講者の業務システムをそのまま実装する",
-    body: "演習テーマは受講者ご自身の業務システムで実施します。「Webhook → Slack 通知」「社内 API の MCP 化」「月次レポートの自動生成」など、研修終了時には本番稼働する成果物が手元に残ります。",
-  },
-  {
-    no: "04",
-    title: "チームへの横展開まで設計する",
-    body: "個人の自動化をチームへ広げるためのスキルライブラリ設計・CLAUDE.md のバージョン管理・非エンジニアへの権限設計まで網羅。組織全体の AI 活用レベルを底上げする設計を持ち帰れます。",
-  },
+	{
+		no: "01",
+		title: "「動かす」から「設計する」へ — 実務水準の実装力",
+		body: "入門編を終えた方が次に直面する壁は「作れるが設計できない」です。本講座は CLAUDE.md エンジニアリング・マルチエージェント設計・MCP 構築まで、実際に自社で稼働するシステムを設計する力を習得します。",
+	},
+	{
+		no: "02",
+		title: "エンジニアに頼らず、AI インフラを内製できる",
+		body: "カスタム MCP サーバー・軽量データベースによるデータ基盤・Cloudflare Workers へのデプロイまでを講師自身が自社で日常運用する形で解説。「外注費ゼロで自社インフラを持つ」が現実になります。",
+	},
+	{
+		no: "03",
+		title: "受講者の業務システムをそのまま実装する",
+		body: "演習テーマは受講者ご自身の業務システムで実施します。「Webhook → Slack 通知」「社内 API の MCP 化」「月次レポートの自動生成」など、研修終了時には本番稼働する成果物が手元に残ります。",
+	},
+	{
+		no: "04",
+		title: "チームへの横展開まで設計する",
+		body: "個人の自動化をチームへ広げるためのスキルライブラリ設計・CLAUDE.md のバージョン管理・非エンジニアへの権限設計まで網羅。組織全体の AI 活用レベルを底上げする設計を持ち帰れます。",
+	},
 ];
 
 const faqs = [
-  {
-    q: "入門講座を受講していないと参加できませんか？",
-    a: "入門講座（初級編）の受講は必須ではありませんが、Claude Code を自分の PC に導入済みで、ファイル編集・Git 操作・基本的な API 呼び出しの経験があることが前提です。独学で同水準に達している方は問題なく参加できます。不明な場合はお気軽にご相談ください。",
-  },
-  {
-    q: "プログラミングの知識はどの程度必要ですか？",
-    a: "コードを書く必要はありませんが、「スクリプトが何をしているかを読んで理解できる」程度の読解力は必要です。Python・JavaScript の基本構文（変数・関数・配列）を見て意味がわかる方を想定しています。完全な非エンジニアの方には先に入門編をお勧めします。",
-  },
-  {
-    q: "MCP サーバーの構築には自社 API が必要ですか？",
-    a: "必須ではありません。第4回では架空の API をモックとして使いながら MCP の設計・実装フローを習得します。その後、ご自身の業務 API に差し替えて適用できる形でお渡しします。",
-  },
-  {
-    q: "助成金の申請代行はお願いできますか？",
-    a: "当社では助成金申請の代行は行っておりません。ご希望の場合は、申請に慣れた提携先の社労士事務所をご紹介いたします。",
-  },
-  {
-    q: "受講人数はどのくらいから対応できますか？",
-    a: "3名から社内貸切での実施が可能です。実装演習の性質上、少人数（3〜6名）での濃密な実施を推奨しています。",
-  },
-  {
-    q: "欠席した回はどうなりますか？",
-    a: "全回録画し、アーカイブ視聴が可能です。特に第3〜5回は前回の実装成果を引き継ぐ設計のため、欠席回の補講対応もご相談ください。",
-  },
+	{
+		q: "入門講座を受講していないと参加できませんか？",
+		a: "入門講座（初級編）の受講は必須ではありませんが、Claude Code を自分の PC に導入済みで、ファイル編集・Git 操作・基本的な API 呼び出しの経験があることが前提です。独学で同水準に達している方は問題なく参加できます。不明な場合はお気軽にご相談ください。",
+	},
+	{
+		q: "プログラミングの知識はどの程度必要ですか？",
+		a: "コードを書く必要はありませんが、「スクリプトが何をしているかを読んで理解できる」程度の読解力は必要です。Python・JavaScript の基本構文（変数・関数・配列）を見て意味がわかる方を想定しています。完全な非エンジニアの方には先に入門編をお勧めします。",
+	},
+	{
+		q: "MCP サーバーの構築には自社 API が必要ですか？",
+		a: "必須ではありません。第4回では架空の API をモックとして使いながら MCP の設計・実装フローを習得します。その後、ご自身の業務 API に差し替えて適用できる形でお渡しします。",
+	},
+	{
+		q: "助成金の申請代行はお願いできますか？",
+		a: "当社では助成金申請の代行は行っておりません。ご希望の場合は、申請に慣れた提携先の社労士事務所をご紹介いたします。",
+	},
+	{
+		q: "受講人数はどのくらいから対応できますか？",
+		a: "3名から社内貸切での実施が可能です。実装演習の性質上、少人数（3〜6名）での濃密な実施を推奨しています。",
+	},
+	{
+		q: "欠席した回はどうなりますか？",
+		a: "全回録画し、アーカイブ視聴が可能です。特に第3〜5回は前回の実装成果を引き継ぐ設計のため、欠席回の補講対応もご相談ください。",
+	},
 ];
 
-const mailtoSubject = encodeURIComponent("AIエージェント実装講座（上級編） お問い合わせ");
+const mailtoSubject = encodeURIComponent(
+	"AIエージェント実装講座（上級編） お問い合わせ",
+);
 const mailtoBody = encodeURIComponent(
-  "【お問い合わせ内容】\n受講希望人数：\n希望時期：\nClaude Code の現在の利用状況：\nご質問・ご要望：\n",
+	"【お問い合わせ内容】\n受講希望人数：\n希望時期：\nClaude Code の現在の利用状況：\nご質問・ご要望：\n",
 );
 const mailtoLink = `mailto:info@effect.moe?subject=${mailtoSubject}&body=${mailtoBody}`;
 
 const tagColors: Record<string, string> = {
-  DESIGN:     "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
-  MULTI_AGENT: "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
-  DATABASE:   "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
-  MCP:        "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
-  CICD:       "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
-  SCALE:      "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	DESIGN:
+		"bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	MULTI_AGENT:
+		"bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	DATABASE:
+		"bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	MCP: "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	CICD: "bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
+	SCALE:
+		"bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300",
 };
 ---
 

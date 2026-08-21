@@ -1,19 +1,20 @@
 ---
-import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
 const lastUpdated = "2026-08-05";
 const pageUrl = `${siteUrl}ai-agent-course-select/`;
 const webPageLd = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${pageUrl}#webpage`,
-  url: pageUrl,
-  name: "AIエージェント講座 コース選択",
-  description: "AIエージェント講座の初級編と上級編を比較し、自分の経験と目標に合うコースを選ぶためのページです。",
-  inLanguage: "ja",
-  dateModified: lastUpdated,
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"@id": `${pageUrl}#webpage`,
+	url: pageUrl,
+	name: "AIエージェント講座 コース選択",
+	description:
+		"AIエージェント講座の初級編と上級編を比較し、自分の経験と目標に合うコースを選ぶためのページです。",
+	inLanguage: "ja",
+	dateModified: lastUpdated,
 };
 ---
 

@@ -5,16 +5,12 @@
  * 加筆協力を求めるメッセージ + 関連リンク。
  */
 interface Props {
-  title?: string;
-  message?: string;
-  class?: string;
+	title?: string;
+	message?: string;
+	class?: string;
 }
 
-const {
-  title = "DFB構造化メソッド",
-  message,
-  class: className,
-} = Astro.props;
+const { title = "DFB構造化メソッド", message, class: className } = Astro.props;
 
 const defaultMessage = `この項目「${title}」は、書きかけです。提唱者が随時加筆・更新していきます。`;
 const finalMessage = message ?? defaultMessage;

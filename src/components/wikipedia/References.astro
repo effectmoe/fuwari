@@ -4,14 +4,14 @@
  * Footnote.astro のリンク先となる出典リスト。
  */
 interface Reference {
-  n: number | string;
-  text: string;
-  url?: string;
+	n: number | string;
+	text: string;
+	url?: string;
 }
 
 interface Props {
-  items: Reference[];
-  class?: string;
+	items: Reference[];
+	class?: string;
 }
 
 const { items, class: className } = Astro.props;

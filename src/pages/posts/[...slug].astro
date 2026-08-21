@@ -1,16 +1,16 @@
 ---
+import { getImage } from "astro:assets";
 import path from "node:path";
+import MangaSwiper from "@components/MangaSwiper.astro";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
+import Markdown from "@components/misc/Markdown.astro";
 import ArticleFAQ from "@components/widget/ArticleFAQ.astro";
 import CourseCTA from "@components/widget/CourseCTA.astro";
-import ServiceCTA from "@components/widget/ServiceCTA.astro";
 import RelatedLinks from "@components/widget/RelatedLinks.astro";
-import Markdown from "@components/misc/Markdown.astro";
-import MangaSwiper from "@components/MangaSwiper.astro";
+import ServiceCTA from "@components/widget/ServiceCTA.astro";
 import ShareBar from "@components/widget/ShareBar.astro";
-import ImageWrapper from "@components/misc/ImageWrapper.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
-import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import { seoConfig } from "src/config";
 import { profileConfig, siteConfig } from "../../config";
@@ -37,7 +37,9 @@ const inLang = entry.data.lang
 const coverSource = entry.data.image || entry.data.thumbnail;
 const heroImageSrc = entry.data.image || entry.data.thumbnail || "";
 const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
-const postImageAlt = entry.data.imageAlt || `${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`;
+const postImageAlt =
+	entry.data.imageAlt ||
+	`${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`;
 const authorShortTitle = "AI・LLMO実装者";
 const authorProfileLinks = seoConfig.sameAs
 	.filter((href: string) => /street-academy/i.test(href))
@@ -49,13 +51,14 @@ const authorProfileLinks = seoConfig.sameAs
 
 		return { href, label };
 	});
-const mangaPanels =
-	entry.data.manga_tldr?.length
-		? entry.data.manga_tldr
-		: [{
-			src: blogThumbSrc,
-			caption: postImageAlt,
-		}];
+const mangaPanels = entry.data.manga_tldr?.length
+	? entry.data.manga_tldr
+	: [
+			{
+				src: blogThumbSrc,
+				caption: postImageAlt,
+			},
+		];
 
 let ogImageUrl = `${siteUrl}og-image.jpg`;
 if (coverSource) {
@@ -64,7 +67,9 @@ if (coverSource) {
 			import: "default",
 		});
 		const normalizedPath = path
-			.normalize(path.join("../../content/posts/", getDir(entry.id), coverSource))
+			.normalize(
+				path.join("../../content/posts/", getDir(entry.id), coverSource),
+			)
 			.replace(/\\/g, "/");
 		const file = files[normalizedPath];
 		if (file) {
@@ -105,7 +110,9 @@ const blogPostingLd = {
 	reviewedBy: { "@id": `${siteUrl}#person` },
 	publisher: { "@id": `${siteUrl}#organization` },
 	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	dateModified: formatDateToYYYYMMDD(entry.data.updated || entry.data.published),
+	dateModified: formatDateToYYYYMMDD(
+		entry.data.updated || entry.data.published,
+	),
 	inLanguage: inLang,
 };
 

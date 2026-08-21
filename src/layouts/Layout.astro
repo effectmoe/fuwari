@@ -13,6 +13,7 @@ import {
 	seoConfig,
 	siteConfig,
 } from "@/config";
+import tonyAvatar from "../assets/images/tony-avatar.jpg";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -26,7 +27,6 @@ import {
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
-import tonyAvatar from "../assets/images/tony-avatar.jpg";
 import "katex/dist/katex.css";
 
 interface Props {
@@ -41,8 +41,17 @@ interface Props {
 	fullTitle?: boolean;
 }
 
-let { title, banner, description, lang, setOGTypeArticle, ogType, ogImage, ogImageAlt, fullTitle } =
-	Astro.props;
+let {
+	title,
+	banner,
+	description,
+	lang,
+	setOGTypeArticle,
+	ogType,
+	ogImage,
+	ogImageAlt,
+	fullTitle,
+} = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -103,7 +112,9 @@ const ogImageURL = ogImage || `${siteUrl}og-image.jpg`;
 const metaDescription = description || pageTitle;
 const ogImageAltText = ogImageAlt || pageTitle;
 const resolvedOgType = setOGTypeArticle ? "article" : ogType || "website";
-const personImageUrl = Astro.site ? new URL(tonyAvatar.src, Astro.site).toString() : tonyAvatar.src;
+const personImageUrl = Astro.site
+	? new URL(tonyAvatar.src, Astro.site).toString()
+	: tonyAvatar.src;
 
 // --- 構造化データ JSON-LD: Organization + WebSite + Person（全ページ共通・LLMO の核） ---
 const organizationLd = {
@@ -187,7 +198,12 @@ const aiCrawlServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-ai-crawl`,
 	name: "AI CRAWL",
-	alternateName: ["AIクロール", "AI流入計測", "AI流入分析", "AIクローラー巡回計測"],
+	alternateName: [
+		"AIクロール",
+		"AI流入計測",
+		"AI流入分析",
+		"AIクローラー巡回計測",
+	],
 	serviceType: "AIクローラー巡回計測・AI検索流入分析",
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: "JP",
@@ -212,7 +228,12 @@ const structuredDataServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-structured-data`,
 	name: "構造化データ設計",
-	alternateName: ["構造化データ実装", "JSON-LD設計", "Schema.org実装", "スキーマ設計"],
+	alternateName: [
+		"構造化データ実装",
+		"JSON-LD設計",
+		"Schema.org実装",
+		"スキーマ設計",
+	],
 	serviceType: "構造化データ（JSON-LD / Schema.org）の設計・実装",
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: "JP",
@@ -239,7 +260,8 @@ const aiCentralServiceLd = {
 				name: "AIセントラル",
 				price: "330000",
 				priceCurrency: "JPY",
-				description: "社内資料・顧客情報・対応履歴をAIの記憶基盤として整える標準構成",
+				description:
+					"社内資料・顧客情報・対応履歴をAIの記憶基盤として整える標準構成",
 			},
 			{
 				"@type": "Offer",
@@ -260,7 +282,8 @@ const aiCentralServiceLd = {
 				name: "AIセントラル 導入後の伴走",
 				price: "22000",
 				priceCurrency: "JPY",
-				description: "導入後6ヶ月間の隔週90分の伴走コンサル、基本保守、チャット対応",
+				description:
+					"導入後6ヶ月間の隔週90分の伴走コンサル、基本保守、チャット対応",
 			},
 		],
 	},
@@ -297,8 +320,17 @@ const baseGraphLd: {
 	"@graph": Record<string, unknown>[];
 } = {
 	"@context": "https://schema.org",
-	"@graph": [organizationLd, websiteLd, personLd, serviceLd, aiCentralServiceLd, aiCrawlServiceLd, aiCitationServiceLd,
-		structuredDataServiceLd, mcpServerLd],
+	"@graph": [
+		organizationLd,
+		websiteLd,
+		personLd,
+		serviceLd,
+		aiCentralServiceLd,
+		aiCrawlServiceLd,
+		aiCitationServiceLd,
+		structuredDataServiceLd,
+		mcpServerLd,
+	],
 };
 
 const breadcrumbLabelMap: Record<string, string> = {
@@ -318,7 +350,10 @@ const breadcrumbLabelMap: Record<string, string> = {
 	llmo: "LLMO対策ガイド",
 	about: "受講生の声",
 };
-const breadcrumbSegments = Astro.url.pathname.replace(/^\/|\/$/g, "").split("/").filter(Boolean);
+const breadcrumbSegments = Astro.url.pathname
+	.replace(/^\/|\/$/g, "")
+	.split("/")
+	.filter(Boolean);
 const breadcrumbItems = [
 	{
 		"@type": "ListItem",

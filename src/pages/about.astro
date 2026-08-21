@@ -2,10 +2,10 @@
 
 import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
+import { profileConfig, seoConfig } from "../config";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { profileConfig, seoConfig } from "../config";
 
 const aboutPost = await getEntry("spec", "about");
 
@@ -17,11 +17,18 @@ const { Content } = await render(aboutPost);
 
 const rv = seoConfig.reviews;
 const siteUrl = Astro.site ? Astro.site.toString() : "/";
-const monthlyConsultingUrl = "https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service";
-const featuredConsultingTestimonial = rv.testimonials.find((t) =>
-	t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+const monthlyConsultingUrl =
+	"https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service";
+const featuredConsultingTestimonial = rv.testimonials.find(
+	(t) =>
+		t.date === "2026-08" &&
+		t.course.includes("経営伴走コンサル") &&
+		t.text &&
+		t.text.length > 40,
 );
-const regularTestimonials = rv.testimonials.filter((t) => t !== featuredConsultingTestimonial);
+const regularTestimonials = rv.testimonials.filter(
+	(t) => t !== featuredConsultingTestimonial,
+);
 
 // 受講生レビューの構造化データ
 // Google リッチリザルト「レビュースニペット」の対象タイプは LocalBusiness/Product/Course/Service 等。

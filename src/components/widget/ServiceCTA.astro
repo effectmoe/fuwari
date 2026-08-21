@@ -35,7 +35,9 @@ function pickService() {
 	let best: (typeof serviceConfig.services)[number] | null = null;
 	let bestScore = 0;
 	for (const s of serviceConfig.services) {
-		const score = s.match.filter((m) => haystack.includes(m.toLowerCase())).length;
+		const score = s.match.filter((m) =>
+			haystack.includes(m.toLowerCase()),
+		).length;
 		if (score > bestScore) {
 			bestScore = score;
 			best = s;

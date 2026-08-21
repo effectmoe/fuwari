@@ -15,14 +15,14 @@
  */
 
 interface PanelInput {
-  src: string;
-  caption: string;
+	src: string;
+	caption: string;
 }
 
 interface Props {
-  panels: PanelInput[];
-  autoplay?: boolean;
-  delay?: number;
+	panels: PanelInput[];
+	autoplay?: boolean;
+	delay?: number;
 }
 
 const { panels, autoplay = false, delay = 4000 } = Astro.props;

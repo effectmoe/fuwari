@@ -37,8 +37,12 @@ const {
 const className = Astro.props.class;
 
 // thumbnail フィールドがあればカードのサムネはそれを優先（記事ヘッダー画像 image と別画像を使える）
-const cardThumbSrc = (entry.data.thumbnail && entry.data.thumbnail !== "") ? entry.data.thumbnail : image;
-const hasCover = cardThumbSrc !== undefined && cardThumbSrc !== null && cardThumbSrc !== "";
+const cardThumbSrc =
+	entry.data.thumbnail && entry.data.thumbnail !== ""
+		? entry.data.thumbnail
+		: image;
+const hasCover =
+	cardThumbSrc !== undefined && cardThumbSrc !== null && cardThumbSrc !== "";
 
 const coverWidth = "28%";
 

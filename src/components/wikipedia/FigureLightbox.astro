@@ -26,29 +26,30 @@
  *   - グローバル window 関数で初期化、ページ遷移後も `swup:contentReplaced` で再 wire
  */
 interface Props {
-  src: string;
-  alt: string;
-  caption?: string;
-  /** 図番号（任意・あれば "図N:" を caption の前に付ける） */
-  figureNumber?: number | string;
-  /** 最大幅（本文中の表示時）デフォルト max-w-2xl */
-  maxWidth?: string;
-  /** 追加 class */
-  class?: string;
+	src: string;
+	alt: string;
+	caption?: string;
+	/** 図番号（任意・あれば "図N:" を caption の前に付ける） */
+	figureNumber?: number | string;
+	/** 最大幅（本文中の表示時）デフォルト max-w-2xl */
+	maxWidth?: string;
+	/** 追加 class */
+	class?: string;
 }
 
 const {
-  src,
-  alt,
-  caption,
-  figureNumber,
-  maxWidth = "max-w-2xl",
-  class: className,
+	src,
+	alt,
+	caption,
+	figureNumber,
+	maxWidth = "max-w-2xl",
+	class: className,
 } = Astro.props;
 
-const captionText = figureNumber !== undefined
-  ? `図${figureNumber}: ${caption ?? ""}`.trim()
-  : caption;
+const captionText =
+	figureNumber !== undefined
+		? `図${figureNumber}: ${caption ?? ""}`.trim()
+		: caption;
 ---
 
 <figure

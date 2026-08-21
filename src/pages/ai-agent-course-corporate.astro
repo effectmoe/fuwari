@@ -1,20 +1,45 @@
 ---
-import LandingLayout from "../layouts/LandingLayout.astro";
 import { Icon } from "astro-icon/components";
+import LandingLayout from "../layouts/LandingLayout.astro";
 
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
 const pagePath = "ai-agent-course-corporate/";
 const pageUrl = `${siteUrl}${pagePath}`;
 const lastUpdated = "2026-08-05";
-const consultationHref = "/?inquiry=consultation&service=ai-course-corporate#contact";
+const consultationHref =
+	"/?inquiry=consultation&service=ai-course-corporate#contact";
 
 const curriculum = [
-	["01", "導入準備", "Claude Codeのインストール、認証、IDE連携、権限モード、CLAUDE.mdの役割を確認します。"],
-	["02", "任せ方の設計", "AIへの指示粒度、TODO分解、Gitでの差分確認、差し戻しの考え方を実務の流れで扱います。"],
-	["03", "社内資料の横断分析", "PDF、Excel、Word、議事録、規程、契約書などから必要情報を探し、根拠を整理します。"],
-	["04", "書類作成の自動化", "Word、Excel、PowerPointのテンプレートを使い、提案書、報告書、比較表の作成を体験します。"],
-	["05", "外部ツール連携", "Webhook、API、GitHub、Notion、Slack、Google Driveなどとの接続方針を学びます。"],
-	["06", "公開・運用設計", "LPや社内ツールをAIと作り、公開、確認、更新、社内展開までの流れを整理します。"],
+	[
+		"01",
+		"導入準備",
+		"Claude Codeのインストール、認証、IDE連携、権限モード、CLAUDE.mdの役割を確認します。",
+	],
+	[
+		"02",
+		"任せ方の設計",
+		"AIへの指示粒度、TODO分解、Gitでの差分確認、差し戻しの考え方を実務の流れで扱います。",
+	],
+	[
+		"03",
+		"社内資料の横断分析",
+		"PDF、Excel、Word、議事録、規程、契約書などから必要情報を探し、根拠を整理します。",
+	],
+	[
+		"04",
+		"書類作成の自動化",
+		"Word、Excel、PowerPointのテンプレートを使い、提案書、報告書、比較表の作成を体験します。",
+	],
+	[
+		"05",
+		"外部ツール連携",
+		"Webhook、API、GitHub、Notion、Slack、Google Driveなどとの接続方針を学びます。",
+	],
+	[
+		"06",
+		"公開・運用設計",
+		"LPや社内ツールをAIと作り、公開、確認、更新、社内展開までの流れを整理します。",
+	],
 ];
 
 const faqs = [

@@ -1,3 +1,6 @@
+// ストアカ実績の単一情報源（毎日 06:00 LaunchAgent `com.streetacademy.fuwari-sync` が
+// ストアカ管理画面から自動取得して上書きする）
+import storacaStats from "./data/storaca-stats.json";
 import type {
 	ExpressiveCodeConfig,
 	LicenseConfig,
@@ -6,9 +9,6 @@ import type {
 	SiteConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
-// ストアカ実績の単一情報源（毎日 06:00 LaunchAgent `com.streetacademy.fuwari-sync` が
-// ストアカ管理画面から自動取得して上書きする）
-import storacaStats from "./data/storaca-stats.json";
 
 export const siteConfig: SiteConfig = {
 	title: "effect.moe",
@@ -220,10 +220,10 @@ export const seoConfig = {
 	//   既に漢字「剛明-朱」で公開済みで、漢字表記は事実上すでに対外露出している。
 	//   → 署名では使わない。しかし「知られるため」の別名としては載せる。
 	alternateName: [
-		"朱 剛明",      // 漢字表記（LinkedIn で公開済み）
-		"朱剛明",       // 空白なし表記
-		"Shu Koumei",  // ラテン文字
-		"Tony Chu",    // 英語圏での呼称
+		"朱 剛明", // 漢字表記（LinkedIn で公開済み）
+		"朱剛明", // 空白なし表記
+		"Shu Koumei", // ラテン文字
+		"Tony Chu", // 英語圏での呼称
 	],
 
 	// ストアカ実績・レビュー（第三者評価＝E-E-A-T Trustworthiness の核）
@@ -294,9 +294,22 @@ export const serviceConfig = {
 			url: "https://effect.moe/aicrawl/",
 			cta: "プランの詳細を見る",
 			match: [
-				"LLMO", "AIO", "AI流入", "AIクローラー", "GPTBot", "ClaudeBot",
-				"SEO", "検索順位", "Search Console", "GA4", "アクセス解析",
-				"AI検索", "生成AI", "構造化データ", "E-E-A-T", "被引用",
+				"LLMO",
+				"AIO",
+				"AI流入",
+				"AIクローラー",
+				"GPTBot",
+				"ClaudeBot",
+				"SEO",
+				"検索順位",
+				"Search Console",
+				"GA4",
+				"アクセス解析",
+				"AI検索",
+				"生成AI",
+				"構造化データ",
+				"E-E-A-T",
+				"被引用",
 			],
 		},
 		{
@@ -309,8 +322,16 @@ export const serviceConfig = {
 			url: "https://effect.moe/",
 			cta: "AI CENTRAL を見る",
 			match: [
-				"社内AI", "ナレッジ", "知識管理", "Obsidian", "Notion",
-				"業務効率化", "ローカルLLM", "RAG", "議事録", "情報整理",
+				"社内AI",
+				"ナレッジ",
+				"知識管理",
+				"Obsidian",
+				"Notion",
+				"業務効率化",
+				"ローカルLLM",
+				"RAG",
+				"議事録",
+				"情報整理",
 			],
 		},
 	],
@@ -324,63 +345,99 @@ export const courseConfig = {
 			id: "claude-obsidian",
 			title: "Claude × Obsidian｜AI×知識管理で劇的時短 活用術",
 			url: "https://www.street-academy.com/myclass/198519?sessiondetailid=22072787",
-			topics: ["Obsidian", "Obsidian Sync", "Claude", "メモ管理", "知識管理", "ワークフロー", "ナレッジ"],
-			pitch: "Obsidian の大量メモを Claude と連携し『最強のアイデア源』に変える方法を、実演で学べます。",
+			topics: [
+				"Obsidian",
+				"Obsidian Sync",
+				"Claude",
+				"メモ管理",
+				"知識管理",
+				"ワークフロー",
+				"ナレッジ",
+			],
+			pitch:
+				"Obsidian の大量メモを Claude と連携し『最強のアイデア源』に変える方法を、実演で学べます。",
 		},
 		{
 			id: "notion-claude",
 			title: "NotionとClaude｜ご希望のツールを一緒に作る Notion実践講座",
 			url: "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584",
 			topics: ["Notion", "Claude", "CMS", "ツール作成", "業務効率化"],
-			pitch: "Notion × Claude で、あなたの業務に合わせたツールを一緒に作りながら学べます。",
+			pitch:
+				"Notion × Claude で、あなたの業務に合わせたツールを一緒に作りながら学べます。",
 		},
 		{
 			id: "claude-code",
 			title: "Claude Code 講座｜AIコーディングを実務で使いこなす",
 			url: "https://www.street-academy.com/myclass/214883?sessiondetailid=22072529",
 			topics: ["Claude Code", "コーディング", "開発", "実装"],
-			pitch: "Claude Code を基礎から実務まで。初心者でも『作りたい』を形にできるようになります。",
+			pitch:
+				"Claude Code を基礎から実務まで。初心者でも『作りたい』を形にできるようになります。",
 		},
 		{
 			id: "claude-code-agent",
 			title: "Claude Code AIエージェント講座｜自律エージェントを構築する",
 			url: "https://www.street-academy.com/myclass/214012?sessiondetailid=22073339",
-			topics: ["AIエージェント", "AI社員", "Claude Code", "自律実行", "業務AI自動化"],
-			pitch: "AIエージェント（AI社員）の作り方を実装ベースで。社内業務をAIに落とす第一歩。",
+			topics: [
+				"AIエージェント",
+				"AI社員",
+				"Claude Code",
+				"自律実行",
+				"業務AI自動化",
+			],
+			pitch:
+				"AIエージェント（AI社員）の作り方を実装ベースで。社内業務をAIに落とす第一歩。",
 		},
 		{
 			id: "claude-cowork",
 			title: "Claude Coworkで変わる仕事術｜AI自律実行を使いこなす",
 			url: "https://www.street-academy.com/myclass/213188?sessiondetailid=22072409",
 			topics: ["Claude Cowork", "AI自律実行", "仕事術", "AI活用"],
-			pitch: "Claude Cowork で AI に仕事を任せる。即使い始められる自律実行の実演講座。",
+			pitch:
+				"Claude Cowork で AI に仕事を任せる。即使い始められる自律実行の実演講座。",
 		},
 		{
 			id: "codex",
 			title: "ChatGPT Codex 速習講座｜独自機能とClaude連携",
 			url: "https://www.street-academy.com/myclass/215436?sessiondetailid=22074702",
 			topics: ["Codex", "ChatGPT", "Claude連携", "AIコーディング"],
-			pitch: "Codex と ChatGPT の違いから実践まで。実際に動かして理解できます。",
+			pitch:
+				"Codex と ChatGPT の違いから実践まで。実際に動かして理解できます。",
 		},
 		{
 			id: "claude-design",
 			title: "Claude Design 講座｜AIでデザインを形にする",
 			url: "https://www.street-academy.com/myclass/215435?sessiondetailid=22073713",
 			topics: ["Claude Design", "デザイン", "UI", "AI活用"],
-			pitch: "Claude でデザインを生成・実装。アイデアを形にするデザインAI活用講座。",
+			pitch:
+				"Claude でデザインを生成・実装。アイデアを形にするデザインAI活用講座。",
 		},
 		{
 			id: "seo-llmo",
 			title: "SEOはLLMOへ！AI検索に選ばれるWEBサイトを作る",
 			url: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948",
-			topics: ["LLMO", "LLMO対策", "SEO", "AI検索", "構造化データ", "JSON-LD", "構造化"],
-			pitch: "SEOとLLMOの違いから、JSON-LD・E-E-A-T・回遊設計まで。AI検索に選ばれるサイトの作り方。",
+			topics: [
+				"LLMO",
+				"LLMO対策",
+				"SEO",
+				"AI検索",
+				"構造化データ",
+				"JSON-LD",
+				"構造化",
+			],
+			pitch:
+				"SEOとLLMOの違いから、JSON-LD・E-E-A-T・回遊設計まで。AI検索に選ばれるサイトの作り方。",
 		},
 		{
 			id: "llmo-writing",
 			title: "LLMOライティング講座｜AIに引用される文章術",
 			url: "https://www.street-academy.com/myclass/203152?sessiondetailid=22073831",
-			topics: ["LLMOライティング", "ライティング", "LLMO", "AI検索", "コンテンツ"],
+			topics: [
+				"LLMOライティング",
+				"ライティング",
+				"LLMO",
+				"AI検索",
+				"コンテンツ",
+			],
 			pitch: "AIに引用されやすい構造化された文章の書き方を実例で習得できます。",
 		},
 		{
@@ -388,42 +445,54 @@ export const courseConfig = {
 			title: "AI検索×SEO×LLMO E-E-A-T実践講座",
 			url: "https://www.street-academy.com/myclass/216408",
 			topics: ["E-E-A-T", "権威性", "SEO", "信頼性", "監修"],
-			pitch: "経験・専門性・権威性・信頼性をサイトにどう実装するかを具体的に学べます。",
+			pitch:
+				"経験・専門性・権威性・信頼性をサイトにどう実装するかを具体的に学べます。",
 		},
 		{
 			id: "ga4",
 			title: "GA4 講座｜AI時代のアクセス解析とAI流入計測",
 			url: "https://www.street-academy.com/myclass/197827?sessiondetailid=22074573",
 			topics: ["GA4", "アクセス解析", "AI流入", "計測", "データ分析"],
-			pitch: "GA4 でAI検索からの流入まで計測。データで打ち手を決められるようになります。",
+			pitch:
+				"GA4 でAI検索からの流入まで計測。データで打ち手を決められるようになります。",
 		},
 		{
 			id: "local-llm",
 			title: "ローカルLLM（ローカルAI）講座｜手元でAIを動かす",
 			url: "https://www.street-academy.com/myclass/209048?sessiondetailid=22074182",
 			topics: ["ローカルLLM", "ローカルAI", "MLX", "プライバシー", "AI活用"],
-			pitch: "手元のMacでAIを動かす。コストとプライバシーを両立するローカルLLM入門。",
+			pitch:
+				"手元のMacでAIを動かす。コストとプライバシーを両立するローカルLLM入門。",
 		},
 		{
 			id: "nanobanana-canva",
 			title: "Nano Banana Pro × Canva 講座｜AI画像をデザインに",
 			url: "https://www.street-academy.com/myclass/208379?sessiondetailid=22074299",
 			topics: ["Nano Banana Pro", "Canva", "画像生成", "デザイン", "AI画像"],
-			pitch: "AI画像生成（Nano Banana Pro）と Canva で、プロ級のビジュアルを作る方法。",
+			pitch:
+				"AI画像生成（Nano Banana Pro）と Canva で、プロ級のビジュアルを作る方法。",
 		},
 		{
 			id: "ai-intro",
 			title: "AI講座｜AIの本質から学ぶ実践活用",
 			url: "https://www.street-academy.com/myclass/211441?sessiondetailid=22074444",
 			topics: ["AI", "AI活用", "生成AI", "入門", "構造化思考"],
-			pitch: "テクニックの前に『なぜそうなるか』から。AIの本質を理解して使いこなす講座。",
+			pitch:
+				"テクニックの前に『なぜそうなるか』から。AIの本質を理解して使いこなす講座。",
 		},
 		{
 			id: "ai-consulting",
 			title: "AI×LLM 経営伴走コンサルティング（月額）",
 			url: "https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service",
-			topics: ["AIコンサルティング", "AIシステム構築", "AIアプリ開発", "DX", "経営"],
-			pitch: "AIシステム構築・LLMO・業務自動化を、月額で継続伴走。事業をAIで構造化して加速します。",
+			topics: [
+				"AIコンサルティング",
+				"AIシステム構築",
+				"AIアプリ開発",
+				"DX",
+				"経営",
+			],
+			pitch:
+				"AIシステム構築・LLMO・業務自動化を、月額で継続伴走。事業をAIで構造化して加速します。",
 		},
 	],
 };
@@ -449,15 +518,24 @@ export const faqConfig = {
 			a: "はい。むしろ初心者の方こそ対象です。私の講座やこのブログでは、テクニックを教える前に「なぜそうなるのか」という仕組みから、専門用語をかみくだいて説明することを大切にしています。実際、受講生レビューでも「難しい言葉を使わないので、機械が苦手な私でも分かった」という声を多くいただいています。分からないところは、理解が追いつくまで根気よく一緒に進めますので、安心してください。",
 			links: [
 				{ label: "著者の教え方・実績を見る", href: "/author/" },
-				{ label: `受講生の声（評価${storacaStats.ratingValue}／${storacaStats.reviewCount}件）`, href: "/about/" },
+				{
+					label: `受講生の声（評価${storacaStats.ratingValue}／${storacaStats.reviewCount}件）`,
+					href: "/about/",
+				},
 			],
 		},
 		{
 			q: "どんなことを教えてもらえますか？",
 			a: "大きく分けて、①AIツールの活用（Claude / Claude Code / Codex など）、②知識管理（Notion・Obsidian）、③LLMO（AI検索に選ばれる対策）、④AIエージェント（AI社員）づくり、⑤ローカルAI、の5つが柱です。どれも「知っておく」だけでなく、あなたの実際の仕事に合わせて一緒に手を動かして作りながら学べるのが特徴です。各テーマは、このブログの記事でも実例つきで読めます。",
 			links: [
-				{ label: "Obsidian×Claudeでメモをアイデア源に", href: "/posts/obsidian-claude-idea-source/" },
-				{ label: "AI時代に「シニア有利」の本質は構造化能力", href: "/posts/ai-era-senior-structuring-power/" },
+				{
+					label: "Obsidian×Claudeでメモをアイデア源に",
+					href: "/posts/obsidian-claude-idea-source/",
+				},
+				{
+					label: "AI時代に「シニア有利」の本質は構造化能力",
+					href: "/posts/ai-era-senior-structuring-power/",
+				},
 				{ label: "AI用語集で各キーワードを確認", href: "/faq/" },
 			],
 		},
@@ -465,22 +543,26 @@ export const faqConfig = {
 			q: "個人や小さな会社でも相談できますか？",
 			a: "はい、むしろ個人・小規模事業の方にこそ効果が大きいです。AIをうまく使えば、1人でも何人分もの仕事をこなせるようになります。作業の自動化・書類管理・時間の使い方まで、全体を見渡して「どこをAIに任せるか」を一緒に設計します。単発の講座のほか、継続して伴走する月額のコンサルティングもあります。",
 			links: [
-				{ label: "「構造化能力」がAI時代の鍵になる理由", href: "/posts/ai-era-senior-structuring-power/" },
+				{
+					label: "「構造化能力」がAI時代の鍵になる理由",
+					href: "/posts/ai-era-senior-structuring-power/",
+				},
 				{ label: "著者・サービスの詳細", href: "/author/" },
 			],
 		},
 		{
 			q: "AIシステムやアプリの開発も頼めますか？",
 			a: "はい。記事や講座だけでなく、社内向けのAIシステム構築、AIアプリ開発、LLMO対策の代行まで対応しています。「AIで事業を構造化して加速する」のが私たちの専門で、このブログ自体も、その考え方と技術で実際に作られています。何ができるかは、まず著者ページのサービス案内をご覧ください。",
-			links: [
-				{ label: "著者・提供サービスを見る", href: "/author/" },
-			],
+			links: [{ label: "著者・提供サービスを見る", href: "/author/" }],
 		},
 		{
 			q: "講座はどこで受けられますか？",
 			a: `スキルシェア最大手「ストアカ」で開講しています。2024年8月の登録から約2年で、累計受講${storacaStats.studentsTaught}人・レビュー${storacaStats.reviewCount}件・評価${storacaStats.ratingValue}（5点満点）・プロランク（最高レベル）の実績があります。各記事の最後に、その内容に関連する講座へのリンクを自動で置いているので、興味を持ったテーマからそのまま受講できます。`,
 			links: [
-				{ label: "ストアカ講師ページ", href: "https://www.street-academy.com/steachers/271053" },
+				{
+					label: "ストアカ講師ページ",
+					href: "https://www.street-academy.com/steachers/271053",
+				},
 				{ label: "著者の実績・経歴", href: "/author/" },
 			],
 		},
@@ -488,7 +570,10 @@ export const faqConfig = {
 			q: "このブログは何がテーマですか？",
 			a: "「構造化」が軸です。物事を整理し、構造化できる人が、AI時代にいちばん得をする——という考えのもと、AIを実際に使って事業や知識を構造化する方法を、机上論ではなく実装しながら発信しています。構造化はLLMO（AI検索対策）にも、社内のAIシステム化にも、AI時代に人に残るスキルにも、すべて通じる共通の土台です。",
 			links: [
-				{ label: "「構造化能力」とは何かを掘り下げた記事", href: "/posts/ai-era-senior-structuring-power/" },
+				{
+					label: "「構造化能力」とは何かを掘り下げた記事",
+					href: "/posts/ai-era-senior-structuring-power/",
+				},
 				{ label: "著者について", href: "/author/" },
 			],
 		},
@@ -499,51 +584,78 @@ export const faqConfig = {
 			q: "Claude（クロード）とは？",
 			a: "Anthropic社が作った対話型AIです。文章の作成・要約・分析や、プログラムのコードを書くのが得意で、長い文章を丁寧に扱えるのが特徴です。このブログで扱う「Claude Code」「Claude Cowork」などは、すべてこのClaudeをベースにした使い方です。",
 			links: [
-				{ label: "ObsidianのメモをClaudeでアイデア源にする実例", href: "/posts/obsidian-claude-idea-source/" },
+				{
+					label: "ObsidianのメモをClaudeでアイデア源にする実例",
+					href: "/posts/obsidian-claude-idea-source/",
+				},
 			],
 		},
 		{
 			q: "Claude Code（クロードコード）とは？",
 			a: "Claude を、コード作成・開発に特化させた道具です。「こういうアプリやツールを作りたい」と日本語で頼むだけで、AIが実際にコードを書いて形にしてくれます。プログラミング未経験でも、伴走してもらいながら「作りたい」を実現できるのが大きな魅力です。",
 			links: [
-				{ label: "Claude Code 講座（ストアカ）", href: "https://www.street-academy.com/myclass/214883?sessiondetailid=22072529" },
+				{
+					label: "Claude Code 講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/214883?sessiondetailid=22072529",
+				},
 			],
 		},
 		{
 			q: "Codex（コーデックス）とは？",
 			a: "OpenAI（ChatGPTを作った会社）のコード作成AIです。Claude Code と似た役割で、プログラムを書くのを手伝ってくれます。Claude Code とどちらが良いかは目的によるので、両方を実際に動かして比べてみるのがおすすめです。",
 			links: [
-				{ label: "Codex 速習講座（ストアカ）", href: "https://www.street-academy.com/myclass/215436?sessiondetailid=22074702" },
+				{
+					label: "Codex 速習講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/215436?sessiondetailid=22074702",
+				},
 			],
 		},
 		{
 			q: "MCP とは？",
 			a: "AIに「このフォルダやアプリを使っていいよ」と許可を出し、AIが自分でファイルを読み書きしたり、外部の道具を使えるようにする「橋渡しの仕組み」です。たとえばこれを使うと、Claude が自分でメモを開いて読み、必要な情報を探してくれます。正式名称は Model Context Protocol。便利な反面、見せる範囲はしっかり絞ることが大切です。",
 			links: [
-				{ label: "MCPでObsidianのメモをClaudeにつなぐ実例", href: "/posts/obsidian-claude-idea-source/" },
+				{
+					label: "MCPでObsidianのメモをClaudeにつなぐ実例",
+					href: "/posts/obsidian-claude-idea-source/",
+				},
 			],
 		},
 		{
 			q: "Obsidian（オブシディアン）とは？",
 			a: "文字（マークダウン）でメモを書きためるアプリです。メモ同士をリンクでつなげられ、自分だけの知識データベースを作れます。データは自分のパソコンに保存されるので安心で、シンプルな文字なのでAIにも渡しやすいのが強みです。スマホとパソコンで同期したい場合は、有料のObsidian Syncを使います。",
 			links: [
-				{ label: "Obsidian×Claudeでメモをアイデア源に変える", href: "/posts/obsidian-claude-idea-source/" },
-				{ label: "Obsidianのモバイル運用とSyncの価値", href: "/posts/obsidian-sync-mobile-astro-blog/" },
+				{
+					label: "Obsidian×Claudeでメモをアイデア源に変える",
+					href: "/posts/obsidian-claude-idea-source/",
+				},
+				{
+					label: "Obsidianのモバイル運用とSyncの価値",
+					href: "/posts/obsidian-sync-mobile-astro-blog/",
+				},
 			],
 		},
 		{
 			q: "Notion（ノーション）とは？",
 			a: "メモ・文書・データベース・タスク管理をまとめてできる万能ツールです。チームでの共有や、見やすい資料づくりが得意です。一方で、ブログの土台（CMS）として使うと手間が増える場面もあるので、用途に応じて使い分けるのがコツです。",
 			links: [
-				{ label: "なぜNotionをCMSにすると面倒くさいのか", href: "/posts/why-notion-cms-is-painful-for-astro/" },
-				{ label: "Notion実践講座（ストアカ）", href: "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584" },
+				{
+					label: "なぜNotionをCMSにすると面倒くさいのか",
+					href: "/posts/why-notion-cms-is-painful-for-astro/",
+				},
+				{
+					label: "Notion実践講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584",
+				},
 			],
 		},
 		{
 			q: "LLMO とは？",
 			a: "ChatGPTやPerplexityなどのAI検索に、自分のサイトを見つけてもらい・引用してもらうための対策です。これまでのSEO（Google検索対策）の、AI時代版にあたります。情報を構造化し、AIが読み取りやすい形に整えることが核心で、まさにこのブログの「構造化」というテーマそのものです。",
 			links: [
-				{ label: "SEOはLLMOへ｜AI検索に選ばれる講座（ストアカ）", href: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948" },
+				{
+					label: "SEOはLLMOへ｜AI検索に選ばれる講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948",
+				},
 				{ label: "著者のLLMO実績・書籍", href: "/author/" },
 			],
 		},
@@ -551,14 +663,20 @@ export const faqConfig = {
 			q: "AIエージェント（AI社員）とは？",
 			a: "指示を出すと、複数の作業を自分で順番に考えて実行してくれるAIです。まるで社員のように、調べもの・資料作成・データ処理などをまかせられます。「AI社員」とも呼び、社内の定型業務をAIに落としていくことで、小さなチームでも大きな成果を出せるようになります。",
 			links: [
-				{ label: "Claude Code AIエージェント講座（ストアカ）", href: "https://www.street-academy.com/myclass/214012?sessiondetailid=22073339" },
+				{
+					label: "Claude Code AIエージェント講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/214012?sessiondetailid=22073339",
+				},
 			],
 		},
 		{
 			q: "ローカルLLM（ローカルAI）とは？",
 			a: "インターネット上のサービスではなく、自分のパソコンの中で動かすAIのことです。情報が外に出ないので、プライバシーやコスト面で安心して使えます。お客様情報など外に出せないデータを扱う仕事と、特に相性がよい使い方です。",
 			links: [
-				{ label: "ローカルLLM（ローカルAI）講座（ストアカ）", href: "https://www.street-academy.com/myclass/209048?sessiondetailid=22074182" },
+				{
+					label: "ローカルLLM（ローカルAI）講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/209048?sessiondetailid=22074182",
+				},
 			],
 		},
 		{
@@ -566,7 +684,10 @@ export const faqConfig = {
 			a: "経験・専門性・権威性・信頼性（Experience / Expertise / Authoritativeness / Trustworthiness）の頭文字です。GoogleやAIが「この情報は信頼できるか」を判断する目安で、発信者が実際に経験しているか・専門家か・実績があるか・出典が明確かが見られます。このブログでは、著者ページや受講生レビュー、構造化データでこれを示しています。",
 			links: [
 				{ label: "著者ページ（経歴・専門・実績）", href: "/author/" },
-				{ label: "E-E-A-T 講座（ストアカ）", href: "https://www.street-academy.com/myclass/216408?sessiondetailid=22239230" },
+				{
+					label: "E-E-A-T 講座（ストアカ）",
+					href: "https://www.street-academy.com/myclass/216408?sessiondetailid=22239230",
+				},
 			],
 		},
 		{
@@ -574,7 +695,10 @@ export const faqConfig = {
 			a: "ページの内容を、検索エンジンやAIが正確に読み取れる「決まった書式の説明書き」です。記事の著者・日付・評価・よくある質問などを機械に伝えることで、検索やAIに引用されやすくなります。このブログ自体も、全ページにこの構造化データを入れています（まさにLLMO対策の実例です）。",
 			links: [
 				{ label: "著者のLLMO・構造化データの専門性", href: "/author/" },
-				{ label: "SEOはLLMOへ｜構造化データを学ぶ講座", href: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948" },
+				{
+					label: "SEOはLLMOへ｜構造化データを学ぶ講座",
+					href: "https://www.street-academy.com/myclass/196061?sessiondetailid=22073948",
+				},
 			],
 		},
 	],

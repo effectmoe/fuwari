@@ -1,7 +1,7 @@
 ---
-import Layout from "./Layout.astro";
 import { Icon } from "astro-icon/components";
 import Search from "../components/Search.svelte";
+import Layout from "./Layout.astro";
 
 interface Props {
 	title?: string;
@@ -13,19 +13,68 @@ interface Props {
 	fullTitle?: boolean;
 }
 
-const { title, description, ogType, setOGTypeArticle, ogImage, ogImageAlt, fullTitle } = Astro.props;
+const {
+	title,
+	description,
+	ogType,
+	setOGTypeArticle,
+	ogImage,
+	ogImageAlt,
+	fullTitle,
+} = Astro.props;
 const currentPath = Astro.url.pathname;
 const brandRoutes = [
-	{ match: (path: string) => path.startsWith("/aicrawl"), label: "AI CRAWL", href: "/aicrawl/" },
-	{ match: (path: string) => path.startsWith("/ai-agent-course"), label: "AI COURSE", href: "/ai-agent-course/" },
-	{ match: (path: string) => path.startsWith("/blog") || path.startsWith("/posts"), label: "BLOG", href: "/blog/" },
-	{ match: (path: string) => path.startsWith("/company"), label: "COMPANY", href: "/company/" },
-	{ match: (path: string) => path.startsWith("/changelog"), label: "CHANGELOG", href: "/changelog/" },
-	{ match: (path: string) => path.startsWith("/author"), label: "ABOUT", href: "/author/" },
-	{ match: (path: string) => path.startsWith("/faq"), label: "FAQ", href: "/faq/" },
-	{ match: (path: string) => path.startsWith("/llmo"), label: "LLMO", href: "/llmo/" },
-	{ match: (path: string) => path.startsWith("/trust"), label: "TRUST", href: "/trust/" },
-	{ match: (path: string) => path.startsWith("/structurepedia"), label: "STRUCTUREPEDIA", href: "/structurepedia/" },
+	{
+		match: (path: string) => path.startsWith("/aicrawl"),
+		label: "AI CRAWL",
+		href: "/aicrawl/",
+	},
+	{
+		match: (path: string) => path.startsWith("/ai-agent-course"),
+		label: "AI COURSE",
+		href: "/ai-agent-course/",
+	},
+	{
+		match: (path: string) =>
+			path.startsWith("/blog") || path.startsWith("/posts"),
+		label: "BLOG",
+		href: "/blog/",
+	},
+	{
+		match: (path: string) => path.startsWith("/company"),
+		label: "COMPANY",
+		href: "/company/",
+	},
+	{
+		match: (path: string) => path.startsWith("/changelog"),
+		label: "CHANGELOG",
+		href: "/changelog/",
+	},
+	{
+		match: (path: string) => path.startsWith("/author"),
+		label: "ABOUT",
+		href: "/author/",
+	},
+	{
+		match: (path: string) => path.startsWith("/faq"),
+		label: "FAQ",
+		href: "/faq/",
+	},
+	{
+		match: (path: string) => path.startsWith("/llmo"),
+		label: "LLMO",
+		href: "/llmo/",
+	},
+	{
+		match: (path: string) => path.startsWith("/trust"),
+		label: "TRUST",
+		href: "/trust/",
+	},
+	{
+		match: (path: string) => path.startsWith("/structurepedia"),
+		label: "STRUCTUREPEDIA",
+		href: "/structurepedia/",
+	},
 ];
 const activeBrandRoute = brandRoutes.find((route) => route.match(currentPath));
 const headerBrand = activeBrandRoute?.label ?? "AI CENTRAL";
@@ -65,7 +114,10 @@ const serviceNavGroups = [
 			{ href: "/aicrawl/#operator", label: "運用者" },
 			{ href: "/aicrawl/#pricing", label: "料金" },
 			{ href: "/aicrawl/#faq", label: "FAQ" },
-			{ href: "/?inquiry=consultation&service=aicrawl#contact", label: "無料相談" },
+			{
+				href: "/?inquiry=consultation&service=aicrawl#contact",
+				label: "無料相談",
+			},
 		],
 	},
 	{
@@ -80,7 +132,10 @@ const serviceNavGroups = [
 			{ href: "/ai-agent-course/#price", label: "料金・助成金" },
 			{ href: "/ai-agent-course/#instructor", label: "講師" },
 			{ href: "/ai-agent-course/#faq", label: "FAQ" },
-			{ href: "/?inquiry=consultation&service=ai-course#contact", label: "無料相談" },
+			{
+				href: "/?inquiry=consultation&service=ai-course#contact",
+				label: "無料相談",
+			},
 		],
 	},
 	{

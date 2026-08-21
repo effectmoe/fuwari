@@ -1,8 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
-import LandingLayout from "../layouts/LandingLayout.astro";
 import { profileConfig } from "../config";
+import LandingLayout from "../layouts/LandingLayout.astro";
 
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
 const pageTitle = "総合FAQ｜effect.moe";
@@ -32,7 +32,7 @@ const faqCategories: FaqCategory[] = [
 		items: [
 			{
 				q: "LLMOとは何ですか？SEOと何が違いますか？",
-				a: "LLMOは、生成AIの回答で自社の情報が正しく理解・引用される状態を整える取り組みで、検索結果で見つけてもらうSEOとは主な接点が異なります。LLMOでは、AIが答えを組み立てる時に、サービス内容、根拠、FAQ、運営者情報を読み違えないように整理します。SEOもLLMOも、読者に役立つ内容を分かりやすく届ける土台として大切です。詳しくは<a href=\"/llmo/\">LLMO対策とは何かを実測データで解説したガイド</a>をご覧ください。",
+				a: 'LLMOは、生成AIの回答で自社の情報が正しく理解・引用される状態を整える取り組みで、検索結果で見つけてもらうSEOとは主な接点が異なります。LLMOでは、AIが答えを組み立てる時に、サービス内容、根拠、FAQ、運営者情報を読み違えないように整理します。SEOもLLMOも、読者に役立つ内容を分かりやすく届ける土台として大切です。詳しくは<a href="/llmo/">LLMO対策とは何かを実測データで解説したガイド</a>をご覧ください。',
 				links: [
 					{ label: "LLMO対策ガイドを読む", href: "/llmo/" },
 					{ label: "AI CRAWLを見る", href: "/aicrawl/" },
@@ -40,19 +40,25 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "LLMO対策は何から始めればいいですか？",
-				a: "LLMO対策は、AIに読ませたい自社のサービス内容、対象者、料金、根拠、FAQ、運営者情報を一つずつ確認し、矛盾なく整えることから始めます。まずは自社サイトの主要ページで、質問への答えが冒頭にあるかを見直してください。LLMO対策では、難しい言葉だけで済ませず、誰に何を提供するかを短く明確に書くことが基本です。詳しくは<a href=\"/llmo/\">LLMO対策の始め方</a>をご覧ください。",
+				a: 'LLMO対策は、AIに読ませたい自社のサービス内容、対象者、料金、根拠、FAQ、運営者情報を一つずつ確認し、矛盾なく整えることから始めます。まずは自社サイトの主要ページで、質問への答えが冒頭にあるかを見直してください。LLMO対策では、難しい言葉だけで済ませず、誰に何を提供するかを短く明確に書くことが基本です。詳しくは<a href="/llmo/">LLMO対策の始め方</a>をご覧ください。',
 				links: [
 					{ label: "LLMO対策の始め方を読む", href: "/llmo/#start" },
 					{ label: "AI CRAWLの分析内容", href: "/aicrawl/#overview" },
-					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+					{
+						label: "無料相談する",
+						href: "/?inquiry=consultation&service=aicrawl#contact",
+					},
 				],
 			},
 			{
 				q: "自社サイトがChatGPTに引用されているか調べる方法はありますか？",
-				a: "自社サイトがChatGPTに引用されているかは、質問ごとに回答内の自社名・サービス名・URLの登場を記録して確かめられます。AI CRAWLでは、AIの回答に自社が出ているかを見るAI CITATIONと組み合わせて、引用の有無を継続して整理します。ChatGPTの回答は変わるため、1回だけで判断せず、同じ質問を定期的に確認することが大切です。詳しくは<a href=\"/posts/ai-crawl-citation-strategy/\">ChatGPT検索でSEOは半分しか通用しない — 対策の分岐点</a>をご覧ください。",
+				a: '自社サイトがChatGPTに引用されているかは、質問ごとに回答内の自社名・サービス名・URLの登場を記録して確かめられます。AI CRAWLでは、AIの回答に自社が出ているかを見るAI CITATIONと組み合わせて、引用の有無を継続して整理します。ChatGPTの回答は変わるため、1回だけで判断せず、同じ質問を定期的に確認することが大切です。詳しくは<a href="/posts/ai-crawl-citation-strategy/">ChatGPT検索でSEOは半分しか通用しない — 対策の分岐点</a>をご覧ください。',
 				links: [
 					{ label: "AI CRAWL / AI CITATION", href: "/aicrawl/" },
-					{ label: "関連する解説記事", href: "/posts/ai-crawl-citation-strategy/" },
+					{
+						label: "関連する解説記事",
+						href: "/posts/ai-crawl-citation-strategy/",
+					},
 				],
 			},
 			{
@@ -68,12 +74,15 @@ const faqCategories: FaqCategory[] = [
 				a: "GPTBotやClaudeBotをブロックすべきかに一律の正解はなく、AI経由の集客を狙うなら許可し、コンテンツ保護を優先するならブロックを検討します。GPTBotやClaudeBotの判断材料は、推測ではなく自サイトの実ログです。どのクローラーが何を読んでいるかを確認し、事業の目的と扱う情報に合わせて決めてください。",
 				links: [
 					{ label: "AI CRAWLで実ログを確認", href: "/aicrawl/" },
-					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+					{
+						label: "無料相談する",
+						href: "/?inquiry=consultation&service=aicrawl#contact",
+					},
 				],
 			},
 			{
 				q: "llms.txtとは何ですか？書き方は？",
-				a: "llms.txtは、AIがサイトの目的、主要ページ、重要な情報を読み取りやすくするための案内ファイルで、見出しとリンクを使って簡潔に書きます。llms.txtには、運営者、提供サービス、FAQ、主要な記事への入口を、実際のページと矛盾しない形で載せます。effect.moeでも<a href=\"/llms.txt\">llms.txt</a>を実運用し、更新した内容をAIがたどれるようにしています。",
+				a: 'llms.txtは、AIがサイトの目的、主要ページ、重要な情報を読み取りやすくするための案内ファイルで、見出しとリンクを使って簡潔に書きます。llms.txtには、運営者、提供サービス、FAQ、主要な記事への入口を、実際のページと矛盾しない形で載せます。effect.moeでも<a href="/llms.txt">llms.txt</a>を実運用し、更新した内容をAIがたどれるようにしています。',
 				links: [
 					{ label: "effect.moe の llms.txt", href: "/llms.txt" },
 					{ label: "主要リファレンスを見る", href: "/dfb-complete-guide/" },
@@ -89,7 +98,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "AIエージェントは自分で作れますか？",
-				a: "AIエージェントは、自分の仕事に必要な情報、手順、確認する人の範囲を決めれば、自分でも少しずつ作れます。AIエージェントは便利ですが、最初から全部を任せず、調査、整理、下書きなど確認しやすい作業から始めるのが安全です。<a href=\"/ai-agent-course/\">AIエージェント講座</a>では、実務で使うための作り方を学べます。",
+				a: 'AIエージェントは、自分の仕事に必要な情報、手順、確認する人の範囲を決めれば、自分でも少しずつ作れます。AIエージェントは便利ですが、最初から全部を任せず、調査、整理、下書きなど確認しやすい作業から始めるのが安全です。<a href="/ai-agent-course/">AIエージェント講座</a>では、実務で使うための作り方を学べます。',
 				links: [
 					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
 					{ label: "法人研修を見る", href: "/ai-agent-course-corporate/" },
@@ -97,7 +106,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "中小企業の生成AI導入は何から始めるべきですか？",
-				a: "中小企業の生成AI導入は、時間がかかる定型作業を一つ選び、扱う情報と人の確認範囲を決めることから始めるべきです。生成AI導入では、便利そうなツールを増やす前に、誰が何に困っているか、AIに見せてよい情報はどこまでかを整理します。<a href=\"/ai-agent-course-corporate/\">法人研修</a>では、現場に合わせた生成AI導入の入口を一緒に設計できます。",
+				a: '中小企業の生成AI導入は、時間がかかる定型作業を一つ選び、扱う情報と人の確認範囲を決めることから始めるべきです。生成AI導入では、便利そうなツールを増やす前に、誰が何に困っているか、AIに見せてよい情報はどこまでかを整理します。<a href="/ai-agent-course-corporate/">法人研修</a>では、現場に合わせた生成AI導入の入口を一緒に設計できます。',
 				links: [
 					{ label: "法人研修を見る", href: "/ai-agent-course-corporate/" },
 					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
@@ -105,7 +114,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "プロンプトの書き方に型はありますか？",
-				a: "プロンプトの書き方には、目的、前提、してほしい作業、守る条件、出力形式を順番に置く型があります。プロンプトの書き方を体系化したDFB構造化メソッドでは、情報を分け、枠を決め、組み立てる流れで、AIに頼みたいことを明確にします。詳しくは<a href=\"/dfb-complete-guide/\">DFB構造化メソッド大全</a>と、<a href=\"/posts/dfb-method-introduction/\">DFB構造化メソッドの入門記事</a>をご覧ください。",
+				a: 'プロンプトの書き方には、目的、前提、してほしい作業、守る条件、出力形式を順番に置く型があります。プロンプトの書き方を体系化したDFB構造化メソッドでは、情報を分け、枠を決め、組み立てる流れで、AIに頼みたいことを明確にします。詳しくは<a href="/dfb-complete-guide/">DFB構造化メソッド大全</a>と、<a href="/posts/dfb-method-introduction/">DFB構造化メソッドの入門記事</a>をご覧ください。',
 				links: [
 					{ label: "DFB構造化メソッド大全", href: "/dfb-complete-guide/" },
 					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
@@ -129,7 +138,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "AIの記憶とは何を指しますか？",
-				a: "ここでいう記憶とは、AIが勝手に覚える曖昧なものではありません。会社の資料、顧客対応履歴、社内ルール、FAQ、過去の判断を、AIが参照しやすい形に整えたナレッジベースです。詳しい考え方は<a href=\"/#decision\">記憶と意思決定</a>のブロックで説明しています。",
+				a: 'ここでいう記憶とは、AIが勝手に覚える曖昧なものではありません。会社の資料、顧客対応履歴、社内ルール、FAQ、過去の判断を、AIが参照しやすい形に整えたナレッジベースです。詳しい考え方は<a href="/#decision">記憶と意思決定</a>のブロックで説明しています。',
 				links: [
 					{ label: "記憶と意思決定", href: "/#decision" },
 					{ label: "構造化ペディア", href: "/structurepedia/" },
@@ -137,7 +146,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "既存のファイルやフォルダを全部移行する必要がありますか？",
-				a: "基本的には、既存のファイルやフォルダを無理に作り替える前提ではありません。いまあるデータ資産を活かしながら、AIが参照できる記憶の網を設計します。社内システムや資料の状態は、まず<a href=\"/#inventory\">業務棚卸し</a>で確認します。",
+				a: '基本的には、既存のファイルやフォルダを無理に作り替える前提ではありません。いまあるデータ資産を活かしながら、AIが参照できる記憶の網を設計します。社内システムや資料の状態は、まず<a href="/#inventory">業務棚卸し</a>で確認します。',
 				links: [
 					{ label: "業務棚卸し", href: "/#inventory" },
 					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
@@ -185,10 +194,13 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "AIクロールの料金プランはどう違いますか？",
-				a: "レポートプランは週次・月次レポート、コンサルプランはレポートに加えて隔週90分相談とチャットワーク相談、グロースプランは改善ロードマップ策定と支援まで含む構成です。詳しくは<a href=\"/aicrawl/#pricing\">AIクロールの料金</a>をご確認ください。",
+				a: 'レポートプランは週次・月次レポート、コンサルプランはレポートに加えて隔週90分相談とチャットワーク相談、グロースプランは改善ロードマップ策定と支援まで含む構成です。詳しくは<a href="/aicrawl/#pricing">AIクロールの料金</a>をご確認ください。',
 				links: [
 					{ label: "AIクロール料金", href: "/aicrawl/#pricing" },
-					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+					{
+						label: "無料相談する",
+						href: "/?inquiry=consultation&service=aicrawl#contact",
+					},
 				],
 			},
 			{
@@ -218,7 +230,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "講座では何が作れるようになりますか？",
-				a: "AIエージェント、業務プロンプト、Notionやスプレッドシートと連携する業務フロー、社内ナレッジの整理などを扱います。具体的な内容は<a href=\"/ai-agent-course/#outputs\">作れるもの</a>と<a href=\"/ai-agent-course/#curriculum\">カリキュラム</a>をご確認ください。",
+				a: 'AIエージェント、業務プロンプト、Notionやスプレッドシートと連携する業務フロー、社内ナレッジの整理などを扱います。具体的な内容は<a href="/ai-agent-course/#outputs">作れるもの</a>と<a href="/ai-agent-course/#curriculum">カリキュラム</a>をご確認ください。',
 				links: [
 					{ label: "作れるもの", href: "/ai-agent-course/#outputs" },
 					{ label: "カリキュラム", href: "/ai-agent-course/#curriculum" },
@@ -226,7 +238,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "AIセントラルとAI講座はどう違いますか？",
-				a: "AIセントラルは、会社やチームの業務AI基盤をこちらが設計・構築するサービスです。AI講座は、AIを使う人自身の理解と実装力を高める学習サービスです。まず自分で作れるようになりたい場合は<a href=\"/ai-agent-course/\">AI講座</a>、業務基盤を作って運用したい場合は<a href=\"/\">AIセントラル</a>が入口になります。",
+				a: 'AIセントラルは、会社やチームの業務AI基盤をこちらが設計・構築するサービスです。AI講座は、AIを使う人自身の理解と実装力を高める学習サービスです。まず自分で作れるようになりたい場合は<a href="/ai-agent-course/">AI講座</a>、業務基盤を作って運用したい場合は<a href="/">AIセントラル</a>が入口になります。',
 				links: [
 					{ label: "AIセントラル", href: "/" },
 					{ label: "AI講座", href: "/ai-agent-course/" },
@@ -274,7 +286,7 @@ const faqCategories: FaqCategory[] = [
 		items: [
 			{
 				q: "AIセントラルは初期費用と月額費用の両方がかかりますか？",
-				a: "はい。AIセントラルは初期導入費用に加えて、半年間の月額伴走コンサルがかかります。初期費用は銀行振込、月額費用はクレジットカード払いを想定しています。詳細は<a href=\"/#pricing\">料金ブロック</a>をご確認ください。",
+				a: 'はい。AIセントラルは初期導入費用に加えて、半年間の月額伴走コンサルがかかります。初期費用は銀行振込、月額費用はクレジットカード払いを想定しています。詳細は<a href="/#pricing">料金ブロック</a>をご確認ください。',
 				links: [
 					{ label: "AIセントラル料金", href: "/#pricing" },
 					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
@@ -285,12 +297,15 @@ const faqCategories: FaqCategory[] = [
 				a: "AIクロールは月額プランとして、クレジットカード払いを想定しています。レポート、コンサル、グロースの3プランがあり、上位プランほどレポート後の相談や改善ロードマップ策定まで含みます。",
 				links: [
 					{ label: "AIクロール料金", href: "/aicrawl/#pricing" },
-					{ label: "AIクロール無料相談", href: "/?inquiry=consultation&service=aicrawl#contact" },
+					{
+						label: "AIクロール無料相談",
+						href: "/?inquiry=consultation&service=aicrawl#contact",
+					},
 				],
 			},
 			{
 				q: "料金だけ見て相談しても大丈夫ですか？",
-				a: "大丈夫です。プランの選び方、初期導入費用と月額費用の違い、どの範囲まで対応するべきかは、<a href=\"/#contact\">無料相談</a>で確認できます。まだ導入を決めていない段階でも問題ありません。",
+				a: '大丈夫です。プランの選び方、初期導入費用と月額費用の違い、どの範囲まで対応するべきかは、<a href="/#contact">無料相談</a>で確認できます。まだ導入を決めていない段階でも問題ありません。',
 				links: [
 					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
 					{ label: "会社概要", href: "/company/" },
@@ -306,7 +321,7 @@ const faqCategories: FaqCategory[] = [
 		items: [
 			{
 				q: "顧客情報や個人情報を扱う場合でも相談できますか？",
-				a: "相談できます。すべてのプランで、顧客名、個人名、住所、電話番号、メールアドレスなどをAIへそのまま渡さない個人情報マスキングを前提にします。その上で、AIをどこで動かすか、どの情報を参照させるか、ログや承認フローをどう残すかを設計します。詳しくは<a href=\"/#secure\">ローカルLLM</a>と<a href=\"/#boundary\">丸投げしない設計</a>をご確認ください。",
+				a: '相談できます。すべてのプランで、顧客名、個人名、住所、電話番号、メールアドレスなどをAIへそのまま渡さない個人情報マスキングを前提にします。その上で、AIをどこで動かすか、どの情報を参照させるか、ログや承認フローをどう残すかを設計します。詳しくは<a href="/#secure">ローカルLLM</a>と<a href="/#boundary">丸投げしない設計</a>をご確認ください。',
 				links: [
 					{ label: "ローカルLLM", href: "/#secure" },
 					{ label: "丸投げしない設計", href: "/#boundary" },
@@ -362,7 +377,7 @@ const faqCategories: FaqCategory[] = [
 		items: [
 			{
 				q: "誰が設計・運用していますか？",
-				a: "シュ コウメイが設計・構築・伴走を行います。運営主体は株式会社EFFECTです。プロフィール、実績、専門領域は<a href=\"/author/\">アバウト</a>と<a href=\"/company/\">会社概要</a>にまとめています。",
+				a: 'シュ コウメイが設計・構築・伴走を行います。運営主体は株式会社EFFECTです。プロフィール、実績、専門領域は<a href="/author/">アバウト</a>と<a href="/company/">会社概要</a>にまとめています。',
 				links: [
 					{ label: "アバウト", href: "/author/" },
 					{ label: "会社概要", href: "/company/" },
@@ -394,7 +409,7 @@ const faqCategories: FaqCategory[] = [
 		items: [
 			{
 				q: "無料相談では何を相談できますか？",
-				a: "AIセントラル、AIクロール、AI講座のどれが合っているか、現状の業務やサイトをどう整理すべきか、料金感や導入範囲を相談できます。入口は<a href=\"/#contact\">無料相談フォーム</a>に統一しています。",
+				a: 'AIセントラル、AIクロール、AI講座のどれが合っているか、現状の業務やサイトをどう整理すべきか、料金感や導入範囲を相談できます。入口は<a href="/#contact">無料相談フォーム</a>に統一しています。',
 				links: [
 					{ label: "無料相談フォーム", href: "/?inquiry=consultation#contact" },
 					{ label: "サイトマップ", href: "/sitemap/" },
@@ -410,7 +425,7 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "どのページから見ればよいですか？",
-				a: "社内AIの導入なら<a href=\"/\">AIセントラル</a>、AIからのサイト流入分析なら<a href=\"/aicrawl/\">AIクロール</a>、AIを学びたいなら<a href=\"/ai-agent-course/\">AI講座</a>が入口です。迷う場合は、この総合FAQか<a href=\"/sitemap/\">サイトマップ</a>から辿れます。",
+				a: '社内AIの導入なら<a href="/">AIセントラル</a>、AIからのサイト流入分析なら<a href="/aicrawl/">AIクロール</a>、AIを学びたいなら<a href="/ai-agent-course/">AI講座</a>が入口です。迷う場合は、この総合FAQか<a href="/sitemap/">サイトマップ</a>から辿れます。',
 				links: [
 					{ label: "AIセントラル", href: "/" },
 					{ label: "AIクロール", href: "/aicrawl/" },
@@ -455,7 +470,11 @@ const trustGuide = [
 const allFaqItems = faqCategories.flatMap((category) =>
 	category.items.map((item) => ({ ...item, category: category.label })),
 );
-const stripHtml = (value: string) => value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+const stripHtml = (value: string) =>
+	value
+		.replace(/<[^>]+>/g, " ")
+		.replace(/\s+/g, " ")
+		.trim();
 const faqLd = {
 	"@context": "https://schema.org",
 	"@type": "FAQPage",
@@ -469,7 +488,11 @@ const faqLd = {
 		acceptedAnswer: {
 			"@type": "Answer",
 			text: stripHtml(item.a),
-			author: { "@type": "Person", name: profileConfig.name, url: `${siteUrl}author/` },
+			author: {
+				"@type": "Person",
+				name: profileConfig.name,
+				url: `${siteUrl}author/`,
+			},
 		},
 	})),
 };

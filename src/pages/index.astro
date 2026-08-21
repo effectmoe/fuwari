@@ -1,12 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
-import LandingLayout from "../layouts/LandingLayout.astro";
+import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
 import EffectInteractiveHero from "../components/effectInteractive/EffectInteractiveHero.astro";
-import StitchCoreSections from "../components/effectInteractive/StitchCoreSections.astro";
 import EvidenceDataSection from "../components/effectInteractive/EvidenceDataSection.astro";
+import StitchCoreSections from "../components/effectInteractive/StitchCoreSections.astro";
 import InlineConversion from "../components/landing/InlineConversion.astro";
 import stats from "../data/storaca-stats.json";
-import storacaTeacherAvatar from "../assets/images/storaca-teacher-avatar.jpg";
+import LandingLayout from "../layouts/LandingLayout.astro";
+
 const testimonials = stats.testimonials.slice(0, 2);
 const consultationHref = "#contact";
 
@@ -129,19 +130,22 @@ const decisionRows = [
 		issue: "社内情報がどこにあるか整理できていない",
 		first: "無料相談",
 		next: "AIセントラル",
-		reason: "既存ファイルや顧客情報をそのまま活かし、AIが参照できる記憶基盤へ整理する。",
+		reason:
+			"既存ファイルや顧客情報をそのまま活かし、AIが参照できる記憶基盤へ整理する。",
 	},
 	{
 		issue: "AIに何を任せてよいか分からない",
 		first: "無料相談",
 		next: "AIセントラル",
-		reason: "検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行のうち、AIが先に進める範囲を切り分ける。",
+		reason:
+			"検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行のうち、AIが先に進める範囲を切り分ける。",
 	},
 	{
 		issue: "社内情報をAIに覚えさせたい",
 		first: "無料相談",
 		next: "AIセントラル",
-		reason: "扱う情報の機密度と、送信・確定前に人が確認する流れを設計してから構築する。",
+		reason:
+			"扱う情報の機密度と、送信・確定前に人が確認する流れを設計してから構築する。",
 	},
 	{
 		issue: "顧客情報・個人情報を扱う業務を速くしたい",
@@ -231,8 +235,21 @@ const aiCentralPricing = [
 		name: "AI セントラル",
 		label: "まず記憶を作る",
 		price: "¥330,000",
-		description: "社内資料・顧客情報・対応履歴・FAQ・メッセージ履歴を、AIが参照できる記憶基盤として整えます。",
-		features: ["社内システム棚卸し", "AI化ボトルネック抽出", "参照範囲設計", "個人情報マスキング", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "社内記憶", "記憶横断検索", "記憶の分析と今後の戦略", "顧客カルテ・案件ログ", "社内資料の索引化", "導入研修つき"],
+		description:
+			"社内資料・顧客情報・対応履歴・FAQ・メッセージ履歴を、AIが参照できる記憶基盤として整えます。",
+		features: [
+			"社内システム棚卸し",
+			"AI化ボトルネック抽出",
+			"参照範囲設計",
+			"個人情報マスキング",
+			"承認トレイ（AIが勝手に送信・確定しない共通設計）",
+			"社内記憶",
+			"記憶横断検索",
+			"記憶の分析と今後の戦略",
+			"顧客カルテ・案件ログ",
+			"社内資料の索引化",
+			"導入研修つき",
+		],
 		cta: "この構成で相談する",
 		icon: "material-symbols:memory-alt-outline",
 		popular: true,
@@ -241,8 +258,17 @@ const aiCentralPricing = [
 		name: "AI セントラル PLUS",
 		label: "業務ツールとつなぐ",
 		price: "¥550,000",
-		description: "Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
-		features: ["AI セントラルの機能すべて", "AI セントラルの安全設計すべて", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "外部ツール連携", "連携時の参照範囲整理", "期限・予定と接続", "類似案件検索"],
+		description:
+			"Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
+		features: [
+			"AI セントラルの機能すべて",
+			"AI セントラルの安全設計すべて",
+			"承認トレイ（AIが勝手に送信・確定しない共通設計）",
+			"外部ツール連携",
+			"連携時の参照範囲整理",
+			"期限・予定と接続",
+			"類似案件検索",
+		],
 		cta: "連携範囲を相談する",
 		icon: "material-symbols:hub-outline",
 		recommended: true,
@@ -251,8 +277,17 @@ const aiCentralPricing = [
 		name: "パーフェクトセキュア",
 		label: "ローカルLLMで守る",
 		price: "¥1,320,000",
-		description: "顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
-		features: ["AI セントラル PLUS の機能すべて", "承認トレイ（AIが勝手に送信・確定しない共通設計）", "完全ローカル構成", "個人情報マスキング・権限設計", "機密情報対応", "承認前作業の自動化", "1台のPCを預かり完全オリジナル仕様に構築"],
+		description:
+			"顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
+		features: [
+			"AI セントラル PLUS の機能すべて",
+			"承認トレイ（AIが勝手に送信・確定しない共通設計）",
+			"完全ローカル構成",
+			"個人情報マスキング・権限設計",
+			"機密情報対応",
+			"承認前作業の自動化",
+			"1台のPCを預かり完全オリジナル仕様に構築",
+		],
 		cta: "セキュリティ前提で相談する",
 		icon: "material-symbols:shield-lock-outline",
 		secure: true,

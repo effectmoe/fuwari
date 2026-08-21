@@ -1,24 +1,32 @@
 ---
 import { Icon } from "astro-icon/components";
+import authorDogPortrait from "../assets/images/tony-avatar.jpg";
 import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
-import LandingLayout from "../layouts/LandingLayout.astro";
 import { profileConfig, seoConfig } from "../config";
 import stats from "../data/storaca-stats.json";
-import authorDogPortrait from "../assets/images/tony-avatar.jpg";
+import LandingLayout from "../layouts/LandingLayout.astro";
 
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
 const pageTitle = "アバウト｜シュ コウメイ";
 const pageDescription =
 	"AI CENTRAL、AI CRAWL、AI講座を設計・運用するシュ コウメイのプロフィール。構造化・AI実装・LLMO・Notion・システム開発を、講座と現場実装の両面から支援します。";
 const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
-const storacaReviewUrl = "https://www.street-academy.com/steachers/271053#review";
+const storacaReviewUrl =
+	"https://www.street-academy.com/steachers/271053#review";
 const officeProfileUrl = "https://office.street-academy.com/teacher/shu-koumei";
-const monthlyConsultingUrl = "https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service";
-const notionSystemCourseUrl = "https://www.street-academy.com/myclass/212265?sessiondetailid=22073584";
-const amazonLlmBookUrl = "https://www.amazon.co.jp/-/en/%E6%9C%B1-%E5%89%9B%E6%98%8E-ebook/dp/B0F7QQF392";
+const monthlyConsultingUrl =
+	"https://www.street-academy.com/subscription/services/4780?trigger=same_teachers_continued_service-subscription_service";
+const notionSystemCourseUrl =
+	"https://www.street-academy.com/myclass/212265?sessiondetailid=22073584";
+const amazonLlmBookUrl =
+	"https://www.amazon.co.jp/-/en/%E6%9C%B1-%E5%89%9B%E6%98%8E-ebook/dp/B0F7QQF392";
 const consultationHref = "/#contact";
-const featuredConsultingTestimonial = (stats.testimonials ?? []).find((t) =>
-	t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+const featuredConsultingTestimonial = (stats.testimonials ?? []).find(
+	(t) =>
+		t.date === "2026-08" &&
+		t.course.includes("経営伴走コンサル") &&
+		t.text &&
+		t.text.length > 40,
 );
 
 const profileLd = {
@@ -59,9 +67,18 @@ const profileLd = {
 };
 
 const summaryBadges = [
-	{ label: "ストアカProランク講師", icon: "material-symbols:workspace-premium-outline-rounded" },
-	{ label: "AI＆DXコンサルタント", icon: "material-symbols:business-center-outline-rounded" },
-	{ label: "AIシステムエンジニア", icon: "material-symbols:account-tree-outline-rounded" },
+	{
+		label: "ストアカProランク講師",
+		icon: "material-symbols:workspace-premium-outline-rounded",
+	},
+	{
+		label: "AI＆DXコンサルタント",
+		icon: "material-symbols:business-center-outline-rounded",
+	},
+	{
+		label: "AIシステムエンジニア",
+		icon: "material-symbols:account-tree-outline-rounded",
+	},
 	{ label: "AI検索エキスパート", icon: "material-symbols:hub-outline" },
 	{ label: "オフィスク講師", icon: "material-symbols:school-outline-rounded" },
 	{ label: "Notionエキスパート", icon: "simple-icons:notion" },
@@ -156,29 +173,56 @@ const systemPillars = [
 ];
 
 const aiSystemPortfolio = [
-	{ product: "CommandC", summary: "社内コンテキスト自律実行型マルチエージェント基盤" },
+	{
+		product: "CommandC",
+		summary: "社内コンテキスト自律実行型マルチエージェント基盤",
+	},
 	{ product: "NexusC", summary: "AI自律ディベート × 深層リサーチ統合基盤" },
 	{ product: "FORGE", summary: "AI記憶網装置" },
 	{ product: "国家試験自動添削", summary: "試験官AIエージェント" },
-	{ product: "完全セキュア型社労士事務所AIセントラルシステム", summary: "顧客管理基盤" },
+	{
+		product: "完全セキュア型社労士事務所AIセントラルシステム",
+		summary: "顧客管理基盤",
+	},
 	{ product: "MarkDown-Web", summary: "MD→Web 完全自動化基盤" },
 	{ product: "AI会計システム", summary: "AI駆動型会計システム" },
 	{ product: "AI契約書システム", summary: "AI駆動型契約書システム" },
 	{ product: "CommandC-PWA", summary: "AI駆動型モバイルチャットコントローラ" },
-	{ product: "DeepMindマッチングアプリ", summary: "AI恋愛エージェントによるマッチングアプリ" },
+	{
+		product: "DeepMindマッチングアプリ",
+		summary: "AI恋愛エージェントによるマッチングアプリ",
+	},
 	{ product: "“グローカル”SNSメディア", summary: "日韓交流SNSメディア" },
-	{ product: "ポータルサイトAI運用システム", summary: "各種ポータルをAIで自律運用" },
-	{ product: "AIクローラー自動監視システム", summary: "各種AIのアクセスを常時監視" },
-	{ product: "Obsidian × Claude Code(Codex) 記憶システム", summary: "完全ローカル＆無料の記憶システム" },
-	{ product: "Notion × Claude Code(Codex) 管理システム", summary: "次世代のDXシステム" },
+	{
+		product: "ポータルサイトAI運用システム",
+		summary: "各種ポータルをAIで自律運用",
+	},
+	{
+		product: "AIクローラー自動監視システム",
+		summary: "各種AIのアクセスを常時監視",
+	},
+	{
+		product: "Obsidian × Claude Code(Codex) 記憶システム",
+		summary: "完全ローカル＆無料の記憶システム",
+	},
+	{
+		product: "Notion × Claude Code(Codex) 管理システム",
+		summary: "次世代のDXシステム",
+	},
 	{ product: "全自動AI駆動WEBサイト", summary: "自律実行されるWEBサイト" },
 	{ product: "他、多数", summary: "継続的にAI組み込み型システムを設計・実装" },
 ];
 
 const profileFacts = [
 	{ term: "所属", desc: "株式会社EFFECT" },
-	{ term: "役割", desc: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント" },
-	{ term: "専門領域", desc: "LLM活用設計・構造化思考・Cloudflare Zero Trust・SEO/LLMO・マルチエージェント基盤" },
+	{
+		term: "役割",
+		desc: "AI・SEO＆LLMO・Notion・システム開発エンジニア兼コンサルタント",
+	},
+	{
+		term: "専門領域",
+		desc: "LLM活用設計・構造化思考・Cloudflare Zero Trust・SEO/LLMO・マルチエージェント基盤",
+	},
 	{ term: "連絡先", desc: "info@effect.moe" },
 ];
 

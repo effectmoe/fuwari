@@ -1,187 +1,286 @@
 ---
+import BackToTop from "../components/wikipedia/BackToTop.astro";
+import ExternalLinks from "../components/wikipedia/ExternalLinks.astro";
+import FaqSection from "../components/wikipedia/FaqSection.astro";
+import FigureLightbox from "../components/wikipedia/FigureLightbox.astro";
+import Footnote from "../components/wikipedia/Footnote.astro";
+import Infobox from "../components/wikipedia/Infobox.astro";
+import InternalLink from "../components/wikipedia/InternalLink.astro";
+import LightboxScript from "../components/wikipedia/LightboxScript.astro";
+import References from "../components/wikipedia/References.astro";
+import RelatedItems from "../components/wikipedia/RelatedItems.astro";
+import Section from "../components/wikipedia/Section.astro";
+import StubNotice from "../components/wikipedia/StubNotice.astro";
+import TableOfContents from "../components/wikipedia/TableOfContents.astro";
+import { profileConfig, seoConfig, siteConfig } from "../config";
 /*
  * dfb-complete-guide.astro — 構造化ペディア: DFB構造化メソッド大全
  * Wikipedia 風レイアウトの固定ページ
  * 提唱者: シュ コウメイ / 2025年〜
  */
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import Infobox from "../components/wikipedia/Infobox.astro";
-import TableOfContents from "../components/wikipedia/TableOfContents.astro";
-import Section from "../components/wikipedia/Section.astro";
-import Footnote from "../components/wikipedia/Footnote.astro";
-import References from "../components/wikipedia/References.astro";
-import RelatedItems from "../components/wikipedia/RelatedItems.astro";
-import ExternalLinks from "../components/wikipedia/ExternalLinks.astro";
-import StubNotice from "../components/wikipedia/StubNotice.astro";
-import FaqSection from "../components/wikipedia/FaqSection.astro";
-import FigureLightbox from "../components/wikipedia/FigureLightbox.astro";
-import LightboxScript from "../components/wikipedia/LightboxScript.astro";
-import BackToTop from "../components/wikipedia/BackToTop.astro";
-import InternalLink from "../components/wikipedia/InternalLink.astro";
-import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
 const PAGE_URL = "https://effect.moe/dfb-complete-guide/";
 const PAGE_TITLE = "プロンプトの書き方を体系化したDFB構造化メソッド大全";
 const PAGE_DESC =
-  "プロンプトの書き方を、DFB（Decompose / Frame / Build）で分解・整理し、再利用できる形にするための体系的な完全ガイドです。";
+	"プロンプトの書き方を、DFB（Decompose / Frame / Build）で分解・整理し、再利用できる形にするための体系的な完全ガイドです。";
 
 const articleLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: PAGE_TITLE,
-  description: PAGE_DESC,
-  image: ["https://effect.moe/dfb/cover.jpg", "https://effect.moe/dfb/thumb.jpg"],
-  datePublished: "2026-06-20",
-  dateModified: "2026-06-20",
-  inLanguage: "ja",
-  url: PAGE_URL,
-  mainEntityOfPage: PAGE_URL,
-  author: {
-    "@type": "Person",
-    name: profileConfig.name,
-    url: "https://effect.moe/company/",
-    jobTitle: seoConfig.jobTitle,
-    sameAs: seoConfig.sameAs,
-  },
-  publisher: {
-    "@type": "Organization",
-    name: seoConfig.organization.name,
-    url: seoConfig.organization.url,
-  },
-  keywords: [
-    "DFB",
-    "構造化メソッド",
-    "Decompose",
-    "Frame",
-    "Build",
-    "AI時代の思考",
-    "プロンプトエンジニアリング",
-    "構造化スキル",
-    "シュ コウメイ",
-    "Stop-Judge",
-    "Intent判定",
-    "失敗パターン",
-  ],
-  about: [
-    { "@type": "Thing", name: "構造化思考" },
-    { "@type": "Thing", name: "プロンプトエンジニアリング" },
-    { "@type": "Thing", name: "AIフレンドリー設計" },
-  ],
+	"@context": "https://schema.org",
+	"@type": "Article",
+	headline: PAGE_TITLE,
+	description: PAGE_DESC,
+	image: [
+		"https://effect.moe/dfb/cover.jpg",
+		"https://effect.moe/dfb/thumb.jpg",
+	],
+	datePublished: "2026-06-20",
+	dateModified: "2026-06-20",
+	inLanguage: "ja",
+	url: PAGE_URL,
+	mainEntityOfPage: PAGE_URL,
+	author: {
+		"@type": "Person",
+		name: profileConfig.name,
+		url: "https://effect.moe/company/",
+		jobTitle: seoConfig.jobTitle,
+		sameAs: seoConfig.sameAs,
+	},
+	publisher: {
+		"@type": "Organization",
+		name: seoConfig.organization.name,
+		url: seoConfig.organization.url,
+	},
+	keywords: [
+		"DFB",
+		"構造化メソッド",
+		"Decompose",
+		"Frame",
+		"Build",
+		"AI時代の思考",
+		"プロンプトエンジニアリング",
+		"構造化スキル",
+		"シュ コウメイ",
+		"Stop-Judge",
+		"Intent判定",
+		"失敗パターン",
+	],
+	about: [
+		{ "@type": "Thing", name: "構造化思考" },
+		{ "@type": "Thing", name: "プロンプトエンジニアリング" },
+		{ "@type": "Thing", name: "AIフレンドリー設計" },
+	],
 };
 
 const howToLd = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "DFB構造化メソッドを使う7ステップ",
-  description: "Decompose（分）→ Frame（枠）→ Build（組）の3ステップに、Step -1（依頼の構造化）と Step 0（Stop-Judge）を前置きした完全フロー。",
-  totalTime: "PT10M",
-  inLanguage: "ja",
-  step: [
-    { "@type": "HowToStep", position: 1, name: "Step -1: 依頼自体の構造化", text: "ユーザー依頼から主体・動詞・対象・暗黙制約・成果物数を抽出する。動詞数 = 成果物数を厳守。" },
-    { "@type": "HowToStep", position: 2, name: "Step 0: Stop-Judge（I/S/T/D）", text: "I（Intent: メタ/オブジェクト判定）★最優先、S（Scope）、T（Time）、D（Deliverable）を宣言する。" },
-    { "@type": "HowToStep", position: 3, name: "Step 1: Decompose（分）", text: "カオスを6要素（Role/Task/Input/Constraints/Output/Examples）に因数分解する。" },
-    { "@type": "HowToStep", position: 4, name: "Step 2: Frame（枠）", text: "5つの枠（XMLタグ/Markdown表/IF-THEN/JSON-LD/手順番号）から最適なものを選ぶ。" },
-    { "@type": "HowToStep", position: 5, name: "Step 3: Build（組）", text: "XMLタグ7種（role/task/input/constraints/output_format/example/phase）で組み立てる。" },
-    { "@type": "HowToStep", position: 6, name: "Step 4: 違和感察知", text: "出力に違和感を感じたら Step 1 に戻る循環的プロセス。" },
-    { "@type": "HowToStep", position: 7, name: "Step 5: 失敗パターン照合", text: "G/F/H/I/B/C/D/E の9パターンに該当しないか自己点検する。" },
-  ],
+	"@context": "https://schema.org",
+	"@type": "HowTo",
+	name: "DFB構造化メソッドを使う7ステップ",
+	description:
+		"Decompose（分）→ Frame（枠）→ Build（組）の3ステップに、Step -1（依頼の構造化）と Step 0（Stop-Judge）を前置きした完全フロー。",
+	totalTime: "PT10M",
+	inLanguage: "ja",
+	step: [
+		{
+			"@type": "HowToStep",
+			position: 1,
+			name: "Step -1: 依頼自体の構造化",
+			text: "ユーザー依頼から主体・動詞・対象・暗黙制約・成果物数を抽出する。動詞数 = 成果物数を厳守。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 2,
+			name: "Step 0: Stop-Judge（I/S/T/D）",
+			text: "I（Intent: メタ/オブジェクト判定）★最優先、S（Scope）、T（Time）、D（Deliverable）を宣言する。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 3,
+			name: "Step 1: Decompose（分）",
+			text: "カオスを6要素（Role/Task/Input/Constraints/Output/Examples）に因数分解する。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 4,
+			name: "Step 2: Frame（枠）",
+			text: "5つの枠（XMLタグ/Markdown表/IF-THEN/JSON-LD/手順番号）から最適なものを選ぶ。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 5,
+			name: "Step 3: Build（組）",
+			text: "XMLタグ7種（role/task/input/constraints/output_format/example/phase）で組み立てる。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 6,
+			name: "Step 4: 違和感察知",
+			text: "出力に違和感を感じたら Step 1 に戻る循環的プロセス。",
+		},
+		{
+			"@type": "HowToStep",
+			position: 7,
+			name: "Step 5: 失敗パターン照合",
+			text: "G/F/H/I/B/C/D/E の9パターンに該当しないか自己点検する。",
+		},
+	],
 };
 
 // ── FAQ 項目（FaqSection で表示・FAQPage schema 自動付与） ────
 const faqItems = [
-  {
-    question: "DFB とは何の略ですか？",
-    answer: "<strong>D</strong>ecompose（分解）/ <strong>F</strong>rame（枠の入れ替え）/ <strong>B</strong>uild（組み立て）の頭文字です。シュ コウメイが 2025 年に提唱した、AI 時代の構造化思考プロトコルにあたります。",
-  },
-  {
-    question: "DFB と PDCA・OODA は何が違いますか？",
-    answer: "PDCA は業務改善、OODA は意思決定のために設計されたサイクルです。DFB は「<strong>AI に正しく考えさせるための入力を作る</strong>」ことに特化したサイクルで、目的が異なります。互いに敵対せず、入れ子で使うこともできます。",
-  },
-  {
-    question: "DFB を使うと、何が変わりますか？",
-    answer: "(1) AI に頼む前に「自分は何を頼んでいるのか」を構造で捉える癖がつく、(2) 他人のプロンプトを見た瞬間に失敗パターンを見抜ける、(3) 同じ依頼でも AI の出力品質が大きく上がる、の3点が主な効果です。",
-  },
-  {
-    question: "Step -1（依頼自体の構造化）はなぜ最初なのですか？",
-    answer: "Step 0（Stop-Judge）の I/S/T/D 判定は、ユーザーの依頼文を構造化していなければ「自分の解釈」で動いてしまうためです。依頼の動詞を抽出して<strong>動詞数 = 成果物数</strong>を厳守することで、Over-Delivery（失敗パターン G）を防ぎます。",
-  },
-  {
-    question: "失敗パターンで最も重要なのはどれですか？",
-    answer: "<strong>G（依頼の未構造化 / Over-Delivery）</strong>と <strong>F（メタ/オブジェクト取り違え）</strong>の 2 つです。とくに F は、ユーザーが「道具を評価したい（メタ）」のか「道具を使って実行したい（オブジェクト）」のかを取り違えると、応答の方向性そのものが見当外れになります。",
-  },
-  {
-    question: "AI 時代に「自分で考える力」は不要になるのですか？",
-    answer: "完全には不要にはなりませんが、<strong>市場価値は劇的に下がります</strong>。推論は AI が速く・安く・24時間休まずやってくれるため、人間に残るのは「AI に考えさせる枠を作る力（=構造化能力）」です。これが本記事の核心命題「<strong>推論はAIに、構造化は人間に</strong>」が指す変化です。",
-  },
+	{
+		question: "DFB とは何の略ですか？",
+		answer:
+			"<strong>D</strong>ecompose（分解）/ <strong>F</strong>rame（枠の入れ替え）/ <strong>B</strong>uild（組み立て）の頭文字です。シュ コウメイが 2025 年に提唱した、AI 時代の構造化思考プロトコルにあたります。",
+	},
+	{
+		question: "DFB と PDCA・OODA は何が違いますか？",
+		answer:
+			"PDCA は業務改善、OODA は意思決定のために設計されたサイクルです。DFB は「<strong>AI に正しく考えさせるための入力を作る</strong>」ことに特化したサイクルで、目的が異なります。互いに敵対せず、入れ子で使うこともできます。",
+	},
+	{
+		question: "DFB を使うと、何が変わりますか？",
+		answer:
+			"(1) AI に頼む前に「自分は何を頼んでいるのか」を構造で捉える癖がつく、(2) 他人のプロンプトを見た瞬間に失敗パターンを見抜ける、(3) 同じ依頼でも AI の出力品質が大きく上がる、の3点が主な効果です。",
+	},
+	{
+		question: "Step -1（依頼自体の構造化）はなぜ最初なのですか？",
+		answer:
+			"Step 0（Stop-Judge）の I/S/T/D 判定は、ユーザーの依頼文を構造化していなければ「自分の解釈」で動いてしまうためです。依頼の動詞を抽出して<strong>動詞数 = 成果物数</strong>を厳守することで、Over-Delivery（失敗パターン G）を防ぎます。",
+	},
+	{
+		question: "失敗パターンで最も重要なのはどれですか？",
+		answer:
+			"<strong>G（依頼の未構造化 / Over-Delivery）</strong>と <strong>F（メタ/オブジェクト取り違え）</strong>の 2 つです。とくに F は、ユーザーが「道具を評価したい（メタ）」のか「道具を使って実行したい（オブジェクト）」のかを取り違えると、応答の方向性そのものが見当外れになります。",
+	},
+	{
+		question: "AI 時代に「自分で考える力」は不要になるのですか？",
+		answer:
+			"完全には不要にはなりませんが、<strong>市場価値は劇的に下がります</strong>。推論は AI が速く・安く・24時間休まずやってくれるため、人間に残るのは「AI に考えさせる枠を作る力（=構造化能力）」です。これが本記事の核心命題「<strong>推論はAIに、構造化は人間に</strong>」が指す変化です。",
+	},
 ];
 
 const breadcrumbLd = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "ホーム", item: "https://effect.moe/" },
-    { "@type": "ListItem", position: 2, name: "構造化ペディア", item: PAGE_URL },
-    { "@type": "ListItem", position: 3, name: PAGE_TITLE, item: PAGE_URL },
-  ],
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "ホーム",
+			item: "https://effect.moe/",
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "構造化ペディア",
+			item: PAGE_URL,
+		},
+		{ "@type": "ListItem", position: 3, name: PAGE_TITLE, item: PAGE_URL },
+	],
 };
 
 // ── インフォボックス ──────────────────────
 const infoboxFields = [
-  { label: "名称", value: "DFB構造化メソッド" },
-  { label: "英名", value: "DFB Structured Method" },
-  { label: "提唱者", value: "シュ コウメイ" },
-  { label: "提唱年", value: "2025年" },
-  { label: "構成要素", value: "Decompose（分）/ Frame（枠）/ Build（組）" },
-  { label: "思想系譜", value: "構造化PG → OOP → GoF → DDD → DFB" },
-  { label: "核心命題", value: "推論はAIに、構造化は人間に" },
-  { label: "応用分野", value: "プロンプト最適化・要件構造化・教育・経営判断" },
-  { label: "公式リファレンス", value: '<a href="https://effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">effect.moe</a>' },
+	{ label: "名称", value: "DFB構造化メソッド" },
+	{ label: "英名", value: "DFB Structured Method" },
+	{ label: "提唱者", value: "シュ コウメイ" },
+	{ label: "提唱年", value: "2025年" },
+	{ label: "構成要素", value: "Decompose（分）/ Frame（枠）/ Build（組）" },
+	{ label: "思想系譜", value: "構造化PG → OOP → GoF → DDD → DFB" },
+	{ label: "核心命題", value: "推論はAIに、構造化は人間に" },
+	{ label: "応用分野", value: "プロンプト最適化・要件構造化・教育・経営判断" },
+	{
+		label: "公式リファレンス",
+		value:
+			'<a href="https://effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">effect.moe</a>',
+	},
 ];
 
 // ── 目次（TOC） ─────────────────────────
 const tocItems: Array<{ id: string; text: string; level: 2 | 3 }> = [
-  { id: "summary", text: "概要", level: 2 },
-  { id: "skill-shift", text: "能力のスライド", level: 2 },
-  { id: "four-levels", text: "構造化スキルの4階層", level: 2 },
-  { id: "lineage", text: "系譜", level: 2 },
-  { id: "dfb-cycle", text: "DFBサイクル", level: 2 },
-  { id: "step-minus-one", text: "Step -1: 依頼自体の構造化", level: 2 },
-  { id: "stop-judge", text: "Step 0: Stop-Judge（I/S/T/D）", level: 2 },
-  { id: "dfb-build", text: "Step 1〜3: D/F/B 実装", level: 2 },
-  { id: "variations", text: "DFB 5バリエーション", level: 2 },
-  { id: "failure-patterns", text: "失敗パターン9種ライブラリ", level: 2 },
-  { id: "demo", text: "実演（Before/After）", level: 2 },
-  { id: "anti-patterns", text: "アンチパターン7種", level: 2 },
-  { id: "kata", text: "武道の「型」としての構造化", level: 2 },
-  { id: "proponent", text: "提唱者", level: 2 },
-  { id: "references", text: "脚注・参考文献", level: 2 },
-  { id: "related-items", text: "関連項目", level: 2 },
-  { id: "external-links", text: "外部リンク", level: 2 },
-  { id: "faq", text: "よくある質問（FAQ）", level: 2 },
+	{ id: "summary", text: "概要", level: 2 },
+	{ id: "skill-shift", text: "能力のスライド", level: 2 },
+	{ id: "four-levels", text: "構造化スキルの4階層", level: 2 },
+	{ id: "lineage", text: "系譜", level: 2 },
+	{ id: "dfb-cycle", text: "DFBサイクル", level: 2 },
+	{ id: "step-minus-one", text: "Step -1: 依頼自体の構造化", level: 2 },
+	{ id: "stop-judge", text: "Step 0: Stop-Judge（I/S/T/D）", level: 2 },
+	{ id: "dfb-build", text: "Step 1〜3: D/F/B 実装", level: 2 },
+	{ id: "variations", text: "DFB 5バリエーション", level: 2 },
+	{ id: "failure-patterns", text: "失敗パターン9種ライブラリ", level: 2 },
+	{ id: "demo", text: "実演（Before/After）", level: 2 },
+	{ id: "anti-patterns", text: "アンチパターン7種", level: 2 },
+	{ id: "kata", text: "武道の「型」としての構造化", level: 2 },
+	{ id: "proponent", text: "提唱者", level: 2 },
+	{ id: "references", text: "脚注・参考文献", level: 2 },
+	{ id: "related-items", text: "関連項目", level: 2 },
+	{ id: "external-links", text: "外部リンク", level: 2 },
+	{ id: "faq", text: "よくある質問（FAQ）", level: 2 },
 ];
 
 // ── 脚注・参考文献 ────────────────────────
 const references = [
-  { n: 1, text: "DFB 完全版理論（dfb.md）— Intent判定・Stop-Judge・バリエーション5種・失敗パターン全集" },
-  { n: 2, text: "構造化理論 v3（structuring-theory-v3.md）— 14章の理論カタログ最上位版" },
-  { n: 3, text: "DFBプロンプト最適化 実証カタログ（dfb-prompt-optimization.md）— Before/After 3サンプル" },
-  { n: 4, text: "DFB XMLタグ ガイド（dfb-xml-tags-guide.md）— Decompose 6要素 ↔ XMLタグ7種の対応" },
-  { n: 5, text: "構造化理論 発見ログ（structuring-discoveries.md）— 4大発見・OOP対応表・失敗パターン進化史" },
+	{
+		n: 1,
+		text: "DFB 完全版理論（dfb.md）— Intent判定・Stop-Judge・バリエーション5種・失敗パターン全集",
+	},
+	{
+		n: 2,
+		text: "構造化理論 v3（structuring-theory-v3.md）— 14章の理論カタログ最上位版",
+	},
+	{
+		n: 3,
+		text: "DFBプロンプト最適化 実証カタログ（dfb-prompt-optimization.md）— Before/After 3サンプル",
+	},
+	{
+		n: 4,
+		text: "DFB XMLタグ ガイド（dfb-xml-tags-guide.md）— Decompose 6要素 ↔ XMLタグ7種の対応",
+	},
+	{
+		n: 5,
+		text: "構造化理論 発見ログ（structuring-discoveries.md）— 4大発見・OOP対応表・失敗パターン進化史",
+	},
 ];
 
 // ── 関連項目 ─────────────────────────────
 const relatedItems = [
-  { href: "/posts/dfb-method-introduction/", text: "DFBとは — シュ コウメイが提唱するAI時代の構造化メソッド", description: "DFB の入門記事（短編）" },
-  { href: "/posts/ai-era-senior-structuring-power/", text: "AI時代に『シニア有利』の本質は構造化能力にある", description: "DFB と経験資産の関係" },
-  { href: "/posts/dfb-trend-map-2026-marketing/", text: "DFB クラスター連載 第1回 — 2026マーケトレンドマップを DFB で読み解く", description: "日経クロストレンド 2026 マーケトレンドマップを Decompose で分解し、LLMO 群の浮上と『能力のスライド』を実証する（クラスター連載・マーケ編）" },
-  { href: "/ai-agent-course/", text: "AIエージェント講座（Claude Code）", description: "DFB を実装で使う" },
+	{
+		href: "/posts/dfb-method-introduction/",
+		text: "DFBとは — シュ コウメイが提唱するAI時代の構造化メソッド",
+		description: "DFB の入門記事（短編）",
+	},
+	{
+		href: "/posts/ai-era-senior-structuring-power/",
+		text: "AI時代に『シニア有利』の本質は構造化能力にある",
+		description: "DFB と経験資産の関係",
+	},
+	{
+		href: "/posts/dfb-trend-map-2026-marketing/",
+		text: "DFB クラスター連載 第1回 — 2026マーケトレンドマップを DFB で読み解く",
+		description:
+			"日経クロストレンド 2026 マーケトレンドマップを Decompose で分解し、LLMO 群の浮上と『能力のスライド』を実証する（クラスター連載・マーケ編）",
+	},
+	{
+		href: "/ai-agent-course/",
+		text: "AIエージェント講座（Claude Code）",
+		description: "DFB を実装で使う",
+	},
 ];
 
 // ── 外部リンク ───────────────────────────
 const externalLinks = [
-  { href: "https://kangmyung.substack.com/", text: "シュ コウメイ Substack", description: "DFB と構造化の最新論考をメール配信" },
-  { href: "https://www.street-academy.com/steachers/271053", text: "ストアカ講座 — シュ コウメイ", description: "DFBを学べる対面講座" },
+	{
+		href: "https://kangmyung.substack.com/",
+		text: "シュ コウメイ Substack",
+		description: "DFB と構造化の最新論考をメール配信",
+	},
+	{
+		href: "https://www.street-academy.com/steachers/271053",
+		text: "ストアカ講座 — シュ コウメイ",
+		description: "DFBを学べる対面講座",
+	},
 ];
 ---
 

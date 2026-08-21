@@ -6,7 +6,8 @@ import { getPostUrlBySlug } from "../utils/url-utils";
 
 const posts = await getSortedPosts();
 const pageTitle = "サイトマップ";
-const pageDescription = "effect.moe の主要ページ、サービス、ブログ記事、構造化ペディアへのリンクをまとめたサイトマップです。";
+const pageDescription =
+	"effect.moe の主要ページ、サービス、ブログ記事、構造化ペディアへのリンクをまとめたサイトマップです。";
 
 const groups = [
 	{
@@ -56,7 +57,10 @@ const groups = [
 			{ label: "運用者", href: "/aicrawl/#operator" },
 			{ label: "料金", href: "/aicrawl/#pricing" },
 			{ label: "FAQ", href: "/aicrawl/#faq" },
-			{ label: "無料相談", href: "/?inquiry=consultation&service=aicrawl#contact" },
+			{
+				label: "無料相談",
+				href: "/?inquiry=consultation&service=aicrawl#contact",
+			},
 		],
 	},
 	{
@@ -70,7 +74,10 @@ const groups = [
 			{ label: "料金・助成金", href: "/ai-agent-course/#price" },
 			{ label: "講師", href: "/ai-agent-course/#instructor" },
 			{ label: "FAQ", href: "/ai-agent-course/#faq" },
-			{ label: "無料相談", href: "/?inquiry=consultation&service=ai-course#contact" },
+			{
+				label: "無料相談",
+				href: "/?inquiry=consultation&service=ai-course#contact",
+			},
 		],
 	},
 ];

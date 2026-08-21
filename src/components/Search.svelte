@@ -140,7 +140,7 @@ onMount(() => {
 			!!window.pagefind &&
 			typeof window.pagefind.search === "function";
 		console.log("Pagefind status on init:", pagefindLoaded);
-			if (keyword) search(keyword, true);
+		if (keyword) search(keyword, true);
 	};
 
 	if (import.meta.env.DEV) {

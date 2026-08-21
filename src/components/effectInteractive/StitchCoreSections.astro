@@ -2,12 +2,30 @@
 import { Icon } from "astro-icon/components";
 
 const problems = [
-	{ icon: "material-symbols:inventory-2-outline", title: "どの社内システムに\n情報があるか" },
-	{ icon: "material-symbols:account-tree-outline", title: "情報がどこで分断\nされているか" },
-	{ icon: "material-symbols:lock-person-outline", title: "権限・個人情報で\n止まる箇所はどこか" },
-	{ icon: "material-symbols:route-outline", title: "業務フローのどこが\n人依存か" },
-	{ icon: "material-symbols:sync-problem", title: "AI化しても詰まる\nボトルネックは何か" },
-	{ icon: "material-symbols:fact-check-outline", title: "根拠・承認・ログを\nどこに残すか" },
+	{
+		icon: "material-symbols:inventory-2-outline",
+		title: "どの社内システムに\n情報があるか",
+	},
+	{
+		icon: "material-symbols:account-tree-outline",
+		title: "情報がどこで分断\nされているか",
+	},
+	{
+		icon: "material-symbols:lock-person-outline",
+		title: "権限・個人情報で\n止まる箇所はどこか",
+	},
+	{
+		icon: "material-symbols:route-outline",
+		title: "業務フローのどこが\n人依存か",
+	},
+	{
+		icon: "material-symbols:sync-problem",
+		title: "AI化しても詰まる\nボトルネックは何か",
+	},
+	{
+		icon: "material-symbols:fact-check-outline",
+		title: "根拠・承認・ログを\nどこに残すか",
+	},
 ];
 
 const aiCentralClarityCards = [
@@ -55,7 +73,8 @@ const memoryNodes = [
 		color: "#ea4335",
 		x: 20,
 		y: 20,
-		description: "顧客とのやり取り、依頼内容、添付資料を案件の記憶として整理し、次の返信や確認事項の下書きに使います。",
+		description:
+			"顧客とのやり取り、依頼内容、添付資料を案件の記憶として整理し、次の返信や確認事項の下書きに使います。",
 	},
 	{
 		id: "chatwork",
@@ -65,7 +84,8 @@ const memoryNodes = [
 		color: "#f39800",
 		x: 12,
 		y: 46,
-		description: "日々の相談、未対応事項、判断の背景を会話ログから拾い、案件の流れを追える状態にします。",
+		description:
+			"日々の相談、未対応事項、判断の背景を会話ログから拾い、案件の流れを追える状態にします。",
 	},
 	{
 		id: "slack",
@@ -75,7 +95,8 @@ const memoryNodes = [
 		color: "#4a154b",
 		x: 27,
 		y: 74,
-		description: "チャンネルごとの議論や決定事項を要約し、担当者しか知らない文脈をチームで再利用できる記憶に変えます。",
+		description:
+			"チャンネルごとの議論や決定事項を要約し、担当者しか知らない文脈をチームで再利用できる記憶に変えます。",
 	},
 	{
 		id: "spreadsheet",
@@ -85,7 +106,8 @@ const memoryNodes = [
 		color: "#0f9d58",
 		x: 50,
 		y: 14,
-		description: "顧客一覧、進捗表、売上表、管理表を参照し、確認・集計・判断材料づくりをAIが先に進めます。",
+		description:
+			"顧客一覧、進捗表、売上表、管理表を参照し、確認・集計・判断材料づくりをAIが先に進めます。",
 	},
 	{
 		id: "excel",
@@ -95,7 +117,8 @@ const memoryNodes = [
 		color: "#217346",
 		x: 75,
 		y: 24,
-		description: "社内に残るExcel台帳や見積管理を、検索・集計・差分確認に使える業務データとして扱います。",
+		description:
+			"社内に残るExcel台帳や見積管理を、検索・集計・差分確認に使える業務データとして扱います。",
 	},
 	{
 		id: "karte",
@@ -105,7 +128,8 @@ const memoryNodes = [
 		color: "#c06a3d",
 		x: 84,
 		y: 52,
-		description: "顧客ごとの属性、契約内容、相談履歴を記憶として扱い、次に必要な説明や確認事項を整理します。",
+		description:
+			"顧客ごとの属性、契約内容、相談履歴を記憶として扱い、次に必要な説明や確認事項を整理します。",
 	},
 	{
 		id: "todo",
@@ -115,7 +139,8 @@ const memoryNodes = [
 		color: "#6f7f3a",
 		x: 70,
 		y: 82,
-		description: "未対応タスク、期限、担当者を整理し、次に動くべき作業と確認待ちの項目を提示します。",
+		description:
+			"未対応タスク、期限、担当者を整理し、次に動くべき作業と確認待ちの項目を提示します。",
 	},
 	{
 		id: "minutes",
@@ -125,7 +150,8 @@ const memoryNodes = [
 		color: "#8a63a8",
 		x: 49,
 		y: 89,
-		description: "会議で決まったこと、保留になったこと、次回確認することを記憶し、後続タスクへつなぎます。",
+		description:
+			"会議で決まったこと、保留になったこと、次回確認することを記憶し、後続タスクへつなぎます。",
 	},
 	{
 		id: "documents",
@@ -135,7 +161,8 @@ const memoryNodes = [
 		color: "#5b78a0",
 		x: 33,
 		y: 42,
-		description: "マニュアル、提案書、説明資料を横断参照し、案件の経緯を復元して次の対応の材料を整えます。",
+		description:
+			"マニュアル、提案書、説明資料を横断参照し、案件の経緯を復元して次の対応の材料を整えます。",
 	},
 	{
 		id: "approval",
@@ -145,7 +172,8 @@ const memoryNodes = [
 		color: "#b68c3c",
 		x: 63,
 		y: 43,
-		description: "誰が、どの判断を、どの根拠で承認したかを残し、次回以降の判断材料として再利用します。",
+		description:
+			"誰が、どの判断を、どの根拠で承認したかを残し、次回以降の判断材料として再利用します。",
 	},
 	{
 		id: "faq",
@@ -155,7 +183,8 @@ const memoryNodes = [
 		color: "#3f8070",
 		x: 50,
 		y: 64,
-		description: "社内ルールやよくある質問を参照し、回答の根拠を残したまま説明文やチェック項目を下書きします。",
+		description:
+			"社内ルールやよくある質問を参照し、回答の根拠を残したまま説明文やチェック項目を下書きします。",
 	},
 	{
 		id: "word",
@@ -165,7 +194,8 @@ const memoryNodes = [
 		color: "#2b579a",
 		x: 58,
 		y: 22,
-		description: "契約書、提案書、報告書などの文書を参照し、下書きや差分確認へつなげます。",
+		description:
+			"契約書、提案書、報告書などの文書を参照し、下書きや差分確認へつなげます。",
 	},
 	{
 		id: "docs",
@@ -175,7 +205,8 @@ const memoryNodes = [
 		color: "#4285f4",
 		x: 39,
 		y: 18,
-		description: "共同編集された文書やメモを記憶として扱い、必要な文脈をすぐ取り出せるようにします。",
+		description:
+			"共同編集された文書やメモを記憶として扱い、必要な文脈をすぐ取り出せるようにします。",
 	},
 	{
 		id: "drive",
@@ -185,7 +216,8 @@ const memoryNodes = [
 		color: "#1a73e8",
 		x: 17,
 		y: 60,
-		description: "フォルダに散らばる資料を横断し、案件や顧客ごとに参照できる状態へ整理します。",
+		description:
+			"フォルダに散らばる資料を横断し、案件や顧客ごとに参照できる状態へ整理します。",
 	},
 	{
 		id: "notion",
@@ -195,7 +227,8 @@ const memoryNodes = [
 		color: "#111111",
 		x: 40,
 		y: 78,
-		description: "社内Wiki、タスク、議事録、ナレッジDBをAIが参照できる記憶基盤として扱います。",
+		description:
+			"社内Wiki、タスク、議事録、ナレッジDBをAIが参照できる記憶基盤として扱います。",
 	},
 	{
 		id: "obsidian",
@@ -205,7 +238,8 @@ const memoryNodes = [
 		color: "#7c3aed",
 		x: 61,
 		y: 76,
-		description: "個人やチームの知識メモを、関連性を保ったまま検索・整理・再利用できる形にします。",
+		description:
+			"個人やチームの知識メモを、関連性を保ったまま検索・整理・再利用できる形にします。",
 	},
 	{
 		id: "calendar",
@@ -215,7 +249,8 @@ const memoryNodes = [
 		color: "#4285f4",
 		x: 79,
 		y: 68,
-		description: "予定、面談、締切、会議履歴を参照し、次の行動や事前準備の提示へつなげます。",
+		description:
+			"予定、面談、締切、会議履歴を参照し、次の行動や事前準備の提示へつなげます。",
 	},
 	{
 		id: "keep",
@@ -225,7 +260,8 @@ const memoryNodes = [
 		color: "#fbbc04",
 		x: 30,
 		y: 58,
-		description: "一時メモや現場メモを拾い上げ、タスク化・文書化・顧客対応に再利用します。",
+		description:
+			"一時メモや現場メモを拾い上げ、タスク化・文書化・顧客対応に再利用します。",
 	},
 ];
 
@@ -238,40 +274,199 @@ const workStages = [
 ];
 
 const operationPanels = [
-	{ label: "Gmail", value: "メール履歴", icon: "simple-icons:gmail", color: "#ea4335" },
-	{ label: "Chatwork", value: "案件チャット", icon: "material-symbols:forum-outline", color: "#f39800" },
-	{ label: "Slack", value: "社内会話", icon: "simple-icons:slack", color: "#4a154b" },
-	{ label: "Google Sheets", value: "管理表", icon: "simple-icons:googlesheets", color: "#0f9d58" },
-	{ label: "Excel", value: "台帳・見積", icon: "simple-icons:microsoftexcel", color: "#217346" },
-	{ label: "Google Docs", value: "共有文書", icon: "simple-icons:googledocs", color: "#4285f4" },
-	{ label: "Google Drive", value: "社内フォルダ", icon: "simple-icons:googledrive", color: "#1a73e8" },
-	{ label: "Notion", value: "社内Wiki", icon: "simple-icons:notion", color: "#111111" },
-	{ label: "Word", value: "契約・報告書", icon: "simple-icons:microsoftword", color: "#2b579a" },
-	{ label: "Obsidian", value: "ナレッジメモ", icon: "simple-icons:obsidian", color: "#7c3aed" },
-	{ label: "Calendar", value: "予定・締切", icon: "simple-icons:googlecalendar", color: "#4285f4" },
-	{ label: "Google Keep", value: "現場メモ", icon: "simple-icons:googlekeep", color: "#fbbc04" },
-	{ label: "Microsoft Teams", value: "社内会議", icon: "simple-icons:microsoftteams", color: "#6264a7" },
-	{ label: "Outlook", value: "メール・予定", icon: "simple-icons:microsoftoutlook", color: "#0078d4" },
-	{ label: "SharePoint", value: "社内ポータル", icon: "simple-icons:microsoftsharepoint", color: "#038387" },
-	{ label: "OneDrive", value: "ファイル共有", icon: "simple-icons:microsoftonedrive", color: "#0078d4" },
-	{ label: "Dropbox", value: "ファイル管理", icon: "simple-icons:dropbox", color: "#0061ff" },
-	{ label: "Box", value: "文書管理", icon: "simple-icons:box", color: "#0061d5" },
-	{ label: "Trello", value: "タスクボード", icon: "simple-icons:trello", color: "#0052cc" },
-	{ label: "Asana", value: "プロジェクト", icon: "simple-icons:asana", color: "#f06a6a" },
-	{ label: "Jira", value: "課題管理", icon: "simple-icons:jira", color: "#0052cc" },
-	{ label: "Confluence", value: "社内Wiki", icon: "simple-icons:confluence", color: "#172b4d" },
-	{ label: "GitHub", value: "開発履歴", icon: "simple-icons:github", color: "#181717" },
-	{ label: "GitLab", value: "開発管理", icon: "simple-icons:gitlab", color: "#fc6d26" },
-	{ label: "Zoom", value: "会議録", icon: "simple-icons:zoom", color: "#0b5cff" },
-	{ label: "Google Meet", value: "オンライン会議", icon: "simple-icons:googlemeet", color: "#00897b" },
-	{ label: "Salesforce", value: "CRM", icon: "simple-icons:salesforce", color: "#00a1e0" },
-	{ label: "HubSpot", value: "顧客管理", icon: "simple-icons:hubspot", color: "#ff7a59" },
-	{ label: "Airtable", value: "業務DB", icon: "simple-icons:airtable", color: "#18bfff" },
-	{ label: "Zapier", value: "自動連携", icon: "simple-icons:zapier", color: "#ff4f00" },
-	{ label: "Make", value: "自動化", icon: "simple-icons:make", color: "#6d00cc" },
-	{ label: "LINE", value: "連絡履歴", icon: "simple-icons:line", color: "#06c755" },
+	{
+		label: "Gmail",
+		value: "メール履歴",
+		icon: "simple-icons:gmail",
+		color: "#ea4335",
+	},
+	{
+		label: "Chatwork",
+		value: "案件チャット",
+		icon: "material-symbols:forum-outline",
+		color: "#f39800",
+	},
+	{
+		label: "Slack",
+		value: "社内会話",
+		icon: "simple-icons:slack",
+		color: "#4a154b",
+	},
+	{
+		label: "Google Sheets",
+		value: "管理表",
+		icon: "simple-icons:googlesheets",
+		color: "#0f9d58",
+	},
+	{
+		label: "Excel",
+		value: "台帳・見積",
+		icon: "simple-icons:microsoftexcel",
+		color: "#217346",
+	},
+	{
+		label: "Google Docs",
+		value: "共有文書",
+		icon: "simple-icons:googledocs",
+		color: "#4285f4",
+	},
+	{
+		label: "Google Drive",
+		value: "社内フォルダ",
+		icon: "simple-icons:googledrive",
+		color: "#1a73e8",
+	},
+	{
+		label: "Notion",
+		value: "社内Wiki",
+		icon: "simple-icons:notion",
+		color: "#111111",
+	},
+	{
+		label: "Word",
+		value: "契約・報告書",
+		icon: "simple-icons:microsoftword",
+		color: "#2b579a",
+	},
+	{
+		label: "Obsidian",
+		value: "ナレッジメモ",
+		icon: "simple-icons:obsidian",
+		color: "#7c3aed",
+	},
+	{
+		label: "Calendar",
+		value: "予定・締切",
+		icon: "simple-icons:googlecalendar",
+		color: "#4285f4",
+	},
+	{
+		label: "Google Keep",
+		value: "現場メモ",
+		icon: "simple-icons:googlekeep",
+		color: "#fbbc04",
+	},
+	{
+		label: "Microsoft Teams",
+		value: "社内会議",
+		icon: "simple-icons:microsoftteams",
+		color: "#6264a7",
+	},
+	{
+		label: "Outlook",
+		value: "メール・予定",
+		icon: "simple-icons:microsoftoutlook",
+		color: "#0078d4",
+	},
+	{
+		label: "SharePoint",
+		value: "社内ポータル",
+		icon: "simple-icons:microsoftsharepoint",
+		color: "#038387",
+	},
+	{
+		label: "OneDrive",
+		value: "ファイル共有",
+		icon: "simple-icons:microsoftonedrive",
+		color: "#0078d4",
+	},
+	{
+		label: "Dropbox",
+		value: "ファイル管理",
+		icon: "simple-icons:dropbox",
+		color: "#0061ff",
+	},
+	{
+		label: "Box",
+		value: "文書管理",
+		icon: "simple-icons:box",
+		color: "#0061d5",
+	},
+	{
+		label: "Trello",
+		value: "タスクボード",
+		icon: "simple-icons:trello",
+		color: "#0052cc",
+	},
+	{
+		label: "Asana",
+		value: "プロジェクト",
+		icon: "simple-icons:asana",
+		color: "#f06a6a",
+	},
+	{
+		label: "Jira",
+		value: "課題管理",
+		icon: "simple-icons:jira",
+		color: "#0052cc",
+	},
+	{
+		label: "Confluence",
+		value: "社内Wiki",
+		icon: "simple-icons:confluence",
+		color: "#172b4d",
+	},
+	{
+		label: "GitHub",
+		value: "開発履歴",
+		icon: "simple-icons:github",
+		color: "#181717",
+	},
+	{
+		label: "GitLab",
+		value: "開発管理",
+		icon: "simple-icons:gitlab",
+		color: "#fc6d26",
+	},
+	{
+		label: "Zoom",
+		value: "会議録",
+		icon: "simple-icons:zoom",
+		color: "#0b5cff",
+	},
+	{
+		label: "Google Meet",
+		value: "オンライン会議",
+		icon: "simple-icons:googlemeet",
+		color: "#00897b",
+	},
+	{
+		label: "Salesforce",
+		value: "CRM",
+		icon: "simple-icons:salesforce",
+		color: "#00a1e0",
+	},
+	{
+		label: "HubSpot",
+		value: "顧客管理",
+		icon: "simple-icons:hubspot",
+		color: "#ff7a59",
+	},
+	{
+		label: "Airtable",
+		value: "業務DB",
+		icon: "simple-icons:airtable",
+		color: "#18bfff",
+	},
+	{
+		label: "Zapier",
+		value: "自動連携",
+		icon: "simple-icons:zapier",
+		color: "#ff4f00",
+	},
+	{
+		label: "Make",
+		value: "自動化",
+		icon: "simple-icons:make",
+		color: "#6d00cc",
+	},
+	{
+		label: "LINE",
+		value: "連絡履歴",
+		icon: "simple-icons:line",
+		color: "#06c755",
+	},
 ];
-
 ---
 
 <section id="inventory" class="stitch-core stitch-core--problems">

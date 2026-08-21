@@ -36,7 +36,9 @@ async function copyUrl() {
 		}
 	}
 	copyToast = true;
-	setTimeout(() => (copyToast = false), 1800);
+	setTimeout(() => {
+		copyToast = false;
+	}, 1800);
 }
 
 let visibleCount = 0;

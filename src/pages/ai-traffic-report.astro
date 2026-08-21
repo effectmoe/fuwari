@@ -5,11 +5,13 @@
  * 商品設計: wiki/EFFECT/strategy-ai-traffic-report-product-20260718.md
  */
 import { Icon } from "astro-icon/components";
-import LandingLayout from "../layouts/LandingLayout.astro";
 import InlineConversion from "../components/landing/InlineConversion.astro";
+import LandingLayout from "../layouts/LandingLayout.astro";
 
 const contactEmail = "info@effect.moe";
-const mailtoSubject = encodeURIComponent("【AIアクセス分析】無料スナップショット診断の申し込み");
+const mailtoSubject = encodeURIComponent(
+	"【AIアクセス分析】無料スナップショット診断の申し込み",
+);
 const mailtoBody = encodeURIComponent(
 	`株式会社EFFECT 御中
 
@@ -23,7 +25,9 @@ AIアクセス分析の無料スナップショット診断を希望します。
 ※ご記入のうえ、このままご送信ください。折り返しご連絡いたします。`,
 );
 const mailtoLink = `mailto:${contactEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
-const consultationSubject = encodeURIComponent("【AIアクセス分析】相談の申し込み");
+const consultationSubject = encodeURIComponent(
+	"【AIアクセス分析】相談の申し込み",
+);
 const consultationBody = encodeURIComponent(
 	`株式会社EFFECT 御中
 
@@ -69,9 +73,21 @@ const perceptionReasons = [
 ];
 
 const steps = [
-	{ label: "知る", body: "無料スナップショット診断／LLMO健康診断で、まず現状を数字にします。", icon: "material-symbols:search" },
-	{ label: "直す", body: "AIに読まれない原因（ブロック・構造化データ不足）を是正します。", icon: "material-symbols:build-outline" },
-	{ label: "続ける", body: "直した後の変化を毎月モニタリングし、改善を積み上げます。", icon: "material-symbols:autorenew" },
+	{
+		label: "知る",
+		body: "無料スナップショット診断／LLMO健康診断で、まず現状を数字にします。",
+		icon: "material-symbols:search",
+	},
+	{
+		label: "直す",
+		body: "AIに読まれない原因（ブロック・構造化データ不足）を是正します。",
+		icon: "material-symbols:build-outline",
+	},
+	{
+		label: "続ける",
+		body: "直した後の変化を毎月モニタリングし、改善を積み上げます。",
+		icon: "material-symbols:autorenew",
+	},
 ];
 
 const auditMap = [
@@ -106,35 +122,70 @@ const plans = [
 		name: "Light",
 		price: "¥12,800",
 		forWho: "まず自分で把握したい個人・小規模",
-		features: ["AI検索5エンジン別 流入/引用計測", "自動レポート", "初期費用0円"],
+		features: [
+			"AI検索5エンジン別 流入/引用計測",
+			"自動レポート",
+			"初期費用0円",
+		],
 		highlight: false,
 	},
 	{
 		name: "Standard",
 		price: "¥29,800",
 		forWho: "しっかり改善したい主力プラン",
-		features: ["AI検索5エンジン別 流入/引用計測", "AIクローラー到達チェック", "人の所見", "毎月1〜2点の改善アドバイス"],
+		features: [
+			"AI検索5エンジン別 流入/引用計測",
+			"AIクローラー到達チェック",
+			"人の所見",
+			"毎月1〜2点の改善アドバイス",
+		],
 		highlight: true,
 	},
 	{
 		name: "Pro",
 		price: "¥78,000",
 		forWho: "複数サイト・代理店",
-		features: ["AI検索5エンジン別 流入/引用計測", "AIクローラー到達チェック", "改善ロードマップ", "四半期ごとの定例ミーティング"],
+		features: [
+			"AI検索5エンジン別 流入/引用計測",
+			"AIクローラー到達チェック",
+			"改善ロードマップ",
+			"四半期ごとの定例ミーティング",
+		],
 		highlight: false,
 	},
 ];
 
 const oneShotItems = [
-	["無料スナップショット診断", "¥0", "AIクローラーのブロック有無＋主要AI検索での自社名の出方を簡易チェック"],
-	["LLMO健康診断", "¥39,800", "詳細診断と是正ポイントを報告。ご契約時は診断料を初月分に全額充当"],
-	["構造化データ実装", "¥55,000〜", "AIが正しく読めるようサイトを整備（JSON-LD／Schema）"],
+	[
+		"無料スナップショット診断",
+		"¥0",
+		"AIクローラーのブロック有無＋主要AI検索での自社名の出方を簡易チェック",
+	],
+	[
+		"LLMO健康診断",
+		"¥39,800",
+		"詳細診断と是正ポイントを報告。ご契約時は診断料を初月分に全額充当",
+	],
+	[
+		"構造化データ実装",
+		"¥55,000〜",
+		"AIが正しく読めるようサイトを整備（JSON-LD／Schema）",
+	],
 ];
 
 const faqs = [
-	["GA4を見ているので十分では？", "GA4はAI検索からの流入を自然検索に混ぜてしまい、区別できません。本サービスはそこを分離して可視化します。"],
-	["月数百円のツールと何が違うの？", "ツールは数字を出すまで。本サービスは人がその数字を読み、次の一手を言葉でお伝えします。"],
-	["途中でやめられますか？", "はい。月単位でご利用いただけます（解約条件は契約時にご案内）。"],
+	[
+		"GA4を見ているので十分では？",
+		"GA4はAI検索からの流入を自然検索に混ぜてしまい、区別できません。本サービスはそこを分離して可視化します。",
+	],
+	[
+		"月数百円のツールと何が違うの？",
+		"ツールは数字を出すまで。本サービスは人がその数字を読み、次の一手を言葉でお伝えします。",
+	],
+	[
+		"途中でやめられますか？",
+		"はい。月単位でご利用いただけます（解約条件は契約時にご案内）。",
+	],
 ];
 ---
 

@@ -2,8 +2,8 @@
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlBySlug } from "@utils/url-utils";
 import { siteConfig } from "../config";
-import PostCard from "./PostCard.astro";
 import MainListControls from "./control/MainListControls.svelte";
+import PostCard from "./PostCard.astro";
 
 const { page } = Astro.props;
 
@@ -13,8 +13,8 @@ const interval = 50;
 // 現在ページの全記事から利用可能なタグ・カテゴリを集計
 const availableTags = Array.from(
 	new Set(
-		page.data.flatMap((entry: CollectionEntry<"posts">) =>
-			entry.data.tags ?? [],
+		page.data.flatMap(
+			(entry: CollectionEntry<"posts">) => entry.data.tags ?? [],
 		),
 	),
 ).sort() as string[];

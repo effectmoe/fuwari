@@ -4,20 +4,27 @@
  * 固定ページ右上に表示する概要画像 + メタデータ表
  */
 interface InfoboxField {
-  label: string;
-  value: string;
+	label: string;
+	value: string;
 }
 
 interface Props {
-  title: string;
-  subtitle?: string;
-  image?: string;
-  imageCaption?: string;
-  fields: InfoboxField[];
-  class?: string;
+	title: string;
+	subtitle?: string;
+	image?: string;
+	imageCaption?: string;
+	fields: InfoboxField[];
+	class?: string;
 }
 
-const { title, subtitle, image, imageCaption, fields, class: className } = Astro.props;
+const {
+	title,
+	subtitle,
+	image,
+	imageCaption,
+	fields,
+	class: className,
+} = Astro.props;
 ---
 
 <aside

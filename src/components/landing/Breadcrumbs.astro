@@ -13,7 +13,9 @@ const { items, class: className = "" } = Astro.props;
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
 const normalizedItems = items.map((item) => ({
 	...item,
-	href: item.href.startsWith("http") ? item.href : new URL(item.href, siteUrl).toString(),
+	href: item.href.startsWith("http")
+		? item.href
+		: new URL(item.href, siteUrl).toString(),
 }));
 const breadcrumbLd = {
 	"@context": "https://schema.org",

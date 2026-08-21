@@ -4,31 +4,37 @@
  * AI Overview / Google リッチリザルト対策。
  */
 import { Icon } from "astro-icon/components";
+
 interface FaqItem {
-  question: string;
-  answer: string;
+	question: string;
+	answer: string;
 }
 
 interface Props {
-  items: FaqItem[];
-  title?: string;
-  id?: string;
-  class?: string;
+	items: FaqItem[];
+	title?: string;
+	id?: string;
+	class?: string;
 }
 
-const { items, title = "よくある質問", id = "faq", class: className } = Astro.props;
+const {
+	items,
+	title = "よくある質問",
+	id = "faq",
+	class: className,
+} = Astro.props;
 
 const faqLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: items.map((it) => ({
-    "@type": "Question",
-    name: it.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: it.answer,
-    },
-  })),
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: items.map((it) => ({
+		"@type": "Question",
+		name: it.question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: it.answer,
+		},
+	})),
 };
 ---
 

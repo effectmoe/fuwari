@@ -1,4 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
+import InlineConversion from "../components/landing/InlineConversion.astro";
+import stats from "../data/storaca-stats.json";
 /*
  * ai-central.astro — 士業向け「AIセントラル」ランディングページ（商品仕様 v2.0 準拠）
  * 3プラン: AIセントラル ¥330,000 / ＋ ¥550,000 / パーフェクトセキュア ¥1,320,000
@@ -7,14 +10,11 @@
  * 実績数値は src/data/storaca-stats.json（日次自動更新）から取得
  */
 import LandingLayout from "../layouts/LandingLayout.astro";
-import { Icon } from "astro-icon/components";
-import InlineConversion from "../components/landing/InlineConversion.astro";
-import stats from "../data/storaca-stats.json";
 
 const contactEmail = "info@effect.moe";
 const mailtoSubject = encodeURIComponent("【AIセントラル】無料相談の申し込み");
 const mailtoBody = encodeURIComponent(
-  `株式会社EFFECT 御中
+	`株式会社EFFECT 御中
 
 AIセントラルの無料相談を希望します。
 
@@ -30,394 +30,511 @@ const storacaProfileUrl = "https://www.street-academy.com/steachers/271053";
 
 // ===== 課題提起: 士業×AIの3つの壁 =====
 const walls = [
-  {
-    icon: "material-symbols:lock-outline",
-    title: "守秘義務の壁",
-    body: "ChatGPT に顧問先の情報を貼り付けるわけにはいかない。クラウド AI は便利でも、顧客データを外部サーバーに送ること自体が士業には重すぎるリスクです。",
-    examples: "税理士：申告書の下書きに顧問先の数字を使えない ／ 弁護士：事件記録を AI に読ませられない",
-  },
-  {
-    icon: "material-symbols:psychology-alt-outline",
-    title: "忘れる AI の壁",
-    body: "毎回ゼロから説明し直す AI は、戦力になりません。顧問先の背景・過去の相談・事務所の型を覚えていない AI に、実務は任せられない。",
-    examples: "社労士：顧問先ごとの就業規則の経緯を毎回説明 ／ 行政書士：過去の許認可案件のノウハウが検索できない",
-  },
-  {
-    icon: "material-symbols:grid-off-outline",
-    title: "ツール分散の壁",
-    body: "メール・チャット・Excel・Notion・業務ソフト。情報が散らばったままでは、どんな AI を入れても「探す時間」は減りません。",
-    examples: "司法書士：案件情報がメールと紙に分散 ／ 会計事務所：担当者の頭の中にしかない顧問先知識",
-  },
+	{
+		icon: "material-symbols:lock-outline",
+		title: "守秘義務の壁",
+		body: "ChatGPT に顧問先の情報を貼り付けるわけにはいかない。クラウド AI は便利でも、顧客データを外部サーバーに送ること自体が士業には重すぎるリスクです。",
+		examples:
+			"税理士：申告書の下書きに顧問先の数字を使えない ／ 弁護士：事件記録を AI に読ませられない",
+	},
+	{
+		icon: "material-symbols:psychology-alt-outline",
+		title: "忘れる AI の壁",
+		body: "毎回ゼロから説明し直す AI は、戦力になりません。顧問先の背景・過去の相談・事務所の型を覚えていない AI に、実務は任せられない。",
+		examples:
+			"社労士：顧問先ごとの就業規則の経緯を毎回説明 ／ 行政書士：過去の許認可案件のノウハウが検索できない",
+	},
+	{
+		icon: "material-symbols:grid-off-outline",
+		title: "ツール分散の壁",
+		body: "メール・チャット・Excel・Notion・業務ソフト。情報が散らばったままでは、どんな AI を入れても「探す時間」は減りません。",
+		examples:
+			"司法書士：案件情報がメールと紙に分散 ／ 会計事務所：担当者の頭の中にしかない顧問先知識",
+	},
 ];
 
 // ===== 時代マッチ: AI進化の3段階 =====
 const stages = [
-  {
-    no: "第1段階",
-    name: "聞ける AI",
-    desc: "ChatGPT に質問して答えをもらう。便利だが、事務所のことは何も知らない。",
-    note: "多くの事務所がいまここで止まっています",
-    plans: null,
-  },
-  {
-    no: "第2段階",
-    name: "覚える AI",
-    desc: "事務所の顧問先・案件・ノウハウを記憶し、文脈を踏まえて答える。",
-    note: null,
-    plans: "AIセントラル ／ ＋",
-  },
-  {
-    no: "第3段階",
-    name: "働く AI",
-    desc: "記憶を土台に、指示すれば下書き・整理・定型業務を実際にこなす。",
-    note: null,
-    plans: "パーフェクトセキュア",
-  },
+	{
+		no: "第1段階",
+		name: "聞ける AI",
+		desc: "ChatGPT に質問して答えをもらう。便利だが、事務所のことは何も知らない。",
+		note: "多くの事務所がいまここで止まっています",
+		plans: null,
+	},
+	{
+		no: "第2段階",
+		name: "覚える AI",
+		desc: "事務所の顧問先・案件・ノウハウを記憶し、文脈を踏まえて答える。",
+		note: null,
+		plans: "AIセントラル ／ ＋",
+	},
+	{
+		no: "第3段階",
+		name: "働く AI",
+		desc: "記憶を土台に、指示すれば下書き・整理・定型業務を実際にこなす。",
+		note: null,
+		plans: "パーフェクトセキュア",
+	},
 ];
 
 // ===== 必要性 6本 =====
 const reasons = [
-  {
-    icon: "material-symbols:balance",
-    title: "守秘義務と AI のジレンマに、答えが出た",
-    body: "問題の本質は「AI を使うこと」ではなく「どこの誰が管理しているか分からないサーバーに送ること」。運用ルールで線を引く方法と、そもそもデータが事務所から出ない構成——2つの答えを用意しました。守秘義務は AI を諦める理由ではなく、正しい構成を選ぶ理由です。",
-  },
-  {
-    icon: "material-symbols:search-off-rounded",
-    title: "「探す・思い出す・説明し直す」が見えないコスト",
-    body: "「あの件どうなってた」を、メールを遡り、担当者に聞き、フォルダを開いて確かめる。この時間は請求書に載りませんが、毎日発生しています。事務所の記憶を AI が持てば、その多くが「聞けば数秒」に変わります。",
-  },
-  {
-    icon: "material-symbols:group-off-outline",
-    title: "属人化と引き継ぎ — 頭の中の情報は資産にならない",
-    body: "顧問先の経緯・注意点・過去の判断が担当者の頭の中にしかない状態は、退職・異動・急病のたびに事務所の資産が失われるということ。日々の業務の中で自然に「事務所の記憶」が蓄積される仕組みが、その構造を変えます。",
-  },
-  {
-    icon: "material-symbols:alarm-on-outline",
-    title: "期限業務を「人の注意力」だけで守る時代の終わり",
-    body: "申告期限・手続き期限・更新期限。士業の信用は期限で決まります。人の注意力とダブルチェックに加えて、記憶と期限がつながった AI の「見張り番」をもう一枚重ねる時代です。",
-  },
-  {
-    icon: "material-symbols:trending-up-rounded",
-    title: "顧問先が、先に AI を使い始めている",
-    body: "顧問先の経営者はすでに ChatGPT で下調べをしてから相談に来ます。「AI ではこう出ましたが、先生はどう思いますか」に、AI の特性を踏まえて答えられる事務所が選ばれます。AI を業務に組み込んでいる事実そのものが、これからの営業力です。",
-  },
-  {
-    icon: "material-symbols:savings-outline-rounded",
-    title: "記憶は「早く始めた分だけ」貯まる",
-    body: "AIセントラルの本体はソフトウェアではなく、蓄積された事務所の記憶です。記憶は後からまとめて買えません。始めるのが1年早ければ、1年分賢い AI になります。だから33万円の第一歩を「小さく・今」踏み出せる設計にしました。",
-  },
+	{
+		icon: "material-symbols:balance",
+		title: "守秘義務と AI のジレンマに、答えが出た",
+		body: "問題の本質は「AI を使うこと」ではなく「どこの誰が管理しているか分からないサーバーに送ること」。運用ルールで線を引く方法と、そもそもデータが事務所から出ない構成——2つの答えを用意しました。守秘義務は AI を諦める理由ではなく、正しい構成を選ぶ理由です。",
+	},
+	{
+		icon: "material-symbols:search-off-rounded",
+		title: "「探す・思い出す・説明し直す」が見えないコスト",
+		body: "「あの件どうなってた」を、メールを遡り、担当者に聞き、フォルダを開いて確かめる。この時間は請求書に載りませんが、毎日発生しています。事務所の記憶を AI が持てば、その多くが「聞けば数秒」に変わります。",
+	},
+	{
+		icon: "material-symbols:group-off-outline",
+		title: "属人化と引き継ぎ — 頭の中の情報は資産にならない",
+		body: "顧問先の経緯・注意点・過去の判断が担当者の頭の中にしかない状態は、退職・異動・急病のたびに事務所の資産が失われるということ。日々の業務の中で自然に「事務所の記憶」が蓄積される仕組みが、その構造を変えます。",
+	},
+	{
+		icon: "material-symbols:alarm-on-outline",
+		title: "期限業務を「人の注意力」だけで守る時代の終わり",
+		body: "申告期限・手続き期限・更新期限。士業の信用は期限で決まります。人の注意力とダブルチェックに加えて、記憶と期限がつながった AI の「見張り番」をもう一枚重ねる時代です。",
+	},
+	{
+		icon: "material-symbols:trending-up-rounded",
+		title: "顧問先が、先に AI を使い始めている",
+		body: "顧問先の経営者はすでに ChatGPT で下調べをしてから相談に来ます。「AI ではこう出ましたが、先生はどう思いますか」に、AI の特性を踏まえて答えられる事務所が選ばれます。AI を業務に組み込んでいる事実そのものが、これからの営業力です。",
+	},
+	{
+		icon: "material-symbols:savings-outline-rounded",
+		title: "記憶は「早く始めた分だけ」貯まる",
+		body: "AIセントラルの本体はソフトウェアではなく、蓄積された事務所の記憶です。記憶は後からまとめて買えません。始めるのが1年早ければ、1年分賢い AI になります。だから33万円の第一歩を「小さく・今」踏み出せる設計にしました。",
+	},
 ];
 
 // ===== ユースケース =====
 const commonCases = [
-  {
-    title: "「あの件どうなってた？」への即答",
-    before: "メール検索 → フォルダ探索 → 担当者に確認。1件あたり10〜20分。",
-    after: "AI に聞くと、経緯・現在の状態・未対応事項が数秒で返る（出典付きで確認可能）。",
-  },
-  {
-    title: "引き継ぎ・急な担当交代",
-    before: "引き継ぎ書の作成に数日。それでも「聞かないと分からないこと」が残る。",
-    after: "顧問先カルテと対応履歴が常に最新で存在。後任は AI に質問しながら業務を継続。",
-  },
-  {
-    title: "新人教育",
-    before: "先輩の時間を割いて OJT。同じ質問が毎年繰り返される。",
-    after: "「この手続きの事務所の型は？」を新人が AI に直接質問。先輩は判断が必要な質問だけ受ける。",
-  },
+	{
+		title: "「あの件どうなってた？」への即答",
+		before: "メール検索 → フォルダ探索 → 担当者に確認。1件あたり10〜20分。",
+		after:
+			"AI に聞くと、経緯・現在の状態・未対応事項が数秒で返る（出典付きで確認可能）。",
+	},
+	{
+		title: "引き継ぎ・急な担当交代",
+		before:
+			"引き継ぎ書の作成に数日。それでも「聞かないと分からないこと」が残る。",
+		after:
+			"顧問先カルテと対応履歴が常に最新で存在。後任は AI に質問しながら業務を継続。",
+	},
+	{
+		title: "新人教育",
+		before: "先輩の時間を割いて OJT。同じ質問が毎年繰り返される。",
+		after:
+			"「この手続きの事務所の型は？」を新人が AI に直接質問。先輩は判断が必要な質問だけ受ける。",
+	},
 ];
 
 const proCases = [
-  {
-    field: "税理士・会計事務所",
-    icon: "material-symbols:calculate-outline",
-    scene: "「B 社の社長から電話。去年の役員報酬の話の続きらしい」→ AI が昨年の検討経緯と結論、保留になっていた論点を即座に提示。",
-    effect: "電話・面談前の「思い出す準備」が数分で完了。月次巡回の質が上がります。パーフェクトセキュアなら申告データそのものを下処理対象にできます。",
-  },
-  {
-    field: "社会保険労務士",
-    icon: "material-symbols:diversity-3-rounded",
-    scene: "「C 社の副業規定、どういう経緯でこの条文になったか」→ 改定時の議論・顧問先の意向・見送った代替案まで AI が提示。",
-    effect: "「経緯を知る人がいない」問題の解消。規程改定の提案スピードが上がります。※本システムの原型は、顧問先約100社の情報散在に悩む士業向けに構築され、実際に稼働しているシステムです。",
-  },
-  {
-    field: "行政書士",
-    icon: "material-symbols:approval-outline",
-    scene: "「この業種の建設業許可、前にやった時に何かクセがあったはず」→ 過去案件の指摘事項・補正内容を AI が想起。",
-    effect: "2回目以降の同種案件の立ち上がりが速くなります。「前回の自分」が最高の参考資料になります。",
-  },
-  {
-    field: "司法書士",
-    icon: "material-symbols:gavel-rounded",
-    scene: "相続登記の相談で「似た構造の数次相続、前に扱った」→ 当時の整理メモと注意点を AI が提示。",
-    effect: "複雑案件の検討漏れ防止。期限管理が「人 + AI」の二重化になります。",
-  },
-  {
-    field: "弁護士",
-    icon: "material-symbols:menu-book-outline",
-    scene: "「この争点、以前の事件で似た主張を組み立てた」→ 当時の書面構成を AI が提示。",
-    effect: "リサーチと下書きの初速が変わります。事件記録は機微性が高いため、パーフェクトセキュア（完全事務所内処理）を推奨します。",
-  },
+	{
+		field: "税理士・会計事務所",
+		icon: "material-symbols:calculate-outline",
+		scene:
+			"「B 社の社長から電話。去年の役員報酬の話の続きらしい」→ AI が昨年の検討経緯と結論、保留になっていた論点を即座に提示。",
+		effect:
+			"電話・面談前の「思い出す準備」が数分で完了。月次巡回の質が上がります。パーフェクトセキュアなら申告データそのものを下処理対象にできます。",
+	},
+	{
+		field: "社会保険労務士",
+		icon: "material-symbols:diversity-3-rounded",
+		scene:
+			"「C 社の副業規定、どういう経緯でこの条文になったか」→ 改定時の議論・顧問先の意向・見送った代替案まで AI が提示。",
+		effect:
+			"「経緯を知る人がいない」問題の解消。規程改定の提案スピードが上がります。※本システムの原型は、顧問先約100社の情報散在に悩む士業向けに構築され、実際に稼働しているシステムです。",
+	},
+	{
+		field: "行政書士",
+		icon: "material-symbols:approval-outline",
+		scene:
+			"「この業種の建設業許可、前にやった時に何かクセがあったはず」→ 過去案件の指摘事項・補正内容を AI が想起。",
+		effect:
+			"2回目以降の同種案件の立ち上がりが速くなります。「前回の自分」が最高の参考資料になります。",
+	},
+	{
+		field: "司法書士",
+		icon: "material-symbols:gavel-rounded",
+		scene:
+			"相続登記の相談で「似た構造の数次相続、前に扱った」→ 当時の整理メモと注意点を AI が提示。",
+		effect: "複雑案件の検討漏れ防止。期限管理が「人 + AI」の二重化になります。",
+	},
+	{
+		field: "弁護士",
+		icon: "material-symbols:menu-book-outline",
+		scene:
+			"「この争点、以前の事件で似た主張を組み立てた」→ 当時の書面構成を AI が提示。",
+		effect:
+			"リサーチと下書きの初速が変わります。事件記録は機微性が高いため、パーフェクトセキュア（完全事務所内処理）を推奨します。",
+	},
 ];
 
 // ===== 競合比較 =====
 const comparisonRows = [
-  { label: "初期費用", big: "300万〜1,500万円", saas: "0円〜", ours: "33万〜132万円" },
-  { label: "月額", big: "保守費 数十万円〜", saas: "6千円〜11万円", ours: "34,800円（週1伴走つき）" },
-  { label: "顧客データの所在", big: "自社内", saas: "外部クラウド", ours: "事務所内（※）" },
-  { label: "AI が事務所の記憶を持つか", big: "構築次第（大規模開発）", saas: "持たない（汎用回答）", ours: "持つ（記憶を構築）" },
-  { label: "人の伴走", big: "なし〜別料金", saas: "なし", ours: "毎週90分（全プラン標準）" },
-  { label: "解約時", big: "—", saas: "データはサービス内に残る", ours: "全データがテキスト形式で手元に残る" },
+	{
+		label: "初期費用",
+		big: "300万〜1,500万円",
+		saas: "0円〜",
+		ours: "33万〜132万円",
+	},
+	{
+		label: "月額",
+		big: "保守費 数十万円〜",
+		saas: "6千円〜11万円",
+		ours: "34,800円（週1伴走つき）",
+	},
+	{
+		label: "顧客データの所在",
+		big: "自社内",
+		saas: "外部クラウド",
+		ours: "事務所内（※）",
+	},
+	{
+		label: "AI が事務所の記憶を持つか",
+		big: "構築次第（大規模開発）",
+		saas: "持たない（汎用回答）",
+		ours: "持つ（記憶を構築）",
+	},
+	{
+		label: "人の伴走",
+		big: "なし〜別料金",
+		saas: "なし",
+		ours: "毎週90分（全プラン標準）",
+	},
+	{
+		label: "解約時",
+		big: "—",
+		saas: "データはサービス内に残る",
+		ours: "全データがテキスト形式で手元に残る",
+	},
 ];
 
 // ===== 料金 3プラン =====
 const plans = [
-  {
-    name: "AIセントラル",
-    catch: "まず、AI に事務所を「覚えさせる」。",
-    price: "¥330,000",
-    highlight: false,
-    badge: null,
-    forWho: "ChatGPT は使ってみたが毎回ゼロから説明するのに疲れた／情報がメール・Excel・頭の中に散らばっている事務所に。",
-    features: [
-      { text: "顧問先カルテ・案件ログ・期限管理（AI 記憶ベース一式）", on: true },
-      { text: "ChatGPT メモ・Notion・Excel の取り込み", on: true },
-      { text: "既存フォルダはそのまま（動かさずに索引連携）", on: true },
-      { text: "士業テンプレート + 機微情報の運用ルール", on: true },
-      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
-      { text: "導入研修 1回 + 顧問先3社分の初期カルテ化を伴走", on: true },
-      { text: "Notion 双方向連携・カレンダー同期・類似案件検索", on: false },
-      { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
-    ],
-    note: "いまお使いのパソコンで導入できます（Mac / Windows・専用機不要）。AI はクラウド型を利用します。",
-  },
-  {
-    name: "AIセントラル＋",
-    catch: "事務所のツールが、全部つながる。",
-    price: "¥550,000",
-    highlight: false,
-    badge: null,
-    forWho: "Notion やスプレッドシートで顧問先・案件を管理している／予定と期限が分散している事務所に。",
-    features: [
-      { text: "「AIセントラル」の全内容", on: true },
-      { text: "Notion 連携（いまの Notion をそのまま使い続けるだけで AI の記憶に）", on: true },
-      { text: "Google カレンダー連携（期限・予定が記憶とつながる）", on: true },
-      { text: "類似案件検索（「前にも似た件がなかったか」を AI がたどる）", on: true },
-      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
-      { text: "導入研修 2回（Notion 運用特化回を含む）", on: true },
-      { text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント", on: false },
-    ],
-    note: "いまお使いのパソコンで導入できます。AI 生成物の Notion への書き戻しは、先生の承認後のみ行う設計です。",
-  },
-  {
-    name: "AIセントラル パーフェクトセキュア",
-    catch: "顧客情報を1バイトも外に出さない。そして、AI が働く。",
-    price: "¥1,320,000",
-    highlight: true,
-    badge: "守秘義務・完全対応",
-    forWho: "マイナンバー・申告データ・事件記録など、外部クラウドに出せない情報こそ AI に扱わせたい事務所に。",
-    features: [
-      { text: "「AIセントラル＋」の全内容", on: true },
-      { text: "完全事務所内 AI（顧客データを外部サーバーに一切送信しない）", on: true },
-      { text: "外出先・スマホから本人認証経由で利用（VPN 機器不要）", on: true },
-      { text: "メール自動取込（放っておいても対応履歴が蓄積）", on: true },
-      { text: "申告・手続き期限のリマインド", on: true },
-      { text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
-      { text: "AI エージェント（指示すれば実作業。送信・確定は必ず先生の承認経由）", on: true },
-      { text: "導入研修 4回（自動化の線引き設計回を含む）", on: true },
-    ],
-    note: "事務所に AI 専用の Mac を1台設置します（実費別・目安30〜60万円・機種選定をお手伝いします）。皆さまの Windows パソコンはそのまま、ブラウザから利用できます。",
-  },
+	{
+		name: "AIセントラル",
+		catch: "まず、AI に事務所を「覚えさせる」。",
+		price: "¥330,000",
+		highlight: false,
+		badge: null,
+		forWho:
+			"ChatGPT は使ってみたが毎回ゼロから説明するのに疲れた／情報がメール・Excel・頭の中に散らばっている事務所に。",
+		features: [
+			{
+				text: "顧問先カルテ・案件ログ・期限管理（AI 記憶ベース一式）",
+				on: true,
+			},
+			{ text: "ChatGPT メモ・Notion・Excel の取り込み", on: true },
+			{ text: "既存フォルダはそのまま（動かさずに索引連携）", on: true },
+			{ text: "士業テンプレート + 機微情報の運用ルール", on: true },
+			{ text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
+			{ text: "導入研修 1回 + 顧問先3社分の初期カルテ化を伴走", on: true },
+			{ text: "Notion 双方向連携・カレンダー同期・類似案件検索", on: false },
+			{
+				text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント",
+				on: false,
+			},
+		],
+		note: "いまお使いのパソコンで導入できます（Mac / Windows・専用機不要）。AI はクラウド型を利用します。",
+	},
+	{
+		name: "AIセントラル＋",
+		catch: "事務所のツールが、全部つながる。",
+		price: "¥550,000",
+		highlight: false,
+		badge: null,
+		forWho:
+			"Notion やスプレッドシートで顧問先・案件を管理している／予定と期限が分散している事務所に。",
+		features: [
+			{ text: "「AIセントラル」の全内容", on: true },
+			{
+				text: "Notion 連携（いまの Notion をそのまま使い続けるだけで AI の記憶に）",
+				on: true,
+			},
+			{ text: "Google カレンダー連携（期限・予定が記憶とつながる）", on: true },
+			{
+				text: "類似案件検索（「前にも似た件がなかったか」を AI がたどる）",
+				on: true,
+			},
+			{ text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
+			{ text: "導入研修 2回（Notion 運用特化回を含む）", on: true },
+			{
+				text: "完全事務所内 AI（ローカル LLM）・スマホ対応・AI エージェント",
+				on: false,
+			},
+		],
+		note: "いまお使いのパソコンで導入できます。AI 生成物の Notion への書き戻しは、先生の承認後のみ行う設計です。",
+	},
+	{
+		name: "AIセントラル パーフェクトセキュア",
+		catch: "顧客情報を1バイトも外に出さない。そして、AI が働く。",
+		price: "¥1,320,000",
+		highlight: true,
+		badge: "守秘義務・完全対応",
+		forWho:
+			"マイナンバー・申告データ・事件記録など、外部クラウドに出せない情報こそ AI に扱わせたい事務所に。",
+		features: [
+			{ text: "「AIセントラル＋」の全内容", on: true },
+			{
+				text: "完全事務所内 AI（顧客データを外部サーバーに一切送信しない）",
+				on: true,
+			},
+			{
+				text: "外出先・スマホから本人認証経由で利用（VPN 機器不要）",
+				on: true,
+			},
+			{ text: "メール自動取込（放っておいても対応履歴が蓄積）", on: true },
+			{ text: "申告・手続き期限のリマインド", on: true },
+			{ text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
+			{
+				text: "AI エージェント（指示すれば実作業。送信・確定は必ず先生の承認経由）",
+				on: true,
+			},
+			{ text: "導入研修 4回（自動化の線引き設計回を含む）", on: true },
+		],
+		note: "事務所に AI 専用の Mac を1台設置します（実費別・目安30〜60万円・機種選定をお手伝いします）。皆さまの Windows パソコンはそのまま、ブラウザから利用できます。",
+	},
 ];
 
 // ===== 導入の流れ =====
 const flowSteps = [
-  { no: "1", title: "無料相談・ヒアリング", body: "業務フロー・お困りごと・扱う情報の機密度を伺い、最適なプランをご提案します。" },
-  { no: "2", title: "構築・設置", body: "リモート中心で AI セントラル一式を構築します（目安 2〜4週間）。既存フォルダは動かしません。" },
-  { no: "3", title: "導入研修", body: "実際の業務データを使って、先生・スタッフの皆さまが日常業務で使えるところまでご一緒します。" },
-  { no: "4", title: "毎週の伴走（月額34,800円）", body: "週1回×90分、AI の記憶と活用範囲を一緒に育てます。基本保守も含まれます。" },
+	{
+		no: "1",
+		title: "無料相談・ヒアリング",
+		body: "業務フロー・お困りごと・扱う情報の機密度を伺い、最適なプランをご提案します。",
+	},
+	{
+		no: "2",
+		title: "構築・設置",
+		body: "リモート中心で AI セントラル一式を構築します（目安 2〜4週間）。既存フォルダは動かしません。",
+	},
+	{
+		no: "3",
+		title: "導入研修",
+		body: "実際の業務データを使って、先生・スタッフの皆さまが日常業務で使えるところまでご一緒します。",
+	},
+	{
+		no: "4",
+		title: "毎週の伴走（月額34,800円）",
+		body: "週1回×90分、AI の記憶と活用範囲を一緒に育てます。基本保守も含まれます。",
+	},
 ];
 
 // ===== FAQ =====
 const faqs = [
-  {
-    q: "守秘義務との関係は大丈夫ですか？",
-    a: "プラン1・2では「機微情報を AI に触れさせない運用ルール」（3段階の線引き表）を研修でお渡しし、パーフェクトセキュアでは AI の処理がすべて事務所内の Mac で完結するため、顧客データが外部サーバーに送信されることはありません。また AI の役割は資料の下処理・過去案件の想起・文書の下書きに限定し、専門的判断は必ず先生が行う前提の運用設計です。",
-  },
-  {
-    q: "事務所は Windows ばかりですが、使えますか？",
-    a: "はい。プラン1・2はいまお使いの Windows パソコンで導入できます。パーフェクトセキュアで設置する Mac は「事務所に置く AI 専用機」であり、皆さまの既存パソコンは一切変更不要。普段のパソコンのブラウザから利用できます。",
-  },
-  {
-    q: "ローカルLLMや社内完結型AIは、通常のクラウドAIと何が違いますか？",
-    a: "通常のクラウドAIは、入力した情報を外部サービスへ送って処理します。一方、パーフェクトセキュアでは事務所内にAI専用環境を置き、顧客情報・相談履歴・社内資料を外へ出さずに参照できる構成を目指します。個人情報や守秘義務が前提になる士業・専門サービス業ほど、この違いが大きな判断材料になります。",
-  },
-  {
-    q: "AIエージェントのセキュリティ対策は、どのように考えていますか？",
-    a: "AIにすべてを自由に触らせる設計にはしません。AIが参照してよい情報、人間の確認が必要な情報、扱わせない情報を分け、必要に応じてマスキング・権限管理・操作ログ・承認フローを組み合わせます。AIエージェントは便利な実行役ですが、最終判断と重要操作は人間が握る設計にします。",
-  },
-  {
-    q: "月額34,800円には何が含まれますか？",
-    a: "週1回×90分のオンライン伴走コンサル、メール相談、システムの基本保守（アップデート適用・軽微な調整）が含まれます。導入して終わりではなく、毎週一緒に AI の活用範囲を広げていくための必須セットです。大規模な改修や障害復旧作業は都度お見積りとなります。",
-  },
-  {
-    q: "パソコンが苦手なスタッフでも使えますか？",
-    a: "AI への質問は日本語の文章で話しかけるだけです。導入研修では実際の業務データを使い、スタッフの皆さまが日常業務で使えるところまで伴走します。毎週の月額コンサルでも、つまずきをその都度解消していきます。",
-  },
-  {
-    q: "解約したらデータはどうなりますか？",
-    a: "蓄積した記憶（カルテ・記録）はすべて誰でも読める標準的なテキスト形式で、事務所のお手元に残ります。特定のサービスに閉じ込められる「データの人質」は起きません。これは本システムの重要な設計思想です。",
-  },
-  {
-    q: "AI が勝手にメールを送ったりしませんか？",
-    a: "しません。AIセントラルは、どのプランでも「承認トレイ」を前提に設計します。AI は下書き・整理・確認材料づくりを進めますが、顧問先へ出る送信や確定操作は、先生が内容を確認して承認するまで実行されません。どの業務を任せ、どこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
-  },
-  {
-    q: "士業以外の会社でも、個人情報を扱う業務に導入できますか？",
-    a: "可能です。税理士・社労士・行政書士などの士業だけでなく、顧客カルテ、契約情報、面談履歴、社内ナレッジなどを扱う企業にも応用できます。重要なのは業種名ではなく、外部AIにそのまま渡せない情報を、どの範囲でAIに参照させるかを設計することです。",
-  },
-  {
-    q: "遠方の事務所でも対応できますか？",
-    a: "ヒアリング・構築・研修・毎週の伴走はすべてオンライン（Zoom）で対応可能です。機器の設置もオンラインでご案内しながら進められます。",
-  },
+	{
+		q: "守秘義務との関係は大丈夫ですか？",
+		a: "プラン1・2では「機微情報を AI に触れさせない運用ルール」（3段階の線引き表）を研修でお渡しし、パーフェクトセキュアでは AI の処理がすべて事務所内の Mac で完結するため、顧客データが外部サーバーに送信されることはありません。また AI の役割は資料の下処理・過去案件の想起・文書の下書きに限定し、専門的判断は必ず先生が行う前提の運用設計です。",
+	},
+	{
+		q: "事務所は Windows ばかりですが、使えますか？",
+		a: "はい。プラン1・2はいまお使いの Windows パソコンで導入できます。パーフェクトセキュアで設置する Mac は「事務所に置く AI 専用機」であり、皆さまの既存パソコンは一切変更不要。普段のパソコンのブラウザから利用できます。",
+	},
+	{
+		q: "ローカルLLMや社内完結型AIは、通常のクラウドAIと何が違いますか？",
+		a: "通常のクラウドAIは、入力した情報を外部サービスへ送って処理します。一方、パーフェクトセキュアでは事務所内にAI専用環境を置き、顧客情報・相談履歴・社内資料を外へ出さずに参照できる構成を目指します。個人情報や守秘義務が前提になる士業・専門サービス業ほど、この違いが大きな判断材料になります。",
+	},
+	{
+		q: "AIエージェントのセキュリティ対策は、どのように考えていますか？",
+		a: "AIにすべてを自由に触らせる設計にはしません。AIが参照してよい情報、人間の確認が必要な情報、扱わせない情報を分け、必要に応じてマスキング・権限管理・操作ログ・承認フローを組み合わせます。AIエージェントは便利な実行役ですが、最終判断と重要操作は人間が握る設計にします。",
+	},
+	{
+		q: "月額34,800円には何が含まれますか？",
+		a: "週1回×90分のオンライン伴走コンサル、メール相談、システムの基本保守（アップデート適用・軽微な調整）が含まれます。導入して終わりではなく、毎週一緒に AI の活用範囲を広げていくための必須セットです。大規模な改修や障害復旧作業は都度お見積りとなります。",
+	},
+	{
+		q: "パソコンが苦手なスタッフでも使えますか？",
+		a: "AI への質問は日本語の文章で話しかけるだけです。導入研修では実際の業務データを使い、スタッフの皆さまが日常業務で使えるところまで伴走します。毎週の月額コンサルでも、つまずきをその都度解消していきます。",
+	},
+	{
+		q: "解約したらデータはどうなりますか？",
+		a: "蓄積した記憶（カルテ・記録）はすべて誰でも読める標準的なテキスト形式で、事務所のお手元に残ります。特定のサービスに閉じ込められる「データの人質」は起きません。これは本システムの重要な設計思想です。",
+	},
+	{
+		q: "AI が勝手にメールを送ったりしませんか？",
+		a: "しません。AIセントラルは、どのプランでも「承認トレイ」を前提に設計します。AI は下書き・整理・確認材料づくりを進めますが、顧問先へ出る送信や確定操作は、先生が内容を確認して承認するまで実行されません。どの業務を任せ、どこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
+	},
+	{
+		q: "士業以外の会社でも、個人情報を扱う業務に導入できますか？",
+		a: "可能です。税理士・社労士・行政書士などの士業だけでなく、顧客カルテ、契約情報、面談履歴、社内ナレッジなどを扱う企業にも応用できます。重要なのは業種名ではなく、外部AIにそのまま渡せない情報を、どの範囲でAIに参照させるかを設計することです。",
+	},
+	{
+		q: "遠方の事務所でも対応できますか？",
+		a: "ヒアリング・構築・研修・毎週の伴走はすべてオンライン（Zoom）で対応可能です。機器の設置もオンラインでご案内しながら進められます。",
+	},
 ];
 
 // ===== 匿名事例 =====
 const cases = [
-  {
-    label: "士業法人 S 様",
-    field: "社会保険労務士",
-    body: "複数の自社メディアの AI 検索対応（LLMO）・コンテンツ改善を継続支援。AI 時代の情報発信基盤を整備。",
-  },
-  {
-    label: "会計事務所 K 様",
-    field: "会計事務所",
-    body: "AI × ナレッジ管理ツールによる顧問先情報の整理と議事録運用を伴走支援。「AI に事務所の記憶を持たせる」運用を実践中。",
-  },
-  {
-    label: "人事労務 BPO 企業 C 様",
-    field: "人事労務アウトソーシング",
-    body: "AI による Web サイト監視2系統と月次レポートを月額で継続運用。定例ミーティングで改善を積み上げる伴走型支援。",
-  },
+	{
+		label: "士業法人 S 様",
+		field: "社会保険労務士",
+		body: "複数の自社メディアの AI 検索対応（LLMO）・コンテンツ改善を継続支援。AI 時代の情報発信基盤を整備。",
+	},
+	{
+		label: "会計事務所 K 様",
+		field: "会計事務所",
+		body: "AI × ナレッジ管理ツールによる顧問先情報の整理と議事録運用を伴走支援。「AI に事務所の記憶を持たせる」運用を実践中。",
+	},
+	{
+		label: "人事労務 BPO 企業 C 様",
+		field: "人事労務アウトソーシング",
+		body: "AI による Web サイト監視2系統と月次レポートを月額で継続運用。定例ミーティングで改善を積み上げる伴走型支援。",
+	},
 ];
 
-const featuredConsultingTestimonial = (stats.testimonials ?? []).find((t) =>
-  t.date === "2026-08" && t.course.includes("経営伴走コンサル") && t.text && t.text.length > 40
+const featuredConsultingTestimonial = (stats.testimonials ?? []).find(
+	(t) =>
+		t.date === "2026-08" &&
+		t.course.includes("経営伴走コンサル") &&
+		t.text &&
+		t.text.length > 40,
 );
 const testimonials = [
-  ...(featuredConsultingTestimonial ? [featuredConsultingTestimonial] : []),
-  ...(stats.testimonials ?? []).filter((t) =>
-    t.text && t.text.length > 40 && t !== featuredConsultingTestimonial
-  ),
+	...(featuredConsultingTestimonial ? [featuredConsultingTestimonial] : []),
+	...(stats.testimonials ?? []).filter(
+		(t) => t.text && t.text.length > 40 && t !== featuredConsultingTestimonial,
+	),
 ].slice(0, 2);
 const heroImage = "/lp/generated/bright-japanese-ai-consulting-hero.png";
 const workflowImage = "/lp/generated/bright-workflow-knowledge-design.png";
 
 const centralMap = [
-  {
-    title: "記憶",
-    body: "顧客情報・社内資料・対応履歴を、AIが参照できる知識として整理する。",
-    icon: "material-symbols:database-outline",
-  },
-  {
-    title: "検索",
-    body: "必要な情報をAIが探し、出典つきで人が確認できる状態にする。",
-    icon: "material-symbols:manage-search",
-  },
-  {
-    title: "下書き",
-    body: "メール・説明文・整理メモ・手続き前の材料をAIが準備する。",
-    icon: "material-symbols:edit-document-outline",
-  },
-  {
-    title: "承認",
-    body: "送信・判断・確定は人が行う。AIは中枢に置くが、決裁者にはしない。",
-    icon: "material-symbols:verified-user-outline",
-  },
+	{
+		title: "記憶",
+		body: "顧客情報・社内資料・対応履歴を、AIが参照できる知識として整理する。",
+		icon: "material-symbols:database-outline",
+	},
+	{
+		title: "検索",
+		body: "必要な情報をAIが探し、出典つきで人が確認できる状態にする。",
+		icon: "material-symbols:manage-search",
+	},
+	{
+		title: "下書き",
+		body: "メール・説明文・整理メモ・手続き前の材料をAIが準備する。",
+		icon: "material-symbols:edit-document-outline",
+	},
+	{
+		title: "承認",
+		body: "送信・判断・確定は人が行う。AIは中枢に置くが、決裁者にはしない。",
+		icon: "material-symbols:verified-user-outline",
+	},
 ];
 
 const approvalSteps = [
-  {
-    no: "01",
-    title: "AIが作る",
-    body: "返信メールの下書き、予定の登録案、資料のまとめをAIが先に用意します。",
-    icon: "material-symbols:edit-note-outline",
-  },
-  {
-    no: "02",
-    title: "先生のトレイに並ぶ",
-    body: "宛先、本文、判断材料、根拠を確認できる状態で、承認待ちとして並びます。",
-    icon: "material-symbols:inventory-2-outline",
-  },
-  {
-    no: "03",
-    title: "押して初めて出ていく",
-    body: "先生が内容を見て「送信する」「確定する」を押すまで、外部への送信や確定は起きません。",
-    icon: "material-symbols:verified-user-outline",
-  },
+	{
+		no: "01",
+		title: "AIが作る",
+		body: "返信メールの下書き、予定の登録案、資料のまとめをAIが先に用意します。",
+		icon: "material-symbols:edit-note-outline",
+	},
+	{
+		no: "02",
+		title: "先生のトレイに並ぶ",
+		body: "宛先、本文、判断材料、根拠を確認できる状態で、承認待ちとして並びます。",
+		icon: "material-symbols:inventory-2-outline",
+	},
+	{
+		no: "03",
+		title: "押して初めて出ていく",
+		body: "先生が内容を見て「送信する」「確定する」を押すまで、外部への送信や確定は起きません。",
+		icon: "material-symbols:verified-user-outline",
+	},
 ];
 
 const approvalSafeguards = [
-  {
-    title: "文面・宛先が見える",
-    body: "要約だけではなく、実際に送られる本文、宛先、CCまで確認してから承認できます。",
-    icon: "material-symbols:article-outline",
-  },
-  {
-    title: "判断材料が残る",
-    body: "AIがなぜそう提案したのかを、元のメールや資料と一緒に確認できます。",
-    icon: "material-symbols:fact-check-outline",
-  },
-  {
-    title: "承認の記録が残る",
-    body: "いつ、誰の指示で、何をして、誰がOKを出したかを後から追えるようにします。",
-    icon: "material-symbols:history-edu-outline",
-  },
-  {
-    title: "古い下書きは止まる",
-    body: "確認待ちの間に新しい返信が来た場合、古い前提の下書きはそのまま使わない設計にします。",
-    icon: "material-symbols:rule-folder-outline",
-  },
+	{
+		title: "文面・宛先が見える",
+		body: "要約だけではなく、実際に送られる本文、宛先、CCまで確認してから承認できます。",
+		icon: "material-symbols:article-outline",
+	},
+	{
+		title: "判断材料が残る",
+		body: "AIがなぜそう提案したのかを、元のメールや資料と一緒に確認できます。",
+		icon: "material-symbols:fact-check-outline",
+	},
+	{
+		title: "承認の記録が残る",
+		body: "いつ、誰の指示で、何をして、誰がOKを出したかを後から追えるようにします。",
+		icon: "material-symbols:history-edu-outline",
+	},
+	{
+		title: "古い下書きは止まる",
+		body: "確認待ちの間に新しい返信が来た場合、古い前提の下書きはそのまま使わない設計にします。",
+		icon: "material-symbols:rule-folder-outline",
+	},
 ];
 
 // ===== JSON-LD =====
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "AIセントラル",
-  serviceType: "士業向けAI・DXシステム構築およびコンサルティング",
-  description:
-    "士業事務所にAI記憶ベース（顧問先カルテ・案件ログ）を構築し、守秘義務に配慮した構成で業務の中心にAIを据えるDXシステム。全プランに週1回の伴走コンサル付き。",
-  keywords:
-    "AIセントラル, ローカルLLM, 社内完結型AI, AIエージェント セキュリティ, 士業 AI, 個人情報 AI, 守秘義務 AI, パーフェクトセキュア, 社内AIシステム",
-  provider: {
-    "@type": "Organization",
-    name: "株式会社EFFECT",
-    url: "https://effect.moe",
-    email: contactEmail,
-    address: { "@type": "PostalAddress", addressLocality: "福岡市中央区", addressRegion: "福岡県", addressCountry: "JP" },
-  },
-  areaServed: "JP",
-  audience: { "@type": "Audience", audienceType: "税理士・社会保険労務士・行政書士・司法書士・弁護士・会計事務所" },
-  offers: [
-    { "@type": "Offer", name: "AIセントラル", price: "330000", priceCurrency: "JPY" },
-    { "@type": "Offer", name: "AIセントラル＋", price: "550000", priceCurrency: "JPY" },
-    { "@type": "Offer", name: "AIセントラル パーフェクトセキュア", price: "1320000", priceCurrency: "JPY" },
-  ],
+	"@context": "https://schema.org",
+	"@type": "Service",
+	name: "AIセントラル",
+	serviceType: "士業向けAI・DXシステム構築およびコンサルティング",
+	description:
+		"士業事務所にAI記憶ベース（顧問先カルテ・案件ログ）を構築し、守秘義務に配慮した構成で業務の中心にAIを据えるDXシステム。全プランに週1回の伴走コンサル付き。",
+	keywords:
+		"AIセントラル, ローカルLLM, 社内完結型AI, AIエージェント セキュリティ, 士業 AI, 個人情報 AI, 守秘義務 AI, パーフェクトセキュア, 社内AIシステム",
+	provider: {
+		"@type": "Organization",
+		name: "株式会社EFFECT",
+		url: "https://effect.moe",
+		email: contactEmail,
+		address: {
+			"@type": "PostalAddress",
+			addressLocality: "福岡市中央区",
+			addressRegion: "福岡県",
+			addressCountry: "JP",
+		},
+	},
+	areaServed: "JP",
+	audience: {
+		"@type": "Audience",
+		audienceType:
+			"税理士・社会保険労務士・行政書士・司法書士・弁護士・会計事務所",
+	},
+	offers: [
+		{
+			"@type": "Offer",
+			name: "AIセントラル",
+			price: "330000",
+			priceCurrency: "JPY",
+		},
+		{
+			"@type": "Offer",
+			name: "AIセントラル＋",
+			price: "550000",
+			priceCurrency: "JPY",
+		},
+		{
+			"@type": "Offer",
+			name: "AIセントラル パーフェクトセキュア",
+			price: "1320000",
+			priceCurrency: "JPY",
+		},
+	],
 };
 
 const faqLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.a,
-    },
-  })),
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.q,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.a,
+		},
+	})),
 };
 ---
 

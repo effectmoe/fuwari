@@ -8,14 +8,12 @@
  *   - その他(相対パス等)                       → 同タブ
  */
 interface Props {
-  href: string;
-  title?: string;
+	href: string;
+	title?: string;
 }
 const { href, title } = Astro.props;
 const isOtherPage = href.startsWith("/");
-const linkProps = isOtherPage
-  ? { target: "_blank", rel: "noopener" }
-  : {};
+const linkProps = isOtherPage ? { target: "_blank", rel: "noopener" } : {};
 ---
 <a
   href={href}

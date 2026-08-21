@@ -31,34 +31,53 @@ const postsCollection = defineCollection({
 
 		/* 用語の補足・FAQ（クラスターFAQ / 難語の注記）。
 		   記事末に表示 + FAQPage 構造化データ化（トピッククラスター・2026-06-14）*/
-		faq: z.array(z.object({
-			q: z.string(),
-			a: z.string(),
-		})).optional().default([]),
+		faq: z
+			.array(
+				z.object({
+					q: z.string(),
+					a: z.string(),
+				}),
+			)
+			.optional()
+			.default([]),
 
 		/* 関連リンク（コンポーネント描画。CTA の下に配置）。
 		   講座リンクは CTA が自動表示するので、ここには他記事・出典のみ。2026-06-14 */
-		relatedLinks: z.array(z.object({
-			label: z.string(),
-			href: z.string(),
-		})).optional().default([]),
+		relatedLinks: z
+			.array(
+				z.object({
+					label: z.string(),
+					href: z.string(),
+				}),
+			)
+			.optional()
+			.default([]),
 
 		/* 参照した外部記事・ブックマーク。
 		   記事末で、関連リンク・FAQ の後に表示する。 */
-		sourceLinks: z.array(z.object({
-			label: z.string(),
-			href: z.string(),
-		})).optional().default([]),
+		sourceLinks: z
+			.array(
+				z.object({
+					label: z.string(),
+					href: z.string(),
+				}),
+			)
+			.optional()
+			.default([]),
 
 		/* 一覧サムネ隅のアイキャッチ文字バッジ（A案）。
 		   未指定なら tags[0] から自動。"none" で非表示。2026-06-14 */
 		badge: z.string().optional().default(""),
 
 		/* astro-blog skill v1.10 - TL;DR マンガ */
-		manga_tldr: z.array(z.object({
-			src: z.string(),
-			caption: z.string(),
-		})).optional(),
+		manga_tldr: z
+			.array(
+				z.object({
+					src: z.string(),
+					caption: z.string(),
+				}),
+			)
+			.optional(),
 
 		/* For internal use */
 		prevTitle: z.string().default(""),

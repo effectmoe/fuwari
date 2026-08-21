@@ -7,7 +7,12 @@ import { PAGE_SIZE } from "../../constants/constants";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 import { getSortedPosts } from "../../utils/content-utils";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
-import { getCategoryUrl, getDir, getPostUrlBySlug, getTagUrl } from "../../utils/url-utils";
+import {
+	getCategoryUrl,
+	getDir,
+	getPostUrlBySlug,
+	getTagUrl,
+} from "../../utils/url-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -20,12 +25,16 @@ const posts = page.data;
 const featured = posts[0];
 const pickups = posts.slice(1, 4);
 const articleGrid = posts.slice(4);
-const topTags = Array.from(new Set(posts.flatMap((post) => post.data.tags ?? []))).slice(0, 8);
+const topTags = Array.from(
+	new Set(posts.flatMap((post) => post.data.tags ?? [])),
+).slice(0, 8);
 
 const blogDescription =
 	"シュ コウメイによるAI開発・LLMO対策・知識管理・構造化の実装ノート。effect.moe の商用サイト内ブログです。";
 const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
-const blogUrl = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
+const blogUrl = Astro.site
+	? new URL(Astro.url.pathname, Astro.site).toString()
+	: Astro.url.pathname;
 const blogLd = {
 	"@context": "https://schema.org",
 	"@type": "Blog",
@@ -38,12 +47,15 @@ const blogLd = {
 	author: { "@id": `${siteUrl}#person` },
 	blogPost: posts.map((post) => ({
 		"@type": "BlogPosting",
-		"@id": new URL(getPostUrlBySlug(post.slug), siteUrl).toString() + "#article",
+		"@id":
+			new URL(getPostUrlBySlug(post.slug), siteUrl).toString() + "#article",
 		headline: post.data.title,
 		description: post.data.description,
 		url: new URL(getPostUrlBySlug(post.slug), siteUrl).toString(),
 		datePublished: formatDateToYYYYMMDD(post.data.published),
-		dateModified: formatDateToYYYYMMDD(post.data.updated || post.data.published),
+		dateModified: formatDateToYYYYMMDD(
+			post.data.updated || post.data.published,
+		),
 		author: { "@id": `${siteUrl}#person` },
 		publisher: { "@id": `${siteUrl}#organization` },
 	})),
@@ -57,9 +69,13 @@ const thumbnailPositions: Record<string, string> = {
 };
 
 const getThumbnailPosition = (post: { id: string; slug: string }) =>
-	thumbnailPositions[post.slug] ?? thumbnailPositions[getDir(post.id)] ?? thumbnailPositions[post.id] ?? "center";
+	thumbnailPositions[post.slug] ??
+	thumbnailPositions[getDir(post.id)] ??
+	thumbnailPositions[post.id] ??
+	"center";
 
-const getBlogThumbSrc = (post: { id: string }) => `/blog-thumbs/${getDir(post.id).replace(/\/$/, "")}.jpg`;
+const getBlogThumbSrc = (post: { id: string }) =>
+	`/blog-thumbs/${getDir(post.id).replace(/\/$/, "")}.jpg`;
 ---
 
 <LandingLayout title="effect.moe Blog" description={blogDescription} ogType="blog">
