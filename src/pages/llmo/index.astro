@@ -13,6 +13,7 @@ const crawlerRows = [
 	["OAI-SearchBot", "255回", "AI検索のために情報を探す接点"],
 	["PerplexityBot", "153回", "質問への回答に使う情報を探す接点"],
 ];
+const crawlerMax = 456;
 
 const faqItems = [
 	{
@@ -72,6 +73,7 @@ const faqLd = {
 	<section class="llmo-section llmo-section--answer">
 		<div class="llmo-container llmo-prose">
 			<p class="llmo-kicker">まず結論から</p>
+			<Icon name="material-symbols:format-quote-rounded" />
 			<p class="llmo-large-answer">
 				<strong>LLMO対策</strong>は、AIがページの意味を読み取り、質問に答える材料として使いやすくするための情報整理です。対象者、サービス内容、根拠、FAQ、運営者情報を、ページごとに矛盾なく伝えます。<mark>検索順位だけでは見えない「AIの回答に候補として入るか」までを、確かめて改善することがLLMO対策です。</mark>
 			</p>
@@ -84,6 +86,10 @@ const faqLd = {
 			<h2>LLMOとは何ですか？SEOと何が違いますか？</h2>
 			<p><strong>LLMOとは、Large Language Model Optimizationの略で、AIが情報を理解し、回答に使いやすい状態を整えることです。</strong> 日本語では、AI検索対策と呼ばれることもあります。このページでは、表記をLLMO対策にそろえます。</p>
 			<p>SEOは、検索結果で見つけてもらうための取り組みです。検索した人がページを開き、比較し、行動する流れを支えます。一方でLLMO対策は、ユーザーがChatGPTなどへ質問した時に、AIが答えを作る前の段階に目を向けます。AIが「何をしている会社か」「誰に向くのか」「何を根拠に言えるのか」を読み取れるようにします。</p>
+			<div class="llmo-journey" role="img" aria-label="SEOは検索結果からページ訪問へ、LLMO対策は質問からAIの回答を経て根拠ページへつながることを表す図">
+				<div><p>SEO</p><span>検索結果</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>ページ訪問</strong></div>
+				<div><p>LLMO</p><span>質問</span><Icon name="material-symbols:arrow-forward-rounded" /><span>AIの回答</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>根拠ページ</strong></div>
+			</div>
 			<div class="llmo-comparison" role="region" aria-label="SEOとLLMO対策の違い">
 				<div><strong>SEO</strong><span>検索結果で見つけてもらい、ページへ来てもらうための土台</span></div>
 				<div><strong>LLMO対策</strong><span>AIが回答を作る時に、情報を理解し、候補として扱えるようにする整え方</span></div>
@@ -100,11 +106,15 @@ const faqLd = {
 			<p class="llmo-eyebrow">WHY NOW / EFFECT.MOE LOG</p>
 			<h2>AIクローラーは、すでにあなたのサイトに来ているかもしれません。</h2>
 			<p><strong>LLMO対策を考える理由は、AI検索が遠い話ではなく、サイトへの接点としてすでに起きているからです。</strong> effect.moeでは直近30日の自社Cloudflareログで、複数のAIクローラーによるアクセスを確認しました。これはAIの回答で必ず紹介されるという意味ではありません。ただ、AIが情報を見つけ、理解しようとする入口が実際にあることを示しています。</p>
-			<div class="llmo-crawler-table" role="region" aria-label="AIクローラーの実測記録">
-				<div class="llmo-crawler-table__head"><span>AIクローラー</span><span>直近30日の記録</span><span>読み解き方</span></div>
-				{crawlerRows.map(([name, count, meaning]) => (
-					<div class="llmo-crawler-table__row"><strong>{name}</strong><b>{count}</b><span>{meaning}</span></div>
-				))}
+			<div class="llmo-crawler-chart" role="img" aria-label="直近30日のAIクローラー観測記録。ChatGPT-User 456回、ClaudeBot 392回、GPTBot 310回、OAI-SearchBot 255回、PerplexityBot 153回">
+				<div class="llmo-crawler-chart__intro"><span>直近30日の観測記録</span><b>AIとの接点を可視化</b><small>観測された接点であり、AI回答での紹介を保証するものではありません。</small></div>
+				<div class="llmo-crawler-chart__rows">
+					{crawlerRows.map(([name, count, meaning]) => (
+						<div class="llmo-crawler-chart__row" style={`--llmo-bar: ${(Number.parseInt(count, 10) / crawlerMax) * 100}%`}>
+							<strong>{name}</strong><div><i></i><b>{count}</b></div><span>{meaning}</span>
+						</div>
+					))}
+				</div>
 			</div>
 			<p>特にChatGPT-Userは、ユーザーが質問したその瞬間に必要な情報を取りに来る挙動として捉えられます。effect.moeでは、ChatGPT経由の訪問も2026年8月に発生し始めました。件数だけを追うのではなく、どのページが読まれ、どんな質問の答えとして使われそうかを確かめる必要があります。</p>
 			<p>また「LLMO」は、SEO調査ツールの実測で月間検索ボリュームが<strong>1万回超</strong>あります。知りたい人が増えている今こそ、言葉だけを増やすのではなく、実際にAIと人が読み取れる情報を整えることが大切です。</p>
@@ -119,12 +129,21 @@ const faqLd = {
 			<h2>Googleの「特別なLLMO対策は不要」は、どこまで正しいですか？</h2>
 			<p><strong>Googleの公式案内は、Google検索のAI Overviews・AI Modeについて、追加要件や特別な最適化は不要であり、既存のSEOの基本を続けるべきだという内容です。</strong> これはGoogle検索の範囲では正しい説明です。<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener noreferrer">Google SearchのAI機能に関する公式ガイド</a>で、原文を確認できます。</p>
 			<p>ただし、この文書はGoogle検索における方針です。独立したAIサービスや各社のクローラー・回答生成の扱いまで、同じ基準だと定めるものではありません。「Googleで追加要件がない」ことを、「すべてのAIに対して情報を整える必要がない」へ広げないことが重要です。</p>
+			<div class="llmo-source-scope" role="img" aria-label="Google検索のAI機能について追加要件なしという見解の適用範囲は、独立したAIサービスまで広がらないことを表す図">
+				<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener noreferrer"><Icon name="material-symbols:link-rounded" /><span>Google公式見解を参照</span><Icon name="material-symbols:open-in-new-rounded" /></a>
+				<div class="llmo-source-scope__diagram"><div class="llmo-source-scope__google"><p>Google Search</p><span>AI Overviews / AI Mode</span><strong>追加要件なし</strong></div><Icon name="material-symbols:arrow-forward-rounded" /><div class="llmo-source-scope__outside"><span>独立したAIサービス</span><span>各社のクローラー・回答</span></div></div>
+			</div>
 			<div class="llmo-statement-grid">
 				<article><p>正しい理解</p><h3>Google検索では、SEOの基本が土台です。</h3><span>クロール可能で、検索に表示でき、役立つ信頼できる内容を用意する。GoogleのAI機能に限れば、特別なファイルや専用マークアップを追加することが参加条件ではありません。</span></article>
 				<article><p>広げすぎない理解</p><h3>Googleの案内だけで、他社AIの要件までは決まりません。</h3><span>AIサービスごとに情報の取得・回答・引用の仕組みは異なります。EFFECTでは一つの前提で決めつけず、AIごとの接点と回答での扱われ方を観察します。</span></article>
 			</div>
 			<h3 class="llmo-subheading">構造化データを「リッチリザルトだけ」と扱わない理由</h3>
 			<p>Google自身も、構造化データはページの意味を明示し、内容だけでなく人物・企業などの情報を理解するために使うと説明しています。リッチリザルトは、その活用で得られる検索結果上の表示の一つです。<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">Googleの構造化データ公式ガイド</a>では、Googleが必須としないSchema.orgの属性でも、他の検索エンジン・サービス・ツール・プラットフォームで役立つ場合があると案内しています。</p>
+			<div class="llmo-entity-map" role="img" aria-label="組織、サービス、著者、FAQ、根拠がつながり、機械が意味を読み取りやすい情報設計になることを表す図">
+				<div class="llmo-entity-map__nodes"><span>組織</span><span>サービス</span><span>著者</span><span>FAQ</span><span>根拠</span></div>
+				<div class="llmo-entity-map__center"><Icon name="material-symbols:account-tree-rounded" /><strong>機械が意味を<br />読み取りやすい<br />情報設計</strong></div>
+				<small>構造化データは、AI回答への採用を保証するものではありません。</small>
+			</div>
 			<p>つまり、リッチリザルトの対象だけを最低限に埋める実装と、組織・サービス・著者・FAQ・根拠の関係まで矛盾なく表す実装は同じではありません。構造化データだけでAI回答への採用は保証できませんが、表示用の補助情報だけに縮めず、機械が意味を取り違えにくい情報設計として扱います。</p>
 			<h3 class="llmo-subheading">FAQ・会社情報・トピックのつながりを整える理由</h3>
 			<p>E-E-A-TはGoogleの品質評価に関する枠組みであり、他社AIの内部評価の重みは公開されていません。だからこそEFFECTは、「AIがこの要素を何点で評価する」とは断定しません。その代わり、会社は誰か、何を提供するか、どの根拠で言えるか、利用前の疑問にどう答えるかを、サービスページ・会社情報・FAQ・関連解説で一貫させます。</p>
@@ -133,8 +152,8 @@ const faqLd = {
 			<aside class="llmo-next-step" aria-label="LLMO対策の相談先">
 				<div class="llmo-next-step__intro"><p>CHOOSE YOUR NEXT STEP</p><h3>目的に合わせて、入口を分けています。</h3><span>単発の現状確認か、継続した分析・監視かで、次に見るページが異なります。</span></div>
 				<div class="llmo-next-step__actions">
-					<a class="llmo-next-step__action" href="https://www.lancers.jp/menu/detail/1296939" target="_blank" rel="noopener noreferrer"><span>LLMO診断を希望する方</span><strong>ランサーズで診断を相談する <Icon name="material-symbols:open-in-new-rounded" /></strong></a>
-					<a class="llmo-next-step__action" href="/aicrawl/"><span>LLMOの分析・監視を希望する方</span><strong>AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></strong></a>
+					<a class="llmo-next-step__action" href="https://www.lancers.jp/menu/detail/1296939" target="_blank" rel="noopener noreferrer"><Icon name="material-symbols:fact-check-rounded" /><span>LLMO診断を希望する方</span><strong>ランサーズで診断を相談する <Icon name="material-symbols:open-in-new-rounded" /></strong></a>
+					<a class="llmo-next-step__action" href="/aicrawl/"><Icon name="material-symbols:monitoring-rounded" /><span>LLMOの分析・監視を希望する方</span><strong>AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></strong></a>
 				</div>
 			</aside>
 		</div>
@@ -226,7 +245,7 @@ const faqLd = {
 	</section>
 
 	<style>
-		:global(body) { --llmo-ink: #202721; --llmo-muted: #566057; --llmo-paper: #fbfaf6; --llmo-green: #294c42; --llmo-gold: #a87b2a; background: var(--llmo-paper); }
+		:global(body) { --llmo-ink: #1c1b1b; --llmo-muted: #4e4538; --llmo-paper: #fcf9f8; --llmo-green: #7b5807; --llmo-gold: #b68c3c; --llmo-line: #d2c5b2; background: var(--llmo-paper); }
 		.llmo-container { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
 		.llmo-hero { overflow: hidden; background: linear-gradient(135deg, #f8f5ec, #eef3ee); padding: clamp(116px, 13vw, 166px) 0 clamp(64px, 9vw, 120px); }
 		.llmo-hero__grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(440px, 1.1fr); align-items: center; gap: clamp(20px, 4vw, 60px); }
@@ -272,6 +291,78 @@ const faqLd = {
 		.llmo-next-step__action strong { display: inline-flex; align-items: center; gap: 6px; color: #1e5d7b; font-size: 16px; line-height: 1.55; }
 		.llmo-next-step__action svg { width: 18px; height: 18px; }
 		.llmo-next-step__action:focus-visible { outline: 3px solid #d4ad55; outline-offset: -3px; }
+		/* Stitch: Premium Editorial SaaS — visual evidence layout */
+		.llmo-hero { border-bottom: 1px solid rgba(210, 197, 178, .6); background: var(--llmo-paper); }
+		.llmo-hero h1 span { color: var(--llmo-gold); }
+		.llmo-hero__lead { color: var(--llmo-muted); }
+		.llmo-hero__visual { overflow: hidden; border: 1px solid rgba(210, 197, 178, .7); border-radius: 24px; background: #fff; }
+		.llmo-hero__visual img { width: 100%; margin-left: 0; mix-blend-mode: normal; }
+		.llmo-hero__visual figcaption { padding: 0 16px 16px; margin-top: -2px; text-align: left; }
+		.llmo-button--primary, .llmo-cta a { background: var(--llmo-gold); color: #fff; box-shadow: none; }
+		.llmo-button--primary:hover, .llmo-cta a:hover, .llmo-prose .llmo-cta a:hover { background: var(--llmo-green); color: #fff; }
+		.llmo-button--quiet { border-color: rgba(28, 27, 27, .25); color: var(--llmo-ink); }
+		.llmo-section--answer { border-block: 1px solid rgba(210, 197, 178, .6); background: #f6f3f2; text-align: center; }
+		.llmo-section--answer > .llmo-prose > svg { width: 36px; height: 36px; margin-bottom: 10px; color: var(--llmo-gold); }
+		.llmo-large-answer { color: var(--llmo-ink) !important; }
+		.llmo-large-answer mark { background: linear-gradient(transparent 57%, rgba(182, 140, 60, .24) 57%); }
+		.llmo-journey { display: grid; gap: 12px; margin: 36px 0; padding: 20px; border: 1px solid rgba(210, 197, 178, .75); border-radius: 20px; background: #f6f3f2; }
+		.llmo-journey > div { display: flex; align-items: center; gap: 10px; min-height: 42px; flex-wrap: wrap; }
+		.llmo-journey p { width: 76px; margin: 0; color: var(--llmo-gold); font-size: 12px; font-weight: 900; letter-spacing: .12em; }
+		.llmo-journey span, .llmo-journey strong { display: inline-flex; align-items: center; min-height: 34px; padding: 0 13px; border-radius: 999px; background: #fff; color: var(--llmo-ink); font-size: 14px; font-weight: 780; }
+		.llmo-journey strong { border: 1px solid rgba(182, 140, 60, .5); color: var(--llmo-green); }
+		.llmo-journey svg { width: 19px; height: 19px; color: var(--llmo-gold); }
+		.llmo-comparison div, .llmo-measure-grid article, .llmo-misconceptions article, .llmo-related-grid a { border-color: rgba(210, 197, 178, .75); border-radius: 18px; box-shadow: none; }
+		.llmo-comparison strong { color: var(--llmo-green); }
+		.llmo-section--soft { background: #f6f3f2; }
+		.llmo-crawler-chart { overflow: hidden; margin: 34px 0; border: 1px solid rgba(210, 197, 178, .8); border-radius: 20px; background: #fff; }
+		.llmo-crawler-chart__intro { display: grid; gap: 7px; padding: 22px 24px; border-bottom: 1px solid rgba(210, 197, 178, .65); background: #f6f3f2; }
+		.llmo-crawler-chart__intro span { color: var(--llmo-gold); font-size: 11px; font-weight: 900; letter-spacing: .12em; }
+		.llmo-crawler-chart__intro b { color: var(--llmo-ink); font-size: 19px; }
+		.llmo-crawler-chart__intro small { color: var(--llmo-muted); font-size: 13px; font-weight: 620; line-height: 1.65; }
+		.llmo-crawler-chart__rows { display: grid; gap: 16px; padding: 24px; }
+		.llmo-crawler-chart__row { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 8px 18px; align-items: center; }
+		.llmo-crawler-chart__row > strong { color: var(--llmo-ink); font-size: 14px; }
+		.llmo-crawler-chart__row > div { position: relative; height: 28px; border-radius: 999px; background: #f0eded; overflow: hidden; }
+		.llmo-crawler-chart__row i { display: block; width: var(--llmo-bar); height: 100%; border-radius: inherit; background: linear-gradient(90deg, #d6bd81, var(--llmo-gold)); }
+		.llmo-crawler-chart__row b { position: absolute; top: 50%; left: 12px; transform: translateY(-50%); color: #fff; font-size: 12px; font-weight: 900; }
+		.llmo-crawler-chart__row > span { grid-column: 2; color: var(--llmo-muted); font-size: 13px; font-weight: 600; line-height: 1.5; }
+		.llmo-section--statement { background: #f6f3f2; }
+		.llmo-source-scope { display: grid; gap: 22px; margin: 34px 0 38px; padding: clamp(20px, 4vw, 32px); border: 1px solid rgba(210, 197, 178, .85); border-radius: 22px; background: #fff; }
+		.llmo-source-scope > a { display: inline-flex; align-items: center; gap: 8px; justify-self: start; color: var(--llmo-green); font-size: 13px; font-weight: 850; }
+		.llmo-source-scope > a svg { width: 17px; height: 17px; }
+		.llmo-source-scope__diagram { display: grid; grid-template-columns: minmax(0, 1.25fr) 28px minmax(0, .85fr); gap: 16px; align-items: center; }
+		.llmo-source-scope__diagram > svg { width: 22px; height: 22px; color: var(--llmo-gold); }
+		.llmo-source-scope__google { display: grid; gap: 8px; padding: 20px; border: 1px solid rgba(182, 140, 60, .68); border-radius: 18px; background: #fdf9ef; }
+		.llmo-source-scope__google p { margin: 0; color: var(--llmo-green); font-size: 12px; font-weight: 900; letter-spacing: .1em; }
+		.llmo-source-scope__google span { color: var(--llmo-muted); font-size: 14px; font-weight: 650; }
+		.llmo-source-scope__google strong { display: inline-flex; justify-self: start; padding: 7px 10px; border-radius: 999px; background: var(--llmo-gold); color: #fff; font-size: 13px; }
+		.llmo-source-scope__outside { display: grid; gap: 8px; padding: 18px; border: 1px dashed rgba(128, 118, 102, .7); border-radius: 18px; }
+		.llmo-source-scope__outside span { color: var(--llmo-muted); font-size: 13px; font-weight: 720; line-height: 1.45; }
+		.llmo-statement-grid article { border-color: rgba(210, 197, 178, .8); }
+		.llmo-entity-map { position: relative; display: grid; place-items: center; min-height: 310px; margin: 32px 0; border: 1px solid rgba(210, 197, 178, .8); border-radius: 22px; background: #fff; overflow: hidden; }
+		.llmo-entity-map__nodes { position: absolute; inset: 24px; }
+		.llmo-entity-map__nodes span { position: absolute; display: inline-flex; align-items: center; min-height: 34px; padding: 0 13px; border: 1px solid rgba(210, 197, 178, .9); border-radius: 999px; background: #fdfcf9; color: var(--llmo-muted); font-size: 13px; font-weight: 780; }
+		.llmo-entity-map__nodes span:nth-child(1) { top: 10%; left: 9%; }
+		.llmo-entity-map__nodes span:nth-child(2) { top: 8%; right: 9%; }
+		.llmo-entity-map__nodes span:nth-child(3) { top: 49%; left: 4%; }
+		.llmo-entity-map__nodes span:nth-child(4) { bottom: 11%; left: 19%; }
+		.llmo-entity-map__nodes span:nth-child(5) { bottom: 12%; right: 17%; }
+		.llmo-entity-map__center { z-index: 1; display: grid; place-items: center; width: 166px; height: 166px; border: 1px solid rgba(182, 140, 60, .75); border-radius: 50%; background: #fdf9ef; color: var(--llmo-green); text-align: center; }
+		.llmo-entity-map__center svg { width: 30px; height: 30px; margin-bottom: 6px; color: var(--llmo-gold); }
+		.llmo-entity-map__center strong { font-size: 14px; line-height: 1.5; }
+		.llmo-entity-map > small { position: absolute; right: 20px; bottom: 15px; max-width: 260px; color: var(--llmo-muted); font-size: 11px; font-weight: 650; line-height: 1.5; text-align: right; }
+		.llmo-next-step { border-color: rgba(210, 197, 178, .9); }
+		.llmo-next-step__intro { background: #f6f3f2; }
+		.llmo-next-step__action, .llmo-prose .llmo-next-step__action { position: relative; min-height: 164px; }
+		.llmo-next-step__action > svg { width: 28px; height: 28px; color: var(--llmo-gold); }
+		.llmo-next-step__action + .llmo-next-step__action { border-color: rgba(210, 197, 178, .75); }
+		.llmo-next-step__action strong { color: var(--llmo-green); }
+		.llmo-section--links { background: #f6f3f2; }
+		.llmo-section--closing { background: var(--llmo-paper); border-block: 1px solid rgba(210, 197, 178, .7); }
+		.llmo-section--closing h2, .llmo-section--closing p { color: var(--llmo-ink); }
+		.llmo-section--closing .llmo-eyebrow { color: var(--llmo-gold); }
+		.llmo-cta, .llmo-cta--closing { border: 1px solid rgba(210, 197, 178, .85); background: #f6f3f2; }
+		.llmo-cta--closing h3, .llmo-cta--closing span { color: var(--llmo-ink); }
 		.llmo-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 36px 0; }
 		.llmo-comparison div { display: grid; gap: 10px; min-height: 150px; border: 1px solid rgba(41, 76, 66, .17); border-radius: 20px; background: white; padding: 24px; }
 		.llmo-comparison strong { color: var(--llmo-green); font-size: 20px; }
@@ -322,6 +413,6 @@ const faqLd = {
 		.llmo-section--faq details[open] summary svg { transform: rotate(45deg); }
 		.llmo-section--faq details p { margin: 0 0 18px; font-size: 15px; }
 		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 116%; margin-left: -8%; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
-		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(41, 76, 66, .15); border-left: 0; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
+		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
 	</style>
 </LandingLayout>
