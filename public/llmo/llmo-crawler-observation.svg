@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 540" role="img" aria-labelledby="title desc">
+  <title id="title">直近30日のAIクローラー観測記録</title>
+  <desc id="desc">ChatGPT-User、ClaudeBot、GPTBot、OAI-SearchBot、PerplexityBotの観測回数を棒グラフで示す。</desc>
+  <rect width="940" height="540" fill="#fff"/>
+  <text x="58" y="63" fill="#8b6a25" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="2.5">OBSERVED AI CRAWLER TOUCHPOINTS / LAST 30 DAYS</text>
+  <text x="58" y="101" fill="#1c1b1b" font-family="system-ui, sans-serif" font-size="28" font-weight="850">AIとの接点を、実ログで確認する。</text>
+  <text x="58" y="131" fill="#655f55" font-family="system-ui, sans-serif" font-size="15">観測された接点であり、AI回答での紹介を保証するものではありません。</text>
+  <g font-family="system-ui, sans-serif">
+    <g fill="#1c1b1b" font-size="17" font-weight="750"><text x="58" y="201">ChatGPT-User</text><text x="58" y="267">ClaudeBot</text><text x="58" y="333">GPTBot</text><text x="58" y="399">OAI-SearchBot</text><text x="58" y="465">PerplexityBot</text></g>
+    <g fill="#eee9df"><rect x="276" y="177" width="530" height="28" rx="3"/><rect x="276" y="243" width="530" height="28" rx="3"/><rect x="276" y="309" width="530" height="28" rx="3"/><rect x="276" y="375" width="530" height="28" rx="3"/><rect x="276" y="441" width="530" height="28" rx="3"/></g>
+    <g fill="#b68c3c"><rect x="276" y="177" width="530" height="28" rx="3"/><rect x="276" y="243" width="456" height="28" rx="3"/><rect x="276" y="309" width="360" height="28" rx="3"/><rect x="276" y="375" width="296" height="28" rx="3"/><rect x="276" y="441" width="178" height="28" rx="3"/></g>
+    <g fill="#1c1b1b" font-size="16" font-weight="850"><text x="828" y="198">456回</text><text x="754" y="264">392回</text><text x="658" y="330">310回</text><text x="594" y="396">255回</text><text x="476" y="462">153回</text></g>
+  </g>
+  <path d="M58 501H882" stroke="#d8ceb9" stroke-width="2"/>
+  <text x="58" y="526" fill="#655f55" font-family="system-ui, sans-serif" font-size="14">出典：effect.moeのアクセスログ集計。計測条件やクローラーの仕様は変動します。</text>
+</svg>

@@ -6,15 +6,6 @@ const pageTitle = "LLMO対策とは？SEOとの違いと始め方を実測デー
 const pageDescription =
 	"LLMO対策とは何か、SEOとの違い、始め方、測定方法を、effect.moeのAIクローラー実測データをもとに分かりやすく解説します。";
 
-const crawlerRows = [
-	["ChatGPT-User", "456回", "ユーザーが質問した瞬間に、必要な情報を取りに来る接点"],
-	["ClaudeBot", "392回", "AIがサイトの情報を把握するための接点"],
-	["GPTBot", "310回", "生成AIに情報を届けるための接点"],
-	["OAI-SearchBot", "255回", "AI検索のために情報を探す接点"],
-	["PerplexityBot", "153回", "質問への回答に使う情報を探す接点"],
-];
-const crawlerMax = 456;
-
 const faqItems = [
 	{
 		q: "LLMO対策は、SEOの代わりになりますか？",
@@ -54,7 +45,7 @@ const faqLd = {
 		<div class="llmo-container llmo-hero__grid">
 			<div class="llmo-hero__copy">
 				<p class="llmo-eyebrow">LLMO / AI SEARCH GUIDE</p>
-				<h1>LLMO対策とは？<br /><span>SEOとの違いと始め方を実測データで解説</span></h1>
+				<h1><span class="llmo-hero__title">LLMO対策とは？</span><span class="llmo-hero__subtitle">SEOとの違いと始め方を<br />実測データで解説</span></h1>
 				<p class="llmo-hero__lead">
 					LLMO対策は、生成AIが自社の情報を正しく理解し、質問への回答で使える状態を整える仕事です。SEOをやめるための新しい言葉ではありません。検索とAIのどちらから来ても、必要な人に正確な情報を届けるための、もう一つの整え方です。
 				</p>
@@ -62,10 +53,10 @@ const faqLd = {
 					<a class="llmo-button llmo-button--primary" href="#start">始め方を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
 					<a class="llmo-button llmo-button--quiet" href="/aicrawl/">AI CRAWLを見る</a>
 				</div>
+				<p class="llmo-hero__note">実測データ・公式リファレンス・FAQをもとに整理</p>
 			</div>
 			<figure class="llmo-hero__visual">
-				<img src="/llmo/llmo-hero.png" alt="ウェブページの情報が整理され、AI検索へつながる様子を表したイラスト" width="1693" height="929" fetchpriority="high" />
-				<figcaption>情報を整えることで、AIにも人にも伝わる状態をつくる。</figcaption>
+				<img src="/llmo/llmo-hero-flow.svg" alt="ユーザーの質問、AIの解釈、根拠ページをつないだAI検索の情報経路" width="960" height="600" fetchpriority="high" />
 			</figure>
 		</div>
 	</section>
@@ -86,10 +77,7 @@ const faqLd = {
 			<h2>LLMOとは何ですか？SEOと何が違いますか？</h2>
 			<p><strong>LLMOとは、Large Language Model Optimizationの略で、AIが情報を理解し、回答に使いやすい状態を整えることです。</strong> 日本語では、AI検索対策と呼ばれることもあります。このページでは、表記をLLMO対策にそろえます。</p>
 			<p>SEOは、検索結果で見つけてもらうための取り組みです。検索した人がページを開き、比較し、行動する流れを支えます。一方でLLMO対策は、ユーザーがChatGPTなどへ質問した時に、AIが答えを作る前の段階に目を向けます。AIが「何をしている会社か」「誰に向くのか」「何を根拠に言えるのか」を読み取れるようにします。</p>
-			<div class="llmo-journey" role="img" aria-label="SEOは検索結果からページ訪問へ、LLMO対策は質問からAIの回答を経て根拠ページへつながることを表す図">
-				<div><p>SEO</p><span>検索結果</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>ページ訪問</strong></div>
-				<div><p>LLMO</p><span>質問</span><Icon name="material-symbols:arrow-forward-rounded" /><span>AIの回答</span><Icon name="material-symbols:arrow-forward-rounded" /><strong>根拠ページ</strong></div>
-			</div>
+			<figure class="llmo-diagram llmo-diagram--journey"><img src="/llmo/llmo-seo-llmo-paths.svg" alt="SEOは検索結果からページ訪問へ、LLMO対策は質問からAIの回答を経て根拠ページへつながることを表す図" width="940" height="420" loading="lazy" /></figure>
 			<div class="llmo-comparison" role="region" aria-label="SEOとLLMO対策の違い">
 				<div><strong>SEO</strong><span>検索結果で見つけてもらい、ページへ来てもらうための土台</span></div>
 				<div><strong>LLMO対策</strong><span>AIが回答を作る時に、情報を理解し、候補として扱えるようにする整え方</span></div>
@@ -106,16 +94,7 @@ const faqLd = {
 			<p class="llmo-eyebrow">WHY NOW / EFFECT.MOE LOG</p>
 			<h2>AIクローラーは、すでにあなたのサイトに来ているかもしれません。</h2>
 			<p><strong>LLMO対策を考える理由は、AI検索が遠い話ではなく、サイトへの接点としてすでに起きているからです。</strong> effect.moeでは直近30日の自社Cloudflareログで、複数のAIクローラーによるアクセスを確認しました。これはAIの回答で必ず紹介されるという意味ではありません。ただ、AIが情報を見つけ、理解しようとする入口が実際にあることを示しています。</p>
-			<div class="llmo-crawler-chart" role="img" aria-label="直近30日のAIクローラー観測記録。ChatGPT-User 456回、ClaudeBot 392回、GPTBot 310回、OAI-SearchBot 255回、PerplexityBot 153回">
-				<div class="llmo-crawler-chart__intro"><span>直近30日の観測記録</span><b>AIとの接点を可視化</b><small>観測された接点であり、AI回答での紹介を保証するものではありません。</small></div>
-				<div class="llmo-crawler-chart__rows">
-					{crawlerRows.map(([name, count, meaning]) => (
-						<div class="llmo-crawler-chart__row" style={`--llmo-bar: ${(Number.parseInt(count, 10) / crawlerMax) * 100}%`}>
-							<strong>{name}</strong><div><i></i><b>{count}</b></div><span>{meaning}</span>
-						</div>
-					))}
-				</div>
-			</div>
+			<figure class="llmo-diagram llmo-diagram--crawler"><img src="/llmo/llmo-crawler-observation.svg" alt="直近30日のAIクローラー観測記録。ChatGPT-User 456回、ClaudeBot 392回、GPTBot 310回、OAI-SearchBot 255回、PerplexityBot 153回" width="940" height="540" loading="lazy" /></figure>
 			<p>特にChatGPT-Userは、ユーザーが質問したその瞬間に必要な情報を取りに来る挙動として捉えられます。effect.moeでは、ChatGPT経由の訪問も2026年8月に発生し始めました。件数だけを追うのではなく、どのページが読まれ、どんな質問の答えとして使われそうかを確かめる必要があります。</p>
 			<p>また「LLMO」は、SEO調査ツールの実測で月間検索ボリュームが<strong>1万回超</strong>あります。知りたい人が増えている今こそ、言葉だけを増やすのではなく、実際にAIと人が読み取れる情報を整えることが大切です。</p>
 			<p>ただし、クローラーが来ていることは、そのまま引用や問い合わせを意味しません。読まれているのに回答で紹介されないなら、ページの説明や根拠、比較される時に必要な情報が足りないかもしれません。逆に、AI回答で名前が出ても、根拠として参照されるページが自社サイトではないこともあります。</p>
@@ -131,7 +110,7 @@ const faqLd = {
 			<p>ただし、この文書はGoogle検索における方針です。独立したAIサービスや各社のクローラー・回答生成の扱いまで、同じ基準だと定めるものではありません。「Googleで追加要件がない」ことを、「すべてのAIに対して情報を整える必要がない」へ広げないことが重要です。</p>
 			<div class="llmo-source-scope" role="img" aria-label="Google検索のAI機能について追加要件なしという見解の適用範囲は、独立したAIサービスまで広がらないことを表す図">
 				<a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener noreferrer"><Icon name="material-symbols:link-rounded" /><span>Google公式見解を参照</span><Icon name="material-symbols:open-in-new-rounded" /></a>
-				<div class="llmo-source-scope__diagram"><div class="llmo-source-scope__google"><p>Google Search</p><span>AI Overviews / AI Mode</span><strong>追加要件なし</strong></div><Icon name="material-symbols:arrow-forward-rounded" /><div class="llmo-source-scope__outside"><span>独立したAIサービス</span><span>各社のクローラー・回答</span></div></div>
+				<figure class="llmo-diagram llmo-diagram--scope"><img src="/llmo/llmo-google-scope.svg" alt="Google検索のAI機能について追加要件なしという見解の適用範囲は、独立したAIサービスまで広がらないことを表す図" width="940" height="430" loading="lazy" /></figure>
 			</div>
 			<div class="llmo-statement-grid">
 				<article><p>正しい理解</p><h3>Google検索では、SEOの基本が土台です。</h3><span>クロール可能で、検索に表示でき、役立つ信頼できる内容を用意する。GoogleのAI機能に限れば、特別なファイルや専用マークアップを追加することが参加条件ではありません。</span></article>
@@ -139,11 +118,7 @@ const faqLd = {
 			</div>
 			<h3 class="llmo-subheading">構造化データを「リッチリザルトだけ」と扱わない理由</h3>
 			<p>Google自身も、構造化データはページの意味を明示し、内容だけでなく人物・企業などの情報を理解するために使うと説明しています。リッチリザルトは、その活用で得られる検索結果上の表示の一つです。<a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener noreferrer">Googleの構造化データ公式ガイド</a>では、Googleが必須としないSchema.orgの属性でも、他の検索エンジン・サービス・ツール・プラットフォームで役立つ場合があると案内しています。</p>
-			<div class="llmo-entity-map" role="img" aria-label="組織、サービス、著者、FAQ、根拠がつながり、機械が意味を読み取りやすい情報設計になることを表す図">
-				<div class="llmo-entity-map__nodes"><span>組織</span><span>サービス</span><span>著者</span><span>FAQ</span><span>根拠</span></div>
-				<div class="llmo-entity-map__center"><Icon name="material-symbols:account-tree-rounded" /><strong>機械が意味を<br />読み取りやすい<br />情報設計</strong></div>
-				<small>構造化データは、AI回答への採用を保証するものではありません。</small>
-			</div>
+			<figure class="llmo-diagram llmo-diagram--entity"><img src="/llmo/llmo-entity-map.svg" alt="組織、サービス、著者、FAQ、根拠がつながり、機械が意味を取り違えにくい情報設計になることを表す図" width="940" height="550" loading="lazy" /></figure>
 			<p>つまり、リッチリザルトの対象だけを最低限に埋める実装と、組織・サービス・著者・FAQ・根拠の関係まで矛盾なく表す実装は同じではありません。構造化データだけでAI回答への採用は保証できませんが、表示用の補助情報だけに縮めず、機械が意味を取り違えにくい情報設計として扱います。</p>
 			<h3 class="llmo-subheading">FAQ・会社情報・トピックのつながりを整える理由</h3>
 			<p>E-E-A-TはGoogleの品質評価に関する枠組みであり、他社AIの内部評価の重みは公開されていません。だからこそEFFECTは、「AIがこの要素を何点で評価する」とは断定しません。その代わり、会社は誰か、何を提供するか、どの根拠で言えるか、利用前の疑問にどう答えるかを、サービスページ・会社情報・FAQ・関連解説で一貫させます。</p>
@@ -418,7 +393,30 @@ const faqLd = {
 		.llmo-section--faq summary svg { flex: 0 0 auto; transition: transform .18s ease; }
 		.llmo-section--faq details[open] summary svg { transform: rotate(45deg); }
 		.llmo-section--faq details p { margin: 0 0 18px; font-size: 15px; }
-		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 116%; margin-left: -8%; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
-		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-misconceptions article { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 14px; padding: 22px 0; } .llmo-misconceptions h3, .llmo-misconceptions p { grid-column: 2; } .llmo-misconceptions h3 { font-size: 16px; } .llmo-misconceptions p { font-size: 14px; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
+
+		/* FigJam下書きを正本SVGへ再構成した図解群 */
+		.llmo-hero { padding-block: clamp(116px, 13vw, 160px) clamp(66px, 9vw, 112px); background: #f7f3ed; }
+		.llmo-hero__grid { grid-template-columns: minmax(0, 1.03fr) minmax(440px, .97fr); gap: clamp(34px, 5vw, 76px); }
+		.llmo-hero h1 { letter-spacing: -.05em; line-height: 1.08; }
+		.llmo-hero h1 .llmo-hero__title { display: block; color: var(--llmo-ink); font-size: clamp(48px, 5.3vw, 72px); }
+		.llmo-hero h1 .llmo-hero__subtitle { display: block; margin-top: 18px; color: var(--llmo-green); font-size: clamp(22px, 2.35vw, 32px); font-weight: 780; letter-spacing: -.035em; line-height: 1.43; }
+		.llmo-hero__lead { max-width: 540px; margin-top: 30px; font-size: 17px; font-weight: 600; }
+		.llmo-hero__note { max-width: 540px; margin: 25px 0 0; border-top: 1px solid rgba(210, 197, 178, .9); padding-top: 14px; color: #6f5c3a; font-size: 12px; font-weight: 800; letter-spacing: .04em; line-height: 1.6; }
+		.llmo-hero__visual { overflow: visible; border: 0; border-radius: 0; background: transparent; }
+		.llmo-hero__visual img { width: 100%; margin: 0; border: 0; }
+		.llmo-diagram { margin: clamp(30px, 5vw, 46px) 0; border: 1px solid rgba(210, 197, 178, .86); border-radius: 0; background: #fff; }
+		.llmo-diagram img { display: block; width: 100%; height: auto; }
+		.llmo-diagram--journey { max-width: 940px; }
+		.llmo-diagram--crawler { max-width: 940px; }
+		.llmo-source-scope { gap: 16px; padding: clamp(16px, 3vw, 26px); border-radius: 0; }
+		.llmo-source-scope .llmo-diagram { margin: 0; border: 0; }
+		.llmo-diagram--entity { max-width: 940px; }
+		.llmo-misconceptions { display: grid; gap: 0; margin: 34px 0; border-top: 1px solid rgba(210, 197, 178, .9); counter-reset: llmo-misconception; }
+		.llmo-misconceptions article { display: grid; grid-template-columns: 48px minmax(190px, .82fr) minmax(0, 1.18fr); gap: 18px 24px; align-items: start; border: 0; border-bottom: 1px solid rgba(210, 197, 178, .9); border-left: 0; border-radius: 0; background: transparent; padding: 28px 0; }
+		.llmo-misconceptions article::before { color: var(--llmo-gold); content: counter(llmo-misconception, decimal-leading-zero); counter-increment: llmo-misconception; font-size: 12px; font-weight: 900; letter-spacing: .1em; line-height: 1.7; }
+		.llmo-misconceptions h3 { grid-column: 2; font-size: 18px; line-height: 1.6; }
+		.llmo-misconceptions p { grid-column: 3; margin: 0; font-size: 15px; line-height: 1.85; }
+		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 100%; margin: 0; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
+		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero h1 .llmo-hero__title { font-size: 38px; white-space: nowrap; } .llmo-hero h1 .llmo-hero__subtitle { margin-top: 14px; font-size: 22px; } .llmo-hero__note { font-size: 11px; } .llmo-diagram { margin-block: 28px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: rgba(182, 140, 60, .62) transparent; } .llmo-diagram img { width: 620px; max-width: none; } .llmo-source-scope .llmo-diagram img { width: 620px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-misconceptions article { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 14px; padding: 22px 0; } .llmo-misconceptions h3, .llmo-misconceptions p { grid-column: 2; } .llmo-misconceptions h3 { font-size: 16px; } .llmo-misconceptions p { font-size: 14px; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
 	</style>
 </LandingLayout>

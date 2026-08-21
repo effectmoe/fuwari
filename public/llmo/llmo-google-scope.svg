@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 430" role="img" aria-labelledby="title desc">
+  <title id="title">Google公式案内の適用範囲</title>
+  <desc id="desc">Google検索のAI機能に追加要件がないという案内の範囲が、独立したAIサービスにそのまま広がるわけではないことを示す図。</desc>
+  <rect width="940" height="430" fill="#fff"/>
+  <text x="58" y="61" fill="#8b6a25" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="2.5">GOOGLE'S GUIDANCE HAS A DEFINED SCOPE</text>
+  <g font-family="system-ui, sans-serif">
+    <rect x="58" y="112" width="354" height="218" rx="6" fill="#fdf5e1" stroke="#b68c3c" stroke-width="2"/>
+    <text x="88" y="157" fill="#1c1b1b" font-size="23" font-weight="850">Google Search のAI機能</text>
+    <text x="88" y="192" fill="#655f55" font-size="17">AI Overviews / AI Mode</text>
+    <path d="M88 222H382" stroke="#d8ceb9" stroke-width="2"/>
+    <text x="88" y="266" fill="#8b6a25" font-size="25" font-weight="900">追加要件なし</text>
+    <text x="88" y="298" fill="#655f55" font-size="16">Google検索の範囲での案内</text>
+    <path d="M450 220H557" stroke="#b68c3c" stroke-width="3"/><path d="M543 208l16 12-16 12" fill="none" stroke="#b68c3c" stroke-width="3"/>
+    <text x="503" y="188" text-anchor="middle" fill="#8b6a25" font-size="14" font-weight="750">適用範囲を確認</text>
+    <rect x="594" y="112" width="288" height="218" rx="6" fill="#fff" stroke="#807666" stroke-width="2" stroke-dasharray="7 7"/>
+    <text x="624" y="157" fill="#1c1b1b" font-size="22" font-weight="850">独立したAIサービス</text>
+    <text x="624" y="194" fill="#655f55" font-size="17">各社のクローラー・回答</text>
+    <path d="M624 222H852" stroke="#d8ceb9" stroke-width="2"/>
+    <text x="624" y="264" fill="#1c1b1b" font-size="18" font-weight="800">同じ結論とは限らない</text>
+    <text x="624" y="296" fill="#655f55" font-size="16">運用・観測を分けて考える</text>
+  </g>
+  <text x="58" y="383" fill="#655f55" font-family="system-ui, sans-serif" font-size="15">Googleの公式案内は重要です。ただし、他社AIの仕様や回答生成まで一括して断定するものではありません。</text>
+</svg>
