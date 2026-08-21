@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import InlineConversion from "../components/landing/InlineConversion.astro";
+import TermHint from "../components/landing/TermHint.astro";
 import stats from "../data/storaca-stats.json";
 /*
  * ai-central.astro — 士業向け「AIセントラル」ランディングページ（商品仕様 v2.0 準拠）
@@ -1125,7 +1126,7 @@ const faqLd = {
         <div class="rounded-xl border-2 border-[var(--primary)] bg-[var(--btn-plain-bg)] p-5">
           <h3 class="text-base font-bold text-90 mb-3 flex items-center gap-2">
             <Icon name="material-symbols:home-work-outline" class="text-xl text-[var(--primary)]" />
-            AIセントラル パーフェクトセキュア
+            AIセントラル <TermHint term="パーフェクトセキュア" description="1台のPCを社内専用のAIサーバーとして構成し、社内PCや社内ネットワーク内でAIを動かす前提のプランです。通常プランの個人情報マスキング、参照範囲設計、権限管理に加え、扱う情報に合わせて社内管理下での運用を設計します。" />
           </h3>
           <div class="mb-5 rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)] p-4">
             <p class="mb-3 text-center text-xs font-bold text-[var(--primary)]">顧客データはこの線を越えない</p>
@@ -1152,7 +1153,7 @@ const faqLd = {
             <p class="mb-2 text-xs font-bold tracking-[0.14em] text-[var(--primary)]">SECURE KARTE DESIGN</p>
             <p class="text-sm font-bold leading-relaxed text-90">個人情報を扱う士業向けカルテ構成でも採用できる、守秘義務前提のAI設計。</p>
             <p class="mt-2 text-xs leading-relaxed text-75">
-              AIに何でも渡すのではなく、AIが参照してよい情報、人間だけが扱うべき機微情報、承認が必要な操作を分けて設計します。必要に応じてマスキング・権限管理・操作ログを組み合わせ、外部AIへ丸投げしない業務AIを構築します。
+			  AIに何でも渡すのではなく、AIが参照してよい情報、人間だけが扱うべき機微情報、承認が必要な操作を分けて設計します。必要に応じて<TermHint term="個人情報マスキング" description="氏名、住所、連絡先など、AIの判断に不要な個人情報を伏せ字や置き換えで扱う方法です。" />・権限管理・操作ログを組み合わせ、外部AIへ丸投げしない業務AIを構築します。
             </p>
           </div>
         </div>
@@ -1173,7 +1174,7 @@ const faqLd = {
           <h2 class="text-2xl font-bold leading-tight text-90 md:text-4xl">「気をつけます」ではなく、送れない作りにする。</h2>
           <p class="mt-4 text-base leading-relaxed text-75">
             士業のAI化でいちばん怖いのは、AIが間違った文面を顧問先へ勝手に送ってしまうことです。
-            AIセントラルでは、<strong class="text-90">どのプランでも、AIが勝手に送信・確定しない承認トレイ</strong>を前提に設計します。
+			AIセントラルでは、<strong class="text-90">どのプランでも、AIが勝手に送信・確定しない</strong><TermHint term="承認トレイ" description="AIが作った下書きや確認材料を、人が内容を確認してから送信・確定へ進めるための確認の場です。" />を前提に設計します。
           </p>
           <div class="mt-5 rounded-xl border border-[var(--primary)]/25 bg-[var(--card-bg)] p-5">
             <p class="text-sm font-bold text-90">止めるのは、AIの仕事ではありません。</p>

@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import TermHint from "../landing/TermHint.astro";
 
 const problems = [
 	{
@@ -520,7 +521,7 @@ const operationPanels = [
 			<div class="safe-ai-editorial__heading">
 				<span>安全なAI配置設計</span>
 				<h2>扱う情報の機微度に合わせて、AIの置き場所と参照範囲を設計する。</h2>
-				<p>AIセントラルは、社内資料・顧客情報・対応履歴をいきなりAIへ丸投げする仕組みではありません。すべてのプランで、顧客名・個人名・住所・連絡先などをAIへそのまま渡さない個人情報マスキング、参照範囲、権限、ログ、承認フローを先に設計します。外部クラウドに出せない情報を扱う場合は、パーフェクトセキュアで社内PC・社内ネットワーク内のローカル構成を選べます。</p>
+			<p>AIセントラルは、社内資料・顧客情報・対応履歴をいきなりAIへ丸投げする仕組みではありません。すべてのプランで、顧客名・個人名・住所・連絡先などをAIへそのまま渡さない<TermHint term="個人情報マスキング" description="氏名、住所、連絡先など、AIの判断に不要な個人情報を伏せ字や置き換えで扱う方法です。" />、参照範囲、権限、ログ、承認フローを先に設計します。外部クラウドに出せない情報を扱う場合は、<TermHint term="パーフェクトセキュア" description="1台のPCを社内専用のAIサーバーとして構成し、社内PCや社内ネットワーク内でAIを動かす前提のプランです。通常プランの個人情報マスキング、参照範囲設計、権限管理に加え、扱う情報に合わせて社内管理下での運用を設計します。" />で社内PC・社内ネットワーク内の<TermHint term="ローカルLLM" description="外部クラウドではなく、社内PCや社内ネットワーク内で動かすAIの構成です。扱う情報に応じて必要性を判断します。" />を選べます。</p>
 			</div>
 			<div class="safe-ai-feature-card">
 				<div class="safe-ai-feature-card__copy">
@@ -571,7 +572,7 @@ const operationPanels = [
 		<div class="operating-map__copy">
 			<span class="operating-map__eyebrow">AI CENTRAL INTEGRATION</span>
 			<h2>いつもの業務ツールを、<br />AIセントラルにつなぐ。</h2>
-			<p>Gmail、Chatwork、Slack、Google Sheets、Excel、Notion、Google Drive、Outlook、Teams、Salesforceなど、日々使っている外部ツールや既存フォルダをAIセントラルの参照先として接続します。</p>
+			<p>日々使っているメール、チャット、文書、表計算、予定、既存フォルダを、AIセントラルの参照先として接続します。対応できる代表的なツールは、この下の連携一覧で確認できます。</p>
 			<div class="operating-map__statement">
 				<Icon name="material-symbols:hub-outline" />
 				<strong>既存ツールを入れ替えず、AIが参照できる入口を作る。</strong>
@@ -586,7 +587,7 @@ const operationPanels = [
 			<div class="operating-map__asset-copy">
 				<span>NO MIGRATION KNOWLEDGE BASE</span>
 				<strong>既存のファイルやフォルダはそのまま。<br />その上に、AIがたどれる記憶の網を作る。</strong>
-				<p>PDF、Word、Excel、Drive、NAS、案件フォルダを別システムへ無理に移し替えるのではなく、今ある保管場所を尊重したまま、索引・関係性・参照ルールを重ねます。</p>
+				<p>既存の文書、表計算、フォルダ、社内ストレージを別システムへ無理に移し替えるのではなく、今ある保管場所を尊重したまま、索引・関係性・参照ルールを重ねます。</p>
 			</div>
 			<div class="operating-map__asset-flow">
 				<div>

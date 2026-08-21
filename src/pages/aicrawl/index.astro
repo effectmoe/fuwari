@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import storacaTeacherAvatar from "../../assets/images/storaca-teacher-avatar.jpg";
+import TermHint from "../../components/landing/TermHint.astro";
 import stats from "../../data/storaca-stats.json";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 
@@ -496,7 +497,7 @@ const faqs = [
 					AI CRAWLは、AIが自社をどう扱っているかを実測し、紹介されるのを偶然から再現性に変えるサービスです。どのAIから、どのページへ、どれくらい来ているかを整理し、なぜ紹介されたのかを分解して、次に直すページと順番まで示します。レポートは納品物であり、目的は紹介され続ける状態をつくることです。
 				</p>
 				<p>
-					最初に考え方と着手順を知りたい方は、<a href="/llmo/">LLMO対策とは何かを実測データで解説したガイド</a>からご覧ください。AI CRAWLは、その考え方を自社サイトの計測と改善へつなげます。
+					最初に考え方と着手順を知りたい方は、AIの回答で自社の情報を正しく理解・利用しやすくするための<TermHint term="LLMO" description="AIの回答で、自社の情報が正しく理解・利用されやすい状態を整える取り組みです。検索順位だけではなく、情報の意味や根拠の伝わり方も扱います。" />対策を<a href="/llmo/">実測データで解説したガイド</a>からご覧ください。AI CRAWLは、その考え方を自社サイトの計測と改善へつなげます。
 				</p>
 				<div class="aicrawl-actions">
 					<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
@@ -800,7 +801,7 @@ const faqs = [
 					<p class="aicrawl-eyebrow">AI CITATION / ANSWER VISIBILITY</p>
 					<h2>AI由来の接点か。<br />AI回答での紹介か。</h2>
 					<p>
-						AI CRAWLは、自社サイトにAI由来の接点が発生しているかを当社側で観測できるシグナルから見ます。AI CITATIONは、実際にAIへ質問し、回答に自社が載るかをユーザー側の見え方で測ります。
+					AI CRAWLは、AIと自社サイトの接点がどこに生まれているかを整理します。AI CITATIONは、ユーザーがAIに質問したとき、回答の候補として自社が出るかを確認します。
 					</p>
 				</div>
 
@@ -808,12 +809,12 @@ const faqs = [
 					<article class="citation-lane">
 						<span>CRAWL</span>
 						<h3>AI由来の接点があるか</h3>
-						<p>当社独自の確認方法で、AIから見たサイト接点と流入傾向を整理します。</p>
+						<p>AIとの接点があるページ、流入の傾向、次に整える導線を整理します。</p>
 					</article>
 					<article class="citation-lane citation-lane--strong">
 						<span>CITATION</span>
 						<h3>AIの回答に自社が載るか</h3>
-						<p>実際のAI回答上で、自社がどの程度登場し、どの候補と比較されているかを測ります。</p>
+						<p>AIの回答に自社がどの程度登場し、どの候補と比較されているかを確認します。</p>
 					</article>
 				</div>
 
