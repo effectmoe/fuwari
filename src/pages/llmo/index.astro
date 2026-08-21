@@ -111,11 +111,12 @@ const llmoPageLd = {
 			<aside class="llmo-mcp-cta">
 				<div class="llmo-mcp-cta__copy">
 					<p class="llmo-eyebrow">EFFECT MCP / 無料LLMO診断</p>
-					<h2 id="free-diagnosis-title">effect.moeではMCPサーバーを使って<strong>あなたのAIを使って、無料のLLMO診断が可能になります。</strong></h2>
+					<h2 id="free-diagnosis-title">effect.moeのMCPサーバーと<strong>あなたのAIを使って、無料のLLMO診断ができます。</strong></h2>
 				</div>
 				<div class="llmo-mcp-cta__action">
-					<a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">無料診断の設定方法を見る <Icon name="material-symbols:open-in-new-rounded" /></a>
-					<span>無料・読み取り専用</span>
+					<a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">無料LLMO診断をはじめる <Icon name="material-symbols:open-in-new-rounded" /></a>
+					<span>無料・読み取り専用（無料でできるのは診断までです）</span>
+					<a class="llmo-mcp-cta__secondary" href="/?inquiry=llmo-diagnosis#contact">LLMO対策を依頼する <Icon name="material-symbols:arrow-forward-rounded" /></a>
 				</div>
 			</aside>
 		</div>
@@ -615,6 +616,8 @@ const llmoPageLd = {
 		.llmo-mcp-cta__action a { display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--llmo-green); border-radius: 999px; background: var(--llmo-green); padding: 0 20px; color: #fff; font-size: 14px; font-weight: 900; line-height: 1.3; text-decoration: none; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
 		.llmo-mcp-cta__action a:hover { border-color: var(--llmo-ink); background: var(--llmo-ink); color: #fff; transform: translateY(-2px); }
 		.llmo-mcp-cta__action a:focus-visible { outline: 3px solid var(--llmo-gold); outline-offset: 3px; }
+		.llmo-mcp-cta__action a.llmo-mcp-cta__secondary { border-color: rgba(28, 27, 27, .3); background: transparent; color: var(--llmo-green); }
+		.llmo-mcp-cta__action a.llmo-mcp-cta__secondary:hover { border-color: var(--llmo-green); background: var(--llmo-green); color: #fff; }
 		.llmo-mcp-cta__action svg { width: 18px; height: 18px; }
 		.llmo-mcp-cta__action span { color: var(--llmo-muted); font-size: 12px; font-weight: 750; line-height: 1.5; }
 
