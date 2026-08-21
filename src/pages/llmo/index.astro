@@ -160,6 +160,20 @@ const faqLd = {
 		</div>
 	</section>
 
+	<section class="llmo-section llmo-section--links" aria-labelledby="llmo-related-title">
+		<div class="llmo-container llmo-prose">
+			<p class="llmo-eyebrow">RELATED GUIDES</p>
+			<h2 id="llmo-related-title">LLMO対策を、次のページで具体化する。</h2>
+			<p>このページで全体像をつかんだ後は、知りたい内容に合わせて次のページへ進めます。FAQで疑問を確認し、AI CRAWLで測定方法を検討し、DFBで情報を整理する考え方を深められます。</p>
+			<nav class="llmo-related-grid" aria-label="LLMO対策の関連ページ">
+				<a href="/faq/"><strong>総合FAQ</strong><span>LLMO対策、AI検索、AI CRAWLについてのよくある質問を確認する。</span><b>FAQを確認する <Icon name="material-symbols:arrow-forward-rounded" /></b></a>
+				<a href="/aicrawl/"><strong>AI CRAWL</strong><span>AIに読まれているページと、次に直す場所を実測から整理する。</span><b>AI CRAWLを見る <Icon name="material-symbols:arrow-forward-rounded" /></b></a>
+				<a href="/dfb-complete-guide/"><strong>DFB構造化メソッド大全</strong><span>AIにも人にも伝わる情報の組み立て方を、プロンプト設計から学ぶ。</span><b>DFBの考え方を見る <Icon name="material-symbols:arrow-forward-rounded" /></b></a>
+				<a href="/posts/ai-crawl-citation-strategy/"><strong>AI検索でSEOは半分しか通用しない — 対策の分岐点</strong><span>AIに読まれることと、AI回答で紹介されることの違いを詳しく知る。</span><b>詳しい解説を読む <Icon name="material-symbols:arrow-forward-rounded" /></b></a>
+			</nav>
+		</div>
+	</section>
+
 	<section class="llmo-section llmo-section--closing">
 		<div class="llmo-container llmo-prose">
 			<p class="llmo-eyebrow">SUMMARY</p>
@@ -234,6 +248,14 @@ const faqLd = {
 		.llmo-measure-grid p, .llmo-misconceptions p { margin: 12px 0 0; font-size: 14px; line-height: 1.8; }
 		.llmo-misconceptions { grid-template-columns: 1fr; }
 		.llmo-misconceptions article { border-left: 4px solid #bd9446; }
+		.llmo-section--links { background: #f5f6f1; }
+		.llmo-related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 34px; }
+		.llmo-related-grid a { display: grid; min-height: 190px; gap: 12px; border: 1px solid rgba(41, 76, 66, .18); border-radius: 20px; background: #fff; padding: 24px; color: var(--llmo-ink); text-decoration: none; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+		.llmo-related-grid a:hover { border-color: var(--llmo-gold); box-shadow: 0 14px 30px rgba(41, 76, 66, .12); transform: translateY(-2px); }
+		.llmo-related-grid strong { font-size: 19px; line-height: 1.45; }
+		.llmo-related-grid span { color: var(--llmo-muted); font-size: 15px; font-weight: 600; line-height: 1.75; }
+		.llmo-related-grid b { display: inline-flex; align-items: center; gap: 6px; align-self: end; color: #1e5d7b; font-size: 14px; }
+		.llmo-related-grid svg { width: 18px; height: 18px; }
 		.llmo-section--closing { background: linear-gradient(135deg, #273f37, #315d50); }
 		.llmo-section--closing h2, .llmo-section--closing p { color: #f8f8f2; }
 		.llmo-section--closing .llmo-eyebrow { color: #e5c77d; }
@@ -248,6 +270,6 @@ const faqLd = {
 		.llmo-section--faq details[open] summary svg { transform: rotate(45deg); }
 		.llmo-section--faq details p { margin: 0 0 18px; font-size: 15px; }
 		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 116%; margin-left: -8%; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
-		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison { grid-template-columns: 1fr; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
+		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid { grid-template-columns: 1fr; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
 	</style>
 </LandingLayout>
