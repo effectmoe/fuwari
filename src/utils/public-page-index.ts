@@ -10,7 +10,13 @@ const pageSources = import.meta.glob("../pages/**/*.astro", {
 	import: "default",
 }) as Record<string, string>;
 
-const excludedRoutes = new Set(["/404/", "/about/", "/ai-central/", "/ai-traffic-report/", "/diagnosis/"]);
+const excludedRoutes = new Set([
+	"/404/",
+	"/about/",
+	"/ai-central/",
+	"/ai-traffic-report/",
+	"/diagnosis/",
+]);
 
 const labelOverrides: Record<string, string> = {
 	"/": "ホーム / AI CENTRAL",
@@ -32,9 +38,12 @@ const labelOverrides: Record<string, string> = {
 };
 
 function routeFromFilePath(filePath: string) {
-	const relativePath = filePath.replace("../pages/", "").replace(/\.astro$/, "");
+	const relativePath = filePath
+		.replace("../pages/", "")
+		.replace(/\.astro$/, "");
 
-	if (relativePath.includes("[") || relativePath.startsWith("admin/")) return null;
+	if (relativePath.includes("[") || relativePath.startsWith("admin/"))
+		return null;
 
 	const segments = relativePath.split("/");
 	if (segments.at(-1) === "index") segments.pop();
@@ -44,7 +53,9 @@ function routeFromFilePath(filePath: string) {
 }
 
 function sourceConstant(source: string, name: string) {
-	const match = source.match(new RegExp(`const\\s+${name}\\s*=\\s*(?:\\n\\s*)?["']([^"']+)["']`));
+	const match = source.match(
+		new RegExp(`const\\s+${name}\\s*=\\s*(?:\\n\\s*)?["']([^"']+)["']`),
+	);
 	return match?.[1];
 }
 
@@ -57,7 +68,11 @@ function labelFromSource(source: string, href: string) {
 	const pageTitle = sourceConstant(source, "pageTitle");
 	if (pageTitle) return pageTitle.split("｜")[0].trim();
 
-	return labelOverrides[href] || href.replace(/^\//, "").replace(/\/$/, "").replaceAll("-", " ") || "ホーム";
+	return (
+		labelOverrides[href] ||
+		href.replace(/^\//, "").replace(/\/$/, "").replaceAll("-", " ") ||
+		"ホーム"
+	);
 }
 
 export function getPublicStaticPages(): PublicPage[] {

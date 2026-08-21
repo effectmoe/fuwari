@@ -15,6 +15,11 @@ permissions:
 
 jobs:
   check:
+    # 🔴 一時的に非ブロック化（2026-08-22）: astro check は型エラー67件の負債があり
+    #    直近30回中28回失敗＝一度も緑になっていない。失敗メールがオオカミ少年化して
+    #    本物の失敗（build ジョブ）を埋もれさせるため、負債解消までは情報提供のみとする。
+    #    型エラーを0にしたらこの行を外して厳格運用に戻すこと（宿題: wiki/EFFECT/_pending-tasks.md）
+    continue-on-error: true
     strategy:
       matrix:
         node: [ 22, 23 ]

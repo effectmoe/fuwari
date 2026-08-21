@@ -93,13 +93,18 @@ const curatedPagePaths = new Set(
 	),
 );
 
-const additionalStaticPages = publicStaticPages.filter((page) => !curatedPagePaths.has(page.href));
+const additionalStaticPages = publicStaticPages.filter(
+	(page) => !curatedPagePaths.has(page.href),
+);
 
 if (additionalStaticPages.length) {
 	groups.push({
 		title: "その他の公開ページ",
 		description: "固定ページをビルド時に自動で検出して掲載します。",
-		links: additionalStaticPages.map((page) => ({ label: page.label, href: page.href })),
+		links: additionalStaticPages.map((page) => ({
+			label: page.label,
+			href: page.href,
+		})),
 	});
 }
 ---

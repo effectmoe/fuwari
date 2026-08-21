@@ -2,7 +2,10 @@ import type { APIRoute } from "astro";
 import { getSortedPosts } from "../utils/content-utils";
 import { getPublicStaticPages } from "../utils/public-page-index";
 
-const curatedSearchMetadata: Record<string, { title?: string; excerpt: string; section: string }> = {
+const curatedSearchMetadata: Record<
+	string,
+	{ title?: string; excerpt: string; section: string }
+> = {
 	"/": {
 		title: "AIセントラル",
 		excerpt:
@@ -10,7 +13,8 @@ const curatedSearchMetadata: Record<string, { title?: string; excerpt: string; s
 		section: "Service",
 	},
 	"/aicrawl/": {
-		excerpt: "AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
+		excerpt:
+			"AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
 		section: "Service",
 	},
 	"/ai-agent-course/": {
@@ -75,10 +79,13 @@ export const GET: APIRoute = async () => {
 			tags: post.data.tags || [],
 		}));
 
-	return new Response(JSON.stringify([...staticPages, ...supplementalSearchItems, ...postItems]), {
-		headers: {
-			"content-type": "application/json; charset=utf-8",
-			"cache-control": "public, max-age=300",
+	return new Response(
+		JSON.stringify([...staticPages, ...supplementalSearchItems, ...postItems]),
+		{
+			headers: {
+				"content-type": "application/json; charset=utf-8",
+				"cache-control": "public, max-age=300",
+			},
 		},
-	});
+	);
 };
