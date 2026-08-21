@@ -3,16 +3,16 @@
   <desc id="desc">組織、サービス、著者、FAQ、根拠が中心の情報設計につながる関係図。</desc>
   <rect width="940" height="550" fill="#fff"/>
   <text x="58" y="61" fill="#8b6a25" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="2.5">STRUCTURED INFORMATION RELATIONSHIPS</text>
-  <g stroke="#d1b370" stroke-width="2.5" fill="none"><path d="M214 165L467 276"/><path d="M720 165L500 276"/><path d="M154 380L438 308"/><path d="M453 439L469 342"/><path d="M761 380L507 308"/></g>
+  <g stroke="#d1b370" stroke-width="2.5" fill="none"><path d="M214 182L398 242"/><path d="M720 182L542 242"/><path d="M242 355L370 310"/><path d="M470 425L470 384"/><path d="M698 355L570 310"/></g>
   <g font-family="system-ui, sans-serif" text-anchor="middle" font-size="19" font-weight="800" fill="#1c1b1b">
     <rect x="126" y="116" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="214" y="157">組織</text>
     <rect x="632" y="116" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="720" y="157">サービス</text>
-    <rect x="66" y="347" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="154" y="388">著者</text>
-    <rect x="365" y="406" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="453" y="447">FAQ</text>
-    <rect x="673" y="347" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="761" y="388">根拠</text>
+    <rect x="66" y="322" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="154" y="363">著者</text>
+    <rect x="382" y="425" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="470" y="466">FAQ</text>
+    <rect x="698" y="322" width="176" height="66" rx="5" fill="#fff" stroke="#807666" stroke-width="2"/><text x="786" y="363">根拠</text>
   </g>
-  <circle cx="470" cy="294" r="112" fill="#fdf5e1" stroke="#b68c3c" stroke-width="3"/>
-  <g text-anchor="middle" font-family="system-ui, sans-serif"><text x="470" y="275" fill="#1c1b1b" font-size="21" font-weight="900">機械が意味を</text><text x="470" y="304" fill="#1c1b1b" font-size="21" font-weight="900">取り違えにくい</text><text x="470" y="333" fill="#1c1b1b" font-size="21" font-weight="900">情報設計</text></g>
-  <path d="M58 509H882" stroke="#d8ceb9" stroke-width="2"/>
-  <text x="58" y="534" fill="#655f55" font-family="system-ui, sans-serif" font-size="15">構造化データは、表示用の補助情報だけではなく、ページ間の意味と関係を矛盾なく伝えるための基盤です。</text>
+  <circle cx="470" cy="280" r="104" fill="#fdf5e1" stroke="#b68c3c" stroke-width="3"/>
+  <g text-anchor="middle" font-family="system-ui, sans-serif"><text x="470" y="262" fill="#1c1b1b" font-size="21" font-weight="900">機械が意味を</text><text x="470" y="291" fill="#1c1b1b" font-size="21" font-weight="900">取り違えにくい</text><text x="470" y="320" fill="#1c1b1b" font-size="21" font-weight="900">情報設計</text></g>
+  <path d="M58 515H882" stroke="#d8ceb9" stroke-width="2"/>
+  <text x="58" y="540" fill="#655f55" font-family="system-ui, sans-serif" font-size="15">構造化データは、表示用の補助情報だけではなく、ページ間の意味と関係を矛盾なく伝えるための基盤です。</text>
 </svg>
