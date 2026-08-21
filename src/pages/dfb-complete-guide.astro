@@ -22,9 +22,9 @@ import { profileConfig, siteConfig, seoConfig } from "../config";
 
 // ── JSON-LD 構造化データ（Article + HowTo + BreadcrumbList） ─────
 const PAGE_URL = "https://effect.moe/dfb-complete-guide/";
-const PAGE_TITLE = "DFB構造化メソッド大全";
+const PAGE_TITLE = "プロンプトの書き方を体系化したDFB構造化メソッド大全";
 const PAGE_DESC =
-  "DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。";
+  "プロンプトの書き方を、DFB（Decompose / Frame / Build）で分解・整理し、再利用できる形にするための体系的な完全ガイドです。";
 
 const articleLd = {
   "@context": "https://schema.org",
@@ -185,7 +185,7 @@ const externalLinks = [
 ];
 ---
 
-<MainGridLayout title="構造化ペディア: DFB構造化メソッド大全" description="DFB（Decompose / Frame / Build）— シュ コウメイが提唱するAI時代の構造化思考プロトコルの全体像・歴史・実装・失敗パターン9種を体系化した大全（ピラーページ）。" fullWidth={true} setOGTypeArticle={true}>
+<MainGridLayout title={PAGE_TITLE} description={PAGE_DESC} fullWidth={true} setOGTypeArticle={true} fullTitle={true}>
 
   <!-- ─── JSON-LD 構造化データ（head に注入） ─── -->
   <Fragment slot="head">

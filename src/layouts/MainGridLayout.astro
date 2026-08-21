@@ -23,6 +23,7 @@ interface Props {
 	setOGTypeArticle?: boolean;
 	headings?: MarkdownHeading[];
 	ogImage?: string;
+	fullTitle?: boolean;
 	/** 左サイドバーを非表示にして本文を全幅表示する（固定ページ等で使用） */
 	fullWidth?: boolean;
 }
@@ -35,6 +36,7 @@ const {
 	setOGTypeArticle,
 	headings = [],
 	ogImage,
+	fullTitle,
 	fullWidth = false,
 } = Astro.props;
 const hasBannerCredit =
@@ -46,7 +48,7 @@ const mainPanelTop = siteConfig.banner.enable
 	: "5.5rem";
 ---
 
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} ogImage={ogImage}>
+<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} ogImage={ogImage} fullTitle={fullTitle}>
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>

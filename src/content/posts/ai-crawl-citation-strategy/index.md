@@ -1,5 +1,6 @@
 ---
-title: "ChatGPT検索でSEO対策が通用しない、は半分だけ正しい"
+title: "ChatGPT検索でSEOは半分しか通用しない — 対策の分岐点"
+fullTitle: true
 published: 2026-08-07
 description: "Web担当者、海外SEO情報ブログ、Moz系のAI検索・SEO論点を読み解きながら、検索順位やCTAだけでは説明できない問い合わせ減少の原因を整理します。"
 image: "./cover.jpg"

@@ -25,6 +25,94 @@ type FaqCategory = {
 
 const faqCategories: FaqCategory[] = [
 	{
+		id: "llmo-ai-search",
+		label: "LLMO・AI検索について",
+		lead: "AI検索で見つけてもらうための考え方、計測、実務への取り入れ方について。",
+		icon: "material-symbols:travel-explore-outline-rounded",
+		items: [
+			{
+				q: "LLMOとは何ですか？SEOと何が違いますか？",
+				a: "LLMOは、生成AIの回答で自社の情報が正しく理解・引用される状態を整える取り組みで、検索結果で見つけてもらうSEOとは主な接点が異なります。LLMOでは、AIが答えを組み立てる時に、サービス内容、根拠、FAQ、運営者情報を読み違えないように整理します。SEOもLLMOも、読者に役立つ内容を分かりやすく届ける土台として大切です。",
+				links: [
+					{ label: "AI CRAWLを見る", href: "/aicrawl/" },
+					{ label: "総合FAQのトップへ", href: "/faq/" },
+				],
+			},
+			{
+				q: "LLMO対策は何から始めればいいですか？",
+				a: "LLMO対策は、AIに読ませたい自社のサービス内容、対象者、料金、根拠、FAQ、運営者情報を一つずつ確認し、矛盾なく整えることから始めます。まずは自社サイトの主要ページで、質問への答えが冒頭にあるかを見直してください。LLMO対策では、難しい言葉だけで済ませず、誰に何を提供するかを短く明確に書くことが基本です。",
+				links: [
+					{ label: "AI CRAWLの分析内容", href: "/aicrawl/#overview" },
+					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+				],
+			},
+			{
+				q: "自社サイトがChatGPTに引用されているか調べる方法はありますか？",
+				a: "自社サイトがChatGPTに引用されているかは、質問ごとに回答内の自社名・サービス名・URLの登場を記録して確かめられます。AI CRAWLでは、AIの回答に自社が出ているかを見るAI CITATIONと組み合わせて、引用の有無を継続して整理します。ChatGPTの回答は変わるため、1回だけで判断せず、同じ質問を定期的に確認することが大切です。",
+				links: [
+					{ label: "AI CRAWL / AI CITATION", href: "/aicrawl/" },
+					{ label: "関連する解説記事", href: "/posts/ai-crawl-citation-strategy/" },
+				],
+			},
+			{
+				q: "自社サイトに来ているAIクローラーを調べる方法はありますか？",
+				a: "自社サイトに来ているAIクローラーは、Cloudflareなどのアクセスログでクローラー名とページを確認して調べられます。effect.moeでは直近30日で、ChatGPT-User 456回、ClaudeBot 392回、GPTBot 310回、OAI-SearchBot 255回、PerplexityBot 153回のクロールを自社集計で記録しました。AI CRAWLでは、このAIクローラーの実ログを分析し、次に直すページを整理します。",
+				links: [
+					{ label: "AI CRAWLを見る", href: "/aicrawl/" },
+					{ label: "AI流入分析の考え方", href: "/aicrawl/#overview" },
+				],
+			},
+			{
+				q: "GPTBotやClaudeBotはブロックすべきですか？",
+				a: "GPTBotやClaudeBotをブロックすべきかに一律の正解はなく、AI経由の集客を狙うなら許可し、コンテンツ保護を優先するならブロックを検討します。GPTBotやClaudeBotの判断材料は、推測ではなく自サイトの実ログです。どのクローラーが何を読んでいるかを確認し、事業の目的と扱う情報に合わせて決めてください。",
+				links: [
+					{ label: "AI CRAWLで実ログを確認", href: "/aicrawl/" },
+					{ label: "無料相談する", href: "/?inquiry=consultation&service=aicrawl#contact" },
+				],
+			},
+			{
+				q: "llms.txtとは何ですか？書き方は？",
+				a: "llms.txtは、AIがサイトの目的、主要ページ、重要な情報を読み取りやすくするための案内ファイルで、見出しとリンクを使って簡潔に書きます。llms.txtには、運営者、提供サービス、FAQ、主要な記事への入口を、実際のページと矛盾しない形で載せます。effect.moeでも<a href=\"/llms.txt\">llms.txt</a>を実運用し、更新した内容をAIがたどれるようにしています。",
+				links: [
+					{ label: "effect.moe の llms.txt", href: "/llms.txt" },
+					{ label: "主要リファレンスを見る", href: "/dfb-complete-guide/" },
+				],
+			},
+			{
+				q: "LLMOの効果はどう測定しますか？",
+				a: "LLMOの効果は、AIクローラーの来訪、AI回答での自社名・サービス名・URLの登場、改善したページをまとめて継続測定します。AI CRAWLでは、AIクローラーの実ログとAI CITATIONを組み合わせ、どのAIがどのページを読んだか、回答に紹介されたかを整理します。LLMOは一度の表示だけで決めず、同じ条件で変化を見続けることが重要です。",
+				links: [
+					{ label: "AI CRAWLの分析内容", href: "/aicrawl/#overview" },
+					{ label: "AI CRAWLの料金", href: "/aicrawl/#pricing" },
+				],
+			},
+			{
+				q: "AIエージェントは自分で作れますか？",
+				a: "AIエージェントは、自分の仕事に必要な情報、手順、確認する人の範囲を決めれば、自分でも少しずつ作れます。AIエージェントは便利ですが、最初から全部を任せず、調査、整理、下書きなど確認しやすい作業から始めるのが安全です。<a href=\"/ai-agent-course/\">AIエージェント講座</a>では、実務で使うための作り方を学べます。",
+				links: [
+					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
+					{ label: "法人研修を見る", href: "/ai-agent-course-corporate/" },
+				],
+			},
+			{
+				q: "中小企業の生成AI導入は何から始めるべきですか？",
+				a: "中小企業の生成AI導入は、時間がかかる定型作業を一つ選び、扱う情報と人の確認範囲を決めることから始めるべきです。生成AI導入では、便利そうなツールを増やす前に、誰が何に困っているか、AIに見せてよい情報はどこまでかを整理します。<a href=\"/ai-agent-course-corporate/\">法人研修</a>では、現場に合わせた生成AI導入の入口を一緒に設計できます。",
+				links: [
+					{ label: "法人研修を見る", href: "/ai-agent-course-corporate/" },
+					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
+				],
+			},
+			{
+				q: "プロンプトの書き方に型はありますか？",
+				a: "プロンプトの書き方には、目的、前提、してほしい作業、守る条件、出力形式を順番に置く型があります。プロンプトの書き方を体系化したDFB構造化メソッドでは、情報を分け、枠を決め、組み立てる流れで、AIに頼みたいことを明確にします。詳しくは<a href=\"/dfb-complete-guide/\">DFB構造化メソッド大全</a>をご覧ください。",
+				links: [
+					{ label: "DFB構造化メソッド大全", href: "/dfb-complete-guide/" },
+					{ label: "AIエージェント講座", href: "/ai-agent-course/" },
+				],
+			},
+		],
+	},
+	{
 		id: "ai-central",
 		label: "AIセントラル",
 		lead: "記憶を持ったAIを社内の中枢に置くサービスについて。",
