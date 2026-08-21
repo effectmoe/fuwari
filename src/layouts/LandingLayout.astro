@@ -86,6 +86,7 @@ const serviceNavGroups = [
 	{
 		label: "ナレッジ",
 		href: "/blog/",
+		menuOnly: true,
 		items: [
 			{ href: "/blog/", label: "ブログ" },
 			{ href: "/llmo/", label: "LLMO対策ガイド" },
@@ -114,10 +115,17 @@ const navItems = [
 					<a href="/" class="effect-landing-header__nav-link">ホーム</a>
 					{serviceNavGroups.map((group) => (
 						<div class="effect-landing-header__nav-group">
-							<a href={group.href} class="effect-landing-header__nav-parent">
-								{group.label}
-								<Icon name="material-symbols:keyboard-arrow-down-rounded" />
-							</a>
+							{group.menuOnly ? (
+								<button type="button" class="effect-landing-header__nav-parent" aria-haspopup="true">
+									{group.label}
+									<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+								</button>
+							) : (
+								<a href={group.href} class="effect-landing-header__nav-parent">
+									{group.label}
+									<Icon name="material-symbols:keyboard-arrow-down-rounded" />
+								</a>
+							)}
 							<div class="effect-landing-header__dropdown">
 								{group.items.map((item) => (
 									<a href={item.href}>{item.label}</a>
@@ -144,9 +152,22 @@ const navItems = [
 							{serviceNavGroups.map((group, index) => (
 								<div class="effect-landing-header__panel-group">
 									<div class="effect-landing-header__panel-group-top">
-										<a href={group.href} class="effect-landing-header__panel-heading">
-											{group.label}
-										</a>
+										{group.menuOnly ? (
+											<button
+												class="effect-landing-header__panel-heading"
+												type="button"
+												aria-label={`${group.label}の下位メニューを開く`}
+												aria-expanded="false"
+												aria-controls={`effect-service-submenu-${index}`}
+												data-service-nav-toggle
+											>
+												{group.label}
+											</button>
+										) : (
+											<a href={group.href} class="effect-landing-header__panel-heading">
+												{group.label}
+											</a>
+										)}
 										<button
 											class="effect-landing-header__panel-disclosure"
 											type="button"
@@ -378,6 +399,10 @@ const navItems = [
 			display: flex;
 			align-items: center;
 			gap: 4px;
+			border: 0;
+			background: transparent;
+			cursor: pointer;
+			font-family: inherit;
 			height: 100%;
 		}
 
@@ -560,6 +585,10 @@ const navItems = [
 
 		.effect-landing-header__panel-heading {
 			flex: 1 1 auto;
+			border: 0;
+			cursor: pointer;
+			font-family: inherit;
+			text-align: left;
 			background: rgba(251, 247, 239, 0.9);
 			color: #7b5807;
 			font-size: 14px;
