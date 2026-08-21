@@ -102,6 +102,20 @@ const llmoPageLd = {
 				<div class="llmo-audit-visual__legend" aria-label="LLMO対策で整える情報">
 					<span>運営者・専門性</span><span>対象者・提供内容</span><span>実績・根拠・FAQ</span>
 				</div>
+				<a
+					class="llmo-mcp-float"
+					href="https://mcp.effect.moe/"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="EFFECT MCP — あなたのAIで、あなたのサイトを無料LLMO診断（はじめ方を見る）"
+				>
+					<span class="llmo-mcp-float__badge" aria-hidden="true">無料</span>
+					<span class="llmo-mcp-float__body">
+						<em>EFFECT MCP</em>
+						<strong>あなたのAIで、あなたのサイトを無料LLMO診断</strong>
+						<span class="llmo-mcp-float__go">診断のはじめ方を見る <Icon name="material-symbols:arrow-forward-rounded" /></span>
+					</span>
+				</a>
 			</figure>
 		</div>
 	</section>
@@ -624,6 +638,63 @@ const llmoPageLd = {
 		@media (max-width: 640px) { .llmo-hero__visual.llmo-audit-visual { min-height: 315px; } .llmo-audit-visual > img { object-position: 62% center; } .llmo-audit-visual figcaption { width: min(90%, 335px); padding: 17px 18px 19px; } .llmo-audit-visual figcaption strong { font-size: 17px; } .llmo-audit-visual__legend { top: 12px; right: 12px; gap: 4px; } .llmo-audit-visual__legend span { padding: 5px 7px; font-size: 9px; } .llmo-public-proof__content { padding: 34px 20px; } .llmo-public-proof__content .llmo-proof-chain { align-items: flex-start; flex-direction: column; } .llmo-public-proof__content .llmo-proof-chain svg { transform: rotate(90deg); } .llmo-public-proof__content .llmo-public-proof__actions { display: grid; grid-template-columns: 1fr; } .llmo-review-showcase { min-height: 0; padding: 28px 20px 34px; } .llmo-review-showcase__quote { min-height: 0; padding: 19px; } .llmo-action-button { width: 100%; } .llmo-section--proof .llmo-next-step__action { min-height: 166px; padding: 24px 20px; } }
 		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 100%; margin: 0; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
 		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero h1 .llmo-hero__title { font-size: 38px; white-space: nowrap; } .llmo-hero h1 .llmo-hero__subtitle { margin-top: 14px; font-size: 22px; } .llmo-hero__note { font-size: 11px; } .llmo-diagram { margin-block: 28px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: rgba(182, 140, 60, .62) transparent; } .llmo-diagram img { width: 620px; max-width: none; } .llmo-source-scope .llmo-diagram img { width: 620px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-misconceptions article { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 14px; padding: 22px 0; } .llmo-misconceptions h3, .llmo-misconceptions p { grid-column: 2; } .llmo-misconceptions h3 { font-size: 16px; } .llmo-misconceptions p { font-size: 14px; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
+		/* MCP無料診断の浮遊カード（aicrawl版と同型・このページの金/オリーブ調に適合） */
+		.llmo-mcp-float {
+			position: absolute;
+			right: -10px;
+			bottom: -22px;
+			z-index: 3;
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			max-width: 316px;
+			border: 1px solid rgba(255, 255, 255, 0.24);
+			border-radius: 18px;
+			background: linear-gradient(135deg, #453305, #7b5807);
+			padding: 15px 18px;
+			box-shadow: 0 26px 58px rgba(58, 44, 8, 0.36);
+			text-decoration: none;
+			opacity: 1;
+			animation:
+				llmo-mcp-in 0.7s cubic-bezier(0.22, 0.9, 0.3, 1) 0.9s backwards,
+				llmo-mcp-float 5.5s ease-in-out 1.7s infinite alternate;
+			transition: box-shadow 0.2s ease;
+		}
+		.llmo-mcp-float:hover { box-shadow: 0 32px 66px rgba(58, 44, 8, 0.46); }
+		.llmo-mcp-float__badge {
+			display: grid;
+			flex: 0 0 auto;
+			place-items: center;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			background: radial-gradient(circle at 32% 28%, #d9ae5b, #7d5b10);
+			box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24);
+			color: #fff;
+			font-size: 13px;
+			font-weight: 900;
+			letter-spacing: 0.04em;
+			animation: llmo-mcp-pulse 3.2s ease-out 2.4s infinite;
+		}
+		.llmo-mcp-float__body { display: grid; gap: 3px; min-width: 0; }
+		.llmo-mcp-float__body em { color: #e9c886; font-size: 10px; font-style: normal; font-weight: 900; letter-spacing: 0.14em; }
+		.llmo-mcp-float__body strong { color: #ffffff; font-size: 13.5px; font-weight: 800; line-height: 1.55; }
+		.llmo-mcp-float__go { display: inline-flex; align-items: center; gap: 4px; color: #f2dca6; font-size: 12px; font-weight: 800; }
+		.llmo-mcp-float__go svg { width: 15px; height: 15px; transition: transform 0.2s ease; }
+		.llmo-mcp-float:hover .llmo-mcp-float__go svg { transform: translateX(3px); }
+		@keyframes llmo-mcp-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+		@keyframes llmo-mcp-float { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+		@keyframes llmo-mcp-pulse {
+			0% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
+			45% { box-shadow: 0 0 0 11px rgba(217, 174, 91, 0); }
+			100% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.llmo-mcp-float, .llmo-mcp-float__badge { animation: none; }
+		}
+		@media (max-width: 900px) {
+			.llmo-mcp-float { position: static; max-width: none; margin-top: 14px; }
+		}
 		/* 後方にある旧モバイル規則を上書きし、写真コラージュの意味を保持する */
 		@media (max-width: 900px) { .llmo-audit-visual figcaption { display: block; } }
 	</style>
