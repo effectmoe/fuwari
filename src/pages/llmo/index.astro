@@ -60,13 +60,13 @@ const faqLd = {
 				<p class="llmo-hero__note">実測データ・公式リファレンス・FAQをもとに、AIに読まれる入口と次の改善を整理します。</p>
 			</div>
 			<figure class="llmo-hero__visual llmo-audit-visual">
-				<img src="/images/lp/ai-crawl-hero-patrol-desktop.png" alt="ユーザーの質問に対し、サービス紹介、導入事例、FAQ、会社情報、料金ページをAIがたどり、問い合わせまでの導線を分析するAI CRAWLのイメージ" width="1672" height="941" fetchpriority="high" />
+				<img src="/llmo/llmo-audit-hero-v2.png" alt="サービス内容、FAQ、会社情報・根拠のページを点検し、AIクローラーとの接点を分析する作業イメージ" width="1672" height="941" fetchpriority="high" />
 				<figcaption>
-					<span>AI CRAWL / ANALYSIS &amp; MONITORING</span>
-					<strong>分断された情報を、<br />改善の順番へ変える。</strong>
+					<span>AI CRAWL / SITE AUDIT</span>
+					<strong>AIに読まれているページを確認し、<br />次に直す場所と順番を見つける。</strong>
 				</figcaption>
 				<div class="llmo-audit-visual__legend" aria-label="AI CRAWLで確認する内容">
-					<span>AIが来たページ</span><span>質問との接点</span><span>次に直す場所</span>
+					<span>サービス内容</span><span>FAQ</span><span>会社情報・根拠</span>
 				</div>
 			</figure>
 		</div>
@@ -455,15 +455,15 @@ const faqLd = {
 		.llmo-misconceptions h3 { grid-column: 2; font-size: 18px; line-height: 1.6; }
 		.llmo-misconceptions p { grid-column: 3; margin: 0; font-size: 15px; line-height: 1.85; }
 
-		/* Stitchの証拠設計を、既存のAI CRAWLとトップページの実績表示へ揃える */
-		.llmo-hero__visual.llmo-audit-visual { position: relative; min-height: 460px; overflow: hidden; border: 1px solid rgba(28, 27, 27, .16); background: #113427; box-shadow: 0 24px 58px rgba(28, 27, 27, .14); }
+		/* Stitchの明るい編集写真に、意味を補うHTMLラベルを重ねる */
+		.llmo-hero__visual.llmo-audit-visual { position: relative; min-height: 460px; overflow: hidden; border: 1px solid rgba(112, 91, 59, .2); background: #eee7dc; box-shadow: 0 22px 48px rgba(81, 62, 38, .12); }
 		.llmo-audit-visual > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-		.llmo-audit-visual::after { position: absolute; inset: 0; z-index: 0; content: ""; background: linear-gradient(90deg, rgba(7, 29, 22, .42), transparent 62%), linear-gradient(0deg, rgba(5, 19, 14, .5), transparent 38%); }
-		.llmo-audit-visual figcaption { position: absolute; z-index: 1; left: 0; bottom: 0; width: min(82%, 435px); margin: 0; padding: 23px 26px 25px; background: rgba(16, 43, 33, .94); color: #fff; text-align: left; }
-		.llmo-audit-visual figcaption span { display: block; margin-bottom: 8px; color: #e5c77d; font-size: 10px; font-weight: 900; letter-spacing: .13em; }
+		.llmo-audit-visual::after { position: absolute; inset: 0; z-index: 0; content: ""; background: linear-gradient(90deg, rgba(255, 253, 249, .16), transparent 58%), linear-gradient(0deg, rgba(255, 253, 249, .38), transparent 42%); }
+		.llmo-audit-visual figcaption { position: absolute; z-index: 1; left: 0; bottom: 0; width: min(87%, 465px); margin: 0; border-left: 4px solid var(--llmo-gold); padding: 23px 26px 25px; background: rgba(255, 253, 249, .94); color: var(--llmo-ink); text-align: left; }
+		.llmo-audit-visual figcaption span { display: block; margin-bottom: 8px; color: #8e640f; font-size: 10px; font-weight: 900; letter-spacing: .13em; }
 		.llmo-audit-visual figcaption strong { display: block; font-size: clamp(18px, 2vw, 24px); line-height: 1.46; letter-spacing: -.035em; }
 		.llmo-audit-visual__legend { position: absolute; z-index: 1; top: 22px; right: 20px; display: grid; justify-items: end; gap: 7px; }
-		.llmo-audit-visual__legend span { border: 1px solid rgba(255, 255, 255, .45); background: rgba(9, 35, 27, .88); padding: 7px 10px; color: #fff; font-size: 11px; font-weight: 850; line-height: 1.2; }
+		.llmo-audit-visual__legend span { border: 1px solid rgba(132, 100, 44, .32); background: rgba(255, 253, 249, .92); padding: 7px 10px; color: #4f401f; font-size: 11px; font-weight: 850; line-height: 1.2; }
 
 		.llmo-section--proof { border-block: 1px solid rgba(210, 197, 178, .74); background: #f6f3f2; }
 		.llmo-public-proof { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr); gap: 0; overflow: hidden; border: 1px solid rgba(28, 27, 27, .15); background: #fff; }
