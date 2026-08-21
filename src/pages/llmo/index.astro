@@ -225,7 +225,9 @@ const faqLd = {
 		.llmo-cta p { margin: 0 0 8px; color: var(--llmo-gold); font-size: 12px; font-weight: 900; letter-spacing: .13em; }
 		.llmo-cta h3 { margin-bottom: 8px; }
 		.llmo-cta span { color: var(--llmo-muted); font-size: 15px; font-weight: 650; line-height: 1.65; }
-		.llmo-cta a { flex: 0 0 auto; }
+		.llmo-cta a, .llmo-prose .llmo-cta a { flex: 0 0 auto; color: #fff; }
+		.llmo-cta a:hover, .llmo-prose .llmo-cta a:hover { background: #173b31; color: #fff; }
+		.llmo-cta a:focus-visible { outline: 3px solid #d4ad55; outline-offset: 3px; }
 		.llmo-measure-grid, .llmo-misconceptions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 34px 0; }
 		.llmo-measure-grid article, .llmo-misconceptions article { border: 1px solid rgba(41, 76, 66, .16); border-radius: 18px; background: #fff; padding: 25px; }
 		.llmo-measure-grid svg { width: 30px; height: 30px; margin-bottom: 18px; color: var(--llmo-gold); }
