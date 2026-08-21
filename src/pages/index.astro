@@ -5,6 +5,7 @@ import EffectInteractiveHero from "../components/effectInteractive/EffectInterac
 import EvidenceDataSection from "../components/effectInteractive/EvidenceDataSection.astro";
 import StitchCoreSections from "../components/effectInteractive/StitchCoreSections.astro";
 import InlineConversion from "../components/landing/InlineConversion.astro";
+import TermHint from "../components/landing/TermHint.astro";
 import stats from "../data/storaca-stats.json";
 import LandingLayout from "../layouts/LandingLayout.astro";
 
@@ -666,7 +667,7 @@ const faqLd = {
 					<span>APPROVAL TRAY</span>
 					<h2>「気をつけます」ではなく、送れない作りにする。</h2>
 					<p>
-						AIセントラルでは、どのプランでも、AIが勝手に送信・確定しない承認トレイを前提に設計します。
+						AIセントラルでは、どのプランでも、AIが勝手に送信・確定しない<TermHint term="承認トレイ" description="AIが作った下書きや確認材料を、人が内容を確認してから送信・確定へ進めるための確認の場です。" />を前提に設計します。
 						AIは下書き・整理・確認材料づくりを先に進めますが、顧客へ出る操作や責任を伴う判断は、人間が確認する場所で止めます。
 					</p>
 				</div>
