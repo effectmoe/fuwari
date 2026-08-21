@@ -53,13 +53,46 @@
     </main>
 
     <script>
-      const tokenInput = document.querySelector("[data-token-input]");
-      const saveTokenButton = document.querySelector("[data-save-token]");
-      const refreshButton = document.querySelector("[data-refresh]");
-      const statusFilter = document.querySelector("[data-status-filter]");
-      const typeFilter = document.querySelector("[data-type-filter]");
-      const statusText = document.querySelector("[data-status]");
-      const list = document.querySelector("[data-inquiry-list]");
+      type InquiryStatus = "new" | "reviewing" | "contacted" | "closed";
+      type InquiryType = "free_diagnosis" | "free_consultation";
+      type Diagnosis = {
+        primaryWorkflow?: string;
+        bottlenecks?: string[];
+        tools?: string[];
+        sensitiveData?: string;
+        aiScope?: string;
+        securityRequirement?: string;
+        expectedOutcome?: string[];
+      };
+      type Inquiry = {
+        id: string;
+        inquiry_type: InquiryType;
+        company: string;
+        department?: string | null;
+        name: string;
+        email: string;
+        phone?: string | null;
+        interest: string;
+        data_location: string;
+        message: string;
+        diagnosis_details?: string | null;
+        page_url?: string | null;
+        status: InquiryStatus;
+        created_at: string;
+      };
+      type InquiryResponse = {
+        ok?: boolean;
+        error?: string;
+        inquiries?: Inquiry[];
+      };
+
+      const tokenInput = document.querySelector<HTMLInputElement>("[data-token-input]");
+      const saveTokenButton = document.querySelector<HTMLButtonElement>("[data-save-token]");
+      const refreshButton = document.querySelector<HTMLButtonElement>("[data-refresh]");
+      const statusFilter = document.querySelector<HTMLSelectElement>("[data-status-filter]");
+      const typeFilter = document.querySelector<HTMLSelectElement>("[data-type-filter]");
+      const statusText = document.querySelector<HTMLParagraphElement>("[data-status]");
+      const list = document.querySelector<HTMLElement>("[data-inquiry-list]");
 
       const statusLabels = {
         new: "新規",
@@ -73,7 +106,7 @@
         free_consultation: "無料相談",
       };
 
-      const formatDate = (value) => {
+      const formatDate = (value: string | null | undefined) => {
         if (!value) return "-";
         const date = new Date(`${String(value).replace(" ", "T")}Z`);
         return new Intl.DateTimeFormat("ja-JP", {
@@ -83,10 +116,10 @@
         }).format(date);
       };
 
-      const parseDiagnosis = (value) => {
+      const parseDiagnosis = (value: string | null | undefined): Diagnosis | null => {
         if (!value) return null;
         try {
-          return JSON.parse(value);
+          return JSON.parse(value) as Diagnosis;
         } catch {
           return null;
         }
@@ -94,11 +127,11 @@
 
       const getToken = () => localStorage.getItem("effect_moe_admin_token") || "";
 
-      const setStatus = (message) => {
+      const setStatus = (message: string) => {
         if (statusText) statusText.textContent = message;
       };
 
-      const renderList = (inquiries) => {
+      const renderList = (inquiries: Inquiry[]) => {
         if (!list) return;
         if (!inquiries.length) {
           list.innerHTML = '<div class="empty">問い合わせはありません。</div>';
@@ -156,15 +189,16 @@
           `;
         }).join("");
 
-        list.querySelectorAll("[data-status-select]").forEach((select) => {
+        list.querySelectorAll<HTMLSelectElement>("[data-status-select]").forEach((select) => {
           select.addEventListener("change", async (event) => {
-            const card = event.currentTarget.closest("[data-id]");
-            await updateStatus(card?.dataset.id, event.currentTarget.value);
+            const target = event.currentTarget as HTMLSelectElement;
+            const card = target.closest<HTMLElement>("[data-id]");
+            await updateStatus(card?.dataset.id, target.value);
           });
         });
       };
 
-      function escapeHtml(value) {
+      function escapeHtml(value: unknown) {
         return String(value ?? "")
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
@@ -188,7 +222,7 @@
         const response = await fetch(`/api/admin/inquiries?${params.toString()}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as InquiryResponse | null;
         if (!response.ok || !data?.ok) {
           setStatus(data?.error === "admin_token_not_configured" ? "ADMIN_TOKEN が未設定です。" : "認証に失敗しました。");
           renderList([]);
@@ -199,7 +233,7 @@
         setStatus(`${data.inquiries?.length || 0}件を表示しています。`);
       }
 
-      async function updateStatus(id, status) {
+      async function updateStatus(id: string | undefined, status: string) {
         if (!id || !status) return;
         const response = await fetch("/api/admin/inquiries", {
           method: "PATCH",
@@ -209,7 +243,7 @@
           },
           body: JSON.stringify({ id, status }),
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as InquiryResponse | null;
         setStatus(response.ok && data?.ok ? "ステータスを更新しました。" : "ステータス更新に失敗しました。");
       }
 

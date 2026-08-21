@@ -124,19 +124,49 @@
     </main>
 
     <script>
-      const refreshButton = document.querySelector("[data-refresh]");
-      const campaignFilter = document.querySelector("[data-campaign-filter]");
-      const statusFilter = document.querySelector("[data-status-filter]");
-      const statusText = document.querySelector("[data-status]");
-      const list = document.querySelector("[data-lead-list]");
-      const sortHeaders = document.querySelectorAll("[data-sort]");
+      type SortKey = "company_name" | "status" | "approach_channel" | "site_url" | "form_url" | "email_address" | "updated_at";
+      type OutreachLead = {
+        id: string;
+        campaign: string;
+        company_name: string;
+        status: string;
+        industry?: string | null;
+        prefecture?: string | null;
+        city?: string | null;
+        skip_reason?: string | null;
+        approach_channel?: string | null;
+        site_url?: string | null;
+        form_url?: string | null;
+        email_address?: string | null;
+        updated_at?: string | null;
+      };
+      type OutreachResponse = {
+        success?: boolean;
+        error?: string;
+        results?: OutreachLead[];
+      };
+      type LeadUpdateFields = {
+        status?: string;
+        skip_reason?: string;
+      };
+      type SortState = {
+        key: SortKey;
+        dir: "asc" | "desc";
+      };
+
+      const refreshButton = document.querySelector<HTMLButtonElement>("[data-refresh]");
+      const campaignFilter = document.querySelector<HTMLSelectElement>("[data-campaign-filter]");
+      const statusFilter = document.querySelector<HTMLSelectElement>("[data-status-filter]");
+      const statusText = document.querySelector<HTMLParagraphElement>("[data-status]");
+      const list = document.querySelector<HTMLTableSectionElement>("[data-lead-list]");
+      const sortHeaders = document.querySelectorAll<HTMLTableCellElement>("[data-sort]");
 
       const STATUS_OPTIONS = ["候補", "下書き", "承認済み", "送信済み", "スキップ", "失敗"];
 
-      let currentLeads = [];
-      let sortState = { key: "updated_at", dir: "desc" };
+      let currentLeads: OutreachLead[] = [];
+      let sortState: SortState = { key: "updated_at", dir: "desc" };
 
-      const formatDate = (value) => {
+      const formatDate = (value: string | null | undefined) => {
         if (!value) return "-";
         const date = new Date(value);
         return new Intl.DateTimeFormat("ja-JP", {
@@ -146,10 +176,10 @@
         }).format(date);
       };
 
-      const parseMetadata = (value) => {
+      const parseMetadata = (value: string | null | undefined): unknown => {
         if (!value) return null;
         try {
-          return JSON.parse(value);
+          return JSON.parse(value) as unknown;
         } catch {
           return null;
         }
@@ -161,11 +191,11 @@
       const DEFAULT_TOKEN = "dbb4bb5dccc4088d16d10ddb854615708a6ae35b53a278354b0b8b836db8fe83";
       const getToken = () => localStorage.getItem("effect_moe_outreach_token") || DEFAULT_TOKEN;
 
-      const setStatus = (message) => {
+      const setStatus = (message: string) => {
         if (statusText) statusText.textContent = message;
       };
 
-      function escapeHtml(value) {
+      function escapeHtml(value: unknown) {
         return String(value ?? "")
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
@@ -174,7 +204,7 @@
           .replaceAll("'", "&#039;");
       }
 
-      const STATUS_CLASS = {
+      const STATUS_CLASS: Record<string, string> = {
         "候補": "st-candidate",
         "下書き": "st-draft",
         "承認済み": "st-approved",
@@ -183,11 +213,11 @@
         "失敗": "st-failed",
       };
 
-      const applySort = (leads) => {
+      const applySort = (leads: OutreachLead[]) => {
         const { key, dir } = sortState;
         const sorted = [...leads].sort((a, b) => {
-          const av = (a[key] ?? "").toString().toLowerCase();
-          const bv = (b[key] ?? "").toString().toLowerCase();
+          const av = String(a[key] ?? "").toLowerCase();
+          const bv = String(b[key] ?? "").toLowerCase();
           if (av < bv) return dir === "asc" ? -1 : 1;
           if (av > bv) return dir === "asc" ? 1 : -1;
           return 0;
@@ -207,7 +237,7 @@
         });
       };
 
-      const renderList = (leads) => {
+      const renderList = (leads: OutreachLead[]) => {
         if (!list) return;
         if (!leads.length) {
           list.innerHTML = '<tr><td colspan="8" class="empty">該当するリードはありません。</td></tr>';
@@ -250,29 +280,33 @@
           `;
         }).join("");
 
-        list.querySelectorAll("[data-status-select]").forEach((select) => {
+        list.querySelectorAll<HTMLSelectElement>("[data-status-select]").forEach((select) => {
           select.addEventListener("change", async (event) => {
-            const row = event.currentTarget.closest("[data-id]");
-            await updateLead(row?.dataset.id, { status: event.currentTarget.value });
+            const target = event.currentTarget as HTMLSelectElement;
+            const row = target.closest<HTMLTableRowElement>("[data-id]");
+            await updateLead(row?.dataset.id, { status: target.value });
           });
         });
-        list.querySelectorAll("[data-approve]").forEach((button) => {
+        list.querySelectorAll<HTMLButtonElement>("[data-approve]").forEach((button) => {
           button.addEventListener("click", async (event) => {
-            const row = event.currentTarget.closest("[data-id]");
+            const target = event.currentTarget as HTMLButtonElement;
+            const row = target.closest<HTMLTableRowElement>("[data-id]");
             await updateLead(row?.dataset.id, { status: "承認済み" });
           });
         });
-        list.querySelectorAll("[data-skip]").forEach((button) => {
+        list.querySelectorAll<HTMLButtonElement>("[data-skip]").forEach((button) => {
           button.addEventListener("click", async (event) => {
-            const row = event.currentTarget.closest("[data-id]");
+            const target = event.currentTarget as HTMLButtonElement;
+            const row = target.closest<HTMLTableRowElement>("[data-id]");
             const reason = prompt("スキップ理由（任意）", "") || "ダッシュボードから手動スキップ";
             await updateLead(row?.dataset.id, { status: "スキップ", skip_reason: reason });
           });
         });
-        list.querySelectorAll(".clickable-row").forEach((row) => {
+        list.querySelectorAll<HTMLTableRowElement>(".clickable-row").forEach((row) => {
           row.addEventListener("click", (event) => {
-            if (event.target.closest("a") || event.target.closest("[data-no-nav]")) return;
-            location.href = `/admin/outreach/detail/?id=${encodeURIComponent(row.dataset.id)}`;
+            const target = event.target as Element | null;
+            if (target?.closest("a") || target?.closest("[data-no-nav]")) return;
+            location.href = `/admin/outreach/detail/?id=${encodeURIComponent(row.dataset.id || "")}`;
           });
         });
       };
@@ -293,7 +327,7 @@
         const response = await fetch(`/api/outreach?${params.toString()}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as OutreachResponse | null;
         if (!response.ok || !data?.success) {
           setStatus(data?.error === "unauthorized" ? "認証に失敗しました。APIキーを確認してください。" : "取得に失敗しました。");
           renderList([]);
@@ -306,7 +340,7 @@
         setStatus(`${currentLeads.length}件を表示しています。`);
       }
 
-      async function updateLead(id, fields) {
+      async function updateLead(id: string | undefined, fields: LeadUpdateFields) {
         if (!id) return;
         const response = await fetch(`/api/outreach?id=${encodeURIComponent(id)}`, {
           method: "PATCH",
@@ -316,14 +350,14 @@
           },
           body: JSON.stringify(fields),
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as OutreachResponse | null;
         setStatus(response.ok && data?.success ? "更新しました。" : "更新に失敗しました。");
         fetchLeads();
       }
 
       sortHeaders.forEach((th) => {
         th.addEventListener("click", () => {
-          const key = th.dataset.sort;
+          const key = th.dataset.sort as SortKey;
           if (sortState.key === key) {
             sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
           } else {
@@ -339,11 +373,11 @@
       statusFilter?.addEventListener("change", fetchLeads);
       fetchLeads();
 
-      const statusHelpDialog = document.querySelector("[data-status-help-dialog]");
-      document.querySelector("[data-open-status-help]")?.addEventListener("click", () => {
+      const statusHelpDialog = document.querySelector<HTMLDialogElement>("[data-status-help-dialog]");
+      document.querySelector<HTMLButtonElement>("[data-open-status-help]")?.addEventListener("click", () => {
         statusHelpDialog?.showModal();
       });
-      document.querySelector("[data-close-status-help]")?.addEventListener("click", () => {
+      document.querySelector<HTMLButtonElement>("[data-close-status-help]")?.addEventListener("click", () => {
         statusHelpDialog?.close();
       });
       statusHelpDialog?.addEventListener("click", (event) => {

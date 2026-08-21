@@ -17,16 +17,44 @@
     </main>
 
     <script>
+      type OutreachLead = {
+        campaign: string;
+        company_name: string;
+        status: string;
+        industry?: string | null;
+        prefecture?: string | null;
+        city?: string | null;
+        rep_name?: string | null;
+        approach_channel?: string | null;
+        site_url?: string | null;
+        form_url?: string | null;
+        email_address?: string | null;
+        corporate_number?: string | null;
+        updated_at?: string | null;
+        skip_reason?: string | null;
+        message?: string | null;
+        metadata_json?: string | null;
+      };
+      type OutreachResponse = {
+        success?: boolean;
+        error?: string;
+        results?: OutreachLead[];
+      };
+      type LeadUpdateFields = {
+        status?: string;
+        skip_reason?: string;
+      };
+
       // このページ自体がCloudflare Access（Googleログイン・許可アカウント限定）で保護されているため、
       // ここに直接埋め込んでも安全（ページに辿り着ける時点で本人確認済み）。
       // ローテーション等でキーを変更した場合はこの値も更新すること。
       const DEFAULT_TOKEN = "dbb4bb5dccc4088d16d10ddb854615708a6ae35b53a278354b0b8b836db8fe83";
       const getToken = () => localStorage.getItem("effect_moe_outreach_token") || DEFAULT_TOKEN;
 
-      const statusText = document.querySelector("[data-status]");
-      const card = document.querySelector("[data-detail-card]");
+      const statusText = document.querySelector<HTMLParagraphElement>("[data-status]");
+      const card = document.querySelector<HTMLDivElement>("[data-detail-card]");
       const STATUS_OPTIONS = ["候補", "下書き", "承認済み", "送信済み", "スキップ", "失敗"];
-      const STATUS_CLASS = {
+      const STATUS_CLASS: Record<string, string> = {
         "候補": "st-candidate",
         "下書き": "st-draft",
         "承認済み": "st-approved",
@@ -38,11 +66,11 @@
       const params = new URLSearchParams(location.search);
       const leadId = params.get("id");
 
-      const setStatus = (message) => {
+      const setStatus = (message: string) => {
         if (statusText) statusText.textContent = message;
       };
 
-      function escapeHtml(value) {
+      function escapeHtml(value: unknown) {
         return String(value ?? "")
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
@@ -51,7 +79,7 @@
           .replaceAll("'", "&#039;");
       }
 
-      const formatDate = (value) => {
+      const formatDate = (value: string | null | undefined) => {
         if (!value) return "-";
         return new Intl.DateTimeFormat("ja-JP", {
           timeZone: "Asia/Tokyo",
@@ -60,16 +88,17 @@
         }).format(new Date(value));
       };
 
-      const parseMetadata = (value) => {
+      const parseMetadata = (value: string | null | undefined): unknown => {
         if (!value) return null;
         try {
-          return JSON.parse(value);
+          return JSON.parse(value) as unknown;
         } catch {
           return null;
         }
       };
 
-      function renderDetail(lead) {
+      function renderDetail(lead: OutreachLead) {
+        if (!card) return;
         const metadata = parseMetadata(lead.metadata_json);
         card.innerHTML = `
           <div class="detail-head">
@@ -143,8 +172,9 @@
           </div>
         `;
 
-        card.querySelector("[data-status-select]")?.addEventListener("change", (event) => {
-          updateLead({ status: event.target.value });
+        card.querySelector<HTMLSelectElement>("[data-status-select]")?.addEventListener("change", (event) => {
+          const target = event.target as HTMLSelectElement;
+          updateLead({ status: target.value });
         });
         card.querySelector("[data-approve]")?.addEventListener("click", () => {
           updateLead({ status: "承認済み" });
@@ -163,7 +193,7 @@
         const response = await fetch(`/api/outreach?id=${encodeURIComponent(leadId)}`, {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as OutreachResponse | null;
         const lead = data?.results?.[0];
         if (!response.ok || !data?.success || !lead) {
           setStatus("リードが見つかりませんでした。");
@@ -173,7 +203,7 @@
         renderDetail(lead);
       }
 
-      async function updateLead(fields) {
+      async function updateLead(fields: LeadUpdateFields) {
         if (!leadId) return;
         const response = await fetch(`/api/outreach?id=${encodeURIComponent(leadId)}`, {
           method: "PATCH",
@@ -183,7 +213,7 @@
           },
           body: JSON.stringify(fields),
         });
-        const data = await response.json().catch(() => null);
+        const data = (await response.json().catch(() => null)) as OutreachResponse | null;
         setStatus(response.ok && data?.success ? "更新しました。" : "更新に失敗しました。");
         fetchDetail();
       }
