@@ -376,14 +376,24 @@ const faqs = [
 // ===== 匿名事例 =====
 const cases = [
 	{
-		label: "士業法人（匿名）",
-		field: "顧客情報を扱う専門業務",
-		body: "個人情報マスキング、参照範囲、権限管理、承認を前提に、社内で扱う情報を業務AIにつなぐ基盤を構築・運用。扱う情報に応じて、社内完結型の構成も検討します。",
+		label: "個人情報を扱う専門事務所（匿名）",
+		field: "顧客情報・対応履歴を扱う日常業務",
+		situation:
+			"顧客情報、対応履歴、判断基準が担当者やツールごとに分かれ、確認や引き継ぎのたびに前提を探し直す状態でした。",
+		design:
+			"個人情報マスキング、参照範囲、権限、承認の流れを先に設計し、必要な資料と対応履歴を案件ごとに参照できる形へ整理しました。",
+		operation:
+			"AIが経緯と判断材料の下準備を行い、人が送信・確定・最終判断を行う運用として、構築後も伴走しています。",
 	},
 	{
-		label: "知識基盤プロジェクト（匿名）",
-		field: "個人の調査・実務ナレッジ運用",
-		body: "日々の調査、メモ、会話、作業記録をローカル中心で蓄積し、検索・整理・下書き・次のアクションの提案につなげる知識基盤を継続運用しています。",
+		label: "調査・制作の知識基盤プロジェクト（匿名）",
+		field: "日々の調査・メモ・会話・作業記録",
+		situation:
+			"情報源やメモ、検討の経緯が日々増え、過去の調査を再利用しながら次の作業へつなぐ仕組みが必要でした。",
+		design:
+			"調査、メモ、会話、作業記録をローカル中心で整理し、検索できる記憶と案件ごとの文脈をつなぐ基盤を設計しました。",
+		operation:
+			"過去の根拠を探す、状況を整理する、下書きを作る、次のアクションを提案するところまでを、日々の運用で継続しています。",
 	},
 ];
 
@@ -1394,15 +1404,28 @@ const faqLd = {
       </div>
       <p class="text-xs text-50 mb-6">※ ストアカ（ストリートアカデミー）講師実績・{stats.periodEnd}時点。</p>
 
-	  <h3 class="text-lg font-bold text-90 mb-2">匿名導入事例（一部）</h3>
-	  <p class="text-sm leading-relaxed text-75 mb-3">以下は、公開可能な範囲で匿名化した実運用の概要です。扱う情報や実施範囲は、事務所・プロジェクトごとに異なります。</p>
+	  <h3 class="text-lg font-bold text-90 mb-2">匿名事例で見る、AI CENTRALの設計範囲</h3>
+	  <p class="text-sm leading-relaxed text-75 mb-3">会社名や固有の業務内容は伏せたうえで、実際に扱った課題と設計・運用の範囲を掲載しています。扱う情報や実施範囲は事務所・プロジェクトごとに異なり、実績数値や効果を保証するものではありません。</p>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
         {cases.map((c) => (
-          <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
+	          <article class="rounded-xl border border-black/10 dark:border-white/10 p-5">
             <div class="text-sm font-bold text-[var(--primary)] mb-1">{c.label}</div>
-            <div class="text-xs text-50 mb-2">{c.field}</div>
-            <p class="text-sm text-75 leading-relaxed">{c.body}</p>
-          </div>
+	            <div class="text-xs text-50 mb-4">{c.field}</div>
+	            <dl class="grid gap-3">
+	              <div class="rounded-lg bg-[var(--btn-plain-bg)] px-4 py-3">
+	                <dt class="text-xs font-bold text-[var(--primary)] mb-1">抱えていた状況</dt>
+	                <dd class="text-sm text-75 leading-relaxed">{c.situation}</dd>
+	              </div>
+	              <div class="rounded-lg bg-[var(--btn-plain-bg)] px-4 py-3">
+	                <dt class="text-xs font-bold text-[var(--primary)] mb-1">最初に設計したこと</dt>
+	                <dd class="text-sm text-75 leading-relaxed">{c.design}</dd>
+	              </div>
+	              <div class="rounded-lg bg-[var(--btn-plain-bg)] px-4 py-3">
+	                <dt class="text-xs font-bold text-[var(--primary)] mb-1">運用でできるようにしたこと</dt>
+	                <dd class="text-sm text-75 leading-relaxed">{c.operation}</dd>
+	              </div>
+	            </dl>
+	          </article>
         ))}
       </div>
 
