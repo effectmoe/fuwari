@@ -433,8 +433,9 @@ const faqLd = {
 		.llmo-section--faq summary svg { flex: 0 0 auto; transition: transform .18s ease; }
 		.llmo-section--faq details[open] summary svg { transform: rotate(45deg); }
 		.llmo-section--faq details p { margin: 0 0 18px; font-size: 15px; }
-		.llmo-faq-hub-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 22px; border: 1px solid var(--llmo-green); border-radius: 999px; padding: 13px 19px; background: var(--llmo-green); color: #fff; font-size: 14px; font-weight: 900; text-decoration: none; transition: background .18s ease, color .18s ease; }
-		.llmo-faq-hub-link:hover { background: #fff; color: var(--llmo-green); }
+		.llmo-prose .llmo-faq-hub-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 22px; border: 1px solid #173b31; border-radius: 999px; padding: 13px 19px; background: #173b31; color: #fff; font-size: 14px; font-weight: 900; text-decoration: none; transition: background .18s ease, color .18s ease; }
+		.llmo-prose .llmo-faq-hub-link:hover { background: #fff; color: #173b31; }
+		.llmo-prose .llmo-faq-hub-link:focus-visible { outline: 3px solid #b68c3c; outline-offset: 3px; }
 
 		/* FigJam下書きを正本SVGへ再構成した図解群 */
 		.llmo-hero { padding-block: clamp(116px, 13vw, 160px) clamp(66px, 9vw, 112px); background: #f7f3ed; }
