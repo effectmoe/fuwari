@@ -403,19 +403,23 @@ const citationExtraQueries = [
 const cases = [
 	{
 		title: "地域サービス事業者（匿名）",
-		field: "地域サービス",
+		field: "検索・比較の入口が多い地域サービス",
 		context:
-			"サービスを探す人に、サイトの内容と相談の入口が伝わる状態を整える必要がありました。",
-		support:
-			"AI由来で見られているページと、次に整えるべき情報を継続して確認。料金・対象者・選ばれる理由・相談導線をページごとに整理する運用を支援しています。",
+			"地域でサービスを探す人に、対象者・料金・相談の入口がサイト上で伝わる状態に整える必要がありました。",
+		design:
+			"AI由来で接点があるページと、サービス内容・対象者・料金・相談導線が不足する箇所を整理しました。",
+		operation:
+			"接点の推移と主要ページを確認し、FAQ・根拠ページ・相談導線のうち何を先に直すかを判断する運用を支援しています。",
 	},
 	{
-		title: "複数サービスを扱う事業者（匿名）",
-		field: "業務支援サービス",
+		title: "複数商材を扱うサービス事業者（匿名）",
+		field: "複数サービスを横断して案内する業務支援",
 		context:
-			"複数のサービス情報を扱うなかで、どのページを優先して改善するかを継続的に判断する必要がありました。",
-		support:
-			"AI由来の流入と主要ページの状態を継続して確認し、月次レポートと定例の振り返りを通じて、優先する改善を積み上げる伴走型の運用を支援しています。",
+			"サービスごとの説明・対象者・相談入口が分かれ、どのページから改善を始めるかを継続的に判断する必要がありました。",
+		design:
+			"AI由来の接点と主要ページを並べ、内容の重複・不足と、相談につながる導線を整理しました。",
+		operation:
+			"月次の振り返りで、優先するページ・FAQ・根拠情報を見直し、改善順を更新する運用を支援しています。",
 	},
 ];
 
@@ -764,9 +768,9 @@ const faqs = [
 		<div class="aicrawl-container aicrawl-case__grid">
 			<div>
 				<p class="aicrawl-eyebrow">CASE STUDIES / 匿名導入事例</p>
-				<h2>AI由来の流入を見ながら、サイトの改善を続ける。</h2>
+				<h2>匿名事例で見る、AI CRAWLの改善の進め方。</h2>
 				<p>
-					以下は、公開可能な範囲で匿名化した継続支援の概要です。AI CRAWLでは、AI由来で見られているページと、その次に整えるべき情報を確認しながら、サイトごとの改善の優先順位を組み立てます。
+					以下は、会社名や固有の業務内容を伏せた実運用の概要です。AI CRAWLでは、接点があるページと、次に整えるべき情報を確認しながら、サイトごとの改善の優先順位を組み立てます。実績数値や効果を保証するものではありません。
 				</p>
 			</div>
 			<div class="case-list">
@@ -775,8 +779,9 @@ const faqs = [
 						<h3>{item.title}</h3>
 						<p class="case-list__field">{item.field}</p>
 						<div>
-							<p><span>背景</span>{item.context}</p>
-							<p><span>継続支援</span>{item.support}</p>
+							<p><span>抱えていた状況</span>{item.context}</p>
+							<p><span>最初に整理したこと</span>{item.design}</p>
+							<p><span>継続していること</span>{item.operation}</p>
 						</div>
 					</article>
 				))}
@@ -1770,7 +1775,7 @@ const faqs = [
 			align-items: center;
 			gap: 14px;
 			max-width: 316px;
-			border: 5px solid #d9ae5b;
+			border: 5px solid #1d643d;
 			border-radius: 18px;
 			background: linear-gradient(135deg, #237a4a, #3da065);
 			padding: 15px 18px;
