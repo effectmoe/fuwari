@@ -401,19 +401,16 @@ const citationExtraQueries = [
 
 const cases = [
 	{
-		title: "サービスページがAIに説明されない",
-		before: "料金・対象者・提供範囲が別ページに散らばっている",
-		after: "AIが引用しやすい説明とFAQを同じ導線に整理",
+		title: "地域サービス事業者（匿名）",
+		field: "地域サービス",
+		context: "サービスを探す人に、サイトの内容と相談の入口が伝わる状態を整える必要がありました。",
+		support: "AI由来で見られているページと、次に整えるべき情報を継続して確認。料金・対象者・選ばれる理由・相談導線をページごとに整理する運用を支援しています。",
 	},
 	{
-		title: "会社名は出るが、強みが出ない",
-		before: "プロフィールや実績が文章として弱く、根拠が足りない",
-		after: "著者・会社・実績・出典をAIが参照できる形に補強",
-	},
-	{
-		title: "記事はあるが、商談につながらない",
-		before: "記事単体で終わり、診断・相談への入口が弱い",
-		after: "記事、診断、相談導線を一本の流れに接続",
+		title: "複数サービスを扱う事業者（匿名）",
+		field: "業務支援サービス",
+		context: "複数のサービス情報を扱うなかで、どのページを優先して改善するかを継続的に判断する必要がありました。",
+		support: "AI由来の流入と主要ページの状態を継続して確認し、月次レポートと定例の振り返りを通じて、優先する改善を積み上げる伴走型の運用を支援しています。",
 	},
 ];
 
@@ -747,20 +744,20 @@ const faqs = [
 	<section id="case" class="aicrawl-section aicrawl-section--soft">
 		<div class="aicrawl-container aicrawl-case__grid">
 			<div>
-				<p class="aicrawl-eyebrow">AI CRAWL BEFORE / AFTER</p>
-				<h2>よくある詰まりを、AIが読める構造へ直す。</h2>
+				<p class="aicrawl-eyebrow">CASE STUDIES / 匿名導入事例</p>
+				<h2>AI由来の流入を見ながら、サイトの改善を続ける。</h2>
 				<p>
-					AI回答で候補に出にくい原因は、情報がないことだけではありません。料金、対象者、実績、FAQ、相談導線が別々の場所に散らばると、AIはそのページの役割を説明しづらくなります。AI CRAWLでは、そうした詰まりを見つけて、AIにも人にも伝わる構造へ組み替えます。
+					以下は、公開可能な範囲で匿名化した継続支援の概要です。AI CRAWLでは、AI由来で見られているページと、その次に整えるべき情報を確認しながら、サイトごとの改善の優先順位を組み立てます。
 				</p>
 			</div>
 			<div class="case-list">
 				{cases.map((item) => (
 					<article>
 						<h3>{item.title}</h3>
+						<p class="case-list__field">{item.field}</p>
 						<div>
-							<p><span>Before</span>{item.before}</p>
-							<Icon name="material-symbols:arrow-forward-rounded" />
-							<p><span>After</span>{item.after}</p>
+							<p><span>背景</span>{item.context}</p>
+							<p><span>継続支援</span>{item.support}</p>
 						</div>
 					</article>
 				))}
@@ -3673,6 +3670,16 @@ const faqs = [
 			font-size: 24px;
 		}
 
+		.case-list p.case-list__field {
+			margin: 8px 0 0;
+			padding: 0;
+			border-radius: 0;
+			background: transparent;
+			color: var(--crawl-green);
+			font-size: 13px;
+			font-weight: 900;
+		}
+
 		.faq-grid {
 			display: grid;
 			grid-template-columns: 1fr;
@@ -3686,7 +3693,7 @@ const faqs = [
 
 		.case-list article > div {
 			display: grid;
-			grid-template-columns: 1fr auto 1fr;
+			grid-template-columns: 1fr 1fr;
 			gap: 16px;
 			align-items: center;
 			margin-top: 18px;

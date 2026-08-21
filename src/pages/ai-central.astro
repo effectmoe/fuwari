@@ -375,19 +375,14 @@ const faqs = [
 // ===== 匿名事例 =====
 const cases = [
 	{
-		label: "士業法人 S 様",
-		field: "社会保険労務士",
-		body: "複数の自社メディアの AI 検索対応（LLMO）・コンテンツ改善を継続支援。AI 時代の情報発信基盤を整備。",
+		label: "士業法人（匿名）",
+		field: "顧客情報を扱う専門業務",
+		body: "個人情報マスキング、参照範囲、権限管理、承認を前提に、社内で扱う情報を業務AIにつなぐ基盤を構築・運用。扱う情報に応じて、社内完結型の構成も検討します。",
 	},
 	{
-		label: "会計事務所 K 様",
-		field: "会計事務所",
-		body: "AI × ナレッジ管理ツールによる顧問先情報の整理と議事録運用を伴走支援。「AI に事務所の記憶を持たせる」運用を実践中。",
-	},
-	{
-		label: "人事労務 BPO 企業 C 様",
-		field: "人事労務アウトソーシング",
-		body: "AI による Web サイト監視2系統と月次レポートを月額で継続運用。定例ミーティングで改善を積み上げる伴走型支援。",
+		label: "知識基盤プロジェクト（匿名）",
+		field: "個人の調査・実務ナレッジ運用",
+		body: "日々の調査、メモ、会話、作業記録をローカル中心で蓄積し、検索・整理・下書き・次のアクションの提案につなげる知識基盤を継続運用しています。",
 	},
 ];
 
@@ -1398,8 +1393,9 @@ const faqLd = {
       </div>
       <p class="text-xs text-50 mb-6">※ ストアカ（ストリートアカデミー）講師実績・{stats.periodEnd}時点。</p>
 
-      <h3 class="text-lg font-bold text-90 mb-3">士業・専門サービス業のご支援実績（一部）</h3>
-      <div class="grid md:grid-cols-3 gap-4 mb-6">
+	  <h3 class="text-lg font-bold text-90 mb-2">匿名導入事例（一部）</h3>
+	  <p class="text-sm leading-relaxed text-75 mb-3">以下は、公開可能な範囲で匿名化した実運用の概要です。扱う情報や実施範囲は、事務所・プロジェクトごとに異なります。</p>
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
         {cases.map((c) => (
           <div class="rounded-xl border border-black/10 dark:border-white/10 p-5">
             <div class="text-sm font-bold text-[var(--primary)] mb-1">{c.label}</div>
