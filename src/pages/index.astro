@@ -870,6 +870,10 @@ const faqLd = {
 									<option>まだ整理できていない</option>
 								</select>
 							</label>
+							<label class="contact-form-grid__wide contact-llmo-check">
+								<input type="checkbox" name="LLMO診断に関する問い合わせ" value="はい" data-llmo-check />
+								<span>LLMO診断に関する問い合わせ</span>
+							</label>
 							<label class="contact-form-grid__wide">
 								<span>メッセージ <b>必須</b></span>
 								<textarea name="メッセージ" rows="7" placeholder="現在困っている業務、扱いたい資料、セキュリティ面の不安などをご記入ください。" required></textarea>
@@ -906,6 +910,18 @@ const faqLd = {
 				messageField.value = "AI講座の無料相談を希望します。受講人数、希望時期、業務テーマについて相談したいです。";
 			}
 		}
+		// 無料LLMO診断レポート（report.effect.moe）の「対策方法を問い合わせる」からの流入
+		if (contactForm && inquiryFromUrl === "llmo-diagnosis") {
+			const llmoCheck = contactForm.querySelector("[data-llmo-check]") as HTMLInputElement | null;
+			if (llmoCheck) llmoCheck.checked = true;
+			if (interestSelect && !interestSelect.value) interestSelect.value = "まだ決まっていない";
+			const reportId = new URLSearchParams(window.location.search).get("report") || "";
+			const reportLine = /^[a-f0-9]{12}$/.test(reportId) ? `\n診断レポート: https://report.effect.moe/${reportId}` : "";
+			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
+			if (messageField && !messageField.value) {
+				messageField.value = `無料LLMO診断のレポートを見て、対策方法について相談したいです。${reportLine}`;
+			}
+		}
 
 		contactForm?.addEventListener("submit", async (event) => {
 			event.preventDefault();
@@ -923,7 +939,7 @@ const faqLd = {
 				phone: String(formData.get("電話番号") || ""),
 				interest: String(formData.get("ご検討内容") || ""),
 				dataLocation: String(formData.get("現在の情報の置き場所") || ""),
-					message: String(formData.get("メッセージ") || ""),
+					message: `${formData.get("LLMO診断に関する問い合わせ") ? "【LLMO診断に関する問い合わせ】\n" : ""}${String(formData.get("メッセージ") || "")}`,
 					primaryWorkflow: String(formData.get("AI化したい業務") || ""),
 					bottlenecks: formData.getAll("ボトルネック").map(String),
 					tools: formData.getAll("利用ツール").map(String),
@@ -2340,6 +2356,19 @@ const faqLd = {
 		font-size: 11px;
 		font-weight: 950;
 		line-height: 1;
+	}
+
+	.contact-llmo-check {
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		justify-content: start;
+	}
+
+	.contact-llmo-check input[type="checkbox"] {
+		width: 20px;
+		height: 20px;
+		margin: 0;
+		accent-color: #52683f;
 	}
 
 	.contact-form-grid input,
