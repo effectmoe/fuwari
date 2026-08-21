@@ -2,9 +2,11 @@
 import Breadcrumbs from "../components/landing/Breadcrumbs.astro";
 import LandingLayout from "../layouts/LandingLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
+import { getPublicStaticPages } from "../utils/public-page-index";
 import { getPostUrlBySlug } from "../utils/url-utils";
 
 const posts = await getSortedPosts();
+const publicStaticPages = getPublicStaticPages();
 const pageTitle = "サイトマップ";
 const pageDescription =
 	"effect.moe の主要ページ、サービス、ブログ記事、構造化ペディアへのリンクをまとめたサイトマップです。";
@@ -18,6 +20,7 @@ const groups = [
 			{ label: "AI CRAWL", href: "/aicrawl/" },
 			{ label: "AI講座", href: "/ai-agent-course/" },
 			{ label: "ブログ", href: "/blog/" },
+			{ label: "LLMO対策ガイド", href: "/llmo/" },
 			{ label: "総合FAQ", href: "/faq/" },
 			{ label: "信頼性・制作方針", href: "/trust/" },
 			{ label: "会社概要", href: "/company/" },
@@ -81,6 +84,24 @@ const groups = [
 		],
 	},
 ];
+
+const curatedPagePaths = new Set(
+	groups.flatMap((group) =>
+		group.links
+			.filter((link) => !link.href.includes("#") && !link.href.includes("?"))
+			.map((link) => link.href),
+	),
+);
+
+const additionalStaticPages = publicStaticPages.filter((page) => !curatedPagePaths.has(page.href));
+
+if (additionalStaticPages.length) {
+	groups.push({
+		title: "その他の公開ページ",
+		description: "固定ページをビルド時に自動で検出して掲載します。",
+		links: additionalStaticPages.map((page) => ({ label: page.label, href: page.href })),
+	});
+}
 ---
 
 <LandingLayout title={pageTitle} description={pageDescription}>

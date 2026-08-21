@@ -193,6 +193,7 @@ export const seoConfig = {
 		"Nano Banana Pro",
 		"AIアプリ開発",
 		"社内AIシステム構築",
+		"AIセキュリティ",
 		"AIコンサルティング",
 		"DFB理論",
 	],
