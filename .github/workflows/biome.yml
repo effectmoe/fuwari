@@ -2,9 +2,12 @@ name: Code quality
 
 on:
   push:
-    branches: [ main ] # Adjust branches as needed
+    branches: [ main ]
   pull_request:
-    branches: [ main ] # Adjust branches as needed
+    branches: [ main ]
+
+permissions:
+  contents: write
 
 jobs:
   quality:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
       - name: Setup Biome
         uses: biomejs/setup-biome@f382a98e582959e6aaac8e5f8b17b31749018780 # v2.5.0
         with:
@@ -19,5 +24,30 @@ jobs:
           #    latest だと Biome の新ルール追加のたびに CI がローカル合格のまま落ちる
           #    （2026-08-21 に恒常失敗の原因になった。版を上げる時は両方同時に上げる）
           version: 2.2.5
-      - name: Run Biome
+      - name: Run Biome (check)
+        id: biome
+        continue-on-error: true
         run: biome ci ./src --reporter=github
+
+      # 🔴 自動修復モード（2026-08-22 導入）
+      # 整形ズレは「失敗として報告」ではなく「その場で直してコミット」する。
+      # 経緯: Codex セッション・storaca 日次同期など複数の書き手が未整形コミットを
+      # 繰り返し、失敗メールが止まらなかった。ローカルの pre-commit フックは
+      # 別クローンや --no-verify で迂回されうるため、サーバー側を最終防衛線にする。
+      # 整形で直らない違反（本物の lint エラー）だけが下の最終ステップで失敗として残る。
+      - name: Auto-fix formatting (main への push のみ)
+        if: steps.biome.outcome == 'failure' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          biome check --write ./src || true
+          if ! git diff --quiet -- src; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src
+            git commit -m "style: auto-format by Code quality workflow [bot]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Fail only if unfixable
+        if: steps.biome.outcome == 'failure'
+        run: biome ci ./src
