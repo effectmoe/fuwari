@@ -269,6 +269,11 @@ export default defineConfig({
 	},
 	vite: {
 		build: {
+			// 🔴 古いブラウザ対応（2026-08-22）: Clarity実測で `?.` `??` を解釈できない
+			// 旧ブラウザの構文エラーが検出された（30日で録画の0.5%）。ES2019 へ変換して
+			// 2020年以前のブラウザでもスクリプトが実行できるようにする。
+			// 注: is:inline スクリプトは変換対象外のため、新記法を使わないこと。
+			target: "es2019",
 			rollupOptions: {
 				onwarn(warning, warn) {
 					// temporarily suppress this warning
