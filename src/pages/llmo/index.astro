@@ -27,6 +27,10 @@ const faqItems = [
 		a: "終わりではありません。AIの回答は質問の言い方や時点で変わります。名前が出ることと、自社ページが根拠として使われることも別です。同じ質問を続けて確認し、どの情報が紹介につながるのかを見ていく必要があります。",
 	},
 	{
+		q: "自分のサイトがLLMO対策できているか、無料で確認できますか？",
+		a: "できます。effect.moeのMCPサーバー「EFFECT MCP」をChatGPTやClaudeなどのAIに登録すると、ご自身のサイトを無料でLLMO診断できます。タイトル・メタ情報・構造化データ・AIクローラーの受け入れ状況・llms.txtなど19項目を100点満点で採点し、共有できるWebレポートを発行します。はじめ方は mcp.effect.moe の案内ページにまとまっています。",
+	},
+	{
 		q: "Googleが「特別なLLMO対策は不要」と言っているなら、何もしなくてよいですか？",
 		a: "Googleの公式案内は、Google検索のAI Overviews・AI Modeに追加要件や特別な最適化は不要という内容です。Google検索の範囲ではSEOの基本を続ける、という意味で正しい一方、独立した他社AIサービスまで同じ基準だと断定する内容ではありません。EFFECTでは、検索の基本を保ちながら、サービス・根拠・FAQ・運営者情報を矛盾なく整理し、AIごとの接点と回答での扱われ方を確認します。",
 	},
@@ -235,6 +239,24 @@ const llmoPageLd = {
 			<p>実際の切り分け方は、<a href="/posts/ai-crawl-citation-strategy/">ChatGPT検索でSEOは半分しか通用しない — 対策の分岐点</a>で詳しく解説しています。AIに読まれることと、AIに紹介されることを分けて見ると、施策の順番を間違えにくくなります。</p>
 			<p>測定の目的は、見栄えのよい数字を作ることではありません。たとえば、特定のページにはAIが来ているのに、サービスを探す質問では候補に入らないなら、次に直す場所が絞れます。反対に、回答で名前が出ても相談につながらないなら、紹介されたページの説明や導線を見直す必要があります。</p>
 			<p>このように、LLMO対策は「出た・出ない」の二択では進めません。質問、回答、ページ、訪問のつながりを観察し、仮説を立て、主要ページを直し、もう一度確かめます。測れる形にしておくことで、施策を増やす前に、いま必要な改善を選べるようになります。</p>
+		</div>
+	</section>
+
+	<section class="llmo-section" id="free-diagnosis">
+		<div class="llmo-container llmo-prose">
+			<p class="llmo-eyebrow">FREE DIAGNOSIS</p>
+			<h2>自分のサイトの現状を、無料で診断できますか？</h2>
+			<p><mark class="llmo-marker"><strong>できます。effect.moe のMCPサーバーをあなたのAIに登録すると、ご自身のサイトを無料でLLMO診断できます。</strong></mark> ChatGPT や Claude などのAIに「EFFECT MCP」という接続口を一度登録するだけで、タイトル・メタ情報・構造化データ・AIクローラーの受け入れ状況・llms.txt など19項目を、100点満点で採点します。</p>
+			<ol class="llmo-steps">
+				<li><strong>EFFECT MCP を登録する</strong><span><a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">mcp.effect.moe</a> の案内に沿って、お使いのAIにコネクタとして追加します。無料・読み取り専用で、登録は1回だけです。</span></li>
+				<li><strong>AIに診断を頼む</strong><span>「EFFECT MCP を使って、私のサイト https://〜 を無料でLLMO診断して」と送ります。質問の冒頭で名前を呼ぶことがコツです。</span></li>
+				<li><strong>結果とレポートを受け取る</strong><span>スコアと改善ポイントに加えて、共有できるWebレポートのURLが返ります。レポートには、ページ本文だけを読んだAIが「何のサイトだと理解したか」を答える読解テストも追記されます。</span></li>
+			</ol>
+			<p>この診断で分かるのは、ページと案内情報の「整い度」です。修正して再診断すれば、変化をその場で確認できます（無料・お一人1日8回まで）。そのうえで、AIクローラーが実際に来ているか、AIの回答で実際に紹介されているかまで確かめたい場合は、AI CRAWL の実測が続きを引き受けます。</p>
+			<aside class="llmo-cta" aria-label="無料LLMO診断の案内">
+				<div><p>EFFECT MCP / 無料</p><h3>あなたのAIが、あなたのサイトを診断する。</h3><span>登録は1回・無料・読み取り専用。はじめ方は案内ページにまとまっています。</span></div>
+				<a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">無料診断のはじめ方を見る <Icon name="material-symbols:open-in-new-rounded" /></a>
+			</aside>
 		</div>
 	</section>
 
