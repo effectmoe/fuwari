@@ -105,6 +105,66 @@ const llmoPageLd = {
 		</div>
 	</section>
 
+	<section class="llmo-section llmo-section--diagnosis" id="free-diagnosis" aria-labelledby="free-diagnosis-title">
+		<div class="llmo-container">
+			<div class="llmo-diagnosis">
+				<div class="llmo-diagnosis__intro">
+					<p class="llmo-eyebrow">FREE LLMO DIAGNOSIS / EFFECT MCP</p>
+					<h2 id="free-diagnosis-title">自分のサイトの現状を、無料で診断できますか？</h2>
+					<p><strong>できます。EFFECT MCPをお使いのAIに一度追加すると、そのAIがあなたのサイトを無料でLLMO診断します。</strong></p>
+					<p>MCP（Model Context Protocol）は、AIとサービスをつなぐ共通の仕組みです。AIにEFFECTの接続口を追加すると、診断のあとも公式のLLMOガイドやFAQを根拠に、結果について質問を続けられます。</p>
+					<div class="llmo-diagnosis__action">
+						<a class="llmo-diagnosis__cta" href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">MCPを設定する（無料・1分） <Icon name="material-symbols:open-in-new-rounded" /></a>
+						<span>無料・読み取り専用。あなたのサイトへ書き込みません。</span>
+					</div>
+				</div>
+
+				<aside class="llmo-diagnosis__summary" aria-label="無料LLMO診断で確認する範囲">
+					<p class="llmo-diagnosis__summary-label">診断の見方を先に知る</p>
+					<div class="llmo-diagnosis__score"><strong>19項目</strong><span>100点満点で、ページ単位の整い方を確認します。</span></div>
+					<p>ページタイトル、メタ情報・OGP、構造化データ、見出し・文字数、robots.txt、AIクローラーの受け入れ、llms.txt、sitemap.xmlなどを確認します。</p>
+					<ul>
+						<li>ページの基本情報が伝わるかを確認します。</li>
+						<li>サイトの案内情報に抜けがないかを確認します。</li>
+						<li>AIが本文をどう理解するかも確かめます。</li>
+					</ul>
+				</aside>
+
+				<div class="llmo-diagnosis__steps" aria-label="無料LLMO診断の手順">
+					<article>
+						<span class="llmo-diagnosis__step-number">01</span>
+						<h3>mcp.effect.moeで、AIにEFFECT MCPを登録します。</h3>
+						<p>案内に沿ってコネクタを一度追加します。登録は無料で、読み取り専用です。</p>
+					</article>
+					<article class="llmo-diagnosis__prompt-card">
+						<span class="llmo-diagnosis__step-number">02</span>
+						<h3>AIに、あなたのサイトの診断を頼みます。</h3>
+						<div class="llmo-diagnosis__prompt">
+							<code>EFFECT MCP を使って、私のサイト https://（あなたのサイトURL） を無料でLLMO診断して</code>
+							<button class="llmo-diagnosis__copy" type="button" data-mcp-copy aria-label="診断用プロンプトをコピーする">コピー <Icon name="material-symbols:content-copy-rounded" /></button>
+						</div>
+						<p class="llmo-diagnosis__copy-status" data-mcp-copy-status aria-live="polite"></p>
+					</article>
+					<article>
+						<span class="llmo-diagnosis__step-number">03</span>
+						<h3>スコアと、共有できるWebレポートを受け取ります。</h3>
+						<p>不足している情報と改善ポイントをページごとに確認し、修正後は同じ流れで再診断できます。</p>
+					</article>
+				</div>
+
+				<div class="llmo-diagnosis__details">
+					<div>
+						<strong>結果は、共有しやすいWebレポートで確認できます。</strong>
+						<span>レポートは90日間有効です。診断から数分後には、ページ本文だけを読んだAIが「何のサイトだと理解したか」を答える読解チェックも追加されます。</span>
+					</div>
+					<p>この診断は、ページと案内情報の整い方を確かめるものです。<a href="/aicrawl/">実際にAIクローラーが来ているか、AIの回答でどう扱われているかはAI CRAWLで確認できます。</a></p>
+				</div>
+
+				<p class="llmo-diagnosis__conditions">無料・読み取り専用で、診断は1日5回までです。同一サイトは1日2ページまで診断でき、同一URLは24時間キャッシュされます。不要になった場合は、お使いのAIのコネクタ一覧から解除できます。</p>
+			</div>
+		</div>
+	</section>
+
 	<section class="llmo-section llmo-section--answer">
 		<div class="llmo-container llmo-prose">
 			<p class="llmo-kicker">まず結論から</p>
@@ -242,24 +302,6 @@ const llmoPageLd = {
 		</div>
 	</section>
 
-	<section class="llmo-section" id="free-diagnosis">
-		<div class="llmo-container llmo-prose">
-			<p class="llmo-eyebrow">FREE DIAGNOSIS</p>
-			<h2>自分のサイトの現状を、無料で診断できますか？</h2>
-			<p><mark class="llmo-marker"><strong>できます。effect.moe のMCPサーバーをあなたのAIに登録すると、ご自身のサイトを無料でLLMO診断できます。</strong></mark> ChatGPT や Claude などのAIに「EFFECT MCP」という接続口を一度登録するだけで、タイトル・メタ情報・構造化データ・AIクローラーの受け入れ状況・llms.txt など19項目を、100点満点で採点します。</p>
-			<ol class="llmo-steps">
-				<li><strong>EFFECT MCP を登録する</strong><span><a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">mcp.effect.moe</a> の案内に沿って、お使いのAIにコネクタとして追加します。無料・読み取り専用で、登録は1回だけです。</span></li>
-				<li><strong>AIに診断を頼む</strong><span>「EFFECT MCP を使って、私のサイト https://〜 を無料でLLMO診断して」と送ります。質問の冒頭で名前を呼ぶことがコツです。</span></li>
-				<li><strong>結果とレポートを受け取る</strong><span>スコアと改善ポイントに加えて、共有できるWebレポートのURLが返ります。レポートには、ページ本文だけを読んだAIが「何のサイトだと理解したか」を答える読解テストも追記されます。</span></li>
-			</ol>
-			<p>この診断で分かるのは、ページと案内情報の「整い度」です。修正して再診断すれば、変化をその場で確認できます（無料・お一人1日5回まで）。そのうえで、AIクローラーが実際に来ているか、AIの回答で実際に紹介されているかまで確かめたい場合は、AI CRAWL の実測が続きを引き受けます。</p>
-			<aside class="llmo-cta" aria-label="無料LLMO診断の案内">
-				<div><p>EFFECT MCP / 無料</p><h3>あなたのAIが、あなたのサイトを診断する。</h3><span>登録は1回・無料・読み取り専用。はじめ方は案内ページにまとまっています。</span></div>
-				<a href="https://mcp.effect.moe/" target="_blank" rel="noopener noreferrer">無料診断のはじめ方を見る <Icon name="material-symbols:open-in-new-rounded" /></a>
-			</aside>
-		</div>
-	</section>
-
 	<section class="llmo-section" id="misunderstandings">
 		<div class="llmo-container llmo-prose">
 			<p class="llmo-eyebrow">COMMON MISUNDERSTANDINGS</p>
@@ -307,6 +349,23 @@ const llmoPageLd = {
 			<a class="llmo-faq-hub-link" href="/faq/">LLMO・AI検索について、総合FAQをもっと見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 		</div>
 	</section>
+
+	<script is:inline>
+		const mcpPrompt = "EFFECT MCP を使って、私のサイト https://（あなたのサイトURL） を無料でLLMO診断して";
+		document.querySelectorAll("[data-mcp-copy]").forEach((copyButton) => {
+			copyButton.addEventListener("click", async () => {
+				const status = copyButton.closest(".llmo-diagnosis__prompt-card")?.querySelector("[data-mcp-copy-status]");
+				try {
+					await navigator.clipboard.writeText(mcpPrompt);
+					copyButton.firstChild.textContent = "コピーしました ";
+					if (status) status.textContent = "診断用プロンプトをコピーしました。";
+					window.setTimeout(() => { copyButton.firstChild.textContent = "コピー "; }, 1800);
+				} catch {
+					if (status) status.textContent = "コピーできませんでした。プロンプトを選択してコピーしてください。";
+				}
+			});
+		});
+	</script>
 
 	<style>
 		:global(body) { --llmo-ink: #1c1b1b; --llmo-muted: #4e4538; --llmo-paper: #fcf9f8; --llmo-green: #7b5807; --llmo-gold: #b68c3c; --llmo-line: #d2c5b2; background: var(--llmo-paper); }
@@ -606,6 +665,54 @@ const llmoPageLd = {
 		.llmo-section--proof .llmo-next-step__action:hover strong { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
 		.llmo-related-grid b { width: fit-content; border: 1px solid rgba(28, 27, 27, .38); padding: 10px 12px; color: #1c1b1b; font-weight: 850; }
 		.llmo-related-grid a:hover b { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
+
+		/* Stitch設計: 診断の実行手順と得られる結果を、同じ情報面で見通せるようにする */
+		.llmo-section--diagnosis { border-block: 1px solid rgba(210, 197, 178, .82); background: #f6f3f2; }
+		.llmo-diagnosis { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(310px, .85fr); gap: 0; overflow: hidden; border: 1px solid rgba(28, 27, 27, .18); background: #fff; }
+		.llmo-diagnosis__intro { padding: clamp(30px, 5vw, 58px); border-right: 1px solid rgba(28, 27, 27, .15); }
+		.llmo-diagnosis__intro h2 { max-width: 650px; margin: 12px 0 22px; color: var(--llmo-ink); font-size: clamp(30px, 3.35vw, 46px); letter-spacing: -.055em; line-height: 1.22; }
+		.llmo-diagnosis__intro p { max-width: 660px; margin: 0 0 13px; color: var(--llmo-muted); font-size: 16px; font-weight: 600; line-height: 1.9; }
+		.llmo-diagnosis__intro p strong { color: var(--llmo-ink); }
+		.llmo-diagnosis__action { display: flex; flex-wrap: wrap; align-items: center; gap: 13px 16px; margin-top: 29px; }
+		.llmo-diagnosis__cta { display: inline-flex; min-height: 58px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--llmo-green); border-radius: 999px; background: var(--llmo-green); padding: 0 22px; color: #fff; font-size: 15px; font-weight: 900; line-height: 1.3; text-decoration: none; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
+		.llmo-diagnosis__cta:hover { border-color: var(--llmo-ink); background: var(--llmo-ink); color: #fff; transform: translateY(-2px); }
+		.llmo-diagnosis__cta:focus-visible, .llmo-diagnosis__copy:focus-visible { outline: 3px solid var(--llmo-gold); outline-offset: 3px; }
+		.llmo-diagnosis__cta svg { width: 19px; height: 19px; }
+		.llmo-diagnosis__action > span { color: var(--llmo-muted); font-size: 12px; font-weight: 750; line-height: 1.55; }
+		.llmo-diagnosis__summary { display: grid; align-content: start; gap: 18px; background: var(--llmo-paper); padding: clamp(30px, 4.5vw, 54px); }
+		.llmo-diagnosis__summary-label { margin: 0; color: var(--llmo-gold); font-size: 11px; font-weight: 900; letter-spacing: .13em; line-height: 1.45; }
+		.llmo-diagnosis__score { display: grid; gap: 8px; border-block: 1px solid rgba(28, 27, 27, .16); padding: 20px 0 18px; }
+		.llmo-diagnosis__score strong { color: var(--llmo-ink); font-size: clamp(39px, 4.3vw, 54px); font-weight: 950; letter-spacing: -.07em; line-height: .95; }
+		.llmo-diagnosis__score span, .llmo-diagnosis__summary > p:not(.llmo-diagnosis__summary-label) { color: var(--llmo-muted); font-size: 14px; font-weight: 700; line-height: 1.75; }
+		.llmo-diagnosis__summary > p:not(.llmo-diagnosis__summary-label) { margin: 0; }
+		.llmo-diagnosis__summary ul { display: grid; gap: 9px; margin: 0; border-top: 1px solid rgba(28, 27, 27, .16); padding: 18px 0 0; list-style: none; }
+		.llmo-diagnosis__summary li { position: relative; padding-left: 16px; color: var(--llmo-ink); font-size: 13px; font-weight: 800; line-height: 1.55; }
+		.llmo-diagnosis__summary li::before { position: absolute; top: .58em; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--llmo-gold); content: ""; }
+		.llmo-diagnosis__steps { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid rgba(28, 27, 27, .15); }
+		.llmo-diagnosis__steps article { display: grid; align-content: start; gap: 13px; min-height: 294px; border-left: 1px solid rgba(28, 27, 27, .15); padding: clamp(24px, 3vw, 36px); background: #fff; }
+		.llmo-diagnosis__steps article:first-child { border-left: 0; }
+		.llmo-diagnosis__step-number { color: var(--llmo-gold); font-size: 12px; font-weight: 950; letter-spacing: .13em; line-height: 1; }
+		.llmo-diagnosis__steps h3 { margin: 3px 0 0; color: var(--llmo-ink); font-size: 19px; letter-spacing: -.03em; line-height: 1.5; }
+		.llmo-diagnosis__steps p { margin: 0; color: var(--llmo-muted); font-size: 14px; font-weight: 600; line-height: 1.85; }
+		.llmo-diagnosis__prompt { display: grid; gap: 12px; margin-top: 2px; border: 1px solid rgba(28, 27, 27, .18); background: #f6f3f2; padding: 14px; }
+		.llmo-diagnosis__prompt code { display: block; overflow-wrap: anywhere; color: var(--llmo-ink); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; font-weight: 700; line-height: 1.7; }
+		.llmo-diagnosis__copy { display: inline-flex; width: fit-content; min-height: 39px; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--llmo-ink); border-radius: 999px; background: var(--llmo-ink); padding: 0 13px; color: #fff; cursor: pointer; font: inherit; font-size: 12px; font-weight: 900; transition: background .18s ease, border-color .18s ease; }
+		.llmo-diagnosis__copy:hover { border-color: var(--llmo-green); background: var(--llmo-green); color: #fff; }
+		.llmo-diagnosis__copy svg { width: 16px; height: 16px; }
+		.llmo-diagnosis__copy-status { min-height: 1.5em; color: var(--llmo-green) !important; font-size: 12px !important; font-weight: 800 !important; line-height: 1.5 !important; }
+		.llmo-diagnosis__details { display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, 1.05fr) minmax(260px, .95fr); gap: 0; border-top: 1px solid rgba(28, 27, 27, .15); background: #f6f3f2; }
+		.llmo-diagnosis__details > div, .llmo-diagnosis__details > p { margin: 0; padding: clamp(24px, 3vw, 34px); }
+		.llmo-diagnosis__details > div { border-right: 1px solid rgba(28, 27, 27, .15); }
+		.llmo-diagnosis__details strong, .llmo-diagnosis__details span { display: block; }
+		.llmo-diagnosis__details strong { color: var(--llmo-ink); font-size: 16px; line-height: 1.6; }
+		.llmo-diagnosis__details span, .llmo-diagnosis__details p { color: var(--llmo-muted); font-size: 14px; font-weight: 600; line-height: 1.8; }
+		.llmo-diagnosis__details span { margin-top: 8px; }
+		.llmo-diagnosis__details a { color: var(--llmo-green); font-weight: 900; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+		.llmo-diagnosis__details a:hover { color: var(--llmo-ink); }
+		.llmo-diagnosis__conditions { grid-column: 1 / -1; margin: 0; border-top: 1px solid rgba(28, 27, 27, .15); padding: 15px clamp(24px, 4vw, 40px); color: var(--llmo-muted); font-size: 12px; font-weight: 700; line-height: 1.75; }
+
+		@media (max-width: 900px) { .llmo-diagnosis { grid-template-columns: 1fr; } .llmo-diagnosis__intro { border-right: 0; border-bottom: 1px solid rgba(28, 27, 27, .15); } .llmo-diagnosis__summary { border-bottom: 1px solid rgba(28, 27, 27, .15); } .llmo-diagnosis__steps { grid-template-columns: 1fr; } .llmo-diagnosis__steps article, .llmo-diagnosis__steps article:first-child { min-height: 0; border-top: 1px solid rgba(28, 27, 27, .15); border-left: 0; } .llmo-diagnosis__steps article:first-child { border-top: 0; } .llmo-diagnosis__details { grid-template-columns: 1fr; } .llmo-diagnosis__details > div { border-right: 0; border-bottom: 1px solid rgba(28, 27, 27, .15); } }
+		@media (max-width: 640px) { .llmo-section--diagnosis { padding-block: 54px; } .llmo-diagnosis__intro, .llmo-diagnosis__summary { padding: 28px 20px; } .llmo-diagnosis__intro h2 { font-size: 29px; } .llmo-diagnosis__intro p { font-size: 15px; } .llmo-diagnosis__action { align-items: stretch; flex-direction: column; } .llmo-diagnosis__cta { width: 100%; } .llmo-diagnosis__steps article { padding: 26px 20px; } .llmo-diagnosis__steps h3 { font-size: 17px; } .llmo-diagnosis__details > div, .llmo-diagnosis__details > p { padding: 23px 20px; } .llmo-diagnosis__conditions { padding: 14px 20px; } }
 
 		@media (max-width: 900px) { .llmo-hero__visual.llmo-audit-visual { min-height: 400px; } .llmo-public-proof { grid-template-columns: 1fr; } .llmo-public-proof__content { order: 2; } .llmo-review-showcase { order: 1; min-height: 550px; } .llmo-section--proof .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-section--proof .llmo-next-step__action, .llmo-section--proof .llmo-next-step__action:first-child { min-height: 178px; border-top: 1px solid rgba(28, 27, 27, .16); border-left: 0; } }
 		@media (max-width: 640px) { .llmo-hero__visual.llmo-audit-visual { min-height: 315px; } .llmo-audit-visual > img { object-position: 62% center; } .llmo-audit-visual figcaption { width: min(90%, 335px); padding: 17px 18px 19px; } .llmo-audit-visual figcaption strong { font-size: 17px; } .llmo-audit-visual__legend { top: 12px; right: 12px; gap: 4px; } .llmo-audit-visual__legend span { padding: 5px 7px; font-size: 9px; } .llmo-public-proof__content { padding: 34px 20px; } .llmo-public-proof__content .llmo-proof-chain { align-items: flex-start; flex-direction: column; } .llmo-public-proof__content .llmo-proof-chain svg { transform: rotate(90deg); } .llmo-public-proof__content .llmo-public-proof__actions { display: grid; grid-template-columns: 1fr; } .llmo-review-showcase { min-height: 0; padding: 28px 20px 34px; } .llmo-review-showcase__quote { min-height: 0; padding: 19px; } .llmo-action-button { width: 100%; } .llmo-section--proof .llmo-next-step__action { min-height: 166px; padding: 24px 20px; } }
