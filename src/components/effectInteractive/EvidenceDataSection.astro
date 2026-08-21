@@ -2,11 +2,13 @@
 const metricCards = [
 	{
 		tag: "Microsoft 365 Copilot",
-		value: "会議・情報探し: 1日平均14分削減",
-		title: "必要な情報を早く揃えられると、判断前の準備が短くなる",
+		value: "早期利用者調査: 1日平均14分の時間短縮",
+		title: "早期利用者調査で報告された、日々の時間短縮",
 		detail:
-			"AI CENTRALも同じく、回答そのものより前にある「探す」「要約する」「説明し直す」を減らし、判断材料を揃える設計です。",
-		sourceLabel: "Microsoft WorkLab",
+			"Microsoftの早期利用者調査で、利用者が自己申告した時間短縮です。AI CENTRALでも、判断前の「探す」「要約する」「説明し直す」を減らし、判断材料を揃える設計を行います。",
+		sourceTitle:
+			"What Can Copilot's Earliest Users Teach Us About Generative AI at Work?",
+		sourcePublished: "公開: 2023-11-15",
 		href: "https://www.microsoft.com/en-us/worklab/work-trend-index/copilots-earliest-users-teach-us-about-generative-ai-at-work",
 	},
 	{
@@ -15,7 +17,8 @@ const metricCards = [
 		title: "顧客対応では、過去の文脈を使えるほど生産性が上がりやすい",
 		detail:
 			"問い合わせ対応や相談業務では、過去履歴・FAQ・判断基準をAIが参照できる状態が効きます。",
-		sourceLabel: "NBER Working Paper",
+		sourceTitle: "Generative AI at Work (NBER Working Paper 31161)",
+		sourcePublished: "公表: 2023-04 / 改訂: 2023-11",
 		href: "https://www.nber.org/papers/w31161",
 	},
 	{
@@ -24,16 +27,19 @@ const metricCards = [
 		title: "文章作成は、過去の根拠と文脈を使えるほど進めやすい",
 		detail:
 			"提案文、返信文、FAQ、社内メモに過去の経緯と判断基準を使える状態をつくる根拠として見ています。",
-		sourceLabel: "Science / PubMed",
+		sourceTitle:
+			"Experimental evidence on the productivity effects of generative artificial intelligence",
+		sourcePublished: "公開: 2023-07-14",
 		href: "https://pubmed.ncbi.nlm.nih.gov/37440646/",
 	},
 	{
 		tag: "HBS / BCG",
-		value: "分析・提案: 25.1%速く / 品質40%超向上",
+		value: "分析・提案: 25%超速く / 品質40%超向上",
 		title: "複雑な判断業務でも、材料整理をAIが担うと速度と品質が変わる",
 		detail:
 			"人が判断する前に、資料・履歴・論点を揃えることがAI CENTRALの役割です。",
-		sourceLabel: "HBS AI Institute",
+		sourceTitle: "Navigating the Jagged Technological Frontier",
+		sourcePublished: "公開: 2023-09-21",
 		href: "https://aiinstitute.hbs.edu/navigating-the-jagged-technological-frontier/",
 	},
 ];
@@ -41,18 +47,26 @@ const metricCards = [
 const securitySources = [
 	{
 		label: "個人情報保護委員会",
+		title: "生成AIサービスの利用に関する注意喚起等について",
+		published: "公表: 2023-06-02",
 		href: "https://www.ppc.go.jp/news/careful_information/230602_AI_utilize_alert/",
 	},
 	{
-		label: "OWASP LLM Top 10",
+		label: "OWASP GenAI Security Project",
+		title: "OWASP Top 10 for LLM and GenAI",
+		published: "確認対象: 公開ガイダンス",
 		href: "https://genai.owasp.org/llm-top-10/",
 	},
 	{
 		label: "NIST AI RMF",
+		title: "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+		published: "公表: 2023-01-26",
 		href: "https://www.nist.gov/itl/ai-risk-management-framework",
 	},
 	{
-		label: "IBM Cost of a Data Breach",
+		label: "IBM",
+		title: "Cost of a Data Breach Report",
+		published: "確認対象: 公開レポート",
 		href: "https://www.ibm.com/reports/data-breach",
 	},
 ];
@@ -82,21 +96,21 @@ const securitySources = [
 					<h3>必要な情報をつなぎ直すと、判断前の確認・説明のやり直しも減る。</h3>
 					<a class="time-saving-board__source-callout" href="https://www.apqc.org/blog/km-makes-knowledge-workers-more-productive-and-less-stressed-out" target="_blank" rel="noopener noreferrer" aria-label="APQCの時間削減データを確認する">
 						<span>外部公開データ</span>
-						<strong>APQC: 社内で情報を探す時間</strong>
+						<strong>APQC調査: KM Makes Knowledge Workers More Productive and Less Stressed Out</strong>
 						<b>2.8h/週 → 0.7h/週</b>
-						<small>出典を確認する ↗</small>
+						<small>公開: 2022-11-17 / 確認日: 2026-08-22 ↗</small>
 					</a>
-					<div class="bar-chart" aria-label="社内資料を人が探す場合とAI CENTRALで候補を返せる場合の比較">
+					<div class="bar-chart" aria-label="通常の情報探索と企業向け検索を利用した情報探索の比較">
 						<div class="bar-chart__row">
 							<div class="bar-chart__label">
-								<span>人が資料を探す状態</span>
+								<span>通常の情報探索</span>
 								<strong>2.8時間 / 週</strong>
 							</div>
 							<div class="bar-chart__rail"><span style="width: 100%"></span></div>
 						</div>
 						<div class="bar-chart__row">
 							<div class="bar-chart__label">
-								<span>AI CENTRALで候補を返す状態</span>
+								<span>企業向け検索を利用した情報探索</span>
 								<strong>0.7時間 / 週</strong>
 							</div>
 							<div class="bar-chart__rail bar-chart__rail--saving"><span style="width: 25%"></span><em>削減余地 2.1時間 / 週</em></div>
@@ -156,9 +170,9 @@ const securitySources = [
 			</div>
 			<div class="time-saving-board__model-note">
 				<strong>約190時間は保証値ではありません。</strong>
-				<span>EFFECT試算: 問い合わせ・案件対応で発生する手戻りを 1日5件 × 10分 × 230日 で置いた例です。初回相談では、実際の件数・分数・対象業務に置き換えて試算します。</span>
+				<span>導入前ヒアリング用の試算モデルです。問い合わせ・案件対応で発生する手戻りを 1日5件 × 10分 × 230日 で置いています。初回相談では、実際の件数・分数・対象業務に置き換えて試算します。</span>
 			</div>
-			<p class="evidence-note">出典明示: 約109時間はAPQC公開データの差分 2.1h × 52週。約190時間はEFFECTの導入前ヒアリング用モデル「問い合わせ・案件対応の手戻り 1日5件 × 10分 × 230日」= 約191.6時間。</p>
+			<p class="evidence-note">計算根拠: 約109時間はAPQC公開データの差分 2.1h × 52週。約190時間は導入前ヒアリング用モデル「問い合わせ・案件対応の手戻り 1日5件 × 10分 × 230日」= 約191.6時間です。</p>
 		</div>
 
 		<div class="evidence-card evidence-card--large evidence-card--flow">
@@ -196,7 +210,11 @@ const securitySources = [
 					<strong>{item.value}</strong>
 					<h3>{item.title}</h3>
 					<p>{item.detail}</p>
-					<a href={item.href} target="_blank" rel="noopener noreferrer">出典: {item.sourceLabel}</a>
+					<a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.sourceTitle}を開く`}>
+						<span>出典</span>
+						<b>{item.sourceTitle}</b>
+						<small>{item.sourcePublished} / 確認日: 2026-08-22 ↗</small>
+					</a>
 				</div>
 			))}
 		</div>
@@ -224,10 +242,23 @@ const securitySources = [
 						<p>回答根拠、利用履歴、送信前の人間承認を追える状態にする。</p>
 					</div>
 				</div>
+				<div class="security-proof__profile" aria-label="公開する技術運用の前提">
+					<span>公開する技術・運用の前提</span>
+					<p>独自の内部構成は公開せず、導入可否を判断できる運用条件を明示します。</p>
+					<dl>
+						<div><dt>入力前</dt><dd>AIに不要な個人情報は、伏せ字や置き換えを検討します。</dd></div>
+						<div><dt>参照中</dt><dd>部署・役割・案件ごとに、参照できる範囲を分けます。</dd></div>
+						<div><dt>実行前</dt><dd>送信・確定・対外提出は、人が確認する設計にします。</dd></div>
+						<div><dt>配置</dt><dd>扱う情報に応じて、外部サービスまたは社内管理下で扱う構成を選びます。</dd></div>
+					</dl>
+				</div>
 				<div class="security-proof__sources">
 					<span>参考資料</span>
 					{securitySources.map((item) => (
-						<a href={item.href} target="_blank" rel="noopener noreferrer">{item.label}</a>
+						<a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.title}を開く`}>
+							<strong>{item.label}</strong>
+							<small>{item.title} / {item.published} / 確認日: 2026-08-22 ↗</small>
+						</a>
 					))}
 				</div>
 			</div>
@@ -971,20 +1002,37 @@ const securitySources = [
 	}
 
 	.metric-card a {
-		display: inline-flex;
-		width: fit-content;
-		min-height: 40px;
-		align-items: center;
+		display: grid;
+		width: 100%;
+		gap: 4px;
 		margin-top: auto;
 		border: 1px solid #d2c5b2;
-		border-radius: 999px;
+		border-radius: 1rem;
 		background: rgba(255, 248, 236, 0.72);
 		color: #6f5c3a;
-		padding: 8px 14px;
+		padding: 12px 14px;
+		text-decoration: none;
+	}
+
+	.metric-card a span {
+		color: #8b691e;
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	.metric-card a b {
+		color: #4d3f28;
 		font-size: 13px;
 		font-weight: 850;
-		text-decoration: underline;
-		text-underline-offset: 3px;
+		line-height: 1.45;
+	}
+
+	.metric-card a small {
+		color: #756956;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 1.45;
 	}
 
 		.security-proof {
@@ -1066,18 +1114,82 @@ const securitySources = [
 		}
 
 		.security-proof__sources a {
-			display: inline-flex;
+			display: grid;
+			gap: 2px;
 			min-height: 42px;
-			align-items: center;
 			border: 1px solid #d2c5b2;
-			border-radius: 999px;
+			border-radius: 1rem;
 			background: #ffffff;
 			color: #6f5c3a;
 			padding: 9px 15px;
+			text-decoration: none;
+		}
+
+		.security-proof__sources a strong {
 			font-size: 14px;
-			font-weight: 800;
-			text-decoration: underline;
-			text-underline-offset: 3px;
+			font-weight: 900;
+			line-height: 1.35;
+		}
+
+		.security-proof__sources a small {
+			color: #756956;
+			font-size: 11px;
+			font-weight: 700;
+			line-height: 1.4;
+		}
+
+		.security-proof__profile {
+			grid-column: 1 / -1;
+			border-top: 1px solid rgba(210, 197, 178, 0.68);
+			border-bottom: 1px solid rgba(210, 197, 178, 0.68);
+			padding: 24px 0;
+		}
+
+		.security-proof__profile > span {
+			display: inline-flex;
+			margin-bottom: 10px;
+			color: #7b5807;
+			font-size: 13px;
+			font-weight: 900;
+			letter-spacing: 0.08em;
+		}
+
+		.security-proof__profile > p {
+			max-width: 780px;
+			margin: 0 0 18px;
+			color: #4e4538;
+			font-size: 15px;
+			font-weight: 700;
+			line-height: 1.7;
+		}
+
+		.security-proof__profile dl {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 12px;
+			margin: 0;
+		}
+
+		.security-proof__profile dl > div {
+			border: 1px solid rgba(210, 197, 178, 0.82);
+			border-radius: 1rem;
+			background: rgba(255, 255, 255, 0.82);
+			padding: 16px;
+		}
+
+		.security-proof__profile dt {
+			margin-bottom: 8px;
+			color: #7b5807;
+			font-size: 13px;
+			font-weight: 900;
+		}
+
+		.security-proof__profile dd {
+			margin: 0;
+			color: #4e4538;
+			font-size: 14px;
+			font-weight: 700;
+			line-height: 1.65;
 		}
 
 		.safety-table {
@@ -1253,7 +1365,8 @@ const securitySources = [
 			.flow-compare,
 			.metric-grid,
 			.security-proof,
-			.security-proof__steps {
+			.security-proof__steps,
+			.security-proof__profile dl {
 				grid-template-columns: 1fr;
 			}
 
