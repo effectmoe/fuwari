@@ -23,6 +23,7 @@ const brandRoutes = [
 	{ match: (path: string) => path.startsWith("/changelog"), label: "CHANGELOG", href: "/changelog/" },
 	{ match: (path: string) => path.startsWith("/author"), label: "ABOUT", href: "/author/" },
 	{ match: (path: string) => path.startsWith("/faq"), label: "FAQ", href: "/faq/" },
+	{ match: (path: string) => path.startsWith("/llmo"), label: "LLMO", href: "/llmo/" },
 	{ match: (path: string) => path.startsWith("/trust"), label: "TRUST", href: "/trust/" },
 	{ match: (path: string) => path.startsWith("/structurepedia"), label: "STRUCTUREPEDIA", href: "/structurepedia/" },
 ];
@@ -54,6 +55,7 @@ const serviceNavGroups = [
 		href: "/aicrawl/",
 		items: [
 			{ href: "/aicrawl/", label: "トップ" },
+			{ href: "/llmo/", label: "LLMO対策ガイド" },
 			{ href: "/aicrawl/#overview", label: "AI流入分析" },
 			{ href: "/aicrawl/#checks", label: "診断内容" },
 			{ href: "/aicrawl/#signals", label: "流入の判別" },
@@ -230,6 +232,7 @@ const navItems = [
 					</nav>
 					<nav aria-label="Footer company links">
 						<strong>サイト情報</strong>
+						<a href="/llmo/">LLMO対策ガイド</a>
 						<a href="/blog/">ブログ</a>
 						<a href="/faq/">総合FAQ</a>
 						<a href="/trust/">信頼性・制作方針</a>
