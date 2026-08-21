@@ -646,13 +646,10 @@ const llmoPageLd = {
 
 		/* MCP無料診断の浮遊カード（aicrawl版と同型・同配色） */
 		.llmo-mcp-float {
-			position: absolute;
-			right: -10px;
-			bottom: -22px;
-			z-index: 3;
 			display: flex;
 			align-items: center;
 			gap: 14px;
+			margin: 16px 0 0 auto;
 			max-width: 316px;
 			border: 5px solid #d9ae5b;
 			border-radius: 18px;
@@ -699,7 +696,7 @@ const llmoPageLd = {
 			.llmo-mcp-float, .llmo-mcp-float__badge { animation: none; }
 		}
 		@media (max-width: 900px) {
-			.llmo-mcp-float { position: static; max-width: none; margin-top: 14px; }
+			.llmo-mcp-float { max-width: none; margin: 14px 0 0; }
 		}
 		/* 後方にある旧モバイル規則を上書きし、写真コラージュの意味を保持する */
 		@media (max-width: 900px) { .llmo-audit-visual figcaption { display: block; } }
