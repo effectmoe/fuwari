@@ -255,6 +255,7 @@ const faqLd = {
 		<div class="llmo-container llmo-prose">
 			<h2 id="llmo-faq-title">LLMO対策のよくある質問</h2>
 			{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p></details>)}
+			<a class="llmo-faq-hub-link" href="/faq/">LLMO・AI検索について、総合FAQをもっと見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 		</div>
 	</section>
 
@@ -432,6 +433,8 @@ const faqLd = {
 		.llmo-section--faq summary svg { flex: 0 0 auto; transition: transform .18s ease; }
 		.llmo-section--faq details[open] summary svg { transform: rotate(45deg); }
 		.llmo-section--faq details p { margin: 0 0 18px; font-size: 15px; }
+		.llmo-faq-hub-link { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 22px; border: 1px solid var(--llmo-green); border-radius: 999px; padding: 13px 19px; background: var(--llmo-green); color: #fff; font-size: 14px; font-weight: 900; text-decoration: none; transition: background .18s ease, color .18s ease; }
+		.llmo-faq-hub-link:hover { background: #fff; color: var(--llmo-green); }
 
 		/* FigJam下書きを正本SVGへ再構成した図解群 */
 		.llmo-hero { padding-block: clamp(116px, 13vw, 160px) clamp(66px, 9vw, 112px); background: #f7f3ed; }

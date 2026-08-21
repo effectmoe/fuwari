@@ -45,6 +45,10 @@ const faqLd =
                     </div>
                 </details>
             ))}
+			<a href="/faq/" class="article-faq__hub-link">
+				総合FAQをもっと見る
+				<Icon name="material-symbols:arrow-forward-rounded" />
+			</a>
         </div>
 
     </div>
@@ -55,4 +59,7 @@ const faqLd =
 .article-faq details > summary::marker { content: ""; }
 .article-faq details[open] .faq-mark { transform: rotate(45deg); }
 .article-faq .faq-mark { transition: transform 0.2s ease; display: inline-block; }
+.article-faq__hub-link { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; width: fit-content; margin-top: .6rem; border: 1px solid var(--primary); border-radius: 999px; padding: .7rem 1rem; background: var(--primary); color: #fff; font-size: .875rem; font-weight: 800; line-height: 1.4; text-decoration: none; transition: background .18s ease, color .18s ease; }
+.article-faq__hub-link:hover { background: transparent; color: var(--primary); }
+.article-faq__hub-link :global(svg) { width: 1.1rem; height: 1.1rem; }
 </style>

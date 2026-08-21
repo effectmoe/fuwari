@@ -3,6 +3,7 @@
  * FaqSection.astro — Wikipedia 風 FAQ セクション (+ JSON-LD FAQPage schema 自動付与)
  * AI Overview / Google リッチリザルト対策。
  */
+import { Icon } from "astro-icon/components";
 interface FaqItem {
   question: string;
   answer: string;
@@ -48,4 +49,8 @@ const faqLd = {
       </div>
     ))}
   </dl>
+  <a href="/faq/" class="mt-5 inline-flex items-center justify-center gap-2 rounded-full border border-sky-700 bg-sky-700 px-4 py-3 text-sm font-bold leading-snug text-white no-underline transition hover:bg-transparent hover:text-sky-700 dark:border-sky-400 dark:bg-sky-400 dark:text-slate-950 dark:hover:bg-transparent dark:hover:text-sky-300">
+    総合FAQをもっと見る
+    <Icon name="material-symbols:arrow-forward-rounded" class="text-lg" />
+  </a>
 </section>
