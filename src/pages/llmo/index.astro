@@ -5,6 +5,8 @@ import LandingLayout from "../../layouts/LandingLayout.astro";
 const pageTitle = "LLMO対策とは？SEOとの違いと始め方を実測データで解説";
 const pageDescription =
 	"LLMO対策とは何か、SEOとの違い、始め方、測定方法を、effect.moeのAIクローラー実測データをもとに分かりやすく解説します。";
+const storacaLlmoCourseUrl = "https://www.street-academy.com/myclass/216408";
+const storacaReviewUrl = "https://www.street-academy.com/steachers/271053#review";
 
 const faqItems = [
 	{
@@ -34,11 +36,30 @@ const faqLd = {
 		acceptedAnswer: { "@type": "Answer", text: item.a },
 	})),
 };
+const courseMentionLd = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"@id": "https://effect.moe/llmo/#course",
+	url: "https://effect.moe/llmo/#course",
+	about: {
+		"@type": "Course",
+		name: "AI検索×SEO×LLMO E-E-A-T実践講座",
+		description: "AI検索、SEO、LLMOの視点から、ウェブサイトのE-E-A-Tを実践的に見直す講座です。",
+		url: storacaLlmoCourseUrl,
+		inLanguage: "ja",
+		provider: {
+			"@type": "Person",
+			name: "シュ コウメイ",
+			url: "https://effect.moe/author/",
+		},
+	},
+};
 ---
 
 <LandingLayout title={pageTitle} description={pageDescription} fullTitle={true}>
 	<Fragment slot="head">
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(courseMentionLd)} />
 	</Fragment>
 
 	<section class="llmo-hero">
@@ -55,8 +76,15 @@ const faqLd = {
 				</div>
 				<p class="llmo-hero__note">実測データ・公式リファレンス・FAQをもとに整理</p>
 			</div>
-			<figure class="llmo-hero__visual">
-				<img src="/llmo/llmo-hero-flow.svg" alt="ユーザーの質問、AIの解釈、根拠ページをつないだAI検索の情報経路" width="960" height="600" fetchpriority="high" />
+			<figure class="llmo-hero__visual llmo-photo-composite">
+				<img src="/llmo/llmo-workshop-hero.png" alt="オンライン講座で、受講者がサイト構造の紙面マップを見ながらLLMO対策を学んでいる様子" width="1586" height="992" fetchpriority="high" />
+				<figcaption>
+					<span>LLMO PRACTICE</span>
+					<strong>質問・根拠・サイト構造を<br />ひとつの説明として整える。</strong>
+				</figcaption>
+				<div class="llmo-photo-composite__tags" aria-label="講座で扱うテーマ">
+					<span>質問を整理する</span><span>根拠をつなぐ</span><span>FAQを見直す</span>
+				</div>
 			</figure>
 		</div>
 	</section>
@@ -124,9 +152,38 @@ const faqLd = {
 			<p>E-E-A-TはGoogleの品質評価に関する枠組みであり、他社AIの内部評価の重みは公開されていません。だからこそEFFECTは、「AIがこの要素を何点で評価する」とは断定しません。その代わり、会社は誰か、何を提供するか、どの根拠で言えるか、利用前の疑問にどう答えるかを、サービスページ・会社情報・FAQ・関連解説で一貫させます。</p>
 			<p>これはSEOとLLMOのどちらかを選ぶ話ではありません。検索順位だけを見るのではなく、AIが一部のページを読んだ時にも説明の筋をたどれるよう、サイト内のトピックをつなぐ実務です。EFFECTの見解は、Googleの声明は<strong>Google検索の条件としては正しいが、すべてのAI接点に対して何もしなくてよいという結論にすると半分しか正しくない</strong>、というものです。</p>
 			<p class="llmo-source-note">Schema.orgはGoogle単独の団体ではありません。Google、Microsoft、Yahoo、Yandexを含む創設企業とウェブコミュニティによる、構造化データの共同活動です。詳しい成り立ちは、<a href="https://schema.org/docs/about.html" target="_blank" rel="noopener noreferrer">Schema.orgの公式About</a>で確認できます。</p>
-			<aside class="llmo-next-step" aria-label="LLMO対策の相談先">
-				<div class="llmo-next-step__intro"><p>CHOOSE YOUR NEXT STEP</p><h3>目的に合わせて、入口を分けています。</h3><span>単発の現状確認か、継続した分析・監視かで、次に見るページが異なります。</span></div>
+		</div>
+	</section>
+
+	<section class="llmo-section llmo-section--course" id="course">
+		<div class="llmo-container">
+			<div class="llmo-course-proof">
+				<figure class="llmo-course-proof__image">
+					<img src="/llmo/llmo-eeat-workshop.png" alt="サービスページ、FAQ、会社情報、根拠を紙面で並べ、サイトの信頼性を組み立てる講座の作業イメージ" width="1536" height="1024" loading="lazy" />
+					<figcaption><span>WORKSHOP NOTE</span><strong>サイトの信頼性は、<br />ページ同士の関係で伝える。</strong></figcaption>
+				</figure>
+				<div class="llmo-course-proof__copy">
+					<p class="llmo-eyebrow">E-E-A-T / LEARN BY DOING</p>
+					<h2>学びながら、自分のサイトの信頼性を整える。</h2>
+					<p class="llmo-course-proof__lead">AI検索×SEO×LLMO E-E-A-T実践講座では、抽象的なチェックリストではなく、ご自身のサイトを題材に、サービス・FAQ・会社情報・根拠のつながりを確認します。</p>
+					<ol class="llmo-course-proof__outcomes">
+						<li><b>01</b><span><strong>不足している情報を見つける</strong>サービス説明・運営者情報・FAQのどこを優先するか整理します。</span></li>
+						<li><b>02</b><span><strong>SEOとAI検索を分けずに考える</strong>人・検索・AIに同じ説明が伝わるページの形を学びます。</span></li>
+						<li><b>03</b><span><strong>改善の最初の一手を決める</strong>受講後に、どのページから直すかを持ち帰れる状態を目指します。</span></li>
+					</ol>
+					<p class="llmo-course-proof__meta"><Icon name="material-symbols:school-outline-rounded" /> 講師：シュ コウメイ　/　掲載・予約：ストアカ</p>
+					<div class="llmo-course-proof__actions">
+						<a class="llmo-action-button llmo-action-button--primary" href={storacaLlmoCourseUrl} target="_blank" rel="noopener noreferrer">ストアカで講座を見る <Icon name="material-symbols:open-in-new-rounded" /></a>
+						<a class="llmo-action-button llmo-action-button--secondary" href={storacaReviewUrl} target="_blank" rel="noopener noreferrer">公開レビューを見る <Icon name="material-symbols:open-in-new-rounded" /></a>
+					</div>
+					<p class="llmo-course-proof__source">受講者レビューは、出典となるストアカの公開ページで確認できます。評価の転載・再集計は行いません。</p>
+				</div>
+			</div>
+
+			<aside class="llmo-next-step" aria-label="LLMO対策の次の行動を選ぶ">
+				<div class="llmo-next-step__intro"><p>CHOOSE YOUR NEXT STEP</p><h3>読むだけで終わらせず、次の一手を選ぶ。</h3><span>学ぶ、診断する、継続して分析する。目的ごとに入口を分けています。</span></div>
 				<div class="llmo-next-step__actions">
+					<a class="llmo-next-step__action llmo-next-step__action--course" href={storacaLlmoCourseUrl} target="_blank" rel="noopener noreferrer"><Icon name="material-symbols:school-outline-rounded" /><span>自分で学びたい方</span><strong>ストアカで講座を見る <Icon name="material-symbols:open-in-new-rounded" /></strong></a>
 					<a class="llmo-next-step__action" href="https://www.lancers.jp/menu/detail/1296939" target="_blank" rel="noopener noreferrer"><Icon name="material-symbols:fact-check-rounded" /><span>LLMO診断を希望する方</span><strong>ランサーズで診断を相談する <Icon name="material-symbols:open-in-new-rounded" /></strong></a>
 					<a class="llmo-next-step__action" href="/aicrawl/"><Icon name="material-symbols:monitoring-rounded" /><span>LLMOの分析・監視を希望する方</span><strong>AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></strong></a>
 				</div>
@@ -416,7 +473,60 @@ const faqLd = {
 		.llmo-misconceptions article::before { color: var(--llmo-gold); content: counter(llmo-misconception, decimal-leading-zero); counter-increment: llmo-misconception; font-size: 12px; font-weight: 900; letter-spacing: .1em; line-height: 1.7; }
 		.llmo-misconceptions h3 { grid-column: 2; font-size: 18px; line-height: 1.6; }
 		.llmo-misconceptions p { grid-column: 3; margin: 0; font-size: 15px; line-height: 1.85; }
+
+		/* StitchのIvory Editorial設計を、既存LPの写真・実績・CTAの作法に合わせて再構成 */
+		.llmo-hero__visual.llmo-photo-composite { position: relative; min-height: 460px; overflow: hidden; border: 1px solid rgba(28, 27, 27, .14); background: #eee6d8; }
+		.llmo-photo-composite > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 66% center; }
+		.llmo-photo-composite figcaption { position: absolute; z-index: 1; left: 0; bottom: 0; width: min(80%, 410px); margin: 0; padding: 23px 26px 25px; background: #1c1b1b; color: #fff; text-align: left; }
+		.llmo-photo-composite figcaption span, .llmo-course-proof__image figcaption span { display: block; margin-bottom: 8px; color: #e5c77d; font-size: 11px; font-weight: 900; letter-spacing: .14em; }
+		.llmo-photo-composite figcaption strong { display: block; font-size: clamp(18px, 2vw, 24px); line-height: 1.46; letter-spacing: -.035em; }
+		.llmo-photo-composite__tags { position: absolute; z-index: 1; top: 23px; left: 23px; display: flex; max-width: 62%; flex-wrap: wrap; gap: 7px; }
+		.llmo-photo-composite__tags span { border: 1px solid rgba(28, 27, 27, .2); background: rgba(255, 255, 255, .94); padding: 8px 10px; color: #1c1b1b; font-size: 12px; font-weight: 850; line-height: 1.2; }
+
+		.llmo-section--course { border-block: 1px solid rgba(210, 197, 178, .74); background: #f6f3f2; }
+		.llmo-course-proof { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, .98fr); border: 1px solid rgba(28, 27, 27, .14); background: #fff; }
+		.llmo-course-proof__image { position: relative; min-height: 100%; margin: 0; overflow: hidden; background: #e8dfd0; }
+		.llmo-course-proof__image img { display: block; width: 100%; height: 100%; min-height: 560px; object-fit: cover; object-position: center; }
+		.llmo-course-proof__image figcaption { position: absolute; right: 0; bottom: 0; max-width: 86%; margin: 0; padding: 23px 26px 25px; background: #1c1b1b; color: #fff; text-align: left; }
+		.llmo-course-proof__image figcaption strong { display: block; font-size: clamp(18px, 2vw, 26px); line-height: 1.48; letter-spacing: -.04em; }
+		.llmo-course-proof__copy { padding: clamp(30px, 5vw, 64px); }
+		.llmo-course-proof__copy h2 { max-width: 620px; margin: 12px 0 20px; color: var(--llmo-ink); font-size: clamp(28px, 3.15vw, 44px); letter-spacing: -.055em; line-height: 1.2; }
+		.llmo-course-proof__lead { margin: 0; color: var(--llmo-muted); font-size: 16px; font-weight: 600; line-height: 1.85; }
+		.llmo-course-proof__outcomes { display: grid; gap: 0; margin: 30px 0; padding: 0; border-top: 1px solid rgba(28, 27, 27, .15); list-style: none; }
+		.llmo-course-proof__outcomes li { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 17px 0; border-bottom: 1px solid rgba(28, 27, 27, .15); }
+		.llmo-course-proof__outcomes b { color: var(--llmo-gold); font-size: 12px; line-height: 1.65; letter-spacing: .1em; }
+		.llmo-course-proof__outcomes span { color: var(--llmo-muted); font-size: 14px; font-weight: 590; line-height: 1.65; }
+		.llmo-course-proof__outcomes strong { display: block; margin-bottom: 3px; color: var(--llmo-ink); font-size: 15px; }
+		.llmo-course-proof__meta { display: flex; align-items: center; gap: 7px; margin: -10px 0 19px; color: var(--llmo-muted); font-size: 13px; font-weight: 700; }
+		.llmo-course-proof__meta svg { width: 18px; height: 18px; color: var(--llmo-gold); }
+		.llmo-course-proof__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+		.llmo-action-button { display: inline-flex; min-height: 51px; align-items: center; justify-content: center; gap: 8px; padding: 0 19px; border: 1px solid #1c1b1b; color: #1c1b1b; font-size: 14px; font-weight: 900; text-decoration: none; transition: transform .18s ease, background .18s ease, color .18s ease; }
+		.llmo-action-button:hover { transform: translateY(-2px); }
+		.llmo-action-button svg { width: 18px; height: 18px; }
+		.llmo-action-button--primary { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
+		.llmo-action-button--primary:hover { background: #765412; color: #fff; }
+		.llmo-action-button--secondary { background: #fff; }
+		.llmo-action-button--secondary:hover { background: #1c1b1b; color: #fff; }
+		.llmo-course-proof__source { margin: 15px 0 0; color: var(--llmo-muted); font-size: 12px; line-height: 1.65; }
+
+		.llmo-section--course .llmo-next-step { margin-top: clamp(40px, 6vw, 74px); border: 1px solid rgba(28, 27, 27, .16); border-radius: 0; background: #fff; }
+		.llmo-section--course .llmo-next-step__intro { border-bottom: 1px solid rgba(28, 27, 27, .16); background: #fff; }
+		.llmo-section--course .llmo-next-step__actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		.llmo-section--course .llmo-next-step__action { min-height: 240px; align-content: start; gap: 14px; border-left: 1px solid rgba(28, 27, 27, .16); padding: 30px; background: #fff; }
+		.llmo-section--course .llmo-next-step__action:first-child { border-left: 0; }
+		.llmo-section--course .llmo-next-step__action:hover { background: #faf6ed; }
+		.llmo-section--course .llmo-next-step__action > svg { width: 31px; height: 31px; color: var(--llmo-gold); }
+		.llmo-section--course .llmo-next-step__action span { color: var(--llmo-muted); font-size: 14px; font-weight: 850; }
+		.llmo-section--course .llmo-next-step__action strong { display: flex; width: 100%; align-items: center; justify-content: space-between; margin-top: auto; border: 1px solid #1c1b1b; padding: 12px 13px; color: #1c1b1b; font-size: 14px; line-height: 1.4; }
+		.llmo-section--course .llmo-next-step__action:hover strong { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
+		.llmo-related-grid b { width: fit-content; border: 1px solid rgba(28, 27, 27, .38); padding: 10px 12px; color: #1c1b1b; font-weight: 850; }
+		.llmo-related-grid a:hover b { border-color: var(--llmo-gold); background: var(--llmo-gold); color: #fff; }
+
+		@media (max-width: 900px) { .llmo-hero__visual.llmo-photo-composite { min-height: 400px; } .llmo-course-proof { grid-template-columns: 1fr; } .llmo-course-proof__image img { min-height: 420px; } .llmo-section--course .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-section--course .llmo-next-step__action, .llmo-section--course .llmo-next-step__action:first-child { min-height: 178px; border-top: 1px solid rgba(28, 27, 27, .16); border-left: 0; } }
+		@media (max-width: 640px) { .llmo-hero__visual.llmo-photo-composite { min-height: 315px; } .llmo-photo-composite > img { object-position: 72% center; } .llmo-photo-composite figcaption { width: min(90%, 335px); padding: 17px 18px 19px; } .llmo-photo-composite figcaption strong { font-size: 17px; } .llmo-photo-composite__tags { top: 13px; left: 13px; max-width: 87%; gap: 5px; } .llmo-photo-composite__tags span { padding: 6px 8px; font-size: 10px; } .llmo-course-proof__image img { min-height: 300px; } .llmo-course-proof__image figcaption { max-width: 94%; padding: 17px 19px 18px; } .llmo-course-proof__image figcaption strong { font-size: 17px; } .llmo-course-proof__copy { padding: 28px 20px 30px; } .llmo-course-proof__copy h2 { font-size: 30px; } .llmo-course-proof__actions { display: grid; grid-template-columns: 1fr; } .llmo-action-button { width: 100%; } .llmo-section--course .llmo-next-step__action { min-height: 166px; padding: 24px 20px; } }
 		@media (max-width: 900px) { .llmo-hero__grid { grid-template-columns: 1fr; } .llmo-hero__visual { order: -1; } .llmo-hero__visual img { width: 100%; margin: 0; } .llmo-hero__visual figcaption { display: none; } .llmo-measure-grid { grid-template-columns: 1fr; } }
 		@media (max-width: 640px) { .llmo-container { width: min(100% - 32px, 1120px); } .llmo-hero { padding-top: 96px; } .llmo-hero h1 { font-size: 37px; } .llmo-hero h1 .llmo-hero__title { font-size: 38px; white-space: nowrap; } .llmo-hero h1 .llmo-hero__subtitle { margin-top: 14px; font-size: 22px; } .llmo-hero__note { font-size: 11px; } .llmo-diagram { margin-block: 28px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-color: rgba(182, 140, 60, .62) transparent; } .llmo-diagram img { width: 620px; max-width: none; } .llmo-source-scope .llmo-diagram img { width: 620px; } .llmo-hero__lead, .llmo-prose p { font-size: 16px; line-height: 1.9; } .llmo-comparison, .llmo-related-grid, .llmo-statement-grid, .llmo-next-step__actions { grid-template-columns: 1fr; } .llmo-next-step__action + .llmo-next-step__action { border-top: 1px solid rgba(210, 197, 178, .75); border-left: 0; } .llmo-journey { padding: 16px; } .llmo-journey > div { gap: 7px; } .llmo-journey p { width: 100%; } .llmo-journey span, .llmo-journey strong { padding: 0 10px; font-size: 12px; } .llmo-crawler-chart__rows { gap: 18px; padding: 18px; } .llmo-crawler-chart__row { grid-template-columns: 1fr; gap: 6px; } .llmo-crawler-chart__row > span { grid-column: auto; } .llmo-source-scope { padding: 18px; } .llmo-source-scope__diagram { grid-template-columns: 1fr; } .llmo-source-scope__diagram > svg { justify-self: center; transform: rotate(90deg); } .llmo-entity-map { min-height: 380px; } .llmo-entity-map__nodes { inset: 16px; } .llmo-entity-map__nodes span { font-size: 11px; } .llmo-entity-map__nodes span:nth-child(1) { top: 6%; left: 3%; } .llmo-entity-map__nodes span:nth-child(2) { top: 6%; right: 3%; } .llmo-entity-map__nodes span:nth-child(3) { top: 44%; left: 2%; } .llmo-entity-map__nodes span:nth-child(4) { bottom: 18%; left: 3%; } .llmo-entity-map__nodes span:nth-child(5) { bottom: 18%; right: 3%; } .llmo-entity-map > small { right: 16px; bottom: 12px; left: 16px; max-width: none; text-align: center; } .llmo-misconceptions article { grid-template-columns: 32px minmax(0, 1fr); gap: 8px 14px; padding: 22px 0; } .llmo-misconceptions h3, .llmo-misconceptions p { grid-column: 2; } .llmo-misconceptions h3 { font-size: 16px; } .llmo-misconceptions p { font-size: 14px; } .llmo-crawler-table { border-radius: 14px; } .llmo-crawler-table__head { display: none; } .llmo-crawler-table__row { grid-template-columns: 1fr auto; gap: 4px 12px; padding: 15px; } .llmo-crawler-table__row span { grid-column: 1 / -1; } .llmo-steps li { grid-template-columns: 34px 1fr; gap: 10px 14px; padding: 18px; } .llmo-steps li::before { width: 32px; height: 32px; } .llmo-steps strong { font-size: 16px; } .llmo-steps span { grid-column: 1 / -1; } .llmo-cta { align-items: flex-start; flex-direction: column; gap: 20px; } .llmo-cta a { width: 100%; } }
+		/* 後方にある旧モバイル規則を上書きし、写真コラージュの意味を保持する */
+		@media (max-width: 900px) { .llmo-photo-composite figcaption { display: block; } }
 	</style>
 </LandingLayout>

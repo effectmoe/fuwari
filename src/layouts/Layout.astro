@@ -166,24 +166,19 @@ const websiteLd = {
 	publisher: { "@id": `${siteUrl}#organization` },
 	author: { "@id": `${siteUrl}#person` },
 };
-// Google レビュースニペット対象タイプとして ProfessionalService に集約評価を載せる。
-// （Person は対象外・LocalBusiness/Service/Product/Course 等が対象）
+// ストアカ上の評価は第三者プラットフォーム上の公開情報であり、EFFECT側で
+// AggregateRating として再集計しない。Googleのレビュー構造化データ要件に合わせ、
+// 実績の確認はリンク先の一次ソースへ委ねる。
 const serviceLd = {
 	"@type": "ProfessionalService",
 	"@id": `${siteUrl}#service`,
 	name: "株式会社EFFECT - AIセントラル・AI CRAWL・AI講座",
 	description:
-		`株式会社EFFECTが提供する、AIセントラル・AI CRAWL・AI講座を通じたAI導入、AI検索可視化、実務研修のサービスです。ストアカで★評価${seoConfig.reviews.ratingValue}/5。`,
+		"株式会社EFFECTが提供する、AIセントラル・AI CRAWL・AI講座を通じたAI導入、AI検索可視化、実務研修のサービスです。",
 	url: siteUrl,
 	image: `${siteUrl}og-image.jpg`,
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: { "@type": "Country", name: "Japan" },
-	aggregateRating: {
-		"@type": "AggregateRating",
-		ratingValue: seoConfig.reviews.ratingValue,
-		reviewCount: seoConfig.reviews.reviewCount,
-		bestRating: seoConfig.reviews.bestRating,
-	},
 };
 // 🔴 2026-08-20 追加: AI CRAWL / AI CITATION は現行の月額商品なのに
 //   Service ノードが存在せず、説明文に名前が出るだけだった。
