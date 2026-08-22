@@ -15,16 +15,6 @@ import { Icon } from "astro-icon/components";
 				<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
 				<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
 			</div>
-			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
-		</div>
-
-		<div class="stitch-top-hero__visual">
-			<div class="stitch-top-hero__image">
-				<picture>
-					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-v2-20260730.png" />
-					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
-				</picture>
-			</div>
 			<a
 				class="central-mcp-card"
 				href="https://mcp.effect.moe/?use=ai-central"
@@ -39,6 +29,16 @@ import { Icon } from "astro-icon/components";
 					<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
 				</span>
 			</a>
+			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
+		</div>
+
+		<div class="stitch-top-hero__visual">
+			<div class="stitch-top-hero__image">
+				<picture>
+					<source media="(max-width: 760px)" srcset="/lp/generated/ai-central-hero-main-mobile-woman-v2-20260730.png" />
+					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
+				</picture>
+			</div>
 			<div class="stitch-top-hero__orchestrator" aria-label="AIセントラルの役割">
 				<div class="stitch-top-hero__orchestrator-head">
 					<Icon name="material-symbols:memory-alt-outline" />
@@ -382,22 +382,21 @@ import { Icon } from "astro-icon/components";
 		}
 	}
 
-	/* EFFECT MCP 深掘りカード — 写真右上（右側の人物の右上の空き）に写真相対%で固定 */
+	/* EFFECT MCP 深掘りカード — CTAボタン列の下・同ブロック内の段として組み込み（インフロー・被りなし） */
 	.central-mcp-card {
-		position: absolute;
-		top: 7%;
-		right: 8%;
-		z-index: 3;
 		display: flex;
 		align-items: center;
 		gap: 12px;
-		width: clamp(270px, 26vw, 340px);
+		width: fit-content;
+		max-width: min(100%, 640px);
+		margin: 0 0 22px;
 		border: 5px solid #163a5e;
 		border-radius: 16px;
 		background: linear-gradient(135deg, #1e4e7e, #33699f);
-		padding: 13px 16px;
-		box-shadow: 0 22px 48px rgba(16, 32, 50, 0.34);
+		padding: 12px 18px;
+		box-shadow: 0 16px 38px rgba(16, 32, 50, 0.28);
 		text-decoration: none;
+		text-align: left;
 		opacity: 1;
 		animation:
 			central-mcp-in 0.7s cubic-bezier(0.22, 0.9, 0.3, 1) 0.5s backwards,
@@ -437,7 +436,6 @@ import { Icon } from "astro-icon/components";
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
 	@media (max-width: 760px) {
-		/* モバイルは別画像（構図が異なる）のため写真上端の全幅オーバーレイに */
-		.central-mcp-card { top: 12px; right: 12px; left: 12px; width: auto; }
+		.central-mcp-card { width: 100%; }
 	}
 </style>
