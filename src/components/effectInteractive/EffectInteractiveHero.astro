@@ -10,7 +10,7 @@ import { Icon } from "astro-icon/components";
 			<p class="stitch-top-hero__lead">
 				社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、管理された環境でAIが参照できる社内基盤へ整えます。過去の経緯から現状を時系列で復元し、次に打つべき手とリスクを組み立てて提示。社員や部署ごとの文脈を持ったAIが、検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行を先に進め、人間は意思決定に集中できる状態をつくります。
 			</p>
-			<div class="stitch-top-hero__actions">
+			<div class="stitch-top-hero__cta">
 				<a
 					class="central-mcp-card"
 					href="https://mcp.effect.moe/?use=ai-central"
@@ -25,9 +25,11 @@ import { Icon } from "astro-icon/components";
 					</span>
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>
-				<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
-				<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
-				<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
+				<div class="stitch-top-hero__actions">
+					<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
+					<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
+					<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
+				</div>
 			</div>
 			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
 		</div>
@@ -119,13 +121,22 @@ import { Icon } from "astro-icon/components";
 		line-height: 1.8;
 	}
 
+	/* カードとボタンのブロック。広い画面=2行（上:カード/下:ボタン3つ横並び・同一幅）、
+	   狭い画面=4行（カード→ボタン→ボタン→ボタン・全段同一幅）。同じ行に混在はさせない */
+	.stitch-top-hero__cta {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: fit-content;
+		max-width: 100%;
+		margin: 0 auto 24px;
+	}
+
 	.stitch-top-hero__actions {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: stretch;
 		justify-content: center;
 		gap: 16px;
-		margin-bottom: 24px;
 	}
 
 	.stitch-top-hero__actions a {
@@ -384,12 +395,17 @@ import { Icon } from "astro-icon/components";
 		}
 	}
 
-	/* EFFECT MCP 深掘りカード — CTAボタン列の先頭に、ボタンと同じ高さで組み込み（青カードのコンパクト形） */
+	/* EFFECT MCP 深掘りカード — ボタン列の上の段。横幅はボタン列の左端〜右端に一致
+	   （width:0 + min-width:100% で、カードの文章長がラッパー幅を押し広げないようにする） */
 	.central-mcp-card {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		gap: 10px;
 		box-sizing: border-box;
+		width: 0;
+		min-width: 100%;
+		margin-bottom: 14px;
 		min-height: 56px;
 		border: 3px solid #163a5e;
 		border-radius: 16px;
@@ -435,15 +451,12 @@ import { Icon } from "astro-icon/components";
 	@media (prefers-reduced-motion: reduce) {
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
-	/* 1行に収まらない幅では、カード＋3ボタンを同一幅で4段に積む（ボタンは拡大・カードは縮小） */
-	@media (max-width: 1080px) {
+	/* 4行パターン: ボタン3つが1行に収まらない幅では カード→ボタン→ボタン→ボタン の縦積み・全段同一幅 */
+	@media (max-width: 620px) {
+		.stitch-top-hero__cta { width: min(100%, 344px); }
 		.stitch-top-hero__actions {
 			flex-direction: column;
-			align-items: center;
-		}
-		.stitch-top-hero__actions > a {
-			box-sizing: border-box;
-			width: min(100%, 344px);
+			align-items: stretch;
 		}
 		.central-mcp-card__body strong { white-space: normal; }
 	}
