@@ -1,4 +1,6 @@
 ---
+const sourceVerifiedAt = "2026-08-22";
+
 const metricCards = [
 	{
 		tag: "Microsoft 365 Copilot",
@@ -7,7 +9,7 @@ const metricCards = [
 		detail:
 			"Microsoftの早期利用者調査で、利用者が自己申告した時間短縮です。AI CENTRALでも、判断前の「探す」「要約する」「説明し直す」を減らし、判断材料を揃える設計を行います。",
 		sourceTitle:
-			"What Can Copilot's Earliest Users Teach Us About Generative AI at Work?",
+			"What Can Copilot’s Earliest Users Teach Us About Generative AI at Work?",
 		sourcePublished: "公開: 2023-11-15",
 		href: "https://www.microsoft.com/en-us/worklab/work-trend-index/copilots-earliest-users-teach-us-about-generative-ai-at-work",
 	},
@@ -53,8 +55,8 @@ const securitySources = [
 	},
 	{
 		label: "OWASP GenAI Security Project",
-		title: "OWASP Top 10 for LLM and GenAI",
-		published: "確認対象: 公開ガイダンス",
+		title: "2025 Top 10 Risk & Mitigations for LLMs and Gen AI Apps",
+		published: "版: 2025",
 		href: "https://genai.owasp.org/llm-top-10/",
 	},
 	{
@@ -65,8 +67,8 @@ const securitySources = [
 	},
 	{
 		label: "IBM",
-		title: "Cost of a Data Breach Report",
-		published: "確認対象: 公開レポート",
+		title: "Cost of a Data Breach Report 2026",
+		published: "版: 2026",
 		href: "https://www.ibm.com/reports/data-breach",
 	},
 ];
@@ -98,7 +100,7 @@ const securitySources = [
 						<span>外部公開データ</span>
 						<strong>APQC調査: KM Makes Knowledge Workers More Productive and Less Stressed Out</strong>
 						<b>2.8h/週 → 0.7h/週</b>
-						<small>公開: 2022-11-17 / 確認日: 2026-08-22 ↗</small>
+						<small>公開: 2022-11-17 / 最終確認: {sourceVerifiedAt} ↗</small>
 					</a>
 					<div class="bar-chart" aria-label="通常の情報探索と企業向け検索を利用した情報探索の比較">
 						<div class="bar-chart__row">
@@ -213,7 +215,7 @@ const securitySources = [
 					<a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.sourceTitle}を開く`}>
 						<span>出典</span>
 						<b>{item.sourceTitle}</b>
-						<small>{item.sourcePublished} / 確認日: 2026-08-22 ↗</small>
+						<small>{item.sourcePublished} / 最終確認: {sourceVerifiedAt} ↗</small>
 					</a>
 				</div>
 			))}
@@ -257,7 +259,7 @@ const securitySources = [
 					{securitySources.map((item) => (
 						<a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={`${item.title}を開く`}>
 							<strong>{item.label}</strong>
-							<small>{item.title} / {item.published} / 確認日: 2026-08-22 ↗</small>
+							<small>{item.title} / {item.published} / 最終確認: {sourceVerifiedAt} ↗</small>
 						</a>
 					))}
 				</div>
