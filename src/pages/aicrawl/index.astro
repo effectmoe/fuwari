@@ -402,24 +402,24 @@ const citationExtraQueries = [
 
 const cases = [
 	{
-		title: "地域サービス事業者（匿名）",
-		field: "検索・比較の入口が多い地域サービス",
+		title: "海外からの来訪もある地域ダイビングサービス（匿名）",
+		field: "国内外の旅行者に選ばれるための情報設計",
 		context:
-			"地域でサービスを探す人に、対象者・料金・相談の入口がサイト上で伝わる状態に整える必要がありました。",
+			"海外から地域のダイビングを探す旅行者にも、候補として見つけてもらう必要がありました。日本語の検索キーワードだけでは、現地サービスの比較や相談の入口まで伝わりにくい状態でした。",
 		design:
-			"AI由来で接点があるページと、サービス内容・対象者・料金・相談導線が不足する箇所を整理しました。",
+			"AI由来で接点が生まれるページと、旅行者が判断に必要なサービス内容・対象者・料金・相談の情報が不足する箇所を整理しました。",
 		operation:
-			"接点の推移と主要ページを確認し、FAQ・根拠ページ・相談導線のうち何を先に直すかを判断する運用を支援しています。",
+			"AI CRAWLで接点と主要ページの推移を確認し、FAQ・根拠ページ・相談導線のうち何を先に整えるかを判断します。AI CITATIONを組み合わせる場合は、実際にAI検索の回答で候補として紹介されるかも確認できます。",
 	},
 	{
-		title: "複数商材を扱うサービス事業者（匿名）",
-		field: "複数サービスを横断して案内する業務支援",
+		title: "立ち上げ期のオンライン業務支援サービス（匿名）",
+		field: "オンラインで比較・相談・契約まで進む継続利用サービス",
 		context:
-			"サービスごとの説明・対象者・相談入口が分かれ、どのページから改善を始めるかを継続的に判断する必要がありました。",
+			"サイト公開から日が浅く、今後の集客を強める段階でした。複数の継続利用サービスをオンラインで比較・検討し、そのまま相談や契約まで進めるため、AI検索で候補として見つけてもらえる情報設計が必要でした。",
 		design:
-			"AI由来の接点と主要ページを並べ、内容の重複・不足と、相談につながる導線を整理しました。",
+			"AI由来で接点となるページと、サービスごとの対象者・提供範囲・料金・相談の情報が不足する箇所を並べ、比較しやすい導線へ整理しました。",
 		operation:
-			"月次の振り返りで、優先するページ・FAQ・根拠情報を見直し、改善順を更新する運用を支援しています。",
+			"AI CRAWLで接点と主要ページの推移を見ながら、FAQ・根拠ページ・相談導線の改善順を更新します。AI CITATIONを組み合わせる場合は、AI検索の回答で候補として紹介される状態も確認できます。",
 	},
 ];
 
@@ -503,13 +503,29 @@ const faqs = [
 				<p>
 					最初に考え方と着手順を知りたい方は、AI検索の回答で自社の情報を正しく理解・利用しやすくするための<TermHint term="LLMO" description="AI検索の回答で、自社の情報が正しく理解され、必要な場面で参照・紹介されやすい状態を整える取り組みです。検索順位だけでなく、情報の意味・根拠・出典が伝わる設計を扱います。" />対策を<a href="/llmo/">実測データで解説したガイド</a>からご覧ください。AI CRAWLは、その考え方を自社サイトの計測と改善へつなげます。
 				</p>
-				<div class="aicrawl-actions">
-					<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
-						<Icon name="material-symbols:manage-search" />
-						無料相談する
+				<div class="aicrawl-cta">
+					<a
+						class="crawl-mcp-card"
+						href="https://mcp.effect.moe/"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="EFFECT MCP（無料）— あなたのAIで、あなたのサイトを無料LLMO診断"
+					>
+						<span class="crawl-mcp-card__badge" aria-hidden="true">無料</span>
+						<span class="crawl-mcp-card__body">
+							<em>EFFECT MCP</em>
+							<strong>あなたのAIで、あなたのサイトを無料LLMO診断</strong>
+						</span>
+						<Icon name="material-symbols:arrow-forward-rounded" />
 					</a>
-					<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">料金を見る</a>
-					<a href="#checks" class="aicrawl-button aicrawl-button--ghost">診断内容を見る</a>
+					<div class="aicrawl-actions">
+						<a href={consultationHref} class="aicrawl-button aicrawl-button--primary">
+							<Icon name="material-symbols:manage-search" />
+							無料相談する
+						</a>
+						<a href="#pricing" class="aicrawl-button aicrawl-button--secondary">料金を見る</a>
+						<a href="#checks" class="aicrawl-button aicrawl-button--ghost">診断内容を見る</a>
+					</div>
 				</div>
 			</div>
 
@@ -592,20 +608,6 @@ const faqs = [
 					<Icon name="material-symbols:priority-high-rounded" />
 					<span>改善優先度つき</span>
 				</div>
-				<a
-					class="crawl-mcp-card"
-					href="https://mcp.effect.moe/"
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="EFFECT MCP — あなたのAIで、あなたのサイトを無料LLMO診断（はじめ方を見る）"
-				>
-					<span class="crawl-mcp-card__badge" aria-hidden="true">無料</span>
-					<span class="crawl-mcp-card__body">
-						<em>EFFECT MCP</em>
-						<strong>あなたのAIで、あなたのサイトを無料LLMO診断</strong>
-						<span class="crawl-mcp-card__go">診断のはじめ方を見る <Icon name="material-symbols:arrow-forward-rounded" /></span>
-					</span>
-				</a>
 			</div>
 		</div>
 	</section>
@@ -1448,11 +1450,20 @@ const faqs = [
 				line-height: 1.75;
 			}
 
+			/* カードとボタンのブロック。広い画面=2行（上:カード/下:ボタン3つ・同一幅）、狭い画面=4行縦積み */
+			.aicrawl-cta {
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				width: fit-content;
+				max-width: 100%;
+				margin-top: 34px;
+			}
+
 			.aicrawl-actions {
 				display: flex;
 			flex-wrap: wrap;
 			gap: 14px;
-			margin-top: 34px;
 		}
 
 		.aicrawl-button {
@@ -1765,23 +1776,25 @@ const faqs = [
 			top: 74px;
 		}
 
-		/* MCP無料診断カード（PUSH ONE の NEW カードを参考にした、ヒーロー右下の浮遊カード） */
+		/* MCP無料診断カード — CTAボタン列の上の段。横幅はボタン列に一致（AIセントラルの青カードと同一レイアウト）
+		   width:0 + min-width:100% で、カードの文章長がラッパー幅を押し広げないようにする */
 		.crawl-mcp-card {
-			position: absolute;
-			right: -14px;
-			bottom: -30px;
-			z-index: 3;
 			display: flex;
 			align-items: center;
-			gap: 14px;
-			max-width: 316px;
-			border: 5px solid #195534;
-			border-radius: 18px;
+			justify-content: center;
+			gap: 10px;
+			box-sizing: border-box;
+			width: 0;
+			min-width: 100%;
+			margin-bottom: 14px;
+			min-height: 56px;
+			border: 3px solid #195534;
+			border-radius: 16px;
 			background: linear-gradient(135deg, #1e683f, #348856);
-			padding: 15px 18px;
-			box-shadow: 0 26px 58px rgba(23, 41, 23, 0.38);
-			backdrop-filter: blur(12px);
+			padding: 8px 14px;
+			box-shadow: 0 10px 26px rgba(23, 41, 23, 0.3);
 			text-decoration: none;
+			text-align: left;
 			/* 基底は表示状態。入場演出は backwards フィルで遅延中だけ透明にする（アニメ未発火環境でも消えない） */
 			opacity: 1;
 			animation:
@@ -1791,63 +1804,57 @@ const faqs = [
 		}
 
 		.crawl-mcp-card:hover {
-			box-shadow: 0 32px 66px rgba(23, 41, 23, 0.46);
+			box-shadow: 0 16px 36px rgba(23, 41, 23, 0.42);
+		}
+
+		.crawl-mcp-card > svg {
+			flex: 0 0 auto;
+			width: 15px;
+			height: 15px;
+			color: #f2dca6;
+			transition: transform 0.2s ease;
+		}
+
+		.crawl-mcp-card:hover > svg {
+			transform: translateX(3px);
 		}
 
 		.crawl-mcp-card__badge {
 			display: grid;
 			flex: 0 0 auto;
 			place-items: center;
-			width: 48px;
-			height: 48px;
+			width: 32px;
+			height: 32px;
 			border-radius: 50%;
 			background: radial-gradient(circle at 32% 28%, #d9ae5b, #7d5b10);
-			box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24);
+			box-shadow: 0 0 0 3px rgba(217, 174, 91, 0.24);
 			animation: crawl-mcp-pulse 3.2s ease-out 2.4s infinite;
 			color: #fff;
-			font-size: 13px;
+			font-size: 10px;
 			font-weight: 900;
 			letter-spacing: 0.04em;
 		}
 
 		.crawl-mcp-card__body {
 			display: grid;
-			gap: 3px;
+			gap: 1px;
 			min-width: 0;
 		}
 
 		.crawl-mcp-card__body em {
 			color: #e9c886;
-			font-size: 10px;
+			font-size: 8.5px;
 			font-style: normal;
 			font-weight: 900;
-			letter-spacing: 0.14em;
+			letter-spacing: 0.13em;
 		}
 
 		.crawl-mcp-card__body strong {
 			color: #ffffff;
-			font-size: 13.5px;
-			font-weight: 800;
-			line-height: 1.55;
-		}
-
-		.crawl-mcp-card__go {
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			color: #f2dca6;
 			font-size: 12px;
 			font-weight: 800;
-		}
-
-		.crawl-mcp-card__go svg {
-			width: 15px;
-			height: 15px;
-			transition: transform 0.2s ease;
-		}
-
-		.crawl-mcp-card:hover .crawl-mcp-card__go svg {
-			transform: translateX(3px);
+			line-height: 1.4;
+			white-space: nowrap;
 		}
 
 		@keyframes crawl-mcp-in {
@@ -4402,10 +4409,12 @@ const faqs = [
 				margin-left: auto;
 			}
 
-			.crawl-mcp-card {
-				position: static;
-				max-width: none;
-				margin-top: 16px;
+			.aicrawl-cta {
+				width: 100%;
+			}
+
+			.crawl-mcp-card__body strong {
+				white-space: normal;
 			}
 
 			.crawl-check-card,
