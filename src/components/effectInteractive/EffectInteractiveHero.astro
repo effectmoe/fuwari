@@ -25,6 +25,20 @@ import { Icon } from "astro-icon/components";
 					<img src="/lp/generated/ai-central-hero-main-generated-20260730.png" alt="日本人チームが明るいオフィスでAIセントラルの業務フローを確認している会議風景" fetchpriority="high" decoding="async" />
 				</picture>
 			</div>
+			<a
+				class="central-mcp-card"
+				href="https://mcp.effect.moe/"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="EFFECT MCP — 問い合わせ前に、あなたのAIでAIセントラルを深掘りできます（使い方を見る）"
+			>
+				<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
+				<span class="central-mcp-card__body">
+					<em>EFFECT MCP</em>
+					<strong>問い合わせ前に、あなたのAIでAIセントラルを深掘りできます</strong>
+					<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
+				</span>
+			</a>
 			<div class="stitch-top-hero__orchestrator" aria-label="AIセントラルの役割">
 				<div class="stitch-top-hero__orchestrator-head">
 					<Icon name="material-symbols:memory-alt-outline" />
@@ -366,5 +380,64 @@ import { Icon } from "astro-icon/components";
 			text-align: left;
 			font-size: 13px;
 		}
+	}
+
+	/* EFFECT MCP 深掘りカード — 写真右上（右側の人物の右上の空き）に写真相対%で固定 */
+	.central-mcp-card {
+		position: absolute;
+		top: 7%;
+		right: 8%;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		width: clamp(270px, 26vw, 340px);
+		border: 5px solid #163a5e;
+		border-radius: 16px;
+		background: linear-gradient(135deg, #1e4e7e, #33699f);
+		padding: 13px 16px;
+		box-shadow: 0 22px 48px rgba(16, 32, 50, 0.34);
+		text-decoration: none;
+		opacity: 1;
+		animation:
+			central-mcp-in 0.7s cubic-bezier(0.22, 0.9, 0.3, 1) 0.5s backwards,
+			central-mcp-float 5.5s ease-in-out 1.4s infinite alternate;
+		transition: box-shadow 0.2s ease;
+	}
+	.central-mcp-card:hover { box-shadow: 0 28px 58px rgba(16, 32, 50, 0.44); }
+	.central-mcp-card__badge {
+		display: grid;
+		flex: 0 0 auto;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 32% 28%, #d9ae5b, #7d5b10);
+		box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24);
+		color: #fff;
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 0.04em;
+		animation: central-mcp-pulse 3.2s ease-out 2.2s infinite;
+	}
+	.central-mcp-card__body { display: grid; gap: 2px; min-width: 0; }
+	.central-mcp-card__body em { color: #e9c886; font-size: 9.5px; font-style: normal; font-weight: 900; letter-spacing: 0.13em; }
+	.central-mcp-card__body strong { color: #fff; font-size: 12.5px; font-weight: 800; line-height: 1.5; }
+	.central-mcp-card__go { display: inline-flex; align-items: center; gap: 4px; color: #f2dca6; font-size: 11px; font-weight: 800; }
+	.central-mcp-card__go svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+	.central-mcp-card:hover .central-mcp-card__go svg { transform: translateX(3px); }
+	@keyframes central-mcp-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+	@keyframes central-mcp-float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+	@keyframes central-mcp-pulse {
+		0% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
+		45% { box-shadow: 0 0 0 10px rgba(217, 174, 91, 0); }
+		100% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.central-mcp-card, .central-mcp-card__badge { animation: none; }
+	}
+	@media (max-width: 760px) {
+		/* モバイルは別画像（構図が異なる）のため写真上端の全幅オーバーレイに */
+		.central-mcp-card { top: 12px; right: 12px; left: 12px; width: auto; }
 	}
 </style>

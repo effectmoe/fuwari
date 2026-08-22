@@ -413,24 +413,7 @@ const faqLd = {
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
 
 	<div class="effect-home-design">
-		<div class="home-hero-mcp-wrap">
-			<EffectInteractiveHero />
-		<a
-			class="central-mcp-card central-mcp-card--hero"
-			href="https://mcp.effect.moe/"
-			target="_blank"
-			rel="noopener noreferrer"
-			aria-label="EFFECT MCP — 問い合わせ前に、あなたのAIでAIセントラルを深掘りできます（使い方を見る）"
-		>
-			<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
-			<span class="central-mcp-card__body">
-				<em>EFFECT MCP</em>
-				<strong>問い合わせ前に、あなたのAIでAIセントラルを深掘りできます</strong>
-				<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
-			</span>
-		</a>
-
-		</div>
+		<EffectInteractiveHero />
 
 	<section id="proof" class="digirise-proof-strip border-b border-black/10">
 		<div class="mx-auto max-w-7xl px-4 py-3 md:px-8 md:py-4">
@@ -820,90 +803,6 @@ const faqLd = {
 			</div>
 		</section>
 
-		<style>
-			/* MCP深掘りカード（aicrawl/llmoの確定デザインの青版・FAQ直前に静的配置） */
-			.central-mcp-card {
-				display: flex;
-				align-items: center;
-				gap: 14px;
-				margin: 26px auto 6px;
-				max-width: 400px;
-				border: 5px solid #163a5e;
-				border-radius: 18px;
-				background: linear-gradient(135deg, #1e4e7e, #33699f);
-				padding: 15px 18px;
-				box-shadow: 0 26px 58px rgba(16, 32, 50, 0.32);
-				text-decoration: none;
-				opacity: 1;
-				animation:
-					central-mcp-in 0.7s cubic-bezier(0.22, 0.9, 0.3, 1) 0.4s backwards,
-					central-mcp-float 5.5s ease-in-out 1.2s infinite alternate;
-				transition: box-shadow 0.2s ease;
-			}
-			.central-mcp-card:hover { box-shadow: 0 32px 66px rgba(16, 32, 50, 0.42); }
-			.central-mcp-card__badge {
-				display: grid;
-				flex: 0 0 auto;
-				place-items: center;
-				width: 48px;
-				height: 48px;
-				border-radius: 50%;
-				background: radial-gradient(circle at 32% 28%, #d9ae5b, #7d5b10);
-				box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24);
-				color: #fff;
-				font-size: 13px;
-				font-weight: 900;
-				letter-spacing: 0.04em;
-				animation: central-mcp-pulse 3.2s ease-out 2s infinite;
-			}
-			.central-mcp-card__body { display: grid; gap: 3px; min-width: 0; }
-			.central-mcp-card__body em { color: #e9c886; font-size: 10px; font-style: normal; font-weight: 900; letter-spacing: 0.14em; }
-			.central-mcp-card__body strong { color: #ffffff; font-size: 13.5px; font-weight: 800; line-height: 1.55; }
-			.central-mcp-card__go { display: inline-flex; align-items: center; gap: 4px; color: #f2dca6; font-size: 12px; font-weight: 800; }
-			.central-mcp-card__go svg { width: 15px; height: 15px; transition: transform 0.2s ease; }
-			.central-mcp-card:hover .central-mcp-card__go svg { transform: translateX(3px); }
-			@keyframes central-mcp-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-			@keyframes central-mcp-float { from { transform: translateY(0); } to { transform: translateY(-6px); } }
-			@keyframes central-mcp-pulse {
-				0% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
-				45% { box-shadow: 0 0 0 11px rgba(217, 174, 91, 0); }
-				100% { box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24); }
-			}
-			@media (prefers-reduced-motion: reduce) {
-				.central-mcp-card, .central-mcp-card__badge { animation: none; }
-			}
-			@media (max-width: 640px) {
-				.central-mcp-card { max-width: calc(100% - 32px); margin: 22px 16px 4px; }
-			}
-			.home-hero-mcp-wrap { position: relative; }
-			/* ヒーロー内の空きスペースは実測済み（縦座標は全幅で固定レイアウト）:
-			   見出し165-320 / 段落344-474 / CTA506-562 / 注記586-605 / 写真655〜 */
-			.central-mcp-card--hero {
-				position: absolute;
-				top: 92px;
-				right: 20px;
-				z-index: 10;
-				margin: 0;
-				width: 380px;
-				max-width: none;
-			}
-			@media (max-width: 1699px) {
-				/* 見出し右端と衝突するため、段落下〜写真上の空き帯（CTA行の右横）へ */
-				.central-mcp-card--hero { top: 484px; }
-			}
-			@media (max-width: 1243px) {
-				.central-mcp-card--hero { width: 290px; right: 16px; }
-			}
-			@media (max-width: 900px) {
-				/* モバイルは写真の上部に全幅で重ねる（本文テキスト帯には置かない） */
-				.central-mcp-card--hero {
-					top: 928px;
-					right: 16px;
-					left: 16px;
-					width: auto;
-				}
-			}
-		</style>
 
 		<section class="lp-faq-section" id="faq">
 			<div class="lp-faq-section__inner">
