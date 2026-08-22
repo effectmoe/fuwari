@@ -413,7 +413,24 @@ const faqLd = {
 	<script type="application/ld+json" set:html={JSON.stringify(faqLd)} is:inline />
 
 	<div class="effect-home-design">
-		<EffectInteractiveHero />
+		<div class="home-hero-mcp-wrap">
+			<EffectInteractiveHero />
+		<a
+			class="central-mcp-card central-mcp-card--hero"
+			href="https://mcp.effect.moe/"
+			target="_blank"
+			rel="noopener noreferrer"
+			aria-label="EFFECT MCP — 問い合わせ前に、あなたのAIでAIセントラルを深掘りできます（使い方を見る）"
+		>
+			<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
+			<span class="central-mcp-card__body">
+				<em>EFFECT MCP</em>
+				<strong>問い合わせ前に、あなたのAIでAIセントラルを深掘りできます</strong>
+				<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
+			</span>
+		</a>
+
+		</div>
 
 	<section id="proof" class="digirise-proof-strip border-b border-black/10">
 		<div class="mx-auto max-w-7xl px-4 py-3 md:px-8 md:py-4">
@@ -671,21 +688,6 @@ const faqLd = {
 			</div>
 		</section>
 
-		<a
-			class="central-mcp-card"
-			href="https://mcp.effect.moe/"
-			target="_blank"
-			rel="noopener noreferrer"
-			aria-label="EFFECT MCP — 問い合わせ前に、あなたのAIでAIセントラルを深掘りできます（使い方を見る）"
-		>
-			<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
-			<span class="central-mcp-card__body">
-				<em>EFFECT MCP</em>
-				<strong>問い合わせ前に、あなたのAIでAIセントラルを深掘りできます</strong>
-				<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
-			</span>
-		</a>
-
 		<section class="approval-tray-section" id="approval-tray">
 			<div class="approval-tray-section__inner">
 				<div class="approval-tray-heading">
@@ -872,6 +874,22 @@ const faqLd = {
 			}
 			@media (max-width: 640px) {
 				.central-mcp-card { max-width: calc(100% - 32px); margin: 22px 16px 4px; }
+			}
+			.home-hero-mcp-wrap { position: relative; }
+			.central-mcp-card--hero {
+				position: absolute;
+				right: 24px;
+				bottom: 28px;
+				z-index: 10;
+				margin: 0;
+				max-width: 380px;
+			}
+			@media (max-width: 900px) {
+				.central-mcp-card--hero {
+					position: static;
+					margin: 0 16px 20px;
+					max-width: none;
+				}
 			}
 		</style>
 
