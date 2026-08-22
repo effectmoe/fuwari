@@ -10,26 +10,24 @@ import { Icon } from "astro-icon/components";
 			<p class="stitch-top-hero__lead">
 				社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、管理された環境でAIが参照できる社内基盤へ整えます。過去の経緯から現状を時系列で復元し、次に打つべき手とリスクを組み立てて提示。社員や部署ごとの文脈を持ったAIが、検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行を先に進め、人間は意思決定に集中できる状態をつくります。
 			</p>
-			<div class="stitch-top-hero__cta">
-				<div class="stitch-top-hero__actions">
-					<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
-					<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
-					<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
-				</div>
+			<div class="stitch-top-hero__actions">
 				<a
 					class="central-mcp-card"
 					href="https://mcp.effect.moe/?use=ai-central"
 					target="_blank"
 					rel="noopener noreferrer"
-					aria-label="EFFECT MCP — あなたのAIを使ってセントラルシステムについて深掘りできます（使い方を見る）"
+					aria-label="EFFECT MCP（無料）— あなたのAIを使ってセントラルシステムについて深掘りできます"
 				>
 					<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
 					<span class="central-mcp-card__body">
 						<em>EFFECT MCP</em>
 						<strong>あなたのAIを使ってセントラルシステムについて深掘りできます</strong>
-						<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
 					</span>
+					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>
+				<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
+				<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
+				<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
 			</div>
 			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
 		</div>
@@ -121,21 +119,13 @@ import { Icon } from "astro-icon/components";
 		line-height: 1.8;
 	}
 
-	.stitch-top-hero__cta {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		width: fit-content;
-		max-width: 100%;
-		margin-bottom: 24px;
-	}
-
 	.stitch-top-hero__actions {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: stretch;
 		justify-content: center;
 		gap: 16px;
-		margin-bottom: 16px;
+		margin-bottom: 24px;
 	}
 
 	.stitch-top-hero__actions a {
@@ -394,21 +384,18 @@ import { Icon } from "astro-icon/components";
 		}
 	}
 
-	/* EFFECT MCP 深掘りカード — CTAボタン列の下に組み込み。横幅はボタン列の左端〜右端に追従
-	   （width:0 + min-width:100% で、カード自身の文章長がラッパー幅を押し広げないようにする） */
+	/* EFFECT MCP 深掘りカード — CTAボタン列の先頭に、ボタンと同じ高さで組み込み（青カードのコンパクト形） */
 	.central-mcp-card {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 10px;
 		box-sizing: border-box;
-		width: 0;
-		min-width: 100%;
-		margin: 0;
-		border: 5px solid #163a5e;
+		min-height: 56px;
+		border: 3px solid #163a5e;
 		border-radius: 16px;
 		background: linear-gradient(135deg, #1e4e7e, #33699f);
-		padding: 12px 18px;
-		box-shadow: 0 16px 38px rgba(16, 32, 50, 0.28);
+		padding: 8px 14px;
+		box-shadow: 0 10px 26px rgba(16, 32, 50, 0.26);
 		text-decoration: none;
 		text-align: left;
 		opacity: 1;
@@ -417,28 +404,27 @@ import { Icon } from "astro-icon/components";
 			central-mcp-float 5.5s ease-in-out 1.4s infinite alternate;
 		transition: box-shadow 0.2s ease;
 	}
-	.central-mcp-card:hover { box-shadow: 0 28px 58px rgba(16, 32, 50, 0.44); }
+	.central-mcp-card:hover { box-shadow: 0 16px 36px rgba(16, 32, 50, 0.4); }
+	.central-mcp-card > svg { flex: 0 0 auto; width: 15px; height: 15px; color: #f2dca6; transition: transform 0.2s ease; }
+	.central-mcp-card:hover > svg { transform: translateX(3px); }
 	.central-mcp-card__badge {
 		display: grid;
 		flex: 0 0 auto;
 		place-items: center;
-		width: 44px;
-		height: 44px;
+		width: 32px;
+		height: 32px;
 		border-radius: 50%;
 		background: radial-gradient(circle at 32% 28%, #d9ae5b, #7d5b10);
-		box-shadow: 0 0 0 4px rgba(217, 174, 91, 0.24);
+		box-shadow: 0 0 0 3px rgba(217, 174, 91, 0.24);
 		color: #fff;
-		font-size: 12px;
+		font-size: 10px;
 		font-weight: 900;
 		letter-spacing: 0.04em;
 		animation: central-mcp-pulse 3.2s ease-out 2.2s infinite;
 	}
-	.central-mcp-card__body { display: grid; gap: 2px; min-width: 0; }
-	.central-mcp-card__body em { color: #e9c886; font-size: 9.5px; font-style: normal; font-weight: 900; letter-spacing: 0.13em; }
-	.central-mcp-card__body strong { color: #fff; font-size: 12.5px; font-weight: 800; line-height: 1.5; }
-	.central-mcp-card__go { display: inline-flex; align-items: center; gap: 4px; color: #f2dca6; font-size: 11px; font-weight: 800; }
-	.central-mcp-card__go svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
-	.central-mcp-card:hover .central-mcp-card__go svg { transform: translateX(3px); }
+	.central-mcp-card__body { display: grid; gap: 1px; min-width: 0; }
+	.central-mcp-card__body em { color: #e9c886; font-size: 8.5px; font-style: normal; font-weight: 900; letter-spacing: 0.13em; }
+	.central-mcp-card__body strong { color: #fff; font-size: 12px; font-weight: 800; line-height: 1.4; white-space: nowrap; }
 	@keyframes central-mcp-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 	@keyframes central-mcp-float { from { transform: translateY(0); } to { transform: translateY(-5px); } }
 	@keyframes central-mcp-pulse {
@@ -450,6 +436,7 @@ import { Icon } from "astro-icon/components";
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
 	@media (max-width: 760px) {
-		.stitch-top-hero__cta { width: 100%; }
+		.central-mcp-card { width: 100%; }
+		.central-mcp-card__body strong { white-space: normal; }
 	}
 </style>
