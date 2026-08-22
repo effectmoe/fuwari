@@ -451,10 +451,13 @@ import { Icon } from "astro-icon/components";
 	@media (prefers-reduced-motion: reduce) {
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
-	/* 4行パターン: ボタン3つが1行に収まらない幅では カード→ボタン→ボタン→ボタン の縦積み・全段同一幅 */
-	@media (max-width: 620px) {
+	/* 4行パターン: ボタン3つが1行に収まらない幅では カード→ボタン→ボタン→ボタン の縦積み・全段同一幅。
+	   🔴 既存の640pxブロックが actions を display:grid にするため、ここで display:flex を明示して上書きする
+	   （grid の auto トラックは内容幅に縮み、width:100% が「縮んだトラックの100%」に解決されてしまう） */
+	@media (max-width: 640px) {
 		.stitch-top-hero__cta { width: min(100%, 344px); }
 		.stitch-top-hero__actions {
+			display: flex;
 			flex-direction: column;
 			flex-wrap: nowrap;
 			align-items: stretch;
