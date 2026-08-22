@@ -435,8 +435,16 @@ import { Icon } from "astro-icon/components";
 	@media (prefers-reduced-motion: reduce) {
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
-	@media (max-width: 760px) {
-		.central-mcp-card { width: 100%; }
+	/* 1行に収まらない幅では、カード＋3ボタンを同一幅で4段に積む（ボタンは拡大・カードは縮小） */
+	@media (max-width: 1080px) {
+		.stitch-top-hero__actions {
+			flex-direction: column;
+			align-items: center;
+		}
+		.stitch-top-hero__actions > a {
+			box-sizing: border-box;
+			width: min(100%, 344px);
+		}
 		.central-mcp-card__body strong { white-space: normal; }
 	}
 </style>
