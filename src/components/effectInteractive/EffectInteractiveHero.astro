@@ -456,7 +456,12 @@ import { Icon } from "astro-icon/components";
 		.stitch-top-hero__cta { width: min(100%, 344px); }
 		.stitch-top-hero__actions {
 			flex-direction: column;
+			flex-wrap: nowrap;
 			align-items: stretch;
+		}
+		.stitch-top-hero__actions a {
+			box-sizing: border-box;
+			width: 100%;
 		}
 		.central-mcp-card__body strong { white-space: normal; }
 	}
