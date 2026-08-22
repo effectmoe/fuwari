@@ -876,18 +876,28 @@ const faqLd = {
 				.central-mcp-card { max-width: calc(100% - 32px); margin: 22px 16px 4px; }
 			}
 			.home-hero-mcp-wrap { position: relative; }
+			/* ヒーロー内の空きスペースは実測済み（縦座標は全幅で固定レイアウト）:
+			   見出し165-320 / 段落344-474 / CTA506-562 / 注記586-605 / 写真655〜 */
 			.central-mcp-card--hero {
 				position: absolute;
 				top: 92px;
 				right: 20px;
 				z-index: 10;
 				margin: 0;
-				width: min(380px, calc(100vw - 40px));
+				width: 380px;
 				max-width: none;
 			}
+			@media (max-width: 1699px) {
+				/* 見出し右端と衝突するため、段落下〜写真上の空き帯（CTA行の右横）へ */
+				.central-mcp-card--hero { top: 484px; }
+			}
+			@media (max-width: 1243px) {
+				.central-mcp-card--hero { width: 290px; right: 16px; }
+			}
 			@media (max-width: 900px) {
+				/* モバイルは写真の上部に全幅で重ねる（本文テキスト帯には置かない） */
 				.central-mcp-card--hero {
-					top: 80px;
+					top: 928px;
 					right: 16px;
 					left: 16px;
 					width: auto;
