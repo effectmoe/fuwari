@@ -10,25 +10,27 @@ import { Icon } from "astro-icon/components";
 			<p class="stitch-top-hero__lead">
 				社内資料・顧客情報・対応履歴・FAQ・メッセージのやり取りを、管理された環境でAIが参照できる社内基盤へ整えます。過去の経緯から現状を時系列で復元し、次に打つべき手とリスクを組み立てて提示。社員や部署ごとの文脈を持ったAIが、検索・整理・時系列の復元・次の一手の提案・作成・確認・自動実行を先に進め、人間は意思決定に集中できる状態をつくります。
 			</p>
-			<div class="stitch-top-hero__actions">
-				<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
-				<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
-				<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
+			<div class="stitch-top-hero__cta">
+				<div class="stitch-top-hero__actions">
+					<a href="#contact" class="stitch-top-hero__primary">無料相談する</a>
+					<a href="#pricing" class="stitch-top-hero__secondary">料金を見る</a>
+					<a href="#decision" class="stitch-top-hero__secondary">仕組みを見る</a>
+				</div>
+				<a
+					class="central-mcp-card"
+					href="https://mcp.effect.moe/?use=ai-central"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="EFFECT MCP — あなたのAIを使ってセントラルシステムについて深掘りできます（使い方を見る）"
+				>
+					<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
+					<span class="central-mcp-card__body">
+						<em>EFFECT MCP</em>
+						<strong>あなたのAIを使ってセントラルシステムについて深掘りできます</strong>
+						<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
+					</span>
+				</a>
 			</div>
-			<a
-				class="central-mcp-card"
-				href="https://mcp.effect.moe/?use=ai-central"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="EFFECT MCP — 問い合わせ前に、あなたのAIでAIセントラルを深掘りできます（使い方を見る）"
-			>
-				<span class="central-mcp-card__badge" aria-hidden="true">無料</span>
-				<span class="central-mcp-card__body">
-					<em>EFFECT MCP</em>
-					<strong>問い合わせ前に、あなたのAIでAIセントラルを深掘りできます</strong>
-					<span class="central-mcp-card__go">使い方を見る（登録1回・読み取り専用） <Icon name="material-symbols:arrow-forward-rounded" /></span>
-				</span>
-			</a>
 			<p class="stitch-top-hero__note">※士業事務所、個人情報を扱う事業者、社内ナレッジをAI化したい企業まで対応。</p>
 		</div>
 
@@ -119,11 +121,21 @@ import { Icon } from "astro-icon/components";
 		line-height: 1.8;
 	}
 
+	.stitch-top-hero__cta {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: fit-content;
+		max-width: 100%;
+		margin-bottom: 24px;
+	}
+
 	.stitch-top-hero__actions {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 16px;
-		margin-bottom: 24px;
+		margin-bottom: 16px;
 	}
 
 	.stitch-top-hero__actions a {
@@ -382,14 +394,16 @@ import { Icon } from "astro-icon/components";
 		}
 	}
 
-	/* EFFECT MCP 深掘りカード — CTAボタン列の下・同ブロック内の段として組み込み（インフロー・被りなし） */
+	/* EFFECT MCP 深掘りカード — CTAボタン列の下に組み込み。横幅はボタン列の左端〜右端に追従
+	   （width:0 + min-width:100% で、カード自身の文章長がラッパー幅を押し広げないようにする） */
 	.central-mcp-card {
 		display: flex;
 		align-items: center;
 		gap: 12px;
-		width: fit-content;
-		max-width: min(100%, 640px);
-		margin: 0 0 22px;
+		box-sizing: border-box;
+		width: 0;
+		min-width: 100%;
+		margin: 0;
 		border: 5px solid #163a5e;
 		border-radius: 16px;
 		background: linear-gradient(135deg, #1e4e7e, #33699f);
@@ -436,6 +450,6 @@ import { Icon } from "astro-icon/components";
 		.central-mcp-card, .central-mcp-card__badge { animation: none; }
 	}
 	@media (max-width: 760px) {
-		.central-mcp-card { width: 100%; }
+		.stitch-top-hero__cta { width: 100%; }
 	}
 </style>
