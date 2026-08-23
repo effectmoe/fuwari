@@ -35,7 +35,8 @@ const postUrl = new URL(`/posts/${entry.slug}/`, Astro.site).toString();
 const inLang = entry.data.lang
 	? entry.data.lang.replace("_", "-")
 	: siteConfig.lang.replace("_", "-");
-const coverSource = entry.data.image || entry.data.thumbnail;
+// 記事ヘッダーは image、SNS/OGカードは thumbnail を優先する。
+const coverSource = entry.data.thumbnail || entry.data.image;
 const heroImageSrc = entry.data.image || entry.data.thumbnail || "";
 const blogThumbSrc = `/blog-thumbs/${getDir(entry.id).replace(/\/$/, "")}.jpg`;
 const postImageAlt =
