@@ -115,6 +115,12 @@
     border-radius: 0.1em;
     font-weight: 600;
 }
+
+/* 長い出典 URL でもモバイル幅を押し広げない。通常の日本語リンクは必要な時だけ改行する。 */
+.custom-md a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
 .dark .custom-md mark {
     background: linear-gradient(transparent 55%, rgba(250, 204, 21, 0.40) 55%);
     color: inherit;

@@ -595,9 +595,16 @@ const navItems = [
 		}
 
 		.effect-landing-header__menu[open] .effect-landing-header__panel {
+			display: grid;
+			visibility: visible;
 			opacity: 1;
 			pointer-events: auto;
 			transform: translateY(0);
+		}
+
+		/* 閉じたモバイルメニューの子要素が画面外へ残り、横スクロールを発生させないようにする。 */
+		.effect-landing-header__menu:not([open]) .effect-landing-header__panel {
+			display: none;
 		}
 
 		.effect-landing-header__panel a,
@@ -820,7 +827,9 @@ const navItems = [
 				top: 76px;
 				right: 14px;
 				left: 14px;
-				width: auto;
+				width: calc(100vw - 28px);
+				max-width: calc(100vw - 28px);
+				box-sizing: border-box;
 			}
 
 			.effect-landing-header__panel-submenu {
