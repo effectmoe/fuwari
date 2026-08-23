@@ -45,9 +45,24 @@ if (r < page.lastPage - 2) pages.push(HIDDEN);
 if (r === page.lastPage - 2) pages.push(page.lastPage - 1);
 if (r < page.lastPage) pages.push(page.lastPage);
 
+// 一覧ページのベースパス。/blog/ → "/blog/" 、/blog/2/ → "/blog/" を返す。
+//
+// 🔴 なぜ page.url.current から導くか（2026-08-24 修正）
+//    本家 Fuwari は「記事一覧＝サイトルート」前提で "/" と `/${p}/` を直書きしていた。
+//    effect.moe は一覧を /blog/ へ移しているため、番号リンクだけが
+//    存在しない /2/ を指し、Google に 404 として拾われていた
+//    （Search Console「見つかりませんでした（404）」の発生源）。
+//    ベースを実際のURLから導けば、一覧がルートでも配下でも正しく追随する。
+const basePath = (() => {
+	const current = page.url.current.endsWith("/")
+		? page.url.current
+		: `${page.url.current}/`;
+	return current.replace(/\/\d+\/$/, "/");
+})();
+
 const getPageUrl = (p: number) => {
-	if (p === 1) return "/";
-	return `/${p}/`;
+	if (p === 1) return basePath;
+	return `${basePath}${p}/`;
 };
 ---
 
