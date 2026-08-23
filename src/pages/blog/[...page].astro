@@ -68,14 +68,24 @@ const thumbnailPositions: Record<string, string> = {
 	"content/posts/astro-fuwari-workflow-vs-wordpress/index.md": "center 84%",
 };
 
+// 公開済みサムネイルを差し替えたときは、古いブラウザ／CDNキャッシュを使わない。
+// 文字や主題が端で切れる旧画像を一覧に残さないため、差し替え対象だけ版を明示する。
+const thumbnailVersions: Record<string, string> = {
+	"ai-security-data-stays-home": "20260824-kagami-v2",
+};
+
 const getThumbnailPosition = (post: { id: string; slug: string }) =>
 	thumbnailPositions[post.slug] ??
 	thumbnailPositions[getDir(post.id)] ??
 	thumbnailPositions[post.id] ??
 	"center";
 
-const getBlogThumbSrc = (post: { id: string }) =>
-	`/blog-thumbs/${getDir(post.id).replace(/\/$/, "")}.jpg`;
+const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
+	const slug = getDir(post.id).replace(/\/$/, "");
+	const version =
+		thumbnailVersions[post.slug ?? slug] ?? thumbnailVersions[slug];
+	return `/blog-thumbs/${slug}.jpg${version ? `?v=${version}` : ""}`;
+};
 ---
 
 <LandingLayout title="effect.moe Blog" description={blogDescription} ogType="blog">
