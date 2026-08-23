@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">2つの構成のデータフロー比較</title><desc id="desc">クラウド型と外に出さない構成を、情報が通る経路で比較する図。</desc>
+  <defs><marker id="r" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b84b42"/></marker><marker id="g" markerWidth="12" markerHeight="12" refX="10" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#397256"/></marker></defs>
+  <rect width="1200" height="760" rx="24" fill="#fffdf8"/><text x="68" y="76" fill="#1e4e7e" font-family="sans-serif" font-size="25" font-weight="700" letter-spacing="3">DATA FLOW / WHERE DOES INFORMATION GO?</text>
+  <rect x="58" y="122" width="1084" height="246" rx="18" fill="#fbefea" stroke="#d38c82" stroke-width="2"/>
+  <text x="94" y="173" fill="#9a3c35" font-family="sans-serif" font-size="30" font-weight="800">クラウド型</text><text x="94" y="209" fill="#5d514c" font-family="sans-serif" font-size="20">機密情報が、社内の境界線を越える</text>
+  <g font-family="sans-serif" font-size="22" font-weight="700" text-anchor="middle"><rect x="130" y="255" width="182" height="70" rx="10" fill="#fff" stroke="#8b6a62" stroke-width="2"/><text x="221" y="299" fill="#2d3136">社内PC</text><rect x="505" y="255" width="192" height="70" rx="10" fill="#fff" stroke="#b84b42" stroke-width="2"/><text x="601" y="299" fill="#9a3c35">インターネット</text><rect x="870" y="255" width="182" height="70" rx="10" fill="#fff" stroke="#8b6a62" stroke-width="2"/><text x="961" y="299" fill="#2d3136">外部AIサーバー</text></g>
+  <path d="M322 290H490" stroke="#b84b42" stroke-width="7" marker-end="url(#r)"/><path d="M707 290H855" stroke="#b84b42" stroke-width="7" marker-end="url(#r)"/>
+  <text x="601" y="350" fill="#9a3c35" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">資料・顧客情報・業務データが外部へ送られる</text>
+  <rect x="58" y="410" width="1084" height="284" rx="18" fill="#eef6ef" stroke="#78a58a" stroke-width="2"/>
+  <text x="94" y="461" fill="#2e674d" font-family="sans-serif" font-size="30" font-weight="800">外に出さない構成</text><text x="94" y="497" fill="#5d514c" font-family="sans-serif" font-size="20">AIが使う情報と処理を、社内の境界内に置く</text>
+  <rect x="110" y="530" width="920" height="120" rx="14" fill="#fffdf8" stroke="#397256" stroke-width="3" stroke-dasharray="10 8"/>
+  <text x="132" y="556" fill="#2e674d" font-family="sans-serif" font-size="16" font-weight="700">社内ネットワーク</text>
+  <g font-family="sans-serif" font-size="21" font-weight="700" text-anchor="middle"><rect x="176" y="570" width="172" height="54" rx="9" fill="#fff" stroke="#397256" stroke-width="2"/><text x="262" y="604" fill="#2d3136">社内PC</text><rect x="514" y="570" width="172" height="54" rx="9" fill="#fff" stroke="#397256" stroke-width="2"/><text x="600" y="604" fill="#2d3136">社内AI</text><rect x="794" y="570" width="172" height="54" rx="9" fill="#fff" stroke="#397256" stroke-width="2"/><text x="880" y="604" fill="#2d3136">参照資料</text></g>
+  <path d="M359 597H498" stroke="#397256" stroke-width="7" marker-end="url(#g)"/><path d="M784 597H700" stroke="#397256" stroke-width="7" marker-end="url(#g)"/>
+  <text x="600" y="724" fill="#51493e" font-family="sans-serif" font-size="22" font-weight="700" text-anchor="middle">AIの利用を止めるのではなく、情報の通り道を設計する。</text>
+</svg>

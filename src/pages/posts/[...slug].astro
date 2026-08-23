@@ -5,6 +5,7 @@ import MangaSwiper from "@components/MangaSwiper.astro";
 import ImageWrapper from "@components/misc/ImageWrapper.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import ArticleFAQ from "@components/widget/ArticleFAQ.astro";
+import ArticleTermHints from "@components/widget/ArticleTermHints.astro";
 import CourseCTA from "@components/widget/CourseCTA.astro";
 import RelatedLinks from "@components/widget/RelatedLinks.astro";
 import ServiceCTA from "@components/widget/ServiceCTA.astro";
@@ -51,14 +52,7 @@ const authorProfileLinks = seoConfig.sameAs
 
 		return { href, label };
 	});
-const mangaPanels = entry.data.manga_tldr?.length
-	? entry.data.manga_tldr
-	: [
-			{
-				src: blogThumbSrc,
-				caption: postImageAlt,
-			},
-		];
+const mangaPanels = entry.data.manga_tldr ?? [];
 
 let ogImageUrl = `${siteUrl}og-image.jpg`;
 if (coverSource) {
@@ -182,6 +176,7 @@ const blogPostingLd = {
 
 		<div class="commercial-post-shell commercial-post-body">
 			<div class="commercial-post-card">
+				<ArticleTermHints />
 				{mangaPanels.length > 0 && (
 					<section class="commercial-post-manga commercial-post-module" aria-label="漫画で読む要約">
 						<div class="commercial-post-manga__head">

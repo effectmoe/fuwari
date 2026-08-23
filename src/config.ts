@@ -320,7 +320,7 @@ export const serviceConfig = {
 			pitch:
 				"社内資料・顧客情報・対応履歴を、AIが参照できる社内基盤として整えます。まずは一部署・一業務から。",
 			note: "個人情報を扱う場合はローカルLLM構成もご相談いただけます。",
-			url: "https://effect.moe/",
+			url: "https://effect.moe/ai-central/",
 			cta: "AI CENTRAL を見る",
 			match: [
 				"社内AI",

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-labelledby="title desc">
+  <title id="title">AIに社内情報を渡すときの二つの構成</title>
+  <desc id="desc">左にクラウド型で社内情報が外へ流れる様子、右に社内でAI利用が完結する様子を対比した記事のアイキャッチ。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fbf7ee"/><stop offset="1" stop-color="#e8e2d5"/></linearGradient>
+    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8e6e0"/><stop offset="1" stop-color="#f0cfc3"/></linearGradient>
+    <linearGradient id="local" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5f0e8"/><stop offset="1" stop-color="#bfd6c7"/></linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#574c3d" flood-opacity=".16"/></filter>
+    <marker id="arrowRed" markerWidth="14" markerHeight="14" refX="11" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#b84b42"/></marker>
+    <marker id="arrowGreen" markerWidth="14" markerHeight="14" refX="11" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#397256"/></marker>
+  </defs>
+  <rect width="1672" height="941" fill="url(#bg)"/>
+  <rect x="28" y="28" width="1616" height="885" rx="28" fill="none" stroke="#b68c3c" stroke-opacity=".65" stroke-width="2"/>
+  <text x="88" y="130" fill="#1e4e7e" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="27" font-weight="700" letter-spacing="4">AI SECURITY / ARCHITECTURE</text>
+  <text x="88" y="218" fill="#20242b" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="66" font-weight="800">AIに社内情報を渡すのが怖い。</text>
+  <text x="88" y="292" fill="#20242b" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="48" font-weight="700">答えは、<tspan fill="#b68c3c">「外に出さない」</tspan>設計だった。</text>
+  <g filter="url(#shadow)">
+    <rect x="88" y="372" width="685" height="420" rx="24" fill="url(#cloud)" stroke="#bc6458" stroke-width="3"/>
+    <rect x="900" y="372" width="685" height="420" rx="24" fill="url(#local)" stroke="#397256" stroke-width="3"/>
+  </g>
+  <g font-family="Hiragino Sans, Yu Gothic, sans-serif">
+    <text x="132" y="438" fill="#9a3c35" font-size="27" font-weight="800" letter-spacing="2">CLOUD TYPE</text>
+    <text x="132" y="488" fill="#272727" font-size="39" font-weight="800">社内情報が外部へ渡る</text>
+    <text x="944" y="438" fill="#2e674d" font-size="27" font-weight="800" letter-spacing="2">LOCAL / CLOSED TYPE</text>
+    <text x="944" y="488" fill="#272727" font-size="39" font-weight="800">社内でAI利用が完結する</text>
+  </g>
+  <g stroke="#70413d" stroke-width="4" fill="#fffaf1">
+    <rect x="143" y="560" width="154" height="102" rx="14"/><rect x="539" y="560" width="166" height="102" rx="14"/>
+    <rect x="954" y="560" width="154" height="102" rx="14"/><rect x="1330" y="560" width="166" height="102" rx="14"/>
+  </g>
+  <g fill="#1e4e7e"><rect x="171" y="580" width="98" height="54" rx="5"/><rect x="982" y="580" width="98" height="54" rx="5"/></g>
+  <g fill="#fff"><rect x="181" y="590" width="78" height="34" rx="2"/></g>
+  <g font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="#263238" font-size="22" font-weight="700" text-anchor="middle">
+    <text x="220" y="704">社内PC</text><text x="622" y="704">外部AI</text><text x="1031" y="704">社内PC</text><text x="1413" y="704">社内AI</text>
+  </g>
+  <path d="M305 610H523" stroke="#b84b42" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowRed)"/>
+  <text x="413" y="545" fill="#9a3c35" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="18" font-weight="700" text-anchor="middle">インターネットを越える</text>
+  <path d="M1117 610H1314" stroke="#397256" stroke-width="8" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+  <path d="M1413 675V724H1031V675" fill="none" stroke="#397256" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+  <text x="1215" y="760" fill="#2e674d" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="18" font-weight="700" text-anchor="middle">社内ネットワークの境界内</text>
+  <g transform="translate(827 534)"><circle cx="0" cy="78" r="52" fill="#b68c3c"/><path d="M-18 78H18M6 62L22 78L6 94" fill="none" stroke="#fffdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <text x="88" y="857" fill="#51493e" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="27" font-weight="700">問題は「AIを使うか」ではない。情報が、どこを通る設計か。</text>
+</svg>
