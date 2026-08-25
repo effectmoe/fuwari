@@ -65,6 +65,13 @@ function existsImage(postPath, src) {
 	return fs.existsSync(target);
 }
 
+// `/blog/` のカードは Astro の相対画像ではなく、公開ディレクトリの
+// `/blog-thumbs/<slug>.jpg` を直接参照する。frontmatter の thumbnail だけを
+// 検査すると、記事本体では画像が見えても一覧カードだけ壊れるため、別途検査する。
+function hasBlogCardThumbnail(slug) {
+	return fs.existsSync(path.join(root, "public", "blog-thumbs", `${slug}.jpg`));
+}
+
 function hasExternalSource(raw) {
 	const urls = raw.match(/https?:\/\/[^\s)>"']+/g) || [];
 	return urls.some((rawUrl) => {
@@ -111,6 +118,7 @@ for (const file of files) {
 	if (image && !existsImage(file, image)) addIssue(errors, `image の実体が見つかりません: ${image}`);
 	if (!thumbnail) addIssue(warnings, "thumbnail がありません");
 	if (thumbnail && !existsImage(file, thumbnail)) addIssue(errors, `thumbnail の実体が見つかりません: ${thumbnail}`);
+	if (!hasBlogCardThumbnail(slug)) addIssue(errors, `一覧カード用サムネイルが見つかりません: public/blog-thumbs/${slug}.jpg`);
 	if (!imageAlt || imageAlt.length < 25) addIssue(warnings, "imageAlt が短い、またはありません");
 	if (tagsCount < 3) addIssue(warnings, "tags が3個未満です");
 	if (!valueOf(frontmatter, "category")) addIssue(warnings, "category がありません");
