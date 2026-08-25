@@ -63,10 +63,13 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "自社サイトに来ているAIクローラーを調べる方法はありますか？",
-				a: "自社サイトに来ているAIクローラーは、Cloudflareなどのアクセスログでクローラー名とページを確認して調べられます。effect.moeでは直近30日で、ChatGPT-User 456回、ClaudeBot 392回、GPTBot 310回、OAI-SearchBot 255回、PerplexityBot 153回のクロールを自社集計で記録しました。AI CRAWLでは、このAIクローラーの実ログを分析し、次に直すページを整理します。",
+				a: '自社サイトに来ているAIクローラーは、サーバー側のアクセス記録でクローラー名、読まれたページ、正常に応答できたかを確認して調べます。AI CRAWLでは、この実ログをもとに、次に直すページを整理します。詳しくは、EFFECT自身の69日間の実測をまとめた<a href="/posts/crawled-not-visited/">AIクローラーは7,218回来た。でも人は3人だけだった</a>をご覧ください。',
 				links: [
 					{ label: "AI CRAWLを見る", href: "/aicrawl/" },
-					{ label: "AI流入分析の考え方", href: "/aicrawl/#overview" },
+					{
+						label: "AIクローラー実測の記事",
+						href: "/posts/crawled-not-visited/",
+					},
 				],
 			},
 			{
