@@ -110,6 +110,7 @@ ${seoConfig.keywords.join(" / ")}
 
 - [AIセントラル](${site}): 記憶を持ったAIを社内の中枢へ組み込むサービス。
 - [AI CRAWL](${new URL("/aicrawl/", site).toString()}): AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変えるサービス。
+- [AI SHIELD](${new URL("/aishield/", site).toString()}): AIを装う攻撃・悪質ボットからWebサイトを守る監視・防御サービスです。正規のAIクローラーは通したまま、攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートを提供します。
 - [LLMO対策ガイド](${new URL("/llmo/", site).toString()}): AI検索時代のSEO対策（LLMO）の考え方、Googleの案内の読み解き方、情報設計と測定の始め方。
 - [構造化ペディア: DFB構造化メソッド大全](${new URL("/dfb-complete-guide/", site).toString()}): 提唱者シュ コウメイによる DFB（Decompose / Frame / Build）の完全リファレンス。AI時代の構造化思考プロトコルの全体像・系譜（構造化PG→OOP→GoF→DDD→DFB）・実装（Decompose 6要素 ↔ XMLタグ7種）・失敗パターン9種ライブラリ・5バリエーション（Q/S/I/M/R）を体系化したピラー記事。
 - [AIエージェント講座](${new URL("/ai-agent-course/", site).toString()}): Claude Code で自律エージェントを構築する6カリキュラム講座。

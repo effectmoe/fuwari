@@ -30,6 +30,11 @@ const brandRoutes = [
 		href: "/aicrawl/",
 	},
 	{
+		match: (path: string) => path.startsWith("/aishield"),
+		label: "AI SHIELD",
+		href: "/aishield/",
+	},
+	{
 		match: (path: string) => path.startsWith("/ai-agent-course"),
 		label: "AI COURSE",
 		href: "/ai-agent-course/",
@@ -116,6 +121,22 @@ const serviceNavGroups = [
 			{ href: "/aicrawl/#faq", label: "FAQ" },
 			{
 				href: "/?inquiry=consultation&service=aicrawl#contact",
+				label: "無料相談",
+			},
+		],
+	},
+	{
+		label: "AI シールド",
+		href: "/aishield/",
+		items: [
+			{ href: "/aishield/", label: "トップ" },
+			{ href: "/aishield/#mechanism", label: "守る仕組み" },
+			{ href: "/aishield/#attacks", label: "攻撃の実態" },
+			{ href: "/aishield/#report", label: "月次レポート" },
+			{ href: "/aishield/#pricing", label: "料金" },
+			{ href: "/aishield/#faq", label: "FAQ" },
+			{
+				href: "/?inquiry=consultation&service=aishield#contact",
 				label: "無料相談",
 			},
 		],

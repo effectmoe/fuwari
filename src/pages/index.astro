@@ -892,6 +892,7 @@ const faqLd = {
 									<option>AIセントラル PLUS</option>
 									<option>パーフェクトセキュア</option>
 									<option>AI CRAWL</option>
+									<option>AI SHIELD</option>
 									<option>AI講座</option>
 									<option>まだ決まっていない</option>
 								</select>
@@ -939,6 +940,13 @@ const faqLd = {
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
 			if (messageField && !messageField.value) {
 				messageField.value = "AI CRAWLの無料相談を希望します。AIからの流入状況、レポート内容、料金プランについて相談したいです。";
+			}
+		}
+		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aishield") {
+			if (interestSelect) interestSelect.value = "AI SHIELD";
+			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
+			if (messageField && !messageField.value) {
+				messageField.value = "AI SHIELDの無料相談を希望します。サイトに来ている偽装アクセス、見守りレポート、前段の防御設置について相談したいです。";
 			}
 		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "ai-course") {

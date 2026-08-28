@@ -1,0 +1,274 @@
+---
+import { Icon } from "astro-icon/components";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "AIサイバー攻撃・ボット対策サービス｜AI SHIELD";
+const pageDescription =
+	"AIを装う攻撃・悪質ボットからWebサイトを守るAIセキュリティ対策サービス「AI SHIELD」。WordPress×共用サーバーのサイトに対応。攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートから始められます。";
+const consultationHref = "/?inquiry=consultation&service=aishield#contact";
+
+const attackStats = [
+	{
+		value: "1,075",
+		label: "偽装攻撃を検出",
+		note: "effect.moe 直近30日の自社実測",
+	},
+	{
+		value: "445",
+		label: "重要な情報を狙う探索",
+		note: "通常の閲覧とは異なる探索を検知",
+	},
+	{ value: "0", label: "情報漏洩", note: "サンプル期間中の検知件数" },
+];
+
+const layers = [
+	{
+		no: "01",
+		title: "サイトの中の入口を見直す",
+		body: "実測ログをもとに、外から狙われやすい入口を優先して見直します。",
+		icon: "material-symbols:home-repair-service-outline",
+	},
+	{
+		no: "02",
+		title: "サーバー会社の機能を活かす",
+		body: "現在の環境で活用できる防御機能を確認し、無理のない守り方を整えます。",
+		icon: "material-symbols:dns-outline",
+	},
+	{
+		no: "03",
+		title: "前段に門番を置く",
+		body: "サイトに届く前にアクセスを確認し、正規のAIクローラーは通したまま偽装を止める設計です。",
+		icon: "material-symbols:shield-lock-outline",
+	},
+];
+
+const reportSteps = [
+	["診断", "今、どんなアクセスが来ているかを確認"],
+	["見守り", "AIを装う攻撃や異常な探索を日々監視"],
+	["月次レポート", "変化・重大時の通知・次に見る点を整理"],
+];
+
+const plans = [
+	{
+		label: "MAIN PLAN",
+		name: "見守り / 月次AI攻撃分析レポート",
+		price: "3,300",
+		unit: "月額・毎月",
+		priceNote: "※ 毎月の月次レポートと見守りにかかる継続費用です。",
+		body: "AIを装う攻撃・偽装が来ているかを毎日監視し、毎月の月次レポートと重大時のアラートで状況を知らせます。初回の可視化を含みます。",
+		items: [
+			"AIを装うアクセスの監視",
+			"月次分析レポート",
+			"重大時のアラート通知",
+			"初回の攻撃状況の可視化",
+		],
+		cta: "見守りプランを相談する",
+		featured: true,
+	},
+	{
+		label: "SPOT SETUP",
+		name: "前段の門番 設置（別途・スポット）",
+		price: "55,000",
+		unit: "スポット",
+		priceNote:
+			"※ 一度きりのスポット対応です。内容によっては別途お見積もりとなる場合があります。",
+		body: "サイトの前でアクセスを確認し、攻撃をサイトへ届く前に止める一度きりのスポット設置支援です。",
+		items: [
+			"攻撃はサイトに届く前に遮断",
+			"本物のAI・検索エンジンはそのまま通過",
+			"サイトを止めずに導入（切り戻し手順つき）",
+			"構成はお使いの環境に合わせて設計",
+		],
+		cta: "設置について相談する",
+		featured: false,
+	},
+	{
+		label: "SITE HARDENING",
+		name: "サーバー内対策（オプション・別途）",
+		price: "33,000",
+		unit: "スポット",
+		priceNote:
+			"※ 一度きりのスポット対応です。内容によっては別途お見積もりとなる場合があります。",
+		body: "WordPressなど、サイトの中に残る攻撃の入口を、実測データにもとづいて優先的に閉じる一度きりのスポット対策です。",
+		items: [
+			"狙われている入口を実測ログから特定",
+			"見えてはいけないものを外から見えなくする",
+			"対処の優先順位は診断結果で決定",
+			"既存のサイト運用はそのまま",
+		],
+		cta: "内部対策を相談する",
+		featured: false,
+	},
+];
+
+const faqs = [
+	[
+		"本物のAIクローラー（Googlebot・ChatGPT等）はブロックされませんか？",
+		"正規のクローラーであることを確認できるものは通す前提で設計します。偽装の可能性があるアクセスを、名前だけで判定せずに確認します。",
+	],
+	[
+		"会社のメールは止まりませんか？",
+		"メールはWebサイトとは別の経路で扱います。設置前に影響を確認し、メールが止まらない前提で進めます。",
+	],
+	[
+		"どのサーバーでも使えますか？",
+		"多くのレンタルサーバーを含め、現状の構成を確認したうえで対応可否と必要な範囲をご案内します。",
+	],
+	[
+		"WordPressのサイトでも使えますか？",
+		"はい。WordPress×共用サーバーで運営しているサイトこそ主な対象です。ログインや管理画面を持つサイトは狙われる入口が多いため、見守りから始める価値があります。",
+	],
+	[
+		"100%防げるのですか？",
+		"100%の防御を保証するものではありません。複数の入口を減らし、監視と検知を続けることで、被害につながる確率を大きく下げるためのサービスです。",
+	],
+	[
+		"robots.txt でAIボットを拒否すれば十分ではありませんか？",
+		"十分ではありません。悪質なボットはrobots.txtに従わないことが広く報告されています。だからこそ、前段での確認と継続した監視を組み合わせます。",
+	],
+];
+
+const relatedArticles: { href: string; title: string; body: string }[] = [];
+
+const serviceLd = {
+	"@type": "Service",
+	"@id": "https://effect.moe/aishield/#service",
+	name: "AI SHIELD",
+	alternateName: ["AIシールド", "AIを装う攻撃の監視・防御"],
+	serviceType: "AIを装う偽装アクセスの監視・ボット対策・Webサイト防御支援",
+	description: pageDescription,
+	url: "https://effect.moe/aishield/",
+	provider: {
+		"@type": "Organization",
+		name: "株式会社EFFECT",
+		url: "https://effect.moe/",
+	},
+	areaServed: "JP",
+	offers: {
+		"@type": "Offer",
+		name: "AI SHIELD 見守り / AI攻撃 分析レポート",
+		price: "3300",
+		priceCurrency: "JPY",
+		billingDuration: "P1M",
+	},
+};
+const faqLd = {
+	"@type": "FAQPage",
+	mainEntity: faqs.map(([question, answer]) => ({
+		"@type": "Question",
+		name: question,
+		acceptedAnswer: { "@type": "Answer", text: answer },
+	})),
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} ogImage="/images/aishield/sample-report-monthly.png" ogImageAlt="AI SHIELD 月次見守りレポートのサンプル">
+	<Fragment slot="head">
+		<meta name="keywords" content="AIセキュリティ対策, ボット対策, ボット対策ツール, bot対策サービス, サイバー攻撃対策サービス, ホームページセキュリティ対策代行" />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": [serviceLd, faqLd] })} />
+	</Fragment>
+	<main class="aishield-page">
+		<section class="aishield-hero" aria-labelledby="aishield-title">
+			<div class="aishield-container aishield-hero__grid">
+				<div class="aishield-hero__copy">
+					<p class="aishield-eyebrow"><Icon name="material-symbols:shield-lock-outline" /> AI SHIELD / AI SECURITY WATCH</p>
+					<h1 id="aishield-title"><span>AIを装う攻撃から、</span><br /><em>サイトを守る。</em></h1>
+					<p class="aishield-hero__lead">本物のAIは通し、偽装だけ止める。<br />AIセキュリティ対策とボット対策を、監視から始めます。</p>
+					<div class="aishield-hero__actions">
+						<a class="aishield-button aishield-button--primary" href={consultationHref}>無料相談をする <Icon name="material-symbols:arrow-forward-rounded" /></a>
+						<a class="aishield-button aishield-button--text" href="#report">月次レポートの中身を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
+					</div>
+					<p class="aishield-hero__note"><Icon name="material-symbols:info-outline" /> 100%の防御を保証するものではありません。被害につながる確率を大きく下げるための多層防御です。</p>
+				</div>
+				<div class="aishield-gate" aria-label="正規AIを通し偽装アクセスを止める概念図">
+					<div class="aishield-gate__top"><span>ACCESS CONTROL</span><b>AI SHIELD</b><i></i></div>
+					<div class="aishield-gate__lane aishield-gate__lane--pass"><Icon name="material-symbols:verified-user-outline" /><div><small>VERIFY</small><strong>正規のAI・人のアクセス</strong></div><b>PASS</b></div>
+					<div class="aishield-gate__lane aishield-gate__lane--block"><Icon name="material-symbols:gpp-maybe-outline" /><div><small>DETECT</small><strong>AIを名乗る偽装・探索</strong></div><b>CHECK</b></div>
+					<div class="aishield-gate__server"><Icon name="material-symbols:language" /><span>YOUR SITE</span><b>サイトへ届く前に確認</b></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="mechanism" class="aishield-section aishield-section--soft">
+			<div class="aishield-container">
+				<div class="aishield-section-heading"><p>HOW IT WORKS</p><h2>AIセキュリティ対策を、<br />3層に分けて整える。</h2><span>ボット対策ツールやbot対策サービスを比較する前に、入口から順に確認します。</span></div>
+				<div class="aishield-layers">
+					{layers.map((layer) => <article class="aishield-layer"><span>{layer.no}</span><Icon name={layer.icon} /><h3>{layer.title}</h3><p>{layer.body}</p></article>)}
+				</div>
+				<div class="aishield-route" aria-label="門番を置く前後の違い"><div><p>BEFORE</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>サーバーへ直接届く</b></div><div class="aishield-route__after"><p>AFTER</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>AI SHIELDで確認</b><Icon name="material-symbols:arrow-forward-rounded" /><b>サイトへ</b></div></div>
+			</div>
+		</section>
+
+		<section id="attacks" class="aishield-section">
+			<div class="aishield-container">
+				<div class="aishield-section-heading aishield-section-heading--split"><div><p>WHAT WE OBSERVE</p><h2>AIを装う悪質ボットを、<br />名前だけで信用しない。</h2></div><span>「AIアシスタント」を名乗るアクセスでも、発信元や挙動を確認すると偽装が含まれることがあります。</span></div>
+				<div class="aishield-stats">{attackStats.map((stat, index) => <article class:list={["aishield-stat", { "aishield-stat--alert": index === 0 }]}><strong>{stat.value}<small>件</small></strong><b>{stat.label}</b><span>{stat.note}</span></article>)}</div>
+				<div class="aishield-evidence"><div><p class="aishield-label">EFFECT OWN OBSERVATION / LAST 30 DAYS</p><h3>一つのIPが、最大364種の場所を探索。</h3><p>通常の閲覧とは異なる順番と頻度で、見えてはいけない情報を探す挙動を記録します。第三者の実測では、AIアシスタントを名乗るアクセスの81.8%が偽装とされた例もあります。</p></div><ul><li>自動探索</li><li>繰り返し試行</li><li>偽装を照合</li><li>実ログで確認</li></ul></div>
+				<p class="aishield-crawler-note"><strong>AIのアクセスが当たり前になった今、その中に偽装が紛れ込みます。</strong> effect.moe直近90日の自社実測では、Bytespider 2,143件、ClaudeBot 944件、GPTBot 795件。ClaudeBotだけでGooglebot（927件）を上回っています。</p>
+			</div>
+		</section>
+
+		<section id="report" class="aishield-section aishield-section--report">
+			<div class="aishield-container aishield-report">
+				<div class="aishield-section-heading"><p>MONTHLY REPORT</p><h2>毎月、こんな攻撃が来ていたかを<br />レポートで届けます。</h2><span>最初に状況を診断し、見守りながら変化を追います。</span></div>
+				<div class="aishield-report__layout"><figure><img src="/images/aishield/sample-report-monthly.png" alt="AI SHIELD 月次見守りレポートのサンプル。偽装攻撃、情報漏洩、正規AIクローラーの状況を表示" loading="lazy" /><figcaption>自社 effect.moe の実測データで作成したサンプルです。数値は参考表示であり、対象サイトごとに異なります。</figcaption></figure><ol>{reportSteps.map(([title, body], index) => <li><b>0{index + 1}</b><div><strong>{title}</strong><span>{body}</span></div></li>)}</ol></div>
+			</div>
+		</section>
+
+		<section id="worth" class="aishield-section">
+			<div class="aishield-container">
+				<div class="aishield-section-heading"><p>WHY PROTECT</p><h2>守る価値が高いのは、<br />WordPressのような中身のあるサイトです。</h2><span>攻撃は静的サイトにも来ます。けれど、ログインやデータを持つサイトは、侵入された時の影響が異なります。</span></div>
+				<div class="aishield-vaults"><article><Icon name="material-symbols:description-outline" /><p>静的サイト</p><h3>空っぽの金庫</h3><span>HTML中心で、狙われる認証情報や管理画面が少ない構成。</span></article><article class="aishield-vaults__target"><Icon name="material-symbols:lock-person-outline" /><p>WordPress × 共用サーバー</p><h3>中身のある金庫</h3><span>ログインや運用上の情報を持つため、入口の管理が重要です。</span></article></div>
+				<aside class="aishield-bridge"><div><p>MEASURE × PROTECT</p><h3>測るのは <a href="/aicrawl/">AI CRAWL</a>。<br />守るのは AI SHIELD。</h3><span>AIクローラーとの接点を見ながら、正規のAIを止めずに、偽装アクセスと探索行為を分けて考えます。</span></div><a class="aishield-button aishield-button--dark" href="/aicrawl/">AI CRAWLを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></aside>
+			</div>
+		</section>
+
+		<section id="pricing" class="aishield-section aishield-section--soft">
+			<div class="aishield-container"><div class="aishield-section-heading aishield-section-heading--center"><p>PRICING</p><h2>状況を知るところから、<br />無理なく始める。</h2><span>サイバー攻撃対策サービスやホームページセキュリティ対策代行として、見守り、前段の門番、サイト内部の対策を別メニューでご案内します。</span></div><div class="aishield-plans">{plans.map((plan) => <article class:list={["aishield-plan", { "aishield-plan--featured": plan.featured }]}><p>{plan.label}</p><h3>{plan.name}</h3><div class="aishield-plan__price"><strong>¥{plan.price}</strong><span>{plan.unit}</span><small>{plan.priceNote}</small></div><p class="aishield-plan__body">{plan.body}</p><ul>{plan.items.map((item) => <li><Icon name="material-symbols:check-circle-outline" />{item}</li>)}</ul><a class:list={["aishield-button", plan.featured ? "aishield-button--primary" : "aishield-button--outline"]} href={consultationHref}>{plan.cta}<Icon name="material-symbols:arrow-forward-rounded" /></a></article>)}</div></div>
+		</section>
+
+		<section id="faq" class="aishield-section aishield-section--faq">
+			<div class="aishield-container aishield-faq"><div><p class="aishield-eyebrow">FAQ / BEFORE YOU START</p><h2>AI SHIELDについて<br />よくある質問</h2><p>仕組みやご利用環境に応じた確認事項は、無料相談で個別に整理します。</p><a href="/faq/">総合FAQを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div>{faqs.map(([q, a]) => <details><summary>{q}<Icon name="material-symbols:add-rounded" /></summary><p>{a}</p></details>)}{relatedArticles.length > 0 && <aside class="aishield-related-articles"><p>関連記事</p>{relatedArticles.map((article) => <a href={article.href}><strong>{article.title}</strong><span>{article.body}</span></a>)}</aside>}</div></div>
+		</section>
+
+		<section class="aishield-final"><div class="aishield-container"><p>AI SHIELD / FIRST STEP</p><h2>まず、あなたのサイトに<br />何が来ているかを見ましょう。</h2><span>現在の環境、守りたい情報、正規AIクローラーの扱いを確認し、必要な範囲からご提案します。</span><a class="aishield-button aishield-button--light" href={consultationHref}>AI SHIELDを無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div></section>
+	</main>
+</LandingLayout>
+
+<style>
+	.aishield-page { --shield-ink: #13243b; --shield-muted: #617087; --shield-navy: #073c5d; --shield-teal: #007a7a; --shield-mint: #daf4ed; --shield-pale: #f2f8f7; --shield-line: #cbdad8; background: #fff; color: var(--shield-ink); overflow: hidden; }
+	.aishield-container { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+	.aishield-hero { position: relative; padding: 6.5rem 0 5.5rem; background: linear-gradient(135deg, #e6f6f4 0%, #f8fcfb 52%, #d9edf0 100%); }
+	.aishield-hero::after { content: ""; position: absolute; inset: auto -12% -33% 45%; height: 32rem; border: 1px solid rgba(0, 122, 122, .18); border-radius: 50%; box-shadow: 0 0 0 3rem rgba(255,255,255,.25), 0 0 0 6rem rgba(0,122,122,.04); pointer-events:none; }
+	.aishield-hero__grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: clamp(2.5rem, 7vw, 7rem); position: relative; z-index: 1; }
+	.aishield-eyebrow, .aishield-section-heading > p { margin: 0 0 1.1rem; color: var(--shield-teal); font-size: .78rem; font-weight: 800; letter-spacing: .16em; }
+	.aishield-eyebrow svg { vertical-align: -.16em; margin-right: .3rem; }
+	.aishield-hero h1, .aishield-section-heading h2, .aishield-faq h2, .aishield-final h2 { margin: 0; font-weight: 800; letter-spacing: -.055em; line-height: 1.13; }
+	.aishield-hero h1 { font-size: clamp(3rem, 5.5vw, 5.4rem); }
+	.aishield-hero h1 > span { white-space: nowrap; }
+	.aishield-hero h1 em { color: var(--shield-teal); font-style: normal; }
+	.aishield-hero__lead { margin: 1.7rem 0; color: #2b4054; font-size: clamp(1.05rem, 1.45vw, 1.3rem); font-weight: 700; line-height: 1.9; }
+	.aishield-hero__actions { display:flex; flex-wrap:wrap; gap: .85rem; align-items:center; }
+	.aishield-button { display:inline-flex; align-items:center; justify-content:center; gap:.55rem; min-height:3.15rem; padding:.8rem 1.1rem; border:1px solid transparent; border-radius: .3rem; font-weight:800; text-decoration:none; transition:transform .2s, box-shadow .2s; }
+	.aishield-button:hover { transform: translateY(-2px); box-shadow: 0 9px 20px rgba(7, 60, 93, .15); }
+	.aishield-button svg { font-size:1.25em; }
+	.aishield-button--primary { background: var(--shield-teal); color: #fff; }
+	.aishield-button--text { color: var(--shield-navy); text-decoration: underline; text-underline-offset: .28em; }
+	.aishield-button--dark { background:#123b55; color:#fff; }
+	.aishield-button--outline { border-color:#0b5c68; color:#084b59; }
+	.aishield-button--light { background:#fff; color:#064a57; }
+	.aishield-hero__note { display:flex; gap:.45rem; margin: 1.2rem 0 0; color:#455d69; font-size:.82rem; line-height:1.6; }
+	.aishield-gate { width:min(100%, 440px); padding:1.05rem; border:1px solid #b4d5d5; border-radius:1rem; background:rgba(255,255,255,.78); box-shadow: 0 1.4rem 3.3rem rgba(5, 67, 83, .15); }
+	.aishield-gate__top { display:flex; align-items:center; gap:.5rem; padding:.15rem .2rem .85rem; color:#56717b; font-size:.65rem; letter-spacing:.12em; }.aishield-gate__top b{margin-left:auto;color:#087779;letter-spacing:.08em}.aishield-gate__top i{display:block;width:.5rem;height:.5rem;background:#3abf88;border-radius:99px;}
+	.aishield-gate__lane { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.75rem; margin-top:.65rem; padding:.82rem; border-radius:.65rem; }.aishield-gate__lane svg{font-size:1.55rem}.aishield-gate__lane small{display:block;font-size:.62rem;font-weight:800;letter-spacing:.1em}.aishield-gate__lane strong{display:block;font-size:.9rem}.aishield-gate__lane b{font-size:.7rem;letter-spacing:.08em}.aishield-gate__lane--pass{background:#e2f8ec;color:#166846}.aishield-gate__lane--block{background:#fff1ec;color:#a44431}.aishield-gate__server{display:flex;align-items:center;gap:.55rem;margin-top:1rem;padding:1rem .85rem;border-radius:.65rem;background:#073c5d;color:white}.aishield-gate__server span{font-size:.63rem;letter-spacing:.09em}.aishield-gate__server b{margin-left:auto;font-size:.72rem}
+	.aishield-section { padding: clamp(4.5rem, 8vw, 8rem) 0; }.aishield-section--soft{background:var(--shield-pale)}.aishield-section-heading{max-width:750px;margin-bottom:3rem}.aishield-section-heading h2,.aishield-faq h2,.aishield-final h2{font-size:clamp(2rem,4vw,3.7rem)}.aishield-section-heading>span{display:block;margin-top:1.2rem;color:var(--shield-muted);font-weight:600;line-height:1.9}.aishield-section-heading--split{max-width:none;display:grid;grid-template-columns:1fr .65fr;gap:3rem;align-items:end}.aishield-section-heading--center{text-align:center;margin-inline:auto}.aishield-section-heading--center>span{max-width:42rem;margin-inline:auto}
+	.aishield-layers{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.aishield-layer{padding:1.55rem;border:1px solid var(--shield-line);background:#fff}.aishield-layer>span{color:#0b7d7e;font-size:.75rem;font-weight:800;letter-spacing:.1em}.aishield-layer>svg{display:block;margin:1.6rem 0 .7rem;color:#087a7b;font-size:2rem}.aishield-layer h3{margin:0;font-size:1.35rem}.aishield-layer p{color:var(--shield-muted);line-height:1.8}.aishield-route{display:grid;grid-template-columns:1fr 1.3fr;gap:1rem;margin-top:1rem}.aishield-route>div{display:flex;align-items:center;gap:.6rem;padding:1.1rem 1.35rem;background:#fff;border:1px solid var(--shield-line);font-size:.86rem}.aishield-route p{margin:0 .7rem 0 0;color:#759099;font-size:.65rem;font-weight:800;letter-spacing:.12em}.aishield-route b{font-size:.85rem}.aishield-route__after{border-color:#6ab9b5!important;background:#e4f8f2!important}
+	.aishield-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.aishield-stat{padding:1.5rem;border:1px solid #d6e1e3;background:#fff}.aishield-stat strong{display:block;color:#14795e;font-size:clamp(2.5rem,5vw,4.3rem);line-height:1}.aishield-stat strong small{font-size:1rem;margin-left:.2rem}.aishield-stat--alert strong{color:#c24230}.aishield-stat b,.aishield-stat span{display:block}.aishield-stat b{margin-top:1rem;font-size:1rem}.aishield-stat span{margin-top:.35rem;color:#748290;font-size:.8rem}.aishield-evidence{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;margin-top:1rem;padding:2rem;background:#103d57;color:#fff}.aishield-evidence h3{font-size:1.75rem;margin:.5rem 0}.aishield-evidence p:not(.aishield-label){color:#d3e3e9;line-height:1.85}.aishield-label{margin:0;color:#7ee4d2;font-weight:800;font-size:.7rem;letter-spacing:.12em}.aishield-evidence ul{display:flex;flex-wrap:wrap;align-content:center;gap:.65rem;list-style:none;margin:0;padding:0}.aishield-evidence li{padding:.55rem .65rem;background:#e8f7f3;color:#103d57;border-radius:.3rem;font-size:.85rem;font-weight:800}
+	.aishield-section--report{background:#eaf2f5}.aishield-report__layout{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(1.5rem,5vw,5rem)}.aishield-report figure{margin:0;padding:.9rem;background:#fff;box-shadow:0 1.1rem 2.5rem rgba(33,58,72,.12)}.aishield-report figure img{display:block;width:100%;height:auto}.aishield-report figcaption{padding:.8rem .15rem .1rem;color:#637282;font-size:.76rem;line-height:1.65}.aishield-report ol{list-style:none;margin:0;padding:0}.aishield-report li{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid #b8cdd3}.aishield-report li>b{color:#088087;font-size:.85rem}.aishield-report li strong,.aishield-report li span{display:block}.aishield-report li strong{font-size:1.25rem}.aishield-report li span{margin-top:.35rem;color:#5d7080;line-height:1.6}
+	.aishield-vaults{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.aishield-vaults article{padding:2rem;background:#f4f6f7;border:1px solid #d6e0e1}.aishield-vaults article>svg{font-size:2.2rem;color:#657b83}.aishield-vaults p{margin:1.2rem 0 .2rem;color:#60747d;font-size:.8rem;font-weight:800}.aishield-vaults h3{margin:0;font-size:1.8rem}.aishield-vaults span{display:block;margin-top:.8rem;color:#60717d;line-height:1.75}.aishield-vaults__target{background:#e4f8f2!important;border-color:#79bfb7!important}.aishield-vaults__target>svg,.aishield-vaults__target p{color:#00776f!important}.aishield-bridge{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:1rem;padding:1.8rem 2rem;background:#0b435d;color:#fff}.aishield-bridge p{margin:0;color:#83ddcf;font-size:.7rem;font-weight:800;letter-spacing:.1em}.aishield-bridge h3{margin:.5rem 0;font-size:1.7rem}.aishield-bridge h3 a{color:#fff;text-underline-offset:.16em}.aishield-bridge span{color:#d5e7ed;line-height:1.7}
+	.aishield-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;align-items:stretch}.aishield-plan{display:flex;flex-direction:column;padding:1.55rem;border:1px solid #cddbdd;background:#fff}.aishield-plan--featured{border:2px solid #07817d;box-shadow:0 .85rem 1.75rem rgba(2,91,91,.12)}.aishield-plan>p:first-child{margin:0;color:#077b7a;font-size:.68rem;font-weight:800;letter-spacing:.11em}.aishield-plan h3{margin:1rem 0 0;font-size:1.32rem}.aishield-plan__price{margin:1rem 0}.aishield-plan__price strong{font-size:2rem}.aishield-plan__price span{margin-left:.3rem;color:#60717e;font-size:.78rem}.aishield-plan__price small{display:block;margin-top:.45rem;color:#66747e;font-size:.72rem;line-height:1.5}.aishield-plan__body{min-height:6.5em;margin:0;color:#586d79;font-size:.88rem;line-height:1.75}.aishield-plan ul{margin:1.2rem 0;padding:0;list-style:none;flex:1}.aishield-plan li{display:flex;gap:.35rem;margin:.45rem 0;color:#38515f;font-size:.83rem;line-height:1.5}.aishield-plan li svg{color:#087d79;flex:none;margin-top:.05rem}.aishield-plan .aishield-button{width:100%;font-size:.88rem}
+	.aishield-section--faq{background:#f6faf9}.aishield-faq{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(2rem,8vw,8rem)}.aishield-faq>div:first-child>p:not(.aishield-eyebrow){color:#60717d;line-height:1.75}.aishield-faq>div:first-child>a{display:inline-flex;align-items:center;gap:.4rem;color:#075c69;font-weight:800;text-underline-offset:.2em}.aishield-faq details{border-top:1px solid #c9d9d9}.aishield-faq details:last-child{border-bottom:1px solid #c9d9d9}.aishield-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 0;cursor:pointer;font-weight:800;line-height:1.55;list-style:none}.aishield-faq summary::-webkit-details-marker{display:none}.aishield-faq summary svg{font-size:1.4rem;flex:none}.aishield-faq details[open] summary svg{transform:rotate(45deg)}.aishield-faq details p{margin:0;padding:0 0 1.3rem;color:#5c6d78;line-height:1.85}
+	.aishield-final{padding:clamp(4.7rem,9vw,8rem) 0;background:linear-gradient(125deg,#063d59,#007777);color:#fff;text-align:center}.aishield-final p{margin:0;color:#83e4d5;font-size:.72rem;font-weight:800;letter-spacing:.12em}.aishield-final h2{margin-top:1rem}.aishield-final span{display:block;max-width:40rem;margin:1.3rem auto 1.7rem;color:#d7f0ec;line-height:1.85}.aishield-final .aishield-button{min-width:min(100%,20rem)}
+	@media (max-width: 900px){.aishield-hero__grid,.aishield-report__layout,.aishield-faq{grid-template-columns:1fr}.aishield-gate{margin-inline:auto}.aishield-section-heading--split{grid-template-columns:1fr;gap:1rem}.aishield-evidence{grid-template-columns:1fr}.aishield-plans{grid-template-columns:1fr}.aishield-plan__body{min-height:0}.aishield-bridge{align-items:flex-start;flex-direction:column}.aishield-route{grid-template-columns:1fr}.aishield-route>div{flex-wrap:wrap}}
+	@media (max-width: 640px){.aishield-container{width:min(100% - 32px,1120px)}.aishield-hero{padding:4.4rem 0 3.8rem}.aishield-hero h1{font-size:clamp(2rem,8.5vw,2.8rem)}.aishield-layers,.aishield-stats,.aishield-vaults{grid-template-columns:1fr}.aishield-route>div{font-size:.74rem;padding:1rem}.aishield-section-heading h2,.aishield-faq h2,.aishield-final h2{font-size:2.15rem}.aishield-evidence,.aishield-bridge{padding:1.35rem}.aishield-hero__actions .aishield-button--primary{width:100%}.aishield-hero__actions .aishield-button--text{padding-left:0}.aishield-gate{padding:.85rem}.aishield-gate__server{align-items:flex-start;flex-wrap:wrap}.aishield-gate__server b{margin-left:0;width:100%}}
+</style>

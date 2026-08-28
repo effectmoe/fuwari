@@ -52,6 +52,10 @@ export const navBarConfig: NavBarConfig = {
 			url: "/aicrawl/",
 		},
 		{
+			name: "AIシールド",
+			url: "/aishield/",
+		},
+		{
 			name: "AI講座",
 			url: "/ai-agent-course/",
 		},

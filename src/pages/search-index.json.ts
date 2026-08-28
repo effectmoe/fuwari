@@ -17,6 +17,11 @@ const curatedSearchMetadata: Record<
 			"AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変える。",
 		section: "Service",
 	},
+	"/aishield/": {
+		excerpt:
+			"AIを装う偽装アクセスやボット攻撃を監視し、正規のAIクローラーは通したままサイトを守るAI SHIELD。月次見守りレポートは月額3,300円。",
+		section: "Service",
+	},
 	"/ai-agent-course/": {
 		excerpt: "AIエージェント、Claude Code、実務AI活用を学ぶ講座ページ。",
 		section: "Course",
