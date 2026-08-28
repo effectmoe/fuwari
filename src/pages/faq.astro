@@ -74,9 +74,10 @@ const faqCategories: FaqCategory[] = [
 			},
 			{
 				q: "GPTBotやClaudeBotはブロックすべきですか？",
-				a: "GPTBotやClaudeBotをブロックすべきかに一律の正解はなく、AI経由の集客を狙うなら許可し、コンテンツ保護を優先するならブロックを検討します。GPTBotやClaudeBotの判断材料は、推測ではなく自サイトの実ログです。どのクローラーが何を読んでいるかを確認し、事業の目的と扱う情報に合わせて決めてください。",
+				a: 'GPTBotやClaudeBotをブロックすべきかに一律の正解はなく、AI経由の集客を狙うなら許可し、コンテンツ保護を優先するならブロックを検討します。GPTBotやClaudeBotの判断材料は、推測ではなく自サイトの実ログです。どのクローラーが何を読んでいるかを確認し、事業の目的と扱う情報に合わせて決めてください。なお、AIを「装う」偽装アクセスは集客とは別問題で、<a href="/aishield/">AI SHIELD</a>で見分けて止められます。',
 				links: [
 					{ label: "AI CRAWLで実ログを確認", href: "/aicrawl/" },
+					{ label: "AI SHIELDを見る", href: "/aishield/" },
 					{
 						label: "無料相談する",
 						href: "/?inquiry=consultation&service=aicrawl#contact",
@@ -369,6 +370,53 @@ const faqCategories: FaqCategory[] = [
 					{ label: "無料相談する", href: "/?inquiry=consultation#contact" },
 					{ label: "会社概要", href: "/company/" },
 				],
+			},
+		],
+	},
+	{
+		id: "ai-shield-defense",
+		label: "AIを装う攻撃からの防御（AI SHIELD）",
+		lead: "AIを装う偽装アクセスや悪質なボットへの見守り・防御について。",
+		icon: "material-symbols:shield-lock-outline",
+		items: [
+			{
+				q: "AIを装った攻撃や悪質なボットから、自社サイトを守れますか？",
+				a: '守れます。<a href="/aishield/">AI SHIELD</a>は、AIを名乗って認証情報などを探す偽装アクセスを発信元や挙動から見分けて監視・遮断します。本物のAIクローラーや検索エンジンはそのまま通します。まず何が来ているかを可視化する見守り（月額3,300円）から始められます。',
+				links: [
+					{ label: "AI SHIELDを見る", href: "/aishield/" },
+					{
+						label: "見守りについて相談する",
+						href: "/?inquiry=consultation&service=aishield#contact",
+					},
+				],
+			},
+			{
+				q: "本物のAIクローラー（Googlebot・ChatGPTなど）まで止まってしまいませんか？",
+				a: '止めません。名乗りだけで判断せず、公式に公開された情報や挙動で本物と偽物を見分け、本物は通し偽装だけを止めます。<a href="/aishield/">AI SHIELD</a>は、AI検索からの流入を失わないように考えます。',
+				links: [{ label: "AI SHIELDの考え方を見る", href: "/aishield/" }],
+			},
+			{
+				q: "WordPressで運営しているサイトでも使えますか？",
+				a: 'はい。ログインや管理画面・データを持つWordPress×共用サーバーのサイトこそ<a href="/aishield/">AI SHIELD</a>の主な対象です。攻撃が成功しうる構成だからこそ、監視と防御の価値があります。',
+				links: [{ label: "AI SHIELDを見る", href: "/aishield/" }],
+			},
+			{
+				q: "robots.txt でAIボットを拒否すれば十分ではありませんか？",
+				a: '十分ではありません。悪質なボットはrobots.txtに従わないことが広く報告されています。だからこそ、来ているものを実際に監視し、必要に応じてサイトの前段で止める<a href="/aishield/">仕組み</a>が要ります。',
+				links: [{ label: "AI SHIELDを見る", href: "/aishield/" }],
+			},
+			{
+				q: "「AIから守るセキュリティ」と「AIに情報を渡す時のセキュリティ」は何が違いますか？",
+				a: '別のものです。前者（<a href="/aishield/">AI SHIELD</a>）は、AIを装う攻撃や悪質ボットから「サイトを守る」話。後者（個人情報マスキング・<a href="/#secure">ローカルLLM</a>等）は、AIを「使う」ときに自社の情報を安全に扱う設計の話です。どちらもご相談いただけます。',
+				links: [
+					{ label: "AI SHIELDを見る", href: "/aishield/" },
+					{ label: "ローカルLLMを見る", href: "/#secure" },
+				],
+			},
+			{
+				q: "100%攻撃を防げますか？",
+				a: '<a href="/aishield/">AI SHIELD</a>は、100%は保証しません。被害につながる確率を大きく下げるための多層的な守りです。',
+				links: [{ label: "AI SHIELDを見る", href: "/aishield/" }],
 			},
 		],
 	},
