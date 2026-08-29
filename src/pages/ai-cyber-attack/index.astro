@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
 import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 
@@ -237,9 +238,7 @@ const structuredData = {
 			</div>
 		</section>
 
-		<section class="cyber-final">
-			<div class="cyber-shell cyber-final__grid"><div><p>AI SHIELD / FIRST STEP</p><h2>まず、何が来ているかを<br />見える状態にする。</h2><span>AIを装うアクセスを見守り、必要な範囲から守る。正規のAIを止めないためにも、状況の確認から始めます。</span></div><a class="cyber-button cyber-button--light" href={consultationHref}>AI SHIELDを無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
-		</section>
+		<ArticleChoiceCta eyebrow="NEXT STEP / AI TRAFFIC" title="あなたのサイトには、今なにが来ていますか？" body="この記事の実測データは当社サイトのものです。あなたのサイトに何が来ているかは、測らないと分かりません。" primaryHref="/aishield/" primaryText="AIを装う攻撃を見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
 	</main>
 
 	<style>

@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../../components/landing/ArticleChoiceCta.astro";
 import Breadcrumbs from "../../../components/landing/Breadcrumbs.astro";
 import botData from "../../../data/bots-data.json";
 import LandingLayout from "../../../layouts/LandingLayout.astro";
@@ -122,7 +123,7 @@ const pageLd = {
 
 		<section class="bot-related"><div class="bot-shell"><p>RELATED GUIDE</p><a href="/ai-cyber-attack/">AIサイバー攻撃の全体像はこちら <span>→</span><strong>AIサイバー攻撃とは？事例と対策を実測データで解説</strong></a></div></section>
 
-		<section class="bot-cta"><div class="bot-shell bot-cta__grid"><div><p>AI SHIELD / NEXT STEP</p><h2>このボット、あなたのサイトにも来ていませんか？</h2><span>当サイトには{botData.period}だけで{formatNumber(bytespider.month_hits)}件来ました。あなたのサイトの数字は、測らないと分かりません。</span></div><div><a class="bot-button bot-button--main" href="/aishield/">偽装・悪質ボットを見守る <b>AI SHIELD</b><Icon name="material-symbols:arrow-forward-rounded" /></a><a class="bot-button bot-button--sub" href="/aicrawl/">AIクローラーの読まれ方を測る <b>AI CRAWL</b><Icon name="material-symbols:arrow-forward-rounded" /></a></div></div></section>
+		<ArticleChoiceCta eyebrow="AI SHIELD / NEXT STEP" title="このボット、あなたのサイトにも来ていませんか？" body={`当サイトには${botData.period}だけで${formatNumber(bytespider.month_hits)}件来ました。あなたのサイトの数字は、測らないと分かりません。`} primaryHref="/aishield/" primaryText="偽装・悪質ボットを見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
 	</main>
 
 	<style>

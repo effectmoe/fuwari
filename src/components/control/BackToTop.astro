@@ -2,48 +2,37 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<!-- There can't be a filter on parent element, or it will break `fixed` -->
-<div class="back-to-top-wrapper hidden lg:block">
-    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
-        <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]">
-            <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
-        </button>
-    </div>
-</div>
+<button id="effect-back-to-top" type="button" class="effect-back-to-top" aria-label="ページの先頭に戻る" title="上に戻る">
+	<Icon name="material-symbols:keyboard-arrow-up-rounded" aria-hidden="true" />
+	<span>上に戻る</span>
+</button>
 
-<style lang="stylus">
-.back-to-top-wrapper
-    width: 3.75rem
-    height: 3.75rem
-    position: absolute
-    right: 0
-    top: 0
-    pointer-events: none
-
-.back-to-top-btn
-    color: var(--primary)
-    font-size: 2.25rem
-    font-weight: bold
-    border: none
-    position: fixed
-    bottom: 10rem
-    opacity: 1
-    cursor: pointer
-    transform: translateX(5rem)
-    pointer-events: auto
-    i
-        font-size: 1.75rem
-    &.hide
-        transform: translateX(5rem) scale(0.9)
-        opacity: 0
-        pointer-events: none
-    &:active
-      transform: translateX(5rem) scale(0.9)
-
+<style>
+	.effect-back-to-top{position:fixed;right:max(1rem,env(safe-area-inset-right));bottom:max(1.25rem,env(safe-area-inset-bottom));z-index:90;display:inline-flex;align-items:center;justify-content:center;gap:.25rem;min-width:3rem;height:3rem;padding:0 .78rem;border:1px solid rgba(29,47,93,.2);border-radius:999px;background:rgba(255,255,255,.92);color:#1d2f5d;box-shadow:0 .7rem 1.8rem rgba(19,35,69,.16);backdrop-filter:blur(12px);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(.7rem);transition:opacity .2s ease,transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}.effect-back-to-top svg{font-size:1.35rem}.effect-back-to-top span{font-size:.72rem;font-weight:850;letter-spacing:.03em}.effect-back-to-top.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}.effect-back-to-top:hover{background:#1d2f5d;color:#fff;box-shadow:0 .9rem 2rem rgba(19,35,69,.26)}.effect-back-to-top:focus-visible{outline:3px solid #e9b23f;outline-offset:3px}.effect-back-to-top:active{transform:translateY(0) scale(.96)}@media(max-width:640px){.effect-back-to-top{width:2.85rem;min-width:2.85rem;height:2.85rem;padding:0}.effect-back-to-top span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}@media(prefers-reduced-motion:reduce){.effect-back-to-top{transition:none}}
 </style>
 
-<script is:raw is:inline>
-function backToTop() {
-    window.scroll({ top: 0, behavior: 'smooth' });
-}
+<script is:inline>
+	(() => {
+		const buttonId = "effect-back-to-top";
+		const threshold = 420;
+		const updateVisibility = () => {
+			const button = document.getElementById(buttonId);
+			if (!button) return;
+			button.classList.toggle("is-visible", window.scrollY > threshold);
+		};
+		const wire = () => {
+			const button = document.getElementById(buttonId);
+			if (!button || button.dataset.wired === "true") return;
+			button.dataset.wired = "true";
+			button.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+			updateVisibility();
+		};
+		if (!window.__effectBackToTopBound) {
+			window.__effectBackToTopBound = true;
+			window.addEventListener("scroll", updateVisibility, { passive: true });
+			document.addEventListener("swup:contentReplaced", () => requestAnimationFrame(wire));
+		}
+		if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wire, { once: true });
+		else wire();
+	})();
 </script>

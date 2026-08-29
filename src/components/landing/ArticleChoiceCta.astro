@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	eyebrow?: string;
+	title: string;
+	body: string;
+	primaryHref: string;
+	primaryText: string;
+	primaryLabel: string;
+	secondaryHref: string;
+	secondaryText: string;
+	secondaryLabel: string;
+}
+
+const {
+	eyebrow = "NEXT STEP",
+	title,
+	body,
+	primaryHref,
+	primaryText,
+	primaryLabel,
+	secondaryHref,
+	secondaryText,
+	secondaryLabel,
+} = Astro.props;
+---
+
+<section class="article-choice-cta">
+	<div class="article-choice-cta__shell">
+		<div>
+			<p>{eyebrow}</p>
+			<h2>{title}</h2>
+			<span>{body}</span>
+		</div>
+		<div class="article-choice-cta__actions">
+			<a class="article-choice-cta__button article-choice-cta__button--primary" href={primaryHref}>{primaryText}<b>{primaryLabel}</b><Icon name="material-symbols:arrow-forward-rounded" /></a>
+			<a class="article-choice-cta__button article-choice-cta__button--secondary" href={secondaryHref}>{secondaryText}<b>{secondaryLabel}</b><Icon name="material-symbols:arrow-forward-rounded" /></a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.article-choice-cta{padding:clamp(4.5rem,8vw,7rem) 0;background:linear-gradient(125deg,#1a2551,#304b99);color:#fff}
+	.article-choice-cta__shell{display:grid;width:min(1080px,calc(100% - 48px));grid-template-columns:1.25fr .75fr;gap:3rem;align-items:center;margin:0 auto}
+	.article-choice-cta p{margin:0 0 .9rem;color:#f3c96f;font-size:.7rem;font-weight:850;letter-spacing:.12em}
+	.article-choice-cta h2{margin:0;font-size:clamp(2rem,3.6vw,3.55rem);line-height:1.15;letter-spacing:-.05em}
+	.article-choice-cta span{display:block;max-width:43rem;margin-top:1.2rem;color:#dce3ff;line-height:1.9}
+	.article-choice-cta__actions{display:grid;gap:.7rem}
+	.article-choice-cta__button{display:grid;grid-template-columns:1fr auto;gap:.15rem .6rem;align-items:center;padding:1rem 1.1rem;font-weight:800;text-decoration:none;transition:transform .2s,box-shadow .2s}
+	.article-choice-cta__button:hover{transform:translateY(-2px);box-shadow:0 .7rem 1.6rem rgba(8,16,53,.24)}
+	.article-choice-cta__button b{grid-column:1;color:inherit;font-size:.76rem}
+	.article-choice-cta__button svg{grid-column:2;grid-row:1 / span 2}
+	.article-choice-cta__button--primary{background:#f0b94f;color:#18204a}
+	.article-choice-cta__button--secondary{border:1px solid rgba(255,255,255,.5);color:#fff}
+	@media(max-width:760px){.article-choice-cta__shell{width:calc(100% - 32px);grid-template-columns:1fr;gap:2rem}}
+</style>
