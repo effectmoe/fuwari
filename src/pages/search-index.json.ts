@@ -22,6 +22,12 @@ const curatedSearchMetadata: Record<
 			"AIを装う偽装アクセスやボット攻撃を監視し、正規のAIクローラーは通したままサイトを守るAI SHIELD。月次見守りレポートは月額3,300円。",
 		section: "Service",
 	},
+	"/ai-cyber-attack/": {
+		title: "AIサイバー攻撃とは？事例と対策を実測データで解説",
+		excerpt:
+			"AIを装う偽装アクセスと正規のAIクローラーを分けて考える、AIサイバー攻撃の固定ガイド。effect.moeの自社実測と、サイトを守るための考え方を解説します。",
+		section: "Guide",
+	},
 	"/ai-agent-course/": {
 		excerpt: "AIエージェント、Claude Code、実務AI活用を学ぶ講座ページ。",
 		section: "Course",

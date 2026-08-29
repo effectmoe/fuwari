@@ -28,6 +28,7 @@ const labelOverrides: Record<string, string> = {
 	"/archive/": "ブログアーカイブ",
 	"/ask/": "AI相談",
 	"/author/": "アバウト｜シュ コウメイ",
+	"/ai-cyber-attack/": "AIサイバー攻撃ガイド",
 	"/company/": "会社概要",
 	"/dfb-complete-guide/": "DFB構造化メソッド大全",
 	"/faq/": "総合FAQ",

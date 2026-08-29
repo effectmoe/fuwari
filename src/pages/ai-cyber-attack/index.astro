@@ -1,0 +1,276 @@
+---
+import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "AIサイバー攻撃とは？事例と対策を実測データで解説";
+const pageDescription =
+	"AIサイバー攻撃とは何かを、AIを名乗るアクセスのeffect.moe自社実測とともに解説。正規のAIは通し、偽装アクセスは止めるための考え方と対策をまとめます。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const canonicalUrl = new URL("/ai-cyber-attack/", siteUrl).toString();
+const publishedDate = "2026-08-29";
+const consultationHref = "/?inquiry=consultation&service=aishield#contact";
+
+const accessCounts = [
+	{ name: "Bytespider", value: 2143, label: "2,143件" },
+	{ name: "ClaudeBot", value: 944, label: "944件" },
+	{ name: "Googlebot", value: 927, label: "927件" },
+	{ name: "GPTBot", value: 795, label: "795件" },
+	{ name: "ChatGPT-User", value: 625, label: "625件" },
+];
+
+const faqItems = [
+	{
+		q: "AIサイバー攻撃は、AIを使っている会社だけの問題ですか？",
+		a: "いいえ。AIを導入しているかにかかわらず、公開サイトにはAIを名乗るアクセスや自動アクセスが来ます。まずは、自社サイトに何が来ているかを確かめ、守るべき情報がある場所から整えることが出発点です。",
+	},
+	{
+		q: "AIボットは全部止めるべきですか？",
+		a: "一律に止める必要はありません。検索やAI経由で情報を見つけてもらう役割を持つ正規のクローラーまで止めないよう、目的と実際のアクセスを分けて判断します。詳しい考え方は総合FAQにもまとめています。",
+	},
+	{
+		q: "robots.txtだけで十分に対策できますか？",
+		a: "十分とは限りません。案内に従う正規のクローラーと、名前を装ったり案内に従わなかったりするアクセスは別に考える必要があります。何が来ているかを観測し、必要な範囲で守りを重ねます。",
+	},
+	{
+		q: "被害を完全に防げますか？",
+		a: "完全な防御は保証できません。大切なのは、被害につながる確率を大きく下げ、異常に早く気づき、優先順位を付けて改善できる状態を作ることです。",
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Article",
+			"@id": `${canonicalUrl}#article`,
+			headline: pageTitle,
+			description: pageDescription,
+			image: [
+				new URL(
+					"/images/aishield/hero-angel-ai-disguised-virus-v10.png",
+					siteUrl,
+				).toString(),
+			],
+			url: canonicalUrl,
+			inLanguage: "ja",
+			datePublished: publishedDate,
+			dateModified: publishedDate,
+			mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+			author: { "@id": `${siteUrl}#person` },
+			publisher: { "@id": `${siteUrl}#organization` },
+			keywords: ["AIサイバー攻撃", "AIサイバー攻撃 対策", "AIを装う攻撃"],
+		},
+		{
+			"@type": "FAQPage",
+			"@id": `${canonicalUrl}#faq`,
+			mainEntity: faqItems.map((item) => ({
+				"@type": "Question",
+				name: item.q,
+				acceptedAnswer: { "@type": "Answer", text: item.a },
+			})),
+		},
+		{
+			"@type": "Dataset",
+			"@id": `${canonicalUrl}#dataset`,
+			name: "effect.moeのAIを名乗るアクセス集計",
+			description:
+				"effect.moeの直近90日に観測した、AIを名乗るクローラーの全ステータス計と、直近30日に観測したAIを名乗る偽装アクセスの集計です。",
+			url: canonicalUrl,
+			inLanguage: "ja",
+			creator: { "@id": `${siteUrl}#organization` },
+			publisher: { "@id": `${siteUrl}#organization` },
+			variableMeasured: [
+				...accessCounts.map((item) => ({
+					"@type": "PropertyValue",
+					name: item.name,
+					value: item.value,
+					unitText: "件",
+				})),
+				{
+					"@type": "PropertyValue",
+					name: "AIを名乗る偽装アクセス",
+					value: 1075,
+					unitText: "件",
+				},
+			],
+		},
+		{
+			"@type": "BreadcrumbList",
+			"@id": `${canonicalUrl}#breadcrumb`,
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "ナレッジ",
+					item: new URL("/blog/", siteUrl).toString(),
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: pageTitle,
+					item: canonicalUrl,
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout
+	title={pageTitle}
+	description={pageDescription}
+	fullTitle={true}
+	setOGTypeArticle={true}
+	ogImage="/images/aishield/hero-angel-ai-disguised-virus-v10.png"
+	ogImageAlt="正規のAIロボットに紛れ、天使の仮面を被った悪質なウイルスがサーバーに近づくイメージ"
+>
+	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+	<main class="cyber-page">
+		<Breadcrumbs class="cyber-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "ナレッジ", href: "/blog/" },
+			{ label: "AIサイバー攻撃ガイド", href: "/ai-cyber-attack/" },
+		]} />
+
+		<section class="cyber-hero" aria-labelledby="cyber-title">
+			<div class="cyber-shell cyber-hero__grid">
+				<div class="cyber-hero__copy">
+					<p class="cyber-kicker"><Icon name="material-symbols:shield-with-heart-outline-rounded" /> KNOWLEDGE / AI SHIELD</p>
+					<h1 id="cyber-title"><span>AIサイバー攻撃とは？</span><em>事例と対策を<br />実測データで解説</em></h1>
+					<p class="cyber-hero__lead">AIを名乗るアクセスを、すべて同じものとして扱わない。<br />正規のAIは通し、偽装アクセスは止めるための判断を整理します。</p>
+					<div class="cyber-actions">
+						<a class="cyber-button cyber-button--primary" href="#measurement">自社実測を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
+						<a class="cyber-button cyber-button--text" href="/aishield/">AI SHIELDを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
+					</div>
+				</div>
+				<figure class="cyber-hero__visual">
+					<img src="/images/aishield/hero-angel-ai-disguised-virus-v10.png" alt="正規のAIロボットに紛れ、天使の仮面を被った悪質なウイルスがサーバーに近づくイメージ" fetchpriority="high" />
+					<figcaption><span>VERIFY</span> 正規のAIと、名乗りを偽るアクセスを分けて見る。</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="cyber-intro" aria-label="このページで分かること">
+			<div class="cyber-shell cyber-intro__grid">
+				<p><strong>AIサイバー攻撃を考える出発点は、</strong>AIそのものを怖がることではありません。どのアクセスが情報を見つけるための正規の訪問で、どのアクセスがサイトの弱い場所を探しているのかを、同じ画面で見分けることです。</p>
+				<ul>
+					<li><span>01</span> AIサイバー攻撃の意味</li>
+					<li><span>02</span> 自社実測で見るアクセス</li>
+					<li><span>03</span> 守る・測るの役割分担</li>
+				</ul>
+			</div>
+		</section>
+
+		<section id="definition" class="cyber-section">
+			<div class="cyber-shell cyber-copy-grid">
+				<div class="cyber-section-heading"><p>01 / DEFINITION</p><h2>AIサイバー攻撃とは何ですか？</h2></div>
+				<div class="cyber-prose">
+					<p><strong>AIサイバー攻撃とは、AIを使って、またはAIを名乗って、サイトやシステムに不正な働きかけを行う行為です。</strong>ここで大切なのは、生成AIを使った攻撃だけを指す言葉ではないことです。公開サイトには、正規の検索・AIクローラーと同じ名前を使いながら、認証情報や管理に関わる情報を探すようなアクセスも混ざります。</p>
+					<p>だから対策は「AIを全部止める」か「AIを全部通す」かの二択ではありません。サイトの役割を理解するために来る正規のAIは通し、利用者や運営に不利益をもたらす偽装アクセスは別に扱う。その前提を持つと、AIサイバー攻撃を必要以上に煽らず、現実的な判断ができます。</p>
+					<p>画面に表示される名前は、アクセスの目的を保証するものではありません。たとえば、普段は情報を探しに来るAIクローラーと似た名前であっても、実際にはサイトの中を広く探る動きであれば、同じ信頼の置き方はできません。反対に、AIだからという理由だけで入口を閉じると、検索やAI経由で必要な情報を届ける機会まで失うことがあります。</p>
+					<aside class="cyber-principle"><Icon name="material-symbols:rule-settings-rounded" /><div><span>THE PRINCIPLE</span><strong>良いAIは通し、悪いAIは止める。</strong><p>見分けるために、名前だけではなく、実際に来ているアクセスとサイトへの影響を確認します。</p></div></aside>
+				</div>
+			</div>
+		</section>
+
+		<section id="warning" class="cyber-section cyber-section--surface">
+			<div class="cyber-shell cyber-copy-grid">
+				<div class="cyber-section-heading"><p>02 / WHY NOW</p><h2>なぜ今、AIサイバー攻撃が警戒されているのですか？（2026-08-28、OpenAI 等127団体が「AI攻撃は数カ月で広範かつ高度になる」と共同警告）</h2></div>
+				<div class="cyber-prose">
+					<p><strong>AIサイバー攻撃が警戒されるのは、攻撃側が短時間で多くの候補を試し、守る側の確認が追いつきにくくなるためです。</strong>2026年8月28日、OpenAIなど127団体は共同文書で、今後数カ月にAIを使ったサイバー攻撃がより広範で高度になると警告しました。これは、特別な大企業だけが考えるテーマではありません。</p>
+					<p>小さなサイトでも、公開されている入口があれば自動アクセスの対象になります。人の目で一件ずつ判断するのではなく、まず状況を観測し、守る場所を絞る。早く気づける状態を作ることが、規模にかかわらず現実的な備えになります。</p>
+					<p>ここでいう「警戒」は、サイトを閉じたり、新しい道具を一度に増やしたりすることではありません。どのページが事業の説明を担い、どこに運用上の情報があり、誰が確認するかを先に決めることです。アクセスが増えてから慌てるより、観測・判断・改善の順番を平時に用意しておく方が、必要な範囲に集中できます。</p>
+					<p class="cyber-source"><Icon name="material-symbols:open-in-new-rounded" /> <a href="https://openai.com/collective-cyberdefense/" target="_blank" rel="noopener noreferrer">OpenAI等の共同文書「A call for collective action on cyber defense」</a>を参照。この記事では、公開された問題提起を自社サイトの防御判断に引き寄せて解説しています。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="examples" class="cyber-section">
+			<div class="cyber-shell">
+				<div class="cyber-section-heading cyber-section-heading--wide"><p>03 / EXAMPLES</p><h2>AIサイバー攻撃にはどんな事例がありますか？</h2><span><strong>AIサイバー攻撃の事例は、AIを使って攻撃を広げるものと、AIの名前を借りて入口を探すものに大別して考えられます。</strong>再現方法ではなく、守る側が見るべき兆候に絞ります。</span></div>
+				<div class="cyber-example-grid">
+					<article><div class="cyber-example__icon"><Icon name="material-symbols:auto-awesome-rounded" /></div><p>AIを使う側</p><h3>短時間に試行を重ねる</h3><span>文章や情報収集を自動化できることは、守る側にとっても、攻撃側にとっても作業量を変えます。急な変化を見逃さない観測が必要です。</span></article>
+					<article><div class="cyber-example__icon cyber-example__icon--alert"><Icon name="material-symbols:masks-rounded" /></div><p>AIを名乗る側</p><h3>正規らしい名前で近づく</h3><span>名前だけを見て通すと、正規のAIに似せたアクセスまで同じ扱いになります。発信元や挙動を確かめる余地を残します。</span></article>
+					<article><div class="cyber-example__icon"><Icon name="material-symbols:manage-search-rounded" /></div><p>守る側</p><h3>何が読まれたかを確認する</h3><span>正規のAIがどのページに来ているかを見れば、止めるべきものと、情報の入口として整えるべきものを分けられます。</span></article>
+				</div>
+				<p class="cyber-example-note">アクセスが自動的であることだけでは、悪意の有無は決まりません。ページを見つけ、内容を理解するための正規アクセスもあります。重要なのは、サイトにとって何を目的としたアクセスなのかを、名前、到達先、実際の動きという複数の観点から確認し、判断を記録しておくことです。</p>
+			</div>
+		</section>
+
+		<section id="measurement" class="cyber-section cyber-section--measurement">
+			<div class="cyber-shell">
+				<div class="cyber-section-heading cyber-section-heading--measurement"><div><p>04 / EFFECT.MOE OBSERVATION</p><h2>AIを名乗るアクセスは実際どれくらい来ているのですか？（自社サイトの実測データ）</h2></div><span><strong>effect.moeでは、直近90日にAIを名乗るクローラーのアクセスを継続して観測しています。</strong>下の件数は、全ステータス計でそろえた自社実測です。</span></div>
+				<div class="cyber-measurement-card">
+					<div class="cyber-measurement-card__head"><div><span>LAST 90 DAYS / ALL STATUS</span><h3>ClaudeBotは、Googlebotを上回った。</h3></div><p>観測値は「AIに紹介される」ことを保証するものではありません。AIがサイトへ接触している状況を確かめるための記録です。</p></div>
+					<div class="cyber-bars" role="img" aria-label="effect.moe直近90日のAIを名乗るクローラーのアクセス数。Bytespider 2,143件、ClaudeBot 944件、Googlebot 927件、GPTBot 795件、ChatGPT-User 625件。">
+						{accessCounts.map((item) => <div class="cyber-bar"><strong>{item.name}</strong><span><i style={`--bar:${(item.value / 2143) * 100}%`}></i></span><b>{item.label}</b></div>)}
+					</div>
+					<div class="cyber-measurement-card__foot"><p><strong>直近30日の別集計では、AIを名乗る偽装アクセスを1,075件観測しました。</strong>第三者の実測実験でも、「AIアシスタント」を名乗るアクセスの81.8%が偽装だった例があります。両者は集計条件と観測主体が異なるため、同じ数値としては扱いません。</p></div>
+				</div>
+				<p class="cyber-measurement-note">件数は、攻撃の成功やAI回答での紹介を意味するものではありません。あくまで、サイトがどの種類のアクセスと接しているかを確認するための観測値です。そのため、値だけを追うのではなく、どのページに来たのか、正規のAIとして扱うべきか、改善の優先度はどこかを続けて見ます。</p>
+				<p class="cyber-measurement-note">自社実測を公開する理由も、数字の大きさを示すためではありません。正規のAIクローラーが実際に来る一方で、AIを名乗る偽装アクセスも別に観測される。その二つを同じものとして扱わないことが、AI検索の入口を保ちながらサイトを守るための前提になるからです。</p>
+				<div class="cyber-two-sided"><div><p>MEASURE</p><h3>AIの流入を測るには<br /><a href="/aicrawl/">AI CRAWL</a>を使う。</h3><span>正規のAIがどのページに来ているかを確認し、情報の入口を整える側です。</span><a href="/aicrawl/">AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div><p>PROTECT</p><h3>AIを装う攻撃からサイトを守るには<br /><a href="/aishield/">AI SHIELD</a>を使う。</h3><span>偽装アクセスを見分け、サイトへ届く前に止める側です。</span><a href="/aishield/">AI SHIELDを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div></div>
+			</div>
+		</section>
+
+		<section id="action" class="cyber-section">
+			<div class="cyber-shell cyber-copy-grid">
+				<div class="cyber-section-heading"><p>05 / FIRST ACTION</p><h2>中小企業や個人サイトは、AIサイバー攻撃に何をすべきですか？</h2></div>
+				<div class="cyber-prose">
+					<p><strong>中小企業や個人サイトが最初にすべきことは、AIを名乗るアクセスを一律に信用も拒否もせず、実際の状況を知ることです。</strong>特にログインや運用データを持つサイトは、公開している情報、守るべき情報、正規のAIに見つけてほしいページを分けて考えます。</p>
+					<ol class="cyber-action-list"><li><span>01</span><div><strong>守る対象を決める</strong><p>サイトに何があり、どこまで影響が及びうるかを整理します。</p></div></li><li><span>02</span><div><strong>来ているアクセスを見る</strong><p>正規のAI、通常の訪問、偽装の疑いがあるアクセスを同じに扱わないようにします。</p></div></li><li><span>03</span><div><strong>対策の順番を決める</strong><p>広く作業を始めるのではなく、影響と優先度に合わせて守りを重ねます。</p></div></li></ol>
+					<p>この順番なら、いきなり設定や製品の比較から入らずに済みます。たとえば、情報を見つけてもらうページまで閉じてしまうと、守りのためにサイトの役割を損なう可能性があります。守る対象と、通してよいアクセスを分けてから、必要な範囲だけ対策を選ぶことが大切です。</p>
+					<p>また、対策は一度実施して終わりではありません。サイトの内容や運用が変われば、守るべき対象も変わります。月ごとの観測を通じて、今は問題がないことも、次に確認すべきことも分かるようになります。小さなサイトほど、判断を複雑にせず、確認できる記録を残しながら続ける方法が向いています。</p>
+					<p>問い合わせや外部からの指摘が起きた後に調べ始めると、何が通常で何が例外だったのかを判断しにくくなります。だからこそ、平時から「見つけてもらうためのアクセス」と「守るために確認するアクセス」を分けておくことが重要です。測定と防御を別の目的として置くことで、必要な判断が見えやすくなります。</p>
+					<p>自社だけで判断しにくい場合は、<a href="/aishield/">AI SHIELD</a>で見守りから始められます。正規のAIの扱いも含めて確認することで、必要以上に集客の入口を閉じずに済みます。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="faq" class="cyber-section cyber-section--surface">
+			<div class="cyber-shell cyber-faq">
+				<div class="cyber-section-heading"><p>06 / FAQ</p><h2>よくある質問（FAQ）</h2><span>AIサイバー攻撃対策で迷いやすい点を、まず短く整理します。状況やサイトの役割によって判断は変わるため、一般論だけで決めず、実際に来ているアクセスと守る対象をあわせて確認してください。</span></div>
+				<div>{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p>{item.q.includes("全部") && <a href="/faq/#ai-shield">総合FAQのAI SHIELDに関する質問を見る <Icon name="material-symbols:arrow-forward-rounded" /></a>}</details>)}</div>
+			</div>
+		</section>
+
+		<section class="cyber-final">
+			<div class="cyber-shell cyber-final__grid"><div><p>AI SHIELD / FIRST STEP</p><h2>まず、何が来ているかを<br />見える状態にする。</h2><span>AIを装うアクセスを見守り、必要な範囲から守る。正規のAIを止めないためにも、状況の確認から始めます。</span></div><a class="cyber-button cyber-button--light" href={consultationHref}>AI SHIELDを無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+		</section>
+	</main>
+
+	<style>
+		.cyber-page { --ink:#10233c; --teal:#007f82; --blue:#18517a; --mint:#e9f8f5; --warm:#f7f4ec; --line:#cfdddc; --muted:#5e7180; overflow:hidden; background:#fff; color:var(--ink); }
+		.cyber-shell { width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+		.cyber-breadcrumbs { position:relative; z-index:2; max-width:1120px; width:calc(100% - 48px); margin:1.25rem auto -1.25rem; }
+		.cyber-hero { position:relative; isolation:isolate; padding:5.8rem 0 5rem; background:linear-gradient(126deg,#edf9f7 0%,#f8fbfb 49%,#deedf2 100%); }
+		.cyber-hero::before { content:""; position:absolute; z-index:-1; width:48rem; height:48rem; right:-13rem; bottom:-27rem; border:1px solid rgba(0,127,130,.18); border-radius:50%; box-shadow:0 0 0 3.7rem rgba(255,255,255,.38),0 0 0 7.4rem rgba(0,127,130,.04); }
+		.cyber-hero__grid { display:grid; grid-template-columns:.92fr 1.08fr; align-items:center; gap:clamp(2rem,5vw,5.2rem); }
+		.cyber-kicker,.cyber-section-heading>p,.cyber-final p { margin:0 0 1rem; color:var(--teal); font-size:.75rem; font-weight:800; letter-spacing:.15em; }
+		.cyber-kicker svg { margin-right:.3rem; vertical-align:-.16em; }
+		.cyber-hero h1,.cyber-section-heading h2,.cyber-final h2 { margin:0; font-weight:850; letter-spacing:-.055em; line-height:1.1; }
+		.cyber-hero h1 { max-width:42rem; font-size:clamp(2.4rem,3.6vw,3.6rem); }
+		.cyber-hero h1>span,.cyber-hero h1 em { display:block; }.cyber-hero h1 em { margin-top:.24em; color:var(--teal); font-style:normal; font-size:.66em; line-height:1.3; }
+		.cyber-hero__lead { margin:1.6rem 0; color:#2e475c; font-size:clamp(1.05rem,1.5vw,1.3rem); font-weight:700; line-height:1.9; }
+		.cyber-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.85rem; }
+		.cyber-button { display:inline-flex; min-height:3.15rem; align-items:center; justify-content:center; gap:.5rem; padding:.78rem 1.1rem; border:1px solid transparent; border-radius:.35rem; font-weight:800; text-decoration:none; transition:transform .2s,box-shadow .2s; }
+		.cyber-button:hover { transform:translateY(-2px); box-shadow:0 .7rem 1.6rem rgba(8,72,92,.16); }
+		.cyber-button--primary { background:var(--teal); color:#fff; }.cyber-button--text{color:#07516c;text-decoration:underline;text-underline-offset:.25em}.cyber-button--light{background:#fff;color:#075b6b;}
+		.cyber-hero__visual { position:relative; overflow:hidden; height:clamp(31rem,50vw,38rem); margin:0 -1.5rem 0 0; border-radius:2rem 0 0 2rem; box-shadow:0 1.7rem 3.2rem rgba(10,61,76,.2); background:#dff1ef; }
+		.cyber-hero__visual img { display:block; width:100%; height:100%; min-height:0; object-fit:cover; object-position:center; mix-blend-mode:multiply; }
+		.cyber-hero__visual figcaption { position:absolute; left:1rem; right:1rem; bottom:1rem; display:flex; align-items:center; gap:.65rem; padding:.8rem 1rem; background:rgba(7,54,77,.9); color:#fff; font-size:.78rem; font-weight:700; line-height:1.55; }.cyber-hero__visual figcaption span{color:#7fe2d1;font-size:.65rem;letter-spacing:.12em;}
+		.cyber-intro { padding:2rem 0; border-bottom:1px solid var(--line); background:#fff; }.cyber-intro__grid{display:grid;grid-template-columns:1.18fr .82fr;gap:3rem;align-items:center}.cyber-intro p{margin:0;font-size:1.12rem;font-weight:600;line-height:1.9}.cyber-intro strong{color:#076875}.cyber-intro ul{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;list-style:none;margin:0;padding:0}.cyber-intro li{font-size:.72rem;font-weight:800;line-height:1.5}.cyber-intro li span{display:block;margin-bottom:.2rem;color:var(--teal);font-size:.66rem;letter-spacing:.08em}
+		.cyber-section { padding:clamp(4.75rem,8vw,8rem) 0; }.cyber-section--surface{background:#f4faf9}.cyber-copy-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,7vw,7rem)}.cyber-section-heading h2{font-size:clamp(2rem,3.7vw,3.55rem)}.cyber-section-heading--wide{max-width:50rem;margin-bottom:2.4rem}.cyber-section-heading--wide>span,.cyber-section-heading--measurement>span,.cyber-section-heading>span{display:block;margin-top:1rem;color:var(--muted);line-height:1.9}.cyber-prose{max-width:47rem}.cyber-prose p{margin:0 0 1.4rem;color:#31485a;line-height:2}.cyber-prose strong{color:var(--ink)}.cyber-prose a,.cyber-source a{color:#006f80;font-weight:800;text-decoration-thickness:1px;text-underline-offset:.2em}.cyber-principle{display:flex;gap:1rem;margin-top:2rem;padding:1.4rem;border-left:.32rem solid #0b9c97;background:#e4f7f2}.cyber-principle>svg{flex:none;color:#00756f;font-size:2rem}.cyber-principle span,.cyber-measurement-card__head span{display:block;color:#007a79;font-size:.68rem;font-weight:850;letter-spacing:.12em}.cyber-principle strong{display:block;margin:.28rem 0;color:#12394c;font-size:1.32rem}.cyber-principle p{margin:0;color:#486472;font-size:.9rem;line-height:1.7}.cyber-source{padding-top:.5rem;font-size:.88rem}.cyber-source svg{vertical-align:-.17em}
+		.cyber-example-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.cyber-example-grid article{padding:1.7rem;background:#fff;border:1px solid var(--line)}.cyber-example__icon{display:grid;width:3rem;height:3rem;place-items:center;background:#e1f5f0;color:#007b77;border-radius:50%;font-size:1.55rem}.cyber-example__icon--alert{background:#feece7;color:#bc452f}.cyber-example-grid p{margin:1.5rem 0 .45rem;color:#23757a;font-size:.68rem;font-weight:850;letter-spacing:.1em}.cyber-example-grid h3{margin:0;font-size:1.32rem}.cyber-example-grid span{display:block;margin-top:.85rem;color:var(--muted);font-size:.9rem;line-height:1.8}
+		.cyber-example-note,.cyber-measurement-note{max-width:50rem;margin:1.35rem 0 0;color:var(--muted);line-height:1.9}.cyber-measurement-note{color:#c7dee4}
+		.cyber-section--measurement{background:#113c58;color:#fff}.cyber-section--measurement .cyber-section-heading>p{color:#78dfcf}.cyber-section--measurement .cyber-section-heading>span{color:#c7dee4}.cyber-section-heading--measurement{display:grid;grid-template-columns:1fr .72fr;gap:2rem;align-items:end;max-width:none;margin-bottom:2.5rem}.cyber-measurement-card{overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 1.6rem 3rem rgba(0,0,0,.18)}.cyber-measurement-card__head{display:grid;grid-template-columns:1fr .9fr;gap:2rem;padding:2rem;border-bottom:1px solid #dce8e8}.cyber-measurement-card__head h3{margin:.5rem 0 0;font-size:clamp(1.5rem,3vw,2.5rem);letter-spacing:-.035em}.cyber-measurement-card__head p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}.cyber-bars{display:grid;gap:1rem;padding:2rem}.cyber-bar{display:grid;grid-template-columns:8.8rem 1fr 4.6rem;gap:1rem;align-items:center}.cyber-bar strong{font-size:.92rem}.cyber-bar>span{display:block;height:.8rem;background:#e7efee;border-radius:999px;overflow:hidden}.cyber-bar i{display:block;width:var(--bar);height:100%;border-radius:inherit;background:linear-gradient(90deg,#087d80,#51bea9)}.cyber-bar b{text-align:right;font-size:.9rem}.cyber-measurement-card__foot{padding:1.3rem 2rem;background:#eef8f6}.cyber-measurement-card__foot p{margin:0;color:#38505f;font-size:.9rem;line-height:1.85}.cyber-two-sided{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.cyber-two-sided>div{padding:1.7rem;background:#0a5870}.cyber-two-sided>div+div{background:#007c78}.cyber-two-sided p{margin:0;color:#a4ebdc;font-size:.67rem;font-weight:850;letter-spacing:.13em}.cyber-two-sided h3{margin:.65rem 0;font-size:1.45rem;line-height:1.4}.cyber-two-sided h3 a{color:#fff;text-underline-offset:.18em}.cyber-two-sided span{display:block;min-height:3em;color:#d4eef1;font-size:.86rem;line-height:1.7}.cyber-two-sided>a{display:inline-flex;align-items:center;gap:.3rem;margin-top:1rem;color:#fff;font-size:.85rem;font-weight:800;text-underline-offset:.2em}
+		.cyber-action-list{display:grid;gap:.9rem;list-style:none;margin:1.6rem 0;padding:0}.cyber-action-list li{display:flex;gap:1rem;padding-bottom:.9rem;border-bottom:1px solid var(--line)}.cyber-action-list span{color:var(--teal);font-size:.7rem;font-weight:850;letter-spacing:.08em}.cyber-action-list strong,.cyber-action-list p{display:block}.cyber-action-list p{margin:.22rem 0 0;color:var(--muted);font-size:.9rem;line-height:1.7}
+		.cyber-faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,7vw,7rem)}.cyber-faq details{border-top:1px solid #bfd4d1}.cyber-faq details:last-child{border-bottom:1px solid #bfd4d1}.cyber-faq summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem 0;cursor:pointer;font-weight:800;line-height:1.6;list-style:none}.cyber-faq summary::-webkit-details-marker{display:none}.cyber-faq summary svg{flex:none;font-size:1.4rem}.cyber-faq details[open] summary svg{transform:rotate(45deg)}.cyber-faq details p{margin:0;padding:0 0 .6rem;color:#4f6872;line-height:1.85}.cyber-faq details>a{display:inline-flex;align-items:center;gap:.25rem;margin:0 0 1.25rem;color:#006c79;font-size:.85rem;font-weight:800;text-underline-offset:.2em}
+		.cyber-final{padding:clamp(4.7rem,8vw,7rem) 0;background:linear-gradient(125deg,#053d59,#00827d);color:#fff}.cyber-final p{color:#9ae8d7}.cyber-final__grid{display:flex;align-items:center;justify-content:space-between;gap:2rem}.cyber-final h2{font-size:clamp(2.3rem,4vw,4rem)}.cyber-final span{display:block;max-width:42rem;margin-top:1.1rem;color:#d6edec;line-height:1.8}.cyber-final .cyber-button{min-width:15rem;flex:none}
+		@media(max-width:900px){.cyber-hero__grid,.cyber-copy-grid,.cyber-intro__grid,.cyber-section-heading--measurement,.cyber-faq{grid-template-columns:1fr}.cyber-hero__visual{max-width:38rem;width:100%;height:33rem;margin:0 auto;border-radius:1.7rem}.cyber-hero__visual img{min-height:33rem}.cyber-intro ul{max-width:34rem}.cyber-final__grid{align-items:flex-start;flex-direction:column}.cyber-example-grid{grid-template-columns:1fr}.cyber-two-sided{grid-template-columns:1fr}.cyber-section-heading--measurement{gap:1rem}.cyber-measurement-card__head{grid-template-columns:1fr}.cyber-measurement-card__head p{max-width:44rem}}
+		@media(max-width:640px){.cyber-shell,.cyber-breadcrumbs{width:calc(100% - 32px)}.cyber-breadcrumbs{margin-top:1rem}.cyber-hero{padding:4.2rem 0 3.5rem}.cyber-hero h1{font-size:2rem}.cyber-hero__lead br{display:none}.cyber-hero__visual{height:28rem}.cyber-hero__visual img{min-height:28rem}.cyber-actions .cyber-button--primary{width:100%}.cyber-intro{padding:1.5rem 0}.cyber-intro ul{grid-template-columns:1fr 1fr}.cyber-section{padding:4.2rem 0}.cyber-section-heading h2{font-size:2.1rem}.cyber-example-grid article{padding:1.35rem}.cyber-measurement-card__head,.cyber-bars{padding:1.35rem}.cyber-bar{grid-template-columns:1fr 4rem;gap:.35rem .75rem}.cyber-bar>span{grid-column:1 / -1;grid-row:2}.cyber-bar b{grid-column:2;grid-row:1}.cyber-measurement-card__foot{padding:1.2rem 1.35rem}.cyber-two-sided>div{padding:1.35rem}.cyber-final .cyber-button{width:100%}}
+	</style>
+</LandingLayout>

@@ -35,6 +35,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/ai-cyber-attack"),
+		label: "AI SHIELD",
+		href: "/aishield/",
+	},
+	{
 		match: (path: string) => path.startsWith("/ai-agent-course"),
 		label: "AI COURSE",
 		href: "/ai-agent-course/",
@@ -166,6 +171,7 @@ const serviceNavGroups = [
 		items: [
 			{ href: "/blog/", label: "ブログ" },
 			{ href: "/llmo/", label: "LLMO対策ガイド" },
+			{ href: "/ai-cyber-attack/", label: "AIサイバー攻撃ガイド" },
 		],
 	},
 ];
@@ -337,6 +343,7 @@ const navItems = [
 						<strong>ナレッジ</strong>
 						<a href="/blog/">ブログ</a>
 						<a href="/llmo/">LLMO対策ガイド</a>
+						<a href="/ai-cyber-attack/">AIサイバー攻撃ガイド</a>
 					</nav>
 					<nav aria-label="Footer company links">
 						<strong>サイト情報</strong>
