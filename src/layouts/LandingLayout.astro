@@ -41,6 +41,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/wordpress-vulnerability"),
+		label: "WORDPRESS SECURITY",
+		href: "/wordpress-vulnerability/",
+	},
+	{
 		match: (path: string) => path.startsWith("/bots"),
 		label: "BOT OBSERVATORY",
 		href: "/bots/",
