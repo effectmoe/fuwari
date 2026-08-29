@@ -1,0 +1,157 @@
+---
+import { Icon } from "astro-icon/components";
+import {
+	type BotDefinition,
+	botData,
+	formatBotText,
+	formatNumber,
+	getBotMetric,
+} from "../../data/bot-observatory";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+import ArticleChoiceCta from "../landing/ArticleChoiceCta.astro";
+import Breadcrumbs from "../landing/Breadcrumbs.astro";
+
+interface Props {
+	definition: BotDefinition;
+}
+
+const { definition } = Astro.props;
+const bot = getBotMetric(definition.slug);
+const pageTitle = definition.pageTitle;
+const pageDescription = formatBotText(
+	definition.pageDescription,
+	definition.slug,
+);
+const maxWeekly = Math.max(...bot.weekly.map((week) => week.n));
+const now = new Date();
+const updatedAt = new Date(`${botData.updated}T00:00:00+09:00`);
+const isUpdateDelayed =
+	Math.floor((now.getTime() - updatedAt.getTime()) / 86400000) > 14;
+const temporalCoverageMatch = botData.period.match(
+	/(\d{4}-\d{2}-\d{2})〜(\d{4}-\d{2}-\d{2})/,
+);
+const temporalCoverage = temporalCoverageMatch
+	? `${temporalCoverageMatch[1]}/${temporalCoverageMatch[2]}`
+	: botData.period;
+const referenceRows = definition.referenceRows.map((row) => ({
+	label: row.label,
+	value:
+		"bot" in row
+			? getBotMetric(row.bot).month_hits
+			: botData.bots.reference[row.metric],
+}));
+const faqItems = definition.faqItems.map((item) => ({
+	question: formatBotText(item.question, definition.slug),
+	answer: formatBotText(item.answer, definition.slug),
+}));
+const pageLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "FAQPage",
+			"@id": `https://effect.moe/bots/${definition.slug}/#faq`,
+			mainEntity: faqItems.map((item) => ({
+				"@type": "Question",
+				name: item.question,
+				acceptedAnswer: { "@type": "Answer", text: item.answer },
+			})),
+		},
+		{
+			"@type": "Dataset",
+			"@id": `https://effect.moe/bots/${definition.slug}/#dataset`,
+			name: `AIボット観測所 ${bot.name}観測データ`,
+			description: `${botData.definition}。${bot.name}のアクセス数と週次推移。`,
+			url: `https://effect.moe/bots/${definition.slug}/`,
+			temporalCoverage,
+			dateModified: botData.updated,
+			creator: { "@id": "https://effect.moe/#organization" },
+			variableMeasured: [
+				{
+					"@type": "PropertyValue",
+					name: "アクセス数",
+					value: bot.month_hits,
+					unitText: "件",
+				},
+				{
+					"@type": "PropertyValue",
+					name: "週次推移",
+					value: bot.weekly.map((week) => `${week.w}: ${week.n}件`).join(" / "),
+				},
+			],
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{
+					"@type": "ListItem",
+					position: 1,
+					name: "ホーム",
+					item: "https://effect.moe/",
+				},
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "AIボット観測所",
+					item: "https://effect.moe/bots/",
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: bot.name,
+					item: `https://effect.moe/bots/${definition.slug}/`,
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} setOGTypeArticle={true} ogImage="/images/aishield/hero-angel-ai-disguised-virus-v10.png" ogImageAlt="AIボットを観測するイメージ">
+	<Fragment slot="head">
+		<meta name="keywords" content={definition.keywords} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(pageLd)} />
+	</Fragment>
+	<main class="bot-profile">
+		<section class="bot-profile__hero">
+			<div class="bot-shell">
+				<Breadcrumbs class="bot-breadcrumbs" items={[{ label: "AIボット観測所", href: "/bots/" }, { label: bot.name, href: `/bots/${definition.slug}/` }]} />
+				<p class="bot-eyebrow"><Icon name="material-symbols:visibility-rounded" /> BOT PROFILE / {definition.profileNumber}</p>
+				<h1>{bot.name}<span>とは？</span></h1>
+				<p>{definition.heroLead}</p>
+			</div>
+		</section>
+
+		<section class="bot-measurement" aria-labelledby="measurement-title">
+			<div class="bot-shell">
+				<header><p>THIS MONTH / AUTO UPDATE</p><h2 id="measurement-title">今週の実測</h2><span>{botData.period}・{botData.definition}</span></header>
+				<div class="bot-measurement__grid">
+					<article class="bot-count"><span>今月の件数</span><strong>{formatNumber(bot.month_hits)}<small>件</small></strong><b>{bot.rank}</b></article>
+					<article class="bot-reference"><span>参考 / 同一観測窓</span><dl>{referenceRows.map((row) => <div><dt>{row.label}</dt><dd>{formatNumber(row.value)}件</dd></div>)}</dl></article>
+				</div>
+				<div class="bot-weekly"><div class="bot-weekly__head"><h3>週次推移</h3><span>初観測日 {bot.first_seen} ／ 最終更新 {botData.updated}{isUpdateDelayed ? " ／ 更新遅延中" : ""}</span></div><ol>{bot.weekly.map((week) => <li><span>{week.w}</span><div aria-hidden="true"><i style={`width:${(week.n / maxWeekly) * 100}%`}></i></div><b>{formatNumber(week.n)}件</b>{week.note && <em>{week.note}</em>}</li>)}</ol></div>
+			</div>
+		</section>
+
+		<section class="bot-copy">
+			<div class="bot-shell bot-copy__grid">
+				<aside><p>{definition.asideEyebrow}</p><h2 set:html={definition.asideTitle.replace("\n", "<br />")} /></aside>
+				<div>{definition.chapters.map((chapter) => <section><h2>{chapter.title}</h2>{chapter.paragraphs.map((paragraph) => <p>{formatBotText(paragraph, definition.slug)}</p>)}{chapter.listIntro && <p>{formatBotText(chapter.listIntro, definition.slug)}</p>}{chapter.listItems && <ol>{chapter.listItems.map((item) => <li>{item.label && <b>{item.label}</b>} {formatBotText(item.text, definition.slug)}</li>)}</ol>}{chapter.referenceLinks && <p class="bot-copy__references">（参考リンク: {chapter.referenceLinks.map((link, index) => <>{index > 0 && " ／ "}<a href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noopener noreferrer" : undefined}>{link.label}</a></>)}）</p>}</section>)}</div>
+			</div>
+		</section>
+
+		<section class="bot-faq" aria-labelledby="bot-faq-title">
+			<div class="bot-shell bot-faq__grid">
+				<header><p>FAQ</p><h2 id="bot-faq-title">{bot.name}のよくある質問</h2></header>
+				<div>{faqItems.map((item) => <details><summary>{item.question}<Icon name="material-symbols:add-rounded" /></summary><p>{item.answer}</p></details>)}<a class="bot-faq__more" href="/faq/#ai-shield">総合FAQも見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+			</div>
+		</section>
+
+		<section class="bot-related"><div class="bot-shell"><p>RELATED GUIDE</p><div>{definition.relatedLinks.map((link) => <a href={link.href}>{link.lead} <span>→</span><strong>{link.title}</strong></a>)}</div></div></section>
+
+		<ArticleChoiceCta {...definition.cta} body={formatBotText(definition.cta.body, definition.slug)} />
+	</main>
+
+	<style>
+		:global(body){background:#faf8f2}.bot-profile{--bot-ink:#19233e;--bot-blue:#314b98;--bot-amber:#e4a43b;--bot-paper:#faf8f2;--bot-line:#d9d7ce;color:var(--bot-ink)}.bot-shell{width:min(1080px,calc(100% - 48px));margin:0 auto}.bot-profile__hero{padding:2rem 0 clamp(4rem,8vw,7rem);background:linear-gradient(180deg,#faf8f2 0,#eeeef7 100%)}.bot-breadcrumbs{margin:0 0 3rem}.bot-eyebrow,.bot-measurement header>p,.bot-copy aside>p,.bot-faq header>p,.bot-related p{display:flex;align-items:center;gap:.4rem;margin:0 0 .9rem;color:#324b99;font-size:.7rem;font-weight:850;letter-spacing:.12em}.bot-profile__hero h1{margin:0;font-size:clamp(3.2rem,7vw,6.4rem);letter-spacing:-.07em;line-height:1}.bot-profile__hero h1 span{color:#314b98}.bot-profile__hero>div>p:not(.bot-eyebrow){max-width:42rem;margin:1.6rem 0 0;color:#4d5870;font-size:1.14rem;font-weight:600;line-height:1.9}.bot-measurement{padding:clamp(4.3rem,8vw,7rem) 0;background:#fff}.bot-measurement header h2{margin:0;font-size:clamp(2rem,4vw,3.45rem);letter-spacing:-.05em}.bot-measurement header>span{display:block;margin-top:.7rem;color:#667085;font-size:.88rem}.bot-measurement__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1rem;margin-top:2.4rem}.bot-count,.bot-reference{padding:2rem;border:1px solid #cad0e0}.bot-count{background:#1d2b5b;color:#fff}.bot-count span,.bot-reference>span{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em}.bot-count strong{display:block;margin:.6rem 0;color:#f4c46e;font-size:clamp(3.8rem,7vw,6.2rem);line-height:1;letter-spacing:-.08em}.bot-count strong small{margin-left:.15em;font-size:.22em;letter-spacing:0}.bot-count b{font-size:.9rem}.bot-reference{background:#f6f5f0}.bot-reference>span{color:#56627b}.bot-reference dl{margin:1.8rem 0 0}.bot-reference dl>div{display:flex;justify-content:space-between;padding:1rem 0;border-top:1px solid #d6d5cf}.bot-reference dt{font-weight:800}.bot-reference dd{margin:0;color:#314b98;font-size:1.3rem;font-weight:850}.bot-weekly{margin-top:1rem;padding:1.5rem 2rem;background:#f6f5f0}.bot-weekly__head{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}.bot-weekly h3{margin:0}.bot-weekly__head span{color:#687389;font-size:.8rem}.bot-weekly ol{display:grid;gap:.9rem;margin:1.5rem 0 0;padding:0;list-style:none}.bot-weekly li{display:grid;grid-template-columns:4.5rem 1fr 5rem auto;gap:.8rem;align-items:center;font-size:.85rem}.bot-weekly li>div{height:.55rem;background:#dde1ec}.bot-weekly li i{display:block;height:100%;background:linear-gradient(90deg,#314b98,#e4a43b)}.bot-weekly li b{justify-self:end}.bot-weekly li em{padding:.18rem .35rem;background:#f5dfb5;color:#665018;font-size:.68rem;font-style:normal}.bot-copy{padding:clamp(5rem,9vw,8rem) 0}.bot-copy__grid,.bot-faq__grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(2rem,7vw,7rem)}.bot-copy aside h2,.bot-faq header h2{margin:0;font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.2;letter-spacing:-.05em}.bot-copy>div section+section{margin-top:3.3rem}.bot-copy>div>section>h2{margin:0 0 1.2rem;font-size:1.6rem}.bot-copy>div>section>p{margin:0 0 1.25rem;color:#405169;line-height:2}.bot-copy ol{display:grid;gap:1rem;margin:1.4rem 0 0;padding-left:1.35rem}.bot-copy li{padding-left:.3rem;color:#405169;line-height:1.85}.bot-copy li b{color:#1c2c57}.bot-copy__references{font-size:.92rem}.bot-copy__references a{color:#2f4997;font-weight:750;text-underline-offset:.2em}.bot-faq{padding:clamp(4.5rem,8vw,7rem) 0;background:#eeeff6}.bot-faq details{border-top:1px solid #bfc6d8}.bot-faq details:last-of-type{border-bottom:1px solid #bfc6d8}.bot-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 0;cursor:pointer;font-weight:800;line-height:1.6;list-style:none}.bot-faq summary::-webkit-details-marker{display:none}.bot-faq details[open] summary svg{transform:rotate(45deg)}.bot-faq details p{margin:0;padding:0 0 1.2rem;color:#4b5a6c;line-height:1.9}.bot-faq__more{display:inline-flex;align-items:center;gap:.3rem;margin-top:1.4rem;color:#2f4997;font-weight:800;text-decoration-thickness:1px;text-underline-offset:.25em}.bot-related{padding:2.1rem 0;background:#fff}.bot-related>div>div{display:grid;gap:.7rem}.bot-related a{display:inline-flex;flex-wrap:wrap;gap:.35rem .7rem;align-items:baseline;color:#1d2c56;font-weight:800;text-decoration:none}.bot-related a span{color:#e4a43b}.bot-related a strong{text-decoration:underline;text-underline-offset:.25em}@media(max-width:760px){.bot-shell{width:calc(100% - 32px)}.bot-profile__hero{padding-top:1rem}.bot-breadcrumbs{margin-bottom:2rem}.bot-measurement__grid,.bot-copy__grid,.bot-faq__grid{grid-template-columns:1fr}.bot-weekly{padding:1.25rem}.bot-weekly__head{align-items:flex-start;flex-direction:column}.bot-weekly li{grid-template-columns:3.9rem 1fr 3.9rem}.bot-weekly li em{display:none}.bot-copy aside{margin-bottom:.3rem}.bot-related a{line-height:1.7}}
+	</style>
+</LandingLayout>

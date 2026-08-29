@@ -80,7 +80,7 @@ function labelFromSource(source: string, href: string) {
 }
 
 export function getPublicStaticPages(): PublicPage[] {
-	return Object.entries(pageSources)
+	const filePages = Object.entries(pageSources)
 		.map(([filePath, source]) => {
 			const href = routeFromFilePath(filePath);
 			if (!href) return null;
@@ -95,6 +95,16 @@ export function getPublicStaticPages(): PublicPage[] {
 					`${label}の案内ページです。`,
 			};
 		})
-		.filter((page): page is PublicPage => page !== null)
-		.sort((a, b) => a.href.localeCompare(b.href, "ja"));
+		.filter((page): page is PublicPage => page !== null);
+	const botPages = botPageDefinitions.map((definition) => ({
+		href: `/bots/${definition.slug}/`,
+		label: definition.pageTitle,
+		description: definition.searchExcerpt,
+	}));
+
+	return [...filePages, ...botPages].sort((a, b) =>
+		a.href.localeCompare(b.href, "ja"),
+	);
 }
+
+import { botPageDefinitions } from "../data/bot-observatory";

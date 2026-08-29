@@ -1,28 +1,36 @@
 ---
 import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
 import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
-import botData from "../../data/bots-data.json";
+import {
+	botData,
+	botPageDefinitions,
+	formatNumber,
+	getBotMetric,
+} from "../../data/bot-observatory";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 
 const pageTitle = "AIボット観測所｜AIクローラーの実測データ - 株式会社EFFECT";
 const pageDescription =
 	"AIボット観測所は、日本の中小規模Webサイトに実際に来ているAIクローラー・ボットを、株式会社EFFECTが自社実測で毎週更新する定点観測サイトです。";
-const bytespider = botData.bots.bytespider;
-const formatNumber = (value: number) =>
-	new Intl.NumberFormat("ja-JP").format(value);
+const bytespider = getBotMetric("bytespider");
+const leadBot = [...botPageDefinitions]
+	.map((definition) => ({ definition, metric: getBotMetric(definition.slug) }))
+	.sort((a, b) => b.metric.month_hits - a.metric.month_hits)[0];
 const categorySections = [
 	{
 		label: "悪質・不明系",
-		items: [
-			{
-				name: bytespider.name,
-				hits: bytespider.month_hits,
-				href: "/bots/bytespider/",
-				description: "公式の確認手段が限られ、挙動を継続して観測する対象",
-			},
-		],
+		items: botPageDefinitions.filter(
+			(definition) => definition.catalogCategory === "rogue",
+		),
 	},
-];
+	{
+		label: "AI学習収集系",
+		items: botPageDefinitions.filter(
+			(definition) => definition.catalogCategory === "training",
+		),
+	},
+].filter((section) => section.items.length);
 
 const pageLd = {
 	"@context": "https://schema.org",
@@ -36,6 +44,11 @@ const pageLd = {
 			inLanguage: "ja",
 			publisher: { "@id": "https://effect.moe/#organization" },
 			dateModified: botData.updated,
+			hasPart: botPageDefinitions.map((definition) => ({
+				"@type": "WebPage",
+				name: getBotMetric(definition.slug).name,
+				url: `https://effect.moe/bots/${definition.slug}/`,
+			})),
 		},
 		{
 			"@type": "BreadcrumbList",
@@ -60,7 +73,7 @@ const pageLd = {
 
 <LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} ogImage="/images/aishield/hero-angel-ai-disguised-virus-v10.png" ogImageAlt="AIクローラーとボットのアクセスを観測するイメージ">
 	<Fragment slot="head">
-		<meta name="keywords" content="AIボット, AIクローラー, Bytespider, ボット観測, クローラー実測" />
+		<meta name="keywords" content="AIボット, AIクローラー, Bytespider, ClaudeBot, ボット観測, クローラー実測" />
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(pageLd)} />
 	</Fragment>
 	<main class="observatory-page">
@@ -77,7 +90,7 @@ const pageLd = {
 				</div>
 				<aside class="observatory-signal" aria-label="最新の観測概要">
 					<div class="observatory-signal__top"><span>OBSERVATION WINDOW</span><b>{botData.period}</b></div>
-					<div class="observatory-signal__core"><span>最多観測</span><strong>{formatNumber(bytespider.month_hits)}<small>件</small></strong><b>{bytespider.name}</b></div>
+					<div class="observatory-signal__core"><span>最多観測</span><strong>{formatNumber(leadBot.metric.month_hits)}<small>件</small></strong><b>{leadBot.metric.name}</b></div>
 					<div class="observatory-signal__rings" aria-hidden="true"><i></i><i></i><i></i><em></em></div>
 					<p>最終更新 {botData.updated}</p>
 				</aside>
@@ -92,13 +105,14 @@ const pageLd = {
 						<h3 id={`category-${section.label}`}>{section.label}</h3>
 						<div class="observatory-table" role="table" aria-label={`${section.label}のボット一覧`}>
 							<div class="observatory-table__head" role="row"><span role="columnheader">ボット名</span><span role="columnheader">今月の件数</span><span role="columnheader">詳細</span></div>
-							{section.items.map((item) => (
-								<a class="observatory-table__row" href={item.href} role="row">
-									<span role="cell"><b>{item.name}</b><small>{item.description}</small></span>
-									<span role="cell"><strong>{formatNumber(item.hits)}<small>件</small></strong></span>
+							{section.items.map((definition) => {
+								const metric = getBotMetric(definition.slug);
+								return <a class="observatory-table__row" href={`/bots/${definition.slug}/`} role="row">
+									<span role="cell"><b>{metric.name}</b><small>{definition.catalogDescription}</small></span>
+									<span role="cell"><strong>{formatNumber(metric.month_hits)}<small>件</small></strong></span>
 									<span role="cell"><span class="observatory-table__action">観測結果を見る <Icon name="material-symbols:arrow-forward-rounded" /></span></span>
-								</a>
-							))}
+								</a>;
+							})}
 						</div>
 					</section>
 				))}
@@ -109,12 +123,14 @@ const pageLd = {
 			<div class="observatory-shell observatory-notes__grid">
 				<div><p>HOW WE OBSERVE</p><h2>数字だけを、強い結論にしない。</h2><span>{botData.definition}。観測できるのはアクセスの事実であり、目的の解釈は控えめに扱います。</span></div>
 				<div class="observatory-notes__actions">
-					<p class="observatory-notes__prompt">気になる方は、今すぐ対策を。</p>
-					<span>状況に合わせて、観測の考え方と守り方を確認できます。</span>
-					<div class="observatory-notes__buttons"><a href="/bots/about/">観測方法とデータ引用について <Icon name="material-symbols:arrow-forward-rounded" /></a><a href="/ai-cyber-attack/">AIサイバー攻撃の全体像を読む <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+					<p class="observatory-notes__prompt">観測の前提と、判断の材料を確認する。</p>
+					<span>実測値の読み方と、AIを名乗るアクセスへの対応を、別ページで詳しく整理しています。</span>
+					<div class="observatory-notes__buttons"><a href="/bots/about/">観測方法とデータ引用について <Icon name="material-symbols:arrow-forward-rounded" /></a><a href="/ai-cyber-attack/">AIを名乗るアクセスへの対応を読む <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
 				</div>
 			</div>
 		</section>
+
+		<ArticleChoiceCta eyebrow="NEXT STEP / SITE CHECK" title="あなたのサイトには、今なにが来ていますか？" body="正規のAIクローラーをどう扱い、AIを名乗る不審なアクセスをどう見分けるかは、実際のアクセスを確認してから判断します。目的に合わせて、守る・測るのどちらから始めるか選べます。" primaryHref="/aishield/" primaryText="AIを装う攻撃を見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
 	</main>
 
 	<style>

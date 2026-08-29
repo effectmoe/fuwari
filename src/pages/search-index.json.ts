@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { botPageDefinitions } from "../data/bot-observatory";
 import { getSortedPosts } from "../utils/content-utils";
 import { getPublicStaticPages } from "../utils/public-page-index";
 
@@ -34,12 +35,6 @@ const curatedSearchMetadata: Record<
 			"日本の中小規模Webサイトに実際に来るAIクローラー・ボットを、株式会社EFFECTが自社実測で毎週更新する定点観測データ。",
 		section: "Data",
 	},
-	"/bots/bytespider/": {
-		title: "Bytespiderとは？ブロック方法を実測ログで解説",
-		excerpt:
-			"Bytespiderの量、扱い、判断材料をeffect.moeの実測ログとともに整理したAIボット観測所の図鑑ページ。",
-		section: "Data",
-	},
 	"/bots/about/": {
 		title: "AIボット観測所の観測方法とデータ引用",
 		excerpt: "観測対象・集計方法・更新方針・データ引用ポリシーと免責。",
@@ -69,6 +64,17 @@ const curatedSearchMetadata: Record<
 	},
 };
 
+const botSearchMetadata = Object.fromEntries(
+	botPageDefinitions.map((definition) => [
+		`/bots/${definition.slug}/`,
+		{
+			title: definition.pageTitle,
+			excerpt: definition.searchExcerpt,
+			section: "Data",
+		},
+	]),
+);
+
 const supplementalSearchItems = [
 	{
 		url: "/#secure",
@@ -89,7 +95,8 @@ const supplementalSearchItems = [
 export const GET: APIRoute = async () => {
 	const posts = await getSortedPosts();
 	const staticPages = getPublicStaticPages().map((page) => {
-		const metadata = curatedSearchMetadata[page.href];
+		const metadata =
+			curatedSearchMetadata[page.href] || botSearchMetadata[page.href];
 		return {
 			url: page.href,
 			title: metadata?.title || page.label,

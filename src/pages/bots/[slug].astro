@@ -1,0 +1,15 @@
+---
+import BotProfilePage from "../../components/bots/BotProfilePage.astro";
+import { botPageDefinitions } from "../../data/bot-observatory";
+
+export function getStaticPaths() {
+	return botPageDefinitions.map((definition) => ({
+		params: { slug: definition.slug },
+		props: { definition },
+	}));
+}
+
+const { definition } = Astro.props;
+---
+
+<BotProfilePage definition={definition} />
