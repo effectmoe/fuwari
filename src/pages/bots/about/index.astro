@@ -1,0 +1,60 @@
+---
+import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../../../components/landing/Breadcrumbs.astro";
+import botData from "../../../data/bots-data.json";
+import LandingLayout from "../../../layouts/LandingLayout.astro";
+
+const pageTitle =
+	"AIボット観測所の観測方法とデータ引用について - 株式会社EFFECT";
+const pageDescription =
+	"AIボット観測所の観測対象、集計方法、更新方針、データ引用ポリシーと免責を説明します。";
+const updatedAt = new Date(`${botData.updated}T00:00:00+09:00`);
+const isUpdateDelayed =
+	Math.floor((new Date().getTime() - updatedAt.getTime()) / 86400000) > 14;
+const pageLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebPage",
+			"@id": "https://effect.moe/bots/about/#webpage",
+			name: pageTitle,
+			description: pageDescription,
+			url: "https://effect.moe/bots/about/",
+			inLanguage: "ja",
+			dateModified: botData.updated,
+			publisher: { "@id": "https://effect.moe/#organization" },
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{
+					"@type": "ListItem",
+					position: 1,
+					name: "ホーム",
+					item: "https://effect.moe/",
+				},
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "AIボット観測所",
+					item: "https://effect.moe/bots/",
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: "観測方法とデータ引用",
+					item: "https://effect.moe/bots/about/",
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true}>
+	<Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(pageLd)} /></Fragment>
+	<main class="method-page"><section class="method-hero"><div class="method-shell"><Breadcrumbs class="method-breadcrumbs" items={[{ label: "AIボット観測所", href: "/bots/" }, { label: "観測方法とデータ引用", href: "/bots/about/" }]} /><p>OBSERVATORY / METHOD &amp; CITATION</p><h1>観測方法と<br />データ引用について</h1><span>数字の出し方と、数字で言わないことを明確にします。</span></div></section><section class="method-content"><div class="method-shell method-content__grid"><aside><a href="#observe">観測方法</a><a href="#citation">データ引用</a><a href="#disclaimer">免責</a></aside><div><section id="observe"><p>01 / METHOD</p><h2>どのように観測していますか？</h2><div class="method-card"><strong>{botData.definition}</strong><span>最終更新 {botData.updated}{isUpdateDelayed ? "（更新遅延中）" : ""}</span></div><p>株式会社EFFECTが運営するWebサイト（現在 n=1）のサーバーログを毎日記録し、クローラー・ボットの名乗り（ユーザーエージェント）別に集計しています。</p><ul><li>件数は全ステータス計（アクセス試行の総数）です</li><li>ボット間の比較は必ず同一観測期間で行います</li><li>観測できるのはアクセスの事実です。目的の解釈（何のために来たか）は控えめに記述します</li><li>数字は毎週自動更新されます。各ページに最終更新日を表示し、更新が14日以上止まった場合は「更新遅延中」と表示します</li></ul></section><section id="citation"><p>02 / CITATION</p><h2>データを引用してもいいですか？</h2><p>出典を明記（リンク付き）いただければ、本観測所のデータ・グラフの引用は自由です。</p><blockquote>出典: AIボット観測所（株式会社EFFECT）<br /><a href="https://effect.moe/bots/">https://effect.moe/bots/</a></blockquote></section><section id="disclaimer"><p>03 / DISCLAIMER</p><h2>免責</h2><p>本観測所のデータは当社観測環境での実測値であり、すべてのWebサイトの傾向を保証するものではありません。ボットの挙動・運営元情報は観測時点のものです。</p></section><a class="method-back" href="/bots/"><Icon name="material-symbols:arrow-back-rounded" /> AIボット観測所へ戻る</a></div></div></section></main>
+	<style>
+		:global(body){background:#faf8f2}.method-page{--ink:#172246;--blue:#314b98;--amber:#e3a43e;--line:#ddd9ce;color:var(--ink)}.method-shell{width:min(1010px,calc(100% - 48px));margin:0 auto}.method-hero{padding:2rem 0 clamp(5rem,10vw,9rem);background:linear-gradient(150deg,#1c2856,#344f9d);color:#fff}.method-breadcrumbs{margin-bottom:3.5rem}.method-hero p,.method-content section>p{margin:0 0 1rem;color:var(--amber);font-size:.72rem;font-weight:850;letter-spacing:.13em}.method-hero h1{margin:0;font-size:clamp(3rem,6.5vw,5.8rem);line-height:1.03;letter-spacing:-.07em}.method-hero span{display:block;max-width:34rem;margin-top:1.7rem;color:#dce3ff;font-size:1.08rem;line-height:1.8}.method-content{padding:clamp(4.5rem,9vw,8rem) 0}.method-content__grid{display:grid;grid-template-columns:.45fr 1.55fr;gap:clamp(2rem,8vw,8rem)}.method-content aside{position:sticky;top:2rem;display:grid;align-content:start;gap:.7rem}.method-content aside a{color:#46536e;font-size:.85rem;font-weight:800;text-decoration:none}.method-content aside a:hover{color:var(--blue)}.method-content section{padding-bottom:4rem;margin-bottom:4rem;border-bottom:1px solid var(--line)}.method-content h2{margin:0 0 1.4rem;font-size:clamp(1.85rem,3.5vw,3.1rem);letter-spacing:-.05em;line-height:1.25}.method-content p:not(.method-content section>p){margin:0;color:#415069;line-height:2}.method-card{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin:1.5rem 0;padding:1.2rem 1.35rem;border-left:.3rem solid var(--amber);background:#f0f1f8}.method-card strong{font-size:.92rem}.method-card span{color:#677289;font-size:.75rem}.method-content ul{display:grid;gap:.7rem;margin:1.5rem 0 0;padding-left:1.25rem;color:#415069;line-height:1.75}.method-content blockquote{margin:1.5rem 0 0;padding:1.4rem;border:1px solid #ccd2e2;background:#f3f5fa;color:#2b3d67;line-height:1.8}.method-content blockquote a{color:#243f95;font-weight:800}.method-back{display:inline-flex;align-items:center;gap:.4rem;color:#2a459a;font-weight:800;text-decoration:none}@media(max-width:760px){.method-shell{width:calc(100% - 32px)}.method-breadcrumbs{margin-bottom:2.2rem}.method-content__grid{grid-template-columns:1fr}.method-content aside{position:static;display:flex;gap:1.2rem;overflow:auto;padding-bottom:.4rem}.method-card{align-items:flex-start;flex-direction:column}.method-content section{padding-bottom:3rem;margin-bottom:3rem}}
+	</style>
+</LandingLayout>

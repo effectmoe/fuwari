@@ -28,6 +28,23 @@ const curatedSearchMetadata: Record<
 			"AIを装う偽装アクセスと正規のAIクローラーを分けて考える、AIサイバー攻撃の固定ガイド。effect.moeの自社実測と、サイトを守るための考え方を解説します。",
 		section: "Guide",
 	},
+	"/bots/": {
+		title: "AIボット観測所",
+		excerpt:
+			"日本の中小規模Webサイトに実際に来るAIクローラー・ボットを、株式会社EFFECTが自社実測で毎週更新する定点観測データ。",
+		section: "Data",
+	},
+	"/bots/bytespider/": {
+		title: "Bytespiderとは？ブロック方法を実測ログで解説",
+		excerpt:
+			"Bytespiderの量、扱い、判断材料をeffect.moeの実測ログとともに整理したAIボット観測所の図鑑ページ。",
+		section: "Data",
+	},
+	"/bots/about/": {
+		title: "AIボット観測所の観測方法とデータ引用",
+		excerpt: "観測対象・集計方法・更新方針・データ引用ポリシーと免責。",
+		section: "Data",
+	},
 	"/ai-agent-course/": {
 		excerpt: "AIエージェント、Claude Code、実務AI活用を学ぶ講座ページ。",
 		section: "Course",

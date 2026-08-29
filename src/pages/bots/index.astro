@@ -1,0 +1,119 @@
+---
+import { Icon } from "astro-icon/components";
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import botData from "../../data/bots-data.json";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "AIボット観測所｜AIクローラーの実測データ - 株式会社EFFECT";
+const pageDescription =
+	"AIボット観測所は、日本の中小規模Webサイトに実際に来ているAIクローラー・ボットを、株式会社EFFECTが自社実測で毎週更新する定点観測サイトです。";
+const bytespider = botData.bots.bytespider;
+const formatNumber = (value: number) =>
+	new Intl.NumberFormat("ja-JP").format(value);
+const categorySections = [
+	{
+		label: "悪質・不明系",
+		items: [
+			{
+				name: bytespider.name,
+				hits: bytespider.month_hits,
+				href: "/bots/bytespider/",
+				description: "公式の確認手段が限られ、挙動を継続して観測する対象",
+			},
+		],
+	},
+];
+
+const pageLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "CollectionPage",
+			"@id": "https://effect.moe/bots/#collection",
+			name: "AIボット観測所",
+			description: pageDescription,
+			url: "https://effect.moe/bots/",
+			inLanguage: "ja",
+			publisher: { "@id": "https://effect.moe/#organization" },
+			dateModified: botData.updated,
+		},
+		{
+			"@type": "BreadcrumbList",
+			itemListElement: [
+				{
+					"@type": "ListItem",
+					position: 1,
+					name: "ホーム",
+					item: "https://effect.moe/",
+				},
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "AIボット観測所",
+					item: "https://effect.moe/bots/",
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} ogImage="/images/aishield/hero-angel-ai-disguised-virus-v10.png" ogImageAlt="AIクローラーとボットのアクセスを観測するイメージ">
+	<Fragment slot="head">
+		<meta name="keywords" content="AIボット, AIクローラー, Bytespider, ボット観測, クローラー実測" />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(pageLd)} />
+	</Fragment>
+	<main class="observatory-page">
+		<section class="observatory-hero" aria-labelledby="observatory-title">
+			<div class="observatory-shell observatory-hero__grid">
+				<div>
+					<p class="observatory-eyebrow"><Icon name="material-symbols:radar" /> BOT OBSERVATORY / EFFECT</p>
+					<h1 id="observatory-title">AIボット観測所</h1>
+					<p class="observatory-hero__lead">AIボット観測所は、日本の中小規模Webサイトに実際に来ているAIクローラー・ボットを<br />実測し、毎週更新で公開する定点観測サイトです。株式会社EFFECTが自社サーバーの<br />実ログをもとに運営しています。</p>
+					<div class="observatory-hero__actions">
+						<a class="observatory-button observatory-button--primary" href="#catalog">観測データを見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
+						<a class="observatory-button observatory-button--text" href="/bots/about/">観測方法・引用ポリシー <Icon name="material-symbols:arrow-forward-rounded" /></a>
+					</div>
+				</div>
+				<aside class="observatory-signal" aria-label="最新の観測概要">
+					<div class="observatory-signal__top"><span>OBSERVATION WINDOW</span><b>{botData.period}</b></div>
+					<div class="observatory-signal__core"><span>最多観測</span><strong>{formatNumber(bytespider.month_hits)}<small>件</small></strong><b>{bytespider.name}</b></div>
+					<div class="observatory-signal__rings" aria-hidden="true"><i></i><i></i><i></i><em></em></div>
+					<p>最終更新 {botData.updated}</p>
+				</aside>
+			</div>
+		</section>
+
+		<section id="catalog" class="observatory-section">
+			<div class="observatory-shell">
+				<header class="observatory-heading"><p>BOT CATALOG / PHASE 1</p><h2>実測から、来ているものを分けて見る。</h2><span>掲載するのは、同じ観測窓で比較できるデータだけです。詳細ページを用意できた対象から公開します。</span></header>
+				{categorySections.map((section) => (
+					<section class="observatory-catalog" aria-labelledby={`category-${section.label}`}>
+						<h3 id={`category-${section.label}`}>{section.label}</h3>
+						<div class="observatory-table" role="table" aria-label={`${section.label}のボット一覧`}>
+							<div class="observatory-table__head" role="row"><span role="columnheader">ボット名</span><span role="columnheader">今月の件数</span><span role="columnheader">詳細</span></div>
+							{section.items.map((item) => (
+								<a class="observatory-table__row" href={item.href} role="row">
+									<span role="cell"><b>{item.name}</b><small>{item.description}</small></span>
+									<span role="cell"><strong>{formatNumber(item.hits)}<small>件</small></strong></span>
+									<span role="cell">図鑑を見る <Icon name="material-symbols:arrow-forward-rounded" /></span>
+								</a>
+							))}
+						</div>
+					</section>
+				))}
+			</div>
+		</section>
+
+		<section class="observatory-notes">
+			<div class="observatory-shell observatory-notes__grid">
+				<div><p>HOW WE OBSERVE</p><h2>数字だけを、強い結論にしない。</h2><span>{botData.definition}。観測できるのはアクセスの事実であり、目的の解釈は控えめに扱います。</span></div>
+				<div class="observatory-notes__actions"><a href="/bots/about/">観測方法とデータ引用について <Icon name="material-symbols:arrow-forward-rounded" /></a><a href="/ai-cyber-attack/">AIサイバー攻撃の全体像を読む <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+			</div>
+		</section>
+	</main>
+
+	<style>
+		:global(body){background:#f7f6f1}.observatory-page{--obs-ink:#14213d;--obs-blue:#263a78;--obs-amber:#e9a83c;--obs-pale:#eef0fa;--obs-line:#d5d9e8;color:var(--obs-ink);overflow:hidden}.observatory-shell{width:min(1120px,calc(100% - 48px));margin:0 auto}.observatory-hero{padding:clamp(5rem,9vw,8.5rem) 0;background:radial-gradient(circle at 82% 30%,#fbdc9c 0,rgba(251,220,156,.15) 20%,transparent 37%),linear-gradient(135deg,#171f42,#273c79 58%,#1c2b5d);color:#fff}.observatory-hero__grid{display:grid;grid-template-columns:1.13fr .87fr;gap:clamp(2rem,7vw,7rem);align-items:center}.observatory-eyebrow,.observatory-heading>p,.observatory-notes p{display:flex;align-items:center;gap:.45rem;margin:0 0 1rem;color:var(--obs-amber);font-size:.72rem;font-weight:850;letter-spacing:.13em}.observatory-hero h1{margin:0;font-size:clamp(3rem,6vw,5.7rem);line-height:1.02;letter-spacing:-.06em}.observatory-hero__lead{margin:2rem 0 0;color:#e3e8ff;font-size:1.04rem;font-weight:600;line-height:2}.observatory-hero__actions{display:flex;align-items:center;gap:1.1rem;margin-top:2rem}.observatory-button{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;min-height:3.1rem;padding:.75rem 1rem;border:1px solid transparent;font-weight:800;text-decoration:none}.observatory-button--primary{background:var(--obs-amber);color:#1b2446}.observatory-button--text{color:#fff;text-decoration:underline;text-underline-offset:.25em}.observatory-signal{position:relative;min-height:28rem;padding:1.55rem;overflow:hidden;border:1px solid rgba(255,255,255,.34);background:linear-gradient(150deg,rgba(255,255,255,.17),rgba(255,255,255,.04));box-shadow:0 1.8rem 3rem rgba(6,11,36,.32);backdrop-filter:blur(10px)}.observatory-signal__top,.observatory-signal__core{position:relative;z-index:1;display:flex;justify-content:space-between;gap:1rem}.observatory-signal__top span,.observatory-signal__core span{color:#c9d4ff;font-size:.66rem;font-weight:850;letter-spacing:.11em}.observatory-signal__top b{font-size:.76rem}.observatory-signal__core{display:flex;flex-direction:column;margin-top:4rem}.observatory-signal__core strong{color:#fff;font-size:clamp(3.7rem,6vw,5.5rem);line-height:1;letter-spacing:-.07em}.observatory-signal__core strong small{margin-left:.18em;font-size:.24em;letter-spacing:0}.observatory-signal__core b{color:#f9d48a;font-size:1.2rem}.observatory-signal__rings{position:absolute;inset:4rem -4rem -5rem 5rem;border:1px solid rgba(255,255,255,.25);border-radius:50%;transform:rotate(-18deg)}.observatory-signal__rings i{position:absolute;border:1px solid rgba(233,168,60,.6);border-radius:50%}.observatory-signal__rings i:nth-child(1){inset:10%}.observatory-signal__rings i:nth-child(2){inset:23%}.observatory-signal__rings i:nth-child(3){inset:37%}.observatory-signal__rings em{position:absolute;top:14%;left:23%;width:.8rem;height:.8rem;border-radius:50%;background:var(--obs-amber);box-shadow:0 0 0 .5rem rgba(233,168,60,.2)}.observatory-signal>p{position:absolute;z-index:1;bottom:1rem;left:1.55rem;margin:0;color:#c9d4ff;font-size:.75rem}.observatory-section{padding:clamp(4.5rem,8vw,7rem) 0;background:#fff}.observatory-heading{max-width:51rem}.observatory-heading h2,.observatory-notes h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);line-height:1.18;letter-spacing:-.045em}.observatory-heading>span{display:block;margin-top:1.3rem;color:#58657a;line-height:1.9}.observatory-catalog{margin-top:3.2rem}.observatory-catalog h3{margin:0 0 1rem;color:#263a78;font-size:1rem}.observatory-table{border-top:2px solid var(--obs-ink)}.observatory-table__head,.observatory-table__row{display:grid;grid-template-columns:1.45fr .7fr .7fr;gap:1rem;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid var(--obs-line)}.observatory-table__head{color:#63708a;font-size:.72rem;font-weight:800}.observatory-table__row{background:#fff;color:inherit;text-decoration:none;transition:background .2s,transform .2s}.observatory-table__row:hover{background:#fff8e9;transform:translateX(.25rem)}.observatory-table__row b{display:block;font-size:1.2rem}.observatory-table__row small{display:block;margin-top:.25rem;color:#677288;font-size:.78rem;line-height:1.55}.observatory-table__row strong{font-size:1.65rem;letter-spacing:-.05em}.observatory-table__row strong small{display:inline;margin-left:.16em;font-size:.5em}.observatory-table__row>[role=cell]:last-child{display:flex;align-items:center;justify-content:flex-end;gap:.3rem;color:#263a78;font-size:.83rem;font-weight:800}.observatory-notes{padding:clamp(3.8rem,7vw,6rem) 0;background:var(--obs-pale)}.observatory-notes__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:end}.observatory-notes>div>div>span{display:block;margin-top:1.2rem;color:#53617a;line-height:1.9}.observatory-notes__actions{display:grid;gap:.7rem}.observatory-notes__actions a{display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1px solid #cbd2e8;background:#fff;color:#172448;font-size:.9rem;font-weight:800;text-decoration:none}.observatory-notes__actions a:hover{border-color:#263a78;background:#f9faff}@media(max-width:760px){.observatory-shell{width:calc(100% - 32px)}.observatory-hero{padding:4.7rem 0}.observatory-hero__grid,.observatory-notes__grid{grid-template-columns:1fr}.observatory-hero__lead br{display:none}.observatory-hero__actions{align-items:stretch;flex-direction:column}.observatory-button--text{justify-content:flex-start}.observatory-signal{min-height:23rem}.observatory-table__head{display:none}.observatory-table__row{grid-template-columns:1fr auto;padding:1rem}.observatory-table__row>[role=cell]:last-child{display:none}.observatory-table__row b{font-size:1.05rem}.observatory-table__row strong{font-size:1.4rem}.observatory-notes__grid{gap:2rem}}
+	</style>
+</LandingLayout>

@@ -1,0 +1,26 @@
+{
+	"updated": "2026-08-29",
+	"period": "2026-08-01〜2026-08-29（29日間）",
+	"definition": "全ステータス計・自社観測サイト n=1（effect.moe）・同一観測窓",
+	"bots": {
+		"bytespider": {
+			"name": "Bytespider",
+			"operator": "ByteDance（TikTok親会社）",
+			"category": "rogue",
+			"first_seen": "2026-08-01",
+			"month_hits": 2154,
+			"rank": "1位（全クローラー最多）",
+			"weekly": [
+				{ "w": "8/3週", "n": 422 },
+				{ "w": "8/10週", "n": 655 },
+				{ "w": "8/17週", "n": 797 },
+				{ "w": "8/24週", "n": 269, "note": "集計中" }
+			]
+		},
+		"reference": {
+			"googlebot_month": 907,
+			"claudebot_month": 944,
+			"amazonbot_month": 991
+		}
+	}
+}

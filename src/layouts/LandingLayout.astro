@@ -40,6 +40,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/bots"),
+		label: "BOT OBSERVATORY",
+		href: "/bots/",
+	},
+	{
 		match: (path: string) => path.startsWith("/ai-agent-course"),
 		label: "AI COURSE",
 		href: "/ai-agent-course/",
@@ -172,6 +177,7 @@ const serviceNavGroups = [
 			{ href: "/blog/", label: "ブログ" },
 			{ href: "/llmo/", label: "LLMO対策ガイド" },
 			{ href: "/ai-cyber-attack/", label: "AIサイバー攻撃ガイド" },
+			{ href: "/bots/", label: "AIボット観測所" },
 		],
 	},
 ];
