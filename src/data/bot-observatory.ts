@@ -4,6 +4,7 @@ export const botData = rawBotData;
 export const botMetrics = {
 	bytespider: botData.bots.bytespider,
 	claudebot: botData.bots.claudebot,
+	amazonbot: botData.bots.amazonbot,
 };
 
 export type BotSlug = keyof typeof botMetrics;
@@ -268,6 +269,130 @@ export const botPageDefinitions: BotDefinition[] = [
 			secondaryLabel: "AI SHIELD",
 		},
 	},
+	{
+		slug: "amazonbot",
+		profileNumber: "003",
+		pageTitle: "Amazonbotとは？実測データとブロックの考え方 - AIボット観測所",
+		pageDescription:
+			"Amazonbotとは何のボットか、ブロックすべきかを実測データで解説。当サイトでは{{reported_month_period}}で{{reported_month_hits}}件と全クローラー2位でした。本物の確認方法（逆引きDNS・公式IPリスト）まで紹介します。",
+		keywords:
+			"Amazonbot, Amazonbotとは, Amazonbot ブロック, Amazon クローラー, AIクローラー",
+		catalogCategory: "training",
+		catalogDescription:
+			"Amazonの正規クローラー。公式のDNS・IP一覧で確認できる対象",
+		searchExcerpt:
+			"Amazonbotの量、扱い、確認方法をeffect.moeの実測データとともに整理したAIボット観測所の図鑑ページ。",
+		heroLead: "実測ログから、ボットの量・扱い・判断材料を分けて見ます。",
+		asideEyebrow: "WHAT IS IT",
+		asideTitle: "Amazonの正規AIを、\n確認して通す。",
+		referenceRows: [
+			{ label: "Googlebot", metric: "googlebot_month" },
+			{ label: "ClaudeBot", bot: "claudebot" },
+		],
+		chapters: [
+			{
+				title: "Amazonbotとは何のクローラーですか？",
+				paragraphs: [
+					"Amazonbot（アマゾンボット）は、Amazonが運営する公式クローラーです。",
+					"公式ドキュメントによると、収集したWebページはAlexa・Kindle・Amazonショッピングなどの製品・サービスの改善に使われ、AmazonのAIモデルの学習にも使われることがあります。",
+					"つまり「音声アシスタントの回答づくり」と「AI学習」の両方の顔を持つボットです。",
+				],
+			},
+			{
+				title: "なぜAmazonbotに注意が必要なのですか？",
+				paragraphs: [
+					"理由は「意外に多い」ことです。当サイトの実測では、{{reported_month_period}}で{{reported_month_hits}}件。これは検索エンジンのGooglebot（{{reported_googlebot_hits}}件）を上回る全クローラー2位で、GPTBotやClaudeBotのような有名なAIボットよりも多く来ています。",
+					"知名度の低さに対してアクセス量が大きい——これがAmazonbotの特徴です。",
+					"もう1つの特徴として、Amazonbotはrobots.txtを最大30日間キャッシュすると公式に説明しています。robots.txtを書き換えても、反映まで時間がかかる場合があることは知っておく価値があります。",
+				],
+			},
+			{
+				title: "Amazonbotが本物か、確認できますか？",
+				paragraphs: [
+					"できます。方法は2つ、どちらもAmazonが公式に用意しています。",
+					"公式の確認手段がある点で、一覧非公開のBytespiderとは対照的です。",
+				],
+				listItems: [
+					{
+						label: "逆引きDNS —",
+						text: "発信元を逆引きすると crawl.amazonbot.amazon のホスト名に解決されます",
+					},
+					{
+						label: "公開IPリスト —",
+						text: "developer.amazon.com/amazonbot/live-ip-addresses/ で正規IPを公開しています",
+					},
+				],
+				referenceLinks: [
+					{
+						label: "https://developer.amazon.com/amazonbot",
+						href: "https://developer.amazon.com/amazonbot",
+						external: true,
+					},
+					{ label: "/bots/bytespider/", href: "/bots/bytespider/" },
+				],
+			},
+		],
+		faqItems: [
+			{
+				question: "Amazonbotとは何のボットですか？",
+				answer:
+					"Amazonの公式クローラーです。Alexa・Kindle・Amazonショッピング等の改善のためにWebページを収集し、AmazonのAIモデルの学習にも使われることがあると公式に説明されています。",
+			},
+			{
+				question: "Amazonbotはブロックすべきですか？",
+				answer:
+					"当観測所の分類は「正規AI系（学習収集）」で、基本は通す判断で問題ありません。AlexaやAmazonのサービス経由であなたのサイトの情報が使われる機会を保てます。学習への利用を避けたい場合は、robots.txtでAmazonbotを個別に制御できます。",
+			},
+			{
+				question: "Amazonbotはrobots.txtに従いますか？",
+				answer:
+					"従うと公式に明言されています。ただし公式の説明では、robots.txtを最大30日間キャッシュするため、設定変更の反映に時間がかかる場合があります。即時に止めたい場合は、サイトの前段で制御する方法が現実的です。",
+			},
+			{
+				question: "AmazonbotをブロックするとSEOやAI検索に影響はありますか？",
+				answer:
+					"GoogleやBingの検索順位には影響しません。ChatGPTやClaude、Perplexity等のAI検索にも影響しません（別のクローラーです）。影響し得るのは、AlexaなどAmazonのサービスであなたのサイトの情報が使われる機会です。",
+			},
+			{
+				question: "Amazonbotはどれくらいアクセスしてきますか？",
+				answer:
+					"当サイトの実測では、{{reported_month_period}}で{{reported_month_hits}}件・全クローラー中2位でした。検索エンジンのGooglebot（{{reported_googlebot_hits}}件）よりも多く来ています。（数字は毎週更新されます）",
+			},
+			{
+				question: "Amazonbotはなぜこんなに多いのですか？",
+				answer:
+					"観測できるのはアクセスの事実までで、理由の断定はできません。事実として言えるのは、当サイトでは有名なAIボット（GPTBot・ClaudeBot）より多く、週によって波がある（週{{weekly_min}}件〜{{weekly_max}}件）ということです。",
+			},
+			{
+				question: "Amazonbotを名乗るアクセスが本物か確認できますか？",
+				answer:
+					"できます。逆引きDNSで crawl.amazonbot.amazon に解決されるか、Amazonが公開している正規IPリストと照合すれば判定できます。当社ではこの照合を継続的に行っています。",
+			},
+		],
+		relatedLinks: [
+			{
+				lead: "AIサイバー攻撃の全体像はこちら",
+				title: "AIサイバー攻撃とは？事例と対策を実測データで解説",
+				href: "/ai-cyber-attack/",
+			},
+			{
+				lead: "確認手段が無いボットとの違い",
+				title: "Bytespiderの観測結果",
+				href: "/bots/bytespider/",
+			},
+		],
+		cta: {
+			eyebrow: "AI CRAWL / NEXT STEP",
+			title: "このボット、あなたのサイトにも来ていませんか？",
+			body: "当サイトには{{reported_month_short}}だけで{{reported_month_hits}}件来ました。あなたのサイトの数字は、測らないと分かりません。",
+			primaryHref: "/aicrawl/",
+			primaryText: "AIクローラーの読まれ方を測る",
+			primaryLabel: "AI CRAWL",
+			secondaryHref: "/aishield/",
+			secondaryText: "AIを装う偽装を見守る",
+			secondaryLabel: "AI SHIELD",
+		},
+	},
 ];
 
 export function getBotDefinition(slug: string) {
@@ -285,15 +410,28 @@ export function formatNumber(value: number) {
 export function formatBotText(text: string, slug: BotSlug) {
 	const bot = getBotMetric(slug);
 	const reported = "reported_month" in bot ? bot.reported_month : undefined;
+	const reportedShortPeriod =
+		reported &&
+		"short_period" in reported &&
+		typeof reported.short_period === "string"
+			? reported.short_period
+			: reported?.period || botData.period;
+	const completedWeeks = bot.weekly.filter((week) => !week.note);
+	const weeklyValues = (
+		completedWeeks.length ? completedWeeks : bot.weekly
+	).map((week) => week.n);
 	const replacements: Record<string, string> = {
 		"{{period}}": botData.period,
 		"{{month_hits}}": formatNumber(bot.month_hits),
 		"{{googlebot_month}}": formatNumber(botData.bots.reference.googlebot_month),
 		"{{reported_month_period}}": reported?.period || botData.period,
+		"{{reported_month_short}}": reportedShortPeriod,
 		"{{reported_month_hits}}": formatNumber(reported?.hits || bot.month_hits),
 		"{{reported_googlebot_hits}}": formatNumber(
 			reported?.googlebot_hits || botData.bots.reference.googlebot_month,
 		),
+		"{{weekly_min}}": formatNumber(Math.min(...weeklyValues)),
+		"{{weekly_max}}": formatNumber(Math.max(...weeklyValues)),
 	};
 	return Object.entries(replacements).reduce(
 		(value, [token, replacement]) => value.replaceAll(token, replacement),

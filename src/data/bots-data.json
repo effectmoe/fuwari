@@ -62,6 +62,39 @@
 				"googlebot_hits": 907
 			}
 		},
+		"amazonbot": {
+			"name": "Amazonbot",
+			"operator": "Amazon",
+			"category": "training",
+			"first_seen": "2026-08-03",
+			"month_hits": 991,
+			"rank": "2位",
+			"weekly": [
+				{
+					"w": "8/3週",
+					"n": 266
+				},
+				{
+					"w": "8/10週",
+					"n": 207
+				},
+				{
+					"w": "8/17週",
+					"n": 483
+				},
+				{
+					"w": "8/24週",
+					"n": 35,
+					"note": "集計中"
+				}
+			],
+			"reported_month": {
+				"period": "2026年8月のひと月",
+				"short_period": "2026年8月",
+				"hits": 991,
+				"googlebot_hits": 907
+			}
+		},
 		"reference": {
 			"googlebot_month": 923,
 			"claudebot_month": 923,
