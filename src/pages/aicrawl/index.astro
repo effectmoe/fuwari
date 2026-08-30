@@ -1112,9 +1112,24 @@ const faqs = [
 					</div>
 					<p>
 						AI別の接点、ページ別の流入実績、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選べます。
-						AI CITATION列の「3クエリ / 5クエリ / 10クエリ」は、計測する質問文の本数です。1クエリごとに主要AIで所定回数を確認します。
+						まず、料金表に出てくる3つの言葉を確認してください。
 					</p>
 				</div>
+
+				<dl class="aicrawl-pricing-terms" aria-label="料金表に出てくる用語の定義">
+					<div>
+						<dt>AI CRAWL</dt>
+						<dd><b>AIが「来ているか」を測る。</b> どのAIが、自社サイトのどのページに来て、そこから人の訪問につながったかを毎週お届けします。</dd>
+					</div>
+					<div>
+						<dt>AI CITATION</dt>
+						<dd><b>AIの回答に「出ているか」を測る。</b> 実際にAIへ質問を投げ、自社が紹介されたか、載らなかった場合は代わりにどこが出たかを整理します。</dd>
+					</div>
+					<div>
+						<dt>クエリ</dt>
+						<dd><b>AIに投げる質問文の本数。</b> 例：「◯◯に強い会社は？」で1クエリ。1クエリごとに主要AIで所定回数を確認します。</dd>
+					</div>
+				</dl>
 
 				<div class="aicrawl-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
 					<div class="aicrawl-pricing-matrix__header">
@@ -3353,6 +3368,41 @@ const faqs = [
 			line-height: 1.85;
 		}
 
+		.aicrawl-pricing-terms {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 14px;
+			margin: 0 0 34px;
+		}
+
+		.aicrawl-pricing-terms > div {
+			border: 1px solid var(--crawl-line);
+			border-radius: 18px;
+			background: rgba(255, 255, 255, 0.72);
+			padding: clamp(18px, 2vw, 24px);
+			box-shadow: 0 16px 36px rgba(50, 59, 42, 0.05);
+		}
+
+		.aicrawl-pricing-terms dt {
+			color: var(--crawl-green-dark);
+			font-size: 13px;
+			font-weight: 950;
+			letter-spacing: 0.09em;
+		}
+
+		.aicrawl-pricing-terms dd {
+			margin: 12px 0 0;
+			color: var(--crawl-muted);
+			font-size: 15px;
+			font-weight: 720;
+			line-height: 1.75;
+		}
+
+		.aicrawl-pricing-terms dd b {
+			color: var(--crawl-ink);
+			font-weight: 950;
+		}
+
 			.aicrawl-pricing-matrix {
 				display: grid;
 				gap: 14px;
@@ -4132,6 +4182,12 @@ const faqs = [
 
 			.crawl-visual {
 				min-height: 0;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.aicrawl-pricing-terms {
+				grid-template-columns: 1fr;
 			}
 		}
 
