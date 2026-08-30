@@ -1,0 +1,206 @@
+---
+import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "ボット対策とは？悪質BotとAIクローラーの防ぎ方";
+const pageDescription =
+	"ボット対策とは何かを実測データで解説。良いボットと悪質ボットの見分け方、robots.txtで止められない理由、対策の3層の考え方、ツールとサービスの選び方まで。当サイトの実測では悪質な偽装アクセスが30日で1,075件でした。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const canonicalUrl = new URL("/bot-protection/", siteUrl).toString();
+const publishedDate = "2026-08-30";
+
+const faqItems = [
+	{
+		q: "robots.txtを設定すれば、ボット対策としては十分ですか？",
+		a: "十分ではありません。robots.txtに従うのは行儀の良い正規ボットだけで、悪質ボットは無視することが広く報告されています。正規ボットの制御にはrobots.txt、悪質ボットには前段での確認と監視、と役割を分けて考えてください。",
+	},
+	{
+		q: "いっそ、すべてのボットをブロックしてはだめですか？",
+		a: "おすすめしません。検索エンジンとAIのクローラーまで止めると、検索結果にもAIの回答にもあなたのサイトが出なくなります。当サイトの実測では、AIクローラーの来訪はすでにGooglebotを上回っており、この入口を閉じる損失は年々大きくなっています。",
+	},
+	{
+		q: "自分のサイトに悪質ボットが来ているか、確認する方法はありますか？",
+		a: "サーバーのアクセスログを継続的に分析すれば分かりますが、名乗りの真偽判定（発信元との照合）まで自力で行うのは手間がかかります。まずどんなボットがいるかはAIボット観測所の実測が参考になります。自分のサイトの数字は、測らないと分かりません。",
+	},
+	{
+		q: "ボット対策はどれくらいの頻度で見直すべきですか？",
+		a: "新しいAIサービスの登場とともに新しいボットが毎月のように現れ、挙動も変わります。設定の見直しは年数回でも、観測（何が来ているかの把握）は継続的に行うのが現実的です。",
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Article",
+			"@id": `${canonicalUrl}#article`,
+			headline: pageTitle,
+			description: pageDescription,
+			url: canonicalUrl,
+			inLanguage: "ja",
+			datePublished: publishedDate,
+			dateModified: publishedDate,
+			mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+			author: { "@id": `${siteUrl}#person` },
+			publisher: { "@id": `${siteUrl}#organization` },
+			keywords: [
+				"ボット対策とは",
+				"ボット対策",
+				"ボット対策 ツール",
+				"bot対策 サービス",
+				"悪質ボット",
+			],
+		},
+		{
+			"@type": "FAQPage",
+			"@id": `${canonicalUrl}#faq`,
+			mainEntity: faqItems.map((item) => ({
+				"@type": "Question",
+				name: item.q,
+				acceptedAnswer: { "@type": "Answer", text: item.a },
+			})),
+		},
+		{
+			"@type": "BreadcrumbList",
+			"@id": `${canonicalUrl}#breadcrumb`,
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "ナレッジ",
+					item: new URL("/blog/", siteUrl).toString(),
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: pageTitle,
+					item: canonicalUrl,
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} setOGTypeArticle={true}>
+	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+	<main class="bot-protection-page">
+		<Breadcrumbs class="bot-protection-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "ナレッジ", href: "/blog/" },
+			{ label: "ボット対策", href: "/bot-protection/" },
+		]} />
+
+		<section class="bot-protection-hero" aria-labelledby="bot-protection-title">
+			<div class="bot-protection-shell bot-protection-hero__grid">
+				<div class="bot-protection-hero__copy">
+					<p class="bot-protection-kicker"><Icon name="material-symbols:shield-with-heart-outline-rounded" /> KNOWLEDGE / AI SHIELD</p>
+					<h1 id="bot-protection-title">ボット対策とは？<br /><em>悪質BotとAIクローラーの防ぎ方</em></h1>
+					<p>いま、あなたのサイトのアクセスの多くは人間ではありません。当サイトの実測では、AIクローラーだけで検索エンジンのGooglebotを上回り、その景色に紛れて<strong>悪質な偽装ボットが30日間で1,075件</strong>検出されました。</p>
+					<p>この記事では、ボット対策とは何かを整理し、<strong>「良いボットは通し、悪質ボットだけ止める」</strong>ための見分け方と対策の考え方を、当社サーバーの実測データつきで解説します。</p>
+					<a class="bot-protection-hero__action" href="#definition">ボット対策の考え方を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
+				</div>
+				<aside class="bot-protection-hero__data" aria-label="effect.moeのボット観測データ">
+					<p>EFFECT.MOE / 2026 AUGUST</p>
+					<strong>1,075<span>件</span></strong>
+					<b>AIを名乗る偽装アクセス</b>
+					<div><span>正規のAIは通し、偽装アクセスは止めるために、名前だけで判断しない。</span></div>
+				</aside>
+			</div>
+		</section>
+
+		<section id="definition" class="bot-protection-section">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>01 / DEFINITION</p><h2>ボット対策とは何ですか？</h2></div>
+				<div class="bot-protection-prose">
+					<p>ボット対策とは、Webサイトに来る自動アクセス（ボット）を<strong>選別して制御する</strong>取り組みです。大事なのは「全部止めること」ではありません。ボットには2種類あるからです。</p>
+					<div class="bot-protection-type-grid">
+						<article><p>GOOD BOTS</p><h3>良いボット</h3><span>検索エンジン（Googlebot等）やAI（ChatGPT・Claude等）のクローラー。あなたのサイトを検索結果やAIの回答で<strong>紹介するために</strong>読みに来ます。止めると、紹介される機会を自分から捨てることになります。</span></article>
+						<article><p>MALICIOUS BOTS</p><h3>悪質ボット</h3><span>正規ボットを装ってサイトの侵入口を探したり、内容を無断で大量収集したりするアクセス。止めるべきはこちらです。</span></article>
+					</div>
+					<p>つまりボット対策の本質は、ブロックの技術ではなく<strong>見分ける力</strong>です。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="verify" class="bot-protection-section bot-protection-section--surface">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>02 / VERIFY</p><h2>良いボットと悪質ボットは、どう見分けますか？</h2></div>
+				<div class="bot-protection-prose">
+					<p>名乗り（ユーザーエージェント）は自己申告なので、それだけでは見分けられません。第三者の実測では、AIアシスタントを名乗るアクセスの81.8%が偽装だったという報告もあります。見分けの軸は2つです。</p>
+					<h3>軸1: 運営元が「本物の確認手段」を公開しているか</h3>
+					<div class="bot-protection-table-wrap"><table><thead><tr><th>ボット</th><th>確認手段</th><th>当サイトの実測（2026年8月）</th></tr></thead><tbody><tr><td><a href="/bots/claudebot/">ClaudeBot</a>（Anthropic）</td><td>✅ 公式IPリスト公開</td><td>944件（Googlebot 907件を上回る）</td></tr><tr><td><a href="/bots/amazonbot/">Amazonbot</a>（Amazon）</td><td>✅ 逆引きDNS＋公式IPリスト</td><td>991件（全体2位）</td></tr><tr><td>Googlebot（Google）</td><td>✅ 公式に検証方法を提供</td><td>907件</td></tr><tr><td><a href="/bots/bytespider/">Bytespider</a>（ByteDance）</td><td>❌ <strong>公式の確認手段なし</strong></td><td>2,154件（全体最多）</td></tr></tbody></table></div>
+					<p>確認手段のあるボットは「名乗りと発信元の照合」で本物か判定できます。確認手段がないボット、そして<strong>どのリストにも載らない無名のアクセス</strong>が、注意すべき領域です。</p>
+					<h3>軸2: 挙動が人間の閲覧として自然か</h3>
+					<p>当サイトの実測では、1つの発信元が<strong>最大364種類の場所を機械的に探し回る</strong>挙動や、通常の閲覧ではあり得ない場所（設定ファイルや認証情報のありか）を狙う探索が30日で445件記録されました。読む順番・速度・狙う場所 — 挙動は嘘をつきません。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="threats" class="bot-protection-section">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>03 / OBSERVE</p><h2>悪質ボットは、実際に何をしてくるのですか？</h2></div>
+				<div class="bot-protection-prose">
+					<p>当サイトの実測（直近30日）から、防御目線で3つだけ紹介します。</p>
+					<ol class="bot-protection-number-list"><li><strong>正規AIのふりをした偵察</strong> — AIクローラーを名乗る偽装アクセスが1,075件。AIボットの往来が当たり前になった今、その中に紛れるのが最も安価な変装だからです</li><li><strong>侵入口の総当たり探索</strong> — サイトの種類も確かめずに、WordPressの入口や露出ファイルを機械的に叩いて回ります（WordPressを使っていない当サイトにさえ来ています。詳細は<a href="/wordpress-vulnerability/">WordPressの脆弱性の記事</a>で解説しています）</li><li><strong>無断の大量収集</strong> — robots.txtの「読まないでください」を無視して収集を続けるボットの存在が、広く報告されています</li></ol>
+				</div>
+			</div>
+		</section>
+
+		<section id="layers" class="bot-protection-section bot-protection-section--ink">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>04 / THREE LAYERS</p><h2>ボット対策は、何から始めればいいですか？（3層の考え方）</h2></div>
+				<div class="bot-protection-prose">
+					<p>道具の名前より先に、順番を覚えてください。</p>
+					<ol class="bot-protection-layers"><li><b>01</b><div><strong>まず測る</strong><span>自分のサイトに今、何がどれだけ来ているかを知る。現状が見えないままの対策は、健康診断なしの投薬と同じです</span></div></li><li><b>02</b><div><strong>入口を減らす</strong><span>使っていない機能・外から見える必要のないものを閉じ、狙われる面積を小さくする</span></div></li><li><b>03</b><div><strong>前段で確認し、監視を続ける</strong><span>アクセスがサイトに届く前に確認する「門番」を置き、正規のAI・人は通し、偽装だけ止める。そして侵入や変化に気づける監視を続ける</span></div></li></ol>
+					<p>注意点が1つ。robots.txtは良いボットへの「お願い」としては機能しますが、悪質ボットには効きません（名乗り自体が嘘なので、宛名のあるお願いは届きません）。<strong>robots.txtは案内板、門番は検問</strong>——役割が違います。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="selection" class="bot-protection-section">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>05 / CHOOSING</p><h2>ボット対策のツールやサービスは、どう選べばいいですか？</h2></div>
+				<div class="bot-protection-prose">
+					<p>具体的な製品名の比較よりも、選ぶ前に確認すべき3つの質問をおすすめします。</p>
+					<ol class="bot-protection-number-list"><li><strong>正規のAIクローラーを誤って止めない設計か？</strong> — 全部ブロック型の対策は、AI検索であなたのサイトが紹介される機会（当サイト実測で、AIの来訪はすでに検索エンジン以上です）を犠牲にします</li><li><strong>「自分のサイトの実測」を見せてくれるか？</strong> — 一般論の脅威データではなく、あなたのサイトに何が来ているかを測ってくれるか</li><li><strong>止めたあとの検証と、続ける仕組みがあるか？</strong> — ボットの顔ぶれは毎週変わります（当社の<a href="/bots/">AIボット観測所</a>は毎週自動更新で定点観測しています）。一度設定して終わりの対策は、時間とともに必ず古くなります</li></ol>
+					<p>「100%防げる」ことを謳う対策には注意してください。できるのは、被害につながる確率を大きく下げることです。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="faq" class="bot-protection-section bot-protection-section--surface">
+			<div class="bot-protection-shell bot-protection-faq">
+				<div class="bot-protection-section-heading"><p>06 / FAQ</p><h2>よくある質問</h2></div>
+				<div>{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p></details>)}</div>
+			</div>
+		</section>
+
+		<section id="summary" class="bot-protection-section bot-protection-summary">
+			<div class="bot-protection-shell bot-protection-copy-grid">
+				<div class="bot-protection-section-heading"><p>07 / SUMMARY</p><h2>まとめ — 「全部止める」でも「全部通す」でもなく</h2></div>
+				<div class="bot-protection-prose"><ul><li>ボット対策の本質は、ブロックではなく<strong>見分けること</strong>。良いボットは紹介の入口、悪質ボットは侵入の偵察</li><li>名乗りは自己申告。確認手段の有無（公式IPリスト等）と挙動で見分ける</li><li>順番は「測る → 入口を減らす → 前段で確認し監視を続ける」。robots.txtは案内板であって検問ではない</li></ul><p>関連記事: <a href="/ai-cyber-attack/">AIサイバー攻撃とは？事例と対策を実測データで解説</a>／<a href="/wordpress-vulnerability/">WordPressの脆弱性とは？放置のリスクと対策を解説</a>／<a href="/bots/">AIボット観測所（毎週自動更新の実測データ）</a></p></div>
+			</div>
+		</section>
+
+		<ArticleChoiceCta eyebrow="NEXT STEP / BOT PROTECTION" title="あなたのサイトには、今なにが来ていますか？" body="この記事の実測データは当社サイトのものです。あなたのサイトに何が来ているかは、測らないと分かりません。" primaryHref="/aishield/" primaryText="AIを装う攻撃・悪質ボットを見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
+
+		<p class="bot-protection-source">出典: 当社 effect.moe サーバーの実測ログ（クローラー別比較は2026年8月・同一期間・全アクセス数集計／偽装・探索の検出は直近30日）／AIアシスタント名乗りの81.8%偽装は第三者の実測報告</p>
+	</main>
+
+	<style>
+		.bot-protection-page{--ink:#142947;--teal:#087b78;--gold:#be8a31;--surface:#f3f7f5;--line:#cbdcd6;--muted:#5b6d7f;overflow:hidden;background:#fff;color:var(--ink)}
+		.bot-protection-shell{width:min(1120px,calc(100% - 48px));margin-inline:auto}.bot-protection-breadcrumbs{position:relative;z-index:2;max-width:1120px;width:calc(100% - 48px);margin:1.25rem auto -1.25rem}
+		.bot-protection-hero{padding:5.8rem 0 5rem;background:linear-gradient(118deg,#eff9f6 0%,#f9fbf8 56%,#e6f2ed 100%)}.bot-protection-hero__grid{display:grid;grid-template-columns:1.24fr .76fr;gap:clamp(2.2rem,6vw,7rem);align-items:center}.bot-protection-hero__grid>*,.bot-protection-copy-grid>*,.bot-protection-faq>*{min-width:0}
+		.bot-protection-kicker,.bot-protection-section-heading>p{margin:0 0 1rem;color:var(--teal);font-size:.75rem;font-weight:800;letter-spacing:.15em}.bot-protection-kicker svg{margin-right:.3rem;vertical-align:-.16em}.bot-protection-hero h1,.bot-protection-section-heading h2{margin:0;font-weight:850;letter-spacing:-.055em;line-height:1.14}.bot-protection-hero h1{font-size:clamp(2.35rem,4.2vw,4rem)}.bot-protection-hero h1 em{color:var(--teal);font-size:.72em;font-style:normal}.bot-protection-hero__copy>p{max-width:45rem;margin:1.2rem 0 0;color:#334d62;font-size:1.05rem;font-weight:600;line-height:1.95}.bot-protection-hero__copy strong{color:var(--ink)}.bot-protection-hero__action{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.65rem;padding:.86rem 1.15rem;border-radius:.35rem;background:var(--teal);color:#fff;font-weight:800;text-decoration:none}.bot-protection-hero__action:hover{transform:translateY(-2px);box-shadow:0 .8rem 1.6rem rgba(8,92,89,.18)}
+		.bot-protection-hero__data{position:relative;overflow:hidden;padding:2.15rem;border:1px solid rgba(8,123,120,.3);background:#fff;box-shadow:0 1.5rem 3rem rgba(13,78,72,.12)}.bot-protection-hero__data::after{position:absolute;right:-4rem;bottom:-6rem;width:10rem;height:10rem;border:1.35rem solid #e3f4ec;border-radius:50%;content:""}.bot-protection-hero__data p{margin:0;color:var(--teal);font-size:.67rem;font-weight:850;letter-spacing:.12em}.bot-protection-hero__data>strong{display:block;margin:.7rem 0 .35rem;font-size:clamp(3.2rem,6vw,4.5rem);letter-spacing:-.07em;line-height:1}.bot-protection-hero__data>strong span{margin-left:.12em;font-size:.36em;letter-spacing:0}.bot-protection-hero__data>b{position:relative;z-index:1;color:#0d6f65;font-size:1.05rem}.bot-protection-hero__data>div{position:relative;z-index:1;margin-top:1.4rem;padding-top:.85rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;line-height:1.75}
+		.bot-protection-section{padding:clamp(4.75rem,8vw,8rem) 0}.bot-protection-section--surface,.bot-protection-summary{background:var(--surface)}.bot-protection-section--ink{background:#153956;color:#fff}.bot-protection-copy-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(2rem,7vw,7rem)}.bot-protection-section-heading h2{font-size:clamp(2rem,3.7vw,3.55rem)}.bot-protection-section--ink .bot-protection-section-heading>p{color:#86dec4}.bot-protection-prose{max-width:48rem}.bot-protection-prose p{margin:0 0 1.45rem;color:#354e61;line-height:2}.bot-protection-prose strong{color:var(--ink)}.bot-protection-section--ink .bot-protection-prose p{color:#d8e7ec}.bot-protection-section--ink .bot-protection-prose strong{color:#fff}.bot-protection-prose a{color:#006d74;font-weight:800;text-decoration-thickness:1px;text-underline-offset:.2em}.bot-protection-section--ink .bot-protection-prose a{color:#a7e3d0}
+		.bot-protection-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.4rem 0}.bot-protection-type-grid article{padding:1.4rem;border:1px solid var(--line);background:#fff}.bot-protection-type-grid article:last-child{border-color:#e5c5bd;background:#fff5f1}.bot-protection-type-grid p{margin:0 0 .5rem;color:var(--teal);font-size:.7rem;font-weight:850;letter-spacing:.11em}.bot-protection-type-grid article:last-child p{color:#ba4939}.bot-protection-type-grid h3{margin:0 0 .6rem;font-size:1.35rem}.bot-protection-type-grid span{color:#4d6571;font-size:.92rem;line-height:1.8}.bot-protection-table-wrap{max-width:100%;margin:1.25rem 0 1.5rem;overflow-x:auto;overscroll-behavior-inline:contain}.bot-protection-table-wrap table{width:100%;min-width:38rem;border-collapse:collapse;background:#fff}.bot-protection-table-wrap th,.bot-protection-table-wrap td{padding:1rem 1.15rem;border:1px solid var(--line);text-align:left;line-height:1.7}.bot-protection-table-wrap th{background:#e1f3ed;color:#245762;font-size:.85rem}.bot-protection-table-wrap td{color:#405668}.bot-protection-prose h3{margin:1.8rem 0 .8rem;font-size:1.2rem}.bot-protection-number-list{display:grid;gap:1rem;margin:1.4rem 0;padding-left:1.4rem;color:#354e61;line-height:1.9}.bot-protection-number-list li::marker{color:var(--teal);font-weight:850}
+		.bot-protection-layers{display:grid;gap:0;margin:1.4rem 0;padding:0;list-style:none}.bot-protection-layers li{display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:1rem 0;border-top:1px solid rgba(216,231,236,.35)}.bot-protection-layers li:last-child{border-bottom:1px solid rgba(216,231,236,.35)}.bot-protection-layers b{color:#86dec4;font-size:.75rem;letter-spacing:.08em}.bot-protection-layers strong{display:block;margin-bottom:.35rem}.bot-protection-layers span{color:#d8e7ec;line-height:1.85}.bot-protection-faq{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(2rem,7vw,7rem)}.bot-protection-faq details{border-top:1px solid #bfd4d1}.bot-protection-faq details:last-child{border-bottom:1px solid #bfd4d1}.bot-protection-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 0;cursor:pointer;font-weight:800;line-height:1.6;list-style:none}.bot-protection-faq summary::-webkit-details-marker{display:none}.bot-protection-faq summary svg{flex:none;font-size:1.4rem}.bot-protection-faq details[open] summary svg{transform:rotate(45deg)}.bot-protection-faq details p{margin:0;padding:0 0 1.25rem;color:#4f6872;line-height:1.85}.bot-protection-summary .bot-protection-prose ul{display:grid;gap:.9rem;margin:0 0 1.5rem;padding-left:1.2rem;color:#354e61;line-height:1.9}.bot-protection-summary .bot-protection-prose li::marker{color:var(--teal)}.bot-protection-source{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:1.6rem 0 3rem;color:#647683;font-size:.8rem;line-height:1.8}
+		@media(max-width:900px){.bot-protection-hero__grid,.bot-protection-copy-grid,.bot-protection-faq{grid-template-columns:1fr}.bot-protection-hero__data{max-width:35rem}}@media(max-width:640px){.bot-protection-shell,.bot-protection-breadcrumbs,.bot-protection-source{width:calc(100% - 32px)}.bot-protection-breadcrumbs{margin-top:1rem}.bot-protection-hero{padding:4.2rem 0 3.5rem}.bot-protection-hero h1{font-size:2.05rem}.bot-protection-hero__copy>p{font-size:.98rem}.bot-protection-section{padding:4.2rem 0}.bot-protection-section-heading h2{font-size:2.1rem}.bot-protection-hero__data{padding:1.6rem}.bot-protection-type-grid{grid-template-columns:1fr}.bot-protection-table-wrap{margin-inline:-.1rem}}
+	</style>
+</LandingLayout>
