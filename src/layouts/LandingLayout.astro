@@ -256,8 +256,18 @@ const navItems = [
 								ホーム
 								<Icon name="material-symbols:chevron-right-rounded" />
 							</a>
-							{serviceNavGroups.map((group, index) => (
-								<div class="effect-landing-header__panel-group">
+							<p class="effect-landing-header__swipe-hint" id="effect-service-swipe-hint">
+								<Icon name="material-symbols:swipe-rounded" />
+								左右にスワイプして、カテゴリを切り替え
+							</p>
+							<div
+								class="effect-landing-header__panel-groups"
+								role="region"
+								aria-label="サービスとナレッジのカテゴリ"
+								aria-describedby="effect-service-swipe-hint"
+							>
+								{serviceNavGroups.map((group, index) => (
+									<div class="effect-landing-header__panel-group">
 									<div class="effect-landing-header__panel-group-top">
 										{group.menuOnly ? (
 											<button
@@ -299,8 +309,9 @@ const navItems = [
 											</a>
 										))}
 									</div>
-								</div>
-							))}
+									</div>
+								))}
+							</div>
 							{navItems.map((item) => (
 								<a href={item.href}>
 									{item.label}
@@ -688,6 +699,14 @@ const navItems = [
 			font-weight: 950;
 		}
 
+		.effect-landing-header__swipe-hint {
+			display: none;
+		}
+
+		.effect-landing-header__panel-groups {
+			display: contents;
+		}
+
 		.effect-landing-header__panel-group {
 			border: 1px solid rgba(210, 197, 178, 0.66);
 			border-radius: 0.95rem;
@@ -901,6 +920,47 @@ const navItems = [
 				width: calc(100vw - 28px);
 				max-width: calc(100vw - 28px);
 				box-sizing: border-box;
+				overflow-x: hidden;
+			}
+
+			.effect-landing-header__swipe-hint {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				margin: 2px 4px 0;
+				color: #78694e;
+				font-size: 12px;
+				font-weight: 800;
+				letter-spacing: 0.02em;
+			}
+
+			.effect-landing-header__swipe-hint svg {
+				width: 17px;
+				height: 17px;
+				color: #a87513;
+			}
+
+			.effect-landing-header__panel-groups {
+				display: flex;
+				width: 100%;
+				gap: 10px;
+				overflow-x: auto;
+				overscroll-behavior-x: contain;
+				scroll-behavior: smooth;
+				scroll-snap-type: x mandatory;
+				scrollbar-width: none;
+				touch-action: pan-x pan-y;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			.effect-landing-header__panel-groups::-webkit-scrollbar {
+				display: none;
+			}
+
+			.effect-landing-header__panel-group {
+				min-width: 100%;
+				scroll-snap-align: start;
+				scroll-snap-stop: always;
 			}
 
 			.effect-landing-header__panel-submenu {
