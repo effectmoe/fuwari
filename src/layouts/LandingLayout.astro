@@ -41,6 +41,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/bot-protection"),
+		label: "AI SHIELD",
+		href: "/aishield/",
+	},
+	{
 		match: (path: string) => path.startsWith("/wordpress-vulnerability"),
 		label: "WORDPRESS SECURITY",
 		href: "/wordpress-vulnerability/",
@@ -750,6 +755,22 @@ const navItems = [
 			align-items: center;
 			justify-content: flex-end;
 			gap: 8px;
+			min-width: 0;
+		}
+
+		/*
+		 * LP / ピラーページのグリッド・フレックス子要素は、内容の最小幅で
+		 * ビューポートを押し広げないようにする。横に広い表・図解は各要素の
+		 * 専用ラッパーでだけスクロールさせ、本文や見出しは常に画面内に収める。
+		 */
+		:global(.effect-shell) :is(
+			[class*="__grid"],
+			[class$="-grid"],
+			[class*="__layout"],
+			[class$="-layout"],
+			[class*="__shell"],
+			[class*="__faq"]
+		) > * {
 			min-width: 0;
 		}
 
