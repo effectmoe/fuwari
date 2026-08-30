@@ -41,6 +41,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/ai-agent-security"),
+		label: "AI SHIELD",
+		href: "/aishield/",
+	},
+	{
 		match: (path: string) => path.startsWith("/bot-protection"),
 		label: "BOT PROTECTION",
 		href: "/bot-protection/",

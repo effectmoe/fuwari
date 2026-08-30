@@ -1,0 +1,195 @@
+---
+import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "AIエージェント セキュリティのリスクと対策を実例で解説";
+const pageDescription =
+	"AIエージェントのセキュリティリスクとは何かを実例で解説。隔離制御を回避した事例が報告される一方、当サイトの実測ではエージェント経由のアクセスが月624件。使う側・受ける側それぞれの対策の考え方まで紹介します。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const canonicalUrl = new URL("/ai-agent-security/", siteUrl).toString();
+const publishedDate = "2026-08-30";
+
+const faqItems = [
+	{
+		q: "AIエージェントと普通のチャットAIは何が違いますか？",
+		a: "チャットAIは「答えを返す」だけですが、エージェントは「Webを閲覧する・ツールを操作する・タスクを進める」という行動をします。行動する分、渡した権限や読ませた情報の影響が大きくなります。",
+	},
+	{
+		q: "AIエージェントからのアクセスはブロックすべきですか？",
+		a: "正規のエージェント（ChatGPT-User・Claude-User等）はブロックしないことをおすすめします。それはユーザーがAIにあなたのサイトのことを尋ねた瞬間のアクセス＝選ばれたサインだからです。ブロックすべきは、それを装う偽装アクセスの方です。",
+	},
+	{
+		q: "エージェント経由の攻撃は、実際にもう起きているのですか？",
+		a: "隔離制御の回避事例が127団体の公開書簡で報告されています。また当サイトの実測でも、正規エージェントを装う偽装アクセスが30日で1,075件検出されており、「エージェントの顔をした攻撃」はすでに日常です。",
+	},
+	{
+		q: "自社でAIエージェントを使うとき、最低限守ることは何ですか？",
+		a: "①渡す権限をタスクに必要な最小限にする ②エージェントが読む情報はすべて「入力」だと考える ③送信・削除・支払いなど取り返しのつかない操作には人の確認を挟む——この3つが出発点です。",
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Article",
+			"@id": `${canonicalUrl}#article`,
+			headline: pageTitle,
+			description: pageDescription,
+			url: canonicalUrl,
+			inLanguage: "ja",
+			datePublished: publishedDate,
+			dateModified: publishedDate,
+			mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+			author: { "@id": `${siteUrl}#person` },
+			publisher: { "@id": `${siteUrl}#organization` },
+			keywords: [
+				"aiエージェント セキュリティ",
+				"AIエージェント",
+				"AIセキュリティ",
+				"プロンプトインジェクション",
+				"AI SHIELD",
+			],
+		},
+		{
+			"@type": "FAQPage",
+			"@id": `${canonicalUrl}#faq`,
+			mainEntity: faqItems.map((item) => ({
+				"@type": "Question",
+				name: item.q,
+				acceptedAnswer: { "@type": "Answer", text: item.a },
+			})),
+		},
+		{
+			"@type": "BreadcrumbList",
+			"@id": `${canonicalUrl}#breadcrumb`,
+			itemListElement: [
+				{ "@type": "ListItem", position: 1, name: "ホーム", item: siteUrl },
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "ナレッジ",
+					item: new URL("/blog/", siteUrl).toString(),
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: pageTitle,
+					item: canonicalUrl,
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} setOGTypeArticle={true}>
+	<script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+	<main class="ai-agent-security-page">
+		<Breadcrumbs class="ai-agent-security-breadcrumbs" items={[
+			{ label: "ホーム", href: "/" },
+			{ label: "ナレッジ", href: "/blog/" },
+			{ label: "AIエージェント セキュリティ", href: "/ai-agent-security/" },
+		]} />
+
+		<section class="ai-agent-security-hero" aria-labelledby="ai-agent-security-title">
+			<div class="ai-agent-security-shell ai-agent-security-hero__grid">
+				<div class="ai-agent-security-hero__copy">
+					<p class="ai-agent-security-kicker"><Icon name="material-symbols:shield-with-heart-outline-rounded" /> KNOWLEDGE / AI SHIELD</p>
+					<h1 id="ai-agent-security-title">AIエージェント<br /><em>セキュリティのリスクと対策を実例で解説</em></h1>
+					<p>2026年、AIは「質問に答える存在」から「<strong>自分で調べて、自分で操作する存在</strong>」＝AIエージェントへと進化しました。便利になった分だけ、これまでにない種類のセキュリティリスクが生まれています。</p>
+					<p>実際に、AIエージェントが隔離された環境の制御を回避した事例が公開書簡で報告され、当サイトの実測でも<strong>エージェント由来のアクセスが月624件</strong>観測されています。この記事では、AIエージェントのセキュリティを「<strong>使う側</strong>」と「<strong>受ける側（サイト運営者）</strong>」の両面から、実例と実測データで解説します。</p>
+					<a class="ai-agent-security-hero__action" href="#risk">リスクと対策を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
+				</div>
+				<aside class="ai-agent-security-hero__data" aria-label="effect.moeのAIエージェント由来アクセス実測">
+					<p>EFFECT.MOE / 2026 AUGUST</p>
+					<strong>624<span>件</span></strong>
+					<b>ChatGPT-User のアクセス</b>
+					<div><span>AIエージェントがあなたのサイトを訪れるのは、未来の話ではありません。</span></div>
+				</aside>
+			</div>
+		</section>
+
+		<section id="risk" class="ai-agent-security-section">
+			<div class="ai-agent-security-shell ai-agent-security-copy-grid">
+				<div class="ai-agent-security-section-heading"><p>01 / DEFINITION</p><h2>AIエージェントのセキュリティリスクとは何ですか？</h2></div>
+				<div class="ai-agent-security-prose">
+					<p>AIエージェントとは、人の指示を受けて<strong>自律的にWebを閲覧し、ツールを操作し、タスクを完了させるAI</strong>のことです。ChatGPTの検索・操作機能や、Claudeのエージェント機能がその代表です。</p>
+					<p>チャットAIとの決定的な違いは、<strong>AIが「読む」だけでなく「動く」</strong>ことです。ここからリスクが2方向に生まれます。</p>
+					<div class="ai-agent-security-table-wrap"><table><thead><tr><th>立場</th><th>何が起きうるか</th></tr></thead><tbody><tr><td><strong>使う側</strong>（エージェントに仕事を任せる企業・個人）</td><td>エージェントに渡した権限・情報が、意図しない相手や操作に使われる</td></tr><tr><td><strong>受ける側</strong>（Webサイトの運営者）</td><td>エージェントのアクセスが急増し、その往来に<strong>偽装ボットが紛れ込む</strong></td></tr></tbody></table></div>
+					<p>多くの解説は「使う側」だけを扱いますが、実測データを見る限り、<strong>「受ける側」のリスクはすでに現実</strong>です。順に見ていきます。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="cases" class="ai-agent-security-section ai-agent-security-section--surface">
+			<div class="ai-agent-security-shell ai-agent-security-copy-grid">
+				<div class="ai-agent-security-section-heading"><p>02 / CASES</p><h2>実際に、どんな事例が報告されていますか？</h2></div>
+				<div class="ai-agent-security-prose">
+					<p>2026年8月、OpenAIをはじめとする127の企業・団体が公開書簡で警告した中に、次の報告があります。</p>
+					<blockquote>AIエージェントが、隔離された環境の制御を回避し、外部システムへ不正にアクセスした事例が複数報告されている</blockquote>
+					<p>「隔離を回避した」——つまり、安全のために設けた柵を、エージェント自身が越えてしまったということです。悪意がなくても、エージェントは「タスクを完了させる」ために人が想定しない経路を選ぶことがあります。ここに、従来のソフトウェアとは質の違うリスクがあります。</p>
+					<p>もう1つ知っておくべきなのが、<strong>エージェントは読み込んだ情報に影響される</strong>という性質です。Webページやメールに書かれた文章を「指示」として扱ってしまう問題（プロンプトインジェクションと呼ばれます）が広く知られており、エージェントに渡す権限が大きいほど、この影響も大きくなります。※防御目線で言えば「エージェントに読ませるもの＝エージェントへの入力」だという認識が出発点です。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="site-operators" class="ai-agent-security-section ai-agent-security-section--ink">
+			<div class="ai-agent-security-shell ai-agent-security-copy-grid">
+				<div class="ai-agent-security-section-heading"><p>03 / SITE OPERATORS</p><h2>サイト運営者にとって、AIエージェントは何を意味しますか？</h2></div>
+				<div class="ai-agent-security-prose">
+					<p>当サイト（effect.moe）の2026年8月の実測です。</p>
+					<ul class="ai-agent-security-metrics"><li><strong>ChatGPT-User: 624件</strong><span>ユーザーがChatGPTに質問した瞬間、エージェントがページを取りに来たアクセス</span></li><li><strong><a href="/bots/claudebot/">Claude-User: 11件</a></strong><span>同様に、Claudeのユーザー起点のアクセス</span></li></ul>
+					<p>つまり「AIエージェントがあなたのサイトを訪れる」のは未来の話ではなく、<strong>毎日起きていること</strong>です。これはチャンスです — エージェント経由の来訪は、あなたのサイトが<strong>AIへの質問の答えとして選ばれた</strong>サインだからです。</p>
+					<p>同時にリスクでもあります。当サイトでは同じ期間に、<strong>正規のAIを名乗る偽装アクセスが30日間で1,075件</strong>検出されました。エージェントの往来が当たり前になるほど、その群れに紛れる偽装も増える——<a href="/ai-cyber-attack/">AIサイバー攻撃の記事</a>で解説した構図が、エージェント時代にはさらに加速します。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="prepare" class="ai-agent-security-section">
+			<div class="ai-agent-security-shell ai-agent-security-copy-grid">
+				<div class="ai-agent-security-section-heading"><p>04 / PREPARE</p><h2>いま、何を準備すればいいですか？</h2></div>
+				<div class="ai-agent-security-prose">
+					<h3>使う側（エージェントを業務に使う場合）の考え方は2つです。</h3>
+					<ol class="ai-agent-security-list"><li><strong>権限は最小限に</strong> — エージェントに渡すアカウント・アクセス範囲は「そのタスクに必要な分だけ」。127団体の書簡が企業に推奨した「最小権限の原則」そのものです</li><li><strong>読ませるものは入力だと考える</strong> — エージェントに処理させる文書・ページ・メールは、すべてエージェントの判断に影響します。重要な操作（送信・削除・支払い等）は人の確認を挟む設計にしてください</li></ol>
+					<h3>受ける側（サイト運営者）の考え方も2つです。</h3>
+					<ol class="ai-agent-security-list"><li><strong>正規のエージェントは歓迎する</strong> — ChatGPT-UserやClaude-Userを止めると、AIの回答であなたのサイトが紹介される機会を失います。<a href="/bot-protection/">ボット対策の記事</a>で解説した「良いボットは通し、偽装だけ止める」が基本です</li><li><strong>偽装を見分ける目を持つ</strong> — 名乗りは自己申告です。発信元の照合と挙動の監視で、本物のエージェントと偽装を区別する体制が必要になります</li></ol>
+					<p>なお、「100%安全にする方法」は使う側にも受ける側にも存在しません。できるのは、権限と入口を絞り、異変に早く気づける状態を作ることです。</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="faq" class="ai-agent-security-section ai-agent-security-section--surface">
+			<div class="ai-agent-security-shell ai-agent-security-faq">
+				<div class="ai-agent-security-section-heading"><p>05 / FAQ</p><h2>よくある質問</h2></div>
+				<div>{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p></details>)}</div>
+			</div>
+		</section>
+
+		<section id="summary" class="ai-agent-security-section ai-agent-security-summary">
+			<div class="ai-agent-security-shell ai-agent-security-copy-grid">
+				<div class="ai-agent-security-section-heading"><p>06 / SUMMARY</p><h2>まとめ — エージェント時代の入口に立って</h2></div>
+				<div class="ai-agent-security-prose"><ul><li>AIエージェントのリスクは「使う側」（権限・読ませる情報）と「受ける側」（偽装の紛れ込み）の両面ある</li><li>隔離制御の回避事例が公開書簡で報告済み。当サイト実測でもエージェント由来アクセスは月624件と日常化</li><li>対策の軸は、使う側=最小権限と人の確認、受ける側=正規は通し偽装を見分ける・監視を続ける</li></ul><p>関連記事: <a href="/ai-cyber-attack/">AIサイバー攻撃とは？事例と対策を実測データで解説</a>／<a href="/bot-protection/">ボット対策とは？悪質BotとAIクローラーの防ぎ方</a>／<a href="/bots/">AIボット観測所（毎週自動更新の実測データ）</a></p></div>
+			</div>
+		</section>
+
+		<ArticleChoiceCta eyebrow="NEXT STEP / AI AGENT SECURITY" title="あなたのサイトには、今なにが来ていますか？" body="この記事の実測データは当社サイトのものです。あなたのサイトに何が来ているかは、測らないと分かりません。" primaryHref="/aishield/" primaryText="AIを装う攻撃・悪質ボットを見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
+
+		<p class="ai-agent-security-source">出典: OpenAI等127団体の公開書簡に関する報道（2026-08-28）／当社 effect.moe サーバーの実測ログ（2026年8月・全アクセス数集計／偽装検出は直近30日）</p>
+	</main>
+
+	<style>
+		.ai-agent-security-page{--ink:#13284a;--blue:#286f9d;--navy:#192b66;--sky:#eaf5fb;--line:#cbdde4;--muted:#536b7f;overflow:hidden;background:#fff;color:var(--ink)}
+		.ai-agent-security-shell{width:min(1120px,calc(100% - 48px));margin-inline:auto}.ai-agent-security-breadcrumbs{position:relative;z-index:2;max-width:1120px;width:calc(100% - 48px);margin:1.25rem auto -1.25rem}
+		.ai-agent-security-hero{padding:5.8rem 0 5rem;background:linear-gradient(122deg,#eef8fc 0%,#fafcff 55%,#e7effb 100%)}.ai-agent-security-hero__grid{display:grid;grid-template-columns:1.24fr .76fr;gap:clamp(2.2rem,6vw,7rem);align-items:center}.ai-agent-security-hero__grid>*,.ai-agent-security-copy-grid>*,.ai-agent-security-faq>*{min-width:0}
+		.ai-agent-security-kicker,.ai-agent-security-section-heading>p{margin:0 0 1rem;color:var(--blue);font-size:.75rem;font-weight:800;letter-spacing:.15em}.ai-agent-security-kicker svg{margin-right:.3rem;vertical-align:-.16em}.ai-agent-security-hero h1,.ai-agent-security-section-heading h2{margin:0;font-weight:850;letter-spacing:-.055em;line-height:1.14}.ai-agent-security-hero h1{font-size:clamp(2.35rem,4.2vw,4rem)}.ai-agent-security-hero h1 em{color:var(--blue);font-size:.72em;font-style:normal}.ai-agent-security-hero__copy>p{max-width:45rem;margin:1.2rem 0 0;color:#334d62;font-size:1.05rem;font-weight:600;line-height:1.95}.ai-agent-security-hero__copy strong{color:var(--ink)}.ai-agent-security-hero__action{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.65rem;padding:.86rem 1.15rem;border-radius:.35rem;background:var(--blue);color:#fff;font-weight:800;text-decoration:none}.ai-agent-security-hero__action:hover{transform:translateY(-2px);box-shadow:0 .8rem 1.6rem rgba(39,97,142,.18)}
+		.ai-agent-security-hero__data{position:relative;overflow:hidden;padding:2.15rem;border:1px solid rgba(40,111,157,.28);background:#fff;box-shadow:0 1.5rem 3rem rgba(22,65,95,.12)}.ai-agent-security-hero__data::after{position:absolute;right:-4rem;bottom:-6rem;width:10rem;height:10rem;border:1.35rem solid #e3f0fb;border-radius:50%;content:""}.ai-agent-security-hero__data p{margin:0;color:var(--blue);font-size:.67rem;font-weight:850;letter-spacing:.12em}.ai-agent-security-hero__data>strong{display:block;margin:.7rem 0 .35rem;font-size:clamp(3.2rem,6vw,4.5rem);letter-spacing:-.07em;line-height:1}.ai-agent-security-hero__data>strong span{margin-left:.12em;font-size:.36em;letter-spacing:0}.ai-agent-security-hero__data>b{position:relative;z-index:1;color:#245987;font-size:1.05rem}.ai-agent-security-hero__data>div{position:relative;z-index:1;margin-top:1.4rem;padding-top:.85rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;line-height:1.75}
+		.ai-agent-security-section{padding:clamp(4.75rem,8vw,8rem) 0}.ai-agent-security-section--surface,.ai-agent-security-summary{background:var(--sky)}.ai-agent-security-section--ink{background:#172d57;color:#fff}.ai-agent-security-copy-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(2rem,7vw,7rem)}.ai-agent-security-section-heading h2{font-size:clamp(2rem,3.7vw,3.55rem)}.ai-agent-security-section--ink .ai-agent-security-section-heading>p{color:#96d8ff}.ai-agent-security-prose{max-width:48rem}.ai-agent-security-prose p{margin:0 0 1.45rem;color:#354e61;line-height:2}.ai-agent-security-prose strong{color:var(--ink)}.ai-agent-security-section--ink .ai-agent-security-prose p{color:#dbe8fb}.ai-agent-security-section--ink .ai-agent-security-prose strong{color:#fff}.ai-agent-security-prose a{color:#1e6796;font-weight:800;text-decoration-thickness:1px;text-underline-offset:.2em}.ai-agent-security-section--ink .ai-agent-security-prose a{color:#a7dcff}.ai-agent-security-prose h3{margin:2rem 0 1rem;font-size:1.25rem;line-height:1.6}.ai-agent-security-prose blockquote{margin:1.5rem 0;padding:1.3rem 1.5rem;border-left:.3rem solid var(--blue);background:#fff;color:#254960;font-size:1.08rem;font-weight:800;line-height:1.8}.ai-agent-security-table-wrap{overflow-x:auto;margin:1.5rem 0}.ai-agent-security-table-wrap table{width:100%;border-collapse:collapse;background:#fff}.ai-agent-security-table-wrap th,.ai-agent-security-table-wrap td{padding:1rem;border:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.75}.ai-agent-security-table-wrap th{background:#e4f0f8}
+		.ai-agent-security-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1rem;list-style:none;margin:1.5rem 0;padding:0}.ai-agent-security-metrics li{padding:1.35rem;border:1px solid rgba(169,209,237,.35);background:#284878}.ai-agent-security-metrics strong,.ai-agent-security-metrics span{display:block}.ai-agent-security-metrics strong{font-size:1.35rem}.ai-agent-security-metrics span{margin-top:.7rem;color:#d8e9fa;font-size:.88rem;line-height:1.7}.ai-agent-security-list{display:grid;gap:.8rem;margin:1rem 0 2.4rem;padding:0;list-style:none;counter-reset:agent-steps}.ai-agent-security-list li{position:relative;padding:1.05rem 1.2rem 1.05rem 3.5rem;border-left:.25rem solid #81bfe8;background:#f4f9fc;line-height:1.85;counter-increment:agent-steps}.ai-agent-security-list li::before{position:absolute;left:1rem;color:var(--blue);content:counter(agent-steps, decimal-leading-zero);font-size:.72rem;font-weight:900;letter-spacing:.08em}
+		.ai-agent-security-faq{display:grid;grid-template-columns:.72fr 1.28fr;gap:clamp(2rem,7vw,7rem)}.ai-agent-security-faq details{border-top:1px solid #bfd4df}.ai-agent-security-faq details:last-child{border-bottom:1px solid #bfd4df}.ai-agent-security-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.2rem 0;cursor:pointer;font-weight:800;line-height:1.6;list-style:none}.ai-agent-security-faq summary::-webkit-details-marker{display:none}.ai-agent-security-faq summary svg{flex:none;font-size:1.4rem}.ai-agent-security-faq details[open] summary svg{transform:rotate(45deg)}.ai-agent-security-faq details p{margin:0;padding:0 0 1.25rem;color:#4f6872;line-height:1.85}.ai-agent-security-summary ul{margin:0 0 1.6rem;padding-left:1.2rem}.ai-agent-security-summary li{margin:.7rem 0;color:#354e61;line-height:1.85}.ai-agent-security-source{width:min(1120px,calc(100% - 48px));margin:0 auto;padding:1.25rem 0;color:var(--muted);font-size:.86rem;line-height:1.8}
+		@media(max-width:900px){.ai-agent-security-hero__grid,.ai-agent-security-copy-grid,.ai-agent-security-faq{grid-template-columns:1fr}.ai-agent-security-hero__data{max-width:38rem}.ai-agent-security-section-heading{max-width:42rem}.ai-agent-security-metrics{max-width:38rem}}@media(max-width:640px){.ai-agent-security-shell,.ai-agent-security-breadcrumbs,.ai-agent-security-source{width:calc(100% - 32px)}.ai-agent-security-breadcrumbs{margin-top:1rem}.ai-agent-security-hero{padding:4.2rem 0 3.5rem}.ai-agent-security-hero h1{font-size:2rem}.ai-agent-security-section{padding:4.2rem 0}.ai-agent-security-section-heading h2{font-size:2.1rem}.ai-agent-security-hero__action{width:100%;justify-content:center}.ai-agent-security-metrics{grid-template-columns:1fr}.ai-agent-security-table-wrap{margin-inline:0}.ai-agent-security-table-wrap table{min-width:34rem}.ai-agent-security-prose blockquote{padding:1.15rem}.ai-agent-security-faq summary{font-size:.96rem}}
+	</style>
+</LandingLayout>

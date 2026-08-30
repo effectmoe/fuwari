@@ -180,18 +180,32 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 					<p class="blog-kicker">PILLAR GUIDE</p>
 					<h2 id="blog-pillar-guides-title">サイトを守るためのガイド</h2>
 				</div>
-				<a href="/bot-protection/" class="blog-pillar-card" aria-label="ボット対策とは？悪質BotとAIクローラーの防ぎ方を読む">
-					<div class="blog-pillar-card__visual" aria-hidden="true">
-						<span>AI SHIELD</span>
-						<strong>BOT<br />PROTECTION</strong>
-					</div>
-					<div class="blog-pillar-card__copy">
-						<p>AI SECURITY GUIDE</p>
-						<time datetime="2026-08-30">2026-08-30</time>
-						<h3>ボット対策とは？悪質BotとAIクローラーの防ぎ方</h3>
-						<span>ガイドを読む <Icon name="material-symbols:arrow-forward-rounded" /></span>
-					</div>
-				</a>
+				<div class="blog-pillar-guides__grid">
+					<a href="/bot-protection/" class="blog-pillar-card" aria-label="ボット対策とは？悪質BotとAIクローラーの防ぎ方を読む">
+						<div class="blog-pillar-card__visual" aria-hidden="true">
+							<span>AI SHIELD</span>
+							<strong>BOT<br />PROTECTION</strong>
+						</div>
+						<div class="blog-pillar-card__copy">
+							<p>AI SECURITY GUIDE</p>
+							<time datetime="2026-08-30">2026-08-30</time>
+							<h3>ボット対策とは？悪質BotとAIクローラーの防ぎ方</h3>
+							<span>ガイドを読む <Icon name="material-symbols:arrow-forward-rounded" /></span>
+						</div>
+					</a>
+					<a href="/ai-agent-security/" class="blog-pillar-card" aria-label="AIエージェント セキュリティのリスクと対策を実例で解説を読む">
+						<div class="blog-pillar-card__visual blog-pillar-card__visual--agent" aria-hidden="true">
+							<span>AI SHIELD</span>
+							<strong>AI AGENT<br />SECURITY</strong>
+						</div>
+						<div class="blog-pillar-card__copy">
+							<p>AI SECURITY GUIDE</p>
+							<time datetime="2026-08-30">2026-08-30</time>
+							<h3>AIエージェント セキュリティのリスクと対策を実例で解説</h3>
+							<span>ガイドを読む <Icon name="material-symbols:arrow-forward-rounded" /></span>
+						</div>
+					</a>
+				</div>
 			</div>
 		</section>
 	)}
@@ -733,6 +747,11 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 		background: linear-gradient(135deg, rgba(6, 126, 131, 0.09), rgba(235, 247, 247, 0.68));
 	}
 
+	.blog-pillar-guides__grid {
+		display: grid;
+		gap: 18px;
+	}
+
 	.blog-pillar-card {
 		display: grid;
 		grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1fr);
@@ -756,6 +775,12 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 			radial-gradient(circle at 85% 18%, rgba(104, 230, 219, 0.72), transparent 28%),
 			linear-gradient(145deg, #063f59, #087f82);
 		color: #fff;
+	}
+
+	.blog-pillar-card__visual--agent {
+		background:
+			radial-gradient(circle at 85% 18%, rgba(165, 192, 255, 0.8), transparent 28%),
+			linear-gradient(145deg, #192b66, #286f9d);
 	}
 
 	.blog-pillar-card__visual span,
