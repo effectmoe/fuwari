@@ -1119,15 +1119,27 @@ const faqs = [
 				<dl class="aicrawl-pricing-terms" aria-label="料金表に出てくる用語の定義">
 					<div>
 						<dt>AI CRAWL</dt>
-						<dd><b>AIが「来ているか」を測る。</b> どのAIが、自社サイトのどのページに来て、そこから人の訪問につながったかを毎週お届けします。</dd>
+						<dd>
+							<span><b>AIが「来ているか」を測る。</b></span>
+							<span>どのAIが、どのページへ来たかを確認。</span>
+							<span>人の訪問につながったかも毎週お届けします。</span>
+						</dd>
 					</div>
 					<div>
 						<dt>AI CITATION</dt>
-						<dd><b>AIの回答に「出ているか」を測る。</b> 実際にAIへ質問を投げ、自社が紹介されたか、載らなかった場合は代わりにどこが出たかを整理します。</dd>
+						<dd>
+							<span><b>AIの回答に「出ているか」を測る。</b></span>
+							<span>実際にAIへ質問し、自社が紹介されたかを確認。</span>
+							<span>載らない場合は、代わりに出た候補も整理します。</span>
+						</dd>
 					</div>
 					<div>
 						<dt>クエリ</dt>
-						<dd><b>AIに投げる質問文の本数。</b> 例：「◯◯に強い会社は？」で1クエリ。1クエリごとに主要AIで所定回数を確認します。</dd>
+						<dd>
+							<span><b>AIに投げる質問文の本数。</b></span>
+							<span>例：「◯◯に強い会社は？」で1クエリ。</span>
+							<span>1クエリごとに、主要AIで所定回数を確認します。</span>
+						</dd>
 					</div>
 				</dl>
 
@@ -3396,6 +3408,10 @@ const faqs = [
 			font-size: 15px;
 			font-weight: 720;
 			line-height: 1.75;
+		}
+
+		.aicrawl-pricing-terms dd span {
+			display: block;
 		}
 
 		.aicrawl-pricing-terms dd b {
