@@ -101,6 +101,47 @@ const plans = [
 	},
 ];
 
+const totalSecurityPlan = {
+	label: "TOTAL SECURITY",
+	name: "AIセキュリティコンサル",
+	price: "55,000",
+	unit: "月額・毎月",
+	priceNote:
+		"※ 上記の「見守り」を含みます。門番設置・サーバー内対策は別途スポットです。",
+	lead: [
+		"AIのセキュリティには、入口が2つあります。ひとつは、外から来る攻撃。もうひとつは、自分たちが使うAIです。",
+		"社員が ChatGPT に入力した情報がどこへ行くのか、社内にルールがあるのか——ここに穴があると、サイトをいくら固めても情報は出ていきます。",
+		"両方を毎月見て、次に手を打つ順番を決めるプランです。",
+	],
+	sides: [
+		{
+			icon: "material-symbols:language",
+			title: "ウェブサイト（外向き）",
+			protects: "自社サイト",
+			watches: "AIを装う攻撃・偽装アクセス・探索行為",
+			report: "AI攻撃分析レポート",
+		},
+		{
+			icon: "material-symbols:apartment",
+			title: "社内システム（内向き）",
+			protects: "社内の情報",
+			watches: "使っている生成AIサービスと、入力データの扱い",
+			report: "社内AI利用の点検レポート",
+		},
+	],
+	items: [
+		"月次レポート2本（ウェブサイト側／社内システム側）",
+		"使っている生成AIサービスの棚卸しと、入力データが学習に使われる設定かの確認",
+		"社内ルール・ガイドラインの有無の点検",
+		"機密度の高い業務でAIを使っている箇所の洗い出し",
+		"月1回・30分のオンライン相談",
+		"メールでのご質問（回数制限なし・3営業日以内に返信）",
+	],
+	excludes:
+		"実際の設置作業（前段の門番・サーバー内対策）、社内規程の文書作成代行、緊急時のインシデント対応は含みません。別途ご相談ください。",
+	cta: "AIセキュリティコンサルを相談する",
+};
+
 const faqs = [
 	[
 		"本物のAIクローラー（Googlebot・ChatGPT等）はブロックされませんか？",
@@ -221,7 +262,20 @@ const faqLd = {
 		</section>
 
 		<section id="pricing" class="aishield-section aishield-section--soft">
-			<div class="aishield-container"><div class="aishield-section-heading aishield-section-heading--center"><p>PRICING</p><h2>状況を知るところから、<br />無理なく始める。</h2><span>サイバー攻撃対策サービスやホームページセキュリティ対策代行として、見守り、前段の門番、サイト内部の対策を別メニューでご案内します。</span></div><div class="aishield-plans">{plans.map((plan) => <article class:list={["aishield-plan", { "aishield-plan--featured": plan.featured }]}><p>{plan.label}</p><h3>{plan.name}</h3><div class="aishield-plan__price"><strong>¥{plan.price}</strong><span>{plan.unit}</span><small>{plan.priceNote}</small></div><p class="aishield-plan__body">{plan.body}</p><ul>{plan.items.map((item) => <li><Icon name="material-symbols:check-circle-outline" />{item}</li>)}</ul><a class:list={["aishield-button", plan.featured ? "aishield-button--primary" : "aishield-button--outline"]} href={consultationHref}>{plan.cta}<Icon name="material-symbols:arrow-forward-rounded" /></a></article>)}</div></div>
+			<div class="aishield-container">
+				<div class="aishield-section-heading aishield-section-heading--center"><p>PRICING</p><h2>状況を知るところから、<br />無理なく始める。</h2><span>サイバー攻撃対策サービスやホームページセキュリティ対策代行として、見守り、前段の門番、サイト内部の対策を別メニューでご案内します。</span></div>
+				<div class="aishield-plans">{plans.map((plan) => <article class:list={["aishield-plan", { "aishield-plan--featured": plan.featured }]}><p>{plan.label}</p><h3>{plan.name}</h3><div class="aishield-plan__price"><strong>¥{plan.price}</strong><span>{plan.unit}</span><small>{plan.priceNote}</small></div><p class="aishield-plan__body">{plan.body}</p><ul>{plan.items.map((item) => <li><Icon name="material-symbols:check-circle-outline" />{item}</li>)}</ul><a class:list={["aishield-button", plan.featured ? "aishield-button--primary" : "aishield-button--outline"]} href={consultationHref}>{plan.cta}<Icon name="material-symbols:arrow-forward-rounded" /></a></article>)}</div>
+				<article class="aishield-total-security" aria-labelledby="total-security-title">
+					<header class="aishield-total-security__header">
+						<div><p>{totalSecurityPlan.label}</p><h3 id="total-security-title">{totalSecurityPlan.name}</h3></div>
+						<div class="aishield-total-security__price"><strong>¥{totalSecurityPlan.price}</strong><span>{totalSecurityPlan.unit}</span><small>{totalSecurityPlan.priceNote}</small></div>
+					</header>
+					<div class="aishield-total-security__intro">{totalSecurityPlan.lead.map((paragraph, index) => <p class:list={{ "aishield-total-security__conclusion": index === totalSecurityPlan.lead.length - 1 }}>{paragraph}</p>)}</div>
+					<div class="aishield-total-security__sides">{totalSecurityPlan.sides.map((side) => <section class="aishield-total-security__side"><div class="aishield-total-security__side-title"><Icon name={side.icon} /><h4>{side.title}</h4></div><dl><div><dt>守るもの</dt><dd>{side.protects}</dd></div><div><dt>見ること</dt><dd>{side.watches}</dd></div><div><dt>毎月の成果物</dt><dd>{side.report}</dd></div></dl></section>)}</div>
+					<div class="aishield-total-security__bottom"><div><h4>含まれるもの</h4><ul>{totalSecurityPlan.items.map((item) => <li><Icon name="material-symbols:check-circle-outline" />{item}</li>)}</ul></div><aside><p>含まれないもの</p><span>{totalSecurityPlan.excludes}</span></aside></div>
+					<a class="aishield-button aishield-button--dark" href={consultationHref}>{totalSecurityPlan.cta}<Icon name="material-symbols:arrow-forward-rounded" /></a>
+				</article>
+			</div>
 		</section>
 
 		<section id="faq" class="aishield-section aishield-section--faq">
@@ -263,8 +317,10 @@ const faqLd = {
 	.aishield-section--report{background:#eaf2f5}.aishield-report__layout{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(1.5rem,5vw,5rem)}.aishield-report figure{margin:0;padding:.9rem;background:#fff;box-shadow:0 1.1rem 2.5rem rgba(33,58,72,.12)}.aishield-report figure img{display:block;width:100%;height:auto}.aishield-report figcaption{padding:.8rem .15rem .1rem;color:#637282;font-size:.76rem;line-height:1.65}.aishield-report ol{list-style:none;margin:0;padding:0}.aishield-report li{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid #b8cdd3}.aishield-report li>b{color:#088087;font-size:.85rem}.aishield-report li strong,.aishield-report li span{display:block}.aishield-report li strong{font-size:1.25rem}.aishield-report li span{margin-top:.35rem;color:#5d7080;line-height:1.6}
 	.aishield-vaults{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.aishield-vaults article{padding:2rem;background:#f4f6f7;border:1px solid #d6e0e1}.aishield-vaults article>svg{font-size:2.2rem;color:#657b83}.aishield-vaults p{margin:1.2rem 0 .2rem;color:#60747d;font-size:.8rem;font-weight:800}.aishield-vaults h3{margin:0;font-size:1.8rem}.aishield-vaults span{display:block;margin-top:.8rem;color:#60717d;line-height:1.75}.aishield-vaults__target{background:#e4f8f2!important;border-color:#79bfb7!important}.aishield-vaults__target>svg,.aishield-vaults__target p{color:#00776f!important}.aishield-bridge{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:1rem;padding:1.8rem 2rem;background:#0b435d;color:#fff}.aishield-bridge p{margin:0;color:#83ddcf;font-size:.7rem;font-weight:800;letter-spacing:.1em}.aishield-bridge h3{margin:.5rem 0;font-size:1.7rem}.aishield-bridge h3 a{color:#fff;text-underline-offset:.16em}.aishield-bridge span{color:#d5e7ed;line-height:1.7}
 	.aishield-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;align-items:stretch}.aishield-plan{display:flex;flex-direction:column;padding:1.55rem;border:1px solid #cddbdd;background:#fff}.aishield-plan--featured{border:2px solid #07817d;box-shadow:0 .85rem 1.75rem rgba(2,91,91,.12)}.aishield-plan>p:first-child{margin:0;color:#077b7a;font-size:.68rem;font-weight:800;letter-spacing:.11em}.aishield-plan h3{margin:1rem 0 0;font-size:1.32rem}.aishield-plan__price{margin:1rem 0}.aishield-plan__price strong{font-size:2rem}.aishield-plan__price span{margin-left:.3rem;color:#60717e;font-size:.78rem}.aishield-plan__price small{display:block;margin-top:.45rem;color:#66747e;font-size:.72rem;line-height:1.5}.aishield-plan__body{min-height:6.5em;margin:0;color:#586d79;font-size:.88rem;line-height:1.75}.aishield-plan ul{margin:1.2rem 0;padding:0;list-style:none;flex:1}.aishield-plan li{display:flex;gap:.35rem;margin:.45rem 0;color:#38515f;font-size:.83rem;line-height:1.5}.aishield-plan li svg{color:#087d79;flex:none;margin-top:.05rem}.aishield-plan .aishield-button{width:100%;font-size:.88rem}
+	.aishield-total-security{margin-top:1.5rem;padding:clamp(1.4rem,3.3vw,2.7rem);border:2px solid #0b6d70;background:linear-gradient(135deg,#e8faf5 0%,#f9fffc 54%,#e6f1f1 100%);box-shadow:0 1.25rem 2.7rem rgba(6,91,91,.12)}.aishield-total-security__header{display:flex;justify-content:space-between;gap:2rem;align-items:flex-start;padding-bottom:1.5rem;border-bottom:1px solid #abd2cd}.aishield-total-security__header p{margin:0;color:#007a7a;font-size:.72rem;font-weight:800;letter-spacing:.14em}.aishield-total-security__header h3{margin:.5rem 0 0;font-size:clamp(1.85rem,3.7vw,3rem);line-height:1.15}.aishield-total-security__price{text-align:right}.aishield-total-security__price strong{display:block;color:#0d463f;font-size:clamp(2.15rem,4.5vw,3.6rem);line-height:1}.aishield-total-security__price span{display:block;margin-top:.25rem;color:#215650;font-size:.88rem;font-weight:800}.aishield-total-security__price small{display:block;max-width:25rem;margin-top:.55rem;color:#5c7174;font-size:.75rem;line-height:1.6}.aishield-total-security__intro{max-width:60rem;margin:1.7rem 0}.aishield-total-security__intro p{margin:.45rem 0;color:#314b56;line-height:1.8}.aishield-total-security__intro p:first-child{font-weight:800;color:#173c47}.aishield-total-security__conclusion{color:#075e60!important;font-weight:800}.aishield-total-security__sides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.aishield-total-security__side{padding:1.35rem;border:1px solid #a9d4ce;background:rgba(255,255,255,.78)}.aishield-total-security__side-title{display:flex;align-items:center;gap:.6rem;padding-bottom:1rem;border-bottom:1px solid #c6dfdb}.aishield-total-security__side-title svg{color:#007a7a;font-size:1.7rem}.aishield-total-security__side h4{margin:0;font-size:1.2rem}.aishield-total-security__side dl{margin:1rem 0 0}.aishield-total-security__side dl>div{display:grid;grid-template-columns:7.5rem 1fr;gap:.8rem;padding:.55rem 0;border-bottom:1px solid #d8e8e5}.aishield-total-security__side dl>div:last-child{border-bottom:0}.aishield-total-security__side dt{color:#637a80;font-size:.75rem;font-weight:800}.aishield-total-security__side dd{margin:0;color:#294752;font-size:.88rem;font-weight:700;line-height:1.6}.aishield-total-security__bottom{display:grid;grid-template-columns:1.3fr .7fr;gap:1.5rem;margin-top:1rem;padding-top:1.35rem;border-top:1px solid #abd2cd}.aishield-total-security__bottom h4{margin:0 0 .8rem;font-size:1.05rem}.aishield-total-security__bottom ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem 1rem;margin:0;padding:0;list-style:none}.aishield-total-security__bottom li{display:flex;gap:.35rem;color:#38515f;font-size:.83rem;line-height:1.55}.aishield-total-security__bottom li svg{color:#087d79;flex:none;margin-top:.05rem}.aishield-total-security__bottom aside{padding:1rem 1.1rem;border-left:3px solid #c48b2d;background:#fff9ec}.aishield-total-security__bottom aside p{margin:0 0 .4rem;color:#8d5d0d;font-size:.72rem;font-weight:800;letter-spacing:.08em}.aishield-total-security__bottom aside span{color:#665634;font-size:.8rem;line-height:1.7}.aishield-total-security>.aishield-button{width:100%;margin-top:1.5rem}
 	.aishield-section--faq{background:#f6faf9}.aishield-faq{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(2rem,8vw,8rem)}.aishield-faq>div:first-child>p:not(.aishield-eyebrow){color:#60717d;line-height:1.75}.aishield-faq>div:first-child>a{display:inline-flex;align-items:center;gap:.4rem;color:#075c69;font-weight:800;text-underline-offset:.2em}.aishield-faq details{border-top:1px solid #c9d9d9}.aishield-faq details:last-child{border-bottom:1px solid #c9d9d9}.aishield-faq summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 0;cursor:pointer;font-weight:800;line-height:1.55;list-style:none}.aishield-faq summary::-webkit-details-marker{display:none}.aishield-faq summary svg{font-size:1.4rem;flex:none}.aishield-faq details[open] summary svg{transform:rotate(45deg)}.aishield-faq details p{margin:0;padding:0 0 1.3rem;color:#5c6d78;line-height:1.85}
 	.aishield-final{padding:clamp(4.7rem,9vw,8rem) 0;background:linear-gradient(125deg,#063d59,#007777);color:#fff;text-align:center}.aishield-final p{margin:0;color:#83e4d5;font-size:.72rem;font-weight:800;letter-spacing:.12em}.aishield-final h2{margin-top:1rem}.aishield-final span{display:block;max-width:40rem;margin:1.3rem auto 1.7rem;color:#d7f0ec;line-height:1.85}.aishield-final .aishield-button{min-width:min(100%,20rem)}
-	@media (max-width: 900px){.aishield-hero__grid,.aishield-report__layout,.aishield-faq{grid-template-columns:1fr}.aishield-hero-visual{width:min(100%,40rem);height:auto;aspect-ratio:4 / 5;margin:1.5rem auto 0;border-radius:2rem}.aishield-section-heading--split{grid-template-columns:1fr;gap:1rem}.aishield-evidence{grid-template-columns:1fr}.aishield-plans{grid-template-columns:1fr}.aishield-plan__body{min-height:0}.aishield-bridge{align-items:flex-start;flex-direction:column}.aishield-route{grid-template-columns:1fr}.aishield-route>div{flex-wrap:wrap}}
+	@media (max-width: 900px){.aishield-hero__grid,.aishield-report__layout,.aishield-faq{grid-template-columns:1fr}.aishield-hero-visual{width:min(100%,40rem);height:auto;aspect-ratio:4 / 5;margin:1.5rem auto 0;border-radius:2rem}.aishield-section-heading--split{grid-template-columns:1fr;gap:1rem}.aishield-evidence{grid-template-columns:1fr}.aishield-plans{grid-template-columns:1fr}.aishield-plan__body{min-height:0}.aishield-bridge{align-items:flex-start;flex-direction:column}.aishield-route{grid-template-columns:1fr}.aishield-route>div{flex-wrap:wrap}.aishield-total-security__bottom{grid-template-columns:1fr}.aishield-total-security__bottom aside{border-left:0;border-top:3px solid #c48b2d}}
+	@media (max-width: 768px){.aishield-total-security__header{display:block}.aishield-total-security__price{text-align:left;margin-top:1.35rem}.aishield-total-security__sides{grid-template-columns:1fr}.aishield-total-security__bottom ul{grid-template-columns:1fr}}
 	@media (max-width: 640px){.aishield-container{width:min(100% - 32px,1120px)}.aishield-hero{padding:4.4rem 0 3.8rem}.aishield-hero h1{font-size:clamp(2rem,8.5vw,2.8rem)}.aishield-layers,.aishield-stats,.aishield-vaults{grid-template-columns:1fr}.aishield-route>div{font-size:.74rem;padding:1rem}.aishield-section-heading h2,.aishield-faq h2,.aishield-final h2{font-size:2.15rem}.aishield-evidence,.aishield-bridge{padding:1.35rem}.aishield-hero__actions .aishield-button--primary{width:100%}.aishield-hero__actions .aishield-button--text{padding-left:0}.aishield-hero-visual{width:calc(100% + 2rem);height:auto;aspect-ratio:4 / 5;margin:1.15rem -1rem 0;border-radius:1.6rem}.aishield-hero-visual img{height:100%;object-position:center 39%}}
 </style>
