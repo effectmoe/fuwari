@@ -280,7 +280,6 @@ const pricingPlans = [
 		cta: "このプランを申し込む",
 		featured: false,
 		tier: "ライト",
-		tierBody: "まずAI由来の接点があるかを継続的に見る入口プラン。",
 		measurementLimit: "3クエリ",
 		citation: {
 			name: "AI CRAWL + AI CITATION ライト",
@@ -313,7 +312,6 @@ const pricingPlans = [
 		cta: "伴走内容を相談する",
 		featured: true,
 		tier: "スタンダード",
-		tierBody: "数字を見ながら相談し、次の打ち手まで一緒に整理する標準プラン。",
 		measurementLimit: "5クエリ",
 		citation: {
 			name: "AI CRAWL + AI CITATION スタンダード",
@@ -343,8 +341,6 @@ const pricingPlans = [
 		cta: "成長運用を相談する",
 		featured: false,
 		tier: "プロ",
-		tierBody:
-			"改善ロードマップと再計測まで含めて、AI検索対策を継続運用する上位プラン。",
 		measurementLimit: "10クエリ",
 		citation: {
 			name: "AI CRAWL + AI CITATION プロ",
@@ -1157,14 +1153,11 @@ const faqs = [
 
 					{pricingPlans.map((plan) => (
 						<div class={`aicrawl-pricing-row ${plan.featured ? "is-featured" : ""}`}>
-							<div class="aicrawl-pricing-row__tier">
-								<div>
+							<article class="aicrawl-price-card">
+								<div class="aicrawl-price-card__tier" aria-label={`${plan.tier}プラン・${plan.measurementLimit}`}>
 									<span>{plan.tier}プラン</span>
 									<strong>{plan.measurementLimit}</strong>
 								</div>
-								<p>{plan.tierBody}</p>
-							</div>
-							<article class="aicrawl-price-card">
 								<div class="aicrawl-price-card__top">
 									<span>{plan.label}</span>
 									<h3>{plan.name}</h3>
@@ -1186,6 +1179,10 @@ const faqs = [
 								<a href={consultationHref} class="aicrawl-price-card__cta">{plan.cta}</a>
 							</article>
 							<article class="aicrawl-price-card is-citation">
+								<div class="aicrawl-price-card__tier" aria-label={`${plan.tier}プラン・${plan.measurementLimit}`}>
+									<span>{plan.tier}プラン</span>
+									<strong>{plan.measurementLimit}</strong>
+								</div>
 								<div class="aicrawl-price-card__top">
 									<span>{plan.citation.label}</span>
 									<h3>{plan.citation.name}</h3>
@@ -3461,49 +3458,10 @@ const faqs = [
 			}
 
 			.aicrawl-pricing-matrix__header .is-citation {
-				border-color: rgba(32, 57, 33, 0.38);
+				border-color: rgba(69, 111, 69, 0.38);
 				background:
 					radial-gradient(circle at 88% 14%, rgba(185, 138, 45, 0.16), transparent 30%),
 					linear-gradient(145deg, rgba(239, 247, 237, 0.98), rgba(255, 255, 255, 0.86));
-			}
-
-			.aicrawl-pricing-row__tier {
-				display: flex;
-				grid-column: 1 / -1;
-				align-items: center;
-				justify-content: space-between;
-				gap: 18px;
-				border: 1px solid rgba(192, 175, 151, 0.6);
-				border-radius: 22px;
-				background:
-					radial-gradient(circle at 96% 20%, rgba(185, 138, 45, 0.12), transparent 28%),
-					rgba(255, 255, 255, 0.8);
-				padding: 18px 20px;
-			}
-
-			.aicrawl-pricing-row__tier span {
-				color: #7d5b10;
-				font-size: 13px;
-				font-weight: 950;
-				letter-spacing: 0.08em;
-			}
-
-			.aicrawl-pricing-row__tier strong {
-				display: block;
-				margin-top: 6px;
-				color: var(--crawl-green-dark);
-				font-size: clamp(22px, 2.4vw, 34px);
-				font-weight: 950;
-				line-height: 1.05;
-			}
-
-			.aicrawl-pricing-row__tier p {
-				max-width: 680px;
-				margin: 0;
-				color: var(--crawl-muted);
-				font-size: 14px;
-				font-weight: 820;
-				line-height: 1.65;
 			}
 
 			.aicrawl-pricing-matrix .aicrawl-price-card {
@@ -3544,16 +3502,39 @@ const faqs = [
 			}
 
 			.aicrawl-price-card.is-citation {
-				border-color: rgba(32, 57, 33, 0.58);
+				border-color: rgba(69, 111, 69, 0.58);
 				background:
 					radial-gradient(circle at 88% 12%, rgba(185, 138, 45, 0.16), transparent 32%),
 					linear-gradient(145deg, rgba(247, 250, 244, 0.98), rgba(255, 255, 255, 0.9)),
 					var(--crawl-card);
-				box-shadow: 0 34px 88px rgba(32, 57, 33, 0.14);
+				box-shadow: 0 34px 88px rgba(69, 111, 69, 0.14);
 			}
 
 			.aicrawl-price-card.is-citation::before {
-				background: linear-gradient(90deg, #203921, #456f45, #b98a2d);
+				background: linear-gradient(90deg, #456f45, #7b9a69, #b98a2d);
+			}
+
+			.aicrawl-price-card__tier {
+				display: flex;
+				align-items: baseline;
+				gap: 10px;
+				margin-bottom: 16px;
+				padding-bottom: 14px;
+				border-bottom: 1px solid rgba(192, 175, 151, 0.56);
+			}
+
+			.aicrawl-price-card__tier span {
+				color: #7d5b10;
+				font-size: 12px;
+				font-weight: 950;
+				letter-spacing: 0.08em;
+			}
+
+			.aicrawl-price-card__tier strong {
+				color: var(--crawl-green-dark);
+				font-size: clamp(20px, 2.1vw, 28px);
+				font-weight: 950;
+				line-height: 1;
 			}
 
 		.aicrawl-price-card__top > span {
@@ -3576,7 +3557,7 @@ const faqs = [
 			}
 
 			.aicrawl-price-card.is-citation .aicrawl-price-card__top > span {
-				background: #203921;
+				background: var(--crawl-green);
 				color: #fff;
 			}
 
@@ -3683,10 +3664,10 @@ const faqs = [
 			}
 
 			.aicrawl-price-card.is-citation .aicrawl-price-card__cta {
-				border-color: #203921;
-				background: #203921;
+				border-color: var(--crawl-green);
+				background: var(--crawl-green);
 				color: #fff;
-				box-shadow: 0 18px 38px rgba(32, 57, 33, 0.18);
+				box-shadow: 0 18px 38px rgba(69, 111, 69, 0.18);
 			}
 
 			.aicrawl-pricing-footnotes {
@@ -4245,7 +4226,6 @@ const faqs = [
 					.aicrawl-pricing-matrix,
 				.aicrawl-pricing-matrix__header,
 				.aicrawl-pricing-row,
-				.aicrawl-pricing-row__tier,
 				.aicrawl-pricing-footnotes,
 				.report-title,
 				.report-kpis,
