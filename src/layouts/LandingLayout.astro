@@ -579,8 +579,10 @@ const mobileNextPage =
 			align-items: center;
 			align-self: stretch;
 			justify-content: center;
-			gap: clamp(18px, 2.6vw, 34px);
+			gap: clamp(14px, 2.2vw, 34px);
 			height: 100%;
+			/* 🔴 これが無いと grid の 1fr に押されて各項目が縦2行に折れる（2026-09-05 実測） */
+			white-space: nowrap;
 		}
 
 		.effect-landing-header__nav a,
