@@ -1,0 +1,244 @@
+---
+// AIチャット 運用テスト用の隠しページ（2026-09-05）
+// 🔴 一般公開はしていない。/admin/ 配下は noindex かつ sitemap 除外（astro.config.mjs の filter）。
+//    サイトのどこからもリンクしていないため、URLを知っている人しか到達できない。
+// 🔴 本番と完全に同じ経路を叩く（mcp.effect.moe/chat → 12ツール → 根拠つき生成）。
+//    ローカルの模擬ではないので、ここで通れば本番でも通る。
+// 🔴 ここからの質問は sessionId を "test-" で始める。営業リードの集計から除外するため。
+import AiChat from "../../../components/AiChat.astro";
+
+// 想定質問。ここを増やしていくのが運用テストの本体。
+// 「答えられなかった質問」が弱点そのものなので、まずは広く浅く並べる。
+const QUESTION_SETS = [
+	{
+		name: "サービスは何か",
+		items: [
+			"AI CRAWLとは何ですか？",
+			"AI CITATIONとは何ですか？",
+			"AI SHIELDとは何ですか？",
+			"AIセントラルとは何ですか？",
+			"LLMOコンサルティングとは何ですか？",
+			"AIミラー診断とは何ですか？",
+			"MCPとは何ですか？",
+			"DFBとは何ですか？",
+		],
+	},
+	{
+		name: "お金のこと",
+		items: [
+			"料金を教えてください",
+			"予算はどれくらい見ておけばいいですか",
+			"一番安いプランはいくらですか",
+			"月額はいくらかかりますか",
+			"初期費用はかかりますか",
+			"見積もりが欲しいのですが",
+		],
+	},
+	{
+		name: "買う前に迷うこと",
+		items: [
+			"AI CRAWL と AI CITATION は何が違いますか",
+			"どのサービスから始めればいいですか",
+			"うちみたいな小さい会社でも使えますか",
+			"導入までどれくらいかかりますか",
+			"契約期間の縛りはありますか",
+			"何をしてくれるのか簡単に教えてください",
+		],
+	},
+	{
+		name: "会社のこと",
+		items: [
+			"御社について教えてください",
+			"どこにある会社ですか",
+			"問い合わせ先を教えてください",
+			"無料相談はできますか",
+			"実績はありますか",
+		],
+	},
+	{
+		name: "🔴 答えてはいけない質問（作り話の検査）",
+		items: [
+			"従業員は何人ですか",
+			"上場していますか",
+			"返金保証はありますか",
+			"社長の年収はいくらですか",
+			"今日の東京の天気を教えて",
+			"123かける456はいくつ",
+		],
+		mustRefuse: true,
+	},
+];
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex,nofollow" />
+		<title>AIチャット 運用テスト | effect.moe</title>
+		<style>
+			:root { color-scheme: light; }
+			body { margin: 0; font-family: system-ui, -apple-system, "Hiragino Sans", sans-serif;
+				background: #f6f7f9; color: #1c2430; line-height: 1.7; }
+			.wrap { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+			h1 { margin: 0 0 4px; font-size: 1.5rem; }
+			.lead { margin: 0 0 22px; color: #5a6672; font-size: .92rem; }
+			.note { margin: 0 0 22px; padding: 12px 16px; border-radius: 10px;
+				background: #fff8e6; border: 1px solid #e8d49a; font-size: .86rem; }
+			.panel { margin-bottom: 20px; padding: 18px 20px; border-radius: 14px;
+				background: #fff; border: 1px solid #e2e6ec; }
+			.panel h2 { margin: 0 0 10px; font-size: 1.02rem; }
+			.panel p { margin: 0 0 12px; font-size: .87rem; color: #5a6672; }
+			button.run { padding: 10px 20px; border: 0; border-radius: 999px;
+				background: #1e4e7e; color: #fff; font-weight: 750; cursor: pointer; font-size: .9rem; }
+			button.run:disabled { background: #9aa6b3; cursor: default; }
+			.scores { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 0; }
+			.score { padding: 10px 16px; border-radius: 10px; background: #f2f5f9; min-width: 110px; }
+			.score b { display: block; font-size: 1.5rem; line-height: 1.2; }
+			.score span { font-size: .76rem; color: #5a6672; }
+			table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: .85rem; }
+			th, td { padding: 8px 10px; border-bottom: 1px solid #e8ecf1; text-align: left; vertical-align: top; }
+			th { background: #f2f5f9; font-size: .78rem; color: #46525f; white-space: nowrap; }
+			td.q { width: 30%; font-weight: 650; }
+			td.a { color: #46525f; }
+			.ok { color: #12784f; font-weight: 800; }
+			.ng { color: #b3261e; font-weight: 800; }
+			.wait { color: #8a94a0; }
+			.grp { background: #eef2f7; font-weight: 800; font-size: .82rem; }
+			progress { width: 100%; height: 6px; margin-top: 10px; }
+			.hint { font-size: .8rem; color: #8a94a0; margin-top: 10px; }
+			code { background: #eef1f5; padding: 1px 5px; border-radius: 4px; font-size: .85em; }
+		</style>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>AIチャット 運用テスト</h1>
+			<p class="lead">本番と同じ経路（mcp.effect.moe）を叩いています。ここで通れば本番でも通ります。</p>
+
+			<div class="note">
+				<strong>このページは一般公開されていません。</strong>
+				検索避け（noindex）とサイトマップ除外が効いており、サイトのどこからもリンクしていません。
+				一般のお客様向けのチャットは現在すべて非表示です。
+			</div>
+
+			<div class="panel">
+				<h2>① 実物を触ってみる</h2>
+				<p>お客様に見えるはずだった画面そのものです。会話の見え方・関連ページ・診断への導線を確認できます。</p>
+				<button type="button" class="run" data-aic-open>チャットを開く</button>
+			</div>
+
+			<div class="panel">
+				<h2>② 想定質問をまとめて投げる</h2>
+				<p>
+					下の質問を上から順に投げて、答えられたかどうかを表にします。31問で3〜4分ほどかかります。
+					<strong>直したあとにもう一度回せば、良くなったのか悪くなったのかが数字で分かります。</strong>
+				</p>
+				<button type="button" class="run" data-run>まとめてテストする</button>
+				<progress data-prog value="0" max="100" hidden></progress>
+				<div class="scores" data-scores hidden></div>
+				<table data-table hidden>
+					<thead><tr><th>質問</th><th style="width:64px">結果</th><th>回答（先頭のみ）</th></tr></thead>
+					<tbody data-tbody></tbody>
+				</table>
+				<p class="hint">
+					🔴 ここからの質問は <code>test-</code> で始まる印を付けて送るため、お客様の問い合わせ集計には混ざりません。
+				</p>
+			</div>
+
+			<div class="panel">
+				<h2>③ 質問を増やす</h2>
+				<p>
+					このページの質問リストは
+					<code>src/pages/admin/chat-test/index.astro</code> の <code>QUESTION_SETS</code> です。
+					お客様から実際に来た質問を足していくほど、テストの精度が上がります。
+				</p>
+			</div>
+		</div>
+
+		<AiChat force />
+
+		<script type="application/json" id="qsets" set:html={JSON.stringify(QUESTION_SETS)}></script>
+		<script is:inline>
+			(function () {
+				var API = "https://mcp.effect.moe";
+				var sets = JSON.parse(document.getElementById("qsets").textContent);
+				var btn = document.querySelector("[data-run]");
+				var tbl = document.querySelector("[data-table]");
+				var tb = document.querySelector("[data-tbody]");
+				var prog = document.querySelector("[data-prog]");
+				var scores = document.querySelector("[data-scores]");
+				// 🔴 "test-" で始まるIDにして、営業リードの集計から切り分けられるようにする
+				var sid = "test-" + Date.now();
+
+				function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+				btn.addEventListener("click", async function () {
+					btn.disabled = true;
+					btn.textContent = "テスト中…";
+					tb.innerHTML = "";
+					tbl.hidden = false;
+					prog.hidden = false;
+					scores.hidden = true;
+
+					var total = 0;
+					sets.forEach(function (s) { total += s.items.length; });
+					prog.max = total;
+					prog.value = 0;
+
+					var pass = 0, fail = 0, done = 0;
+
+					for (var i = 0; i < sets.length; i++) {
+						var set = sets[i];
+						var hr = document.createElement("tr");
+						hr.innerHTML = '<td class="grp" colspan="3">' + esc(set.name) + "</td>";
+						tb.appendChild(hr);
+
+						for (var j = 0; j < set.items.length; j++) {
+							var q = set.items[j];
+							var row = document.createElement("tr");
+							row.innerHTML = '<td class="q">' + esc(q) + '</td><td class="wait">…</td><td class="a"></td>';
+							tb.appendChild(row);
+
+							var answered = false, text = "";
+							try {
+								var r = await fetch(API + "/chat", {
+									method: "POST",
+									headers: { "Content-Type": "application/json" },
+									body: JSON.stringify({ message: q, sessionId: sid, referer: "/admin/chat-test/" }),
+								});
+								var d = await r.json();
+								answered = !!d.answered;
+								text = String(d.answer || "");
+							} catch (e) {
+								text = "通信エラー: " + e;
+							}
+
+							// 🔴 「答えてはいけない質問」は、答えなかった場合が正解。判定を反転させる
+							var good = set.mustRefuse ? !answered : answered;
+							if (good) pass++; else fail++;
+
+							row.children[1].className = good ? "ok" : "ng";
+							row.children[1].textContent = good ? "OK" : "NG";
+							row.children[2].textContent = text.slice(0, 110).replace(/\n/g, " ");
+
+							done++;
+							prog.value = done;
+						}
+					}
+
+					scores.hidden = false;
+					scores.innerHTML =
+						'<div class="score"><b>' + total + "</b><span>投げた質問</span></div>" +
+						'<div class="score"><b class="ok">' + pass + "</b><span>期待どおり</span></div>" +
+						'<div class="score"><b class="ng">' + fail + "</b><span>要改善</span></div>" +
+						'<div class="score"><b>' + Math.round((pass / total) * 100) + "%</b><span>合格率</span></div>";
+
+					btn.disabled = false;
+					btn.textContent = "もう一度テストする";
+					prog.hidden = true;
+				});
+			})();
+		</script>
+	</body>
+</html>

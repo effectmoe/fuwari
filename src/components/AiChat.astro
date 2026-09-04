@@ -10,15 +10,22 @@ import { AI_CHAT_ENABLED } from "../config/aiChat";
 interface Props {
 	/** トップ等に置く常設の帯（案C）を出すか */
 	banner?: boolean;
+	/**
+	 * 非公開スイッチを無視して描画する。
+	 * 🔴 検証用の隠しページ（/admin/chat-test/）専用。一般ページで使ってはならない。
+	 *    /admin/ 配下は noindex かつ sitemap 除外のため、検索から到達されない。
+	 */
+	force?: boolean;
 }
-const { banner: bannerProp = false } = Astro.props;
+const { banner: bannerProp = false, force = false } = Astro.props;
 // 🔴 非公開スイッチはここで効かせる。呼び出し側が漏れても、この2つが false なら
 //    HTMLには一切出力されない（隠すのではなく描画しない）。src/config/aiChat.ts 参照。
-const banner = AI_CHAT_ENABLED && bannerProp;
+const live = AI_CHAT_ENABLED || force;
+const banner = live && bannerProp;
 // 🔴 モーダル本体とスクリプトはページに1つだけ。
 //    レイアウト側（banner なし）が唯一の実体で、banner 呼び出しは帯だけを描画する。
 //    2つ描画すると click ハンドラが二重登録され、同じ質問が2回送信される（2026-09-05 実測）。
-const renderModal = AI_CHAT_ENABLED && !bannerProp;
+const renderModal = live && !bannerProp;
 
 const STARTERS = [
 	"料金を教えてください",
