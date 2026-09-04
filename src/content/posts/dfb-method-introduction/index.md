@@ -10,7 +10,7 @@ category: "AI"
 service: "ai-central"
 relatedLinks:
   - label: "構造化ペディア"
-    href: "/structurepedia/"
+    href: "/dfb-complete-guide/"
   - label: "AI時代に『シニア有利』の本質は構造化能力にある"
     href: "/posts/ai-era-senior-structuring-power/"
 faq:

@@ -58,8 +58,9 @@ const curatedSearchMetadata: Record<
 			"AI検索時代のSEO対策（LLMO）の考え方、Googleの案内の読み解き方、情報設計と測定の始め方。",
 		section: "Guide",
 	},
-	"/structurepedia/": {
-		excerpt: "DFB構造化メソッドをWikipedia風に体系化した大全ページ。",
+	"/dfb-complete-guide/": {
+		excerpt:
+			"プロンプトの書き方をDFB構造化メソッドとして体系化した大全ページ。",
 		section: "Wiki",
 	},
 };

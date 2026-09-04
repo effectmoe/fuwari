@@ -43,3 +43,8 @@
 
 # 利用規約単独ページは廃止。特定商取引法の表記を含む /company/ が後継。
 /terms-of-service/  /company/  301
+
+# /structurepedia/ は /dfb-complete-guide/ とほぼ同一内容の重複ページだった。
+# 検索評価が分散するため、内容が上位互換（19セクション対14セクション）の
+# /dfb-complete-guide/ へ集約する（2026-09-04 トニー判断）。
+/structurepedia/  /dfb-complete-guide/  301

@@ -37,7 +37,6 @@ const labelOverrides: Record<string, string> = {
 	"/faq/": "総合FAQ",
 	"/llmo/": "LLMO対策ガイド",
 	"/sitemap/": "サイトマップ",
-	"/structurepedia/": "構造化ペディア",
 	"/trust/": "信頼性・制作方針",
 };
 

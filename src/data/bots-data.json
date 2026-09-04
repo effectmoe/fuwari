@@ -1,6 +1,6 @@
 {
-	"updated": "2026-08-30",
-	"period": "2026-08-02〜2026-08-29（28日間）",
+	"updated": "2026-08-31",
+	"period": "2026-08-03〜2026-08-30（28日間）",
 	"definition": "全ステータス計・自社観測サイト n=1（effect.moe）・同一観測窓",
 	"bots": {
 		"bytespider": {
@@ -8,13 +8,9 @@
 			"operator": "ByteDance（TikTok親会社）",
 			"category": "rogue",
 			"first_seen": "2026-08-01",
-			"month_hits": 2156,
+			"month_hits": 2274,
 			"rank": "1位（全クローラー最多）",
 			"weekly": [
-				{
-					"w": "8/3週",
-					"n": 422
-				},
 				{
 					"w": "8/10週",
 					"n": 655
@@ -25,7 +21,11 @@
 				},
 				{
 					"w": "8/24週",
-					"n": 304,
+					"n": 400
+				},
+				{
+					"w": "8/31週",
+					"n": 36,
 					"note": "集計中"
 				}
 			]
@@ -35,13 +35,9 @@
 			"operator": "Anthropic（AIアシスタント「Claude」の開発元）",
 			"category": "training",
 			"first_seen": "2026-08-01",
-			"month_hits": 923,
-			"rank": "3位",
+			"month_hits": 888,
+			"rank": "4位",
 			"weekly": [
-				{
-					"w": "8/3週",
-					"n": 220
-				},
 				{
 					"w": "8/10週",
 					"n": 49
@@ -52,7 +48,11 @@
 				},
 				{
 					"w": "8/24週",
-					"n": 508,
+					"n": 508
+				},
+				{
+					"w": "8/31週",
+					"n": 0,
 					"note": "集計中"
 				}
 			],
@@ -71,10 +71,6 @@
 			"rank": "2位",
 			"weekly": [
 				{
-					"w": "8/3週",
-					"n": 266
-				},
-				{
 					"w": "8/10週",
 					"n": 207
 				},
@@ -84,7 +80,11 @@
 				},
 				{
 					"w": "8/24週",
-					"n": 35,
+					"n": 35
+				},
+				{
+					"w": "8/31週",
+					"n": 0,
 					"note": "集計中"
 				}
 			],
@@ -96,8 +96,8 @@
 			}
 		},
 		"reference": {
-			"googlebot_month": 923,
-			"claudebot_month": 923,
+			"googlebot_month": 950,
+			"claudebot_month": 888,
 			"amazonbot_month": 991
 		}
 	}
