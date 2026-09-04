@@ -7,6 +7,7 @@ import EvidenceDataSection from "../components/effectInteractive/EvidenceDataSec
 import StitchCoreSections from "../components/effectInteractive/StitchCoreSections.astro";
 import InlineConversion from "../components/landing/InlineConversion.astro";
 import TermHint from "../components/landing/TermHint.astro";
+import { AI_CHAT_ENABLED } from "../config/aiChat";
 import stats from "../data/storaca-stats.json";
 import LandingLayout from "../layouts/LandingLayout.astro";
 
@@ -417,7 +418,7 @@ const faqLd = {
 		<EffectInteractiveHero />
 	</div>
 
-	<AiChat banner />
+	{AI_CHAT_ENABLED && <AiChat banner />}
 
 	<div>
 

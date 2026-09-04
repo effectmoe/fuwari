@@ -5,15 +5,20 @@
 //    経緯: wiki/refactoring/systems/effect-moe-ai-chat-quality-2026-09.md
 // 🔴 個人情報（質問内容・IP・メール）は https://effect.moe/privacy/ に準拠して扱う。
 //    メールは同意チェックが入るまで送信できない。
+import { AI_CHAT_ENABLED } from "../config/aiChat";
+
 interface Props {
 	/** トップ等に置く常設の帯（案C）を出すか */
 	banner?: boolean;
 }
-const { banner = false } = Astro.props;
+const { banner: bannerProp = false } = Astro.props;
+// 🔴 非公開スイッチはここで効かせる。呼び出し側が漏れても、この2つが false なら
+//    HTMLには一切出力されない（隠すのではなく描画しない）。src/config/aiChat.ts 参照。
+const banner = AI_CHAT_ENABLED && bannerProp;
 // 🔴 モーダル本体とスクリプトはページに1つだけ。
 //    レイアウト側（banner なし）が唯一の実体で、banner 呼び出しは帯だけを描画する。
 //    2つ描画すると click ハンドラが二重登録され、同じ質問が2回送信される（2026-09-05 実測）。
-const renderModal = !banner;
+const renderModal = AI_CHAT_ENABLED && !bannerProp;
 
 const STARTERS = [
 	"料金を教えてください",
