@@ -1,0 +1,202 @@
+---
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "プライバシーポリシー｜株式会社EFFECT";
+const pageDescription =
+	"株式会社EFFECT が運営する effect.moe における個人情報の取得項目、利用目的、第三者提供、保存期間、開示等のご請求方法を定めたプライバシーポリシーです。";
+const siteUrl = Astro.site ? Astro.site.toString() : "https://effect.moe/";
+const canonicalUrl = new URL("/privacy/", siteUrl).toString();
+const revisedDate = "2026-09-04";
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	"@id": `${canonicalUrl}#webpage`,
+	url: canonicalUrl,
+	name: pageTitle,
+	description: pageDescription,
+	inLanguage: "ja",
+	isPartOf: { "@id": `${siteUrl}#website` },
+	publisher: { "@id": `${siteUrl}#organization` },
+	dateModified: revisedDate,
+};
+
+const sections = [
+	{
+		no: "01",
+		title: "事業者情報",
+		rows: [
+			["名称", "株式会社EFFECT"],
+			["所在地", "〒810-0001 福岡市中央区天神2丁目2番12号 T&Jビルディング7F"],
+			["個人情報に関する連絡先", "info@effect.moe"],
+		],
+	},
+];
+
+const purposes = [
+	"お問い合わせ・ご相談への回答および連絡",
+	"当社サービスに関する情報提供および営業のご連絡",
+	"サービス品質の改善（よくあるご質問の整備、応答内容の改善を含む）",
+	"当サイトの利用状況の分析および改善",
+	"不正アクセス・攻撃の検知および防止",
+];
+
+const thirdParties = [
+	[
+		"Cloudflare, Inc.",
+		"アクセス情報、AIチャットの送受信内容",
+		"サイトの配信・保護・AI応答の処理",
+	],
+	[
+		"Google LLC（Googleアナリティクス4）",
+		"Cookie による閲覧情報",
+		"アクセス解析",
+	],
+];
+
+const retention = [
+	["お問い合わせ・ご相談の内容", "最終のご連絡から3年"],
+	["AIチャットの質問内容・応答内容", "最終のご利用から3年"],
+	[
+		"AIチャットで取得したメールアドレス",
+		"ご案内の停止をお申し出いただくまで、または最終接触から3年",
+	],
+	[
+		"Googleアナリティクス4 のアクセス解析データ",
+		"14か月（最後の活動から起算し、活動があるたびに延長されます）",
+	],
+];
+---
+
+<LandingLayout title={pageTitle} description={pageDescription}>
+	<Fragment slot="head">
+		<link rel="canonical" href={canonicalUrl} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+	</Fragment>
+
+	<div class="pp-shell">
+		<Breadcrumbs items={[{ label: "ホーム", href: "/" }, { label: "プライバシーポリシー", href: "/privacy/" }]} />
+
+		<header class="pp-head">
+			<p class="pp-eyebrow">PRIVACY POLICY</p>
+			<h1>プライバシーポリシー</h1>
+			<p class="pp-lead">
+				株式会社EFFECT（以下「当社」）は、当社が運営するウェブサイト effect.moe（以下「当サイト」）における
+				個人情報の取扱いについて、以下のとおり定めます。
+			</p>
+			<p class="pp-date">制定日: 2026年9月4日</p>
+		</header>
+
+		<section class="pp-section">
+			<h2>1. 事業者情報</h2>
+			<dl class="pp-dl">
+				{sections[0].rows.map(([k, v]) => (<div><dt>{k}</dt><dd>{v}</dd></div>))}
+			</dl>
+		</section>
+
+		<section class="pp-section">
+			<h2>2. 取得する情報と取得方法</h2>
+			<h3>(1) お問い合わせフォーム・無料相談フォーム</h3>
+			<p>お客様にご入力いただく、会社名・お名前・メールアドレス・電話番号・お問い合わせ内容。</p>
+			<h3>(2) AIチャット（サイト内の相談窓口）</h3>
+			<ul>
+				<li>お客様が入力された<strong>質問内容および当社AIの応答内容</strong></li>
+				<li>アクセス元の<strong>IPアドレス</strong>、ブラウザ情報、アクセス日時</li>
+				<li>お客様が希望された場合に限り入力いただく<strong>メールアドレス</strong></li>
+			</ul>
+			<h3>(3) アクセス解析</h3>
+			<p>
+				Googleアナリティクス4（GA4）により、閲覧ページ、滞在時間、参照元、おおよその地域、デバイス種別等を
+				Cookie を用いて取得します。これらの情報から個人を特定することはできません。
+			</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>3. 利用目的</h2>
+			<p>取得した情報は、以下の目的で利用します。</p>
+			<ol class="pp-ol">{purposes.map((p) => (<li>{p}</li>))}</ol>
+			<div class="pp-note">
+				<p>
+					<strong>営業のご連絡について</strong><br />
+					AIチャットでメールアドレスをご入力いただいた場合、チャット内容の控えの送付に加え、
+					当社サービスのご案内を差し上げることがあります。ご希望されない場合は、第7項の方法でお申し出ください。
+				</p>
+			</div>
+		</section>
+
+		<section class="pp-section">
+			<h2>4. 第三者提供・業務委託</h2>
+			<p>当社は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者へ提供しません。ただし、以下の外部サービスを利用しており、その範囲で情報が処理されます。</p>
+			<div class="pp-table-wrap">
+				<table class="pp-table">
+					<thead><tr><th>委託先</th><th>処理される情報</th><th>目的</th></tr></thead>
+					<tbody>{thirdParties.map(([a, b, c]) => (<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>))}</tbody>
+				</table>
+			</div>
+			<p class="pp-small">これらの事業者は日本国外にサーバーを有する場合があります。</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>5. 保存期間</h2>
+			<div class="pp-table-wrap">
+				<table class="pp-table">
+					<thead><tr><th>対象</th><th>保存期間</th></tr></thead>
+					<tbody>{retention.map(([a, b]) => (<tr><td>{a}</td><td>{b}</td></tr>))}</tbody>
+				</table>
+			</div>
+			<p class="pp-small">期間経過後は、速やかに削除または匿名化します。</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>6. Cookie について</h2>
+			<p>当サイトはアクセス解析のため Cookie を使用します。ブラウザの設定により Cookie を無効化できますが、一部の機能がご利用いただけない場合があります。Googleアナリティクスのオプトアウトは、Google が提供するアドオンからも行えます。</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>7. 開示・訂正・削除・利用停止のご請求</h2>
+			<p>ご本人からのご請求により、保有する個人情報の開示・訂正・追加・削除・利用停止に応じます。また、営業のご連絡を希望されない場合も、下記へお申し出ください。</p>
+			<p class="pp-contact"><a href="mailto:info@effect.moe">info@effect.moe</a></p>
+			<p>ご本人であることを確認のうえ、合理的な期間内に対応します。</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>8. 安全管理措置</h2>
+			<p>取得した情報は、アクセス権限の制限、通信の暗号化、保存期間の設定等により適切に管理します。</p>
+		</section>
+
+		<section class="pp-section">
+			<h2>9. 改定</h2>
+			<p>本ポリシーは、法令の変更やサービス内容の変更に応じて改定することがあります。重要な変更を行う場合は、当サイト上でお知らせします。</p>
+		</section>
+	</div>
+</LandingLayout>
+
+<style>
+	.pp-shell { width: min(820px, calc(100% - 40px)); margin-inline: auto; padding-block: 56px 96px; color: #1d2b45; }
+	.pp-eyebrow { margin: 0; font-size: .78rem; font-weight: 800; letter-spacing: .18em; color: #6b53c9; }
+	.pp-head h1 { margin: 12px 0 0; font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 850; letter-spacing: -.03em; line-height: 1.3; }
+	.pp-lead { margin: 18px 0 0; line-height: 1.95; color: #3c4c68; }
+	.pp-date { margin: 14px 0 0; font-size: .86rem; color: #67768f; }
+	.pp-section { margin-top: 46px; }
+	.pp-section h2 { margin: 0 0 14px; font-size: 1.22rem; font-weight: 800; padding-bottom: 10px; border-bottom: 2px solid #e6e3f6; }
+	.pp-section h3 { margin: 22px 0 8px; font-size: 1.02rem; font-weight: 750; }
+	.pp-section p { margin: 0 0 12px; line-height: 1.95; color: #3c4c68; }
+	.pp-section ul, .pp-ol { margin: 0 0 12px; padding-left: 1.3em; line-height: 1.95; color: #3c4c68; }
+	.pp-section li { margin-bottom: 6px; }
+	.pp-dl > div { display: grid; grid-template-columns: minmax(170px, .4fr) 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid #eceaf7; }
+	.pp-dl dt { margin: 0; font-weight: 700; }
+	.pp-dl dd { margin: 0; color: #3c4c68; }
+	.pp-note { margin-top: 16px; padding: 16px 18px; border-left: 4px solid #6b53c9; background: #f6f4ff; border-radius: 0 8px 8px 0; }
+	.pp-note p { margin: 0; }
+	.pp-table-wrap { overflow-x: auto; }
+	.pp-table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+	.pp-table th, .pp-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #eceaf7; vertical-align: top; }
+	.pp-table th { background: #f6f4ff; font-weight: 750; white-space: nowrap; }
+	.pp-small { font-size: .86rem; color: #67768f; }
+	.pp-contact a { font-weight: 750; color: #4b3e9e; }
+	@media (max-width: 640px) {
+		.pp-dl > div { grid-template-columns: 1fr; gap: 4px; }
+		.pp-shell { padding-block: 40px 72px; }
+	}
+</style>
