@@ -211,18 +211,18 @@ const STARTERS = [
 <style is:global>
 	/* ── 案C: 常設の帯 ── */
 	.aic-banner { width: min(1120px, calc(100% - 40px)); margin: 0 auto 8px; padding: 22px 26px;
-		border-radius: 16px; background: linear-gradient(112deg, #faf7ef, #f3f7f5); border: 1px solid #e6dcc4; }
+		border-radius: 16px; background: linear-gradient(112deg, #eefaf8, #f6fbfa); border: 1px solid #c7e8e3; }
 	.aic-banner__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); gap: 20px; align-items: center; }
-	.aic-banner__eyebrow { margin: 0 0 6px; font-size: .72rem; font-weight: 800; letter-spacing: .18em; color: #8a6d1f; }
+	.aic-banner__eyebrow { margin: 0 0 6px; font-size: .72rem; font-weight: 800; letter-spacing: .18em; color: #0c8377; }
 	.aic-banner h2 { margin: 0 0 6px; font-size: clamp(1.05rem, 2vw, 1.32rem); font-weight: 800; line-height: 1.5; color: #1d2b45; }
 	.aic-banner p { margin: 0; font-size: .9rem; line-height: 1.75; color: #4a5a76; }
 	.aic-banner__actions { display: flex; flex-wrap: wrap; gap: 8px; }
-	.aic-banner__cta { padding: 10px 20px; border: 0; border-radius: 999px; background: #7b5807; color: #fff;
+	.aic-banner__cta { padding: 10px 20px; border: 0; border-radius: 999px; background: #0f9d8f; color: #fff;
 		font-weight: 750; font-size: .9rem; cursor: pointer; }
-	.aic-banner__cta:hover { background: #634605; }
-	.aic-chip { padding: 8px 14px; border: 1px solid #ddd0ac; border-radius: 999px; background: #fff;
-		color: #6b5320; font-size: .84rem; font-weight: 650; cursor: pointer; text-align: left; }
-	.aic-chip:hover { background: #f9f4e8; }
+	.aic-banner__cta:hover { background: #0c8377; }
+	.aic-chip { padding: 8px 14px; border: 1px solid #b9e2dc; border-radius: 999px; background: #fff;
+		color: #0c6f66; font-size: .84rem; font-weight: 650; cursor: pointer; text-align: left; }
+	.aic-chip:hover { background: #eefaf8; }
 
 	/* ── モーダル ── */
 	.aic-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 16px; }
@@ -233,7 +233,7 @@ const STARTERS = [
 		box-shadow: 0 28px 70px rgba(20, 22, 48, .32); }
 	.aic-modal__head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
 		padding: 16px 20px; border-bottom: 1px solid #eceaf7; }
-	.aic-modal__eyebrow { margin: 0 0 2px; font-size: .68rem; font-weight: 800; letter-spacing: .18em; color: #8a6d1f; }
+	.aic-modal__eyebrow { margin: 0 0 2px; font-size: .68rem; font-weight: 800; letter-spacing: .18em; color: #0c8377; }
 	.aic-modal__head strong { font-size: .98rem; color: #1d2b45; }
 	.aic-modal__close { border: 0; background: transparent; font-size: 1.5rem; line-height: 1; color: #67768f; cursor: pointer; padding: 4px 8px; }
 	.aic-log { flex: 1; overflow-y: auto; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; background: #fbfaff; }
@@ -241,20 +241,20 @@ const STARTERS = [
 	.aic-msg p { margin: 0 0 8px; }
 	.aic-msg p:last-child { margin-bottom: 0; }
 	.aic-msg--bot { align-self: flex-start; background: #fff; border: 1px solid #eceaf7; color: #26364f; white-space: normal; }
-	.aic-msg--me { align-self: flex-end; background: #7b5807; color: #fff; }
+	.aic-msg--me { align-self: flex-end; background: #0f9d8f; color: #fff; }
 	.aic-msg--wait { color: #7b88a1; font-style: italic; }
 	.aic-note { font-size: .8rem; color: #7b88a1; }
 	.aic-related { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e2def5; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-	.aic-related span { font-size: .74rem; font-weight: 800; letter-spacing: .1em; color: #8a6d1f; }
-	.aic-related a { padding: 5px 11px; border-radius: 999px; background: #f7f2e6; color: #6b5320; font-size: .82rem; font-weight: 650; text-decoration: none; }
-	.aic-related a:hover { background: #efe6d2; }
+	.aic-related span { font-size: .74rem; font-weight: 800; letter-spacing: .1em; color: #0c8377; }
+	.aic-related a { padding: 5px 11px; border-radius: 999px; background: #eefaf8; color: #0c6f66; font-size: .82rem; font-weight: 650; text-decoration: none; }
+	.aic-related a:hover { background: #d9f2ee; }
 	.aic-diag { margin-top: 10px; padding: 12px 14px; border-radius: 10px; background: #eefaf8; border: 1px solid #c9ece6; }
 	.aic-diag p { font-size: .86rem; color: #245c53; }
 	.aic-diag__cta { display: inline-block; margin-top: 6px; padding: 7px 14px; border-radius: 999px; background: #149f95; color: #fff; font-size: .84rem; font-weight: 750; text-decoration: none; }
 	.aic-faqs { display: flex; flex-wrap: wrap; gap: 8px; }
 	.aic-form { display: flex; gap: 8px; padding: 14px 20px; border-top: 1px solid #eceaf7; }
 	.aic-form input { flex: 1; padding: 11px 14px; border: 1px solid #ddd8f0; border-radius: 999px; font-size: .92rem; }
-	.aic-form button { padding: 11px 20px; border: 0; border-radius: 999px; background: #7b5807; color: #fff; font-weight: 750; cursor: pointer; }
+	.aic-form button { padding: 11px 20px; border: 0; border-radius: 999px; background: #0f9d8f; color: #fff; font-weight: 750; cursor: pointer; }
 	.aic-mail { padding: 14px 20px; border-top: 1px solid #eceaf7; background: #fbfaff; }
 	.aic-mail[hidden] { display: none !important; }
 	.aic-mail__title { margin: 0 0 8px; font-size: .88rem; font-weight: 750; color: #1d2b45; }
@@ -263,19 +263,19 @@ const STARTERS = [
 	.aic-mail__row button { padding: 9px 16px; border: 0; border-radius: 8px; background: #2f3f5c; color: #fff; font-weight: 700; cursor: pointer; }
 	.aic-mail__consent { display: flex; gap: 8px; margin-top: 10px; font-size: .78rem; line-height: 1.7; color: #4a5a76; }
 	.aic-mail__consent input { margin-top: 3px; }
-	.aic-mail__result { margin: 8px 0 0; font-size: .84rem; color: #6b5320; }
+	.aic-mail__result { margin: 8px 0 0; font-size: .84rem; color: #0c6f66; }
 	.aic-modal__foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
 		padding: 10px 20px; border-top: 1px solid #eceaf7; font-size: .76rem; color: #7b88a1; }
-	.aic-modal__foot a { color: #8a6d1f; }
+	.aic-modal__foot a { color: #0c8377; }
 
 	/* ── ヘッダーのボタン（案A）── */
 	/* 🔴 紫は浮くので不採用。ただし白地では目立たないため、サイト基調の金茶で塗りつぶす。
 	   （2026-09-05 トニー様: 「紫は嫌だけど、色はつけて。そうしないと目立たない」） */
 	.aic-header-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 17px;
-		border: 0; border-radius: 999px; background: #7b5807; color: #fff; font-size: .84rem; font-weight: 800;
-		cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(123, 88, 7, .28);
+		border: 0; border-radius: 999px; background: #0f9d8f; color: #fff; font-size: .84rem; font-weight: 800;
+		cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(15, 157, 143, .30);
 		transition: background .18s ease, box-shadow .18s ease, transform .18s ease; }
-	.aic-header-btn:hover { background: #634605; box-shadow: 0 4px 14px rgba(123, 88, 7, .38); transform: translateY(-1px); }
+	.aic-header-btn:hover { background: #0c8377; box-shadow: 0 4px 14px rgba(15, 157, 143, .42); transform: translateY(-1px); }
 
 	@media (max-width: 860px) {
 		.aic-banner__inner { grid-template-columns: 1fr; }
