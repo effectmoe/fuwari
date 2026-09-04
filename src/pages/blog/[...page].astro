@@ -210,6 +210,31 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 		</section>
 	)}
 
+	{page.currentPage === 1 && (
+		<section class="blog-pillar-guides blog-pillar-guides--howto" aria-labelledby="blog-agent-guides-title">
+			<div class="blog-shell">
+				<div class="blog-section-heading">
+					<p class="blog-kicker">AI AGENT GUIDE</p>
+					<h2 id="blog-agent-guides-title">AIエージェントを仕事で使うためのガイド</h2>
+				</div>
+				<div class="blog-pillar-guides__grid">
+					<a href="/ai-agent-how-to/" class="blog-pillar-card" aria-label="AIエージェントの作り方｜Claude Codeで構築する手順を読む">
+						<div class="blog-pillar-card__visual blog-pillar-card__visual--howto" aria-hidden="true">
+							<span>AI AGENT GUIDE</span>
+							<strong>AI AGENT<br />HOW-TO</strong>
+						</div>
+						<div class="blog-pillar-card__copy">
+							<p>KNOWLEDGE GUIDE</p>
+							<time datetime="2026-09-04">2026-09-04</time>
+							<h3>AIエージェントの作り方｜Claude Codeで構築する手順</h3>
+							<span>ガイドを読む <Icon name="material-symbols:arrow-forward-rounded" /></span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+	)}
+
 	<section class="blog-index">
 		<div class="blog-shell blog-index__layout">
 			<aside class="blog-sidebar">
@@ -747,6 +772,10 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 		background: linear-gradient(135deg, rgba(6, 126, 131, 0.09), rgba(235, 247, 247, 0.68));
 	}
 
+	.blog-pillar-guides--howto {
+		background: linear-gradient(135deg, rgba(95, 68, 184, 0.1), rgba(231, 249, 246, 0.8));
+	}
+
 	.blog-pillar-guides__grid {
 		display: grid;
 		gap: 18px;
@@ -781,6 +810,12 @@ const getBlogThumbSrc = (post: { id: string; slug?: string }) => {
 		background:
 			radial-gradient(circle at 85% 18%, rgba(165, 192, 255, 0.8), transparent 28%),
 			linear-gradient(145deg, #192b66, #286f9d);
+	}
+
+	.blog-pillar-card__visual--howto {
+		background:
+			radial-gradient(circle at 85% 18%, rgba(137, 237, 217, 0.78), transparent 28%),
+			linear-gradient(145deg, #443487, #137f86);
 	}
 
 	.blog-pillar-card__visual span,

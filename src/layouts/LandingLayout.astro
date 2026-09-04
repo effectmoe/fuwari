@@ -51,6 +51,11 @@ const brandRoutes = [
 		href: "/aishield/",
 	},
 	{
+		match: (path: string) => path.startsWith("/ai-agent-how-to"),
+		label: "AI AGENT GUIDE",
+		href: "/ai-agent-how-to/",
+	},
+	{
 		match: (path: string) => path.startsWith("/bot-protection"),
 		label: "BOT PROTECTION",
 		href: "/bot-protection/",
@@ -197,6 +202,7 @@ const serviceNavGroups = [
 		items: [
 			{ href: "/blog/", label: "ブログ" },
 			{ href: "/llmo/", label: "LLMO対策ガイド" },
+			{ href: "/ai-agent-how-to/", label: "AIエージェントの作り方" },
 			{ href: "/ai-cyber-attack/", label: "AIサイバー攻撃ガイド" },
 			{ href: "/ai-agent-security/", label: "AIエージェント セキュリティ" },
 			{ href: "/bot-protection/", label: "ボット対策ガイド" },
@@ -218,6 +224,7 @@ const mobilePageSequence: MobilePageTarget[] = [
 	{ href: "/ai-agent-course/", label: "AI講座" },
 	{ href: "/blog/", label: "ブログ" },
 	{ href: "/llmo/", label: "LLMO対策ガイド" },
+	{ href: "/ai-agent-how-to/", label: "AIエージェントの作り方" },
 	{ href: "/ai-cyber-attack/", label: "AIサイバー攻撃ガイド" },
 	{ href: "/ai-agent-security/", label: "AIエージェント セキュリティ" },
 	{ href: "/bot-protection/", label: "ボット対策ガイド" },
@@ -396,6 +403,7 @@ const mobileNextPage =
 						<strong>ナレッジ</strong>
 						<a href="/blog/">ブログ</a>
 						<a href="/llmo/">LLMO対策ガイド</a>
+						<a href="/ai-agent-how-to/">AIエージェントの作り方</a>
 						<a href="/ai-cyber-attack/">AIサイバー攻撃ガイド</a>
 						<a href="/wordpress-vulnerability/">WordPress脆弱性ガイド</a>
 					</nav>

@@ -1,0 +1,508 @@
+---
+import { Icon } from "astro-icon/components";
+import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
+import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "AIエージェントの作り方｜Claude Codeで構築する手順";
+const pageDescription =
+	"AIエージェントの作り方を、任せる仕事の決め方、Claude Codeでの構築、確認の置き方まで順に解説します。";
+const siteUrl = "https://effect.moe";
+const canonicalUrl = new URL("/ai-agent-how-to/", siteUrl).toString();
+const publishedDate = "2026-09-04";
+
+const faqItems = [
+	{
+		question: "AIエージェントとは何ですか？",
+		answer:
+			"AIエージェントとは、目的に合わせて情報を集め、手順に沿って作業し、必要な確認へ進むように組み立てた仕組みです。会話だけで完結させず、仕事の流れとして設計します。",
+	},
+	{
+		question: "AIエージェントの作り方は、何から始めればいいですか？",
+		answer:
+			"最初に、ひとつの仕事について、入力、判断、成果物、確認する人を順に決めます。広い業務を一度に任せず、繰り返し使う小さな流れから始めます。",
+	},
+	{
+		question: "Claude Code でAIエージェントを作る手順は？",
+		answer:
+			"Claude Code に仕事の目的、参照してよい情報、出力の形、確認が必要な条件を書き、実際の作業を小さく実行して見直します。結果を受け取るだけでなく、次の判断へつながる形に整えます。",
+	},
+	{
+		question: "作ったAIエージェントに、実際の業務を任せるには何が必要ですか？",
+		answer:
+			"実務に任せるには、読む情報の範囲、人が確認する地点、してはいけない処理を先に決める必要があります。安全に扱える範囲から運用し、成果物を見ながら手順を整えます。",
+	},
+	{
+		question: "AIエージェントの作り方でつまずきやすいのはどこですか？",
+		answer:
+			"つまずきやすいのは、任せる仕事が広すぎること、確認の基準がないこと、情報の扱いを決めないことです。仕事を分け、出力例と確認条件を置くと調整しやすくなります。",
+	},
+	{
+		question: "自分で作るのと、講座で学ぶのはどちらがいいですか？",
+		answer:
+			"小さな仕事を試しながら学べる環境があるなら自分で始められます。業務に合わせた設計、確認の置き方、外部ツールとのつなぎ方まで体系的に進めたい場合は、講座で実例とともに学ぶ方法が向いています。",
+	},
+];
+
+const sections = [
+	{
+		id: "what-is-an-ai-agent",
+		eyebrow: "01 / DEFINITION",
+		title: "AIエージェントとは何ですか？",
+		paragraphs: [
+			"AIエージェントとは、目的に合わせて情報を集め、手順に沿って作業し、必要な確認へ進むように組み立てた仕組みです。単に質問に答えるチャットとは違い、仕事を進めるための役割と順序を持たせます。",
+			"たとえば、資料を読んで要点を整理し、次に下書きをつくり、最後に人が確認するという流れは、仕事として見通しを持たせやすい形です。どの情報を読ませるか、どこで止めるか、誰が判断するかを先に置くことで、出力だけを眺めて終わらない運用に変わります。",
+			"AIエージェントとは何かを考えるときは、道具の名前よりも、任せたい仕事の流れを見ることが大切です。作業の入口から出口までを見れば、AIに任せる部分と人が担う部分を分けて決められます。",
+		],
+	},
+	{
+		id: "where-to-start",
+		eyebrow: "02 / START SMALL",
+		title: "AIエージェントの作り方は、何から始めればいいですか？",
+		paragraphs: [
+			"AIエージェントの作り方は、ひとつの仕事について、入力、判断、成果物、確認する人を順に決めるところから始めます。最初から部署全体の仕事を自動化しようとせず、毎週または毎月くり返す小さな仕事を選びます。",
+			"まずは、何を渡したら作業が始まるのかを明確にします。次に、AIが探してよい情報、出力してほしい形式、人が確認したいポイントを書き出します。この順序が曖昧なままだと、もっともらしい出力でも、仕事として使えるか判断できません。",
+			"始める仕事は、調査、整理、下書き、問い合わせ対応の準備のように、途中で確認を入れやすいものが向いています。成果物を見て手順を直せるため、AIエージェントの作り方を自社の仕事に合わせて育てられます。",
+		],
+	},
+	{
+		id: "claude-code-steps",
+		eyebrow: "03 / BUILD",
+		title: "Claude Code でAIエージェントを作る手順は？",
+		paragraphs: [
+			"Claude Code でAIエージェントを作る手順は、任せる仕事を言葉にし、参照する情報、出力の形、確認が必要な条件をファイルと指示に置いて、小さく実行しながら整えることです。最初に完成形を決め打ちするより、実際の業務に近い素材で試します。",
+			"仕事の目的を一文で書いたら、次に手順を並べます。必要な資料を読む、内容を整理する、下書きをつくる、確認事項を残すというように、作業ごとの役割を分けます。Claude Code には、どの場所を見てよいか、どの形式で結果を返すかを具体的に伝えます。",
+			"その後は、出力の内容だけでなく、途中の判断が追えるかを確認します。依頼内容が変わったときに直す場所、確認が必要なときに止まる場所が分かる形なら、担当者が変わっても使い続けやすくなります。<a href='/ai-agent-course/'>AIエージェント入門講座</a>では、Claude Codeの導入、指示の置き方、外部ツールとのつなぎ方まで、実際に組み立てながら学びます。",
+		],
+	},
+	{
+		id: "put-it-to-work",
+		eyebrow: "04 / OPERATE",
+		title: "作ったAIエージェントに、実際の業務を任せるには何が必要ですか？",
+		paragraphs: [
+			"作ったAIエージェントに実際の業務を任せるには、読む情報の範囲、人が確認する地点、してはいけない処理を先に決める必要があります。任せる範囲を広げる前に、結果がどこへ渡り、誰が最終判断をするのかを見えるようにします。",
+			"情報の扱いは、便利さだけで決めません。社内のどの資料を使うか、外へ出してよい内容は何か、承認が必要な作業はどこかを、仕事ごとに整理します。確認する人の負担を減らすには、AIが出した結論だけでなく、根拠や未確認の点も残す設計が役立ちます。",
+			"複数の担当者や部署で使う場合は、同じ前提を共有することが欠かせません。会社全体の導入方針や研修として設計したいときは、<a href='/ai-agent-course-corporate/'>AIエージェントの法人研修</a>で、業務の棚卸しから進める方法を検討できます。",
+		],
+	},
+	{
+		id: "common-sticking-points",
+		eyebrow: "05 / REVIEW",
+		title: "AIエージェントの作り方でつまずきやすいのはどこですか？",
+		paragraphs: [
+			"AIエージェントの作り方でつまずきやすいのは、任せる仕事が広すぎること、確認の基準がないこと、情報の扱いを決めないことです。作業を一つにまとめすぎると、どこで判断を誤ったのか、どこを直せばよいのかが見えにくくなります。",
+			"もうひとつのつまずきは、最初の出力だけで良し悪しを決めてしまうことです。実務では、依頼の条件、参照する資料、成果物の形式が変わります。小さな仕事で出力例をつくり、確認する観点を残し、次の依頼で調整する流れを持つと、使い方が安定します。",
+			"難しい処理へ急いで進むより、まずは作業の入口と出口を揃えることが先です。より踏み込んで、複数の手順や外部ツールを組み合わせる実装まで学びたい場合は、<a href='/ai-agent-course-advanced/'>AIエージェント上級編</a>が次の選択肢になります。",
+		],
+	},
+	{
+		id: "learn-alone-or-in-course",
+		eyebrow: "06 / LEARN",
+		title: "自分で作るのと、講座で学ぶのはどちらがいいですか？",
+		paragraphs: [
+			"自分で作るのと講座で学ぶのは、目の前の仕事を試せる環境と、どこまで体系的に身につけたいかで選びます。小さな仕事を試しながら学べるなら、自分で作り、出力を見ながら直していく方法から始められます。",
+			"一方で、仕事の切り分け、指示の置き方、確認の設計、外部ツールとのつなぎ方まで一貫して学びたい場合は、実例に沿って進めるほうが迷いを減らせます。AIエージェント入門講座は<strong>385,000円</strong>で、Claude Codeの導入、AIに任せる仕事の組み立て、書類の自動化、外部ツールとの連携を扱います。",
+			"法人での受講では、<a href='/ai-agent-course/#price'>人材開発支援助成金の活用例</a>も確認できます。制度利用の可否や申請手続きには条件があるため、社労士等への確認が必要です。株式会社EFFECTは助成金申請の代行を行いません。",
+			"講座の選び方では、受講後に自分の業務へ戻って試せるかを確かめます。株式会社EFFECTの講座は、累計受講者<strong>522名以上</strong>、公開レビュー<strong>231件</strong>、講座レビュー評価<strong>★5</strong>、<strong>ストアカ Proランク講師</strong>としての掲載実績があります。",
+		],
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Article",
+			"@id": canonicalUrl + "#article",
+			headline: pageTitle,
+			description: pageDescription,
+			datePublished: publishedDate,
+			dateModified: publishedDate,
+			mainEntityOfPage: canonicalUrl,
+			image: new URL(
+				"/images/ai-agent-how-to/hero-ai-agent-how-to.svg",
+				siteUrl,
+			).toString(),
+			author: {
+				"@type": "Person",
+				name: "シュ コウメイ",
+				url: new URL("/author/", siteUrl).toString(),
+			},
+			publisher: {
+				"@type": "Organization",
+				name: "株式会社EFFECT",
+				url: siteUrl,
+			},
+			inLanguage: "ja",
+		},
+		{
+			"@type": "FAQPage",
+			"@id": canonicalUrl + "#faq",
+			mainEntity: faqItems.map((item) => ({
+				"@type": "Question",
+				name: item.question,
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: item.answer,
+				},
+			})),
+		},
+		{
+			"@type": "BreadcrumbList",
+			"@id": canonicalUrl + "#breadcrumb",
+			itemListElement: [
+				{
+					"@type": "ListItem",
+					position: 1,
+					name: "ホーム",
+					item: siteUrl + "/",
+				},
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "ナレッジ",
+					item: siteUrl + "/blog/",
+				},
+				{
+					"@type": "ListItem",
+					position: 3,
+					name: pageTitle,
+					item: canonicalUrl,
+				},
+			],
+		},
+	],
+};
+---
+
+<LandingLayout
+  title={pageTitle}
+  description={pageDescription}
+  fullTitle={true}
+  setOGTypeArticle={true}
+  ogImage="/images/ai-agent-how-to/hero-ai-agent-how-to.svg"
+  ogImageAlt="AIエージェントの作り方を示すClaude Codeの図解"
+>
+  <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+  <main class="agent-how-to-page">
+    <Breadcrumbs
+      items={[
+        { label: "ナレッジ", href: "/blog/" },
+        { label: "AIエージェントの作り方", href: "/ai-agent-how-to/" },
+      ]}
+    />
+
+    <section class="howto-hero" aria-labelledby="page-title">
+      <div class="howto-hero__copy">
+        <p class="howto-eyebrow">KNOWLEDGE / AI AGENT GUIDE</p>
+        <h1 id="page-title">AIエージェントの作り方｜<br />Claude Codeで構築する手順</h1>
+        <p class="howto-hero__lead">
+          AIエージェントの作り方は、道具を増やすことではなく、任せる仕事と確認の流れを組み立てることから始まります。
+        </p>
+        <div class="howto-hero__actions">
+          <a class="howto-button howto-button--primary" href="#where-to-start">手順から読む <Icon name="material-symbols:arrow-downward-rounded" /></a>
+          <a class="howto-button howto-button--plain" href="/ai-agent-course/">入門講座を見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
+        </div>
+      </div>
+      <figure class="howto-hero__visual">
+        <img src="/images/ai-agent-how-to/hero-ai-agent-how-to.svg" alt="Claude CodeでAIエージェントを組み立てる手順の図解" width="1600" height="900" />
+      </figure>
+    </section>
+
+    <section class="howto-intro" aria-label="この記事で分かること">
+      <p class="howto-intro__label">この記事で整理すること</p>
+      <p>
+        AIエージェントの作り方を、仕事の選び方、Claude Codeでの組み立て方、実務へ渡す前の確認まで順に整理します。まずは、AIに何を任せ、どこを人が決めるかを言葉にします。
+      </p>
+    </section>
+
+    {sections.map((section) => (
+      <section class="howto-section" id={section.id} aria-labelledby={section.id + "-title"}>
+        <div class="howto-section__heading">
+          <p>{section.eyebrow}</p>
+          <h2 id={section.id + "-title"}>{section.title}</h2>
+        </div>
+        <div class="howto-section__body">
+          {section.paragraphs.map((paragraph) => <p set:html={paragraph} />)}
+        </div>
+      </section>
+    ))}
+
+    <section class="howto-afterword" aria-label="関連リンク">
+      <p class="howto-afterword__eyebrow">RELATED LINKS</p>
+      <h3>関連リンク</h3>
+      <ul>
+        <li><a href="/ai-agent-course/">AIエージェント入門講座</a> — Claude Codeを使い、業務に合わせてAIエージェントを組み立てる講座です。</li>
+        <li><a href="/ai-agent-course-corporate/">AIエージェント法人研修</a> — 組織の仕事へ導入するための設計を相談できます。</li>
+        <li><a href="/ai-agent-course-advanced/">AIエージェント上級編</a> — より踏み込んだ実装と連携を学ぶためのコースです。</li>
+      </ul>
+    </section>
+
+    <section class="howto-afterword howto-terms-faq" id="faq" aria-label="用語の補足と記事内FAQ">
+      <p class="howto-afterword__eyebrow">TERMS</p>
+      <h3>用語の補足・記事内FAQ</h3>
+      <p><strong>AIエージェント</strong>は、目的、参照する情報、実行する手順、確認する条件を持たせて、仕事を進めるための仕組みです。</p>
+      <div class="howto-section howto-section--faq" aria-labelledby="faq-title">
+        <div class="howto-section__heading">
+          <p>07 / FAQ</p>
+          <h2 id="faq-title">よくある質問（FAQ）</h2>
+        </div>
+        <div class="howto-faq">
+          {faqItems.map((item) => (
+            <details>
+              <summary>{item.question}<Icon name="material-symbols:add-rounded" /></summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="howto-afterword" aria-label="参照記事と出典">
+      <p class="howto-afterword__eyebrow">REFERENCES</p>
+      <h3>参照記事・出典</h3>
+      <ul>
+        <li><a href="/llmo/">LLMO</a> — AIに情報を正しく理解・参照されるための情報設計についての解説です。</li>
+        <li><a href="/faq/">よくある質問</a> — AI活用の進め方と、情報を扱う前に決めることを確認できます。</li>
+      </ul>
+    </section>
+
+    <section class="howto-afterword howto-author" aria-label="著者情報">
+      <p class="howto-afterword__eyebrow">AUTHOR</p>
+      <h3>著者情報</h3>
+      <p><a href="/author/">シュ コウメイ氏</a>／株式会社EFFECT。AIを使う業務設計、AIエージェントの構築、情報を安全に扱うための導入支援を行っています。</p>
+    </section>
+
+    <section class="howto-pedia" aria-label="構造化ペディア">
+      <p class="howto-afterword__eyebrow">STRUCTUREPEDIA</p>
+      <h3>構造化ペディア</h3>
+      <p>AIエージェントの作り方を、仕事・情報・手順・確認の関係として整理するページです。作業の目的と判断の位置を分けておくと、AIに任せる範囲を見直しやすくなります。</p>
+      <div class="howto-pedia__nodes">
+        <span>仕事</span><Icon name="material-symbols:arrow-forward-rounded" /><span>情報</span><Icon name="material-symbols:arrow-forward-rounded" /><span>手順</span><Icon name="material-symbols:arrow-forward-rounded" /><span>確認</span>
+      </div>
+    </section>
+
+    <ArticleChoiceCta
+      eyebrow="AI AGENT COURSE"
+      title="AIエージェントを、自分の仕事で組み立てる。"
+      body="手順だけで終わらせず、業務に合わせてAIエージェントを動かすところまで学びます。"
+      primaryHref="/ai-agent-course/"
+      primaryText="AIエージェント入門講座"
+      primaryLabel="Claude Codeで基礎から組み立てる"
+      secondaryHref="/ai-agent-course-corporate/"
+      secondaryText="法人研修を相談する"
+      secondaryLabel="組織の業務に合わせて進める"
+    />
+  </main>
+</LandingLayout>
+
+<style>
+  .agent-how-to-page {
+    --howto-ink: #162242;
+    --howto-muted: #52627e;
+    --howto-line: #d5d9ed;
+    --howto-violet: #7558ce;
+    --howto-teal: #149f95;
+    overflow: clip;
+    background: #fff;
+  }
+
+  .howto-hero,
+  .howto-intro,
+  .howto-section,
+  .howto-afterword,
+  .howto-pedia {
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .howto-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.92fr);
+    gap: clamp(40px, 7vw, 96px);
+    align-items: center;
+    padding-block: clamp(52px, 9vw, 116px);
+  }
+
+  .howto-eyebrow,
+  .howto-section__heading > p,
+  .howto-afterword__eyebrow {
+    margin: 0 0 14px;
+    color: var(--howto-violet);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+  }
+
+  .howto-hero h1 {
+    max-width: 670px;
+    margin: 0;
+    color: var(--howto-ink);
+    font-size: clamp(2.35rem, 5vw, 4.8rem);
+    font-weight: 850;
+    letter-spacing: -0.065em;
+    line-height: 1.13;
+  }
+
+  .howto-hero__lead {
+    max-width: 630px;
+    margin: 28px 0 0;
+    color: #344562;
+    font-size: clamp(1.04rem, 1.8vw, 1.22rem);
+    font-weight: 650;
+    line-height: 1.9;
+  }
+
+  .howto-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .howto-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font-weight: 750;
+    text-decoration: none;
+  }
+
+  .howto-button svg { font-size: 1.25rem; }
+  .howto-button--primary { color: #fff; background: var(--howto-violet); }
+  .howto-button--plain { color: var(--howto-ink); border: 1px solid var(--howto-line); }
+  .howto-button:hover { transform: translateY(-2px); }
+
+  .howto-hero__visual {
+    margin: 0;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgb(45 45 89 / 18%);
+  }
+
+  .howto-hero__visual img { display: block; width: 100%; height: auto; }
+
+  .howto-intro {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 40px;
+    padding: 32px 38px;
+    border: 1px solid var(--howto-line);
+    border-left: 6px solid var(--howto-teal);
+    background: #f6fbfb;
+  }
+
+  .howto-intro__label {
+    margin: 0;
+    color: var(--howto-teal);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .howto-intro > p:last-child {
+    margin: 0;
+    color: #344562;
+    font-weight: 600;
+    line-height: 1.9;
+  }
+
+  .howto-section {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.74fr) minmax(0, 1.16fr);
+    gap: clamp(42px, 8vw, 110px);
+    padding-block: clamp(72px, 10vw, 128px);
+    border-bottom: 1px solid var(--howto-line);
+  }
+
+  .howto-section__heading h2,
+  .howto-afterword h3,
+  .howto-pedia h3 {
+    margin: 0;
+    color: var(--howto-ink);
+    font-size: clamp(1.72rem, 3.2vw, 3rem);
+    letter-spacing: -0.045em;
+    line-height: 1.34;
+  }
+
+  .howto-section__body p,
+  .howto-afterword p,
+  .howto-afterword li,
+  .howto-pedia p {
+    color: #384a67;
+    font-size: 1.04rem;
+    line-height: 2.05;
+  }
+
+  .howto-section__body p { margin: 0 0 1.55em; }
+  .howto-section__body p:last-child { margin-bottom: 0; }
+  .howto-section a,
+  .howto-afterword a { color: #4b3e9e; font-weight: 750; text-underline-offset: 0.2em; }
+
+  .howto-section--faq { align-items: start; }
+  .howto-terms-faq .howto-section--faq {
+    width: 100%;
+    margin-top: 42px;
+    padding-bottom: 0;
+  }
+  .howto-faq { border-top: 1px solid var(--howto-line); }
+  .howto-faq details { border-bottom: 1px solid var(--howto-line); }
+  .howto-faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px 0;
+    color: var(--howto-ink);
+    font-weight: 760;
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+  }
+  .howto-faq summary::-webkit-details-marker { display: none; }
+  .howto-faq summary svg { flex: none; color: var(--howto-violet); font-size: 1.45rem; }
+  .howto-faq details[open] summary svg { transform: rotate(45deg); }
+  .howto-faq p { margin: 0; padding: 0 0 26px; color: #40516b; line-height: 1.9; }
+
+  .howto-afterword,
+  .howto-pedia {
+    padding-block: 50px;
+    border-bottom: 1px solid var(--howto-line);
+  }
+
+  .howto-afterword h3,
+  .howto-pedia h3 { font-size: clamp(1.5rem, 2.7vw, 2.2rem); }
+  .howto-afterword ul { margin: 20px 0 0; padding-left: 1.2em; }
+  .howto-afterword li + li { margin-top: 10px; }
+  .howto-pedia { margin-bottom: 76px; background: linear-gradient(115deg, #f2efff, #effbf9); padding-inline: 36px; border-bottom: 0; }
+  .howto-pedia__nodes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+  .howto-pedia__nodes span { padding: 10px 16px; color: var(--howto-ink); border: 1px solid #c9c1f2; border-radius: 999px; background: #fff; font-weight: 750; }
+  .howto-pedia__nodes svg { color: var(--howto-violet); }
+
+  @media (max-width: 820px) {
+    .howto-hero,
+    .howto-section { grid-template-columns: 1fr; }
+    .howto-hero { gap: 36px; padding-top: 44px; }
+    .howto-hero__visual { order: -1; }
+    .howto-intro { grid-template-columns: 1fr; gap: 12px; padding: 26px 24px; }
+    .howto-section { gap: 30px; padding-block: 68px; }
+  }
+
+  @media (max-width: 560px) {
+    .howto-hero,
+    .howto-intro,
+    .howto-section,
+    .howto-afterword,
+    .howto-pedia { width: min(100% - 32px, 1120px); }
+    .howto-hero h1 { font-size: clamp(2.35rem, 12vw, 3.4rem); }
+    .howto-hero__lead { font-size: 1rem; }
+    .howto-hero__actions { display: grid; grid-template-columns: 1fr; }
+    .howto-button { justify-content: center; }
+    .howto-pedia { padding-inline: 22px; }
+    .howto-pedia__nodes { gap: 8px; }
+    .howto-pedia__nodes span { padding: 9px 12px; font-size: 0.88rem; }
+  }
+</style>
