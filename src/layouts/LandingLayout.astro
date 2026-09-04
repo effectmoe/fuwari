@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import AiChat from "../components/AiChat.astro";
 import BackToTop from "../components/control/BackToTop.astro";
 import Search from "../components/Search.svelte";
 import Layout from "./Layout.astro";
@@ -288,6 +289,7 @@ const mobileNextPage =
 					))}
 				</nav>
 				<div class="effect-landing-header__tools">
+					<button type="button" class="aic-header-btn" data-aic-open>💬 AIに聞く</button>
 					<Search client:only="svelte" />
 					<details class="effect-landing-header__menu">
 						<summary aria-label="メニューを開く">
@@ -359,6 +361,8 @@ const mobileNextPage =
 		<main data-pagefind-body>
 			<slot />
 		</main>
+
+		<AiChat />
 
 		<footer class="effect-landing-footer">
 			<div class="effect-landing-footer__inner">
