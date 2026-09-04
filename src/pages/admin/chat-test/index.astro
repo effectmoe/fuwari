@@ -105,6 +105,7 @@ const QUESTION_SETS = [
 			.ok { color: #12784f; font-weight: 800; }
 			.ng { color: #b3261e; font-weight: 800; }
 			.wait { color: #8a94a0; }
+			.err { color: #8a5a00; font-weight: 800; }
 			.grp { background: #eef2f7; font-weight: 800; font-size: .82rem; }
 			progress { width: 100%; height: 6px; margin-top: 10px; }
 			.hint { font-size: .8rem; color: #8a94a0; margin-top: 10px; }
@@ -186,7 +187,7 @@ const QUESTION_SETS = [
 					prog.max = total;
 					prog.value = 0;
 
-					var pass = 0, fail = 0, done = 0;
+					var pass = 0, fail = 0, errs = 0, done = 0;
 
 					for (var i = 0; i < sets.length; i++) {
 						var set = sets[i];
@@ -200,27 +201,41 @@ const QUESTION_SETS = [
 							row.innerHTML = '<td class="q">' + esc(q) + '</td><td class="wait">…</td><td class="a"></td>';
 							tb.appendChild(row);
 
-							var answered = false, text = "";
+							// 🔴 通信の失敗を「答えられなかった」と数えてはならない。
+							//    2026-09-05、Cloudflare が bot と判定して 403 を返したのを
+							//    回答品質の問題として数え、合格率 19%（実際は84%）と誤報告した。
+							//    通信エラーは ERR として別枠にし、合格率の母数からも外す。
+							var answered = false, text = "", commErr = null;
 							try {
 								var r = await fetch(API + "/chat", {
 									method: "POST",
 									headers: { "Content-Type": "application/json" },
 									body: JSON.stringify({ message: q, sessionId: sid, referer: "/admin/chat-test/" }),
 								});
-								var d = await r.json();
-								answered = !!d.answered;
-								text = String(d.answer || "");
+								if (!r.ok) {
+									commErr = "HTTP " + r.status;
+								} else {
+									var d = await r.json();
+									answered = !!d.answered;
+									text = String(d.answer || "");
+								}
 							} catch (e) {
-								text = "通信エラー: " + e;
+								commErr = String(e && e.message ? e.message : e);
 							}
 
-							// 🔴 「答えてはいけない質問」は、答えなかった場合が正解。判定を反転させる
-							var good = set.mustRefuse ? !answered : answered;
-							if (good) pass++; else fail++;
-
-							row.children[1].className = good ? "ok" : "ng";
-							row.children[1].textContent = good ? "OK" : "NG";
-							row.children[2].textContent = text.slice(0, 110).replace(/\n/g, " ");
+							if (commErr) {
+								errs++;
+								row.children[1].className = "err";
+								row.children[1].textContent = "ERR";
+								row.children[2].textContent = "通信エラー: " + commErr + "（品質の問題ではありません）";
+							} else {
+								// 🔴 「答えてはいけない質問」は、答えなかった場合が正解。判定を反転させる
+								var good = set.mustRefuse ? !answered : answered;
+								if (good) pass++; else fail++;
+								row.children[1].className = good ? "ok" : "ng";
+								row.children[1].textContent = good ? "OK" : "NG";
+								row.children[2].textContent = text.slice(0, 110).replace(/\n/g, " ");
+							}
 
 							done++;
 							prog.value = done;
@@ -228,11 +243,14 @@ const QUESTION_SETS = [
 					}
 
 					scores.hidden = false;
+					var base = total - errs;   // 🔴 通信エラーは母数から外す
 					scores.innerHTML =
 						'<div class="score"><b>' + total + "</b><span>投げた質問</span></div>" +
 						'<div class="score"><b class="ok">' + pass + "</b><span>期待どおり</span></div>" +
 						'<div class="score"><b class="ng">' + fail + "</b><span>要改善</span></div>" +
-						'<div class="score"><b>' + Math.round((pass / total) * 100) + "%</b><span>合格率</span></div>";
+						(errs ? '<div class="score"><b class="err">' + errs + "</b><span>通信エラー</span></div>" : "") +
+						'<div class="score"><b>' + (base ? Math.round((pass / base) * 100) : 0) +
+						"%</b><span>合格率（母数 " + base + "）</span></div>";
 
 					btn.disabled = false;
 					btn.textContent = "もう一度テストする";
