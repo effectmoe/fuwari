@@ -200,6 +200,31 @@ const infoboxFields = [
 
 // ── 目次（TOC） ─────────────────────────
 const tocItems: Array<{ id: string; text: string; level: 2 | 3 }> = [
+	{
+		id: "prompt-basics",
+		text: "プロンプトの書き方の基本は何ですか？",
+		level: 2,
+	},
+	{
+		id: "prompt-common-mistakes",
+		text: "うまくいかないプロンプトには、どんな共通点がありますか？",
+		level: 2,
+	},
+	{
+		id: "prompt-steps",
+		text: "プロンプトの書き方は、どんな手順で組み立てますか？",
+		level: 2,
+	},
+	{
+		id: "prompt-answer-changes",
+		text: "同じ内容でも、書き方でAIの答えはどう変わりますか？",
+		level: 2,
+	},
+	{
+		id: "prompt-repeatability",
+		text: "プロンプトの書き方を、毎回同じ品質で再現するには？",
+		level: 2,
+	},
 	{ id: "summary", text: "概要", level: 2 },
 	{ id: "skill-shift", text: "能力のスライド", level: 2 },
 	{ id: "four-levels", text: "構造化スキルの4階層", level: 2 },
@@ -365,6 +390,64 @@ const externalLinks = [
     <!-- 書きかけ案内（Wikipedia stub テンプレート相当） -->
     <StubNotice title="DFB構造化メソッド" class="mb-6" />
 
+    <!-- 検索意図に直接答える導入 -->
+    <Section id="prompt-basics" number="1" title="プロンプトの書き方の基本は何ですか？">
+      <p>
+        <strong>プロンプトの書き方の基本は、AIにしてほしい仕事、渡す情報、守る条件、出力の形を分けて伝えることです。</strong>
+        いきなり長い依頼文を書き始めるのではなく、まず「何を決めたいのか」「AIに何を作らせるのか」を一つに絞ります。次に、判断に必要な資料や前提を渡し、守ってほしい条件と完成形を指定します。AIは依頼に書かれていない背景を確実に補えるわけではないため、仕事の境界を人が決めておくことが出発点になります。
+      </p>
+      <p>
+        AIプロンプトの書き方では、丁寧な言葉を増やすことよりも、依頼の構造を見える形にすることが重要です。たとえば、目的と材料と出力形式が混ざっているなら、先に分けてから並べます。これにより、AIへ渡したい情報と、AIに判断させたい部分を区別しやすくなります。
+      </p>
+    </Section>
+
+    <Section id="prompt-common-mistakes" number="2" title="うまくいかないプロンプトには、どんな共通点がありますか？">
+      <p>
+        <strong>うまくいかないプロンプトには、目的が曖昧なまま複数の仕事を頼み、判断の基準と完成形を置かないという共通点があります。</strong>
+        「よい案を出して」「分かりやすくして」だけでは、AIは何を優先するかを決めにくくなります。また、背景情報を途中で足したり、出力の形式を最後まで指定しなかったりすると、回答を受け取る側も比較や修正をしにくくなります。
+      </p>
+      <p>
+        プロンプトの書き方で迷ったときは、依頼の中に目的、材料、制約、出力がそろっているかを見直します。AIの回答を一度で正解にすることを狙うのではなく、どこを人が判断し、どこをAIに任せるかを明確にすると、次の修正も行いやすくなります。
+      </p>
+    </Section>
+
+    <Section id="prompt-steps" number="3" title="プロンプトの書き方は、どんな手順で組み立てますか？">
+      <p>
+        <strong>プロンプトの書き方は、依頼の目的を決め、必要な情報を並べ、制約と出力形式を決め、返ってきた結果を見直す順で組み立てます。</strong>
+        最初から完璧な文章にしようとせず、仕事を分けてから組み立てます。
+      </p>
+      <ul>
+        <li><strong>目的を決めます。</strong> AIに任せる仕事を一つに絞り、誰が何のために使う結果なのかを置きます。</li>
+        <li><strong>材料を渡します。</strong> 事実、対象、前提、参考にしてほしい内容を、推測と混ざらないように並べます。</li>
+        <li><strong>条件と出力を決めます。</strong> 守るべき表現、避けること、回答の形式を具体的に示します。</li>
+        <li><strong>結果を見直します。</strong> 足りない情報や違和感を見つけ、次に使う依頼へ反映します。</li>
+      </ul>
+      <p>
+        この順で組み立てると、プロンプト 書き方の問題を「文章力の不足」だけとして扱わず、依頼の設計として見直せます。
+      </p>
+    </Section>
+
+    <Section id="prompt-answer-changes" number="4" title="同じ内容でも、書き方でAIの答えはどう変わりますか？">
+      <p>
+        <strong>同じ内容でも、書き方でAIの答えは、何を優先し、どこまで説明し、どの形で返すかが変わります。</strong>
+        目的だけを渡した場合は一般的な説明になりやすく、材料と判断基準まで渡した場合は、指定した前提に沿って整理しやすくなります。出力形式を決めれば、箇条書き、比較表、下書きなど、次の作業へ渡しやすい形を選びやすくなります。
+      </p>
+      <p>
+        これは、書き方だけで回答が唯一に正しくなるという意味ではありません。AIの回答を確認する人が、依頼と結果の対応をたどれるようにするための書き方です。期待と違う結果が返ったときも、目的、材料、条件、出力のどこを直すべきかを切り分けやすくなります。
+      </p>
+    </Section>
+
+    <Section id="prompt-repeatability" number="5" title="プロンプトの書き方を、毎回同じ品質で再現するには？">
+      <p>
+        <strong>プロンプトの書き方を毎回同じ品質で再現するには、目的、入力、制約、出力の関係を残し、使った後の違和感を次の依頼へ反映します。</strong>
+        成功した依頼文をそのまま保存するだけでなく、なぜその材料が必要だったのか、どの条件が結果を左右したのかを分けて残します。状況が変わったときは、必要な部分だけを入れ替えます。
+      </p>
+      <p>
+        <strong>ここから先は、この書き方を体系化したDFB構造化メソッドの詳細です。</strong>
+        DFB構造化メソッドでは、依頼や課題を分け、扱う枠を決め、使える形に組み立てる考え方を、既存の失敗パターンや実演も含めて掘り下げます。
+      </p>
+    </Section>
+
     <!-- 数字の地図（3/4/4/5/6/7/9 階層の俯瞰） -->
     <FigureLightbox
       src="/dfb/figures/dfb-numbers-map.png"
@@ -375,7 +458,7 @@ const externalLinks = [
     />
 
     <!-- 各セクション -->
-    <Section id="summary" number="1" title="概要">
+    <Section id="summary" number="6" title="概要">
       <p>
         DFB が解決したい問題は、たった一つです。<strong>「AI 時代に必要な力」が静かに入れ替わったのに、私たちが古い力のまま生きてしまっている</strong>——この状態を、思考の道具として整えること<Footnote n={2} />。
       </p>
@@ -397,7 +480,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="skill-shift" number="2" title="能力のスライド">
+    <Section id="skill-shift" number="7" title="能力のスライド">
       <p>
         昔は必要だった「自分で考える推論力」は、AI に取って代わられました。理由はシンプルに 3 つです。<strong>速い</strong>（人間が 30 分かける推論を AI は 3 秒で出す）/ <strong>安い</strong>（人件費比で桁違いに安い）/ <strong>疲れない</strong>（24 時間動ける・休日も祝日もない）。
         この 3 条件がそろった相手と「考える速度・量・コスト」で勝負しても勝てません。コンサルやプランナーが 30 分かけて出すアウトプットの大半は、適切な前提を与えれば AI が数秒で返す時代に入っています。
@@ -416,7 +499,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="four-levels" number="3" title="構造化スキルの 4 階層">
+    <Section id="four-levels" number="8" title="構造化スキルの 4 階層">
       <p>「構造化スキル」とひとことで言っても、実はレベルがあります。シュ コウメイは 4 階層に分けて整理しています<Footnote n={5} />:</p>
       <ul class="list-disc pl-6 space-y-2">
         <li><strong>L1 知る</strong> — 既存フレーム（SWOT・3C・4P など）を暗記している段階。MBA の教科書を一冊読み終えた人のレベル。</li>
@@ -431,7 +514,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="lineage" number="4" title="系譜">
+    <Section id="lineage" number="9" title="系譜">
       <p>DFB は突然出てきた発想ではなく、知的歴史 60 年の延長線上にあります<Footnote n={5} />。プログラミングの世界で連綿と積み上げられてきた「構造化」の思想が、AI 時代になって <strong>現実世界そのもの</strong> に拡張されたのが DFB です。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-lineage-timeline.png"
@@ -464,7 +547,7 @@ const externalLinks = [
       </div>
     </Section>
 
-    <Section id="dfb-cycle" number="5" title="DFBサイクル">
+    <Section id="dfb-cycle" number="10" title="DFBサイクル">
       <p>DFB の本体は、3 ステップの循環構造です<Footnote n={1} />。難しい理論ではなく「分けて・枠で見て・組み立てる」の繰り返しです。</p>
       <FigureLightbox
         src="/dfb/figures/dfb-cycle.png"
@@ -503,7 +586,7 @@ const externalLinks = [
       </div>
     </Section>
 
-    <Section id="step-minus-one" number="6" title="Step -1: 依頼自体の構造化">
+    <Section id="step-minus-one" number="11" title="Step -1: 依頼自体の構造化">
       <p>
         DFB の最初の一歩は、<strong>サイクルを回す前に「依頼そのもの」を構造化する</strong> ことです<Footnote n={1} />。これは書き手の暴走を止めるための「儀式」のような工程。
         やることはシンプルで、ユーザーの依頼文から <strong>主体・動詞・対象・暗黙制約・成果物数</strong> を抜き出し、<strong>動詞の数 = 成果物の数</strong> を厳守します。
@@ -521,7 +604,7 @@ const externalLinks = [
       <p>発見の経緯はこうです。DFB を実装した直後の検証セッションで、提唱者は「構造化して、プロンプトを作って」という 2 動詞の依頼に対し、フィージビリティ判定・スキル資産マッピング・8 週間工数・リスク Top3・優位性 4 点まで自動的に添えてしまいました。「DFB を使う側」が DFB の最初の一歩を踏んでいなかったのです。このメタ的な自己発見こそが Step -1 を生み出しました。</p>
     </Section>
 
-    <Section id="stop-judge" number="7" title="Step 0: Stop-Judge（I/S/T/D）">
+    <Section id="stop-judge" number="12" title="Step 0: Stop-Judge（I/S/T/D）">
       <p>サイクルを始める前に、必ず「立ち止まって判断する（Stop-Judge）」工程があります。自分に向けて 4 つを声に出して宣言します<Footnote n={1} />:</p>
       <ul class="list-disc pl-6 space-y-1.5">
         <li><strong>I</strong>（Intent layer）— ユーザーは <strong>メタ</strong>（道具評価）か <strong>オブジェクト</strong>（道具で実行）か ★最重要</li>
@@ -567,7 +650,7 @@ const externalLinks = [
       />
     </Section>
 
-    <Section id="dfb-build" number="8" title="Step 1〜3: D/F/B 実装">
+    <Section id="dfb-build" number="13" title="Step 1〜3: D/F/B 実装">
       <p>実装は次のフレームに対応します<Footnote n={3} /><Footnote n={4} />:</p>
       <ol class="list-decimal pl-6 space-y-2">
         <li>
@@ -587,7 +670,7 @@ const externalLinks = [
       <p>なお、Schema.org の <strong>JSON-LD</strong> は LLMO / GEO / AEO / AIO の対策とも親和性が高く、本記事自体も <code>Article</code> + <code>HowTo</code> + <code>FAQPage</code> の JSON-LD を埋め込んでいます（AI 検索エンジンに「何の記事か」を構造化して伝えるため）。</p>
     </Section>
 
-    <Section id="variations" number="9" title="DFB 5バリエーション（Q / S / I / M / R）">
+    <Section id="variations" number="14" title="DFB 5バリエーション（Q / S / I / M / R）">
       <p>基本 DFB の上に、シーン別の 5 派生が乗っています<Footnote n={1} />。それぞれ「いつ呼び出すか」「典型シーン」がはっきり決まっています:</p>
       <ul class="list-disc pl-6 space-y-2">
         <li>
@@ -616,7 +699,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="failure-patterns" number="10" title="失敗パターン9種ライブラリ">
+    <Section id="failure-patterns" number="15" title="失敗パターン9種ライブラリ">
       <p>「やってはいけない」を明示することで、<InternalLink href="#four-levels">目利き</InternalLink> が育ちます<Footnote n={1} /><Footnote n={5} />。9 つのパターンは、依頼受領フェーズ・実行フェーズ・出力フェーズの 3 段階に分布します:</p>
 
       <p><strong>【依頼受領フェーズ】</strong>(4 種)</p>
@@ -649,7 +732,7 @@ const externalLinks = [
       />
     </Section>
 
-    <Section id="demo" number="11" title="実演（Before/After）">
+    <Section id="demo" number="16" title="実演（Before/After）">
       <p>DFB の効果は、誰でも身近な題材「<strong>プロンプト最適化</strong>」で検証できます<Footnote n={3} />。日常的に AI に投げているラフな依頼を、DFB の 3 ステップで再構築すると、<strong>出力品質が桁違いに変わります</strong>:</p>
       <ul class="list-disc pl-6 space-y-2">
         <li><strong>議事録作成</strong>: 「次の会議の議事録を作って」（15 字）→ <code>&lt;role&gt;</code>（議事録作成のプロライター）/ <code>&lt;task&gt;</code>（A4 1 枚以内に変換）/ <code>&lt;input&gt;</code>（文字起こし）/ <code>&lt;constraints&gt;</code>（敬語・固有名詞そのまま）/ <code>&lt;output_format&gt;</code>（会議概要・議題と議論・決定事項・ToDo の 5 セクション仕様）まで構造化（約 500 字）。<em>変化のポイント</em>: AI が「議事録っぽい何か」を返すのではなく、仕様に従った決まった形式で返すようになる。</li>
@@ -668,7 +751,7 @@ const externalLinks = [
 				</p>
     </Section>
 
-    <Section id="anti-patterns" number="12" title="アンチパターン7種（XMLタグ実装時）">
+    <Section id="anti-patterns" number="17" title="アンチパターン7種（XMLタグ実装時）">
       <p>理論を知っていても、実装で崩れる典型を 7 つ集めました<Footnote n={4} />。<InternalLink href="#failure-patterns">失敗パターン 9 種</InternalLink> が「思考の歪み」を扱うのに対し、こちらは「実装の手癖」を扱います。実装時に踏みやすい順に並べました:</p>
       <ol class="list-decimal pl-6 space-y-2">
         <li><strong>単純質問への過剰構造化</strong>（→ 失敗パターン D）— 「明日の天気は？」のような単発質問にまで XML タグを巻く。フレーム選択のコストが効果を上回っている時点でアンチパターン。</li>
@@ -684,7 +767,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="kata" number="13" title="武道の「型」としての構造化">
+    <Section id="kata" number="18" title="武道の「型」としての構造化">
       <p>
         DFB は 1 回学んで終わりではなく、毎日の思考の <strong>型</strong> として体得するものです<Footnote n={2} />。記事を読み終えて「分かった」気になるレベルと、実務で反射的に使えるレベルの間には、武道でいう「型稽古」に相当する距離があります。
       </p>
@@ -708,7 +791,7 @@ const externalLinks = [
       </p>
     </Section>
 
-    <Section id="proponent" number="14" title="提唱者">
+    <Section id="proponent" number="19" title="提唱者">
       <p>
         <strong>シュ コウメイ</strong>は、AI 時代の構造化メソッド「DFB」を 2025 年に提唱した実務家です。
         クライアント業務で AI（ChatGPT・Claude などの LLM）を駆動しながら、「AI に正しく仕事をさせる技術」を体系化した独自メソッドとして DFB（Decompose / Frame / Build）を開発しました。
