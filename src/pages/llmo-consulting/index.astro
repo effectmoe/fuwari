@@ -1,0 +1,370 @@
+---
+import { Icon } from "astro-icon/components";
+import LandingLayout from "../../layouts/LandingLayout.astro";
+
+const pageTitle = "LLMOコンサルティングとは？費用と進め方をAI検索の実測で解説";
+const pageDescription =
+	"LLMOコンサルティングとは何か、AI CRAWLとAI CITATIONで何を測り、どの費用・進め方を選ぶのかを、AI検索の実測にもとづいて解説します。";
+const pageUrl = "https://effect.moe/llmo-consulting/";
+const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
+
+// AI CRAWL料金表の正本（src/pages/aicrawl/index.astro）をそのまま転記する。
+const pricingPlans = [
+	{
+		name: "AI CRAWL レポート",
+		label: "週次＆月次レポート",
+		price: "¥3,300",
+		body: "毎週月曜、AI由来の接点がどのページに発生しているかを実数でお届けします。続けるほど、先月と今月を比べられるようになります。",
+		features: [
+			"週次レポート（毎週月曜）",
+			"月次サマリー",
+			"AI別の巡回数（ChatGPT・Claude・Perplexity 等）",
+			"ページ別の巡回数と、AI経由の訪問・CV",
+			"継続するほど蓄積される時系列データ",
+		],
+		cta: "このプランを申し込む",
+		tier: "ライト",
+		measurementLimit: "3クエリ",
+		citation: {
+			name: "AI CRAWL + AI CITATION ライト",
+			price: "¥9,900",
+			label: "紹介されたかまで見る",
+			body: "月1回の露出計測と、載らなかった場合に代わりに表示された競合ドメインを整理します。まず、自社がどの状態にいるかを確認したい方向けです。",
+			features: [
+				"AI CRAWL ライトの内容すべて",
+				"3クエリの露出計測",
+				"競合ドメイン特定",
+			],
+			cta: "CITATION付きで相談する",
+		},
+	},
+	{
+		name: "AI CRAWL コンサル",
+		label: "伴走コンサル",
+		price: "¥19,800",
+		body: "週ごとの数字だけでなく、これまでどう伸びてきたかの推移で判断したい方向け。成長レポートで大局を掴み、次の一手を相談しながら進めます。",
+		features: [
+			"レポートプランの内容すべて",
+			"📈 成長レポート（週ごとの推移グラフ・変化点の寸評）",
+			"2週間に1回の90分相談",
+			"Chatworkでの随時相談",
+			"改善優先度の整理",
+		],
+		cta: "伴走内容を相談する",
+		tier: "スタンダード",
+		measurementLimit: "5クエリ",
+		citation: {
+			name: "AI CRAWL + AI CITATION スタンダード",
+			price: "¥30,800",
+			label: "結果を読み解く",
+			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問テーマで弱いか、どの候補と比較されているかを見ながら次の打ち手を整理します。",
+			features: [
+				"AI CRAWL スタンダードの内容すべて",
+				"5クエリの露出計測",
+				"相談で結果を読み解く",
+			],
+			cta: "スタンダードを相談する",
+		},
+	},
+	{
+		name: "AI CRAWL グロース",
+		label: "AI流入 成長運用",
+		price: "¥33,000",
+		body: "実装代行までは不要だが、AIに紹介されるために何を直すべきか、具体的な改善プランまで欲しい方向け。",
+		features: [
+			"コンサルプランの内容すべて",
+			"月次のAI流入戦略レビュー",
+			"具体的な改善プランの提示",
+			"AIに引用されやすいFAQ・根拠ページ・相談導線の改善優先順位",
+			"戦略ロードマップ策定と支援",
+		],
+		cta: "成長運用を相談する",
+		tier: "プロ",
+		measurementLimit: "10クエリ",
+		citation: {
+			name: "AI CRAWL + AI CITATION プロ",
+			price: "¥55,000",
+			label: "改善後に再計測する",
+			body: "露出計測、差分診断、改善ロードマップ、施策後の同一クエリ再計測まで扱います。AI回答に載るかを継続的に検証したい方向けです。",
+			features: [
+				"AI CRAWL プロの内容すべて",
+				"10クエリの露出計測",
+				"差分診断・改善ロードマップ",
+				"再計測での効果判定",
+			],
+			cta: "プロを相談する",
+		},
+	},
+];
+
+const faqItems = [
+	{
+		q: "LLMOコンサルティングでは、何を見て進めますか？",
+		a: "LLMOコンサルティングでは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、どの状態にいるかを特定します。AI CRAWLで接点を、AI CITATIONで回答での露出を扱います。",
+	},
+	{
+		q: "1クエリは何回試行しますか？",
+		a: "1クエリは、ChatGPT 10回とGemini 10回の合計20回試行です。少ない回数では見落とす差もあるため、同じ質問を複数回確認します。",
+	},
+	{
+		q: "LLMOコンサルティングとSEOコンサルティングは、どちらを先に考えるべきですか？",
+		a: "LLMOコンサルティングとSEOコンサルティングは、どちらかを置き換える関係ではありません。検索で見つかるための土台と、AIが回答に使う情報を読み取るための設計を、同じサイトで矛盾なく扱います。",
+	},
+	{
+		q: "AI SHIELDとは何が違いますか？",
+		a: "AI SHIELDはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、LLMOコンサルティングはAI検索での接点と回答での扱われ方を測るサービスです。",
+	},
+];
+
+const faqLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"@id": `${pageUrl}#faq`,
+	url: pageUrl,
+	inLanguage: "ja-JP",
+	mainEntity: faqItems.map((item) => ({
+		"@type": "Question",
+		name: item.q,
+		acceptedAnswer: { "@type": "Answer", text: item.a },
+	})),
+};
+
+const pageLd = {
+	"@context": "https://schema.org",
+	"@type": ["WebPage", "Service"],
+	"@id": pageUrl,
+	url: pageUrl,
+	name: pageTitle,
+	description: pageDescription,
+	inLanguage: "ja-JP",
+	publisher: { "@id": "https://effect.moe/#organization" },
+	provider: { "@id": "https://effect.moe/#organization" },
+	serviceType: "LLMOコンサルティング",
+	hasPart: { "@id": `${pageUrl}#faq` },
+};
+
+const breadcrumbLd = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "ホーム",
+			item: "https://effect.moe/",
+		},
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "LLMOコンサルティング",
+			item: pageUrl,
+		},
+	],
+};
+---
+
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true}>
+	<Fragment slot="head">
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(pageLd)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(faqLd)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+	</Fragment>
+
+	<section class="consulting-hero">
+		<div class="consulting-container consulting-hero__grid">
+			<div class="consulting-hero__copy">
+				<p class="consulting-eyebrow">LLMO CONSULTING / AI SEARCH MEASUREMENT</p>
+				<h1><span class="consulting-hero__service">LLMOコンサルティング</span><strong>読まれることと、回答に載ることを分けて見ます。</strong></h1>
+				<p class="consulting-hero__lead"><strong>LLMOコンサルティングは、AI検索で自社がどの状態にいるかを実測し、次に扱う課題を決めるための入口です。</strong> AI CRAWLでAIの接点を見て、AI CITATIONで回答での扱われ方を見ます。</p>
+				<div class="consulting-actions">
+					<a class="consulting-button consulting-button--primary" href="#pricing">料金・プランを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
+					<a class="consulting-button consulting-button--secondary" href={consultationHref}>無料相談する</a>
+				</div>
+				<p class="consulting-hero__note">LLMOの考え方から確認したい方は、<a href="/llmo/">LLMO対策ガイド</a>をご覧ください。</p>
+			</div>
+
+			<figure class="consulting-signal" aria-labelledby="consulting-signal-caption">
+				<div class="consulting-signal__header"><span>AI SEARCH VISIBILITY</span><i aria-hidden="true"></i><b>LIVE CHECK</b></div>
+				<div class="consulting-signal__tracks">
+					<div class="consulting-signal__track is-crawl"><span>AI CRAWL</span><strong>読みに来ているか</strong><em>CRAWL LOG</em></div>
+					<div class="consulting-signal__line" aria-hidden="true"></div>
+					<div class="consulting-signal__track is-citation"><span>AI CITATION</span><strong>AIの回答に載るか</strong><em>ANSWER CHECK</em></div>
+				</div>
+				<figcaption id="consulting-signal-caption">片方のデータだけでは、次に扱う課題を決められません。</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<section class="consulting-section" id="about">
+		<div class="consulting-container consulting-prose">
+			<p class="consulting-eyebrow">BASICS</p>
+			<h2>LLMOコンサルティングとは何ですか？</h2>
+			<p><strong>LLMOコンサルティングとは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、次に扱う課題を決めるサービスです。</strong> AI CRAWLはサイト側に残る接点を、AI CITATIONは実際のAI回答での露出を扱います。</p>
+			<p>「読みに来ているか」と「回答に載るか」は別の問題で、両方見ないと打ち手が決まりません。クローラーが来ているのに回答に載らないなら中身を見直し、クローラーが来ないのに回答に載るなら外部の情報源への依存を確かめます。片方のデータだけで、状態を決めつけません。</p>
+			<div class="consulting-quadrants" role="region" aria-label="AI CRAWLとAI CITATIONを組み合わせて見る4つの状態">
+			<div class="consulting-quadrants__corner">AI CRAWL<br />AI CITATION</div>
+			<div class="consulting-quadrants__column">AIの回答に載る</div>
+			<div class="consulting-quadrants__column">AIの回答に載らない</div>
+			<div class="consulting-quadrants__row">クローラーが来る</div>
+			<div><b>✅ 正常</b></div>
+			<div><b>🔴 読まれているのに選ばれない</b><span>→ 中身の問題</span></div>
+			<div class="consulting-quadrants__row">クローラーが来ない</div>
+			<div><b>⚠️ 他所経由で載る</b></div>
+			<div><b>🔴 認知されていない</b><span>→ 技術・導線の問題</span></div>
+			</div>
+			<p>右上と左下では打ち手が正反対です。前者では技術改修が無駄になりやすく、後者ではコンテンツ増強が無駄になりやすいからです。</p>
+		</div>
+	</section>
+
+	<section class="consulting-section consulting-section--soft" id="fit">
+		<div class="consulting-container consulting-prose">
+			<p class="consulting-eyebrow">FIT</p>
+			<h2>どんな会社に必要ですか？</h2>
+			<p><strong>どんな会社に必要かは、AI検索で自社の情報がどう扱われているかを、推測ではなく実測から決めたい会社です。</strong> AIクローラーは毎日来ているのに、AIの回答には載らない状態もあります。effect.moe自身の実測では、ClaudeBot 22回/日が来ている一方で、AIの回答には0/10回しか載りませんでした。</p>
+			<p>構造化データを実装済みでも0/10回であり、必要条件だが十分条件ではありません。また、3回計測では0/3と誤判定していたものを、10回で1/10として検出しました。まず状態を測り、技術・導線の問題か、中身の問題かを分けてから進めます。</p>
+			<p>AI SHIELDはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、守り側を確認したい場合は<a href="/aishield/">AI SHIELD</a>をご覧ください。</p>
+		</div>
+	</section>
+
+	<section class="consulting-section" id="monthly-work">
+		<div class="consulting-container consulting-prose">
+			<p class="consulting-eyebrow">MONTHLY WORK</p>
+			<h2>毎月、何をしてもらえますか？</h2>
+			<p><strong>毎月の内容は、AI CRAWLでAI由来の接点を見続けることと、AI CITATIONを組み合わせる場合はAIの回答に載るかを測ることです。</strong> 下の料金表は、AI CRAWLとAI CRAWL + AI CITATIONを2列で対比し、各プランで扱う内容をそのまま示しています。</p>
+			<p>1クエリ = ChatGPT 10回 + Gemini 10回 = 20回試行です。</p>
+		</div>
+	</section>
+
+	<section class="consulting-section consulting-section--pricing" id="pricing">
+		<div class="consulting-container">
+			<div class="consulting-pricing-head">
+				<div><p class="consulting-eyebrow">PRICE</p><h2>費用はいくらですか？</h2></div>
+				<p><strong>費用は、AI別の接点、ページ別の流入実績、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選びます。</strong> AI CRAWLのみと、AI CRAWL + AI CITATIONを同じ測定枠で比較します。</p>
+			</div>
+			<div class="consulting-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
+				<div class="consulting-pricing-matrix__header"><div><strong>AI CRAWLのみ</strong><em>AI由来の接点を見る</em></div><div class="is-citation"><strong>AI CRAWL + AI CITATION</strong><em>AI CRAWL込みで、紹介されたかまで見る</em></div></div>
+				{pricingPlans.map((plan) => (
+					<div class="consulting-pricing-row">
+						<article class="consulting-price-card">
+							<div class="consulting-price-card__tier"><span>{plan.tier}プラン</span><strong>{plan.measurementLimit}</strong></div>
+							<p class="consulting-price-card__label">{plan.label}</p><h3>{plan.name}</h3><p>{plan.body}</p>
+							<p class="consulting-price-card__price"><strong>{plan.price}</strong><span>/ 月</span></p>
+							<ul>{plan.features.map((feature) => <li><Icon name="material-symbols:check-circle-outline-rounded" />{feature}</li>)}</ul>
+							<a href={consultationHref}>{plan.cta} <Icon name="material-symbols:arrow-forward-rounded" /></a>
+						</article>
+						<article class="consulting-price-card is-citation">
+							<div class="consulting-price-card__tier"><span>{plan.tier}プラン</span><strong>{plan.measurementLimit}</strong></div>
+							<p class="consulting-price-card__label">{plan.citation.label}</p><h3>{plan.citation.name}</h3><p>{plan.citation.body}</p>
+							<p class="consulting-price-card__price"><strong>{plan.citation.price}</strong><span>/ 月</span></p>
+							<ul>{plan.citation.features.map((feature) => <li><Icon name="material-symbols:check-circle-outline-rounded" />{feature}</li>)}</ul>
+							<a href={consultationHref}>{plan.citation.cta} <Icon name="material-symbols:arrow-forward-rounded" /></a>
+						</article>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="consulting-section" id="seo-difference">
+		<div class="consulting-container consulting-prose">
+			<p class="consulting-eyebrow">SEO AND LLMO</p>
+			<h2>SEOコンサルティングとは何が違いますか？</h2>
+			<p><strong>SEOコンサルティングとの違いは、LLMOコンサルティングが検索結果での順位だけでなく、AIがサイトを読みに来ているかと回答に載るかを分けて扱う点です。</strong> SEOとLLMO対策は競合するものではなく、同じサイトの情報を人、検索エンジン、AIに伝えるために並行して整えます。</p>
+			<p>生成AIコンサルとして、AIに情報を理解させるためだけの言葉を増やすことはしません。サービス、根拠、FAQ、導線が質問に答えられる形になっているかを見て、測定結果に合わせて次の手を決めます。</p>
+		</div>
+	</section>
+
+	<section class="consulting-section consulting-section--faq" id="faq">
+		<div class="consulting-container consulting-faq-grid">
+			<div><p class="consulting-eyebrow">FAQ</p><h2>よくある質問（FAQ）</h2></div>
+			<div class="consulting-faq-list">{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p></details>)}</div>
+		</div>
+	</section>
+
+	<section class="consulting-cta">
+		<div class="consulting-container consulting-cta__inner"><div><p class="consulting-eyebrow">NEXT STEP</p><h2>まず、どの状態にいるかを測ります。</h2><p>AI CRAWLとAI CITATIONのどちらまで扱うかは、実測したい範囲から決めます。</p></div><a class="consulting-button consulting-button--primary" href={consultationHref}>無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+	</section>
+
+	<style>
+		:global(:root) { --consult-bg:#f8fbfc; --consult-ink:#132b42; --consult-muted:#52677a; --consult-line:#c9d8e3; --consult-blue:#006b91; --consult-blue-deep:#064b6b; --consult-aqua:#d9f3f2; --consult-card:rgba(255,255,255,.88); }
+		.consulting-hero,.consulting-section,.consulting-cta { color:var(--consult-ink); background:var(--consult-bg); }
+		.consulting-container { width:min(1180px,calc(100% - 48px)); margin-inline:auto; }
+		.consulting-hero { overflow:hidden; padding:clamp(112px,13vw,164px) 0 clamp(68px,8vw,104px); border-bottom:1px solid var(--consult-line); background:radial-gradient(circle at 84% 18%,rgba(77,201,199,.22),transparent 26%),linear-gradient(120deg,#f8fbfc 10%,#eaf7f7 100%); }
+		.consulting-hero__grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,.8fr); gap:clamp(36px,7vw,100px); align-items:center; }
+		.consulting-eyebrow { margin:0; color:var(--consult-blue); font-size:12px; font-weight:900; letter-spacing:.14em; }
+		.consulting-hero h1 { max-width:780px; margin:18px 0 0; font-size:clamp(42px,5.0vw,72px); font-weight:950; letter-spacing:-.065em; line-height:1.08; }
+		.consulting-hero__service { display:block; color:var(--consult-ink); font-size:.75em; letter-spacing:-.05em; line-height:1.1; white-space:nowrap; }
+		.consulting-hero h1 strong { display:block; color:var(--consult-blue); }
+		.consulting-hero__lead { max-width:700px; margin:28px 0 0; color:var(--consult-muted); font-size:clamp(17px,1.45vw,20px); line-height:1.9; }
+		.consulting-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+		.consulting-button { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:52px; border:1px solid var(--consult-blue); border-radius:999px; padding:0 21px; font-weight:900; text-decoration:none; transition:transform .2s ease,background .2s ease; }
+		.consulting-button:hover { transform:translateY(-2px); }
+		.consulting-button--primary { background:var(--consult-blue); color:#fff; }
+		.consulting-button--secondary { color:var(--consult-blue-deep); background:rgba(255,255,255,.76); }
+		.consulting-hero__note { margin:17px 0 0; color:var(--consult-muted); font-size:14px; }
+		.consulting-hero__note a,.consulting-prose a { color:var(--consult-blue-deep); font-weight:800; text-underline-offset:3px; }
+		.consulting-signal { margin:0; border:1px solid rgba(0,107,145,.28); border-radius:30px; background:rgba(255,255,255,.78); box-shadow:0 28px 70px rgba(19,43,66,.12); overflow:hidden; }
+		.consulting-signal__header { display:flex; align-items:center; gap:10px; padding:17px 20px; border-bottom:1px solid var(--consult-line); color:var(--consult-blue-deep); font-size:11px; font-weight:900; letter-spacing:.11em; }
+		.consulting-signal__header i { width:8px; height:8px; border-radius:50%; background:#31bc96; box-shadow:0 0 0 5px rgba(49,188,150,.16); }
+		.consulting-signal__header b { margin-left:auto; font-size:10px; }
+		.consulting-signal__tracks { position:relative; display:grid; gap:18px; padding:26px; }
+		.consulting-signal__track { position:relative; z-index:1; display:grid; gap:7px; border-radius:20px; padding:20px; }
+		.consulting-signal__track span { font-size:12px; font-weight:950; letter-spacing:.1em; }
+		.consulting-signal__track strong { font-size:clamp(21px,2.2vw,30px); line-height:1.25; }
+		.consulting-signal__track em { font-size:11px; font-style:normal; font-weight:850; letter-spacing:.08em; }
+		.consulting-signal__track.is-crawl { color:#07586e; background:#e1f5f4; }
+		.consulting-signal__track.is-citation { color:#1c4a72; background:#e6eefb; }
+		.consulting-signal__line { position:absolute; inset:50% 39px auto; height:18px; border-left:2px dotted #82b8bf; }
+		.consulting-signal figcaption { padding:0 24px 23px; color:var(--consult-muted); font-size:14px; line-height:1.6; }
+		.consulting-section { padding:clamp(66px,9vw,118px) 0; border-bottom:1px solid var(--consult-line); }
+		.consulting-section--soft { background:#eef7f8; }
+		.consulting-prose { max-width:900px; }
+		.consulting-prose h2,.consulting-pricing-head h2,.consulting-faq-grid h2,.consulting-cta h2 { margin:13px 0 0; font-size:clamp(31px,4vw,54px); font-weight:950; letter-spacing:-.055em; line-height:1.2; }
+		.consulting-prose p { margin:24px 0 0; color:var(--consult-muted); font-size:clamp(16px,1.45vw,19px); line-height:1.9; }
+		.consulting-prose p strong { color:var(--consult-ink); }
+		.consulting-quadrants { display:grid; grid-template-columns:150px repeat(2,minmax(0,1fr)); margin-top:32px; border:1px solid var(--consult-line); border-radius:18px; overflow:hidden; background:#fff; }
+		.consulting-quadrants > div { min-height:82px; display:flex; flex-direction:column; justify-content:center; gap:5px; border-right:1px solid var(--consult-line); border-bottom:1px solid var(--consult-line); padding:15px; color:var(--consult-muted); font-size:14px; line-height:1.5; }
+		.consulting-quadrants > div:nth-child(3n) { border-right:0; }
+		.consulting-quadrants > div:nth-last-child(-n+3) { border-bottom:0; }
+		.consulting-quadrants__corner,.consulting-quadrants__column,.consulting-quadrants__row { background:#edf5f8; color:var(--consult-ink)!important; font-weight:900; }
+		.consulting-quadrants__column { text-align:center; }
+		.consulting-quadrants b { color:var(--consult-ink); }
+		.consulting-pricing-head { display:grid; grid-template-columns:minmax(0,.85fr) minmax(320px,.8fr); gap:clamp(28px,6vw,80px); align-items:end; margin-bottom:32px; }
+		.consulting-pricing-head > p { margin:0; color:var(--consult-muted); font-size:17px; line-height:1.8; }
+		.consulting-pricing-matrix { display:grid; gap:14px; }
+		.consulting-pricing-matrix__header,.consulting-pricing-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+		.consulting-pricing-matrix__header > div { border:1px solid var(--consult-line); border-radius:18px; padding:17px; background:#fff; }
+		.consulting-pricing-matrix__header .is-citation { border-color:rgba(0,107,145,.38); background:#e8f7f5; }
+		.consulting-pricing-matrix__header strong { display:block; font-size:clamp(20px,2.2vw,28px); }
+		.consulting-pricing-matrix__header em { display:block; margin-top:6px; color:var(--consult-muted); font-style:normal; font-weight:750; }
+		.consulting-price-card { display:flex; flex-direction:column; min-width:0; border:1px solid var(--consult-line); border-radius:22px; padding:clamp(20px,2.5vw,30px); background:var(--consult-card); box-shadow:0 14px 36px rgba(19,43,66,.05); }
+		.consulting-price-card.is-citation { border-color:rgba(0,107,145,.42); background:linear-gradient(145deg,#e9f7f5,#fff); }
+		.consulting-price-card__tier { display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--consult-blue-deep); font-size:13px; font-weight:900; letter-spacing:.08em; }
+		.consulting-price-card__tier strong { border-radius:999px; background:#dceff0; padding:7px 10px; font-size:13px; letter-spacing:0; white-space:nowrap; }
+		.consulting-price-card__label { margin:24px 0 0!important; color:var(--consult-blue)!important; font-size:14px!important; font-weight:900; letter-spacing:.05em; }
+		.consulting-price-card h3 { margin:8px 0 0; font-size:clamp(24px,2.3vw,34px); letter-spacing:-.05em; line-height:1.2; }
+		.consulting-price-card > p:not(.consulting-price-card__label):not(.consulting-price-card__price) { margin:16px 0 0; color:var(--consult-muted); line-height:1.75; }
+		.consulting-price-card__price { display:flex; align-items:baseline; gap:7px; margin:25px 0 0!important; border-top:1px solid var(--consult-line); padding-top:20px; }
+		.consulting-price-card__price strong { font-size:clamp(34px,4vw,50px); letter-spacing:-.065em; }
+		.consulting-price-card__price span { font-weight:850; }
+		.consulting-price-card ul { display:grid; gap:11px; margin:25px 0; padding:0; list-style:none; }
+		.consulting-price-card li { display:flex; gap:9px; color:var(--consult-ink); font-size:15px; line-height:1.55; }
+		.consulting-price-card li :global(svg) { flex:0 0 auto; margin-top:2px; color:var(--consult-blue); font-size:18px; }
+		.consulting-price-card > a { display:flex; align-items:center; justify-content:center; gap:7px; margin-top:auto; min-height:48px; border:1px solid var(--consult-blue); border-radius:999px; color:var(--consult-blue-deep); font-weight:900; text-decoration:none; }
+		.consulting-price-card.is-citation > a { background:var(--consult-blue-deep); color:#fff; }
+		.consulting-faq-grid { display:grid; grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr); gap:clamp(30px,8vw,100px); }
+		.consulting-faq-list { display:grid; gap:10px; }
+		.consulting-faq-list details { border:1px solid var(--consult-line); border-radius:15px; background:#fff; padding:0 18px; }
+		.consulting-faq-list summary { display:flex; align-items:center; justify-content:space-between; gap:16px; cursor:pointer; padding:19px 0; color:var(--consult-ink); font-weight:850; line-height:1.55; }
+		.consulting-faq-list summary :global(svg) { flex:0 0 auto; color:var(--consult-blue); }
+		.consulting-faq-list details[open] summary :global(svg) { transform:rotate(45deg); }
+		.consulting-faq-list p { margin:0 0 19px; color:var(--consult-muted); line-height:1.8; }
+		.consulting-cta { padding:clamp(58px,8vw,96px) 0; background:#e8f5f5; }
+		.consulting-cta__inner { display:flex; align-items:end; justify-content:space-between; gap:26px; }
+		.consulting-cta h2 { font-size:clamp(30px,3.5vw,48px); }
+		.consulting-cta p:not(.consulting-eyebrow) { margin:14px 0 0; color:var(--consult-muted); line-height:1.75; }
+		.consulting-cta .consulting-button { flex:0 0 auto; }
+		@media (max-width:820px) { .consulting-hero__grid,.consulting-pricing-head,.consulting-faq-grid { grid-template-columns:1fr; } .consulting-hero { padding-top:112px; } .consulting-signal { max-width:560px; } .consulting-pricing-head { align-items:start; } }
+		@media (max-width:620px) { .consulting-container { width:min(100% - 32px,1180px); } .consulting-hero h1 { font-size:clamp(39px,12vw,54px); } .consulting-actions,.consulting-actions .consulting-button { width:100%; } .consulting-signal { border-radius:22px; } .consulting-signal__tracks { padding:17px; } .consulting-quadrants { grid-template-columns:104px repeat(2,minmax(0,1fr)); font-size:12px; } .consulting-quadrants > div { min-height:92px; padding:10px; font-size:12px; overflow-wrap:anywhere; } .consulting-pricing-matrix__header,.consulting-pricing-row { grid-template-columns:1fr; } .consulting-pricing-matrix__header { display:none; } .consulting-price-card { padding:21px; } .consulting-price-card h3 { font-size:28px; } .consulting-faq-grid { gap:26px; } .consulting-cta__inner { display:grid; align-items:start; } .consulting-cta .consulting-button { width:100%; } }
+	</style>
+</LandingLayout>
