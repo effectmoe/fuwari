@@ -256,6 +256,11 @@ export const botPageDefinitions: BotDefinition[] = [
 				title: "Bytespiderの観測結果",
 				href: "/bots/bytespider/",
 			},
+			{
+				lead: "他のAIボットも見る",
+				title: "AIボット観測所（図鑑一覧）",
+				href: "/bots/",
+			},
 		],
 		cta: {
 			eyebrow: "AI CRAWL / NEXT STEP",
