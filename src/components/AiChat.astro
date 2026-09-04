@@ -269,11 +269,13 @@ const STARTERS = [
 	.aic-modal__foot a { color: #8a6d1f; }
 
 	/* ── ヘッダーのボタン（案A）── */
-	/* 🔴 紫は既存の配色から浮くため、サイト基調の落ち着いた色に合わせる（2026-09-05 トニー様指摘） */
-	.aic-header-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 15px;
-		border: 1px solid #d8cdb4; border-radius: 999px; background: #fff; color: #6b5320; font-size: .82rem; font-weight: 750;
-		cursor: pointer; white-space: nowrap; transition: background .18s ease, border-color .18s ease; }
-	.aic-header-btn:hover { background: #f7f2e6; border-color: #c2b28c; }
+	/* 🔴 紫は浮くので不採用。ただし白地では目立たないため、サイト基調の金茶で塗りつぶす。
+	   （2026-09-05 トニー様: 「紫は嫌だけど、色はつけて。そうしないと目立たない」） */
+	.aic-header-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 17px;
+		border: 0; border-radius: 999px; background: #7b5807; color: #fff; font-size: .84rem; font-weight: 800;
+		cursor: pointer; white-space: nowrap; box-shadow: 0 2px 10px rgba(123, 88, 7, .28);
+		transition: background .18s ease, box-shadow .18s ease, transform .18s ease; }
+	.aic-header-btn:hover { background: #634605; box-shadow: 0 4px 14px rgba(123, 88, 7, .38); transform: translateY(-1px); }
 
 	@media (max-width: 860px) {
 		.aic-banner__inner { grid-template-columns: 1fr; }
