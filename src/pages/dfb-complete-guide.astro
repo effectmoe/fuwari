@@ -10,7 +10,6 @@ import LightboxScript from "../components/wikipedia/LightboxScript.astro";
 import References from "../components/wikipedia/References.astro";
 import RelatedItems from "../components/wikipedia/RelatedItems.astro";
 import Section from "../components/wikipedia/Section.astro";
-import StubNotice from "../components/wikipedia/StubNotice.astro";
 import TableOfContents from "../components/wikipedia/TableOfContents.astro";
 import { profileConfig, seoConfig, siteConfig } from "../config";
 /*
@@ -339,7 +338,7 @@ const externalLinks = [
       </button>
       <div class="flex-1 min-w-0">
         <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 m-0 leading-tight">
-          DFB構造化メソッド
+          プロンプトの書き方｜DFB構造化メソッド大全
         </h1>
         <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 m-0">
           構造化ペディア・大全（ピラー記事）/ 出典: <a href="https://effect.moe/" class="text-sky-600 dark:text-sky-400 hover:underline">effect.moe</a>
@@ -387,9 +386,6 @@ const externalLinks = [
       </p>
     </div>
 
-    <!-- 書きかけ案内（Wikipedia stub テンプレート相当） -->
-    <StubNotice title="DFB構造化メソッド" class="mb-6" />
-
     <!-- 検索意図に直接答える導入 -->
     <Section id="prompt-basics" number="1" title="プロンプトの書き方の基本は何ですか？">
       <p>
@@ -423,7 +419,7 @@ const externalLinks = [
         <li><strong>結果を見直します。</strong> 足りない情報や違和感を見つけ、次に使う依頼へ反映します。</li>
       </ul>
       <p>
-        この順で組み立てると、プロンプト 書き方の問題を「文章力の不足」だけとして扱わず、依頼の設計として見直せます。
+        この順で組み立てると、プロンプトの書き方の問題を「文章力の不足」だけとして扱わず、依頼の設計として見直せます。
       </p>
     </Section>
 
