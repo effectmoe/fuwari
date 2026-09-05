@@ -48,3 +48,4 @@
 # 検索評価が分散するため、内容が上位互換（19セクション対14セクション）の
 # /dfb-complete-guide/ へ集約する（2026-09-04 トニー判断）。
 /structurepedia/  /dfb-complete-guide/  301
+/ai-mirror/*  /aicrawl/  301
