@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1500" role="img" aria-labelledby="title desc">
+  <title id="title">Copilotを使う前に確認する順番</title>
+  <desc id="desc">Copilotを使う前に、種類、処理場所、有効な設定と情報の扱いを順番に確認する流れを示す縦型の図解。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8fbff"/><stop offset="1" stop-color="#f1faf7"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#12314d" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1000" height="1500" rx="36" fill="url(#bg)"/>
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif">
+    <text x="70" y="100" fill="#102b48" font-size="52" font-weight="700">Copilotを使う前に</text>
+    <text x="70" y="165" fill="#102b48" font-size="52" font-weight="700">確認する順番</text>
+    <text x="70" y="222" fill="#536b81" font-size="30">設定画面から始めず、使っているものを分けてから確認します。</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="70" y="290" width="860" height="280" rx="30" fill="#fff" stroke="#2c8c9b" stroke-width="3"/>
+    <rect x="70" y="670" width="860" height="280" rx="30" fill="#fff" stroke="#6b82b6" stroke-width="3"/>
+    <rect x="70" y="1050" width="860" height="280" rx="30" fill="#fff" stroke="#e0a044" stroke-width="3"/>
+  </g>
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif">
+    <circle cx="150" cy="370" r="40" fill="#dff5ef"/><text x="150" y="383" text-anchor="middle" fill="#007b72" font-size="33" font-weight="700">1</text>
+    <text x="225" y="390" fill="#102b48" font-size="45" font-weight="700">使うCopilotを分ける</text>
+    <text x="225" y="462" fill="#526b80" font-size="33">仕事用・個人用・端末内の機能を混ぜない</text>
+    <text x="225" y="510" fill="#526b80" font-size="33">まず、何を使っているかを言葉にする</text>
+
+    <circle cx="150" cy="750" r="40" fill="#e6ecfa"/><text x="150" y="763" text-anchor="middle" fill="#3c5f9d" font-size="33" font-weight="700">2</text>
+    <text x="225" y="770" fill="#102b48" font-size="45" font-weight="700">処理場所を確認する</text>
+    <text x="225" y="842" fill="#526b80" font-size="33">端末内か、クラウドかを用途ごとに見る</text>
+    <text x="225" y="890" fill="#526b80" font-size="33">端末が日本にあることと混同しない</text>
+
+    <circle cx="150" cy="1130" r="40" fill="#fff1d8"/><text x="150" y="1143" text-anchor="middle" fill="#a96d12" font-size="33" font-weight="700">3</text>
+    <text x="225" y="1150" fill="#102b48" font-size="45" font-weight="700">有効な設定と扱う情報を確認</text>
+    <text x="225" y="1222" fill="#526b80" font-size="33">利用モデル・保持・管理を確認する</text>
+    <text x="225" y="1270" fill="#526b80" font-size="33">任せる範囲を説明できる状態へ</text>
+  </g>
+  <g fill="none" stroke="#9db2c4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><path d="M500 590v48l-28-28"/><path d="M500 970v48l-28-28"/></g>
+  <rect x="70" y="1380" width="860" height="82" rx="24" fill="#112f4a"/>
+  <text x="500" y="1433" text-anchor="middle" fill="#fff" font-family="Hiragino Sans, Noto Sans JP, sans-serif" font-size="31" font-weight="700">名前だけで判断せず、順番に確認してから任せる範囲を決めます。</text>
+</svg>
