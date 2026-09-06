@@ -127,7 +127,7 @@ const organizationLd = {
 	//   社名の表記ゆれ（カナ・英字）も辿れないため、同一組織と判定されない。
 	alternateName: ["EFFECT", "エフェクト", "effect.moe"],
 	description:
-		"AI検索に選ばれる状態をつくる福岡の会社。社内資料や顧客対応の履歴をAIが参照できる記憶として整える「AIセントラル」、AIクローラーの巡回と回答への露出を計測する「AI CRAWL / AI CITATION」、AIを装う偽装アクセスを監視する「AI SHIELD」、実務者向けのAI講座を提供する。",
+		"AI検索に選ばれる状態をつくる福岡の会社。社内資料や顧客対応の履歴をAIが参照できる記憶として整える「AIセントラル」、AIクローラーの巡回と回答への露出を計測する「AIクロール / AIサイテーション」、AIを装う偽装アクセスを監視する「AIシールド」、実務者向けのAI講座を提供する。",
 	url: siteUrl,
 	email: "info@effect.moe",
 	address: {
@@ -171,7 +171,7 @@ const websiteLd = {
 	alternateName: siteConfig.subtitle,
 	url: siteUrl,
 	description:
-		"株式会社EFFECTは、AIセントラル、AI CRAWL、AI SHIELD、AI講座を通じて、AI導入・AI検索可視化・サイト防御・実務研修を提供します。AIセントラルでは、社内の経緯を時系列で復元し、次に打つべき手とリスクを提示する記憶を持ったAI軍師を構築します。",
+		"株式会社EFFECTは、AIセントラル、AIクロール、AIシールド、AI講座を通じて、AI導入・AI検索可視化・サイト防御・実務研修を提供します。AIセントラルでは、社内の経緯を時系列で復元し、次に打つべき手とリスクを提示する記憶を持ったAI軍師を構築します。",
 	inLanguage: siteConfig.lang.replace("_", "-"),
 	keywords: seoConfig.keywords.join(", "),
 	publisher: { "@id": `${siteUrl}#organization` },
@@ -183,23 +183,23 @@ const websiteLd = {
 const serviceLd = {
 	"@type": "ProfessionalService",
 	"@id": `${siteUrl}#service`,
-	name: "株式会社EFFECT - AIセントラル・AI CRAWL・AI SHIELD・AI講座",
+	name: "株式会社EFFECT - AIセントラル・AIクロール・AIシールド・AI講座",
 	description:
-		"株式会社EFFECTが提供する、AIセントラル・AI CRAWL・AI SHIELD・AI講座を通じたAI導入、AI検索可視化、サイト防御、実務研修のサービスです。",
+		"株式会社EFFECTが提供する、AIセントラル・AIクロール・AIシールド・AI講座を通じたAI導入、AI検索可視化、サイト防御、実務研修のサービスです。",
 	url: siteUrl,
 	image: `${siteUrl}og-image.jpg`,
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: { "@type": "Country", name: "Japan" },
 };
-// 🔴 2026-08-20 追加: AI CRAWL / AI CITATION は現行の月額商品なのに
+// 🔴 2026-08-20 追加: AIクロール / AIサイテーションは現行の月額商品なのに
 //   Service ノードが存在せず、説明文に名前が出るだけだった。
 //   商品名で質問された時にAIが「その商品は存在する」と判定できない状態。
 const aiCrawlServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-ai-crawl`,
-	name: "AI CRAWL",
+	name: "AIクロール",
 	alternateName: [
-		"AIクロール",
+		"AI CRAWL",
 		"AI流入計測",
 		"AI流入分析",
 		"AIクローラー巡回計測",
@@ -213,8 +213,8 @@ const aiCrawlServiceLd = {
 const aiCitationServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-ai-citation`,
-	name: "AI CITATION",
-	alternateName: ["AIサイテーション", "AI回答露出計測"],
+	name: "AIサイテーション",
+	alternateName: ["AI CITATION", "AIサイテーション", "AI回答露出計測"],
 	serviceType: "生成AI回答への露出計測・LLMO診断",
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: "JP",
@@ -224,8 +224,8 @@ const aiCitationServiceLd = {
 const aiShieldServiceLd = {
 	"@type": "Service",
 	"@id": `${siteUrl}#service-ai-shield`,
-	name: "AI SHIELD",
-	alternateName: ["AIシールド", "AIを装う攻撃の監視・防御"],
+	name: "AIシールド",
+	alternateName: ["AI SHIELD", "AIシールド", "AIを装う攻撃の監視・防御"],
 	serviceType: "AIを装う偽装アクセスの監視・ボット対策・Webサイト防御支援",
 	provider: { "@id": `${siteUrl}#organization` },
 	areaServed: "JP",
@@ -233,7 +233,7 @@ const aiShieldServiceLd = {
 		"AIを装う攻撃・悪質ボットからWebサイトを守る監視・防御サービス。正規のAIクローラーは通したまま、月次の見守りレポート、サイトの前で守る対策、サイトの中を見直す対策を分けて提供する。",
 	hasOfferCatalog: {
 		"@type": "OfferCatalog",
-		name: "AI SHIELD プラン",
+		name: "AIシールド プラン",
 		itemListElement: [
 			{
 				"@type": "Offer",
@@ -321,7 +321,7 @@ const mcpServerLd = {
 	name: "EFFECT MCP",
 	alternateName: "株式会社EFFECT 公式MCPサーバー",
 	description:
-		"effect.moe の公式 MCP（Model Context Protocol）サーバー。AIアシスタントに接続すると、会社概要・サービス（AIセントラル／AI CRAWL／AI SHIELD／AI講座）・料金・FAQ・ブログ本文など、サイトの全公開ページをAIが直接読み取れる。読み取り専用・認証不要。",
+		"effect.moe の公式 MCP（Model Context Protocol）サーバー。AIアシスタントに接続すると、会社概要・サービス（AIセントラル／AIクロール／AIシールド／AI講座）・料金・FAQ・ブログ本文など、サイトの全公開ページをAIが直接読み取れる。読み取り専用・認証不要。",
 	url: "https://mcp.effect.moe/mcp",
 	documentation: "https://mcp.effect.moe/",
 	provider: { "@id": `${siteUrl}#organization` },
@@ -360,8 +360,8 @@ const baseGraphLd: {
 
 const breadcrumbLabelMap: Record<string, string> = {
 	"": "ホーム",
-	aicrawl: "AI CRAWL",
-	aishield: "AI SHIELD",
+	aicrawl: "AIクロール",
+	aishield: "AIシールド",
 	"ai-agent-course": "AI COURSE",
 	blog: "ブログ",
 	posts: "ブログ",

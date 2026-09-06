@@ -281,7 +281,7 @@ export const seoConfig = {
    - `service: "none"` で明示的に非表示
 
    🔴 誇大表現の禁止: ここに書く文言は商品の実態と一致させること。
-   AI CRAWL の 3,300円プランは「集計（事実の可視化）」であり、
+   AIクロールの 3,300円プランは「集計（事実の可視化）」であり、
    人的な読解・改善提案は上位プランの領域。
    （strategy-ai-traffic-report-tier-differentiation-20260728.md の運用憲法）
    ============================================================ */
@@ -290,7 +290,7 @@ export const serviceConfig = {
 		{
 			id: "aicrawl",
 			label: "自社サイトのAI流入を、毎週見る",
-			title: "AI CRAWL 週次レポート（月額3,300円）",
+			title: "AIクロール 週次レポート（月額3,300円）",
 			pitch:
 				"ChatGPT や Claude が、自社サイトのどのページを読みに来たか。毎週月曜、実数でお届けします。続けるほど、先月と今月を比べられるようになります。",
 			// 相場を1行だけ添える。お得さを自称せず、事実を置いて読者に判断してもらう。
@@ -320,12 +320,12 @@ export const serviceConfig = {
 		{
 			id: "ai-central",
 			label: "社内のAI活用を設計する",
-			title: "AI CENTRAL（記憶を持ったAIを社内の中枢へ）",
+			title: "AIセントラル（記憶を持ったAIを社内の中枢へ）",
 			pitch:
 				"社内資料・顧客情報・対応履歴を、AIが参照できる社内基盤として整えます。まずは一部署・一業務から。",
 			note: "個人情報を扱う場合はローカルLLM構成もご相談いただけます。",
 			url: "https://effect.moe/ai-central/",
-			cta: "AI CENTRAL を見る",
+			cta: "AIセントラルを見る",
 			match: [
 				"社内AI",
 				"ナレッジ",

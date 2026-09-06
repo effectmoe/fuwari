@@ -105,7 +105,7 @@ const sampleReports = [
 	{
 		label: "匿名企業での計測例",
 		title: "AI回答露出レポート",
-		body: "AI CRAWLでAI由来の接点を確認した後に、AI回答へどれだけ登場するかを見ます。質問テーマごとの露出、引用、比較候補、改善ロードマップまで1つのレポートに整理します。",
+		body: "AIクロールでAI由来の接点を確認した後に、AI回答へどれだけ登場するかを見ます。質問テーマごとの露出、引用、比較候補、改善ロードマップまで1つのレポートに整理します。",
 		href: "https://markdown-web.effect.moe/s/JctO0Q87NY8rTKt6_biO1eysTNBruuM5",
 		visual: "citation",
 		cta: "サンプルを見る",
@@ -266,7 +266,7 @@ const citationCapabilities = [
 
 const pricingPlans = [
 	{
-		name: "AI CRAWL レポート",
+		name: "AIクロール レポート",
 		label: "週次＆月次レポート",
 		price: "¥3,300",
 		// 🔴 2026-08-01 改稿: 旧文面は5行中2行が「含まれません」という引き算で、
@@ -286,12 +286,12 @@ const pricingPlans = [
 		tier: "ライト",
 		measurementLimit: "3クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION ライト",
+			name: "AIクロール + AIサイテーション ライト",
 			price: "¥9,900",
 			label: "紹介されたかまで見る",
 			body: "月1回の露出計測と、載らなかった場合に代わりに表示された競合ドメインを整理します。まず、自社がどの状態にいるかを確認したい方向けです。",
 			features: [
-				"AI CRAWL ライトの内容すべて",
+				"AIクロール ライトの内容すべて",
 				"3クエリの露出計測",
 				"競合ドメイン特定",
 			],
@@ -299,7 +299,7 @@ const pricingPlans = [
 		},
 	},
 	{
-		name: "AI CRAWL コンサル",
+		name: "AIクロール コンサル",
 		label: "伴走コンサル",
 		price: "¥19,800",
 		// v2.0 の主要差別化点＝成長レポート（時系列の「線」）。
@@ -318,12 +318,12 @@ const pricingPlans = [
 		tier: "スタンダード",
 		measurementLimit: "5クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION スタンダード",
+			name: "AIクロール + AIサイテーション スタンダード",
 			price: "¥30,800",
 			label: "結果を読み解く",
 			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問テーマで弱いか、どの候補と比較されているかを見ながら次の打ち手を整理します。",
 			features: [
-				"AI CRAWL スタンダードの内容すべて",
+				"AIクロール スタンダードの内容すべて",
 				"5クエリの露出計測",
 				"相談で結果を読み解く",
 			],
@@ -331,7 +331,7 @@ const pricingPlans = [
 		},
 	},
 	{
-		name: "AI CRAWL グロース",
+		name: "AIクロール グロース",
 		label: "AI流入 成長運用",
 		price: "¥33,000",
 		body: "実装代行までは不要だが、AIに紹介されるために何を直すべきか、具体的な改善プランまで欲しい方向け。",
@@ -347,12 +347,12 @@ const pricingPlans = [
 		tier: "プロ",
 		measurementLimit: "10クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION プロ",
+			name: "AIクロール + AIサイテーション プロ",
 			price: "¥55,000",
 			label: "改善後に再計測する",
 			body: "露出計測、差分診断、改善ロードマップ、施策後の同一クエリ再計測まで扱います。AI回答に載るかを継続的に検証したい方向けです。",
 			features: [
-				"AI CRAWL プロの内容すべて",
+				"AIクロール プロの内容すべて",
 				"10クエリの露出計測",
 				"差分診断・改善ロードマップ",
 				"再計測での効果判定",
@@ -409,7 +409,7 @@ const cases = [
 		design:
 			"AI由来で接点が生まれるページと、旅行者が判断に必要なサービス内容・対象者・料金・相談の情報が不足する箇所を整理しました。",
 		operation:
-			"AI CRAWLで接点と主要ページの推移を確認し、FAQ・根拠ページ・相談導線のうち何を先に整えるかを判断します。AI CITATIONを組み合わせる場合は、実際にAI検索の回答で候補として紹介されるかも確認できます。",
+			"AIクロールで接点と主要ページの推移を確認し、FAQ・根拠ページ・相談導線のうち何を先に整えるかを判断します。AIサイテーションを組み合わせる場合は、実際にAI検索の回答で候補として紹介されるかも確認できます。",
 	},
 	{
 		title: "立ち上げ期のオンライン業務支援サービス（匿名）",
@@ -419,13 +419,13 @@ const cases = [
 		design:
 			"AI由来で接点となるページと、サービスごとの対象者・提供範囲・料金・相談の情報が不足する箇所を並べ、比較しやすい導線へ整理しました。",
 		operation:
-			"AI CRAWLで接点と主要ページの推移を見ながら、FAQ・根拠ページ・相談導線の改善順を更新します。AI CITATIONを組み合わせる場合は、AI検索の回答で候補として紹介される状態も確認できます。",
+			"AIクロールで接点と主要ページの推移を見ながら、FAQ・根拠ページ・相談導線の改善順を更新します。AIサイテーションを組み合わせる場合は、AI検索の回答で候補として紹介される状態も確認できます。",
 	},
 ];
 
 const faqs = [
 	[
-		"AI CRAWLは何をするサービスですか？",
+		"AIクロールは何をするサービスですか？",
 		"ChatGPT、Claude、Perplexity、GeminiなどのAIから、どのページへ、どれくらいの頻度で来ているかを実測し、なぜ紹介されたのかを分解します。コンサル以上では、その紹介が一度きりで終わらず再現するよう、直すページと順番まで組み立てます。",
 	],
 	[
@@ -445,7 +445,7 @@ const faqs = [
 		"3,300円プランは週次＆月次で「来ているか」を実測するところまでです。なぜ紹介されたのかの分解、紹介が再現するための改善方針、その相談はコンサル以上で対応します。",
 	],
 	[
-		"AI CRAWL グロースはどのような方向けですか？",
+		"AIクロール グロースはどのような方向けですか？",
 		"レポートを見るだけでなく、AIに紹介されるページを増やすために、改善ロードマップ、FAQ・根拠ページ・導線改善、複数サイト運用まで継続的に進めたい方向けです。",
 	],
 	[
@@ -453,8 +453,8 @@ const faqs = [
 		"お支払いはクレジットカード払いです。プラン内容や開始時期は、無料相談で確認したうえでご案内します。",
 	],
 	[
-		"AI CENTRALとは何が違いますか？",
-		"AI CRAWLは外側、つまりAIからの流入とサイト改善を見るサービスです。AI CENTRALは内側、つまり社内情報を記憶として扱う業務AIを設計するサービスです。",
+		"AIセントラルとは何が違いますか？",
+		"AIクロールは外側、つまりAIからの流入とサイト改善を見るサービスです。AIセントラルは内側、つまり社内情報を記憶として扱う業務AIを設計するサービスです。",
 	],
 	[
 		"1つの質問につき20回も測るのは、なぜですか？",
@@ -465,8 +465,8 @@ const faqs = [
 		"レポートには「代わりに誰が載っていたか」と「そのページと御社のページの構造差分」が出ます。たとえば見本では、構造化データは御社のほうが厚く実装されているのに引用は0回でした。この場合、構造化データを足しても変わりません。やらなくていいことを先に消せるのが、測ることの実利です。",
 	],
 	[
-		"AI CRAWL とどう違いますか。両方必要ですか？",
-		"AI CRAWLは「AI由来の接点がサイト側に発生しているか」、AI CITATIONは「AIの回答に載ったか」を見ます。この2つは別々に起こります。接点があるのに載らないなら、回答候補として選ばれるための中身を見直す領域です。接点が弱いのに載っているなら、外部サイト経由で紹介されている可能性があります。打つべき手が正反対になるため、どちらの状態かは2つを突き合わせて初めて分かります。片方だけでも計測はできますが、原因の切り分けには両方が必要です。",
+		"AIクロールとどう違いますか。両方必要ですか？",
+		"AIクロールは「AI由来の接点がサイト側に発生しているか」、AIサイテーションは「AIの回答に載ったか」を見ます。この2つは別々に起こります。接点があるのに載らないなら、回答候補として選ばれるための中身を見直す領域です。接点が弱いのに載っているなら、外部サイト経由で紹介されている可能性があります。打つべき手が正反対になるため、どちらの状態かは2つを突き合わせて初めて分かります。片方だけでも計測はできますが、原因の切り分けには両方が必要です。",
 	],
 	[
 		"改善したら、すぐに結果は変わりますか？",
@@ -484,8 +484,8 @@ const faqs = [
 ---
 
 <LandingLayout
-	title="AI CRAWL｜LLMO対策・AI検索対策の分析サービス"
-	description="AI CRAWLは、LLMO対策とAI検索対策のために、自社をAIがどう扱うかを実測し、改善するページと順番を整理する分析サービスです。"
+	title="AIクロール｜LLMO対策・AI検索対策の分析サービス"
+	description="AIクロールは、LLMO対策とAI検索対策のために、自社をAIがどう扱うかを実測し、改善するページと順番を整理する分析サービスです。"
 	fullTitle={true}
 >
 	<section class="aicrawl-hero">
@@ -498,10 +498,10 @@ const faqs = [
 				</div>
 				<h1>AIに紹介されるのを、<strong>偶然から<wbr />再現性に変える。</strong></h1>
 				<p>
-					AI CRAWLは、AIが自社をどう扱っているかを実測し、紹介されるのを偶然から再現性に変えるサービスです。どのAIから、どのページへ、どれくらい来ているかを整理し、なぜ紹介されたのかを分解して、次に直すページと順番まで示します。レポートは納品物であり、目的は紹介され続ける状態をつくることです。
+					AIクロールは、AIが自社をどう扱っているかを実測し、紹介されるのを偶然から再現性に変えるサービスです。どのAIから、どのページへ、どれくらい来ているかを整理し、なぜ紹介されたのかを分解して、次に直すページと順番まで示します。レポートは納品物であり、目的は紹介され続ける状態をつくることです。
 				</p>
 				<p>
-					最初に考え方と着手順を知りたい方は、AI検索の回答で自社の情報を正しく理解・利用しやすくするための<TermHint term="LLMO" description="AI検索の回答で、自社の情報が正しく理解され、必要な場面で参照・紹介されやすい状態を整える取り組みです。検索順位だけでなく、情報の意味・根拠・出典が伝わる設計を扱います。" />対策を<a href="/llmo/">実測データで解説したガイド</a>からご覧ください。AI CRAWLは、その考え方を自社サイトの計測と改善へつなげます。
+					最初に考え方と着手順を知りたい方は、AI検索の回答で自社の情報を正しく理解・利用しやすくするための<TermHint term="LLMO" description="AI検索の回答で、自社の情報が正しく理解され、必要な場面で参照・紹介されやすい状態を整える取り組みです。検索順位だけでなく、情報の意味・根拠・出典が伝わる設計を扱います。" />対策を<a href="/llmo/">実測データで解説したガイド</a>からご覧ください。AIクロールは、その考え方を自社サイトの計測と改善へつなげます。
 				</p>
 				<p>
 					EFFECT自身の計測では、AIクローラーの巡回と人の訪問には大きな差がありました。<a href="/posts/crawled-not-visited/">AIクローラーは7,218回来た。でも人は3人だけだった</a>では、69日間の自社ログから、どの数字を分けて見るべきかを公開しています。
@@ -532,11 +532,11 @@ const faqs = [
 				</div>
 			</div>
 
-			<div class="crawl-visual" aria-label="AI CRAWL 週次レポートの見本">
+			<div class="crawl-visual" aria-label="AIクロール 週次レポートの見本">
 				<div class="crawl-browser">
 					<div class="crawl-browser__bar">
 						<span></span><span></span><span></span>
-						<strong>AI CRAWL 週次レポート</strong>
+						<strong>AIクロール 週次レポート</strong>
 					</div>
 					<div class="crawl-browser__body">
 						<div class="report-title">
@@ -621,20 +621,20 @@ const faqs = [
 				<p class="aicrawl-eyebrow">FIRST GUIDE / 用語の前提</p>
 				<h2 id="aicrawl-terms-title">AIが存在を確認することと、AIの回答で紹介されることは違います。</h2>
 				<p>
-					このページでは、AI CRAWLとAI CITATIONを分けて扱います。料金表に出てくる「クエリ」は、AIに投げる質問文のことです。まず、この3つを押さえるとサービス内容が読みやすくなります。
+					このページでは、AIクロールとAIサイテーションを分けて扱います。料金表に出てくる「クエリ」は、AIに投げる質問文のことです。まず、この3つを押さえるとサービス内容が読みやすくなります。
 				</p>
 			</div>
 			<div class="aicrawl-term-grid">
 				<article>
 					<span>01</span>
-					<h3>AI CRAWL<br /><small>エーアイ・クロール</small></h3>
+					<h3>AIクロール<br /><small>エーアイ・クロール</small></h3>
 					<p>
 						AI由来のアクセス状況を見て、自社サイトにAI由来の接点があるか、どのページに接点が発生しているかを確認します。外側から見えるAI流入の実績を整理するサービスです。
 					</p>
 				</article>
 				<article>
 					<span>02</span>
-					<h3>AI CITATION<br /><small>エーアイ・サイテーション</small></h3>
+					<h3>AIサイテーション<br /><small>エーアイ・サイテーション</small></h3>
 					<p>
 						主要AIの回答上で、自社名・ページ・サービスが登場するかを測ります。ユーザー側から見える「紹介されるか」を見る診断です。
 					</p>
@@ -676,7 +676,7 @@ const faqs = [
 		<div class="aicrawl-container">
 			<div class="aicrawl-section-head">
 				<p class="aicrawl-eyebrow">CHECK POINTS</p>
-				<h2>AI CRAWLがつくるのは、紹介され続ける状態です。</h2>
+				<h2>AIクロールがつくるのは、紹介され続ける状態です。</h2>
 			</div>
 			<div class="crawl-check-grid">
 				{crawlChecks.map((check) => (
@@ -699,7 +699,7 @@ const faqs = [
 				<p class="aicrawl-eyebrow">DIAGNOSTIC MAP</p>
 				<h2>AI別、ページ別、頻度、動機。分けて見ると、伸ばすべき場所が見える。</h2>
 				<p>
-					「AI検索に出るか」だけでは、次の施策がぼやけます。AI CRAWLでは、AIからの流入実績を分解して紹介された理由を特定し、どのページを補強すれば同じ紹介が繰り返し起きるかを組み立てます。
+					「AI検索に出るか」だけでは、次の施策がぼやけます。AIクロールでは、AIからの流入実績を分解して紹介された理由を特定し、どのページを補強すれば同じ紹介が繰り返し起きるかを組み立てます。
 				</p>
 			</div>
 			<div class="signal-board">
@@ -720,7 +720,7 @@ const faqs = [
 				<p class="aicrawl-eyebrow">AI CRAWL OUTPUT</p>
 				<h2>AI流入の実績を、次に直すページと導線へ落とし込む。</h2>
 				<p>
-					AI CRAWLのレポートは、単なるアクセス数の一覧ではありません。主要AIとの接点、接点が生まれているページ、推定される関心を整理し、サイトのどこから直すべきかを判断できる材料にします。
+					AIクロールのレポートは、単なるアクセス数の一覧ではありません。主要AIとの接点、接点が生まれているページ、推定される関心を整理し、サイトのどこから直すべきかを判断できる材料にします。
 				</p>
 			</div>
 			<div class="deliverable-grid">
@@ -741,9 +741,9 @@ const faqs = [
 					<p class="aicrawl-eyebrow">AI CRAWL / AUTONOMOUS PATROL</p>
 					<h2 id="crawl-visual-break-title">AIがサイトを巡回し、改善の入口を見つける。</h2>
 					<p>
-						AI CRAWLでは、AIによるサイト上の接点を、ページ・導線・流入の状態ごとに整理します。目的は、存在を確認することではありません。AIに見つけてもらった後に、どこを整えれば次の行動につながるかを見極めることです。
+						AIクロールでは、AIによるサイト上の接点を、ページ・導線・流入の状態ごとに整理します。目的は、存在を確認することではありません。AIに見つけてもらった後に、どこを整えれば次の行動につながるかを見極めることです。
 					</p>
-					<ol aria-label="AI CRAWLで確認する流れ">
+					<ol aria-label="AIクロールで確認する流れ">
 						<li><b>01</b><span>AIが接点を見つける</span></li>
 						<li><b>02</b><span>流入につながるページを整理する</span></li>
 						<li><b>03</b><span>次に整える導線を決める</span></li>
@@ -773,9 +773,9 @@ const faqs = [
 		<div class="aicrawl-container aicrawl-case__grid">
 			<div>
 				<p class="aicrawl-eyebrow">CASE STUDIES / 匿名導入事例</p>
-				<h2>匿名事例で見る、AI CRAWLの改善の進め方。</h2>
+				<h2>匿名事例で見る、AIクロールの改善の進め方。</h2>
 				<p>
-					以下は、会社名や固有の業務内容を伏せた実運用の概要です。AI CRAWLでは、接点があるページと、次に整えるべき情報を確認しながら、サイトごとの改善の優先順位を組み立てます。実績数値や効果を保証するものではありません。
+					以下は、会社名や固有の業務内容を伏せた実運用の概要です。AIクロールでは、接点があるページと、次に整えるべき情報を確認しながら、サイトごとの改善の優先順位を組み立てます。実績数値や効果を保証するものではありません。
 				</p>
 			</div>
 			<div class="case-list">
@@ -798,22 +798,22 @@ const faqs = [
 			<div class="aicrawl-container aicrawl-bridge">
 				<div>
 					<p class="aicrawl-eyebrow">OUTSIDE / INSIDE</p>
-					<h2>外側はAI CRAWL。<br /><span class="aicrawl-nowrap">内側はAI CENTRAL。</span></h2>
+					<h2>外側はAIクロール。<br /><span class="aicrawl-nowrap">内側はAIセントラル。</span></h2>
 				<p>
-					AI CRAWLは、AIからの流入を分析し、外側の集客戦略を整えます。AI CENTRALは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
+					AIクロールは、AIからの流入を分析し、外側の集客戦略を整えます。AIセントラルは、社内情報を記憶として扱う内側の中枢を作ります。両方を分けることで、AIに紹介される外側と、AIが働く内側を混同せずに設計できます。
 				</p>
 			</div>
 				<div class="bridge-cards">
 					<article class="bridge-card">
 						<span>Outside</span>
-						<h3>AI CRAWL</h3>
+						<h3>AIクロール</h3>
 						<p>AI流入、接点が生まれたページ、推定動機を見て、紹介されるための戦略へ接続。</p>
 					</article>
 					<a href={centralHref} class="bridge-card bridge-card--light">
 						<span>Inside</span>
-						<h3>AI CENTRAL</h3>
+						<h3>AIセントラル</h3>
 						<p>社内資料、顧客情報、対応履歴を記憶として業務AIへ接続。</p>
-						<small>AI CENTRALを見る →</small>
+						<small>AIセントラルを見る →</small>
 					</a>
 					</div>
 				</div>
@@ -825,11 +825,11 @@ const faqs = [
 					<p class="aicrawl-eyebrow">AI CITATION / ANSWER VISIBILITY</p>
 					<h2>AI由来の接点か。<br />AI回答での紹介か。</h2>
 					<p>
-					AI CRAWLは、AIと自社サイトの接点がどこに生まれているかを整理します。AI CITATIONは、ユーザーがAIに質問したとき、回答の候補として自社が出るかを確認します。
+					AIクロールは、AIと自社サイトの接点がどこに生まれているかを整理します。AIサイテーションは、ユーザーがAIに質問したとき、回答の候補として自社が出るかを確認します。
 					</p>
 				</div>
 
-				<div class="citation-lanes" aria-label="AI CRAWLとAI CITATIONの違い">
+				<div class="citation-lanes" aria-label="AIクロールとAIサイテーションの違い">
 					<article class="citation-lane">
 						<span>CRAWL</span>
 						<h3>AI由来の接点があるか</h3>
@@ -842,7 +842,7 @@ const faqs = [
 					</article>
 				</div>
 
-				<div class="citation-quadrants" aria-label="AI CRAWLとAI CITATIONで見える4つの状態">
+				<div class="citation-quadrants" aria-label="AIクロールとAIサイテーションで見える4つの状態">
 					{citationQuadrants.map(([crawl, answer, title, body], index) => (
 						<article class={index === 1 || index === 3 ? "is-alert" : ""}>
 							<span>{crawl}</span>
@@ -858,7 +858,7 @@ const faqs = [
 							<span>匿名企業での計測例</span>
 							<strong>AIに存在を確認されるだけでなく、回答候補に出るかを測る。</strong>
 							<p>
-								AI CITATIONは、AI回答の中で自社名・ページ・サービスがどれだけ登場し、引用元として扱われるかを測る診断です。スコアが高いほど、ユーザーがAIに相談したときに候補として見つけられやすい状態を示します。
+								AIサイテーションは、AI回答の中で自社名・ページ・サービスがどれだけ登場し、引用元として扱われるかを測る診断です。スコアが高いほど、ユーザーがAIに相談したときに候補として見つけられやすい状態を示します。
 							</p>
 						</div>
 					<div class="citation-metrics">
@@ -877,9 +877,9 @@ const faqs = [
 							<p class="aicrawl-eyebrow">WHAT WE MEASURE / 源流</p>
 							<h3>AIに聞かれた時、自社は候補に出てくるのか。</h3>
 							<p>
-								AI CITATIONは、ユーザーがAIに相談した場面を想定し、自社が回答に登場するかを測る診断です。AIがサイトの存在を確認しているだけでは、ユーザーに候補として届くとは限りません。AIの回答に出るか、引用されるか、どの候補と比較されているかを確認します。
+								AIサイテーションは、ユーザーがAIに相談した場面を想定し、自社が回答に登場するかを測る診断です。AIがサイトの存在を確認しているだけでは、ユーザーに候補として届くとは限りません。AIの回答に出るか、引用されるか、どの候補と比較されているかを確認します。
 							</p>
-							<div class="citation-origin-flow" aria-label="AI CITATIONで分かること">
+							<div class="citation-origin-flow" aria-label="AIサイテーションで分かること">
 								<div>
 									<span>01</span>
 									<strong>質問する</strong>
@@ -916,7 +916,7 @@ const faqs = [
 				<p class="aicrawl-eyebrow">E-E-A-T / OPERATOR</p>
 				<h2>ストアカPro講師が、責任を持って運用します。</h2>
 				<p>
-					AI CRAWLは、単に数値を並べるレポートではありません。AI由来の接点がどこに生まれ、どのページへ人が流入したのかを分解し、その紹介が次も起きるように、次に直すべきページと順番を、AI実装・LLMO対策・サイト改善の実務視点で組み立てます。
+					AIクロールは、単に数値を並べるレポートではありません。AI由来の接点がどこに生まれ、どのページへ人が流入したのかを分解し、その紹介が次も起きるように、次に直すべきページと順番を、AI実装・LLMO対策・サイト改善の実務視点で組み立てます。
 				</p>
 			</div>
 			<div class="aicrawl-proof__summary">
@@ -977,11 +977,11 @@ const faqs = [
 									{report.visual === "citation" ? (
 										<>
 										<div class="sample-preview-head">
-											<span>AI CITATION</span>
+											<span>AIサイテーション</span>
 											<strong>匿名企業での計測例</strong>
 										</div>
 										<div class="citation-preview-lead">
-											<em>AI CRAWLの次に見るレポート</em>
+											<em>AIクロールの次に見るレポート</em>
 											<strong>AI接点の先で、回答候補に出るか。</strong>
 											<p>質問テーマごとに、A社が回答に登場したか、根拠として扱われたか、代わりにどの候補が出たかを整理します。</p>
 										</div>
@@ -1003,7 +1003,7 @@ const faqs = [
 												<strong>0/20</strong>
 											</div>
 										</div>
-										<div class="citation-preview-steps" aria-label="AI CITATIONレポートで分かる流れ">
+										<div class="citation-preview-steps" aria-label="AIサイテーションレポートで分かる流れ">
 											<div>
 												<span>01</span>
 												<strong>聞かれ方を見る</strong>
@@ -1108,7 +1108,7 @@ const faqs = [
 				<div class="aicrawl-pricing-head">
 					<div>
 						<p class="aicrawl-eyebrow">PRICE</p>
-						<h2>AI CRAWLの料金</h2>
+						<h2>AIクロールの料金</h2>
 					</div>
 					<p>
 						AI別の接点、ページ別の流入実績、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選べます。
@@ -1118,7 +1118,7 @@ const faqs = [
 
 				<dl class="aicrawl-pricing-terms" aria-label="料金表に出てくる用語の定義">
 					<div>
-						<dt>AI CRAWL</dt>
+						<dt>AIクロール</dt>
 						<dd>
 							<span><b>AIが「来ているか」を測る。</b></span>
 							<span>どのAIが、どのページへ来たかを確認。</span>
@@ -1126,7 +1126,7 @@ const faqs = [
 						</dd>
 					</div>
 					<div>
-						<dt>AI CITATION</dt>
+						<dt>AIサイテーション</dt>
 						<dd>
 							<span><b>AIの回答に「出ているか」を測る。</b></span>
 							<span>実際にAIへ質問し、自社が紹介されたかを確認。</span>
@@ -1143,15 +1143,15 @@ const faqs = [
 					</div>
 				</dl>
 
-				<div class="aicrawl-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
+				<div class="aicrawl-pricing-matrix" aria-label="AIクロールとAIクロール + AIサイテーションの料金比較">
 					<div class="aicrawl-pricing-matrix__header">
 						<div>
-							<strong>AI CRAWLのみ</strong>
+							<strong>AIクロールのみ</strong>
 							<em>AI由来の接点を見る</em>
 						</div>
 						<div class="is-citation">
-							<strong>AI CRAWL + AI CITATION</strong>
-							<em>AI CRAWL込みで、紹介されたかまで見る</em>
+							<strong>AIクロール + AIサイテーション</strong>
+							<em>AIクロール込みで、紹介されたかまで見る</em>
 						</div>
 					</div>
 
@@ -1221,7 +1221,7 @@ const faqs = [
 					</div>
 					<div>
 						<strong>お支払い</strong>
-						<p>お支払いはクレジットカード払いです。AI CITATIONは成果保証ではなく、AI回答に載るかどうかを実測するためのサービスです。</p>
+						<p>お支払いはクレジットカード払いです。AIサイテーションは成果保証ではなく、AI回答に載るかどうかを実測するためのサービスです。</p>
 					</div>
 				</div>
 		</div>
@@ -1271,7 +1271,7 @@ const faqs = [
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>
 				<a href="/aishield/">
-					<span>AI SHIELD</span>
+					<span>AIシールド</span>
 					<strong>正規のAIを通し、偽装アクセスを見張る</strong>
 					<Icon name="material-symbols:arrow-forward-rounded" />
 				</a>

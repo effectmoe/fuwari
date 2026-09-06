@@ -43,7 +43,7 @@ export const importantChangelogEvents: ChangelogEvent[] = [
 		version: "SERVICE",
 		product: "AIクロール",
 		status: "更新",
-		title: "AI CRAWLページの料金・FAQ・運用者情報を整理",
+		title: "AIクロールページの料金・FAQ・運用者情報を整理",
 		items: [
 			"3プラン構成を整理",
 			"AI流入総合分析の訴求を追加",

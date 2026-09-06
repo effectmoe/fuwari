@@ -110,8 +110,8 @@ ${seoConfig.keywords.join(" / ")}
 ## 主要リファレンスページ（Pillar / Wiki）
 
 - [AIセントラル](${site}): 記憶を持ったAIを社内の中枢へ組み込むサービス。
-- [AI CRAWL](${new URL("/aicrawl/", site).toString()}): AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変えるサービス。
-- [AI SHIELD](${new URL("/aishield/", site).toString()}): AIを装う攻撃・悪質ボットからWebサイトを守る監視・防御サービスです。正規のAIクローラーは通したまま、攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートを提供します。
+- [AIクロール](${new URL("/aicrawl/", site).toString()}): AIが自社をどう扱っているかを実測し、AIに紹介されるのを偶然から再現性に変えるサービス。
+- [AIシールド](${new URL("/aishield/", site).toString()}): AIを装う攻撃・悪質ボットからWebサイトを守る監視・防御サービスです。正規のAIクローラーは通したまま、攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートを提供します。
 - [AIサイバー攻撃ガイド](${new URL("/ai-cyber-attack/", site).toString()}): AIサイバー攻撃の考え方、AIを名乗るアクセスの自社実測、正規のAIを通し偽装アクセスを止めるための判断をまとめた固定ガイドです。
 - [AIボット観測所](${new URL("/bots/", site).toString()}): 日本の中小サイトに来るAIクローラー・ボットを実測し毎週更新で公開する定点観測データ。
 ${botPageDefinitions.map((definition) => `- [${getBotMetric(definition.slug).name}の観測結果](${new URL(`/bots/${definition.slug}/`, site).toString()}): ${definition.searchExcerpt}`).join("\n")}

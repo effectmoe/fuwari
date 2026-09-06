@@ -34,22 +34,22 @@ const currentPath = Astro.url.pathname;
 const brandRoutes = [
 	{
 		match: (path: string) => path.startsWith("/aicrawl"),
-		label: "AI CRAWL",
+		label: "AIクロール",
 		href: "/aicrawl/",
 	},
 	{
 		match: (path: string) => path.startsWith("/aishield"),
-		label: "AI SHIELD",
+		label: "AIシールド",
 		href: "/aishield/",
 	},
 	{
 		match: (path: string) => path.startsWith("/ai-cyber-attack"),
-		label: "AI SHIELD",
+		label: "AIシールド",
 		href: "/aishield/",
 	},
 	{
 		match: (path: string) => path.startsWith("/ai-agent-security"),
-		label: "AI SHIELD",
+		label: "AIシールド",
 		href: "/aishield/",
 	},
 	{
@@ -120,7 +120,7 @@ const brandRoutes = [
 	},
 ];
 const activeBrandRoute = brandRoutes.find((route) => route.match(currentPath));
-const headerBrand = activeBrandRoute?.label ?? "AI CENTRAL";
+const headerBrand = activeBrandRoute?.label ?? "AIセントラル";
 const headerBrandHref = activeBrandRoute?.href ?? "/";
 const headerBrandAria = `${headerBrand} by effect.moe home`;
 
@@ -225,9 +225,9 @@ const navItems = [
 
 const mobilePageSequence: MobilePageTarget[] = [
 	{ href: "/", label: "AI セントラル" },
-	{ href: "/aicrawl/", label: "AI CRAWL" },
+	{ href: "/aicrawl/", label: "AIクロール" },
 	{ href: "/llmo-consulting/", label: "LLMOコンサルティング" },
-	{ href: "/aishield/", label: "AI SHIELD" },
+	{ href: "/aishield/", label: "AIシールド" },
 	{ href: "/ai-agent-course/", label: "AI講座" },
 	{ href: "/blog/", label: "ブログ" },
 	{ href: "/llmo/", label: "LLMO対策ガイド" },

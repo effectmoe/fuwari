@@ -144,7 +144,7 @@ const structuredData = {
 					<p class="cyber-hero__lead">AIからのアクセスには、情報を読みに来る正規のものと、AIを装ってサイトの入口を探るものがあります。<br />正規のAIを活かしながら、偽装アクセスからサイトを守る考え方を解説します。</p>
 					<div class="cyber-actions">
 						<a class="cyber-button cyber-button--primary" href="#measurement">自社実測を見る <Icon name="material-symbols:arrow-downward-rounded" /></a>
-						<a class="cyber-button cyber-button--text" href="/aishield/">AI SHIELDを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
+						<a class="cyber-button cyber-button--text" href="/aishield/">AIシールドを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 					</div>
 				</div>
 				<figure class="cyber-hero__visual">
@@ -213,7 +213,7 @@ const structuredData = {
 				</div>
 				<p class="cyber-measurement-note">件数は、攻撃の成功やAI回答での紹介を意味するものではありません。あくまで、サイトがどの種類のアクセスと接しているかを確認するための観測値です。そのため、値だけを追うのではなく、どのページに来たのか、正規のAIとして扱うべきか、改善の優先度はどこかを続けて見ます。</p>
 				<p class="cyber-measurement-note">自社実測を公開する理由も、数字の大きさを示すためではありません。正規のAIクローラーが実際に来る一方で、AIを名乗る偽装アクセスも別に観測される。その二つを同じものとして扱わないことが、AI検索の入口を保ちながらサイトを守るための前提になるからです。</p>
-				<div class="cyber-two-sided"><div><p>MEASURE</p><h3>AIの流入を測るには<br /><a href="/aicrawl/">AI CRAWL</a>を使う。</h3><span>正規のAIがどのページに来ているかを確認し、情報の入口を整える側です。</span><a href="/aicrawl/">AI CRAWLの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div><p>PROTECT</p><h3>AIを装う攻撃からサイトを守るには<br /><a href="/aishield/">AI SHIELD</a>を使う。</h3><span>偽装アクセスを見分け、サイトへ届く前に止める側です。</span><a href="/aishield/">AI SHIELDを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div></div>
+				<div class="cyber-two-sided"><div><p>MEASURE</p><h3>AIの流入を測るには<br /><a href="/aicrawl/">AIクロール</a>を使う。</h3><span>正規のAIがどのページに来ているかを確認し、情報の入口を整える側です。</span><a href="/aicrawl/">AIクロールの分析内容を見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div><p>PROTECT</p><h3>AIを装う攻撃からサイトを守るには<br /><a href="/aishield/">AIシールド</a>を使う。</h3><span>偽装アクセスを見分け、サイトへ届く前に止める側です。</span><a href="/aishield/">AIシールドを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div></div>
 			</div>
 		</section>
 
@@ -226,7 +226,7 @@ const structuredData = {
 					<p>この順番なら、いきなり設定や製品の比較から入らずに済みます。たとえば、情報を見つけてもらうページまで閉じてしまうと、守りのためにサイトの役割を損なう可能性があります。守る対象と、通してよいアクセスを分けてから、必要な範囲だけ対策を選ぶことが大切です。</p>
 					<p>また、対策は一度実施して終わりではありません。サイトの内容や運用が変われば、守るべき対象も変わります。月ごとの観測を通じて、今は問題がないことも、次に確認すべきことも分かるようになります。小さなサイトほど、判断を複雑にせず、確認できる記録を残しながら続ける方法が向いています。</p>
 					<p>問い合わせや外部からの指摘が起きた後に調べ始めると、何が通常で何が例外だったのかを判断しにくくなります。だからこそ、平時から「見つけてもらうためのアクセス」と「守るために確認するアクセス」を分けておくことが重要です。測定と防御を別の目的として置くことで、必要な判断が見えやすくなります。</p>
-					<p>自社だけで判断しにくい場合は、<a href="/aishield/">AI SHIELD</a>で見守りから始められます。正規のAIの扱いも含めて確認することで、必要以上に集客の入口を閉じずに済みます。</p>
+					<p>自社だけで判断しにくい場合は、<a href="/aishield/">AIシールド</a>で見守りから始められます。正規のAIの扱いも含めて確認することで、必要以上に集客の入口を閉じずに済みます。</p>
 				</div>
 			</div>
 		</section>
@@ -234,13 +234,13 @@ const structuredData = {
 		<section id="faq" class="cyber-section cyber-section--surface">
 			<div class="cyber-shell cyber-faq">
 				<div class="cyber-section-heading"><p>06 / FAQ</p><h2>よくある質問（FAQ）</h2><span>AIサイバー攻撃対策で迷いやすい点を、まず短く整理します。状況やサイトの役割によって判断は変わるため、一般論だけで決めず、実際に来ているアクセスと守る対象をあわせて確認してください。</span></div>
-				<div>{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p>{item.q.includes("全部") && <a href="/faq/#ai-shield">総合FAQのAI SHIELDに関する質問を見る <Icon name="material-symbols:arrow-forward-rounded" /></a>}</details>)}</div>
+				<div>{faqItems.map((item) => <details><summary>{item.q}<Icon name="material-symbols:add-rounded" /></summary><p>{item.a}</p>{item.q.includes("全部") && <a href="/faq/#ai-shield">総合FAQのAIシールドに関する質問を見る <Icon name="material-symbols:arrow-forward-rounded" /></a>}</details>)}</div>
 			</div>
 		</section>
 
 		<p class="cyber-related-article cyber-shell">関連記事: <a href="/wordpress-vulnerability/">WordPressの脆弱性とは？放置のリスクと対策を解説</a>／<a href="/bot-protection/">ボット対策とは？悪質BotとAIクローラーの防ぎ方</a>／<a href="/ai-agent-security/">AIエージェント セキュリティのリスクと対策を実例で解説</a></p>
 
-		<ArticleChoiceCta eyebrow="NEXT STEP / AI TRAFFIC" title="あなたのサイトには、今なにが来ていますか？" body="この記事の実測データは当社サイトのものです。あなたのサイトに何が来ているかは、測らないと分かりません。" primaryHref="/aishield/" primaryText="AIを装う攻撃を見守る" primaryLabel="AI SHIELD" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AI CRAWL" />
+		<ArticleChoiceCta eyebrow="NEXT STEP / AI TRAFFIC" title="あなたのサイトには、今なにが来ていますか？" body="この記事の実測データは当社サイトのものです。あなたのサイトに何が来ているかは、測らないと分かりません。" primaryHref="/aishield/" primaryText="AIを装う攻撃を見守る" primaryLabel="AIシールド" secondaryHref="/aicrawl/" secondaryText="AIクローラーの読まれ方を測る" secondaryLabel="AIクロール" />
 	</main>
 
 	<style>

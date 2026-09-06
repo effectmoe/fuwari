@@ -15,7 +15,7 @@ relatedLinks:
     href: "/posts/ai-crawl-citation-strategy/"
   - label: "SEO が消えて LLMO が左上に来た日"
     href: "/posts/dfb-trend-map-2026-marketing/"
-  - label: "AI CRAWL / AI CITATION"
+  - label: "AIクロール / AIサイテーション"
     href: "/aicrawl/"
   - label: "著者プロフィール"
     href: "/author/"
@@ -178,11 +178,11 @@ SEOが「検索結果で見つけてもらう工夫」だとしたら、LLMOは�
 
 AI別の巡回数、ページ別の巡回数、AI経由の訪問や問い合わせなどの成果を、毎週月曜に確認する入口プランです。
 
-回答に名前が出たかまで見る場合は、AI CITATION と組み合わせます。
+回答に名前が出たかまで見る場合は、AIサイテーションと組み合わせます。
 
 この話は、[「ChatGPT検索でSEO対策が通用しない、は半分だけ正しい」](/posts/ai-crawl-citation-strategy/)で書いた「AIに読まれること」と「AIに紹介されること」の違いそのものです。
 
-計測の2種類を分けて見たい場合は、[AI CRAWL / AI CITATION のページ](/aicrawl/)に整理しています。
+計測の2種類を分けて見たい場合は、[AIクロール / AIサイテーションのページ](/aicrawl/)に整理しています。
 
 ## では、どうするか。順番があった
 

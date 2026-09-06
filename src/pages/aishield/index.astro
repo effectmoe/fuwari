@@ -2,9 +2,9 @@
 import { Icon } from "astro-icon/components";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 
-const pageTitle = "AIサイバー攻撃・ボット対策サービス｜AI SHIELD";
+const pageTitle = "AIサイバー攻撃・ボット対策サービス｜AIシールド";
 const pageDescription =
-	"AIを装う攻撃・悪質ボットからWebサイトを守るAIセキュリティ対策サービス「AI SHIELD」。WordPress×共用サーバーのサイトに対応。攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートから始められます。";
+	"AIを装う攻撃・悪質ボットからWebサイトを守るAIセキュリティ対策サービス「AIシールド」。WordPress×共用サーバーのサイトに対応。攻撃の実態を実測データで可視化し、月額3,300円の見守りレポートから始められます。";
 const consultationHref = "/?inquiry=consultation&service=aishield#contact";
 
 const attackStats = [
@@ -174,7 +174,7 @@ const relatedArticles: { href: string; title: string; body: string }[] = [];
 const serviceLd = {
 	"@type": "Service",
 	"@id": "https://effect.moe/aishield/#service",
-	name: "AI SHIELD",
+	name: "AIシールド",
 	alternateName: ["AIシールド", "AIを装う攻撃の監視・防御"],
 	serviceType: "AIを装う偽装アクセスの監視・ボット対策・Webサイト防御支援",
 	description: pageDescription,
@@ -187,7 +187,7 @@ const serviceLd = {
 	areaServed: "JP",
 	offers: {
 		"@type": "Offer",
-		name: "AI SHIELD 見守り / AI攻撃 分析レポート",
+		name: "AIシールド 見守り / AI攻撃 分析レポート",
 		price: "3300",
 		priceCurrency: "JPY",
 		billingDuration: "P1M",
@@ -203,7 +203,7 @@ const faqLd = {
 };
 ---
 
-<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} ogImage="/images/aishield/sample-report-monthly.png" ogImageAlt="AI SHIELD 月次見守りレポートのサンプル">
+<LandingLayout title={pageTitle} description={pageDescription} fullTitle={true} ogImage="/images/aishield/sample-report-monthly.png" ogImageAlt="AIシールド 月次見守りレポートのサンプル">
 	<Fragment slot="head">
 		<meta name="keywords" content="AIセキュリティ対策, ボット対策, ボット対策ツール, bot対策サービス, サイバー攻撃対策サービス, ホームページセキュリティ対策代行" />
 		<script is:inline type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@graph": [serviceLd, faqLd] })} />
@@ -222,7 +222,7 @@ const faqLd = {
 					<p class="aishield-hero__note"><Icon name="material-symbols:info-outline" /> 100%の防御を保証するものではありません。被害につながる確率を大きく下げるための多層防御です。</p>
 				</div>
 				<figure class="aishield-hero-visual">
-					<img src="/images/aishield/hero-angel-ai-disguised-virus-v10.png" alt="天使のような正規AIロボットに紛れ、天使の仮面を被った悪魔型ウイルスがラックサーバーへ近づくAI SHIELDのイメージ" fetchpriority="high" />
+					<img src="/images/aishield/hero-angel-ai-disguised-virus-v10.png" alt="天使のような正規AIロボットに紛れ、天使の仮面を被った悪魔型ウイルスがラックサーバーへ近づくAIシールドのイメージ" fetchpriority="high" />
 				</figure>
 			</div>
 		</section>
@@ -233,7 +233,7 @@ const faqLd = {
 				<div class="aishield-layers">
 					{layers.map((layer) => <article class="aishield-layer"><span>{layer.no}</span><Icon name={layer.icon} /><h3>{layer.title}</h3><p>{layer.body}</p></article>)}
 				</div>
-				<div class="aishield-route" aria-label="門番を置く前後の違い"><div><p>BEFORE</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>サーバーへ直接届く</b></div><div class="aishield-route__after"><p>AFTER</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>AI SHIELDで確認</b><Icon name="material-symbols:arrow-forward-rounded" /><b>サイトへ</b></div></div>
+				<div class="aishield-route" aria-label="門番を置く前後の違い"><div><p>BEFORE</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>サーバーへ直接届く</b></div><div class="aishield-route__after"><p>AFTER</p><strong>訪問者・攻撃者</strong><Icon name="material-symbols:arrow-forward-rounded" /><b>AIシールドで確認</b><Icon name="material-symbols:arrow-forward-rounded" /><b>サイトへ</b></div></div>
 			</div>
 		</section>
 
@@ -249,7 +249,7 @@ const faqLd = {
 		<section id="report" class="aishield-section aishield-section--report">
 			<div class="aishield-container aishield-report">
 				<div class="aishield-section-heading"><p>MONTHLY REPORT</p><h2>毎月、こんな攻撃が来ていたかを<br />レポートで届けます。</h2><span>最初に状況を診断し、見守りながら変化を追います。</span></div>
-				<div class="aishield-report__layout"><figure><img src="/images/aishield/sample-report-monthly.png" alt="AI SHIELD 月次見守りレポートのサンプル。偽装攻撃、情報漏洩、正規AIクローラーの状況を表示" loading="lazy" /><figcaption>自社 effect.moe の実測データで作成したサンプルです。数値は参考表示であり、対象サイトごとに異なります。</figcaption></figure><ol>{reportSteps.map(([title, body], index) => <li><b>0{index + 1}</b><div><strong>{title}</strong><span>{body}</span></div></li>)}</ol></div>
+				<div class="aishield-report__layout"><figure><img src="/images/aishield/sample-report-monthly.png" alt="AIシールド 月次見守りレポートのサンプル。偽装攻撃、情報漏洩、正規AIクローラーの状況を表示" loading="lazy" /><figcaption>自社 effect.moe の実測データで作成したサンプルです。数値は参考表示であり、対象サイトごとに異なります。</figcaption></figure><ol>{reportSteps.map(([title, body], index) => <li><b>0{index + 1}</b><div><strong>{title}</strong><span>{body}</span></div></li>)}</ol></div>
 			</div>
 		</section>
 
@@ -257,7 +257,7 @@ const faqLd = {
 			<div class="aishield-container">
 				<div class="aishield-section-heading"><p>WHY PROTECT</p><h2>守る価値が高いのは、<br />WordPressのような中身のあるサイトです。</h2><span>攻撃は静的サイトにも来ます。けれど、ログインやデータを持つサイトは、侵入された時の影響が異なります。</span></div>
 				<div class="aishield-vaults"><article><Icon name="material-symbols:description-outline" /><p>LPなどのような静的サイト</p><h3>空っぽの金庫</h3><span>HTML中心で、狙われる認証情報や管理画面が少ない構成。</span></article><article class="aishield-vaults__target"><Icon name="material-symbols:lock-person-outline" /><p>WordPress × 共用サーバー</p><h3>中身のある金庫</h3><span>ログインや運用上の情報を持つため、入口の管理が重要です。</span></article></div>
-				<aside class="aishield-bridge"><div><p>MEASURE × PROTECT</p><h3>測るのは <a href="/aicrawl/">AI CRAWL</a>。<br />守るのは AI SHIELD。</h3><span>AIクローラーとの接点を見ながら、正規のAIを止めずに、偽装アクセスと探索行為を分けて考えます。</span></div><a class="aishield-button aishield-button--dark" href="/aicrawl/">AI CRAWLを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></aside>
+				<aside class="aishield-bridge"><div><p>MEASURE × PROTECT</p><h3>測るのは <a href="/aicrawl/">AIクロール</a>。<br />守るのはAIシールド。</h3><span>AIクローラーとの接点を見ながら、正規のAIを止めずに、偽装アクセスと探索行為を分けて考えます。</span></div><a class="aishield-button aishield-button--dark" href="/aicrawl/">AIクロールを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></aside>
 			</div>
 		</section>
 
@@ -279,10 +279,10 @@ const faqLd = {
 		</section>
 
 		<section id="faq" class="aishield-section aishield-section--faq">
-			<div class="aishield-container aishield-faq"><div><p class="aishield-eyebrow">FAQ / BEFORE YOU START</p><h2>AI SHIELDについて<br />よくある質問</h2><p>仕組みやご利用環境に応じた確認事項は、無料相談で個別に整理します。</p><a href="/faq/">総合FAQを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div>{faqs.map(([q, a]) => <details><summary>{q}<Icon name="material-symbols:add-rounded" /></summary><p>{a}</p></details>)}{relatedArticles.length > 0 && <aside class="aishield-related-articles"><p>関連記事</p>{relatedArticles.map((article) => <a href={article.href}><strong>{article.title}</strong><span>{article.body}</span></a>)}</aside>}</div></div>
+			<div class="aishield-container aishield-faq"><div><p class="aishield-eyebrow">FAQ / BEFORE YOU START</p><h2>AIシールドについて<br />よくある質問</h2><p>仕組みやご利用環境に応じた確認事項は、無料相談で個別に整理します。</p><a href="/faq/">総合FAQを見る <Icon name="material-symbols:arrow-forward-rounded" /></a></div><div>{faqs.map(([q, a]) => <details><summary>{q}<Icon name="material-symbols:add-rounded" /></summary><p>{a}</p></details>)}{relatedArticles.length > 0 && <aside class="aishield-related-articles"><p>関連記事</p>{relatedArticles.map((article) => <a href={article.href}><strong>{article.title}</strong><span>{article.body}</span></a>)}</aside>}</div></div>
 		</section>
 
-		<section class="aishield-final"><div class="aishield-container"><p>AI SHIELD / FIRST STEP</p><h2>まず、あなたのサイトに<br />何が来ているかを見ましょう。</h2><span>現在の環境、守りたい情報、正規AIクローラーの扱いを確認し、必要な範囲からご提案します。</span><a class="aishield-button aishield-button--light" href={consultationHref}>AI SHIELDを無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div></section>
+		<section class="aishield-final"><div class="aishield-container"><p>AIシールド / FIRST STEP</p><h2>まず、あなたのサイトに<br />何が来ているかを見ましょう。</h2><span>現在の環境、守りたい情報、正規AIクローラーの扱いを確認し、必要な範囲からご提案します。</span><a class="aishield-button aishield-button--light" href={consultationHref}>AIシールドを無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div></section>
 	</main>
 </LandingLayout>
 

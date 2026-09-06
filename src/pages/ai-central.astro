@@ -68,7 +68,7 @@ const stages = [
 		name: "覚える AI",
 		desc: "事務所の顧問先・案件・ノウハウを記憶し、文脈を踏まえて答える。",
 		note: null,
-		plans: "AIセントラル ／ ＋",
+		plans: "AIセントラル ／ PLUS",
 	},
 	{
 		no: "第3段階",
@@ -104,7 +104,7 @@ const reasons = [
 	{
 		icon: "material-symbols:trending-up-rounded",
 		title: "顧問先が、先に AI を使い始めている",
-		body: "顧問先の経営者はすでに ChatGPT で下調べをしてから相談に来ます。「AI ではこう出ましたが、先生はどう思いますか」に、AI の特性を踏まえて答えられる事務所が選ばれます。AI を業務に組み込んでいる事実そのものが、これからの営業力です。",
+		body: "顧問先の経営者はすでに ChatGPT で下調べをしてから相談に来ます。「AI ではこう出ましたが、どう思われますか」に、AI の特性を踏まえて答えられる事務所が選ばれます。AI を業務に組み込んでいる事実そのものが、これからの営業力です。",
 	},
 	{
 		icon: "material-symbols:savings-outline-rounded",
@@ -244,10 +244,10 @@ const plans = [
 				on: false,
 			},
 		],
-		note: "いまお使いのパソコンで導入できます（Mac / Windows・専用機不要）。AI はクラウド型を利用します。",
+		note: "いまお使いのパソコンで導入できます（Mac / Windows・専用機不要）。AI はクラウド型を、法人向けプラン（商用契約）でのご利用を標準としています。この契約では、入力した内容が AI の学習に使われることはありません。",
 	},
 	{
-		name: "AIセントラル＋",
+		name: "AIセントラル PLUS",
 		catch: "事務所のツールが、全部つながる。",
 		price: "¥550,000",
 		highlight: false,
@@ -272,7 +272,7 @@ const plans = [
 				on: false,
 			},
 		],
-		note: "いまお使いのパソコンで導入できます。AI 生成物の Notion への書き戻しは、先生の承認後のみ行う設計です。",
+		note: "いまお使いのパソコンで導入できます。AI はクラウド型を法人向けプラン（商用契約）でご利用いただき、入力内容が AI の学習に使われることはありません。AI 生成物の Notion への書き戻しは、ご承認後のみ行う設計です。",
 	},
 	{
 		name: "AIセントラル パーフェクトセキュア",
@@ -283,7 +283,7 @@ const plans = [
 		forWho:
 			"マイナンバー・申告データ・事件記録など、外部クラウドに出せない情報こそ AI に扱わせたい事務所に。",
 		features: [
-			{ text: "「AIセントラル＋」の全内容", on: true },
+			{ text: "「AIセントラル PLUS」の全内容", on: true },
 			{
 				text: "完全事務所内 AI（顧客データを外部サーバーに一切送信しない）",
 				on: true,
@@ -296,7 +296,7 @@ const plans = [
 			{ text: "申告・手続き期限のリマインド", on: true },
 			{ text: "承認トレイ（AI が勝手に送信・確定しない共通設計）", on: true },
 			{
-				text: "AI エージェント（指示すれば実作業。送信・確定は必ず先生の承認経由）",
+				text: "AI エージェント（指示すれば実作業。送信・確定は必ずご承認経由）",
 				on: true,
 			},
 			{ text: "導入研修 4回（自動化の線引き設計回を含む）", on: true },
@@ -320,7 +320,7 @@ const flowSteps = [
 	{
 		no: "3",
 		title: "導入研修",
-		body: "実際の業務データを使って、先生・スタッフの皆さまが日常業務で使えるところまでご一緒します。",
+		body: "実際の業務データを使って、ご担当者・スタッフの皆さまが日常業務で使えるところまでご一緒します。",
 	},
 	{
 		no: "4",
@@ -333,7 +333,7 @@ const flowSteps = [
 const faqs = [
 	{
 		q: "守秘義務との関係は大丈夫ですか？",
-		a: "プラン1・2では「機微情報を AI に触れさせない運用ルール」（3段階の線引き表）を研修でお渡しし、パーフェクトセキュアでは AI の処理がすべて事務所内の Mac で完結するため、顧客データが外部サーバーに送信されることはありません。また AI の役割は資料の下処理・過去案件の想起・文書の下書きに限定し、専門的判断は必ず先生が行う前提の運用設計です。",
+		a: "プラン1・2では「機微情報を AI に触れさせない運用ルール」（3段階の線引き表）を研修でお渡しし、パーフェクトセキュアでは AI の処理がすべて事務所内の Mac で完結するため、顧客データが外部サーバーに送信されることはありません。また AI の役割は資料の下処理・過去案件の想起・文書の下書きに限定し、専門的判断は必ず人が行う前提の運用設計です。",
 	},
 	{
 		q: "事務所は Windows ばかりですが、使えますか？",
@@ -342,6 +342,10 @@ const faqs = [
 	{
 		q: "ローカルLLMや社内完結型AIは、通常のクラウドAIと何が違いますか？",
 		a: "通常のクラウドAIは、入力した情報を外部サービスへ送って処理します。一方、パーフェクトセキュアでは事務所内にAI専用環境を置き、顧客情報・相談履歴・社内資料を外へ出さずに参照できる構成を目指します。個人情報や守秘義務が前提になる士業・専門サービス業ほど、この違いが大きな判断材料になります。",
+	},
+	{
+		q: "クラウド型のプランでも、入力した情報が AI の学習に使われませんか？",
+		a: "使われません。プラン1・2では法人向けプラン（商用契約）でのご利用を標準としており、この契約では入力内容や生成結果が AI モデルの学習に使われない取り扱いになります。導入時に契約形態を確認し、毎月の伴走でも設定を点検します。なお、学習に使われないことと、情報が外部に一切送信されないことは別です。送信そのものを避けたい情報は、パーフェクトセキュアの事務所内完結の構成をご検討ください。",
 	},
 	{
 		q: "AIエージェントのセキュリティ対策は、どのように考えていますか？",
@@ -361,7 +365,7 @@ const faqs = [
 	},
 	{
 		q: "AI が勝手にメールを送ったりしませんか？",
-		a: "しません。AIセントラルは、どのプランでも「承認トレイ」を前提に設計します。AI は下書き・整理・確認材料づくりを進めますが、顧問先へ出る送信や確定操作は、先生が内容を確認して承認するまで実行されません。どの業務を任せ、どこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
+		a: "しません。AIセントラルは、どのプランでも「承認トレイ」を前提に設計します。AI は下書き・整理・確認材料づくりを進めますが、顧問先へ出る送信や確定操作は、内容をご確認いただき承認するまで実行されません。どの業務を任せ、どこで人が確認するかの線引きは、導入研修で事務所ごとに設計します。",
 	},
 	{
 		q: "士業以外の会社でも、個人情報を扱う業務に導入できますか？",
@@ -445,14 +449,14 @@ const approvalSteps = [
 	},
 	{
 		no: "02",
-		title: "先生のトレイに並ぶ",
+		title: "承認トレイに並ぶ",
 		body: "宛先、本文、判断材料、根拠を確認できる状態で、承認待ちとして並びます。",
 		icon: "material-symbols:inventory-2-outline",
 	},
 	{
 		no: "03",
 		title: "押して初めて出ていく",
-		body: "先生が内容を見て「送信する」「確定する」を押すまで、外部への送信や確定は起きません。",
+		body: "内容をご確認のうえ「送信する」「確定する」を押すまで、外部への送信や確定は起きません。",
 		icon: "material-symbols:verified-user-outline",
 	},
 ];
@@ -517,7 +521,7 @@ const jsonLd = {
 		},
 		{
 			"@type": "Offer",
-			name: "AIセントラル＋",
+			name: "AIセントラル PLUS",
 			price: "550000",
 			priceCurrency: "JPY",
 		},
@@ -574,7 +578,7 @@ const faqLd = {
               個人情報・機密情報対応
             </span>
           </div>
-          <p class="mb-4 text-sm font-bold tracking-[0.18em] text-[var(--primary)]">AI CENTRAL</p>
+          <p class="mb-4 text-sm font-bold tracking-[0.18em] text-[var(--primary)]">AIセントラル</p>
           <h1 class="max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
             記憶を持ったAIを、<br />
             システムの中枢へ。
@@ -627,7 +631,7 @@ const faqLd = {
           <div class="central-hero-console">
             <div class="central-hero-console__core">
               <Icon name="material-symbols:memory-alt-outline" class="text-5xl" />
-              <strong>AI CENTRAL</strong>
+              <strong>AIセントラル</strong>
             </div>
             <div class="central-hero-console__nodes">
               {[
@@ -953,12 +957,12 @@ const faqLd = {
         <h2 class="text-2xl font-bold text-90">士業の AI 活用には、3つの壁があります。</h2>
       </div>
       <p class="text-base text-75 mb-6 leading-relaxed">
-        「AI を使いたいが、うちの業務では無理だ」——そう感じている先生の多くは、次の3つの壁に阻まれています。
+        「AI を使いたいが、うちの業務では無理だ」——そう感じている方の多くは、次の3つの壁に阻まれています。
       </p>
       <div class="mb-6 grid gap-3 rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:grid-cols-[0.8fr_1.4fr_0.8fr] md:items-center md:p-6">
         <div class="rounded-lg bg-[var(--card-bg)] p-4 text-center shadow-sm">
           <Icon name="material-symbols:person-outline" class="mx-auto text-4xl text-[var(--primary)]" />
-          <p class="mt-2 text-sm font-bold text-90">先生・スタッフ</p>
+          <p class="mt-2 text-sm font-bold text-90">ご担当者・スタッフ</p>
           <p class="mt-1 text-xs text-50">顧問先対応 / 資料整理 / 期限管理</p>
         </div>
         <div class="grid grid-cols-3 gap-2">
@@ -1088,7 +1092,7 @@ const faqLd = {
           </div>
         </div>
       </div>
-      <p class="text-xs text-50 mt-3">※ 画面はイメージです。AI の役割は下処理・想起・下書きまでで、専門的判断は必ず先生が行う運用設計です。</p>
+      <p class="text-xs text-50 mt-3">※ 画面はイメージです。AI の役割は下処理・想起・下書きまでで、専門的判断は必ず人が行う運用設計です。</p>
     </div>
 
     <InlineConversion
@@ -1404,7 +1408,7 @@ const faqLd = {
       </div>
       <p class="text-xs text-50 mb-6">※ ストアカ（ストリートアカデミー）講師実績・{stats.periodEnd}時点。</p>
 
-	  <h3 class="text-lg font-bold text-90 mb-2">匿名事例で見る、AI CENTRALの設計範囲</h3>
+	  <h3 class="text-lg font-bold text-90 mb-2">匿名事例で見る、AIセントラルの設計範囲</h3>
 	  <p class="text-sm leading-relaxed text-75 mb-3">会社名や固有の業務内容は伏せたうえで、実際に扱った課題と設計・運用の範囲を掲載しています。扱う情報や実施範囲は事務所・プロジェクトごとに異なり、実績数値や効果を保証するものではありません。</p>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
         {cases.map((c) => (
@@ -1480,7 +1484,7 @@ const faqLd = {
         <div class="grid gap-3 md:grid-cols-3 md:items-end">
           {[
             { step: "01", label: "覚える", price: "¥330,000", plan: "AIセントラル", height: "md:min-h-40" },
-            { step: "02", label: "つながる", price: "¥550,000", plan: "AIセントラル＋", height: "md:min-h-52" },
+            { step: "02", label: "つながる", price: "¥550,000", plan: "AIセントラル PLUS", height: "md:min-h-52" },
             { step: "03", label: "完全セキュアで働く", price: "¥1,320,000", plan: "パーフェクトセキュア", height: "md:min-h-64" },
           ].map((item) => (
             <div class={`flex ${item.height} flex-col justify-end rounded-lg border border-[var(--primary)]/45 bg-[var(--card-bg)] p-5`}>
@@ -1499,7 +1503,7 @@ const faqLd = {
       <div class="mb-6 grid gap-3 rounded-xl border border-black/10 bg-[var(--btn-plain-bg)] p-4 dark:border-white/10 md:grid-cols-3">
         {[
           ["AIセントラル", "まず記憶を作る", "情報が散らばっている／毎回説明し直している"],
-          ["AIセントラル＋", "既存ツールとつなぐ", "Notion・カレンダー・類似案件検索まで進めたい"],
+          ["AIセントラル PLUS", "既存ツールとつなぐ", "Notion・カレンダー・類似案件検索まで進めたい"],
           ["パーフェクトセキュア", "外に出さずに働かせる", "申告データ・事件記録・マイナンバー級の情報も扱いたい"],
         ].map((row, index) => (
           <div class="rounded-lg bg-[var(--card-bg)] p-4 shadow-sm">
@@ -1564,7 +1568,7 @@ const faqLd = {
 
       <p class="text-xs text-50 leading-relaxed">
         ※ 上位プランへは差額でアップグレードできます。蓄積した AI の記憶はそのまま引き継がれ、作り直しはありません。<br />
-        ※ クラウド AI の利用料（月数千円程度〜）は事務所さまのご契約となります。導入時に最適なプランをご案内します。
+        ※ クラウド AI の利用料は事務所さまのご契約となります。プラン1・2は、入力内容が AI の学習に使われない<strong class="text-75">法人向けプラン（商用契約・1ライセンス月額 数千円程度／最低2ライセンスから）</strong>でのご利用を標準としています。必要なライセンス数は、事務所の体制に合わせて導入時にご案内します。
       </p>
     </div>
 
@@ -1634,7 +1638,7 @@ const faqLd = {
       <div>
         <p class="central-related-services__eyebrow">RELATED SERVICES</p>
         <h2>AIセントラルと合わせて検討できる入口。</h2>
-        <p>サイトへのAI流入を調べる場合は AIクロール、社内でAIエージェントを扱う力を育てる場合は AI講座へ進めます。</p>
+        <p>サイトへのAI流入を調べる場合はAIクロール、社内でAIエージェントを扱う力を育てる場合は AI講座へ進めます。</p>
       </div>
       <div class="central-related-services__links">
         <a href="/aicrawl/">

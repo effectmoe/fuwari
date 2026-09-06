@@ -20,7 +20,7 @@ const curatedSearchMetadata: Record<
 	},
 	"/aishield/": {
 		excerpt:
-			"AIを装う偽装アクセスやボット攻撃を監視し、正規のAIクローラーは通したままサイトを守るAI SHIELD。月次見守りレポートは月額3,300円。",
+			"AIを装う偽装アクセスやボット攻撃を監視し、正規のAIクローラーは通したままサイトを守るAIシールド。月次見守りレポートは月額3,300円。",
 		section: "Service",
 	},
 	"/ai-cyber-attack/": {

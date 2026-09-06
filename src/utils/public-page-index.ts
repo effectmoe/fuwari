@@ -19,8 +19,8 @@ const excludedRoutes = new Set([
 ]);
 
 const labelOverrides: Record<string, string> = {
-	"/": "ホーム / AI CENTRAL",
-	"/aicrawl/": "AI CRAWL",
+	"/": "ホーム / AIセントラル",
+	"/aicrawl/": "AIクロール",
 	"/ai-agent-course/": "AI講座",
 	"/ai-agent-course-advanced/": "AIエージェント実装講座（上級編）",
 	"/ai-agent-course-corporate/": "法人向けClaude Code社内研修",

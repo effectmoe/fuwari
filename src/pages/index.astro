@@ -94,7 +94,7 @@ const pillars = [
 	},
 	{
 		title: "業務棚卸し",
-		body: "既存ファイル・フォルダ・顧客情報・業務フローを見て、AI CENTRALに入れるべき記憶を整理します。",
+		body: "既存ファイル・フォルダ・顧客情報・業務フローを見て、AIセントラルに入れるべき記憶を整理します。",
 		icon: "material-symbols:inventory-2-outline",
 	},
 	{
@@ -167,7 +167,7 @@ const trustBlocks = [
 	},
 	{
 		title: "マーケティングまで接続",
-		body: "記事構造や問い合わせ導線まで扱うため、AI CENTRALの説明と集客ページを分断せずに設計できます。",
+		body: "記事構造や問い合わせ導線まで扱うため、AIセントラルの説明と集客ページを分断せずに設計できます。",
 		icon: "material-symbols:monitoring",
 		href: "/blog/",
 	},
@@ -192,7 +192,7 @@ const proofFlow = [
 	},
 	{
 		label: "次を決める",
-		title: "AI CENTRALを入れるべきか判断",
+		title: "AIセントラルを入れるべきか判断",
 		icon: "material-symbols:alt-route",
 	},
 ];
@@ -211,7 +211,7 @@ const diagnosisChecks = [
 	{
 		step: "03",
 		title: "次にどこを直すか",
-		body: "AI CENTRALを導入すべきか、通常相談で十分か、ローカル構成が必要かを整理します。",
+		body: "AIセントラルを導入すべきか、通常相談で十分か、ローカル構成が必要かを整理します。",
 	},
 ];
 
@@ -307,7 +307,7 @@ const approvalSteps = [
 	{
 		step: "02",
 		title: "承認トレイに止める",
-		body: "顧客へ出る文章や確定操作は、先生・担当者が確認する場所で止めます。",
+		body: "顧客へ出る文章や確定操作は、ご担当者が確認する場所で止めます。",
 		icon: "material-symbols:rule-folder-outline",
 	},
 	{
@@ -738,7 +738,7 @@ const faqLd = {
 					</picture>
 					<div class="lp-security-visual__diagram" aria-label="安全設計の3段階">
 						<div class="lp-security-visual__diagram-title">
-							<span>AI CENTRAL / 安全設計</span>
+							<span>AIセントラル / 安全設計</span>
 							<strong>情報をそのまま渡さない。</strong>
 						</div>
 						<ol>
@@ -762,7 +762,7 @@ const faqLd = {
 				</figure>
 
 				<div class="lp-security-visual__copy">
-					<p>AI CENTRAL / 安全設計</p>
+					<p>AIセントラル / 安全設計</p>
 					<h2 id="security-visual-title">AIに渡す前に、情報の扱いを決める。</h2>
 					<p>便利に使うことと、何でもAIへ渡すことは同じではありません。扱う情報と使う場面を先に分け、必要に応じて伏せたうえで、確認が必要な操作は人の手前で止めます。</p>
 					<ul>
@@ -898,8 +898,8 @@ const faqLd = {
 									<option>AIセントラル</option>
 									<option>AIセントラル PLUS</option>
 									<option>パーフェクトセキュア</option>
-									<option>AI CRAWL</option>
-									<option>AI SHIELD</option>
+									<option>AIクロール</option>
+									<option>AIシールド</option>
 									<option>AI講座</option>
 									<option>まだ決まっていない</option>
 								</select>
@@ -943,17 +943,17 @@ const faqLd = {
 		const inquiryFromUrl = new URLSearchParams(window.location.search).get("inquiry");
 		const serviceFromUrl = new URLSearchParams(window.location.search).get("service");
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aicrawl") {
-			if (interestSelect) interestSelect.value = "AI CRAWL";
+			if (interestSelect) interestSelect.value = "AIクロール";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
 			if (messageField && !messageField.value) {
-				messageField.value = "AI CRAWLの無料相談を希望します。AIからの流入状況、レポート内容、料金プランについて相談したいです。";
+				messageField.value = "AIクロールの無料相談を希望します。AIからの流入状況、レポート内容、料金プランについて相談したいです。";
 			}
 		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aishield") {
-			if (interestSelect) interestSelect.value = "AI SHIELD";
+			if (interestSelect) interestSelect.value = "AIシールド";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
 			if (messageField && !messageField.value) {
-				messageField.value = "AI SHIELDの無料相談を希望します。サイトに来ている偽装アクセス、見守りレポート、前段の防御設置について相談したいです。";
+				messageField.value = "AIシールドの無料相談を希望します。サイトに来ている偽装アクセス、見守りレポート、前段の防御設置について相談したいです。";
 			}
 		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "ai-course") {

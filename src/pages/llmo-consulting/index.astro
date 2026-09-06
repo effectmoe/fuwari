@@ -4,14 +4,14 @@ import LandingLayout from "../../layouts/LandingLayout.astro";
 
 const pageTitle = "LLMOコンサルティングとは？費用と進め方をAI検索の実測で解説";
 const pageDescription =
-	"LLMOコンサルティングとは何か、AI CRAWLとAI CITATIONで何を測り、どの費用・進め方を選ぶのかを、AI検索の実測にもとづいて解説します。";
+	"LLMOコンサルティングとは何か、AIクロールとAIサイテーションで何を測り、どの費用・進め方を選ぶのかを、AI検索の実測にもとづいて解説します。";
 const pageUrl = "https://effect.moe/llmo-consulting/";
 const consultationHref = "/?inquiry=consultation&service=aicrawl#contact";
 
-// AI CRAWL料金表の正本（src/pages/aicrawl/index.astro）をそのまま転記する。
+// AIクロール料金表の正本（src/pages/aicrawl/index.astro）をそのまま転記する。
 const pricingPlans = [
 	{
-		name: "AI CRAWL レポート",
+		name: "AIクロール レポート",
 		label: "週次＆月次レポート",
 		price: "¥3,300",
 		body: "毎週月曜、AI由来の接点がどのページに発生しているかを実数でお届けします。続けるほど、先月と今月を比べられるようになります。",
@@ -26,12 +26,12 @@ const pricingPlans = [
 		tier: "ライト",
 		measurementLimit: "3クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION ライト",
+			name: "AIクロール + AIサイテーション ライト",
 			price: "¥9,900",
 			label: "紹介されたかまで見る",
 			body: "月1回の露出計測と、載らなかった場合に代わりに表示された競合ドメインを整理します。まず、自社がどの状態にいるかを確認したい方向けです。",
 			features: [
-				"AI CRAWL ライトの内容すべて",
+				"AIクロール ライトの内容すべて",
 				"3クエリの露出計測",
 				"競合ドメイン特定",
 			],
@@ -39,7 +39,7 @@ const pricingPlans = [
 		},
 	},
 	{
-		name: "AI CRAWL コンサル",
+		name: "AIクロール コンサル",
 		label: "伴走コンサル",
 		price: "¥19,800",
 		body: "週ごとの数字だけでなく、これまでどう伸びてきたかの推移で判断したい方向け。成長レポートで大局を掴み、次の一手を相談しながら進めます。",
@@ -54,12 +54,12 @@ const pricingPlans = [
 		tier: "スタンダード",
 		measurementLimit: "5クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION スタンダード",
+			name: "AIクロール + AIサイテーション スタンダード",
 			price: "¥30,800",
 			label: "結果を読み解く",
 			body: "露出計測に加えて、相談の中で結果を読み解きます。どの質問テーマで弱いか、どの候補と比較されているかを見ながら次の打ち手を整理します。",
 			features: [
-				"AI CRAWL スタンダードの内容すべて",
+				"AIクロール スタンダードの内容すべて",
 				"5クエリの露出計測",
 				"相談で結果を読み解く",
 			],
@@ -67,7 +67,7 @@ const pricingPlans = [
 		},
 	},
 	{
-		name: "AI CRAWL グロース",
+		name: "AIクロール グロース",
 		label: "AI流入 成長運用",
 		price: "¥33,000",
 		body: "実装代行までは不要だが、AIに紹介されるために何を直すべきか、具体的な改善プランまで欲しい方向け。",
@@ -82,12 +82,12 @@ const pricingPlans = [
 		tier: "プロ",
 		measurementLimit: "10クエリ",
 		citation: {
-			name: "AI CRAWL + AI CITATION プロ",
+			name: "AIクロール + AIサイテーション プロ",
 			price: "¥55,000",
 			label: "改善後に再計測する",
 			body: "露出計測、差分診断、改善ロードマップ、施策後の同一クエリ再計測まで扱います。AI回答に載るかを継続的に検証したい方向けです。",
 			features: [
-				"AI CRAWL プロの内容すべて",
+				"AIクロール プロの内容すべて",
 				"10クエリの露出計測",
 				"差分診断・改善ロードマップ",
 				"再計測での効果判定",
@@ -100,7 +100,7 @@ const pricingPlans = [
 const faqItems = [
 	{
 		q: "LLMOコンサルティングでは、何を見て進めますか？",
-		a: "LLMOコンサルティングでは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、どの状態にいるかを特定します。AI CRAWLで接点を、AI CITATIONで回答での露出を扱います。",
+		a: "LLMOコンサルティングでは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、どの状態にいるかを特定します。AIクロールで接点を、AIサイテーションで回答での露出を扱います。",
 	},
 	{
 		q: "1クエリは何回試行しますか？",
@@ -111,8 +111,8 @@ const faqItems = [
 		a: "LLMOコンサルティングとSEOコンサルティングは、どちらかを置き換える関係ではありません。検索で見つかるための土台と、AIが回答に使う情報を読み取るための設計を、同じサイトで矛盾なく扱います。",
 	},
 	{
-		q: "AI SHIELDとは何が違いますか？",
-		a: "AI SHIELDはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、LLMOコンサルティングはAI検索での接点と回答での扱われ方を測るサービスです。",
+		q: "AIシールドとは何が違いますか？",
+		a: "AIシールドはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、LLMOコンサルティングはAI検索での接点と回答での扱われ方を測るサービスです。",
 	},
 ];
 
@@ -175,7 +175,7 @@ const breadcrumbLd = {
 			<div class="consulting-hero__copy">
 				<p class="consulting-eyebrow">LLMO CONSULTING / AI SEARCH MEASUREMENT</p>
 				<h1><span class="consulting-hero__service">LLMOコンサルティング</span><strong>読まれることと、回答に載ることを分けて見ます。</strong></h1>
-				<p class="consulting-hero__lead"><strong>LLMOコンサルティングは、AI検索で自社がどの状態にいるかを実測し、次に扱う課題を決めるための入口です。</strong> AI CRAWLでAIの接点を見て、AI CITATIONで回答での扱われ方を見ます。</p>
+				<p class="consulting-hero__lead"><strong>LLMOコンサルティングは、AI検索で自社がどの状態にいるかを実測し、次に扱う課題を決めるための入口です。</strong> AIクロールでAIの接点を見て、AIサイテーションで回答での扱われ方を見ます。</p>
 				<div class="consulting-actions">
 					<a class="consulting-button consulting-button--primary" href="#pricing">料金・プランを見る <Icon name="material-symbols:arrow-forward-rounded" /></a>
 					<a class="consulting-button consulting-button--secondary" href={consultationHref}>無料相談する</a>
@@ -186,9 +186,9 @@ const breadcrumbLd = {
 			<figure class="consulting-signal" aria-labelledby="consulting-signal-caption">
 				<div class="consulting-signal__header"><span>AI SEARCH VISIBILITY</span><i aria-hidden="true"></i><b>LIVE CHECK</b></div>
 				<div class="consulting-signal__tracks">
-					<div class="consulting-signal__track is-crawl"><span>AI CRAWL</span><strong>読みに来ているか</strong><em>CRAWL LOG</em></div>
+					<div class="consulting-signal__track is-crawl"><span>AIクロール</span><strong>読みに来ているか</strong><em>CRAWL LOG</em></div>
 					<div class="consulting-signal__line" aria-hidden="true"></div>
-					<div class="consulting-signal__track is-citation"><span>AI CITATION</span><strong>AIの回答に載るか</strong><em>ANSWER CHECK</em></div>
+					<div class="consulting-signal__track is-citation"><span>AIサイテーション</span><strong>AIの回答に載るか</strong><em>ANSWER CHECK</em></div>
 				</div>
 				<figcaption id="consulting-signal-caption">片方のデータだけでは、次に扱う課題を決められません。</figcaption>
 			</figure>
@@ -199,10 +199,10 @@ const breadcrumbLd = {
 		<div class="consulting-container consulting-prose">
 			<p class="consulting-eyebrow">BASICS</p>
 			<h2>LLMOコンサルティングとは何ですか？</h2>
-			<p><strong>LLMOコンサルティングとは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、次に扱う課題を決めるサービスです。</strong> AI CRAWLはサイト側に残る接点を、AI CITATIONは実際のAI回答での露出を扱います。</p>
+			<p><strong>LLMOコンサルティングとは、AIがサイトを読みに来ているかと、AIの回答に自社が載るかを分けて測り、次に扱う課題を決めるサービスです。</strong> AIクロールはサイト側に残る接点を、AIサイテーションは実際のAI回答での露出を扱います。</p>
 			<p>「読みに来ているか」と「回答に載るか」は別の問題で、両方見ないと打ち手が決まりません。クローラーが来ているのに回答に載らないなら中身を見直し、クローラーが来ないのに回答に載るなら外部の情報源への依存を確かめます。片方のデータだけで、状態を決めつけません。</p>
-			<div class="consulting-quadrants" role="region" aria-label="AI CRAWLとAI CITATIONを組み合わせて見る4つの状態">
-			<div class="consulting-quadrants__corner">AI CRAWL<br />AI CITATION</div>
+			<div class="consulting-quadrants" role="region" aria-label="AIクロールとAIサイテーションを組み合わせて見る4つの状態">
+			<div class="consulting-quadrants__corner">AIクロール<br />AIサイテーション</div>
 			<div class="consulting-quadrants__column">AIの回答に載る</div>
 			<div class="consulting-quadrants__column">AIの回答に載らない</div>
 			<div class="consulting-quadrants__row">クローラーが来る</div>
@@ -222,7 +222,7 @@ const breadcrumbLd = {
 			<h2>どんな会社に必要ですか？</h2>
 			<p><strong>どんな会社に必要かは、AI検索で自社の情報がどう扱われているかを、推測ではなく実測から決めたい会社です。</strong> AIクローラーは毎日来ているのに、AIの回答には載らない状態もあります。effect.moe自身の実測では、ClaudeBot 22回/日が来ている一方で、AIの回答には0/10回しか載りませんでした。</p>
 			<p>構造化データを実装済みでも0/10回であり、必要条件だが十分条件ではありません。また、3回計測では0/3と誤判定していたものを、10回で1/10として検出しました。まず状態を測り、技術・導線の問題か、中身の問題かを分けてから進めます。</p>
-			<p>AI SHIELDはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、守り側を確認したい場合は<a href="/aishield/">AI SHIELD</a>をご覧ください。</p>
+			<p>AIシールドはAIを装う攻撃や悪質なボットからサイトを守る別サービスであり、守り側を確認したい場合は<a href="/aishield/">AIシールド</a>をご覧ください。</p>
 		</div>
 	</section>
 
@@ -230,7 +230,7 @@ const breadcrumbLd = {
 		<div class="consulting-container consulting-prose">
 			<p class="consulting-eyebrow">MONTHLY WORK</p>
 			<h2>毎月、何をしてもらえますか？</h2>
-			<p><strong>毎月の内容は、AI CRAWLでAI由来の接点を見続けることと、AI CITATIONを組み合わせる場合はAIの回答に載るかを測ることです。</strong> 下の料金表は、AI CRAWLとAI CRAWL + AI CITATIONを2列で対比し、各プランで扱う内容をそのまま示しています。</p>
+			<p><strong>毎月の内容は、AIクロールでAI由来の接点を見続けることと、AIサイテーションを組み合わせる場合はAIの回答に載るかを測ることです。</strong> 下の料金表は、AIクロールとAIクロール + AIサイテーションを2列で対比し、各プランで扱う内容をそのまま示しています。</p>
 			<p>1クエリ = ChatGPT 10回 + Gemini 10回 = 20回試行です。</p>
 		</div>
 	</section>
@@ -239,10 +239,10 @@ const breadcrumbLd = {
 		<div class="consulting-container">
 			<div class="consulting-pricing-head">
 				<div><p class="consulting-eyebrow">PRICE</p><h2>費用はいくらですか？</h2></div>
-				<p><strong>費用は、AI別の接点、ページ別の流入実績、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選びます。</strong> AI CRAWLのみと、AI CRAWL + AI CITATIONを同じ測定枠で比較します。</p>
+				<p><strong>費用は、AI別の接点、ページ別の流入実績、推定されるユーザー動機、改善優先度をどこまで継続的に扱うかで選びます。</strong> AIクロールのみと、AIクロール + AIサイテーションを同じ測定枠で比較します。</p>
 			</div>
-			<div class="consulting-pricing-matrix" aria-label="AI CRAWLとAI CRAWL + AI CITATIONの料金比較">
-				<div class="consulting-pricing-matrix__header"><div><strong>AI CRAWLのみ</strong><em>AI由来の接点を見る</em></div><div class="is-citation"><strong>AI CRAWL + AI CITATION</strong><em>AI CRAWL込みで、紹介されたかまで見る</em></div></div>
+			<div class="consulting-pricing-matrix" aria-label="AIクロールとAIクロール + AIサイテーションの料金比較">
+				<div class="consulting-pricing-matrix__header"><div><strong>AIクロールのみ</strong><em>AI由来の接点を見る</em></div><div class="is-citation"><strong>AIクロール + AIサイテーション</strong><em>AIクロール込みで、紹介されたかまで見る</em></div></div>
 				{pricingPlans.map((plan) => (
 					<div class="consulting-pricing-row">
 						<article class="consulting-price-card">
@@ -282,7 +282,7 @@ const breadcrumbLd = {
 	</section>
 
 	<section class="consulting-cta">
-		<div class="consulting-container consulting-cta__inner"><div><p class="consulting-eyebrow">NEXT STEP</p><h2>まず、どの状態にいるかを測ります。</h2><p>AI CRAWLとAI CITATIONのどちらまで扱うかは、実測したい範囲から決めます。</p></div><a class="consulting-button consulting-button--primary" href={consultationHref}>無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
+		<div class="consulting-container consulting-cta__inner"><div><p class="consulting-eyebrow">NEXT STEP</p><h2>まず、どの状態にいるかを測ります。</h2><p>AIクロールとAI CITATIONのどちらまで扱うかは、実測したい範囲から決めます。</p></div><a class="consulting-button consulting-button--primary" href={consultationHref}>無料相談する <Icon name="material-symbols:arrow-forward-rounded" /></a></div>
 	</section>
 
 	<style>
