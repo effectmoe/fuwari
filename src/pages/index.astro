@@ -235,7 +235,7 @@ const blogAngles = [
 
 const aiCentralPricing = [
 	{
-		name: "AI セントラル",
+		name: "AIセントラル",
 		label: "まず記憶を作る",
 		price: "¥330,000",
 		description:
@@ -258,14 +258,14 @@ const aiCentralPricing = [
 		popular: true,
 	},
 	{
-		name: "AI セントラル PLUS",
+		name: "AIセントラル PLUS",
 		label: "業務ツールとつなぐ",
 		price: "¥550,000",
 		description:
 			"Notion、Googleカレンダー、スプレッドシートなど、既存ツールとの連携まで広げる構成です。",
 		features: [
-			"AI セントラルの機能すべて",
-			"AI セントラルの安全設計すべて",
+			"AIセントラルの機能すべて",
+			"AIセントラルの安全設計すべて",
 			"承認トレイ（AIが勝手に送信・確定しない共通設計）",
 			"外部ツール連携",
 			"連携時の参照範囲整理",
@@ -283,7 +283,7 @@ const aiCentralPricing = [
 		description:
 			"顧客情報を外部クラウドへ出さず、社内PC・社内ネットワーク内でAIを動かす構成です。",
 		features: [
-			"AI セントラル PLUS の機能すべて",
+			"AIセントラル PLUS の機能すべて",
 			"承認トレイ（AIが勝手に送信・確定しない共通設計）",
 			"完全ローカル構成",
 			"個人情報マスキング・権限設計",
@@ -369,6 +369,10 @@ const topFaqs = [
 	{
 		q: "顧客情報や個人情報をAIに扱わせても大丈夫ですか？",
 		a: "すべてのプランで、顧客名、個人名、住所、電話番号、メールアドレスなど、AIにそのまま渡す必要のない情報を伏せる個人情報マスキングを前提に設計します。外部クラウドに出せない情報がある場合は、パーフェクトセキュアでローカルLLMや管理下AIの構成を検討します。",
+	},
+	{
+		q: "クラウド型のプランでも、入力した情報がAIの学習に使われませんか？",
+		a: "使われません。AIセントラルとAIセントラル PLUSでは、法人向けプラン（商用契約）でのご利用を標準としており、この契約では入力内容や生成結果がAIモデルの学習に使われない取り扱いになります。導入時に契約形態を確認し、伴走期間中も設定を点検します。なお、学習に使われないことと、情報が外部に一切送信されないことは別です。送信そのものを避けたい情報は、パーフェクトセキュアの社内完結の構成をご検討ください。",
 	},
 	{
 		q: "AIが勝手に顧客対応や判断をしますか？",
@@ -627,7 +631,7 @@ const faqLd = {
 					<div class="pricing-security-note__copy">
 						<span>全プラン共通の安全設計</span>
 						<strong>AIにそのまま渡さない情報を、先に伏せる。</strong>
-						<p>顧客名、個人名、住所、連絡先、契約内容など、AIが判断に使う必要のない情報は、伏せ字化やサンプル化を前提に整理します。パーフェクトセキュアは、その上で社内PC・社内ネットワーク内に閉じる上位構成です。</p>
+						<p>顧客名、個人名、住所、連絡先、契約内容など、AIが判断に使う必要のない情報は、伏せ字化やサンプル化を前提に整理します。AIセントラルとAIセントラル PLUSは、入力内容がAIの学習に使われない法人向けプラン（商用契約）でのご利用を標準としています。パーフェクトセキュアは、その上で社内PC・社内ネットワーク内に閉じる上位構成です。</p>
 					</div>
 					<ul>
 						<li><Icon name="material-symbols:visibility-off-outline" />個人情報マスキング</li>
@@ -639,7 +643,7 @@ const faqLd = {
 				<div class="pricing-cards" aria-label="AIセントラルの料金プラン">
 					{aiCentralPricing.map((plan) => (
 						<article class:list={["pricing-card", { "is-recommended": plan.recommended, "is-secure": plan.secure }]}>
-							{plan.popular && <span class="pricing-card__badge pricing-card__badge--popular">AI セントラル 33万円が人気</span>}
+							{plan.popular && <span class="pricing-card__badge pricing-card__badge--popular">AIセントラル 33万円が人気</span>}
 							{plan.recommended && <span class="pricing-card__badge">RECOMMENDED</span>}
 							{plan.secure && <span class="pricing-card__badge pricing-card__badge--secure">個人情報・顧客情報を扱う企業向け</span>}
 							<div class="pricing-card__icon"><Icon name={plan.icon} /></div>
@@ -669,7 +673,7 @@ const faqLd = {
 				</div>
 
 				<div class="pricing-note">
-					<p>表示は税込・初期導入費用の目安です。導入時は、各プランの初期導入費用がかかります。その後、システム完成後の伴走費用として、全プラン共通で月額 ¥22,000 が6ヶ月間だけ発生します。初回費用は銀行振込、伴走費用はクレジットカード払いです。</p>
+					<p>表示は税込・初期導入費用の目安です。導入時は、各プランの初期導入費用がかかります。その後、システム完成後の伴走費用として、全プラン共通で月額 ¥22,000 が6ヶ月間だけ発生します。初回費用は銀行振込、伴走費用はクレジットカード払いです。AIセントラルとAIセントラル PLUSでご利用いただくクラウドAIの利用料は、別途お客様のご契約となります（法人向けプラン・1ライセンス月額 数千円程度／最低2ライセンスから）。必要なライセンス数は導入時にご案内します。</p>
 					<div>
 						<a class="pricing-note__primary" href={consultationHref}>無料相談で見積もる</a>
 						<a class="pricing-note__secondary" href="#pricing">詳しい料金を見る</a>
