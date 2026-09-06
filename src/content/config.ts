@@ -3,6 +3,9 @@ import { defineCollection, z } from "astro:content";
 const postsCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
+		/* 記事本文のH1だけ、語の途中で不自然に割れないよう表示行を明示する。
+		   title・OGP・構造化データには使わず、未指定時は title をそのまま表示する。 */
+		titleLines: z.array(z.string()).optional().default([]),
 		fullTitle: z.boolean().optional().default(false),
 		published: z.date(),
 		updated: z.date().optional(),

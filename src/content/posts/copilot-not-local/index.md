@@ -1,5 +1,8 @@
 ---
 title: "そのCopilot、本当にローカルですか — 設定ひとつで預け先が変わる話"
+titleLines:
+  - "そのCopilot、本当にローカルですか"
+  - "設定ひとつで預け先が変わる話"
 fullTitle: true
 published: 2026-09-06
 description: "Copilotはすべてパソコンの中で動くわけではありません。仕事で使うCopilotの処理場所、Data Retentionの設定、確認すべき項目を整理します。"

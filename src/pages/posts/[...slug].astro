@@ -43,6 +43,8 @@ const postImageAlt =
 	entry.data.imageAlt ||
 	`${entry.data.title}｜${entry.data.description || "effect.moe ブログ アイキャッチ"}`;
 const authorShortTitle = "AI・LLMO実装者";
+const displayTitleLines =
+	entry.data.titleLines.length > 0 ? entry.data.titleLines : [entry.data.title];
 const authorProfileLinks = seoConfig.sameAs
 	.filter((href: string) => /street-academy/i.test(href))
 	.slice(0, 3)
@@ -151,7 +153,14 @@ const blogPostingLd = {
 						)}
 						<span>{remarkPluginFrontmatter.minutes}分で読める</span>
 					</div>
-					<h1 data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title">{entry.data.title}</h1>
+					<h1 data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title">
+						{displayTitleLines.map((line, index) => (
+							<Fragment>
+								{index > 0 && <br />}
+								{line}
+							</Fragment>
+						))}
+					</h1>
 					<div class="commercial-post-authorline">
 						<span>著者</span>
 						<a href="/author/" rel="author">{profileConfig.name}</a>
@@ -259,7 +268,7 @@ const blogPostingLd = {
 
 				<div class="commercial-post-ai-cta">
 					<span>
-						<small>AI CENTRAL</small>
+						<small>AIセントラル</small>
 						<strong>社内情報を、AIが参照できる記憶基盤へ。</strong>
 					</span>
 					<div>
