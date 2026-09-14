@@ -52,6 +52,11 @@ export const navBarConfig: NavBarConfig = {
 			url: "/aicrawl/",
 		},
 		{
+			name: "AI比較",
+			url: "https://aicouncil.jp/",
+			external: true,
+		},
+		{
 			name: "AIシールド",
 			url: "/aishield/",
 		},

@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import AICouncilLink from "../components/AICouncilLink.astro";
 import AiChat from "../components/AiChat.astro";
 import BackToTop from "../components/control/BackToTop.astro";
 import Search from "../components/Search.svelte";
@@ -220,6 +221,7 @@ const serviceNavGroups = [
 
 const navItems = [
 	{ href: "/faq/", label: "FAQ" },
+	{ href: "https://aicouncil.jp/", label: "AI比較", external: true },
 	{ href: "/author/", label: "アバウト" },
 ];
 
@@ -286,7 +288,7 @@ const mobileNextPage =
 						</div>
 					))}
 					{navItems.map((item) => (
-						<a href={item.href} class="effect-landing-header__nav-link">{item.label}</a>
+						<a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} class="effect-landing-header__nav-link">{item.label}</a>
 					))}
 				</nav>
 				<div class="effect-landing-header__tools">
@@ -348,7 +350,7 @@ const mobileNextPage =
 								</div>
 							))}
 							{navItems.map((item) => (
-								<a href={item.href}>
+								<a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
 									{item.label}
 									<Icon name="material-symbols:chevron-right-rounded" />
 								</a>
@@ -364,6 +366,9 @@ const mobileNextPage =
 		</main>
 
 		{AI_CHAT_ENABLED && <AiChat />}
+		<div class="effect-landing-aicouncil">
+			<AICouncilLink />
+		</div>
 
 		<footer class="effect-landing-footer">
 			<div class="effect-landing-footer__inner">
@@ -416,6 +421,7 @@ const mobileNextPage =
 						<strong>ナレッジ</strong>
 						<a href="/blog/">ブログ</a>
 						<a href="/llmo/">LLMO対策ガイド</a>
+						<a href="https://aicouncil.jp/" target="_blank" rel="noopener noreferrer">AI比較（AI COUNCIL）</a>
 						<a href="/ai-agent-how-to/">AIエージェントの作り方</a>
 						<a href="/ai-cyber-attack/">AIサイバー攻撃ガイド</a>
 						<a href="/wordpress-vulnerability/">WordPress脆弱性ガイド</a>
@@ -890,6 +896,12 @@ const mobileNextPage =
 				radial-gradient(circle at 84% 14%, rgba(182, 140, 60, 0.12), transparent 30%),
 				linear-gradient(180deg, #f6f3f4 0%, #fcf8f9 100%);
 			color: #1c1b1c;
+		}
+
+		.effect-landing-aicouncil {
+			max-width: 1280px;
+			margin: 0 auto;
+			padding: 1.5rem 28px 0;
 		}
 
 		.effect-landing-footer__inner {
