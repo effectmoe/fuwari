@@ -1,16 +1,16 @@
 {
 	"ratingValue": 4.95,
-	"reviewCount": 237,
-	"studentsTaught": 568,
-	"repeatStudents": 328,
-	"repeatRate": 57.7,
+	"reviewCount": 238,
+	"studentsTaught": 569,
+	"repeatStudents": 329,
+	"repeatRate": 57.8,
 	"sessionsTaught": 537,
-	"salesTotal": 2819450,
+	"salesTotal": 2824950,
 	"badge": "プラチナ",
 	"badgeDetail": null,
 	"periodStart": "2019年1月1日",
-	"periodEnd": "2026年9月15日",
-	"updatedAt": "2026-09-14T21:00:22.396Z",
+	"periodEnd": "2026年9月16日",
+	"updatedAt": "2026-09-15T21:00:24.459Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
 		{
@@ -20,6 +20,14 @@
 			"rating": 5,
 			"headline": "賢い先生との会話が楽しい講座",
 			"text": "頭の回転が早くAIへの指示の仕方や使い方に驚くことばかりで本当に尊敬します。私はAIを結構使っているつもりでしたが、「その先の先があるんだ」と感じました。やっぱり、もともとプログラマーの先生だからこその発想というか、内部からの見方が面白く、お話ししている時間が本当に楽しすぎて、次の講座もどんどん受けてみたいと思いました"
+		},
+		{
+			"course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
+			"reviewer": "女性 40代",
+			"date": "2026-09",
+			"rating": 5,
+			"headline": "あなた専用Notionツールを講師がその場で作る超実践90分講座",
+			"text": "いつも大変助かっています！"
 		},
 		{
 			"course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
@@ -108,15 +116,7 @@
 			"rating": 5,
 			"headline": "プログラムを作り上げていく講座",
 			"text": "ワンポイントアドバイスありがとうございました"
-		},
-		{
-			"course": "ローカルLLM（AI）を身近なシステムに組み込み、無料で使い倒す！",
-			"reviewer": "その他 30代",
-			"date": "2026-07",
-			"rating": 5,
-			"headline": "ローカルLLM初心者に最適なレクチャー",
-			"text": "普段はオンライン上でしかAIサービスを利用したことがなく、ローカルLLM導入については全くの初心者でしたが、一からヒアリングを行い、PCスペックや使いたい用途に最適なモデルやサービスを丁寧に教えてくださいました。先生の説明もわかりやすく親切で、続編講義もぜひ受講したいと思います。また来月、よろしくお願いいたします！"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-09-14T21:01:02.634Z"
+	"testimonialsUpdatedAt": "2026-09-15T21:01:03.342Z"
 }
