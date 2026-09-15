@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import ArticleChoiceCta from "../../components/landing/ArticleChoiceCta.astro";
 import Breadcrumbs from "../../components/landing/Breadcrumbs.astro";
+import stats from "../../data/storaca-stats.json";
 import LandingLayout from "../../layouts/LandingLayout.astro";
 
 const pageTitle = "AIエージェントの作り方｜Claude Codeで構築する手順";
@@ -108,7 +109,7 @@ const sections = [
 			"自分で作るのと講座で学ぶのは、目の前の仕事を試せる環境と、どこまで体系的に身につけたいかで選びます。小さな仕事を試しながら学べるなら、自分で作り、出力を見ながら直していく方法から始められます。",
 			"一方で、仕事の切り分け、指示の置き方、確認の設計、外部ツールとのつなぎ方まで一貫して学びたい場合は、実例に沿って進めるほうが迷いを減らせます。AIエージェント入門講座は<strong>385,000円</strong>で、Claude Codeの導入、AIに任せる仕事の組み立て、書類の自動化、外部ツールとの連携を扱います。",
 			"法人での受講では、<a href='/ai-agent-course/#price'>人材開発支援助成金の活用例</a>も確認できます。制度利用の可否や申請手続きには条件があるため、社労士等への確認が必要です。株式会社EFFECTは助成金申請の代行を行いません。",
-			"講座の選び方では、受講後に自分の業務へ戻って試せるかを確かめます。株式会社EFFECTの講座は、累計受講者<strong>522名以上</strong>、公開レビュー<strong>231件</strong>、講座レビュー評価<strong>★5</strong>、<strong>ストアカ Proランク講師</strong>としての掲載実績があります。",
+			`講座の選び方では、受講後に自分の業務へ戻って試せるかを確かめます。株式会社EFFECTの講座は、累計受講者<strong>${stats.studentsTaught}名以上</strong>、公開レビュー<strong>${stats.reviewCount}件</strong>、講座レビュー評価<strong>★${stats.ratingValue}</strong>、<strong>ストアカ Proランク講師</strong>としての掲載実績があります。`,
 		],
 	},
 ];
