@@ -1,18 +1,26 @@
 {
 	"ratingValue": 4.95,
-	"reviewCount": 238,
-	"studentsTaught": 569,
-	"repeatStudents": 329,
-	"repeatRate": 57.8,
-	"sessionsTaught": 537,
-	"salesTotal": 2824950,
+	"reviewCount": 239,
+	"studentsTaught": 571,
+	"repeatStudents": 331,
+	"repeatRate": 58,
+	"sessionsTaught": 538,
+	"salesTotal": 2863550,
 	"badge": "プラチナ",
 	"badgeDetail": null,
 	"periodStart": "2019年1月1日",
-	"periodEnd": "2026年9月16日",
-	"updatedAt": "2026-09-15T21:00:24.459Z",
+	"periodEnd": "2026年9月17日",
+	"updatedAt": "2026-09-16T21:00:23.079Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
+		{
+			"course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
+			"reviewer": "男性 60代",
+			"date": "2026-09",
+			"rating": 5,
+			"headline": "基礎的なことから学ぶことが出来ました",
+			"text": "本来のAIの使い方を教わりたくて、シュ先生にお願いしました。初めは基本的な話ででしたのですが、Youtubeにのテイル断片的な情報でなく基本から教えてもらえたのと、小手先のテクニックでなAIを第二の脳的な使い方をするのにはどうしたら良いかのアイデアも教えてもらえました。"
+		},
 		{
 			"course": "最強AIツール！Claude Code バイブコーディング講座",
 			"reviewer": "女性",
@@ -108,15 +116,7 @@
 			"rating": 5,
 			"headline": "少しずつ出来上がっていく講座",
 			"text": "いつもありがとうございます"
-		},
-		{
-			"course": "【限定】Claude Codeであなたの作りたいを講師が伴走し構築",
-			"reviewer": "女性 70代",
-			"date": "2026-07",
-			"rating": 5,
-			"headline": "プログラムを作り上げていく講座",
-			"text": "ワンポイントアドバイスありがとうございました"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-09-15T21:01:03.342Z"
+	"testimonialsUpdatedAt": "2026-09-16T21:01:03.228Z"
 }
