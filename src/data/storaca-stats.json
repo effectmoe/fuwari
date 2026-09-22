@@ -1,8 +1,16 @@
 {
-	"reviewCount": null,
-	"badge": null,
+	"ratingValue": 4.94,
+	"reviewCount": 242,
+	"studentsTaught": 579,
+	"repeatStudents": 337,
+	"repeatRate": 58.2,
+	"sessionsTaught": 544,
+	"salesTotal": 2894950,
+	"badge": "プラチナ",
 	"badgeDetail": null,
-	"updatedAt": "2026-09-21T21:00:44.194Z",
+	"periodStart": "2019年1月1日",
+	"periodEnd": "2026年9月23日",
+	"updatedAt": "2026-09-22T21:00:21.565Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
 		{
@@ -110,5 +118,5 @@
 			"text": "ニーズに沿って、マンツーマンで課題解決へとつなげれる良い講座でした。受講しながらどんどんやりたいことが増えていくので90分はあっという間でした。"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-09-21T21:01:02.975Z"
+	"testimonialsUpdatedAt": "2026-09-22T21:01:02.986Z"
 }
