@@ -1,16 +1,16 @@
 {
 	"ratingValue": 4.95,
 	"reviewCount": 247,
-	"studentsTaught": 590,
-	"repeatStudents": 345,
-	"repeatRate": 58.5,
-	"sessionsTaught": 552,
-	"salesTotal": 3058350,
+	"studentsTaught": 589,
+	"repeatStudents": 344,
+	"repeatRate": 58.4,
+	"sessionsTaught": 551,
+	"salesTotal": 3054550,
 	"badge": "プラチナ",
 	"badgeDetail": null,
 	"periodStart": "2019年1月1日",
-	"periodEnd": "2026年10月5日",
-	"updatedAt": "2026-10-04T21:00:26.677Z",
+	"periodEnd": "2026年10月6日",
+	"updatedAt": "2026-10-05T21:00:27.971Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
 		{
@@ -118,5 +118,5 @@
 			"text": "「ChatGPT Codex速習講座｜独自機能とClaude連携が◎」を受講しました。Codexを使い始めて3週間ほど、自己流で試行錯誤しながら使っていました。そのため、必要以上にクレジットと時間を使ってしまい、「なぜこんなに消費するのか」「どうすれば効率よく使えるのか」を知りたくて今回受講しました。講座では、さまざまな設定方法や使い方の工夫を教えていただき、やり方次第でクレジットの消費をかなり抑えながら、効率よく前に進められることがわかりました。自己流で遠回りしていた部分も整理され、とても参考になった有益な講座でした。これからCodexを使い始める方はもちろん、すでに使っているけれど時間やクレジットを使いすぎている方、CodexやAIの力を最大限に活用したい方にも、ぜひおすすめしたい先生・講座です。本日はありがとうございました。"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-10-04T21:01:06.089Z"
+	"testimonialsUpdatedAt": "2026-10-05T21:01:07.963Z"
 }
