@@ -1,18 +1,26 @@
 {
 	"ratingValue": 4.94,
-	"reviewCount": 248,
-	"studentsTaught": 590,
+	"reviewCount": 249,
+	"studentsTaught": 591,
 	"repeatStudents": 345,
-	"repeatRate": 58.5,
-	"sessionsTaught": 552,
-	"salesTotal": 3060050,
+	"repeatRate": 58.4,
+	"sessionsTaught": 553,
+	"salesTotal": 3066050,
 	"badge": "プラチナ",
 	"badgeDetail": null,
 	"periodStart": "2019年1月1日",
-	"periodEnd": "2026年10月8日",
-	"updatedAt": "2026-10-07T21:00:29.233Z",
+	"periodEnd": "2026年10月9日",
+	"updatedAt": "2026-10-08T21:00:26.562Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
+		{
+			"course": "SEOはLLMOへ！AI検索マーケティングのスキルを学ぶ60分",
+			"reviewer": "男性 40代",
+			"date": "2026-10",
+			"rating": 5,
+			"headline": "LLMOを生徒にカスタマイズして教えてくれる講座",
+			"text": "長い時間レクチャー頂きありがとうございました。とても勉強になることばかりでした。また、今後、どのように進めばいいのかの具体的なアクションが見えました。（こんな方にオススメ）自分のサイトを・今、この時代に・なにを・どのように・何から始めればいいのか迷っている。今までブログ運営とこれからのブログ運営は違うのは、分かっているけど、どこから手を付けたらいいのか分からない。時代においていかれたくない方。そんな方は、是非、コウメイ先生の講義を強くお勧めします。"
+		},
 		{
 			"course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
 			"reviewer": "男性 50代",
@@ -108,15 +116,7 @@
 			"rating": 5,
 			"headline": "Claude Codeのコアテクニックを学習出来る口座",
 			"text": "初心者の私にもマンツーマンで勘所をご教授くださいました。こちらからの質問に対しても分かり易くご説明頂けました。ありがとうございました。"
-		},
-		{
-			"course": "ご希望のツールを一緒に作る！そして学ぶ！Notion実践講座",
-			"reviewer": "その他 60代",
-			"date": "2026-08",
-			"rating": 5,
-			"headline": "とてもわかりやすく勉強になりました",
-			"text": "丁寧なご説明でとてもわかりやすく勉強になりました。内容が盛りだくさんだったので思い出しながら復讐したいです。ありがとうございました。"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-10-07T21:01:10.916Z"
+	"testimonialsUpdatedAt": "2026-10-08T21:01:06.598Z"
 }
