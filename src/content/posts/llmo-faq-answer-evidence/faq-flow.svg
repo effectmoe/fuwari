@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="490" viewBox="0 0 360 490" role="img">
+<rect width="360" height="490" rx="16" fill="#fbf7ed"/>
+<g font-family="serif" text-anchor="middle" fill="#123e32">
+<rect x="20" y="25" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="69" font-size="24">読者の質問</text>
+<text x="180" y="107" font-size="20">何に迷っているか</text>
+<path d="M180 148v22m-8-8 8 8 8-8" fill="none" stroke="#123e32" stroke-width="3"/>
+<rect x="20" y="180" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="224" font-size="24">答えと条件</text>
+<text x="180" y="262" font-size="20">対象と範囲を説明する</text>
+<path d="M180 303v22m-8-8 8 8 8-8" fill="none" stroke="#123e32" stroke-width="3"/>
+<rect x="20" y="335" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="379" font-size="24">確かめる根拠</text>
+<text x="180" y="417" font-size="20">出典や案内へつなぐ</text>
+</g></svg>

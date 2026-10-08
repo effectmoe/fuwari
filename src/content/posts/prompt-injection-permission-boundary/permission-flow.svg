@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="490" viewBox="0 0 360 490" role="img">
+<rect width="360" height="490" rx="16" fill="#fbf7ed"/>
+<g font-family="serif" text-anchor="middle" fill="#123e32">
+<rect x="20" y="25" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="69" font-size="24">対象の資料だけ</text>
+<text x="180" y="107" font-size="20">AIへ渡す範囲を絞る</text>
+<path d="M180 148v22m-8-8 8 8 8-8" fill="none" stroke="#123e32" stroke-width="3"/>
+<rect x="20" y="180" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="224" font-size="24">要約・下書き</text>
+<text x="180" y="262" font-size="20">元資料は変更しない</text>
+<path d="M180 303v22m-8-8 8 8 8-8" fill="none" stroke="#123e32" stroke-width="3"/>
+<rect x="20" y="335" width="320" height="115" rx="12" fill="#ffffff" stroke="#b59650" stroke-width="2"/>
+<text x="180" y="379" font-size="24">人が内容を承認</text>
+<text x="180" y="417" font-size="20">送信は別の操作にする</text>
+</g></svg>
