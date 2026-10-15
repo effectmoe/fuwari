@@ -953,6 +953,10 @@ const faqLd = {
 				messageField.value = "AIクロールの無料相談を希望します。AIからの流入状況、レポート内容、料金プランについて相談したいです。";
 			}
 		}
+		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "argus") {
+			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
+			if (messageField && !messageField.value) messageField.value = "ARGUSのアプリ安全性診断を相談したいです。用途・使用技術・規模・希望日と、共有可能な資料の範囲を確認してください。";
+		}
 		if (contactForm && inquiryFromUrl === "consultation" && serviceFromUrl === "aishield") {
 			if (interestSelect) interestSelect.value = "AIシールド";
 			const messageField = contactForm.elements.namedItem("メッセージ") as HTMLTextAreaElement | null;
