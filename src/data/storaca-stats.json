@@ -1,16 +1,16 @@
 {
 	"ratingValue": 4.94,
 	"reviewCount": 251,
-	"studentsTaught": 605,
-	"repeatStudents": 353,
-	"repeatRate": 58.3,
-	"sessionsTaught": 560,
-	"salesTotal": 3227250,
+	"studentsTaught": 607,
+	"repeatStudents": 355,
+	"repeatRate": 58.5,
+	"sessionsTaught": 562,
+	"salesTotal": 3238750,
 	"badge": "プラチナ",
 	"badgeDetail": null,
 	"periodStart": "2019年1月1日",
-	"periodEnd": "2026年10月22日",
-	"updatedAt": "2026-10-21T21:00:21.969Z",
+	"periodEnd": "2026年10月23日",
+	"updatedAt": "2026-10-22T21:00:27.299Z",
 	"source": "https://www.street-academy.com/dashboard/steachers",
 	"testimonials": [
 		{
@@ -118,5 +118,5 @@
 			"text": "頭の回転が早くAIへの指示の仕方や使い方に驚くことばかりで本当に尊敬します。私はAIを結構使っているつもりでしたが、「その先の先があるんだ」と感じました。やっぱり、もともとプログラマーの先生だからこその発想というか、内部からの見方が面白く、お話ししている時間が本当に楽しすぎて、次の講座もどんどん受けてみたいと思いました"
 		}
 	],
-	"testimonialsUpdatedAt": "2026-10-21T21:01:03.527Z"
+	"testimonialsUpdatedAt": "2026-10-22T21:01:03.970Z"
 }
